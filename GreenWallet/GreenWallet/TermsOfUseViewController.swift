@@ -20,32 +20,30 @@ class TermsOfUseViewController: UIViewController {
         self.continueButton.backgroundColor = #colorLiteral(red: 0.6106664538, green: 0.6106664538, blue: 0.6106664538, alpha: 1)
         self.continueButton.tintColor = .black
         
+        setupAgreeLabel()
         
-
-        let text = "Я соглашаюсь с условиями пользования"
-        self.agreeLabel.text = text
-        self.agreeLabel.textColor =  UIColor.white
-        let underlineAttriString = NSMutableAttributedString(string: text)
-        let range1 = (text as NSString).range(of: "условиями пользования")
-             underlineAttriString.addAttribute(NSAttributedString.Key.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: range1)
-        self.agreeLabel.attributedText = underlineAttriString
-        self.agreeLabel.isUserInteractionEnabled = true
-        self.agreeLabel.addGestureRecognizer(UITapGestureRecognizer(target:self, action: #selector(tapLabel(gesture:))))
+        self.agreeLabel.addRangeGesture(stringRange: "условиями пользования") {
+            let url = URL(string: "https://devushka.ru/upload/posts/a1797083197722a6b1ab8e2f4beb2b08.jpg")
+            if UIApplication.shared.canOpenURL(url!) {
+                UIApplication.shared.open(url!, options: [:])
+            }
+        }
+        
     }
     
-    @objc func tapLabel(gesture: UIGestureRecognizer) {
-        let termsRange = (text as NSString).range(of: "Terms & Conditions")
-        // comment for now
-        //let privacyRange = (text as NSString).range(of: "Privacy Policy")
-
-        if gesture.didTapAttributedTextInLabel(label: lblTerms, inRange: termsRange) {
-            print("Tapped terms")
-        } else if gesture.didTapAttributedTextInLabel(label: lblTerms, inRange: privacyRange) {
-            print("Tapped privacy")
-        } else {
-            print("Tapped none")
-        }
+    private func setupAgreeLabel() {
+        let prefixString = "Я соглашаюсь с  "
+        let infixAttributedString = NSAttributedString(
+            string: "условиями пользования",
+            attributes: [NSAttributedString.Key.foregroundColor: #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)]
+        )
+        
+        let attributedString = NSMutableAttributedString(string: prefixString)
+        attributedString.append(infixAttributedString)
+        
+        self.agreeLabel.attributedText = attributedString
     }
+
     
     @IBAction func tappedOnCheckboxButton(_ sender: UIButton){
         if sender.imageView?.image != UIImage(systemName: "checkmark.square.fill") {

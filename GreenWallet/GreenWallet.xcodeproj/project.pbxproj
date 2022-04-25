@@ -14,6 +14,9 @@
 		FB59403F2816856700037DFA /* GreenWallet.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FB59403D2816856700037DFA /* GreenWallet.xcdatamodeld */; };
 		FB5940412816856A00037DFA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FB5940402816856A00037DFA /* Assets.xcassets */; };
 		FB5940442816856A00037DFA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FB5940422816856A00037DFA /* LaunchScreen.storyboard */; };
+		FB59404C281694DD00037DFA /* TermsOfUseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB59404B281694DD00037DFA /* TermsOfUseViewController.swift */; };
+		FB5940532816AC8800037DFA /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5940522816AC8800037DFA /* Extensions.swift */; };
+		FB5940552816AEF400037DFA /* CustomClasses.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5940542816AEF400037DFA /* CustomClasses.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +29,9 @@
 		FB5940402816856A00037DFA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FB5940432816856A00037DFA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FB5940452816856A00037DFA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FB59404B281694DD00037DFA /* TermsOfUseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfUseViewController.swift; sourceTree = "<group>"; };
+		FB5940522816AC8800037DFA /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		FB5940542816AEF400037DFA /* CustomClasses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomClasses.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +67,8 @@
 				FB5940342816856700037DFA /* AppDelegate.swift */,
 				FB5940362816856700037DFA /* SceneDelegate.swift */,
 				FB5940382816856700037DFA /* SelectLanguageViewController.swift */,
+				FB59404B281694DD00037DFA /* TermsOfUseViewController.swift */,
+				FB5940512816AC7800037DFA /* Extensions */,
 				FB59403A2816856700037DFA /* Main.storyboard */,
 				FB5940402816856A00037DFA /* Assets.xcassets */,
 				FB5940422816856A00037DFA /* LaunchScreen.storyboard */,
@@ -68,6 +76,15 @@
 				FB59403D2816856700037DFA /* GreenWallet.xcdatamodeld */,
 			);
 			path = GreenWallet;
+			sourceTree = "<group>";
+		};
+		FB5940512816AC7800037DFA /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				FB5940522816AC8800037DFA /* Extensions.swift */,
+				FB5940542816AEF400037DFA /* CustomClasses.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -141,6 +158,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FB59404C281694DD00037DFA /* TermsOfUseViewController.swift in Sources */,
+				FB5940532816AC8800037DFA /* Extensions.swift in Sources */,
+				FB5940552816AEF400037DFA /* CustomClasses.swift in Sources */,
 				FB5940392816856700037DFA /* SelectLanguageViewController.swift in Sources */,
 				FB5940352816856700037DFA /* AppDelegate.swift in Sources */,
 				FB59403F2816856700037DFA /* GreenWallet.xcdatamodeld in Sources */,

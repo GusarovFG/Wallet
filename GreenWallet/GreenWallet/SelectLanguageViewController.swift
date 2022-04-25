@@ -43,6 +43,15 @@ extension SelectLanguageViewController: UITableViewDelegate, UITableViewDataSour
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch indexPath.row {
+        case 1:
+            let termsOfUseVC = storyboard?.instantiateViewController(withIdentifier: "TermsOfUseViewController") as! TermsOfUseViewController
+            self.navigationController?.pushViewController(termsOfUseVC, animated: true)
+        default:
+            break
+        }
+    }
 }
 
 
