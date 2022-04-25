@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		FB5940352816856700037DFA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5940342816856700037DFA /* AppDelegate.swift */; };
 		FB5940372816856700037DFA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5940362816856700037DFA /* SceneDelegate.swift */; };
-		FB5940392816856700037DFA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5940382816856700037DFA /* ViewController.swift */; };
+		FB5940392816856700037DFA /* SelectLanguageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5940382816856700037DFA /* SelectLanguageViewController.swift */; };
 		FB59403C2816856700037DFA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FB59403A2816856700037DFA /* Main.storyboard */; };
 		FB59403F2816856700037DFA /* GreenWallet.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FB59403D2816856700037DFA /* GreenWallet.xcdatamodeld */; };
 		FB5940412816856A00037DFA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FB5940402816856A00037DFA /* Assets.xcassets */; };
@@ -20,7 +20,7 @@
 		FB5940312816856700037DFA /* GreenWallet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GreenWallet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB5940342816856700037DFA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FB5940362816856700037DFA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		FB5940382816856700037DFA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		FB5940382816856700037DFA /* SelectLanguageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLanguageViewController.swift; sourceTree = "<group>"; };
 		FB59403B2816856700037DFA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FB59403E2816856700037DFA /* GreenWallet.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GreenWallet.xcdatamodel; sourceTree = "<group>"; };
 		FB5940402816856A00037DFA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -60,7 +60,7 @@
 			children = (
 				FB5940342816856700037DFA /* AppDelegate.swift */,
 				FB5940362816856700037DFA /* SceneDelegate.swift */,
-				FB5940382816856700037DFA /* ViewController.swift */,
+				FB5940382816856700037DFA /* SelectLanguageViewController.swift */,
 				FB59403A2816856700037DFA /* Main.storyboard */,
 				FB5940402816856A00037DFA /* Assets.xcassets */,
 				FB5940422816856A00037DFA /* LaunchScreen.storyboard */,
@@ -141,7 +141,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FB5940392816856700037DFA /* ViewController.swift in Sources */,
+				FB5940392816856700037DFA /* SelectLanguageViewController.swift in Sources */,
 				FB5940352816856700037DFA /* AppDelegate.swift in Sources */,
 				FB59403F2816856700037DFA /* GreenWallet.xcdatamodeld in Sources */,
 				FB5940372816856700037DFA /* SceneDelegate.swift in Sources */,

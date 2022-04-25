@@ -7,8 +7,10 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class SelectLanguageViewController: UIViewController {
 
+    @IBOutlet weak var languageTableView: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -16,4 +18,32 @@ class ViewController: UIViewController {
 
 
 }
+
+extension SelectLanguageViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        2
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "languageCell", for: indexPath)
+        var content = cell.defaultContentConfiguration()
+        
+        switch indexPath.row {
+        case 0:
+            content.text = "English"
+        case 1:
+            content.text = "Русский"
+        default:
+            break
+        }
+        
+        cell.contentConfiguration = content
+        
+        return cell
+    }
+    
+}
+
+
 
