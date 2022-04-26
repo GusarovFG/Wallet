@@ -16,7 +16,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WelcomeLogo" translatesAutoresizingMaskIntoConstraints="NO" id="OCR-fx-cvW">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image 466" translatesAutoresizingMaskIntoConstraints="NO" id="OCR-fx-cvW">
                                 <rect key="frame" x="81" y="421" width="252" height="54"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="252" id="OVA-v8-3e5"/>
@@ -25,11 +25,11 @@
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aTz-D7-9Om">
                                 <rect key="frame" x="32" y="746" width="350" height="62"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" red="0.2274509804" green="0.67450980390000004" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="62" id="00g-j1-pLT"/>
                                 </constraints>
-                                <color key="tintColor" red="0.2274509804" green="0.67450980390000004" blue="0.34901960780000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Start">
                                     <fontDescription key="titleFontDescription" name="Helvetica" family="Helvetica" pointSize="15"/>
@@ -45,7 +45,7 @@
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                        <color key="backgroundColor" red="0.2274509804" green="0.67450980390000004" blue="0.34901960780000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="aTz-D7-9Om" secondAttribute="bottom" constant="54" id="aEg-mh-OKN"/>
@@ -135,7 +135,19 @@
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="okl-XG-SSv">
                                 <rect key="frame" x="14" y="177" width="385" height="491"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <string key="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. At cursus in in feugiat montes. Dictum nunc duis augue fames adipiscing arcu tempor donec cras. Diam auctor sed et tempor duis. Ultrices eget maecenas donec ac, volutpat cursus rhoncus habitant enim. Et sodales vestibulum purus ipsum, sit. Hac purus quis est libero, fames porttitor vitae nibh. Nam vitae maecenas volutpat nulla ipsum eget. Faucibus tellus nisi vitae iaculis pellentesque lacus tempus in eget. Maecenas lacus, malesuada tempor, egestas. Et sodales vestibulum purus ipsum, sit. Hac purus quis est libero, fames porttitor vitae nibh. Nam vitae maecenas volutpat nulla ipsum eget. Faucibus tellus nisi vitae iaculis pellentesque lacus tempus in eget.</string>
+                                <mutableString key="text" base64-UTF8="YES">
+0JTQsNC90L3Ri9C5INC/0YDQvtGC0L7RgtC40L8g0Y/QstC70Y/QtdGC0YHRjyDQuNC90YLQtdC70LXQ
+utGC0YPQsNC70YzQvdC+0Lkg0YHQvtCx0YHRgtCy0LXQvdC90L7RgdGC0YzRjiDQutC+0LzQv9Cw0L3Q
+uNC4IEdyZWVuIEFwcCBEZXZlbG9wbWVudCBMTEMu4oCoEOKAqNCg0LDQt9GA0LXRiNCw0LXRgtGB0Y8g
+0LjRgdC/0L7Qu9GM0LfQvtCy0LDQvdCz0LjQtSDQvNCw0YLQtdGA0LjQsNC70L7QsiDQsiDQvtC30L3Q
+sNC60L7QvNC40YLQtdC70YzQvdGL0YUg0YbQtdC70Y/RhSDRgSDQvtCx0Y/Qt9Cw0YLQtdC70YzQvdC+
+0Lkg0YHRgdGL0LvQutC+0Lkg0L3QsCDRgdCw0LnRgiDQstC70LDQtNC10LvRjNGG0LAg0L/RgNC+0LTR
+g9C60YLQsCBncmVlbi1hcHAuaW/igKjigKjQmNGB0L/QvtC70YzQt9GD0LXQvNGL0LUg0LvQvtCz0L7R
+gtC40L/RiyBDaGlhLCBDaGl2ZXMsIFVTRFMg0Lgg0YLQtC4g0L/RgNC40L3QsNC00LvQtdC20LDRgiDQ
+uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
+0YDQvtCy0LDQvdC40LUg0L/RgNC10LTRgdGC0LDQstC70LXQvdC90YvRhSDQvNCw0YLQtdGA0LjQsNC7
+0L7QsiDQv9GA0LXRgdC70LXQtNGD0LXRgtGB0Y8g0LfQsNC60L7QvdC+0LwuA
+</mutableString>
                                 <color key="textColor" systemColor="labelColor"/>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="18"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -217,20 +229,40 @@
         <scene sceneID="u11-UC-NEZ">
             <objects>
                 <tableViewController id="c7o-TL-evF" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="tcr-BX-6s9">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="tcr-BX-6s9">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="Hgf-L4-8OS">
-                                <rect key="frame" x="0.0" y="44.5" width="414" height="43.5"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Hgf-L4-8OS" id="m8M-ts-qWg">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
+                        <sections>
+                            <tableViewSection headerTitle="Section-1" id="hkx-9B-WEF">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="Hgf-L4-8OS">
+                                        <rect key="frame" x="0.0" y="44.5" width="414" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Hgf-L4-8OS" id="m8M-ts-qWg">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="Xfb-ht-I2n">
+                                        <rect key="frame" x="0.0" y="88" width="414" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Xfb-ht-I2n" id="07G-Ex-mUc">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="v7N-zE-2z8">
+                                        <rect key="frame" x="0.0" y="131.5" width="414" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="v7N-zE-2z8" id="Rj2-YG-p4Y">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
                         <connections>
                             <outlet property="dataSource" destination="c7o-TL-evF" id="5bl-ye-QNx"/>
                             <outlet property="delegate" destination="c7o-TL-evF" id="wmY-Ju-kuG"/>
@@ -281,7 +313,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="WelcomeLogo" width="252" height="54"/>
+        <image name="image 466" width="252" height="54"/>
         <image name="squareshape.fill" catalog="system" width="128" height="114"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
