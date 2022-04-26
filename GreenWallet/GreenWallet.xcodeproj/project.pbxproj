@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FB3207F62818002800F1ADCA /* MainTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB3207F52818002800F1ADCA /* MainTableViewController.swift */; };
+		FB3207F92818018F00F1ADCA /* BalanceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB3207F72818018F00F1ADCA /* BalanceTableViewCell.swift */; };
+		FB3207FA2818018F00F1ADCA /* BalanceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB3207F82818018F00F1ADCA /* BalanceTableViewCell.xib */; };
 		FB5940352816856700037DFA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5940342816856700037DFA /* AppDelegate.swift */; };
 		FB5940372816856700037DFA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5940362816856700037DFA /* SceneDelegate.swift */; };
 		FB5940392816856700037DFA /* SelectLanguageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5940382816856700037DFA /* SelectLanguageViewController.swift */; };
@@ -20,6 +23,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		FB3207F52818002800F1ADCA /* MainTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewController.swift; sourceTree = "<group>"; };
+		FB3207F72818018F00F1ADCA /* BalanceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceTableViewCell.swift; sourceTree = "<group>"; };
+		FB3207F82818018F00F1ADCA /* BalanceTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BalanceTableViewCell.xib; sourceTree = "<group>"; };
 		FB5940312816856700037DFA /* GreenWallet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GreenWallet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB5940342816856700037DFA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FB5940362816856700037DFA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -45,6 +51,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FB3207FB2818019300F1ADCA /* CutomCells */ = {
+			isa = PBXGroup;
+			children = (
+				FB3207F72818018F00F1ADCA /* BalanceTableViewCell.swift */,
+				FB3207F82818018F00F1ADCA /* BalanceTableViewCell.xib */,
+			);
+			path = CutomCells;
+			sourceTree = "<group>";
+		};
 		FB5940282816856700037DFA = {
 			isa = PBXGroup;
 			children = (
@@ -68,6 +83,8 @@
 				FB5940362816856700037DFA /* SceneDelegate.swift */,
 				FB5940382816856700037DFA /* SelectLanguageViewController.swift */,
 				FB59404B281694DD00037DFA /* TermsOfUseViewController.swift */,
+				FB3207FB2818019300F1ADCA /* CutomCells */,
+				FB3207F52818002800F1ADCA /* MainTableViewController.swift */,
 				FB5940512816AC7800037DFA /* Extensions */,
 				FB59403A2816856700037DFA /* Main.storyboard */,
 				FB5940402816856A00037DFA /* Assets.xcassets */,
@@ -147,6 +164,7 @@
 			files = (
 				FB5940442816856A00037DFA /* LaunchScreen.storyboard in Resources */,
 				FB5940412816856A00037DFA /* Assets.xcassets in Resources */,
+				FB3207FA2818018F00F1ADCA /* BalanceTableViewCell.xib in Resources */,
 				FB59403C2816856700037DFA /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -162,9 +180,11 @@
 				FB5940532816AC8800037DFA /* Extensions.swift in Sources */,
 				FB5940552816AEF400037DFA /* CustomClasses.swift in Sources */,
 				FB5940392816856700037DFA /* SelectLanguageViewController.swift in Sources */,
+				FB3207F62818002800F1ADCA /* MainTableViewController.swift in Sources */,
 				FB5940352816856700037DFA /* AppDelegate.swift in Sources */,
 				FB59403F2816856700037DFA /* GreenWallet.xcdatamodeld in Sources */,
 				FB5940372816856700037DFA /* SceneDelegate.swift in Sources */,
+				FB3207F92818018F00F1ADCA /* BalanceTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
