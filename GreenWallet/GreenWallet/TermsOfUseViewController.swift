@@ -29,6 +29,8 @@ class TermsOfUseViewController: UIViewController {
             }
         }
         
+        
+        
     }
     
     private func setupAgreeLabel() {

@@ -31,7 +31,7 @@
                                 </constraints>
                                 <color key="tintColor" red="0.2274509804" green="0.67450980390000004" blue="0.34901960780000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Начать">
+                                <buttonConfiguration key="configuration" style="plain" title="Start">
                                     <fontDescription key="titleFontDescription" name="Helvetica" family="Helvetica" pointSize="15"/>
                                 </buttonConfiguration>
                                 <userDefinedRuntimeAttributes>
@@ -107,7 +107,9 @@
                             <constraint firstItem="lVt-eH-gB2" firstAttribute="leading" secondItem="Cps-B3-dNe" secondAttribute="leading" constant="25" id="nwc-eG-ZoC"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="Xvf-ni-fH8"/>
+                    <navigationItem key="navigationItem" id="Xvf-ni-fH8">
+                        <barButtonItem key="backBarButtonItem" title="Назад" id="ePX-qa-ebp"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="languageTableView" destination="lVt-eH-gB2" id="YB9-en-KRi"/>
                     </connections>
@@ -133,7 +135,7 @@
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="okl-XG-SSv">
                                 <rect key="frame" x="14" y="177" width="385" height="491"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <mutableString key="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. At cursus in in feugiat montes. Dictum nunc duis augue fames adipiscing arcu tempor donec cras. Diam auctor sed et tempor duis. Ultrices eget maecenas donec ac, volutpat cursus rhoncus habitant enim. Et sodales vestibulum purus ipsum, sit. Hac purus quis est libero, fames porttitor vitae nibh. Nam vitae maecenas volutpat nulla ipsum eget. Faucibus tellus nisi vitae iaculis pellentesque lacus tempus in eget. Maecenas lacus, malesuada tempor, egestas. Et sodales vestibulum purus ipsum, sit. Hac purus quis est libero, fames porttitor vitae nibh. Nam vitae maecenas volutpat nulla ipsum eget. Faucibus tellus nisi vitae iaculis pellentesque lacus tempus in eget.</mutableString>
+                                <string key="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. At cursus in in feugiat montes. Dictum nunc duis augue fames adipiscing arcu tempor donec cras. Diam auctor sed et tempor duis. Ultrices eget maecenas donec ac, volutpat cursus rhoncus habitant enim. Et sodales vestibulum purus ipsum, sit. Hac purus quis est libero, fames porttitor vitae nibh. Nam vitae maecenas volutpat nulla ipsum eget. Faucibus tellus nisi vitae iaculis pellentesque lacus tempus in eget. Maecenas lacus, malesuada tempor, egestas. Et sodales vestibulum purus ipsum, sit. Hac purus quis est libero, fames porttitor vitae nibh. Nam vitae maecenas volutpat nulla ipsum eget. Faucibus tellus nisi vitae iaculis pellentesque lacus tempus in eget.</string>
                                 <color key="textColor" systemColor="labelColor"/>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="18"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -211,6 +213,35 @@
             </objects>
             <point key="canvasLocation" x="2647.826086956522" y="97.767857142857139"/>
         </scene>
+        <!--Item-->
+        <scene sceneID="u11-UC-NEZ">
+            <objects>
+                <tableViewController id="c7o-TL-evF" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="tcr-BX-6s9">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="Hgf-L4-8OS">
+                                <rect key="frame" x="0.0" y="44.5" width="414" height="43.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Hgf-L4-8OS" id="m8M-ts-qWg">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="c7o-TL-evF" id="5bl-ye-QNx"/>
+                            <outlet property="delegate" destination="c7o-TL-evF" id="wmY-Ju-kuG"/>
+                        </connections>
+                    </tableView>
+                    <tabBarItem key="tabBarItem" title="Item" id="DNA-dw-eOP"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PMU-Zi-3yU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3414" y="809"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="WfF-RW-GbI">
             <objects>
@@ -229,6 +260,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="84g-3Y-hEr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="969.56521739130437" y="97.767857142857139"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="RHD-aJ-9xZ">
+            <objects>
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="J20-v7-nfO" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="seL-iD-e4G">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="tintColor" red="0.2274509804" green="0.67450980390000004" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="c7o-TL-evF" kind="relationship" relationship="viewControllers" id="phH-30-qrO"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="h6Q-gd-t1P" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2648" y="809"/>
         </scene>
     </scenes>
     <resources>
