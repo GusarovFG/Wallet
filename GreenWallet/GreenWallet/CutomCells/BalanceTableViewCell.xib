@@ -3,71 +3,61 @@
     <device id="retina6_1" orientation="portrait" appearance="dark"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="207" id="KGk-i7-Jjw" customClass="BalanceTableViewCell" customModule="GreenWallet" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="346" height="207"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="346" height="207"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="walletCell" rowHeight="76" id="yXn-Nx-tkw" customClass="BalanceTableViewCell" customModule="GreenWallet" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="384" height="76"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="yXn-Nx-tkw" id="Y14-kJ-001">
+                <rect key="frame" x="0.0" y="0.0" width="384" height="76"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Баланс" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ogj-jz-rjT">
-                        <rect key="frame" x="15" y="15" width="94" height="24"/>
-                        <color key="tintColor" red="0.2274509804" green="0.67450980390000004" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
-                        <color key="textColor" red="0.2274509804" green="0.67450980390000004" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 USD" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kRZ-sk-xiU">
-                        <rect key="frame" x="15" y="54" width="192" height="34"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="28"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="vdh-iz-cQC">
-                        <rect key="frame" x="15" y="103" width="316" height="32"/>
-                        <segments>
-                            <segment title="First"/>
-                            <segment title="Second"/>
-                        </segments>
-                    </segmentedControl>
-                    <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" ambiguous="YES" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="MVj-GK-OJX">
-                        <rect key="frame" x="20" y="149" width="306" height="4"/>
-                    </progressView>
-                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GKg-hI-URN">
-                        <rect key="frame" x="18" y="158" width="67" height="31"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <state key="normal" title="Button"/>
-                        <buttonConfiguration key="configuration" style="filled" title="Button"/>
-                    </button>
-                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VWM-FD-n7i">
-                        <rect key="frame" x="127" y="158" width="67" height="31"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <state key="normal" title="Button"/>
-                        <buttonConfiguration key="configuration" style="filled" title="Button"/>
-                    </button>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vCb-Nl-jt6">
+                        <rect key="frame" x="15" y="19" width="40" height="40"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="40" id="Bjh-cl-FOX"/>
+                            <constraint firstAttribute="height" constant="40" id="rRP-JV-b9n"/>
+                        </constraints>
+                    </imageView>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="HIF-AW-Ih0">
+                        <rect key="frame" x="70" y="12" width="299" height="53"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fIT-Nj-eKn">
+                                <rect key="frame" x="0.0" y="0.0" width="299" height="16"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <color key="textColor" red="0.2274509804" green="0.67450980390000004" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bwr-Uv-qms">
+                                <rect key="frame" x="0.0" y="17" width="299" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H37-q8-a1c">
+                                <rect key="frame" x="0.0" y="38.5" width="299" height="14.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                    </stackView>
                 </subviews>
-                <color key="backgroundColor" red="0.18823529411764706" green="0.18823529411764706" blue="0.18823529411764706" alpha="1" colorSpace="calibratedRGB"/>
+                <color key="backgroundColor" red="0.23529411764705882" green="0.23529411764705882" blue="0.23529411764705882" alpha="0.19948112840000001" colorSpace="custom" customColorSpace="sRGB"/>
                 <constraints>
-                    <constraint firstItem="kRZ-sk-xiU" firstAttribute="top" secondItem="ogj-jz-rjT" secondAttribute="bottom" constant="15" id="8Ks-TI-lki"/>
-                    <constraint firstAttribute="trailing" secondItem="kRZ-sk-xiU" secondAttribute="trailing" constant="139" id="HB1-qH-FCn"/>
-                    <constraint firstItem="ogj-jz-rjT" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="Kl0-GI-1fp"/>
-                    <constraint firstAttribute="trailing" secondItem="ogj-jz-rjT" secondAttribute="trailing" constant="237" id="QDh-og-1O0"/>
-                    <constraint firstItem="ogj-jz-rjT" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="Sjd-wc-FLg"/>
-                    <constraint firstItem="vdh-iz-cQC" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="T5D-NR-m4M"/>
-                    <constraint firstItem="kRZ-sk-xiU" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="Tnt-jb-sUZ"/>
-                    <constraint firstItem="vdh-iz-cQC" firstAttribute="top" secondItem="kRZ-sk-xiU" secondAttribute="bottom" constant="15" id="Z7m-xh-Ap1"/>
-                    <constraint firstAttribute="trailing" secondItem="vdh-iz-cQC" secondAttribute="trailing" constant="15" id="iyN-ZC-dQS"/>
-                    <constraint firstAttribute="bottom" secondItem="MVj-GK-OJX" secondAttribute="bottom" constant="54" id="siP-e1-ZCS"/>
+                    <constraint firstAttribute="bottom" secondItem="vCb-Nl-jt6" secondAttribute="bottom" constant="18" id="8A2-BJ-1Fc"/>
+                    <constraint firstAttribute="trailing" secondItem="HIF-AW-Ih0" secondAttribute="trailing" constant="15" id="CCE-6R-9s3"/>
+                    <constraint firstAttribute="bottom" secondItem="HIF-AW-Ih0" secondAttribute="bottom" constant="12" id="Jb0-Mj-0Il"/>
+                    <constraint firstItem="HIF-AW-Ih0" firstAttribute="top" secondItem="Y14-kJ-001" secondAttribute="top" constant="12" id="Kzg-ky-bYC"/>
+                    <constraint firstItem="vCb-Nl-jt6" firstAttribute="leading" secondItem="Y14-kJ-001" secondAttribute="leading" constant="15" id="ZqW-ib-1in"/>
+                    <constraint firstItem="vCb-Nl-jt6" firstAttribute="top" secondItem="Y14-kJ-001" secondAttribute="top" constant="19" id="e7m-m2-lcT"/>
+                    <constraint firstItem="HIF-AW-Ih0" firstAttribute="leading" secondItem="vCb-Nl-jt6" secondAttribute="trailing" constant="15" id="vho-NG-ENW"/>
                 </constraints>
             </tableViewCellContentView>
-            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
-            <point key="canvasLocation" x="113.04347826086958" y="148.32589285714286"/>
+            <point key="canvasLocation" x="118.84057971014494" y="87.723214285714278"/>
         </tableViewCell>
     </objects>
 </document>
