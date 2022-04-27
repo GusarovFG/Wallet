@@ -9,6 +9,13 @@
 /* Begin PBXBuildFile section */
 		FB0FCA6328193CCC00BB0527 /* ImportTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0FCA6128193CCC00BB0527 /* ImportTableViewCell.swift */; };
 		FB0FCA6428193CCC00BB0527 /* ImportTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB0FCA6228193CCC00BB0527 /* ImportTableViewCell.xib */; };
+		FB0FCA6628194D4300BB0527 /* SelectSystemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0FCA6528194D4300BB0527 /* SelectSystemViewController.swift */; };
+		FB0FCA6D2819600400BB0527 /* SelectSystemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0FCA6B2819600400BB0527 /* SelectSystemTableViewCell.swift */; };
+		FB0FCA6E2819600400BB0527 /* SelectSystemTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB0FCA6C2819600400BB0527 /* SelectSystemTableViewCell.xib */; };
+		FB0FCA702819629D00BB0527 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0FCA6F2819629D00BB0527 /* Models.swift */; };
+		FB0FCA7328197A4000BB0527 /* ImportTokensTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0FCA7128197A4000BB0527 /* ImportTokensTableViewCell.swift */; };
+		FB0FCA7428197A4000BB0527 /* ImportTokensTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB0FCA7228197A4000BB0527 /* ImportTokensTableViewCell.xib */; };
+		FB0FCA7628197B4800BB0527 /* ImportTokensViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0FCA7528197B4800BB0527 /* ImportTokensViewController.swift */; };
 		FB3207F92818018F00F1ADCA /* BalanceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB3207F72818018F00F1ADCA /* BalanceTableViewCell.swift */; };
 		FB3207FA2818018F00F1ADCA /* BalanceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB3207F82818018F00F1ADCA /* BalanceTableViewCell.xib */; };
 		FB3208092818286E00F1ADCA /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB3208082818286E00F1ADCA /* MainViewController.swift */; };
@@ -27,6 +34,13 @@
 /* Begin PBXFileReference section */
 		FB0FCA6128193CCC00BB0527 /* ImportTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportTableViewCell.swift; sourceTree = "<group>"; };
 		FB0FCA6228193CCC00BB0527 /* ImportTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImportTableViewCell.xib; sourceTree = "<group>"; };
+		FB0FCA6528194D4300BB0527 /* SelectSystemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectSystemViewController.swift; sourceTree = "<group>"; };
+		FB0FCA6B2819600400BB0527 /* SelectSystemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectSystemTableViewCell.swift; sourceTree = "<group>"; };
+		FB0FCA6C2819600400BB0527 /* SelectSystemTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectSystemTableViewCell.xib; sourceTree = "<group>"; };
+		FB0FCA6F2819629D00BB0527 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		FB0FCA7128197A4000BB0527 /* ImportTokensTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportTokensTableViewCell.swift; sourceTree = "<group>"; };
+		FB0FCA7228197A4000BB0527 /* ImportTokensTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImportTokensTableViewCell.xib; sourceTree = "<group>"; };
+		FB0FCA7528197B4800BB0527 /* ImportTokensViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportTokensViewController.swift; sourceTree = "<group>"; };
 		FB3207F72818018F00F1ADCA /* BalanceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceTableViewCell.swift; sourceTree = "<group>"; };
 		FB3207F82818018F00F1ADCA /* BalanceTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BalanceTableViewCell.xib; sourceTree = "<group>"; };
 		FB3208082818286E00F1ADCA /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -58,10 +72,14 @@
 		FB3207FB2818019300F1ADCA /* CutomCells */ = {
 			isa = PBXGroup;
 			children = (
+				FB0FCA6B2819600400BB0527 /* SelectSystemTableViewCell.swift */,
 				FB0FCA6128193CCC00BB0527 /* ImportTableViewCell.swift */,
-				FB0FCA6228193CCC00BB0527 /* ImportTableViewCell.xib */,
 				FB3207F72818018F00F1ADCA /* BalanceTableViewCell.swift */,
+				FB0FCA7128197A4000BB0527 /* ImportTokensTableViewCell.swift */,
+				FB0FCA6C2819600400BB0527 /* SelectSystemTableViewCell.xib */,
+				FB0FCA6228193CCC00BB0527 /* ImportTableViewCell.xib */,
 				FB3207F82818018F00F1ADCA /* BalanceTableViewCell.xib */,
+				FB0FCA7228197A4000BB0527 /* ImportTokensTableViewCell.xib */,
 			);
 			path = CutomCells;
 			sourceTree = "<group>";
@@ -79,6 +97,8 @@
 				FB5940382816856700037DFA /* SelectLanguageViewController.swift */,
 				FB59404B281694DD00037DFA /* TermsOfUseViewController.swift */,
 				FB3208082818286E00F1ADCA /* MainViewController.swift */,
+				FB0FCA6528194D4300BB0527 /* SelectSystemViewController.swift */,
+				FB0FCA7528197B4800BB0527 /* ImportTokensViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -104,6 +124,7 @@
 			children = (
 				FB5940342816856700037DFA /* AppDelegate.swift */,
 				FB5940362816856700037DFA /* SceneDelegate.swift */,
+				FB0FCA6F2819629D00BB0527 /* Models.swift */,
 				FB3208072818285100F1ADCA /* ViewControllers */,
 				FB3207FB2818019300F1ADCA /* CutomCells */,
 				FB3208062818279E00F1ADCA /* CustomViews */,
@@ -187,7 +208,9 @@
 				FB5940442816856A00037DFA /* LaunchScreen.storyboard in Resources */,
 				FB5940412816856A00037DFA /* Assets.xcassets in Resources */,
 				FB3207FA2818018F00F1ADCA /* BalanceTableViewCell.xib in Resources */,
+				FB0FCA6E2819600400BB0527 /* SelectSystemTableViewCell.xib in Resources */,
 				FB0FCA6428193CCC00BB0527 /* ImportTableViewCell.xib in Resources */,
+				FB0FCA7428197A4000BB0527 /* ImportTokensTableViewCell.xib in Resources */,
 				FB59403C2816856700037DFA /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -200,10 +223,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				FB59404C281694DD00037DFA /* TermsOfUseViewController.swift in Sources */,
+				FB0FCA702819629D00BB0527 /* Models.swift in Sources */,
 				FB5940532816AC8800037DFA /* Extensions.swift in Sources */,
 				FB5940552816AEF400037DFA /* CustomClasses.swift in Sources */,
+				FB0FCA6628194D4300BB0527 /* SelectSystemViewController.swift in Sources */,
+				FB0FCA7628197B4800BB0527 /* ImportTokensViewController.swift in Sources */,
 				FB5940392816856700037DFA /* SelectLanguageViewController.swift in Sources */,
 				FB0FCA6328193CCC00BB0527 /* ImportTableViewCell.swift in Sources */,
+				FB0FCA6D2819600400BB0527 /* SelectSystemTableViewCell.swift in Sources */,
+				FB0FCA7328197A4000BB0527 /* ImportTokensTableViewCell.swift in Sources */,
 				FB5940352816856700037DFA /* AppDelegate.swift in Sources */,
 				FB59403F2816856700037DFA /* GreenWallet.xcdatamodeld in Sources */,
 				FB3208092818286E00F1ADCA /* MainViewController.swift in Sources */,

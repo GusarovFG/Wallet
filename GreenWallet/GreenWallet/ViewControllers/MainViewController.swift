@@ -9,6 +9,8 @@ import UIKit
 
 class MainViewController: UIViewController {
     
+    
+    
     @IBOutlet weak var balanceLabel: UILabel!
     @IBOutlet weak var riseLabel: UILabel!
     @IBOutlet weak var percentLabel: UILabel!
@@ -29,8 +31,27 @@ class MainViewController: UIViewController {
         self.footerView.layer.cornerRadius = 15
         self.footerView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
     }
+    
+    private func presentModal() {
+        let detailViewController = storyboard?.instantiateViewController(withIdentifier: "SelectSystemViewController") as! SelectSystemViewController
+        let nav = UINavigationController(rootViewController: detailViewController)
+        nav.navigationBar.isHidden = true
+
+        nav.modalPresentationStyle = .pageSheet
+
+        if let sheet = nav.sheetPresentationController {
+            sheet.detents = [.medium()]
+        }
+
+        present(nav, animated: true, completion: nil)
+    }
+    
     @IBAction func qwe(_ sender: Any) {
-        self.stackView.insertArrangedSubview(self.walletsTableView, at: 1)
+        
+        presentModal()
+        
+//        self.stackView.insertArrangedSubview(self.walletsTableView, at: 1)
+        
     }
 }
 
@@ -48,10 +69,5 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         default:
             return walletCell
         }
-        
-        
-    }
-    
-    
-    
+    } 
 }

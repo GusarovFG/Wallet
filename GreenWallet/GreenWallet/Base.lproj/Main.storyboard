@@ -496,6 +496,74 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
             </objects>
             <point key="canvasLocation" x="3434.7826086956525" y="803.57142857142856"/>
         </scene>
+        <!--Select System View Controller-->
+        <scene sceneID="sE3-uu-aeA">
+            <objects>
+                <viewController storyboardIdentifier="SelectSystemViewController" id="8ML-xe-QgD" customClass="SelectSystemViewController" customModule="GreenWallet" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="83J-cZ-u2m">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Выберите сеть" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6j7-jE-JJK">
+                                <rect key="frame" x="15" y="79" width="143" height="24"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                <color key="textColor" red="0.2274509804" green="0.67450980390000004" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="55V-h2-7G0">
+                                <rect key="frame" x="0.0" y="113" width="414" height="729"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="systemCell" id="ute-45-KQo" customClass="SelectSystemTableViewCell" customModule="GreenWallet" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="44.5" width="414" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ute-45-KQo" id="21D-uy-rWa">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="typeOfWalletCell" id="oc8-dD-5jj">
+                                        <rect key="frame" x="0.0" y="88" width="414" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="oc8-dD-5jj" id="EuP-Rg-9cO">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="8Cj-md-0Ks" kind="presentation" modalPresentationStyle="fullScreen" id="IKU-YF-ppE"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="8ML-xe-QgD" id="9xK-S5-Al7"/>
+                                    <outlet property="delegate" destination="8ML-xe-QgD" id="hB6-px-xvD"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="MkD-X3-35e"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="6j7-jE-JJK" firstAttribute="top" secondItem="MkD-X3-35e" secondAttribute="top" constant="35" id="1MQ-Mr-IUz"/>
+                            <constraint firstItem="6j7-jE-JJK" firstAttribute="leading" secondItem="MkD-X3-35e" secondAttribute="leading" constant="15" id="3S1-Nm-eeG"/>
+                            <constraint firstItem="55V-h2-7G0" firstAttribute="trailing" secondItem="MkD-X3-35e" secondAttribute="trailing" id="fqQ-eK-ibK"/>
+                            <constraint firstItem="55V-h2-7G0" firstAttribute="top" secondItem="6j7-jE-JJK" secondAttribute="bottom" constant="10" id="lit-Yc-fgK"/>
+                            <constraint firstItem="55V-h2-7G0" firstAttribute="leading" secondItem="MkD-X3-35e" secondAttribute="leading" id="nWO-jC-3Si"/>
+                            <constraint firstItem="MkD-X3-35e" firstAttribute="bottom" secondItem="55V-h2-7G0" secondAttribute="bottom" constant="20" id="qS5-wG-lwz"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="fte-aO-B9V"/>
+                    <value key="contentSizeForViewInPopover" type="size" width="414" height="239"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <connections>
+                        <outlet property="tableView" destination="55V-h2-7G0" id="Lay-cl-0Gg"/>
+                        <outlet property="titleLabel" destination="6j7-jE-JJK" id="Xub-zn-YpE"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eSk-cY-Ygr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4344.927536231884" y="1482.5892857142856"/>
+        </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="ONr-cc-Ym3">
             <objects>
@@ -514,9 +582,120 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
             </objects>
             <point key="canvasLocation" x="2648" y="804"/>
         </scene>
+        <!--Import Tokens View Controller-->
+        <scene sceneID="OSC-Zg-zz2">
+            <objects>
+                <viewController storyboardIdentifier="ImportTokensViewController" id="8Cj-md-0Ks" customClass="ImportTokensViewController" customModule="GreenWallet" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="4qO-ma-slA">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Импорт токенов" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="frK-gj-Kgx">
+                                <rect key="frame" x="88" y="103" width="237" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <color key="textColor" red="0.2274509804" green="0.67450980390000004" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="B3u-bv-gnj">
+                                <rect key="frame" x="15" y="164" width="384" height="51"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="OWq-IL-ydH">
+                                <rect key="frame" x="0.0" y="246" width="414" height="616"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="importTokenCell" id="A8k-bJ-993" customClass="ImportTokensTableViewCell" customModule="GreenWallet" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="44.5" width="414" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="A8k-bJ-993" id="SwN-Z6-eN7">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="8Cj-md-0Ks" id="d9F-zA-4XE"/>
+                                    <outlet property="delegate" destination="8Cj-md-0Ks" id="E3z-6r-8pU"/>
+                                </connections>
+                            </tableView>
+                            <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Добавлен на главный экран" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PoU-AQ-0vp">
+                                <rect key="frame" x="20" y="172" width="374" height="35"/>
+                                <color key="backgroundColor" red="0.2274509804" green="0.67450980390000004" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <integer key="value" value="8"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chia ******5630" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sLP-T1-FGd">
+                                <rect key="frame" x="137" y="139" width="137" height="15"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" red="0.45882352939999999" green="0.45882352939999999" blue="0.45882352939999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h7d-Ky-eV6">
+                                <rect key="frame" x="0.0" y="88" width="86" height="32"/>
+                                <color key="tintColor" red="0.45882352939999999" green="0.45882352939999999" blue="0.45882352939999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <buttonConfiguration key="configuration" style="plain" image="chevron.backward" catalog="system">
+                                    <attributedString key="attributedTitle">
+                                        <fragment content=" Назад">
+                                            <attributes>
+                                                <font key="NSFont" size="15" name="Helvetica"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="backButtonPressed:" destination="8Cj-md-0Ks" eventType="touchUpInside" id="Rjl-XG-enZ"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="o41-3F-sw4"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="frK-gj-Kgx" firstAttribute="leading" secondItem="o41-3F-sw4" secondAttribute="leading" constant="88" id="3Fy-u7-k8u"/>
+                            <constraint firstAttribute="trailing" secondItem="B3u-bv-gnj" secondAttribute="trailing" constant="15" id="5zK-6k-zkK"/>
+                            <constraint firstItem="B3u-bv-gnj" firstAttribute="leading" secondItem="o41-3F-sw4" secondAttribute="leading" constant="15" id="9BW-Nr-AGp"/>
+                            <constraint firstItem="OWq-IL-ydH" firstAttribute="top" secondItem="B3u-bv-gnj" secondAttribute="bottom" constant="31" id="BNv-6A-BGD"/>
+                            <constraint firstItem="PoU-AQ-0vp" firstAttribute="height" secondItem="B3u-bv-gnj" secondAttribute="height" multiplier="0.401961" constant="14.5" id="DgS-NP-PWV"/>
+                            <constraint firstItem="o41-3F-sw4" firstAttribute="trailing" secondItem="frK-gj-Kgx" secondAttribute="trailing" constant="89" id="E7d-73-WVB"/>
+                            <constraint firstItem="o41-3F-sw4" firstAttribute="trailing" secondItem="sLP-T1-FGd" secondAttribute="trailing" constant="140" id="I49-3x-vHD"/>
+                            <constraint firstItem="sLP-T1-FGd" firstAttribute="leading" secondItem="o41-3F-sw4" secondAttribute="leading" constant="137" id="N61-OO-gjo"/>
+                            <constraint firstItem="h7d-Ky-eV6" firstAttribute="top" secondItem="o41-3F-sw4" secondAttribute="top" id="XTE-0l-tJq"/>
+                            <constraint firstItem="OWq-IL-ydH" firstAttribute="bottom" secondItem="o41-3F-sw4" secondAttribute="bottom" id="Y0D-kG-lE9"/>
+                            <constraint firstItem="OWq-IL-ydH" firstAttribute="leading" secondItem="o41-3F-sw4" secondAttribute="leading" id="Y9N-jD-Toc"/>
+                            <constraint firstItem="PoU-AQ-0vp" firstAttribute="leading" secondItem="o41-3F-sw4" secondAttribute="leading" constant="20" id="Z3c-tF-vWU"/>
+                            <constraint firstItem="frK-gj-Kgx" firstAttribute="top" secondItem="o41-3F-sw4" secondAttribute="top" constant="15" id="dbU-6a-vSF"/>
+                            <constraint firstItem="sLP-T1-FGd" firstAttribute="top" secondItem="frK-gj-Kgx" secondAttribute="bottom" constant="6" id="ghB-8V-ZH6"/>
+                            <constraint firstItem="h7d-Ky-eV6" firstAttribute="leading" secondItem="o41-3F-sw4" secondAttribute="leading" id="hMY-Vc-7TV"/>
+                            <constraint firstItem="o41-3F-sw4" firstAttribute="trailing" secondItem="PoU-AQ-0vp" secondAttribute="trailing" constant="20" id="kFH-7Q-rgm"/>
+                            <constraint firstItem="B3u-bv-gnj" firstAttribute="top" secondItem="sLP-T1-FGd" secondAttribute="bottom" constant="10" id="vsh-J5-Rfz"/>
+                            <constraint firstItem="PoU-AQ-0vp" firstAttribute="top" secondItem="sLP-T1-FGd" secondAttribute="bottom" constant="18" id="xKK-L1-Aov"/>
+                            <constraint firstItem="OWq-IL-ydH" firstAttribute="trailing" secondItem="o41-3F-sw4" secondAttribute="trailing" id="z7V-SF-5PJ"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" leftItemsSupplementBackButton="YES" id="72l-y2-kwQ">
+                        <barButtonItem key="backBarButtonItem" title="Назад" id="zaH-1L-L9W"/>
+                    </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="addedWalletButton" destination="PoU-AQ-0vp" id="bak-re-95h"/>
+                        <outlet property="numberOFWalletLabel" destination="sLP-T1-FGd" id="Rwn-25-Ogw"/>
+                        <outlet property="searchSystemBar" destination="B3u-bv-gnj" id="igV-W5-pah"/>
+                        <outlet property="tableView" destination="OWq-IL-ydH" id="4fi-MA-kRc"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vCB-4g-cg7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5185.507246376812" y="1482.5892857142856"/>
+        </scene>
     </scenes>
     <resources>
         <image name="button1" width="28" height="28"/>
+        <image name="chevron.backward" catalog="system" width="96" height="128"/>
         <image name="image 466" width="252" height="54"/>
         <image name="plus" catalog="system" width="128" height="113"/>
         <image name="qrcode" catalog="system" width="128" height="114"/>
