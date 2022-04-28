@@ -9,6 +9,8 @@ import UIKit
 
 class SecureAndPushTableViewCell: UITableViewCell {
 
+    private let userInfo = ["": "***** USD"]
+    
     @IBOutlet weak var mainLabel: UILabel?
     @IBOutlet weak var detailLabel: UILabel?
     @IBOutlet weak var cellSwitch: UISwitch?
@@ -16,12 +18,16 @@ class SecureAndPushTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    @IBAction func hideWallet(_ sender: Any) {
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "hideWallet"), object: nil, userInfo: userInfo)
     }
     
 }

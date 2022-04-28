@@ -23,7 +23,6 @@ class SelectSystemViewController: UIViewController {
         
         self.navigationController?.navigationBar.isHidden = true
     }
-
 }
 
 extension SelectSystemViewController: UITableViewDelegate, UITableViewDataSource {

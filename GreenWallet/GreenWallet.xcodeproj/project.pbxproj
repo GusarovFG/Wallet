@@ -38,6 +38,7 @@
 		FBFE578F281AC4050016E74A /* PushAndAllSettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBFE578D281AC4050016E74A /* PushAndAllSettingsTableViewCell.swift */; };
 		FBFE5790281AC4060016E74A /* PushAndAllSettingsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBFE578E281AC4050016E74A /* PushAndAllSettingsTableViewCell.xib */; };
 		FBFE5793281AE8C60016E74A /* SecureBalanceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBFE5792281AE8C60016E74A /* SecureBalanceTableViewCell.xib */; };
+		FBFE5795281AF4F90016E74A /* AllSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBFE5794281AF4F90016E74A /* AllSettingsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -74,6 +75,7 @@
 		FBFE578D281AC4050016E74A /* PushAndAllSettingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushAndAllSettingsTableViewCell.swift; sourceTree = "<group>"; };
 		FBFE578E281AC4050016E74A /* PushAndAllSettingsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PushAndAllSettingsTableViewCell.xib; sourceTree = "<group>"; };
 		FBFE5792281AE8C60016E74A /* SecureBalanceTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SecureBalanceTableViewCell.xib; sourceTree = "<group>"; };
+		FBFE5794281AF4F90016E74A /* AllSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllSettingsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +118,7 @@
 				FB0FCA6528194D4300BB0527 /* SelectSystemViewController.swift */,
 				FB0FCA7528197B4800BB0527 /* ImportTokensViewController.swift */,
 				FBFE5772281AAB040016E74A /* SettingsViewController.swift */,
+				FBFE5794281AF4F90016E74A /* AllSettingsViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -338,6 +341,7 @@
 				FB0FCA6328193CCC00BB0527 /* ImportTableViewCell.swift in Sources */,
 				FB0FCA6D2819600400BB0527 /* SelectSystemTableViewCell.swift in Sources */,
 				FBFE578F281AC4050016E74A /* PushAndAllSettingsTableViewCell.swift in Sources */,
+				FBFE5795281AF4F90016E74A /* AllSettingsViewController.swift in Sources */,
 				FB0FCA7328197A4000BB0527 /* ImportTokensTableViewCell.swift in Sources */,
 				FBFE577B281AB9250016E74A /* ThemesTableViewCell.swift in Sources */,
 				FB5940352816856700037DFA /* AppDelegate.swift in Sources */,

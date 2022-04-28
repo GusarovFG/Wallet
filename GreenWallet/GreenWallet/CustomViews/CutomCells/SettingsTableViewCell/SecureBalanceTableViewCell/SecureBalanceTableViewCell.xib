@@ -32,6 +32,9 @@
                     </imageView>
                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SG2-DJ-5bL">
                         <rect key="frame" x="312" y="22" width="51" height="31"/>
+                        <connections>
+                            <action selector="hideWallet:" destination="lTR-Ii-zWO" eventType="valueChanged" id="MeV-NL-TZ0"/>
+                        </connections>
                     </switch>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dWI-pF-g98">
                         <rect key="frame" x="85" y="17" width="207" height="21"/>

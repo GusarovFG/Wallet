@@ -1,5 +1,5 @@
 //
-//  SettingsViewController.swift
+//  AllSettingsViewController.swift
 //  GreenWallet
 //
 //  Created by Фаддей Гусаров on 28.04.2022.
@@ -7,12 +7,13 @@
 
 import UIKit
 
-class SettingsViewController: UIViewController {
-    
-    private var titlesOfCells = ["Скрыть баланс кошельков", "Push-уведомления", "Поддержка", "Уведомления", "Все настройки"]
+class AllSettingsViewController: UIViewController {
+
+    private var titlesOfCells = ["Скрыть баланс кошельков", "Push-уведомления", "Поддержка", "Уведомления", "Сменить язык", "О приложении"]
     private var detailOfCells = ["На главном экране", "Рекомендуется", "Ответим на вопросы"]
 
     @IBOutlet weak var tableView: UITableView!
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,9 +26,9 @@ class SettingsViewController: UIViewController {
 
 }
 
-extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
+extension AllSettingsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        6
+        7
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -60,20 +61,14 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
             pushAndAllSettingsCell.cellImage.image = UIImage(named: "Notification")!
             pushAndAllSettingsCell.mainLabel.text = self.titlesOfCells[3]
             return pushAndAllSettingsCell
-        default:
-            pushAndAllSettingsCell.cellImage.image = UIImage(named: "settings")!
+        case [0,5]:
+            pushAndAllSettingsCell.cellImage.image = UIImage(named: "Language")!
             pushAndAllSettingsCell.mainLabel.text = self.titlesOfCells[4]
             return pushAndAllSettingsCell
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath == [0,5] {
-            let allSettingsVC = storyboard?.instantiateViewController(withIdentifier: "AllSettingsViewController") as! AllSettingsViewController
-            allSettingsVC.modalPresentationStyle = .fullScreen
-            
-            self.present(allSettingsVC, animated: true, completion: nil)
-//            self.navigationController?.navigationBar.isHidden = false
+        default:
+            pushAndAllSettingsCell.cellImage.image = UIImage(named: "info")!
+            pushAndAllSettingsCell.mainLabel.text = self.titlesOfCells[5]
+            return pushAndAllSettingsCell
         }
     }
 }

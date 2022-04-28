@@ -39,6 +39,8 @@ class MainViewController: UIViewController {
         navigationItem.rightBarButtonItem = settingsItem
         self.navigationController?.navigationBar.setItems([navigationItem], animated: false)
         
+        NotificationCenter.default.addObserver(self, selector: #selector(hideWallet), name: NSNotification.Name(rawValue: "hideWallet"), object: nil)
+        
     }
     
     private func presentSelectSystemVC() {
@@ -60,14 +62,18 @@ class MainViewController: UIViewController {
         let settingsViewController = storyboard?.instantiateViewController(withIdentifier: "SettingsViewController") as! SettingsViewController
         let nav = UINavigationController(rootViewController: settingsViewController)
         nav.navigationBar.isHidden = true
-
         nav.modalPresentationStyle = .pageSheet
-
         if let sheet = nav.sheetPresentationController {
             sheet.detents = [.medium(), .large()]
         }
-
         self.present(nav, animated: true, completion: nil)
+    }
+    
+    @objc private func hideWallet(notification: Notification) {
+        guard let userInfo = notification.userInfo else { return }
+        guard let text = userInfo[""] as? String else { return }
+        
+        self.balanceLabel.text = text
     }
     
     @IBAction func addWalletButtonPressed(_ sender: Any) {
