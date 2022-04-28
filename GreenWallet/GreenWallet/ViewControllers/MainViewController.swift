@@ -41,10 +41,10 @@ class MainViewController: UIViewController {
         
     }
     
-    private func presentModal() {
+    private func presentSelectSystemVC() {
+        
         let detailViewController = storyboard?.instantiateViewController(withIdentifier: "SelectSystemViewController") as! SelectSystemViewController
         let nav = UINavigationController(rootViewController: detailViewController)
-        nav.navigationBar.isHidden = true
 
         nav.modalPresentationStyle = .pageSheet
 
@@ -70,8 +70,8 @@ class MainViewController: UIViewController {
         self.present(nav, animated: true, completion: nil)
     }
     
-    @IBAction func qwe(_ sender: Any) {
-        presentModal()
+    @IBAction func addWalletButtonPressed(_ sender: Any) {
+        presentSelectSystemVC()
     }
 }
 

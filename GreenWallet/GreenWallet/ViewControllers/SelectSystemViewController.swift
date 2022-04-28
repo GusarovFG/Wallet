@@ -20,6 +20,8 @@ class SelectSystemViewController: UIViewController {
         super.viewDidLoad()
         
         self.tableView.register(UINib(nibName: "SelectSystemTableViewCell", bundle: nil), forCellReuseIdentifier: "systemCell")
+        
+        self.navigationController?.navigationBar.isHidden = true
     }
 
 }
@@ -57,14 +59,6 @@ extension SelectSystemViewController: UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if self.isSelectedSystem {
-            let importTokensVC = storyboard?.instantiateViewController(withIdentifier: "ImportTokensViewController") as! ImportTokensViewController
-//            importTokensVC.modalPresentationStyle = .fullScreen
-//            self.navigationController?.present(importTokensVC, animated: true)
-//            self.navigationController?.navigationBar.isHidden = false
-            let vc = ImportTokensViewController()
-            
-            
-            present(vc, animated: true)
             
         } else {
             self.isSelectedSystem = true
