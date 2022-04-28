@@ -8,11 +8,20 @@
 import UIKit
 
 class SettingsViewController: UIViewController {
+    
+    private var titlesOfCells = ["Скрыть баланс кошельков", "Push-уведомления", "Поддержка", "Уведомления", "Все настройки"]
 
+    @IBOutlet weak var tableView: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        self.tableView.register(UINib(nibName: "ThemesTableViewCell", bundle: nil), forCellReuseIdentifier: "themeCell")
+        self.tableView.register(UINib(nibName: "SecureBalanceTableViewCell", bundle: nil), forCellReuseIdentifier: "secureAndPushCell")
+        self.tableView.register(UINib(nibName: "SupportTableViewCell", bundle: nil), forCellReuseIdentifier: "supportCell")
+        self.tableView.register(UINib(nibName: "PushAndAllSettingsTableViewCell", bundle: nil), forCellReuseIdentifier: "pushAndAllSettingsCell")
+        
+//        self.tableView.rowHeight = 74
     }
     
 
@@ -26,4 +35,43 @@ class SettingsViewController: UIViewController {
     }
     */
 
+}
+
+extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        6
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let themeCell = tableView.dequeueReusableCell(withIdentifier: "themeCell", for: indexPath) as! ThemesTableViewCell
+        let secureAndPushCell = tableView.dequeueReusableCell(withIdentifier: "secureAndPushCell", for: indexPath) as! SecureAndPushTableViewCell
+        let supportCell = tableView.dequeueReusableCell(withIdentifier: "supportCell", for: indexPath) as! SupportTableViewCell
+        let pushAndAllSettingsCell = tableView.dequeueReusableCell(withIdentifier: "pushAndAllSettingsCell", for: indexPath) as! PushAndAllSettingsTableViewCell
+        
+        switch indexPath {
+        case [0,0]:
+            return themeCell
+        case [0,1]:
+            secureAndPushCell.eyeImageView?.image = UIImage(named: "Eye")!
+            secureAndPushCell.mainLabel?.text = self.titlesOfCells[0]
+            return secureAndPushCell
+        case [0,2]:
+            secureAndPushCell.eyeImageView?.image = UIImage(named: "Notification")!
+            secureAndPushCell.mainLabel?.text = self.titlesOfCells[1]
+            return secureAndPushCell
+        case [0,3]:
+            supportCell.mainLabel?.text = self.titlesOfCells[2]
+            supportCell.cellImage?.image = UIImage(named: "support")!
+            return supportCell
+        case [0,4]:
+            pushAndAllSettingsCell.cellImage.image = UIImage(named: "Notification")!
+            pushAndAllSettingsCell.mainLabel.text = self.titlesOfCells[3]
+            return pushAndAllSettingsCell
+        default:
+            pushAndAllSettingsCell.cellImage.image = UIImage(named: "settings")!
+            pushAndAllSettingsCell.mainLabel.text = self.titlesOfCells[4]
+            return pushAndAllSettingsCell
+        }
+    }
 }

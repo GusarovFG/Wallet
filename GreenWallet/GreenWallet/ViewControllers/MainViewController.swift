@@ -57,6 +57,17 @@ class MainViewController: UIViewController {
     
     @objc private func pushSettingsController() {
         
+        let settingsViewController = storyboard?.instantiateViewController(withIdentifier: "SettingsViewController") as! SettingsViewController
+        let nav = UINavigationController(rootViewController: settingsViewController)
+        nav.navigationBar.isHidden = true
+
+        nav.modalPresentationStyle = .pageSheet
+
+        if let sheet = nav.sheetPresentationController {
+            sheet.detents = [.medium(), .large()]
+        }
+
+        self.present(nav, animated: true, completion: nil)
     }
     
     @IBAction func qwe(_ sender: Any) {

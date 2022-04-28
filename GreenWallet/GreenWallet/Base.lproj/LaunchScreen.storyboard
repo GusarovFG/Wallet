@@ -15,7 +15,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image 466" translatesAutoresizingMaskIntoConstraints="NO" id="48V-ZW-8Us">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LaunchScreenLogo" translatesAutoresizingMaskIntoConstraints="NO" id="48V-ZW-8Us">
                                 <rect key="frame" x="81" y="421" width="252" height="54"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="54" id="6LB-Gp-xEg"/>
@@ -38,6 +38,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="image 466" width="252" height="54"/>
+        <image name="LaunchScreenLogo" width="252" height="54"/>
     </resources>
 </document>

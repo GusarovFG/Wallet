@@ -30,6 +30,14 @@
 		FB5940532816AC8800037DFA /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5940522816AC8800037DFA /* Extensions.swift */; };
 		FB5940552816AEF400037DFA /* CustomClasses.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5940542816AEF400037DFA /* CustomClasses.swift */; };
 		FBFE5773281AAB040016E74A /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBFE5772281AAB040016E74A /* SettingsViewController.swift */; };
+		FBFE577B281AB9250016E74A /* ThemesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBFE5779281AB9250016E74A /* ThemesTableViewCell.swift */; };
+		FBFE577C281AB9250016E74A /* ThemesTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBFE577A281AB9250016E74A /* ThemesTableViewCell.xib */; };
+		FBFE5781281ABE2D0016E74A /* SecureBalanceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBFE577F281ABE2D0016E74A /* SecureBalanceTableViewCell.swift */; };
+		FBFE578A281AC2B70016E74A /* SupportTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBFE5788281AC2B70016E74A /* SupportTableViewCell.swift */; };
+		FBFE578B281AC2B70016E74A /* SupportTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBFE5789281AC2B70016E74A /* SupportTableViewCell.xib */; };
+		FBFE578F281AC4050016E74A /* PushAndAllSettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBFE578D281AC4050016E74A /* PushAndAllSettingsTableViewCell.swift */; };
+		FBFE5790281AC4060016E74A /* PushAndAllSettingsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBFE578E281AC4050016E74A /* PushAndAllSettingsTableViewCell.xib */; };
+		FBFE5793281AE8C60016E74A /* SecureBalanceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBFE5792281AE8C60016E74A /* SecureBalanceTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +66,14 @@
 		FB5940522816AC8800037DFA /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		FB5940542816AEF400037DFA /* CustomClasses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomClasses.swift; sourceTree = "<group>"; };
 		FBFE5772281AAB040016E74A /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		FBFE5779281AB9250016E74A /* ThemesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemesTableViewCell.swift; sourceTree = "<group>"; };
+		FBFE577A281AB9250016E74A /* ThemesTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ThemesTableViewCell.xib; sourceTree = "<group>"; };
+		FBFE577F281ABE2D0016E74A /* SecureBalanceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureBalanceTableViewCell.swift; sourceTree = "<group>"; };
+		FBFE5788281AC2B70016E74A /* SupportTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportTableViewCell.swift; sourceTree = "<group>"; };
+		FBFE5789281AC2B70016E74A /* SupportTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SupportTableViewCell.xib; sourceTree = "<group>"; };
+		FBFE578D281AC4050016E74A /* PushAndAllSettingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushAndAllSettingsTableViewCell.swift; sourceTree = "<group>"; };
+		FBFE578E281AC4050016E74A /* PushAndAllSettingsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PushAndAllSettingsTableViewCell.xib; sourceTree = "<group>"; };
+		FBFE5792281AE8C60016E74A /* SecureBalanceTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SecureBalanceTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,14 +90,11 @@
 		FB3207FB2818019300F1ADCA /* CutomCells */ = {
 			isa = PBXGroup;
 			children = (
-				FB0FCA6B2819600400BB0527 /* SelectSystemTableViewCell.swift */,
-				FB0FCA6128193CCC00BB0527 /* ImportTableViewCell.swift */,
-				FB3207F72818018F00F1ADCA /* BalanceTableViewCell.swift */,
-				FB0FCA7128197A4000BB0527 /* ImportTokensTableViewCell.swift */,
-				FB0FCA6C2819600400BB0527 /* SelectSystemTableViewCell.xib */,
-				FB0FCA6228193CCC00BB0527 /* ImportTableViewCell.xib */,
-				FB3207F82818018F00F1ADCA /* BalanceTableViewCell.xib */,
-				FB0FCA7228197A4000BB0527 /* ImportTokensTableViewCell.xib */,
+				FBFE5774281AB8CC0016E74A /* SelectSystemTableViewCell */,
+				FBFE5775281AB8D90016E74A /* ImportTableViewCell */,
+				FBFE5776281AB8E20016E74A /* BalanceTableViewCell */,
+				FBFE5777281AB8EE0016E74A /* ImportTokensTableViewCell */,
+				FBFE5778281AB8FB0016E74A /* SettingsTableViewCell */,
 			);
 			path = CutomCells;
 			sourceTree = "<group>";
@@ -89,6 +102,7 @@
 		FB3208062818279E00F1ADCA /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
+				FB3207FB2818019300F1ADCA /* CutomCells */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -129,7 +143,6 @@
 				FB5940362816856700037DFA /* SceneDelegate.swift */,
 				FB0FCA6F2819629D00BB0527 /* Models.swift */,
 				FB3208072818285100F1ADCA /* ViewControllers */,
-				FB3207FB2818019300F1ADCA /* CutomCells */,
 				FB3208062818279E00F1ADCA /* CustomViews */,
 				FB5940512816AC7800037DFA /* Extensions */,
 				FB59403A2816856700037DFA /* Main.storyboard */,
@@ -148,6 +161,89 @@
 				FB5940542816AEF400037DFA /* CustomClasses.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		FBFE5774281AB8CC0016E74A /* SelectSystemTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				FB0FCA6B2819600400BB0527 /* SelectSystemTableViewCell.swift */,
+				FB0FCA6C2819600400BB0527 /* SelectSystemTableViewCell.xib */,
+			);
+			path = SelectSystemTableViewCell;
+			sourceTree = "<group>";
+		};
+		FBFE5775281AB8D90016E74A /* ImportTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				FB0FCA6128193CCC00BB0527 /* ImportTableViewCell.swift */,
+				FB0FCA6228193CCC00BB0527 /* ImportTableViewCell.xib */,
+			);
+			path = ImportTableViewCell;
+			sourceTree = "<group>";
+		};
+		FBFE5776281AB8E20016E74A /* BalanceTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				FB3207F72818018F00F1ADCA /* BalanceTableViewCell.swift */,
+				FB3207F82818018F00F1ADCA /* BalanceTableViewCell.xib */,
+			);
+			path = BalanceTableViewCell;
+			sourceTree = "<group>";
+		};
+		FBFE5777281AB8EE0016E74A /* ImportTokensTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				FB0FCA7128197A4000BB0527 /* ImportTokensTableViewCell.swift */,
+				FB0FCA7228197A4000BB0527 /* ImportTokensTableViewCell.xib */,
+			);
+			path = ImportTokensTableViewCell;
+			sourceTree = "<group>";
+		};
+		FBFE5778281AB8FB0016E74A /* SettingsTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				FBFE577E281ABE060016E74A /* ThemesTableViewCell */,
+				FBFE5783281ABE500016E74A /* SecureBalanceTableViewCell */,
+				FBFE578C281AC2BF0016E74A /* SupportTableViewCell */,
+				FBFE5791281AC5E50016E74A /* PushAndAllSettingsTableViewCell */,
+			);
+			path = SettingsTableViewCell;
+			sourceTree = "<group>";
+		};
+		FBFE577E281ABE060016E74A /* ThemesTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				FBFE5779281AB9250016E74A /* ThemesTableViewCell.swift */,
+				FBFE577A281AB9250016E74A /* ThemesTableViewCell.xib */,
+			);
+			path = ThemesTableViewCell;
+			sourceTree = "<group>";
+		};
+		FBFE5783281ABE500016E74A /* SecureBalanceTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				FBFE577F281ABE2D0016E74A /* SecureBalanceTableViewCell.swift */,
+				FBFE5792281AE8C60016E74A /* SecureBalanceTableViewCell.xib */,
+			);
+			path = SecureBalanceTableViewCell;
+			sourceTree = "<group>";
+		};
+		FBFE578C281AC2BF0016E74A /* SupportTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				FBFE5788281AC2B70016E74A /* SupportTableViewCell.swift */,
+				FBFE5789281AC2B70016E74A /* SupportTableViewCell.xib */,
+			);
+			path = SupportTableViewCell;
+			sourceTree = "<group>";
+		};
+		FBFE5791281AC5E50016E74A /* PushAndAllSettingsTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				FBFE578D281AC4050016E74A /* PushAndAllSettingsTableViewCell.swift */,
+				FBFE578E281AC4050016E74A /* PushAndAllSettingsTableViewCell.xib */,
+			);
+			path = PushAndAllSettingsTableViewCell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -209,11 +305,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				FB5940442816856A00037DFA /* LaunchScreen.storyboard in Resources */,
+				FBFE578B281AC2B70016E74A /* SupportTableViewCell.xib in Resources */,
 				FB5940412816856A00037DFA /* Assets.xcassets in Resources */,
 				FB3207FA2818018F00F1ADCA /* BalanceTableViewCell.xib in Resources */,
+				FBFE5790281AC4060016E74A /* PushAndAllSettingsTableViewCell.xib in Resources */,
 				FB0FCA6E2819600400BB0527 /* SelectSystemTableViewCell.xib in Resources */,
 				FB0FCA6428193CCC00BB0527 /* ImportTableViewCell.xib in Resources */,
 				FB0FCA7428197A4000BB0527 /* ImportTokensTableViewCell.xib in Resources */,
+				FBFE5793281AE8C60016E74A /* SecureBalanceTableViewCell.xib in Resources */,
+				FBFE577C281AB9250016E74A /* ThemesTableViewCell.xib in Resources */,
 				FB59403C2816856700037DFA /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -225,7 +325,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FBFE5781281ABE2D0016E74A /* SecureBalanceTableViewCell.swift in Sources */,
 				FB59404C281694DD00037DFA /* TermsOfUseViewController.swift in Sources */,
+				FBFE578A281AC2B70016E74A /* SupportTableViewCell.swift in Sources */,
 				FB0FCA702819629D00BB0527 /* Models.swift in Sources */,
 				FB5940532816AC8800037DFA /* Extensions.swift in Sources */,
 				FB5940552816AEF400037DFA /* CustomClasses.swift in Sources */,
@@ -235,7 +337,9 @@
 				FBFE5773281AAB040016E74A /* SettingsViewController.swift in Sources */,
 				FB0FCA6328193CCC00BB0527 /* ImportTableViewCell.swift in Sources */,
 				FB0FCA6D2819600400BB0527 /* SelectSystemTableViewCell.swift in Sources */,
+				FBFE578F281AC4050016E74A /* PushAndAllSettingsTableViewCell.swift in Sources */,
 				FB0FCA7328197A4000BB0527 /* ImportTokensTableViewCell.swift in Sources */,
+				FBFE577B281AB9250016E74A /* ThemesTableViewCell.swift in Sources */,
 				FB5940352816856700037DFA /* AppDelegate.swift in Sources */,
 				FB59403F2816856700037DFA /* GreenWallet.xcdatamodeld in Sources */,
 				FB3208092818286E00F1ADCA /* MainViewController.swift in Sources */,
