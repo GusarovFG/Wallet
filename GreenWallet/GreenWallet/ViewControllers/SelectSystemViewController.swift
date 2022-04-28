@@ -62,9 +62,7 @@ extension SelectSystemViewController: UITableViewDelegate, UITableViewDataSource
             self.isSelectedSystem = true
             tableView.reloadData()
         }
-        
-      
-        
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
 }

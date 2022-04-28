@@ -43,6 +43,7 @@
 		FBFE579A281B269E0016E74A /* LanguageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBFE5798281B269E0016E74A /* LanguageTableViewCell.swift */; };
 		FBFE579E281B28880016E74A /* LanguageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBFE579D281B28880016E74A /* LanguageViewController.swift */; };
 		FBFE57A2281B2EDD0016E74A /* LanguageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBFE57A1281B2EDD0016E74A /* LanguageTableViewCell.xib */; };
+		FBFE57A4281B4AFE0016E74A /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBFE57A3281B4AFE0016E74A /* InfoViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -84,6 +85,7 @@
 		FBFE5798281B269E0016E74A /* LanguageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageTableViewCell.swift; sourceTree = "<group>"; };
 		FBFE579D281B28880016E74A /* LanguageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageViewController.swift; sourceTree = "<group>"; };
 		FBFE57A1281B2EDD0016E74A /* LanguageTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LanguageTableViewCell.xib; sourceTree = "<group>"; };
+		FBFE57A3281B4AFE0016E74A /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,6 +131,7 @@
 				FBFE5772281AAB040016E74A /* SettingsViewController.swift */,
 				FBFE5794281AF4F90016E74A /* AllSettingsViewController.swift */,
 				FBFE579D281B28880016E74A /* LanguageViewController.swift */,
+				FBFE57A3281B4AFE0016E74A /* InfoViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -353,6 +356,7 @@
 				FB59404C281694DD00037DFA /* TermsOfUseViewController.swift in Sources */,
 				FBFE579E281B28880016E74A /* LanguageViewController.swift in Sources */,
 				FBFE578A281AC2B70016E74A /* SupportTableViewCell.swift in Sources */,
+				FBFE57A4281B4AFE0016E74A /* InfoViewController.swift in Sources */,
 				FB0FCA702819629D00BB0527 /* Models.swift in Sources */,
 				FBFE5797281B121B0016E74A /* UserDefaultsManager.swift in Sources */,
 				FB5940532816AC8800037DFA /* Extensions.swift in Sources */,

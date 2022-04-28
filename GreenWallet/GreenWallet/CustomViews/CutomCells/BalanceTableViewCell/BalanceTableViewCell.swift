@@ -9,6 +9,11 @@ import UIKit
 
 class BalanceTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var cellImage: UIImageView!
+    @IBOutlet weak var balanceLabel: UILabel!
+    @IBOutlet weak var tokenLabel: UILabel!
+    @IBOutlet weak var convertLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

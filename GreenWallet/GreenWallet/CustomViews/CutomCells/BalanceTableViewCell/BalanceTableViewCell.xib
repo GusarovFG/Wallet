@@ -57,6 +57,12 @@
                     <constraint firstItem="HIF-AW-Ih0" firstAttribute="leading" secondItem="vCb-Nl-jt6" secondAttribute="trailing" constant="15" id="vho-NG-ENW"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="balanceLabel" destination="Bwr-Uv-qms" id="RvL-wa-psW"/>
+                <outlet property="cellImage" destination="vCb-Nl-jt6" id="i4q-xF-AHR"/>
+                <outlet property="convertLabel" destination="H37-q8-a1c" id="2UI-Pm-Pk4"/>
+                <outlet property="tokenLabel" destination="fIT-Nj-eKn" id="9Z4-Lg-Qh7"/>
+            </connections>
             <point key="canvasLocation" x="118.84057971014494" y="87.723214285714278"/>
         </tableViewCell>
     </objects>

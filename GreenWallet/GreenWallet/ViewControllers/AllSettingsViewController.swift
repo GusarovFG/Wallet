@@ -87,10 +87,14 @@ extension AllSettingsViewController: UITableViewDelegate, UITableViewDataSource 
         case [0,5]:
             let languageVC = storyboard?.instantiateViewController(withIdentifier: "LanguageViewController") as! LanguageViewController
             languageVC.modalPresentationStyle = .fullScreen
-            
             self.present(languageVC, animated: true, completion: nil)
+        case [0,6]:
+            let infoVC = storyboard?.instantiateViewController(withIdentifier: "InfoViewController") as! InfoViewController
+            infoVC.modalPresentationStyle = .fullScreen
+            self.present(infoVC, animated: true, completion: nil)
         default:
             break
         }
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }

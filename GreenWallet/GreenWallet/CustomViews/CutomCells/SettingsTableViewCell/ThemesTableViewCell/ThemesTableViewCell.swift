@@ -26,12 +26,14 @@ class ThemesTableViewCell: UITableViewCell {
         UIApplication.shared.windows.forEach { window in
             window.overrideUserInterfaceStyle = .dark
         }
+        UserDefaultsManager.shared.userDefaults.set("dark", forKey: UserDefaultsStringKeys.theme.rawValue)
     }
     
     @IBAction func lightThemeButtonPressed(_ sender: Any) {
         UIApplication.shared.windows.forEach { window in
             window.overrideUserInterfaceStyle = .light
         }
+        UserDefaultsManager.shared.userDefaults.set("light", forKey: UserDefaultsStringKeys.theme.rawValue)
     }
     
 }

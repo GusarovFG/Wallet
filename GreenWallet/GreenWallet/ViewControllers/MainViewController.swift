@@ -10,7 +10,7 @@ import UIKit
 class MainViewController: UIViewController {
     
     private var balance = 0
-    
+    private var wallets = [System(name: "Green App Development", token: "GAD", image: UIImage(named: "emptyLogo")!), System(name: "Marmot", token: "MRT", image: UIImage(named: "emptyLogo")!), System(name: "Chia MEM", token: "CMM", image: UIImage(named: "emptyLogo")!), System(name: "USD Stable", token: "USDS", image: UIImage(named: "emptyLogo")!)]
     let userDefaults = UserDefaults.standard
     
     @IBOutlet weak var balanceLabel: UILabel!
@@ -97,28 +97,34 @@ class MainViewController: UIViewController {
 
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        3
+        self.wallets.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let importCell = tableView.dequeueReusableCell(withIdentifier: "importCell", for: indexPath) as! ImportTableViewCell
         let walletCell = tableView.dequeueReusableCell(withIdentifier: "walletCell", for: indexPath) as! BalanceTableViewCell
         switch indexPath {
-        case [0,2]:
+        case [0,self.wallets.count - 1]:
             return importCell
         default:
+            let wallet = self.wallets[indexPath.row]
+            walletCell.cellImage.image = wallet.image
+            walletCell.balanceLabel.text = "0 \(wallet.token)"
+            walletCell.convertLabel.text = "⁓ 504.99 USD"
+            walletCell.tokenLabel.text = wallet.name
             return walletCell
         }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath {
-        case [0,2]:
+        case [0,self.wallets.count - 1]:
             let importTokensVC = storyboard?.instantiateViewController(withIdentifier: "ImportTokensViewController") as! ImportTokensViewController
             importTokensVC.modalPresentationStyle = .fullScreen
             self.navigationController!.present(importTokensVC, animated: true, completion: nil)
         default:
             break
         }
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }

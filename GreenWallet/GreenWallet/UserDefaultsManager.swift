@@ -21,4 +21,5 @@ class UserDefaultsManager {
 enum UserDefaultsStringKeys: String {
     case hideWalletsBalance = "HideWalletsBalance"
     case Language = "Language"
+    case theme = "Theme"
 }

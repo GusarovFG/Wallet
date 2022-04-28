@@ -19,6 +19,7 @@ class TermsOfUseViewController: UIViewController {
         self.continueButton.isEnabled = false
         self.continueButton.backgroundColor = #colorLiteral(red: 0.6106664538, green: 0.6106664538, blue: 0.6106664538, alpha: 1)
         self.continueButton.tintColor = .black
+        self.checkBoxButton.contentMode = .center
         
         setupAgreeLabel()
         
