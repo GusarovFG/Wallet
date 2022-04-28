@@ -599,6 +599,9 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                             <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="B3u-bv-gnj">
                                 <rect key="frame" x="15" y="164" width="384" height="51"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="8Cj-md-0Ks" id="YA0-Uc-HfY"/>
+                                </connections>
                             </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="OWq-IL-ydH">
                                 <rect key="frame" x="0.0" y="246" width="414" height="616"/>
@@ -684,6 +687,7 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                     <connections>
                         <outlet property="addedWalletButton" destination="PoU-AQ-0vp" id="bak-re-95h"/>
                         <outlet property="numberOFWalletLabel" destination="sLP-T1-FGd" id="Rwn-25-Ogw"/>
+                        <outlet property="searchBar" destination="B3u-bv-gnj" id="aRz-pg-Ub8"/>
                         <outlet property="searchSystemBar" destination="B3u-bv-gnj" id="igV-W5-pah"/>
                         <outlet property="tableView" destination="OWq-IL-ydH" id="4fi-MA-kRc"/>
                     </connections>

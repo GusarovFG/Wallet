@@ -8,18 +8,21 @@
 import UIKit
 
 class ImportTokensViewController: UIViewController {
-
+    
     private var tokens = [System(name: "Green App Development", token: "GAD", image: UIImage(named: "emptyLogo")!), System(name: "Marmot", token: "MRT", image: UIImage(named: "emptyLogo")!), System(name: "Chia MEM", token: "CMM", image: UIImage(named: "emptyLogo")!), System(name: "USD Stable", token: "USDS", image: UIImage(named: "emptyLogo")!), System(name: "Gem NTF", token: "GEM", image: UIImage(named: "emptyLogo")!),  System(name: "Gem NTF", token: "GEM", image: UIImage(named: "emptyLogo")!), System(name: "Gem NTF", token: "GEM", image: UIImage(named: "emptyLogo")!), System(name: "Gem NTF", token: "GEM", image: UIImage(named: "emptyLogo")!), System(name: "Gem NTF", token: "GEM", image: UIImage(named: "emptyLogo")!)]
+    private var filteredTokens: [System] = []
     
     @IBOutlet weak var numberOFWalletLabel: UILabel!
     @IBOutlet weak var addedWalletButton: UILabel!
     @IBOutlet weak var searchSystemBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var searchBar: UISearchBar!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.tableView.register(UINib(nibName: "ImportTokensTableViewCell", bundle: nil), forCellReuseIdentifier: "importTokenCell")
+        
     }
     
     @IBAction func backButtonPressed(_ sender: Any) {
@@ -60,3 +63,12 @@ extension ImportTokensViewController: UITableViewDelegate, UITableViewDataSource
         return cell
     }
 }
+extension ImportTokensViewController: UISearchBarDelegate {
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        self.tokens = self.tokens.filter{$0.name.contains(searchText)}
+        self.tableView.reloadData()
+    }
+}
+
+

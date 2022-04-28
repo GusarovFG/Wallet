@@ -29,6 +29,7 @@
 		FB59404C281694DD00037DFA /* TermsOfUseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB59404B281694DD00037DFA /* TermsOfUseViewController.swift */; };
 		FB5940532816AC8800037DFA /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5940522816AC8800037DFA /* Extensions.swift */; };
 		FB5940552816AEF400037DFA /* CustomClasses.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5940542816AEF400037DFA /* CustomClasses.swift */; };
+		FBFE5773281AAB040016E74A /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBFE5772281AAB040016E74A /* SettingsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +57,7 @@
 		FB59404B281694DD00037DFA /* TermsOfUseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfUseViewController.swift; sourceTree = "<group>"; };
 		FB5940522816AC8800037DFA /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		FB5940542816AEF400037DFA /* CustomClasses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomClasses.swift; sourceTree = "<group>"; };
+		FBFE5772281AAB040016E74A /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +101,7 @@
 				FB3208082818286E00F1ADCA /* MainViewController.swift */,
 				FB0FCA6528194D4300BB0527 /* SelectSystemViewController.swift */,
 				FB0FCA7528197B4800BB0527 /* ImportTokensViewController.swift */,
+				FBFE5772281AAB040016E74A /* SettingsViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -229,6 +232,7 @@
 				FB0FCA6628194D4300BB0527 /* SelectSystemViewController.swift in Sources */,
 				FB0FCA7628197B4800BB0527 /* ImportTokensViewController.swift in Sources */,
 				FB5940392816856700037DFA /* SelectLanguageViewController.swift in Sources */,
+				FBFE5773281AAB040016E74A /* SettingsViewController.swift in Sources */,
 				FB0FCA6328193CCC00BB0527 /* ImportTableViewCell.swift in Sources */,
 				FB0FCA6D2819600400BB0527 /* SelectSystemTableViewCell.swift in Sources */,
 				FB0FCA7328197A4000BB0527 /* ImportTokensTableViewCell.swift in Sources */,

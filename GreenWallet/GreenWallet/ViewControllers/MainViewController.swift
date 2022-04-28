@@ -23,7 +23,7 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
         self.walletsTableView.register(UINib(nibName: "BalanceTableViewCell", bundle: nil), forCellReuseIdentifier: "walletCell")
         self.walletsTableView.register(UINib(nibName: "ImportTableViewCell", bundle: nil), forCellReuseIdentifier: "importCell")
-        self.stackView.removeArrangedSubview(self.walletsTableView)
+//        self.stackView.removeArrangedSubview(self.walletsTableView)
         
         self.headerView.layer.cornerRadius = 15
         self.headerView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
@@ -52,7 +52,7 @@ class MainViewController: UIViewController {
             sheet.detents = [.medium()]
         }
 
-        present(nav, animated: true, completion: nil)
+        self.present(nav, animated: true, completion: nil)
     }
     
     @objc private func pushSettingsController() {
@@ -60,11 +60,7 @@ class MainViewController: UIViewController {
     }
     
     @IBAction func qwe(_ sender: Any) {
-        
         presentModal()
-        
-//        self.stackView.insertArrangedSubview(self.walletsTableView, at: 1)
-        
     }
 }
 
@@ -82,5 +78,16 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         default:
             return walletCell
         }
-    } 
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch indexPath {
+        case [0,9]:
+            let importTokensVC = storyboard?.instantiateViewController(withIdentifier: "ImportTokensViewController") as! ImportTokensViewController
+            importTokensVC.modalPresentationStyle = .fullScreen
+            self.present(importTokensVC, animated: true, completion: nil)
+        default:
+            break
+        }
+    }
 }
