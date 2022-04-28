@@ -24,6 +24,9 @@ class AllSettingsViewController: UIViewController {
         self.tableView.register(UINib(nibName: "PushAndAllSettingsTableViewCell", bundle: nil), forCellReuseIdentifier: "pushAndAllSettingsCell")
     }
 
+    @IBAction func backButtonPressed(_ sender: Any) {
+        self.dismiss(animated: true)
+    }
 }
 
 extension AllSettingsViewController: UITableViewDelegate, UITableViewDataSource {
@@ -46,11 +49,18 @@ extension AllSettingsViewController: UITableViewDelegate, UITableViewDataSource 
             secureAndPushCell.mainLabel?.text = self.titlesOfCells[0]
             secureAndPushCell.detailLabel?.text = self.detailOfCells[0]
             secureAndPushCell.cellSwitch?.isOn = false
+            secureAndPushCell.secure = true
+            if UserDefaultsManager.shared.userDefaults.bool(forKey: UserDefaultsStringKeys.hideWalletsBalance.rawValue) {
+                secureAndPushCell.cellSwitch?.isOn = true
+            } else {
+                secureAndPushCell.cellSwitch?.isOn = false
+            }
             return secureAndPushCell
         case [0,2]:
             secureAndPushCell.eyeImageView?.image = UIImage(named: "Notification")!
             secureAndPushCell.detailLabel?.text = self.detailOfCells[1]
             secureAndPushCell.mainLabel?.text = self.titlesOfCells[1]
+            
             return secureAndPushCell
         case [0,3]:
             supportCell.mainLabel?.text = self.titlesOfCells[2]

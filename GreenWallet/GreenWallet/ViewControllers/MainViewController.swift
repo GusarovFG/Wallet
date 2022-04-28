@@ -11,6 +11,8 @@ class MainViewController: UIViewController {
     
     private var balance = 0
     
+    let userDefaults = UserDefaults.standard
+    
     @IBOutlet weak var balanceLabel: UILabel!
     @IBOutlet weak var riseLabel: UILabel!
     @IBOutlet weak var percentLabel: UILabel!
@@ -22,7 +24,12 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.balanceLabel.text = "\(self.balance) USD"
+
+        if UserDefaultsManager.shared.userDefaults.bool(forKey: UserDefaultsStringKeys.hideWalletsBalance.rawValue) {
+            self.balanceLabel.text = "***** USD"
+        } else {
+            self.balanceLabel.text = "\(self.balance) USD"
+        }
         
         self.walletsTableView.register(UINib(nibName: "BalanceTableViewCell", bundle: nil), forCellReuseIdentifier: "walletCell")
         self.walletsTableView.register(UINib(nibName: "ImportTableViewCell", bundle: nil), forCellReuseIdentifier: "importCell")
@@ -33,8 +40,6 @@ class MainViewController: UIViewController {
         
         self.footerView.layer.cornerRadius = 15
         self.footerView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
-        
-        
         
         let navigationItem = UINavigationItem()
         let settingsItem = UIBarButtonItem(image: UIImage(named: "Menu")!, style: .done, target: self, action: #selector(pushSettingsController))
@@ -81,9 +86,8 @@ class MainViewController: UIViewController {
     }
     
     @objc private func showWallet(notification: Notification) {
-        guard let userInfo = notification.userInfo else { return }
-        guard let text = userInfo[""] as? String else { return }
         self.balanceLabel.text = "\(self.balance) USD"
+        
     }
     
     @IBAction func addWalletButtonPressed(_ sender: Any) {
@@ -93,14 +97,14 @@ class MainViewController: UIViewController {
 
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        10
+        3
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let importCell = tableView.dequeueReusableCell(withIdentifier: "importCell", for: indexPath) as! ImportTableViewCell
         let walletCell = tableView.dequeueReusableCell(withIdentifier: "walletCell", for: indexPath) as! BalanceTableViewCell
         switch indexPath {
-        case [0,9]:
+        case [0,2]:
             return importCell
         default:
             return walletCell
@@ -109,10 +113,10 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath {
-        case [0,9]:
+        case [0,2]:
             let importTokensVC = storyboard?.instantiateViewController(withIdentifier: "ImportTokensViewController") as! ImportTokensViewController
             importTokensVC.modalPresentationStyle = .fullScreen
-            self.present(importTokensVC, animated: true, completion: nil)
+            self.navigationController!.present(importTokensVC, animated: true, completion: nil)
         default:
             break
         }

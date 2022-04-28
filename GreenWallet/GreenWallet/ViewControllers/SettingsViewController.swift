@@ -46,6 +46,11 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
             secureAndPushCell.detailLabel?.text = self.detailOfCells[0]
             secureAndPushCell.cellSwitch?.isOn = false
             secureAndPushCell.secure = true
+            if UserDefaultsManager.shared.userDefaults.bool(forKey: UserDefaultsStringKeys.hideWalletsBalance.rawValue) {
+                secureAndPushCell.cellSwitch?.isOn = true
+            } else {
+                secureAndPushCell.cellSwitch?.isOn = false
+            }
             return secureAndPushCell
         case [0,2]:
             secureAndPushCell.eyeImageView?.image = UIImage(named: "Notification")!
@@ -71,10 +76,10 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath == [0,5] {
             let allSettingsVC = storyboard?.instantiateViewController(withIdentifier: "AllSettingsViewController") as! AllSettingsViewController
-            allSettingsVC.modalPresentationStyle = .fullScreen
+            allSettingsVC.modalPresentationStyle = .overFullScreen
             
             self.present(allSettingsVC, animated: true, completion: nil)
-//            self.navigationController?.navigationBar.isHidden = false
+            self.navigationController?.navigationBar.isHidden = false
         }
     }
 }

@@ -39,6 +39,7 @@
 		FBFE5790281AC4060016E74A /* PushAndAllSettingsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBFE578E281AC4050016E74A /* PushAndAllSettingsTableViewCell.xib */; };
 		FBFE5793281AE8C60016E74A /* SecureBalanceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBFE5792281AE8C60016E74A /* SecureBalanceTableViewCell.xib */; };
 		FBFE5795281AF4F90016E74A /* AllSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBFE5794281AF4F90016E74A /* AllSettingsViewController.swift */; };
+		FBFE5797281B121B0016E74A /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBFE5796281B121A0016E74A /* UserDefaultsManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -76,6 +77,7 @@
 		FBFE578E281AC4050016E74A /* PushAndAllSettingsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PushAndAllSettingsTableViewCell.xib; sourceTree = "<group>"; };
 		FBFE5792281AE8C60016E74A /* SecureBalanceTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SecureBalanceTableViewCell.xib; sourceTree = "<group>"; };
 		FBFE5794281AF4F90016E74A /* AllSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllSettingsViewController.swift; sourceTree = "<group>"; };
+		FBFE5796281B121A0016E74A /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,6 +147,7 @@
 				FB5940342816856700037DFA /* AppDelegate.swift */,
 				FB5940362816856700037DFA /* SceneDelegate.swift */,
 				FB0FCA6F2819629D00BB0527 /* Models.swift */,
+				FBFE5796281B121A0016E74A /* UserDefaultsManager.swift */,
 				FB3208072818285100F1ADCA /* ViewControllers */,
 				FB3208062818279E00F1ADCA /* CustomViews */,
 				FB5940512816AC7800037DFA /* Extensions */,
@@ -332,6 +335,7 @@
 				FB59404C281694DD00037DFA /* TermsOfUseViewController.swift in Sources */,
 				FBFE578A281AC2B70016E74A /* SupportTableViewCell.swift in Sources */,
 				FB0FCA702819629D00BB0527 /* Models.swift in Sources */,
+				FBFE5797281B121B0016E74A /* UserDefaultsManager.swift in Sources */,
 				FB5940532816AC8800037DFA /* Extensions.swift in Sources */,
 				FB5940552816AEF400037DFA /* CustomClasses.swift in Sources */,
 				FB0FCA6628194D4300BB0527 /* SelectSystemViewController.swift in Sources */,

@@ -21,7 +21,6 @@ class SelectSystemViewController: UIViewController {
         
         self.tableView.register(UINib(nibName: "SelectSystemTableViewCell", bundle: nil), forCellReuseIdentifier: "systemCell")
         
-        self.navigationController?.navigationBar.isHidden = true
     }
 }
 
