@@ -20,9 +20,8 @@ class ImportTokensViewController: UIViewController {
         super.viewDidLoad()
         
         self.tableView.register(UINib(nibName: "ImportTokensTableViewCell", bundle: nil), forCellReuseIdentifier: "importTokenCell")
-        
-        
     }
+    
     @IBAction func backButtonPressed(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
@@ -48,7 +47,7 @@ extension ImportTokensViewController: UITableViewDelegate, UITableViewDataSource
             cell.choiceSwitch.isEnabled = false
         }
         
-        cell.switchPressed = {
+        cell.switchPressed = { [unowned self] in
             
             UIView.animate(withDuration: 3) {
                 self.addedWalletButton.alpha = 1
@@ -60,6 +59,4 @@ extension ImportTokensViewController: UITableViewDelegate, UITableViewDataSource
         
         return cell
     }
-    
-    
 }

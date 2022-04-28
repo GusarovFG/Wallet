@@ -30,6 +30,15 @@ class MainViewController: UIViewController {
         
         self.footerView.layer.cornerRadius = 15
         self.footerView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+        
+
+        
+        let navigationItem = UINavigationItem()
+        let settingsItem = UIBarButtonItem(image: UIImage(named: "Menu")!, style: .done, target: self, action: #selector(pushSettingsController))
+        settingsItem.tintColor = .white
+        navigationItem.rightBarButtonItem = settingsItem
+        self.navigationController?.navigationBar.setItems([navigationItem], animated: false)
+        
     }
     
     private func presentModal() {
@@ -44,6 +53,10 @@ class MainViewController: UIViewController {
         }
 
         present(nav, animated: true, completion: nil)
+    }
+    
+    @objc private func pushSettingsController() {
+        
     }
     
     @IBAction func qwe(_ sender: Any) {
