@@ -21,6 +21,7 @@ class ImportTokensViewController: UIViewController {
         
         self.tableView.register(UINib(nibName: "ImportTokensTableViewCell", bundle: nil), forCellReuseIdentifier: "importTokenCell")
         
+        
     }
     @IBAction func backButtonPressed(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
@@ -38,6 +39,7 @@ extension ImportTokensViewController: UITableViewDelegate, UITableViewDataSource
         cell.nameOfSystemLabel.text = token.name
         cell.tokensLabel.text = token.token
         cell.systemImage.image = token.image
+        
         if token.name == "Green App Development" {
             cell.choiceSwitch.isOn = true
             cell.choiceSwitch.isEnabled = false
@@ -46,6 +48,15 @@ extension ImportTokensViewController: UITableViewDelegate, UITableViewDataSource
             cell.choiceSwitch.isEnabled = false
         }
         
+        cell.switchPressed = {
+            
+            UIView.animate(withDuration: 3) {
+                self.addedWalletButton.alpha = 1
+            }
+            UIView.animate(withDuration: 3) {
+                self.addedWalletButton.alpha = 0
+            }
+        }
         
         return cell
     }

@@ -9,6 +9,7 @@ import UIKit
 
 class ImportTokensTableViewCell: UITableViewCell {
 
+    var switchPressed: (() -> ())?
     
     @IBOutlet weak var nameOfSystemLabel: UILabel!
     @IBOutlet weak var tokensLabel: UILabel!
@@ -25,7 +26,10 @@ class ImportTokensTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     @IBAction func switchIsOn(_ sender: UISwitch) {
-        
+        if sender.isOn {
+            
+            self.switchPressed?()
+        }
         
     }
     

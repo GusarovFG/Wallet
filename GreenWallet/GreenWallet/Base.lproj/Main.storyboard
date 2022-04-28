@@ -618,8 +618,8 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                                     <outlet property="delegate" destination="8Cj-md-0Ks" id="E3z-6r-8pU"/>
                                 </connections>
                             </tableView>
-                            <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Добавлен на главный экран" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PoU-AQ-0vp">
-                                <rect key="frame" x="20" y="172" width="374" height="35"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Добавлен на главный экран" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PoU-AQ-0vp">
+                                <rect key="frame" x="24" y="174" width="367" height="32"/>
                                 <color key="backgroundColor" red="0.2274509804" green="0.67450980390000004" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -660,20 +660,20 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                             <constraint firstAttribute="trailing" secondItem="B3u-bv-gnj" secondAttribute="trailing" constant="15" id="5zK-6k-zkK"/>
                             <constraint firstItem="B3u-bv-gnj" firstAttribute="leading" secondItem="o41-3F-sw4" secondAttribute="leading" constant="15" id="9BW-Nr-AGp"/>
                             <constraint firstItem="OWq-IL-ydH" firstAttribute="top" secondItem="B3u-bv-gnj" secondAttribute="bottom" constant="31" id="BNv-6A-BGD"/>
-                            <constraint firstItem="PoU-AQ-0vp" firstAttribute="height" secondItem="B3u-bv-gnj" secondAttribute="height" multiplier="0.401961" constant="14.5" id="DgS-NP-PWV"/>
+                            <constraint firstItem="PoU-AQ-0vp" firstAttribute="height" secondItem="B3u-bv-gnj" secondAttribute="height" multiplier="0.401961" constant="11.499988999999999" id="DgS-NP-PWV"/>
                             <constraint firstItem="o41-3F-sw4" firstAttribute="trailing" secondItem="frK-gj-Kgx" secondAttribute="trailing" constant="89" id="E7d-73-WVB"/>
                             <constraint firstItem="o41-3F-sw4" firstAttribute="trailing" secondItem="sLP-T1-FGd" secondAttribute="trailing" constant="140" id="I49-3x-vHD"/>
                             <constraint firstItem="sLP-T1-FGd" firstAttribute="leading" secondItem="o41-3F-sw4" secondAttribute="leading" constant="137" id="N61-OO-gjo"/>
                             <constraint firstItem="h7d-Ky-eV6" firstAttribute="top" secondItem="o41-3F-sw4" secondAttribute="top" id="XTE-0l-tJq"/>
                             <constraint firstItem="OWq-IL-ydH" firstAttribute="bottom" secondItem="o41-3F-sw4" secondAttribute="bottom" id="Y0D-kG-lE9"/>
                             <constraint firstItem="OWq-IL-ydH" firstAttribute="leading" secondItem="o41-3F-sw4" secondAttribute="leading" id="Y9N-jD-Toc"/>
-                            <constraint firstItem="PoU-AQ-0vp" firstAttribute="leading" secondItem="o41-3F-sw4" secondAttribute="leading" constant="20" id="Z3c-tF-vWU"/>
+                            <constraint firstItem="PoU-AQ-0vp" firstAttribute="leading" secondItem="o41-3F-sw4" secondAttribute="leading" constant="24" id="Z3c-tF-vWU"/>
                             <constraint firstItem="frK-gj-Kgx" firstAttribute="top" secondItem="o41-3F-sw4" secondAttribute="top" constant="15" id="dbU-6a-vSF"/>
                             <constraint firstItem="sLP-T1-FGd" firstAttribute="top" secondItem="frK-gj-Kgx" secondAttribute="bottom" constant="6" id="ghB-8V-ZH6"/>
                             <constraint firstItem="h7d-Ky-eV6" firstAttribute="leading" secondItem="o41-3F-sw4" secondAttribute="leading" id="hMY-Vc-7TV"/>
-                            <constraint firstItem="o41-3F-sw4" firstAttribute="trailing" secondItem="PoU-AQ-0vp" secondAttribute="trailing" constant="20" id="kFH-7Q-rgm"/>
+                            <constraint firstItem="o41-3F-sw4" firstAttribute="trailing" secondItem="PoU-AQ-0vp" secondAttribute="trailing" constant="23" id="kFH-7Q-rgm"/>
                             <constraint firstItem="B3u-bv-gnj" firstAttribute="top" secondItem="sLP-T1-FGd" secondAttribute="bottom" constant="10" id="vsh-J5-Rfz"/>
-                            <constraint firstItem="PoU-AQ-0vp" firstAttribute="top" secondItem="sLP-T1-FGd" secondAttribute="bottom" constant="18" id="xKK-L1-Aov"/>
+                            <constraint firstItem="PoU-AQ-0vp" firstAttribute="top" secondItem="sLP-T1-FGd" secondAttribute="bottom" constant="20" id="xKK-L1-Aov"/>
                             <constraint firstItem="OWq-IL-ydH" firstAttribute="trailing" secondItem="o41-3F-sw4" secondAttribute="trailing" id="z7V-SF-5PJ"/>
                         </constraints>
                     </view>
