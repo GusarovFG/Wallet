@@ -40,6 +40,9 @@
 		FBFE5793281AE8C60016E74A /* SecureBalanceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBFE5792281AE8C60016E74A /* SecureBalanceTableViewCell.xib */; };
 		FBFE5795281AF4F90016E74A /* AllSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBFE5794281AF4F90016E74A /* AllSettingsViewController.swift */; };
 		FBFE5797281B121B0016E74A /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBFE5796281B121A0016E74A /* UserDefaultsManager.swift */; };
+		FBFE579A281B269E0016E74A /* LanguageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBFE5798281B269E0016E74A /* LanguageTableViewCell.swift */; };
+		FBFE579E281B28880016E74A /* LanguageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBFE579D281B28880016E74A /* LanguageViewController.swift */; };
+		FBFE57A2281B2EDD0016E74A /* LanguageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBFE57A1281B2EDD0016E74A /* LanguageTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -78,6 +81,9 @@
 		FBFE5792281AE8C60016E74A /* SecureBalanceTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SecureBalanceTableViewCell.xib; sourceTree = "<group>"; };
 		FBFE5794281AF4F90016E74A /* AllSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllSettingsViewController.swift; sourceTree = "<group>"; };
 		FBFE5796281B121A0016E74A /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
+		FBFE5798281B269E0016E74A /* LanguageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageTableViewCell.swift; sourceTree = "<group>"; };
+		FBFE579D281B28880016E74A /* LanguageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageViewController.swift; sourceTree = "<group>"; };
+		FBFE57A1281B2EDD0016E74A /* LanguageTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LanguageTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +105,7 @@
 				FBFE5776281AB8E20016E74A /* BalanceTableViewCell */,
 				FBFE5777281AB8EE0016E74A /* ImportTokensTableViewCell */,
 				FBFE5778281AB8FB0016E74A /* SettingsTableViewCell */,
+				FBFE579C281B284D0016E74A /* LanguageTableViewCell */,
 			);
 			path = CutomCells;
 			sourceTree = "<group>";
@@ -121,6 +128,7 @@
 				FB0FCA7528197B4800BB0527 /* ImportTokensViewController.swift */,
 				FBFE5772281AAB040016E74A /* SettingsViewController.swift */,
 				FBFE5794281AF4F90016E74A /* AllSettingsViewController.swift */,
+				FBFE579D281B28880016E74A /* LanguageViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -252,6 +260,15 @@
 			path = PushAndAllSettingsTableViewCell;
 			sourceTree = "<group>";
 		};
+		FBFE579C281B284D0016E74A /* LanguageTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				FBFE5798281B269E0016E74A /* LanguageTableViewCell.swift */,
+				FBFE57A1281B2EDD0016E74A /* LanguageTableViewCell.xib */,
+			);
+			path = LanguageTableViewCell;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -319,6 +336,7 @@
 				FB0FCA6428193CCC00BB0527 /* ImportTableViewCell.xib in Resources */,
 				FB0FCA7428197A4000BB0527 /* ImportTokensTableViewCell.xib in Resources */,
 				FBFE5793281AE8C60016E74A /* SecureBalanceTableViewCell.xib in Resources */,
+				FBFE57A2281B2EDD0016E74A /* LanguageTableViewCell.xib in Resources */,
 				FBFE577C281AB9250016E74A /* ThemesTableViewCell.xib in Resources */,
 				FB59403C2816856700037DFA /* Main.storyboard in Resources */,
 			);
@@ -333,6 +351,7 @@
 			files = (
 				FBFE5781281ABE2D0016E74A /* SecureBalanceTableViewCell.swift in Sources */,
 				FB59404C281694DD00037DFA /* TermsOfUseViewController.swift in Sources */,
+				FBFE579E281B28880016E74A /* LanguageViewController.swift in Sources */,
 				FBFE578A281AC2B70016E74A /* SupportTableViewCell.swift in Sources */,
 				FB0FCA702819629D00BB0527 /* Models.swift in Sources */,
 				FBFE5797281B121B0016E74A /* UserDefaultsManager.swift in Sources */,
@@ -343,6 +362,7 @@
 				FB5940392816856700037DFA /* SelectLanguageViewController.swift in Sources */,
 				FBFE5773281AAB040016E74A /* SettingsViewController.swift in Sources */,
 				FB0FCA6328193CCC00BB0527 /* ImportTableViewCell.swift in Sources */,
+				FBFE579A281B269E0016E74A /* LanguageTableViewCell.swift in Sources */,
 				FB0FCA6D2819600400BB0527 /* SelectSystemTableViewCell.swift in Sources */,
 				FBFE578F281AC4050016E74A /* PushAndAllSettingsTableViewCell.swift in Sources */,
 				FBFE5795281AF4F90016E74A /* AllSettingsViewController.swift in Sources */,

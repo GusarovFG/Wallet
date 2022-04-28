@@ -81,4 +81,16 @@ extension AllSettingsViewController: UITableViewDelegate, UITableViewDataSource 
             return pushAndAllSettingsCell
         }
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch indexPath {
+        case [0,5]:
+            let languageVC = storyboard?.instantiateViewController(withIdentifier: "LanguageViewController") as! LanguageViewController
+            languageVC.modalPresentationStyle = .fullScreen
+            
+            self.present(languageVC, animated: true, completion: nil)
+        default:
+            break
+        }
+    }
 }

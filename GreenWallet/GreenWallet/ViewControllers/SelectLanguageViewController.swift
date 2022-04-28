@@ -47,9 +47,12 @@ extension SelectLanguageViewController: UITableViewDelegate, UITableViewDataSour
         switch indexPath.row {
         case 1:
             let termsOfUseVC = storyboard?.instantiateViewController(withIdentifier: "TermsOfUseViewController") as! TermsOfUseViewController
+            UserDefaultsManager.shared.userDefaults.set("Russian", forKey: UserDefaultsStringKeys.Language.rawValue)
             self.navigationController?.pushViewController(termsOfUseVC, animated: true)
         default:
-            break
+            let termsOfUseVC = storyboard?.instantiateViewController(withIdentifier: "TermsOfUseViewController") as! TermsOfUseViewController
+            UserDefaultsManager.shared.userDefaults.set("English", forKey: UserDefaultsStringKeys.Language.rawValue)
+            self.navigationController?.pushViewController(termsOfUseVC, animated: true)
         }
     }
 }
