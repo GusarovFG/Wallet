@@ -9,7 +9,7 @@ import UIKit
 
 class MainViewController: UIViewController {
     
-    
+    private var balance = 0
     
     @IBOutlet weak var balanceLabel: UILabel!
     @IBOutlet weak var riseLabel: UILabel!
@@ -21,9 +21,12 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.balanceLabel.text = "\(self.balance) USD"
+        
         self.walletsTableView.register(UINib(nibName: "BalanceTableViewCell", bundle: nil), forCellReuseIdentifier: "walletCell")
         self.walletsTableView.register(UINib(nibName: "ImportTableViewCell", bundle: nil), forCellReuseIdentifier: "importCell")
-//        self.stackView.removeArrangedSubview(self.walletsTableView)
+        //        self.stackView.removeArrangedSubview(self.walletsTableView)
         
         self.headerView.layer.cornerRadius = 15
         self.headerView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
@@ -31,7 +34,7 @@ class MainViewController: UIViewController {
         self.footerView.layer.cornerRadius = 15
         self.footerView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
         
-
+        
         
         let navigationItem = UINavigationItem()
         let settingsItem = UIBarButtonItem(image: UIImage(named: "Menu")!, style: .done, target: self, action: #selector(pushSettingsController))
@@ -40,6 +43,7 @@ class MainViewController: UIViewController {
         self.navigationController?.navigationBar.setItems([navigationItem], animated: false)
         
         NotificationCenter.default.addObserver(self, selector: #selector(hideWallet), name: NSNotification.Name(rawValue: "hideWallet"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(showWallet), name: NSNotification.Name(rawValue: "showWallet"), object: nil)
         
     }
     
@@ -47,13 +51,13 @@ class MainViewController: UIViewController {
         
         let detailViewController = storyboard?.instantiateViewController(withIdentifier: "SelectSystemViewController") as! SelectSystemViewController
         let nav = UINavigationController(rootViewController: detailViewController)
-
+        
         nav.modalPresentationStyle = .pageSheet
-
+        
         if let sheet = nav.sheetPresentationController {
             sheet.detents = [.medium()]
         }
-
+        
         self.present(nav, animated: true, completion: nil)
     }
     
@@ -72,8 +76,14 @@ class MainViewController: UIViewController {
     @objc private func hideWallet(notification: Notification) {
         guard let userInfo = notification.userInfo else { return }
         guard let text = userInfo[""] as? String else { return }
-        
         self.balanceLabel.text = text
+        
+    }
+    
+    @objc private func showWallet(notification: Notification) {
+        guard let userInfo = notification.userInfo else { return }
+        guard let text = userInfo[""] as? String else { return }
+        self.balanceLabel.text = "\(self.balance) USD"
     }
     
     @IBAction func addWalletButtonPressed(_ sender: Any) {

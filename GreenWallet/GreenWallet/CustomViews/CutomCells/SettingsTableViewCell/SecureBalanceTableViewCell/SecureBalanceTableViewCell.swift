@@ -8,8 +8,8 @@
 import UIKit
 
 class SecureAndPushTableViewCell: UITableViewCell {
-
-    private let userInfo = ["": "***** USD"]
+    
+    var secure = false
     
     @IBOutlet weak var mainLabel: UILabel?
     @IBOutlet weak var detailLabel: UILabel?
@@ -20,14 +20,18 @@ class SecureAndPushTableViewCell: UITableViewCell {
         super.awakeFromNib()
         
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-    @IBAction func hideWallet(_ sender: Any) {
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "hideWallet"), object: nil, userInfo: userInfo)
-    }
     
+    @IBAction func hideWallet(_ sender: UISwitch) {
+        let userInfo = ["": "***** USD"]
+        if self.secure {
+            if sender.isOn {
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "hideWallet"), object: nil, userInfo: userInfo)
+            } else {
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "showWallet"), object: nil, userInfo: userInfo)
+            }
+            
+        }
+    }
 }
+
+

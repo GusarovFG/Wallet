@@ -45,6 +45,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
             secureAndPushCell.mainLabel?.text = self.titlesOfCells[0]
             secureAndPushCell.detailLabel?.text = self.detailOfCells[0]
             secureAndPushCell.cellSwitch?.isOn = false
+            secureAndPushCell.secure = true
             return secureAndPushCell
         case [0,2]:
             secureAndPushCell.eyeImageView?.image = UIImage(named: "Notification")!
