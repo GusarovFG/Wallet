@@ -407,9 +407,6 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorInsetReference="fromAutomaticInsets" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="2AX-kW-rL9">
                                         <rect key="frame" x="0.0" y="54" width="384" height="369"/>
                                         <color key="backgroundColor" red="0.23529411764705882" green="0.23529411764705882" blue="0.23529411764705882" alpha="0.19948112840000001" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="369" id="KVF-Qb-0US"/>
-                                        </constraints>
                                         <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="walletCell" id="Ytz-kl-XW5" customClass="BalanceTableViewCell" customModule="GreenWallet" customModuleProvider="target">
@@ -468,6 +465,7 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                                     </view>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstAttribute="height" constant="477" id="amq-fp-GzU"/>
                                     <constraint firstItem="2AX-kW-rL9" firstAttribute="centerY" secondItem="ykU-fL-Pmd" secondAttribute="centerY" id="tJo-CF-ta0"/>
                                 </constraints>
                             </stackView>
@@ -484,9 +482,7 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                             <constraint firstItem="ykU-fL-Pmd" firstAttribute="trailing" secondItem="neh-Z2-VSf" secondAttribute="trailing" id="KJM-2J-8rD"/>
                             <constraint firstItem="m6P-Tb-zTL" firstAttribute="top" secondItem="jMi-1S-2e6" secondAttribute="top" constant="15" id="L8B-hH-HNh"/>
                             <constraint firstItem="ykU-fL-Pmd" firstAttribute="top" secondItem="D3F-W3-Jpm" secondAttribute="bottom" constant="15" id="Ukv-8s-MCG"/>
-                            <constraint firstItem="ITP-eL-ev8" firstAttribute="top" secondItem="44c-rY-qld" secondAttribute="bottom" constant="-1" id="Xuo-eD-vL7"/>
                             <constraint firstItem="m6P-Tb-zTL" firstAttribute="leading" secondItem="D3F-W3-Jpm" secondAttribute="trailing" constant="15" id="cgq-RU-PCl"/>
-                            <constraint firstItem="jMi-1S-2e6" firstAttribute="bottom" secondItem="ykU-fL-Pmd" secondAttribute="bottom" constant="98" id="iiM-NJ-GQb"/>
                             <constraint firstItem="neh-Z2-VSf" firstAttribute="leading" secondItem="D3F-W3-Jpm" secondAttribute="trailing" constant="15" id="ixB-g7-TYe"/>
                             <constraint firstItem="jMi-1S-2e6" firstAttribute="trailing" secondItem="m6P-Tb-zTL" secondAttribute="trailing" constant="15" id="nBL-6d-ytf"/>
                             <constraint firstItem="jMi-1S-2e6" firstAttribute="trailing" secondItem="ITP-eL-ev8" secondAttribute="trailing" constant="149" id="o5B-xA-b7K"/>
@@ -501,6 +497,7 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                         <outlet property="percentLabel" destination="q8X-eN-3k7" id="kuj-dn-Fon"/>
                         <outlet property="riseLabel" destination="aKl-mN-fcL" id="ByR-je-BZb"/>
                         <outlet property="stackView" destination="ykU-fL-Pmd" id="5se-eO-CYY"/>
+                        <outlet property="stackViewHeightConstraint" destination="amq-fp-GzU" id="CLP-uq-5eu"/>
                         <outlet property="walletsTableView" destination="2AX-kW-rL9" id="Evl-y8-J4j"/>
                     </connections>
                 </viewController>

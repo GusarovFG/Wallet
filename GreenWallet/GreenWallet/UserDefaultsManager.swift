@@ -22,4 +22,5 @@ enum UserDefaultsStringKeys: String {
     case hideWalletsBalance = "HideWalletsBalance"
     case Language = "Language"
     case theme = "Theme"
+    case firstSession = "FirstSession"
 }

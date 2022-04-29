@@ -20,11 +20,12 @@ class MainViewController: UIViewController {
     @IBOutlet weak var stackView: UIStackView!
     @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var footerView: UIView!
+    @IBOutlet weak var stackViewHeightConstraint: NSLayoutConstraint!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-
+        
         if UserDefaultsManager.shared.userDefaults.bool(forKey: UserDefaultsStringKeys.hideWalletsBalance.rawValue) {
             self.balanceLabel.text = "***** USD"
         } else {
@@ -34,6 +35,7 @@ class MainViewController: UIViewController {
         self.walletsTableView.register(UINib(nibName: "BalanceTableViewCell", bundle: nil), forCellReuseIdentifier: "walletCell")
         self.walletsTableView.register(UINib(nibName: "ImportTableViewCell", bundle: nil), forCellReuseIdentifier: "importCell")
         //        self.stackView.removeArrangedSubview(self.walletsTableView)
+        
         
         self.headerView.layer.cornerRadius = 15
         self.headerView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
@@ -50,6 +52,14 @@ class MainViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(hideWallet), name: NSNotification.Name(rawValue: "hideWallet"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(showWallet), name: NSNotification.Name(rawValue: "showWallet"), object: nil)
         
+    }
+    
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        let qwe = self.walletsTableView.visibleCells.map{$0.frame.height}.reduce(0, +)
+        
+        self.stackViewHeightConstraint.constant = self.headerView.frame.height + qwe + self.footerView.frame.height
     }
     
     private func presentSelectSystemVC() {
@@ -112,6 +122,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
             walletCell.balanceLabel.text = "0 \(wallet.token)"
             walletCell.convertLabel.text = "⁓ 504.99 USD"
             walletCell.tokenLabel.text = wallet.name
+            
             return walletCell
         }
     }
