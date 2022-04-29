@@ -14,10 +14,11 @@ class ImportTokensTableViewCell: UITableViewCell {
     @IBOutlet weak var nameOfSystemLabel: UILabel!
     @IBOutlet weak var tokensLabel: UILabel!
     @IBOutlet weak var systemImage: UIImageView!
-    @IBOutlet weak var choiceSwitch: UISwitch!
+    @IBOutlet weak var choiceSwitch: CustomSwitch!
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        self.choiceSwitch.isOn = false
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -25,7 +26,7 @@ class ImportTokensTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    @IBAction func switchIsOn(_ sender: UISwitch) {
+    @IBAction func switchIsOn(_ sender: CustomSwitch) {
         if sender.isOn {
             
             self.switchPressed?()

@@ -4,6 +4,7 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -24,7 +25,7 @@
                         </constraints>
                     </imageView>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="ErT-2l-g2U">
-                        <rect key="frame" x="62" y="13" width="230" height="38"/>
+                        <rect key="frame" x="62" y="13" width="44" height="38"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bn5-2b-1I5">
                                 <rect key="frame" x="0.0" y="0.0" width="44" height="21"/>
@@ -40,30 +41,33 @@
                             </label>
                         </subviews>
                     </stackView>
-                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" preferredStyle="sliding" translatesAutoresizingMaskIntoConstraints="NO" id="rH2-MS-Gb6">
-                        <rect key="frame" x="307" y="17" width="51" height="31"/>
-                        <color key="onTintColor" red="0.2274509804" green="0.67450980390000004" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Spv-pk-6vH" customClass="CustomSwitch" customModule="GreenWallet" customModuleProvider="target">
+                        <rect key="frame" x="302" y="21" width="55" height="25"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="55" id="5Pf-SJ-ieb"/>
+                            <constraint firstAttribute="width" constant="55" id="jUO-hF-fLm"/>
+                        </constraints>
                         <connections>
-                            <action selector="switchIsOn:" destination="KGk-i7-Jjw" eventType="valueChanged" id="KpK-Zd-K44"/>
+                            <action selector="switchIsOn:" destination="KGk-i7-Jjw" eventType="valueChanged" id="KbI-jz-g0T"/>
                         </connections>
-                    </switch>
+                    </view>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="rH2-MS-Gb6" firstAttribute="leading" secondItem="ErT-2l-g2U" secondAttribute="trailing" constant="15" id="8Dz-JT-uos"/>
-                    <constraint firstAttribute="trailing" secondItem="rH2-MS-Gb6" secondAttribute="trailing" constant="19" id="DGB-DI-Smq"/>
-                    <constraint firstAttribute="bottom" secondItem="rH2-MS-Gb6" secondAttribute="bottom" constant="16" id="JOC-rx-M3s"/>
                     <constraint firstItem="ErT-2l-g2U" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="13" id="KIT-TE-Nzh"/>
-                    <constraint firstItem="rH2-MS-Gb6" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="17" id="L6X-m3-epR"/>
+                    <constraint firstAttribute="trailing" secondItem="Spv-pk-6vH" secondAttribute="trailing" constant="18" id="LUL-2N-yz9"/>
                     <constraint firstItem="OIG-5I-uKd" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="17" id="P3s-Ig-CYx"/>
+                    <constraint firstItem="Spv-pk-6vH" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="21" id="Pdb-0e-mVm"/>
                     <constraint firstAttribute="bottom" secondItem="ErT-2l-g2U" secondAttribute="bottom" constant="13" id="WTe-Sf-cYj"/>
                     <constraint firstItem="OIG-5I-uKd" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="12" id="b3p-H0-lwX"/>
                     <constraint firstAttribute="bottom" secondItem="OIG-5I-uKd" secondAttribute="bottom" constant="12" id="eBi-DF-KvR"/>
+                    <constraint firstAttribute="bottom" secondItem="Spv-pk-6vH" secondAttribute="bottom" constant="18" id="lBh-qf-GJ6"/>
                     <constraint firstItem="ErT-2l-g2U" firstAttribute="leading" secondItem="OIG-5I-uKd" secondAttribute="trailing" constant="5" id="rYc-Ja-Xic"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
-                <outlet property="choiceSwitch" destination="rH2-MS-Gb6" id="vsM-jJ-n6L"/>
+                <outlet property="choiceSwitch" destination="Spv-pk-6vH" id="r9Z-sU-IVs"/>
                 <outlet property="nameOfSystemLabel" destination="bn5-2b-1I5" id="Tol-4O-esR"/>
                 <outlet property="systemImage" destination="OIG-5I-uKd" id="LOI-9Z-Jj4"/>
                 <outlet property="tokensLabel" destination="cIS-Vs-WDW" id="J3w-Lz-E66"/>
@@ -71,4 +75,9 @@
             <point key="canvasLocation" x="171.73913043478262" y="101.11607142857143"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>

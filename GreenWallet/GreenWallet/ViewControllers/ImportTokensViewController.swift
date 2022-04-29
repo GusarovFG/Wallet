@@ -45,9 +45,11 @@ extension ImportTokensViewController: UITableViewDelegate, UITableViewDataSource
         if token.name == "Green App Development" {
             cell.choiceSwitch.isOn = true
             cell.choiceSwitch.isEnabled = false
+            cell.choiceSwitch.onTintColor = #colorLiteral(red: 0.5098039216, green: 0.5098039216, blue: 0.5098039216, alpha: 1)
         } else if token.name == "USD Stable" {
             cell.choiceSwitch.isOn = true
             cell.choiceSwitch.isEnabled = false
+            cell.choiceSwitch.onTintColor = #colorLiteral(red: 0.5098039216, green: 0.5098039216, blue: 0.5098039216, alpha: 1)
         }
         
         cell.switchPressed = { [unowned self] in

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FB0883DC281BE21F001D4317 /* CustomThumbView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0883DB281BE21F001D4317 /* CustomThumbView.swift */; };
 		FB0FCA6328193CCC00BB0527 /* ImportTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0FCA6128193CCC00BB0527 /* ImportTableViewCell.swift */; };
 		FB0FCA6428193CCC00BB0527 /* ImportTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB0FCA6228193CCC00BB0527 /* ImportTableViewCell.xib */; };
 		FB0FCA6628194D4300BB0527 /* SelectSystemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0FCA6528194D4300BB0527 /* SelectSystemViewController.swift */; };
@@ -19,6 +20,7 @@
 		FB3207F92818018F00F1ADCA /* BalanceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB3207F72818018F00F1ADCA /* BalanceTableViewCell.swift */; };
 		FB3207FA2818018F00F1ADCA /* BalanceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB3207F82818018F00F1ADCA /* BalanceTableViewCell.xib */; };
 		FB3208092818286E00F1ADCA /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB3208082818286E00F1ADCA /* MainViewController.swift */; };
+		FB383FE7281BE1C700939B6D /* CustomSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB383FE6281BE1C700939B6D /* CustomSwitch.swift */; };
 		FB5940352816856700037DFA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5940342816856700037DFA /* AppDelegate.swift */; };
 		FB5940372816856700037DFA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5940362816856700037DFA /* SceneDelegate.swift */; };
 		FB5940392816856700037DFA /* SelectLanguageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5940382816856700037DFA /* SelectLanguageViewController.swift */; };
@@ -47,6 +49,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		FB0883DB281BE21F001D4317 /* CustomThumbView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomThumbView.swift; sourceTree = "<group>"; };
 		FB0FCA6128193CCC00BB0527 /* ImportTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportTableViewCell.swift; sourceTree = "<group>"; };
 		FB0FCA6228193CCC00BB0527 /* ImportTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImportTableViewCell.xib; sourceTree = "<group>"; };
 		FB0FCA6528194D4300BB0527 /* SelectSystemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectSystemViewController.swift; sourceTree = "<group>"; };
@@ -59,6 +62,7 @@
 		FB3207F72818018F00F1ADCA /* BalanceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceTableViewCell.swift; sourceTree = "<group>"; };
 		FB3207F82818018F00F1ADCA /* BalanceTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BalanceTableViewCell.xib; sourceTree = "<group>"; };
 		FB3208082818286E00F1ADCA /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		FB383FE6281BE1C700939B6D /* CustomSwitch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSwitch.swift; sourceTree = "<group>"; };
 		FB5940312816856700037DFA /* GreenWallet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GreenWallet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB5940342816856700037DFA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FB5940362816856700037DFA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -116,6 +120,8 @@
 			isa = PBXGroup;
 			children = (
 				FB3207FB2818019300F1ADCA /* CutomCells */,
+				FB383FE6281BE1C700939B6D /* CustomSwitch.swift */,
+				FB0883DB281BE21F001D4317 /* CustomThumbView.swift */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -364,11 +370,13 @@
 				FB0FCA6628194D4300BB0527 /* SelectSystemViewController.swift in Sources */,
 				FB0FCA7628197B4800BB0527 /* ImportTokensViewController.swift in Sources */,
 				FB5940392816856700037DFA /* SelectLanguageViewController.swift in Sources */,
+				FB383FE7281BE1C700939B6D /* CustomSwitch.swift in Sources */,
 				FBFE5773281AAB040016E74A /* SettingsViewController.swift in Sources */,
 				FB0FCA6328193CCC00BB0527 /* ImportTableViewCell.swift in Sources */,
 				FBFE579A281B269E0016E74A /* LanguageTableViewCell.swift in Sources */,
 				FB0FCA6D2819600400BB0527 /* SelectSystemTableViewCell.swift in Sources */,
 				FBFE578F281AC4050016E74A /* PushAndAllSettingsTableViewCell.swift in Sources */,
+				FB0883DC281BE21F001D4317 /* CustomThumbView.swift in Sources */,
 				FBFE5795281AF4F90016E74A /* AllSettingsViewController.swift in Sources */,
 				FB0FCA7328197A4000BB0527 /* ImportTokensTableViewCell.swift in Sources */,
 				FBFE577B281AB9250016E74A /* ThemesTableViewCell.swift in Sources */,
