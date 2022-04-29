@@ -754,7 +754,7 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vCB-4g-cg7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="E4b-Nt-1qz">
+                <tapGestureRecognizer cancelsTouchesInView="NO" id="E4b-Nt-1qz">
                     <connections>
                         <action selector="hideKeyBoard:" destination="8Cj-md-0Ks" id="4N6-ux-PzG"/>
                     </connections>
