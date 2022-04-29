@@ -103,7 +103,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		FB3207FB2818019300F1ADCA /* CutomCells */ = {
+		FB0883DD281BF48F001D4317 /* CustomSwith */ = {
+			isa = PBXGroup;
+			children = (
+				FB383FE6281BE1C700939B6D /* CustomSwitch.swift */,
+				FB0883DB281BE21F001D4317 /* CustomThumbView.swift */,
+			);
+			path = CustomSwith;
+			sourceTree = "<group>";
+		};
+		FB0883DF281BF4B9001D4317 /* MainVCCells */ = {
 			isa = PBXGroup;
 			children = (
 				FBFE5774281AB8CC0016E74A /* SelectSystemTableViewCell */,
@@ -113,6 +122,14 @@
 				FBFE5778281AB8FB0016E74A /* SettingsTableViewCell */,
 				FBFE579C281B284D0016E74A /* LanguageTableViewCell */,
 			);
+			path = MainVCCells;
+			sourceTree = "<group>";
+		};
+		FB3207FB2818019300F1ADCA /* CutomCells */ = {
+			isa = PBXGroup;
+			children = (
+				FB0883DF281BF4B9001D4317 /* MainVCCells */,
+			);
 			path = CutomCells;
 			sourceTree = "<group>";
 		};
@@ -120,8 +137,7 @@
 			isa = PBXGroup;
 			children = (
 				FB3207FB2818019300F1ADCA /* CutomCells */,
-				FB383FE6281BE1C700939B6D /* CustomSwitch.swift */,
-				FB0883DB281BE21F001D4317 /* CustomThumbView.swift */,
+				FB0883DD281BF48F001D4317 /* CustomSwith */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";

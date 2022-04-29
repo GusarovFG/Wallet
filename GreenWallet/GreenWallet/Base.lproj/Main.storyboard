@@ -717,6 +717,7 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="o41-3F-sw4"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="frK-gj-Kgx" firstAttribute="leading" secondItem="o41-3F-sw4" secondAttribute="leading" constant="88" id="3Fy-u7-k8u"/>
                             <constraint firstAttribute="trailing" secondItem="B3u-bv-gnj" secondAttribute="trailing" constant="15" id="5zK-6k-zkK"/>
@@ -738,19 +739,26 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                             <constraint firstItem="PoU-AQ-0vp" firstAttribute="top" secondItem="sLP-T1-FGd" secondAttribute="bottom" constant="20" id="xKK-L1-Aov"/>
                             <constraint firstItem="OWq-IL-ydH" firstAttribute="trailing" secondItem="o41-3F-sw4" secondAttribute="trailing" id="z7V-SF-5PJ"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="E4b-Nt-1qz" appends="YES" id="OuV-gh-mHC"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" leftItemsSupplementBackButton="YES" id="72l-y2-kwQ">
                         <barButtonItem key="backBarButtonItem" title="Назад" id="zaH-1L-L9W"/>
                     </navigationItem>
                     <connections>
-                        <outlet property="addedWalletButton" destination="PoU-AQ-0vp" id="bak-re-95h"/>
+                        <outlet property="addedWalletLabel" destination="PoU-AQ-0vp" id="inL-bP-sUl"/>
                         <outlet property="numberOFWalletLabel" destination="sLP-T1-FGd" id="Rwn-25-Ogw"/>
                         <outlet property="searchBar" destination="B3u-bv-gnj" id="aRz-pg-Ub8"/>
-                        <outlet property="searchSystemBar" destination="B3u-bv-gnj" id="igV-W5-pah"/>
                         <outlet property="tableView" destination="OWq-IL-ydH" id="4fi-MA-kRc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vCB-4g-cg7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="E4b-Nt-1qz">
+                    <connections>
+                        <action selector="hideKeyBoard:" destination="8Cj-md-0Ks" id="4N6-ux-PzG"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="5226.0869565217399" y="825"/>
         </scene>
