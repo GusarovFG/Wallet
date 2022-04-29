@@ -14,7 +14,7 @@ class SecureAndPushTableViewCell: UITableViewCell {
     
     @IBOutlet weak var mainLabel: UILabel?
     @IBOutlet weak var detailLabel: UILabel?
-    @IBOutlet weak var cellSwitch: UISwitch?
+    @IBOutlet weak var cellSwitch: CustomSwitch?
     @IBOutlet weak var eyeImageView: UIImageView?
     
     override func awakeFromNib() {
@@ -27,7 +27,7 @@ class SecureAndPushTableViewCell: UITableViewCell {
         
     }
     
-    @IBAction func hideWallet(_ sender: UISwitch) {
+    @IBAction func hideWallet(_ sender: CustomSwitch) {
         let userInfo = ["": "***** USD"]
         if self.secure {
             if sender.isOn {

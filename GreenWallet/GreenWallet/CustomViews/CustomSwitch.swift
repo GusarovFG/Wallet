@@ -18,7 +18,7 @@ public class CustomSwitch: UIControl {
     
     @IBInspectable public var isOn:Bool = true
     
-    public var animationDuration: Double = 0.5
+    public var animationDuration: Double = 0.2
     
     @IBInspectable  public var padding: CGFloat = 1 {
         didSet {
