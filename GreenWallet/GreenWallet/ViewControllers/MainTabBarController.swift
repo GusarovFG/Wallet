@@ -17,10 +17,10 @@ class MainTabBarController: UITabBarController, UINavigationBarDelegate {
     
     private func addTabs() {
         
-        let mainVC = storyboard?.instantiateViewController(withIdentifier: "MainViewController") as! MainViewController
+        let mainVC = storyboard?.instantiateViewController(withIdentifier: "qwe") as! UINavigationController
         mainVC.tabBarItem = UITabBarItem(title: "Кошелек", image: UIImage(named: "wallet")!, selectedImage: UIImage(named: "wallet")!)
         
-        let selectSystemVC = storyboard?.instantiateViewController(withIdentifier: "MainViewController") as! MainViewController
+        let selectSystemVC = UIViewController()
         selectSystemVC.tabBarItem = UITabBarItem(title: "Получить", image: UIImage(named: "wallet")!, selectedImage: UIImage(named: "wallet")!)
 
         self.setViewControllers([mainVC, selectSystemVC], animated: true)
@@ -30,6 +30,7 @@ class MainTabBarController: UITabBarController, UINavigationBarDelegate {
     override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
         if tabBar.selectedItem?.title == "Получить" {
             let selectSystemVC = storyboard?.instantiateViewController(withIdentifier: "SelectSystemViewController") as! SelectSystemViewController
+            selectSystemVC.modalPresentationStyle = .pageSheet
             self.present(selectSystemVC, animated: true, completion: nil)
         }
     }

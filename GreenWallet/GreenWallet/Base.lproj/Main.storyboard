@@ -1300,7 +1300,7 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
         <scene sceneID="Nlo-bn-b7l">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h8M-OB-DmP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="lST-aH-cSZ" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="qwe" automaticallyAdjustsScrollViewInsets="NO" id="lST-aH-cSZ" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="XFV-fe-OxW"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Az2-Wp-Hsp">
