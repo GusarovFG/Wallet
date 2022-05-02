@@ -1,24 +1,23 @@
 //
-//  TermsOfUseViewController.swift
+//  NewWalletViewController.swift
 //  GreenWallet
 //
-//  Created by Фаддей Гусаров on 25.04.2022.
+//  Created by Фаддей Гусаров on 02.05.2022.
 //
 
 import UIKit
 
-class TermsOfUseViewController: UIViewController {
-    
-    @IBOutlet weak var continueButton: UIButton!
-    @IBOutlet weak var checkBoxButton: UIButton!
+class NewWalletViewController: UIViewController {
+
     @IBOutlet weak var agreeLabel: UILabel!
-    
+    @IBOutlet weak var checkBoxButton: UIButton!
+    @IBOutlet weak var createNewWalletButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.continueButton.isEnabled = false
-        self.continueButton.backgroundColor = #colorLiteral(red: 0.6106664538, green: 0.6106664538, blue: 0.6106664538, alpha: 1)
-        self.checkBoxButton.contentMode = .center
+
+        self.createNewWalletButton.isEnabled = false
+        self.createNewWalletButton.backgroundColor = #colorLiteral(red: 0.6106664538, green: 0.6106664538, blue: 0.6106664538, alpha: 1)
+        self.createNewWalletButton.contentMode = .center
         
         setupAgreeLabel()
         
@@ -28,9 +27,6 @@ class TermsOfUseViewController: UIViewController {
                 UIApplication.shared.open(url!, options: [:])
             }
         }
-        
-        
-        
     }
     
     private func setupAgreeLabel() {
@@ -45,26 +41,42 @@ class TermsOfUseViewController: UIViewController {
         
         self.agreeLabel.attributedText = attributedString
     }
-
     
-    @IBAction func tappedOnCheckboxButton(_ sender: UIButton){
+
+    /*
+    // MARK: - Navigation
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destination.
+        // Pass the selected object to the new view controller.
+    }
+    */
+    @IBAction func checkBoxButtonPressed(_ sender: UIButton) {
+        
         if sender.imageView?.image != UIImage(systemName: "checkmark.square.fill") {
             sender.setImage(UIImage(systemName: "checkmark.square.fill"), for: .normal)
             sender.tintColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
             sender.backgroundColor = .white
             sender.imageView?.layer.cornerRadius = 5
             
-            self.continueButton.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
-            self.continueButton.isEnabled = true
+            self.createNewWalletButton.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
+            self.createNewWalletButton.isEnabled = true
         } else {
             sender.setImage(UIImage(systemName: "squareshape.fill"), for: .normal)
             sender.imageView?.layer.cornerRadius = 5
             sender.tintColor = .white
             
-            self.continueButton.backgroundColor = #colorLiteral(red: 0.6106664538, green: 0.6106664538, blue: 0.6106664538, alpha: 1)
-            self.continueButton.isEnabled = false
+            self.createNewWalletButton.backgroundColor = #colorLiteral(red: 0.6106664538, green: 0.6106664538, blue: 0.6106664538, alpha: 1)
+            self.createNewWalletButton.isEnabled = false
         }
-        
     }
     
+    @IBAction func createButtonPressed(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func backButtonPressed(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
 }

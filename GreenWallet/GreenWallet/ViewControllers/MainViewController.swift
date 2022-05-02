@@ -10,7 +10,10 @@ import UIKit
 class MainViewController: UIViewController {
     
     private var balance = 0
-    private var wallets = [System(name: "Green App Development", token: "GAD", image: UIImage(named: "emptyLogo")!), System(name: "Marmot", token: "MRT", image: UIImage(named: "emptyLogo")!), System(name: "Chia MEM", token: "CMM", image: UIImage(named: "emptyLogo")!), System(name: "USD Stable", token: "USDS", image: UIImage(named: "emptyLogo")!)]
+    private var wallets: [System] = []
+//    [System(name: "Green App Development", token: "GAD", image: UIImage(named: "emptyLogo")!), System(name: "Marmot", token: "MRT", image: UIImage(named: "emptyLogo")!), System(name: "Chia MEM", token: "CMM", image: UIImage(named: "emptyLogo")!), System(name: "USD Stable", token: "USDS", image: UIImage(named: "emptyLogo")!)]
+    private var footerButtonTitle = "Все кошельки"
+
     let userDefaults = UserDefaults.standard
     
     @IBOutlet weak var balanceLabel: UILabel!
@@ -21,6 +24,7 @@ class MainViewController: UIViewController {
     @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var footerView: UIView!
     @IBOutlet weak var stackViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var footerButtom: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,15 +37,20 @@ class MainViewController: UIViewController {
         }
         
         self.walletsTableView.register(UINib(nibName: "BalanceTableViewCell", bundle: nil), forCellReuseIdentifier: "walletCell")
-        self.walletsTableView.register(UINib(nibName: "ImportTableViewCell", bundle: nil), forCellReuseIdentifier: "importCell")
-        //        self.stackView.removeArrangedSubview(self.walletsTableView)
-        
+        self.walletsTableView.register(UINib(nibName: "ImportTableViewCell", bundle: nil), forCellReuseIdentifier: "importCell")        
         
         self.headerView.layer.cornerRadius = 15
         self.headerView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         
         self.footerView.layer.cornerRadius = 15
         self.footerView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+        
+        if self.wallets.isEmpty {
+            self.footerButtom.setTitle("Добавить кошелек", for: .normal)
+            self.footerButtom.addTarget(self, action: #selector(addWalletButtonPressed), for: .touchUpInside)
+        } else {
+            self.footerButtom.setTitle(self.footerButtonTitle, for: .normal)
+        }
         
         let navigationItem = UINavigationItem()
         let settingsItem = UIBarButtonItem(image: UIImage(named: "Menu")!, style: .done, target: self, action: #selector(pushSettingsController))
@@ -100,8 +109,10 @@ class MainViewController: UIViewController {
         
     }
     
-    @IBAction func addWalletButtonPressed(_ sender: Any) {
+    @IBAction @objc func addWalletButtonPressed(_ sender: Any) {
         presentSelectSystemVC()
+       
+        
     }
 }
 

@@ -57,7 +57,13 @@ extension SelectSystemViewController: UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if self.isSelectedSystem {
-            
+            switch indexPath {
+            case [0,0]:
+                guard let newWalletVC = storyboard?.instantiateViewController(withIdentifier: "NewWalletViewController") else { return }
+                self.present(newWalletVC, animated: true, completion: nil)
+            default:
+                break
+            }
         } else {
             self.isSelectedSystem = true
             tableView.reloadData()

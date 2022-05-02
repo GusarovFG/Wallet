@@ -17,6 +17,7 @@
 		FB0FCA7328197A4000BB0527 /* ImportTokensTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0FCA7128197A4000BB0527 /* ImportTokensTableViewCell.swift */; };
 		FB0FCA7428197A4000BB0527 /* ImportTokensTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB0FCA7228197A4000BB0527 /* ImportTokensTableViewCell.xib */; };
 		FB0FCA7628197B4800BB0527 /* ImportTokensViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0FCA7528197B4800BB0527 /* ImportTokensViewController.swift */; };
+		FB2F369028206ACB007576FE /* NewWalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB2F368F28206ACB007576FE /* NewWalletViewController.swift */; };
 		FB3207F92818018F00F1ADCA /* BalanceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB3207F72818018F00F1ADCA /* BalanceTableViewCell.swift */; };
 		FB3207FA2818018F00F1ADCA /* BalanceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB3207F82818018F00F1ADCA /* BalanceTableViewCell.xib */; };
 		FB3208092818286E00F1ADCA /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB3208082818286E00F1ADCA /* MainViewController.swift */; };
@@ -59,6 +60,7 @@
 		FB0FCA7128197A4000BB0527 /* ImportTokensTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportTokensTableViewCell.swift; sourceTree = "<group>"; };
 		FB0FCA7228197A4000BB0527 /* ImportTokensTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImportTokensTableViewCell.xib; sourceTree = "<group>"; };
 		FB0FCA7528197B4800BB0527 /* ImportTokensViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportTokensViewController.swift; sourceTree = "<group>"; };
+		FB2F368F28206ACB007576FE /* NewWalletViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewWalletViewController.swift; sourceTree = "<group>"; };
 		FB3207F72818018F00F1ADCA /* BalanceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceTableViewCell.swift; sourceTree = "<group>"; };
 		FB3207F82818018F00F1ADCA /* BalanceTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BalanceTableViewCell.xib; sourceTree = "<group>"; };
 		FB3208082818286E00F1ADCA /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -154,6 +156,7 @@
 				FBFE5794281AF4F90016E74A /* AllSettingsViewController.swift */,
 				FBFE579D281B28880016E74A /* LanguageViewController.swift */,
 				FBFE57A3281B4AFE0016E74A /* InfoViewController.swift */,
+				FB2F368F28206ACB007576FE /* NewWalletViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -392,6 +395,7 @@
 				FBFE579A281B269E0016E74A /* LanguageTableViewCell.swift in Sources */,
 				FB0FCA6D2819600400BB0527 /* SelectSystemTableViewCell.swift in Sources */,
 				FBFE578F281AC4050016E74A /* PushAndAllSettingsTableViewCell.swift in Sources */,
+				FB2F369028206ACB007576FE /* NewWalletViewController.swift in Sources */,
 				FB0883DC281BE21F001D4317 /* CustomThumbView.swift in Sources */,
 				FBFE5795281AF4F90016E74A /* AllSettingsViewController.swift in Sources */,
 				FB0FCA7328197A4000BB0527 /* ImportTokensTableViewCell.swift in Sources */,
