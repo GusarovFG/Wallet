@@ -73,7 +73,9 @@ class NewWalletViewController: UIViewController {
     }
     
     @IBAction func createButtonPressed(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
+        guard let creatingVC = storyboard?.instantiateViewController(withIdentifier: "WalletCreating") else { return }
+        self.present(creatingVC, animated: true, completion: nil)
+        
     }
     
     @IBAction func backButtonPressed(_ sender: Any) {

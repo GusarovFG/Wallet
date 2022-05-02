@@ -29,7 +29,6 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         if UserDefaultsManager.shared.userDefaults.bool(forKey: UserDefaultsStringKeys.hideWalletsBalance.rawValue) {
             self.balanceLabel.text = "***** USD"
         } else {
@@ -52,6 +51,7 @@ class MainViewController: UIViewController {
             self.footerButtom.setTitle(self.footerButtonTitle, for: .normal)
         }
         
+        self.navigationController?.navigationBar.isHidden = false
         let navigationItem = UINavigationItem()
         let settingsItem = UIBarButtonItem(image: UIImage(named: "Menu")!, style: .done, target: self, action: #selector(pushSettingsController))
         settingsItem.tintColor = .white

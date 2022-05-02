@@ -3,7 +3,6 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
-        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -454,10 +453,55 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
             </objects>
             <point key="canvasLocation" x="6497" y="1501"/>
         </scene>
+        <!--Creating View Controller-->
+        <scene sceneID="AOp-Sf-Y3Z">
+            <objects>
+                <viewController storyboardIdentifier="WalletCreating" id="tOL-lP-eDL" customClass="CreatingViewController" customModule="GreenWallet" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="RfU-De-HlH">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="walletCreate" translatesAutoresizingMaskIntoConstraints="NO" id="kdo-Nv-hJd">
+                                <rect key="frame" x="156" y="350" width="103" height="104"/>
+                            </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="6ol-uM-fqE">
+                                <rect key="frame" x="70" y="507" width="274" height="63"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Новый кошелек" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d6i-0I-BMi">
+                                        <rect key="frame" x="0.0" y="0.0" width="274" height="36"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Создание нового кошелька..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Muf-RC-I0m">
+                                        <rect key="frame" x="0.0" y="46" width="274" height="17"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="7tp-P1-sND"/>
+                        <color key="backgroundColor" red="0.2274509804" green="0.67450980390000004" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="7tp-P1-sND" firstAttribute="bottom" secondItem="6ol-uM-fqE" secondAttribute="bottom" constant="292" id="9w1-se-kID"/>
+                            <constraint firstItem="7tp-P1-sND" firstAttribute="trailing" secondItem="6ol-uM-fqE" secondAttribute="trailing" constant="70" id="Fbi-J0-y20"/>
+                            <constraint firstItem="6ol-uM-fqE" firstAttribute="leading" secondItem="7tp-P1-sND" secondAttribute="leading" constant="70" id="LBN-ZX-ovW"/>
+                            <constraint firstItem="kdo-Nv-hJd" firstAttribute="leading" secondItem="7tp-P1-sND" secondAttribute="leading" constant="156" id="NtQ-sV-Mef"/>
+                            <constraint firstItem="7tp-P1-sND" firstAttribute="trailing" secondItem="kdo-Nv-hJd" secondAttribute="trailing" constant="155" id="Sg0-6o-YJt"/>
+                            <constraint firstItem="6ol-uM-fqE" firstAttribute="top" secondItem="kdo-Nv-hJd" secondAttribute="bottom" constant="53" id="kQE-N7-Ofn"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JTy-wJ-cjL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="7226.0869565217399" y="1505.3571428571429"/>
+        </scene>
         <!--Main View Controller-->
         <scene sceneID="rD9-JV-rzT">
             <objects>
-                <viewController storyboardIdentifier="MainViewController" id="6t9-aC-OYq" customClass="MainViewController" customModule="GreenWallet" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MainViewController" modalPresentationStyle="fullScreen" id="6t9-aC-OYq" customClass="MainViewController" customModule="GreenWallet" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cKo-uq-5Xq">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -689,7 +733,7 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                             <constraint firstItem="ITP-eL-ev8" firstAttribute="leading" secondItem="jMi-1S-2e6" secondAttribute="leading" constant="149" id="o6q-CK-nut"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" largeTitleDisplayMode="always" id="ygC-JQ-O32"/>
+                    <navigationItem key="navigationItem" id="ygC-JQ-O32"/>
                     <connections>
                         <outlet property="balanceLabel" destination="2Vr-bL-6TF" id="lh9-uy-8cl"/>
                         <outlet property="footerButtom" destination="wzt-BU-jCP" id="yTo-TD-SRc"/>
@@ -1233,10 +1277,11 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
             </objects>
             <point key="canvasLocation" x="7048" y="2166"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Main Tab Bar Controller-->
         <scene sceneID="R54-pX-4vo">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="Q8h-cT-tKU" sceneMemberID="viewController">
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lX5-jZ-5Ki" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="Q8h-cT-tKU" customClass="MainTabBarController" customModule="GreenWallet" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="MWR-pt-qZu"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Kz6-Us-AtJ">
@@ -1248,13 +1293,13 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                         <segue destination="lST-aH-cSZ" kind="relationship" relationship="viewControllers" id="0zI-UJ-OdK"/>
                     </connections>
                 </tabBarController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="lX5-jZ-5Ki" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2648" y="825"/>
         </scene>
         <!--Item-->
         <scene sceneID="Nlo-bn-b7l">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="h8M-OB-DmP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="lST-aH-cSZ" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="XFV-fe-OxW"/>
                     <toolbarItems/>
@@ -1268,7 +1313,6 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                         <segue destination="6t9-aC-OYq" kind="relationship" relationship="rootViewController" id="p5X-RN-mWI"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="h8M-OB-DmP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3557.971014492754" y="825"/>
         </scene>
@@ -1280,6 +1324,7 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
         <image name="chevron.backward" catalog="system" width="96" height="128"/>
         <image name="plus" catalog="system" width="128" height="113"/>
         <image name="qrcode" catalog="system" width="128" height="114"/>
+        <image name="walletCreate" width="104" height="104"/>
         <namedColor name="safeAria">
             <color red="0.22699999809265137" green="0.67500001192092896" blue="0.34900000691413879" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
