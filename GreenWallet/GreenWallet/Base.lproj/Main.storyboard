@@ -3,6 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -438,6 +439,7 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                             <constraint firstItem="n0S-eP-Xrv" firstAttribute="top" secondItem="Vak-Gd-HqX" secondAttribute="bottom" constant="35" id="cue-of-LH0"/>
                             <constraint firstItem="gNk-yQ-KHO" firstAttribute="leading" secondItem="iQo-cZ-Xyg" secondAttribute="leading" constant="32" id="iHC-P3-dCx"/>
                             <constraint firstItem="5ES-sY-Jgm" firstAttribute="top" secondItem="iQo-cZ-Xyg" secondAttribute="top" id="mJI-2T-kMA"/>
+                            <constraint firstItem="AoR-dM-eJI" firstAttribute="top" secondItem="Nil-Oo-WTy" secondAttribute="bottom" constant="90" id="nIj-6b-sPs"/>
                             <constraint firstItem="iQo-cZ-Xyg" firstAttribute="trailing" secondItem="8Ia-dC-0XL" secondAttribute="trailing" constant="15" id="oX3-pM-IIk"/>
                             <constraint firstItem="9CI-LL-2DI" firstAttribute="leading" secondItem="iQo-cZ-Xyg" secondAttribute="leading" constant="130" id="op0-E8-UOz"/>
                         </constraints>
@@ -451,12 +453,12 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g3S-PL-QUO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6497" y="1501"/>
+            <point key="canvasLocation" x="6775" y="1501"/>
         </scene>
         <!--Creating View Controller-->
         <scene sceneID="AOp-Sf-Y3Z">
             <objects>
-                <viewController storyboardIdentifier="WalletCreating" id="tOL-lP-eDL" customClass="CreatingViewController" customModule="GreenWallet" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WalletCreating" modalPresentationStyle="fullScreen" id="tOL-lP-eDL" customClass="CreatingViewController" customModule="GreenWallet" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="RfU-De-HlH">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -483,20 +485,204 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                             </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="7tp-P1-sND"/>
-                        <color key="backgroundColor" red="0.2274509804" green="0.67450980390000004" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" name="NewWalletColor"/>
                         <constraints>
                             <constraint firstItem="7tp-P1-sND" firstAttribute="bottom" secondItem="6ol-uM-fqE" secondAttribute="bottom" constant="292" id="9w1-se-kID"/>
                             <constraint firstItem="7tp-P1-sND" firstAttribute="trailing" secondItem="6ol-uM-fqE" secondAttribute="trailing" constant="70" id="Fbi-J0-y20"/>
                             <constraint firstItem="6ol-uM-fqE" firstAttribute="leading" secondItem="7tp-P1-sND" secondAttribute="leading" constant="70" id="LBN-ZX-ovW"/>
                             <constraint firstItem="kdo-Nv-hJd" firstAttribute="leading" secondItem="7tp-P1-sND" secondAttribute="leading" constant="156" id="NtQ-sV-Mef"/>
                             <constraint firstItem="7tp-P1-sND" firstAttribute="trailing" secondItem="kdo-Nv-hJd" secondAttribute="trailing" constant="155" id="Sg0-6o-YJt"/>
+                            <constraint firstItem="kdo-Nv-hJd" firstAttribute="top" secondItem="7tp-P1-sND" secondAttribute="top" constant="306" id="chJ-69-wFU"/>
                             <constraint firstItem="6ol-uM-fqE" firstAttribute="top" secondItem="kdo-Nv-hJd" secondAttribute="bottom" constant="53" id="kQE-N7-Ofn"/>
                         </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JTy-wJ-cjL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7226.0869565217399" y="1505.3571428571429"/>
+            <point key="canvasLocation" x="7509" y="1501"/>
+        </scene>
+        <!--Mnemonic View Controller-->
+        <scene sceneID="WCZ-4d-CdI">
+            <objects>
+                <viewController storyboardIdentifier="MnemonicViewController" modalPresentationStyle="fullScreen" id="ruV-4q-VUH" customClass="MnemonicViewController" customModule="GreenWallet" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="nfh-1g-xMR">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jv2-Pf-DJj">
+                                <rect key="frame" x="0.0" y="44" width="85.5" height="31.5"/>
+                                <color key="tintColor" red="0.45882352939999999" green="0.45882352939999999" blue="0.45882352939999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <buttonConfiguration key="configuration" style="plain" image="chevron.backward" catalog="system">
+                                    <attributedString key="attributedTitle">
+                                        <fragment content=" Назад">
+                                            <attributes>
+                                                <font key="NSFont" size="15" name="Helvetica"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="backButtonPressed:" destination="5v2-Wl-TZc" eventType="touchUpInside" id="Z4e-XZ-mBV"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Обязательно сохраните мнемоническую фразу" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LyD-ft-yyg">
+                                <rect key="frame" x="42" y="96.5" width="330" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="XM8-Z1-sBv"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="25"/>
+                                <color key="textColor" red="0.2274509804" green="0.67450980390000004" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Потеря менмонической фразы может повлечь за собой активов" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1AU-wh-zeW">
+                                <rect key="frame" x="67" y="162" width="280" height="43"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="43" id="TxS-wg-KPD"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <color key="textColor" red="0.58039215686274503" green="0.58039215686274503" blue="0.58039215686274503" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="JhJ-Jd-9Xg">
+                                <rect key="frame" x="15" y="234" width="384" height="374"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="VAd-OU-lxo">
+                                    <size key="itemSize" width="178" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                                <connections>
+                                    <outlet property="dataSource" destination="ruV-4q-VUH" id="a0F-0G-vv9"/>
+                                    <outlet property="delegate" destination="ruV-4q-VUH" id="hKb-Gz-7Ie"/>
+                                </connections>
+                            </collectionView>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="qVR-Qo-gZa">
+                                <rect key="frame" x="14" y="627" width="385" height="40"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NEf-gW-JQq">
+                                        <rect key="frame" x="0.0" y="0.0" width="192" height="40"/>
+                                        <color key="backgroundColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.23529411759999999" alpha="0.19948112840000001" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="192" id="SXx-fm-d4N"/>
+                                        </constraints>
+                                        <color key="tintColor" name="LightThemeLogo"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" image="hydeImage"/>
+                                        <connections>
+                                            <action selector="hydeButtonPressed:" destination="ruV-4q-VUH" eventType="touchUpInside" id="Tfg-Kk-1mu"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OYs-IQ-vIi">
+                                        <rect key="frame" x="193" y="0.0" width="192" height="40"/>
+                                        <color key="backgroundColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.23529411759999999" alpha="0.19948112840000001" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="192" id="J0S-TN-LlR"/>
+                                        </constraints>
+                                        <color key="tintColor" name="LightThemeLogo"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" image="CopyImage"/>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="AZK-LF-uiN"/>
+                                </constraints>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OIM-1O-6Sf">
+                                <rect key="frame" x="32" y="746" width="350" height="62"/>
+                                <color key="backgroundColor" red="0.2274509804" green="0.67450980390000004" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="62" id="CsQ-HH-OO3"/>
+                                </constraints>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain">
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="Создать">
+                                            <attributes>
+                                                <font key="NSFont" size="16" name="Helvetica"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                </buttonConfiguration>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <integer key="value" value="30"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </button>
+                            <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Vh-Tj-bcQ">
+                                <rect key="frame" x="15" y="692" width="20" height="20"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="In8-ZE-JK9"/>
+                                    <constraint firstAttribute="width" constant="20" id="NCz-Sw-CjR"/>
+                                </constraints>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <size key="titleShadowOffset" width="1" height="1"/>
+                                <buttonConfiguration key="configuration" style="plain" cornerStyle="small">
+                                    <backgroundConfiguration key="background">
+                                        <color key="strokeColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </backgroundConfiguration>
+                                    <directionalEdgeInsets key="contentInsets" top="0.0" leading="0.0" bottom="0.0" trailing="0.0"/>
+                                </buttonConfiguration>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="checkBoxPressed:" destination="ruV-4q-VUH" eventType="touchUpInside" id="LSA-Xf-tOB"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Я подтверждаю что сохранил мнемоническую фразу" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BLU-dJ-RTc">
+                                <rect key="frame" x="42" y="678" width="357" height="48"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="39w-rU-upT"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="OIM-1O-6Sf" firstAttribute="top" secondItem="BLU-dJ-RTc" secondAttribute="bottom" constant="20" id="1nd-xG-uxZ"/>
+                            <constraint firstItem="39w-rU-upT" firstAttribute="trailing" secondItem="qVR-Qo-gZa" secondAttribute="trailing" constant="15" id="1qk-Zy-q0s"/>
+                            <constraint firstItem="BLU-dJ-RTc" firstAttribute="top" secondItem="qVR-Qo-gZa" secondAttribute="bottom" constant="11" id="2uo-h3-m8h"/>
+                            <constraint firstItem="LyD-ft-yyg" firstAttribute="leading" secondItem="39w-rU-upT" secondAttribute="leading" constant="42" id="6hr-Cn-9ft"/>
+                            <constraint firstItem="LyD-ft-yyg" firstAttribute="top" secondItem="jv2-Pf-DJj" secondAttribute="bottom" constant="21" id="6u9-Ov-hNv"/>
+                            <constraint firstItem="1AU-wh-zeW" firstAttribute="top" secondItem="LyD-ft-yyg" secondAttribute="bottom" constant="5.5" id="8Kl-N2-qOR"/>
+                            <constraint firstItem="jv2-Pf-DJj" firstAttribute="leading" secondItem="39w-rU-upT" secondAttribute="leading" id="GNy-QW-Caf"/>
+                            <constraint firstItem="OIM-1O-6Sf" firstAttribute="leading" secondItem="39w-rU-upT" secondAttribute="leading" constant="32" id="GWB-a1-5LH"/>
+                            <constraint firstItem="39w-rU-upT" firstAttribute="bottom" secondItem="qVR-Qo-gZa" secondAttribute="bottom" constant="195" id="IOo-x6-hAN"/>
+                            <constraint firstItem="qVR-Qo-gZa" firstAttribute="leading" secondItem="39w-rU-upT" secondAttribute="leading" constant="14" id="PZk-fN-1Nm"/>
+                            <constraint firstItem="39w-rU-upT" firstAttribute="bottom" secondItem="OIM-1O-6Sf" secondAttribute="bottom" constant="54" id="RtA-kV-kZ6"/>
+                            <constraint firstItem="JhJ-Jd-9Xg" firstAttribute="leading" secondItem="39w-rU-upT" secondAttribute="leading" constant="15" id="Zcd-uX-Xv3"/>
+                            <constraint firstItem="1Vh-Tj-bcQ" firstAttribute="leading" secondItem="39w-rU-upT" secondAttribute="leading" constant="15" id="aQN-BC-O01"/>
+                            <constraint firstItem="39w-rU-upT" firstAttribute="trailing" secondItem="LyD-ft-yyg" secondAttribute="trailing" constant="42" id="kkq-oz-rIj"/>
+                            <constraint firstItem="39w-rU-upT" firstAttribute="trailing" secondItem="BLU-dJ-RTc" secondAttribute="trailing" constant="15" id="knq-lv-A1L"/>
+                            <constraint firstItem="1Vh-Tj-bcQ" firstAttribute="top" secondItem="qVR-Qo-gZa" secondAttribute="bottom" constant="25" id="lUa-oz-RWS"/>
+                            <constraint firstItem="jv2-Pf-DJj" firstAttribute="top" secondItem="39w-rU-upT" secondAttribute="top" id="rVh-QS-kpa"/>
+                            <constraint firstItem="39w-rU-upT" firstAttribute="trailing" secondItem="1AU-wh-zeW" secondAttribute="trailing" constant="67" id="sLl-SV-ISx"/>
+                            <constraint firstItem="BLU-dJ-RTc" firstAttribute="leading" secondItem="1Vh-Tj-bcQ" secondAttribute="trailing" constant="7" id="uAe-WO-nte"/>
+                            <constraint firstItem="1AU-wh-zeW" firstAttribute="leading" secondItem="39w-rU-upT" secondAttribute="leading" constant="67" id="wA3-ep-MDm"/>
+                            <constraint firstItem="JhJ-Jd-9Xg" firstAttribute="top" secondItem="1AU-wh-zeW" secondAttribute="bottom" constant="29" id="wNs-bd-Nq8"/>
+                            <constraint firstItem="qVR-Qo-gZa" firstAttribute="top" secondItem="JhJ-Jd-9Xg" secondAttribute="bottom" constant="19" id="wt6-L7-zbY"/>
+                            <constraint firstItem="39w-rU-upT" firstAttribute="trailing" secondItem="OIM-1O-6Sf" secondAttribute="trailing" constant="32" id="z2w-LB-1Gq"/>
+                            <constraint firstItem="39w-rU-upT" firstAttribute="trailing" secondItem="JhJ-Jd-9Xg" secondAttribute="trailing" constant="15" id="z4J-3h-zFn"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="collectionView" destination="JhJ-Jd-9Xg" id="ZLm-vk-yZ2"/>
+                        <outlet property="continueButton" destination="OIM-1O-6Sf" id="Geq-as-tEI"/>
+                        <outlet property="copyButton" destination="OYs-IQ-vIi" id="356-0L-HJa"/>
+                        <outlet property="hydeButton" destination="NEf-gW-JQq" id="2Mh-Pf-yu6"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SoI-bc-9SM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="8221.7391304347839" y="1500.6696428571429"/>
         </scene>
         <!--Main View Controller-->
         <scene sceneID="rD9-JV-rzT">
@@ -1280,7 +1466,6 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
         <!--Main Tab Bar Controller-->
         <scene sceneID="R54-pX-4vo">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="lX5-jZ-5Ki" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="Q8h-cT-tKU" customClass="MainTabBarController" customModule="GreenWallet" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="MWR-pt-qZu"/>
@@ -1293,14 +1478,14 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                         <segue destination="lST-aH-cSZ" kind="relationship" relationship="viewControllers" id="0zI-UJ-OdK"/>
                     </connections>
                 </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lX5-jZ-5Ki" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2648" y="825"/>
         </scene>
         <!--Item-->
         <scene sceneID="Nlo-bn-b7l">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="h8M-OB-DmP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <navigationController storyboardIdentifier="qwe" automaticallyAdjustsScrollViewInsets="NO" id="lST-aH-cSZ" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="navi" automaticallyAdjustsScrollViewInsets="NO" id="lST-aH-cSZ" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="XFV-fe-OxW"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Az2-Wp-Hsp">
@@ -1313,18 +1498,27 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                         <segue destination="6t9-aC-OYq" kind="relationship" relationship="rootViewController" id="p5X-RN-mWI"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="h8M-OB-DmP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3557.971014492754" y="825"/>
         </scene>
     </scenes>
     <resources>
+        <image name="CopyImage" width="17" height="20"/>
         <image name="LaunchScreenLogo" width="252" height="54"/>
         <image name="NewWallet" width="119" height="116"/>
         <image name="button1" width="28" height="28"/>
         <image name="chevron.backward" catalog="system" width="96" height="128"/>
+        <image name="hydeImage" width="20" height="16"/>
         <image name="plus" catalog="system" width="128" height="113"/>
         <image name="qrcode" catalog="system" width="128" height="114"/>
         <image name="walletCreate" width="104" height="104"/>
+        <namedColor name="LightThemeLogo">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="NewWalletColor">
+            <color red="0.22699999809265137" green="0.67500001192092896" blue="0.34900000691413879" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="safeAria">
             <color red="0.22699999809265137" green="0.67500001192092896" blue="0.34900000691413879" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

@@ -12,8 +12,9 @@ class CreatingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        let mnemonicVC = storyboard?.instantiateViewController(withIdentifier: "MnemonicViewController") as! MnemonicViewController
         DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-            
+            self.present(mnemonicVC, animated: true, completion: nil)
             
         }
     }

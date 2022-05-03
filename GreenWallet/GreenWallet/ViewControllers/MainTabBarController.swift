@@ -16,8 +16,7 @@ class MainTabBarController: UITabBarController, UINavigationBarDelegate {
     }
     
     private func addTabs() {
-        
-        let mainVC = storyboard?.instantiateViewController(withIdentifier: "qwe") as! UINavigationController
+        let mainVC = storyboard?.instantiateViewController(withIdentifier: "navi") as! UINavigationController
         mainVC.tabBarItem = UITabBarItem(title: "Кошелек", image: UIImage(named: "wallet")!, selectedImage: UIImage(named: "wallet")!)
         
         let selectSystemVC = UIViewController()
