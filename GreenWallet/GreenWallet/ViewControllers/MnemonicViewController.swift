@@ -18,6 +18,7 @@ class MnemonicViewController: UIViewController {
     @IBOutlet weak var hydeButton: UIButton!
     @IBOutlet weak var copyButton: UIButton!
     @IBOutlet weak var continueButton: UIButton!
+    @IBOutlet weak var copyLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +26,9 @@ class MnemonicViewController: UIViewController {
         self.secureMnemonicPhrase = self.mnemonicPhrase
         
         self.continueButton.isEnabled = false
+        self.copyLabel.alpha = 0
+        
+        self.copyLabel.layer.cornerRadius = 8
         
         self.hydeButton.layer.cornerRadius = 15
         self.hydeButton.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner]
@@ -78,6 +82,19 @@ class MnemonicViewController: UIViewController {
             self.continueButton.isEnabled = false
         }
         
+    }
+    @IBAction func copyButtonPressed(_ sender: Any) {
+        print("qweqwe")
+
+
+        UIView.animate(withDuration: 2) {
+            self.copyLabel.alpha = 1
+        }
+        UIView.animate(withDuration: 2) {
+            self.copyLabel.alpha = 0
+        }
+        
+        UIPasteboard.general.string = self.mnemonicPhrase.joined(separator: ", ")
     }
 }
 
