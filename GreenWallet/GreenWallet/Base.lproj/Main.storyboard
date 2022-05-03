@@ -546,7 +546,7 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="JhJ-Jd-9Xg">
                                 <rect key="frame" x="15" y="234" width="384" height="374"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="VAd-OU-lxo">
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" sectionInsetReference="layoutMargins" id="VAd-OU-lxo">
                                     <size key="itemSize" width="178" height="50"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -615,6 +615,9 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                                         <integer key="value" value="30"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <segue destination="d4Y-us-RBk" kind="presentation" identifier="mnemonicSegue" modalPresentationStyle="overFullScreen" id="pe2-Jd-Afp"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Vh-Tj-bcQ">
                                 <rect key="frame" x="15" y="692" width="20" height="20"/>
@@ -703,7 +706,7 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SoI-bc-9SM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="8221.7391304347839" y="1500.6696428571429"/>
+            <point key="canvasLocation" x="8284" y="1505"/>
         </scene>
         <!--Main View Controller-->
         <scene sceneID="rD9-JV-rzT">
@@ -1522,6 +1525,152 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h8M-OB-DmP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3557.971014492754" y="825"/>
+        </scene>
+        <!--Verify Mnemonic View Controller-->
+        <scene sceneID="fXH-FJ-RZW">
+            <objects>
+                <viewController storyboardIdentifier="VerifyMnemonicViewController" definesPresentationContext="YES" providesPresentationContextTransitionStyle="YES" modalPresentationStyle="fullScreen" id="d4Y-us-RBk" customClass="VerifyMnemonicViewController" customModule="GreenWallet" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="kpR-Wh-Uqo">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RiR-UH-uP8">
+                                <rect key="frame" x="0.0" y="44" width="85.5" height="31.5"/>
+                                <color key="tintColor" red="0.45882352939999999" green="0.45882352939999999" blue="0.45882352939999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <buttonConfiguration key="configuration" style="plain" image="chevron.backward" catalog="system">
+                                    <attributedString key="attributedTitle">
+                                        <fragment content=" Назад">
+                                            <attributes>
+                                                <font key="NSFont" size="15" name="Helvetica"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="backButtonPressed:" destination="d4Y-us-RBk" eventType="touchUpInside" id="QH0-RP-a1z"/>
+                                    <action selector="backButtonPressed:" destination="5v2-Wl-TZc" eventType="touchUpInside" id="fpt-3J-jap"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Защитите свой кошелек" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qyu-0U-OQb">
+                                <rect key="frame" x="102" y="85.5" width="210" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="uA7-BQ-jyv"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="25"/>
+                                <color key="textColor" red="0.2274509804" green="0.67450980390000004" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Подтвердите фразу для востановления" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Xh-4b-AIu">
+                                <rect key="frame" x="67" y="151" width="280" height="43"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="43" id="x92-vn-9iX"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <color key="textColor" red="0.58039215690000001" green="0.58039215690000001" blue="0.58039215690000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Xsl-Ls-Mh0">
+                                <rect key="frame" x="15" y="204" width="384" height="365"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="5" minimumInteritemSpacing="5" sectionInsetReference="layoutMargins" id="Zk4-IF-e8W">
+                                    <size key="itemSize" width="178" height="45"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                                <connections>
+                                    <outlet property="dataSource" destination="d4Y-us-RBk" id="0do-zS-7vj"/>
+                                    <outlet property="delegate" destination="d4Y-us-RBk" id="Ci0-Lw-NRv"/>
+                                </connections>
+                            </collectionView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tl3-u5-MSQ">
+                                <rect key="frame" x="32" y="800" width="350" height="62"/>
+                                <color key="backgroundColor" red="0.2274509804" green="0.67450980390000004" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="62" id="n2R-i5-OGh"/>
+                                </constraints>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain">
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="Продолжить">
+                                            <attributes>
+                                                <font key="NSFont" size="16" name="Helvetica"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                </buttonConfiguration>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <integer key="value" value="30"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </button>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="P6I-m1-eO2">
+                                <rect key="frame" x="15" y="624" width="384" height="168"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="168" id="2tc-BV-299"/>
+                                </constraints>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="5" minimumInteritemSpacing="5" sectionInsetReference="layoutMargins" id="Erd-ek-wOY">
+                                    <size key="itemSize" width="178" height="45"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                                <connections>
+                                    <outlet property="dataSource" destination="d4Y-us-RBk" id="JCA-qe-5OC"/>
+                                    <outlet property="delegate" destination="d4Y-us-RBk" id="NAB-4w-Un2"/>
+                                </connections>
+                            </collectionView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Пожалуйста заполните следующие слова, словами из списка ниже" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zC3-Wm-DlC">
+                                <rect key="frame" x="50" y="577" width="314" height="39"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="39" id="ibb-DR-EzE"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" red="0.58039215690000001" green="0.58039215690000001" blue="0.58039215690000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="iDH-Xn-8rr"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="5Xh-4b-AIu" firstAttribute="leading" secondItem="iDH-Xn-8rr" secondAttribute="leading" constant="67" id="0gX-fI-zuc"/>
+                            <constraint firstItem="Tl3-u5-MSQ" firstAttribute="top" secondItem="P6I-m1-eO2" secondAttribute="bottom" constant="8" id="7nb-6C-qhQ"/>
+                            <constraint firstItem="Tl3-u5-MSQ" firstAttribute="leading" secondItem="iDH-Xn-8rr" secondAttribute="leading" constant="32" id="CmZ-Qj-RX8"/>
+                            <constraint firstItem="iDH-Xn-8rr" firstAttribute="trailing" secondItem="Xsl-Ls-Mh0" secondAttribute="trailing" constant="15" id="DVO-G2-lvL"/>
+                            <constraint firstItem="P6I-m1-eO2" firstAttribute="top" secondItem="zC3-Wm-DlC" secondAttribute="bottom" constant="8" id="Exr-5t-BRb"/>
+                            <constraint firstItem="Xsl-Ls-Mh0" firstAttribute="leading" secondItem="iDH-Xn-8rr" secondAttribute="leading" constant="15" id="KHq-dT-NG8"/>
+                            <constraint firstItem="iDH-Xn-8rr" firstAttribute="trailing" secondItem="zC3-Wm-DlC" secondAttribute="trailing" constant="50" id="NAK-9v-LI8"/>
+                            <constraint firstItem="iDH-Xn-8rr" firstAttribute="trailing" secondItem="Tl3-u5-MSQ" secondAttribute="trailing" constant="32" id="R7l-B1-aWm"/>
+                            <constraint firstItem="RiR-UH-uP8" firstAttribute="top" secondItem="iDH-Xn-8rr" secondAttribute="top" id="Sey-mw-Piu"/>
+                            <constraint firstItem="iDH-Xn-8rr" firstAttribute="bottom" secondItem="Tl3-u5-MSQ" secondAttribute="bottom" id="YcO-75-bxB"/>
+                            <constraint firstItem="5Xh-4b-AIu" firstAttribute="top" secondItem="Qyu-0U-OQb" secondAttribute="bottom" constant="5.5" id="aYJ-jB-kVi"/>
+                            <constraint firstItem="P6I-m1-eO2" firstAttribute="leading" secondItem="iDH-Xn-8rr" secondAttribute="leading" constant="15" id="dTP-nq-80d"/>
+                            <constraint firstItem="zC3-Wm-DlC" firstAttribute="leading" secondItem="iDH-Xn-8rr" secondAttribute="leading" constant="50" id="fcf-nv-S93"/>
+                            <constraint firstItem="Qyu-0U-OQb" firstAttribute="leading" secondItem="iDH-Xn-8rr" secondAttribute="leading" constant="102" id="jvN-sE-YLl"/>
+                            <constraint firstItem="iDH-Xn-8rr" firstAttribute="trailing" secondItem="5Xh-4b-AIu" secondAttribute="trailing" constant="67" id="oc4-aE-y4V"/>
+                            <constraint firstItem="Qyu-0U-OQb" firstAttribute="top" secondItem="RiR-UH-uP8" secondAttribute="bottom" constant="10" id="q7U-cT-Yka"/>
+                            <constraint firstItem="zC3-Wm-DlC" firstAttribute="top" secondItem="Xsl-Ls-Mh0" secondAttribute="bottom" constant="8" id="qUg-EZ-r10"/>
+                            <constraint firstItem="iDH-Xn-8rr" firstAttribute="trailing" secondItem="Qyu-0U-OQb" secondAttribute="trailing" constant="102" id="tpi-fD-OPg"/>
+                            <constraint firstItem="iDH-Xn-8rr" firstAttribute="trailing" secondItem="P6I-m1-eO2" secondAttribute="trailing" constant="15" id="wQg-fV-kV4"/>
+                            <constraint firstItem="Xsl-Ls-Mh0" firstAttribute="top" secondItem="5Xh-4b-AIu" secondAttribute="bottom" constant="10" id="whC-QT-og5"/>
+                            <constraint firstItem="RiR-UH-uP8" firstAttribute="leading" secondItem="iDH-Xn-8rr" secondAttribute="leading" id="yYd-2R-fH7"/>
+                        </constraints>
+                    </view>
+                    <value key="contentSizeForViewInPopover" type="size" width="414" height="1009"/>
+                    <connections>
+                        <outlet property="selectCollectionView" destination="P6I-m1-eO2" id="4Ca-hQ-1nA"/>
+                        <outlet property="veryfyCollectionView" destination="Xsl-Ls-Mh0" id="eb5-Ys-ATA"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KW5-nH-wHt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="9047.826086956522" y="1503.3482142857142"/>
         </scene>
     </scenes>
     <resources>

@@ -26,6 +26,7 @@
 		FB3754AB28214F2000882338 /* MnemonicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB3754AA28214F2000882338 /* MnemonicViewController.swift */; };
 		FB3754AF2821511900882338 /* MnemonicCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB3754AD2821511900882338 /* MnemonicCollectionViewCell.swift */; };
 		FB3754B02821511900882338 /* MnemonicCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB3754AE2821511900882338 /* MnemonicCollectionViewCell.xib */; };
+		FB3754B22821BE8F00882338 /* VerifyMnemonicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB3754B12821BE8F00882338 /* VerifyMnemonicViewController.swift */; };
 		FB383FE7281BE1C700939B6D /* CustomSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB383FE6281BE1C700939B6D /* CustomSwitch.swift */; };
 		FB5940352816856700037DFA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5940342816856700037DFA /* AppDelegate.swift */; };
 		FB5940372816856700037DFA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5940362816856700037DFA /* SceneDelegate.swift */; };
@@ -74,6 +75,7 @@
 		FB3754AA28214F2000882338 /* MnemonicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MnemonicViewController.swift; sourceTree = "<group>"; };
 		FB3754AD2821511900882338 /* MnemonicCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MnemonicCollectionViewCell.swift; sourceTree = "<group>"; };
 		FB3754AE2821511900882338 /* MnemonicCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MnemonicCollectionViewCell.xib; sourceTree = "<group>"; };
+		FB3754B12821BE8F00882338 /* VerifyMnemonicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyMnemonicViewController.swift; sourceTree = "<group>"; };
 		FB383FE6281BE1C700939B6D /* CustomSwitch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSwitch.swift; sourceTree = "<group>"; };
 		FB5940312816856700037DFA /* GreenWallet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GreenWallet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB5940342816856700037DFA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -171,6 +173,7 @@
 				FB2F369128207BC0007576FE /* CreatingViewController.swift */,
 				FB2F369328208286007576FE /* MainTabBarController.swift */,
 				FB3754AA28214F2000882338 /* MnemonicViewController.swift */,
+				FB3754B12821BE8F00882338 /* VerifyMnemonicViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -407,6 +410,7 @@
 				FBFE579E281B28880016E74A /* LanguageViewController.swift in Sources */,
 				FB3754AB28214F2000882338 /* MnemonicViewController.swift in Sources */,
 				FBFE578A281AC2B70016E74A /* SupportTableViewCell.swift in Sources */,
+				FB3754B22821BE8F00882338 /* VerifyMnemonicViewController.swift in Sources */,
 				FBFE57A4281B4AFE0016E74A /* InfoViewController.swift in Sources */,
 				FB0FCA702819629D00BB0527 /* Models.swift in Sources */,
 				FBFE5797281B121B0016E74A /* UserDefaultsManager.swift in Sources */,

@@ -9,9 +9,9 @@ import UIKit
 
 class MnemonicViewController: UIViewController {
     
-    private let mnemonicPhrase: [String] = ["Дверь", "Будущее", "Слово", "Криптовалюта", "Деньги", "Музыка", "Компьютер", "Плавание", "Кошелек", "Дизайн", "Дом", "Яблоко"]
+    private var mnemonicPhrase: [String] = ["Дверь", "Будущее", "Слово", "Криптовалюта", "Деньги", "Музыка", "Компьютер", "Плавание", "Кошелек", "Дизайн", "Дом", "Яблоко"]
     private var secureMnemonicPhrase: [String] = []
-    private let indexes: [Int] = [1, 7, 2, 8, 3, 9, 4, 10, 5, 11, 6, 12]
+    private let indexes: [Int] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
     private var hide = false
 
     @IBOutlet weak var collectionView: UICollectionView!
@@ -22,6 +22,8 @@ class MnemonicViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.mnemonicPhrase.shuffle()
         
         self.secureMnemonicPhrase = self.mnemonicPhrase
         
@@ -84,8 +86,6 @@ class MnemonicViewController: UIViewController {
         
     }
     @IBAction func copyButtonPressed(_ sender: Any) {
-        print("qweqwe")
-
 
         UIView.animate(withDuration: 2) {
             self.copyLabel.alpha = 1
@@ -96,6 +96,14 @@ class MnemonicViewController: UIViewController {
         
         UIPasteboard.general.string = self.mnemonicPhrase.joined(separator: ", ")
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "mnemonicSegue" {
+            let vc = segue.destination as! VerifyMnemonicViewController
+            vc.mnemonicPhrase = self.mnemonicPhrase
+        }
+    }
+    
 }
 
 extension MnemonicViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
