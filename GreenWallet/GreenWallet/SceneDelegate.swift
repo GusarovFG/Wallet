@@ -19,6 +19,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             self.window?.overrideUserInterfaceStyle = .light
         }
         guard let _ = (scene as? UIWindowScene) else { return }
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: .main)
+        let mainTabBarVC = storyboard.instantiateViewController(withIdentifier: "MainTabBarController") as! MainTabBarController
+        let startVC = storyboard.instantiateViewController(withIdentifier: "startVC")
+        
+        if UserDefaultsManager.shared.userDefaults.string(forKey: UserDefaultsStringKeys.firstSession.rawValue) == "First" {
+            self.window?.rootViewController = mainTabBarVC
+        } else {
+            self.window?.rootViewController = startVC
+        }
+        
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

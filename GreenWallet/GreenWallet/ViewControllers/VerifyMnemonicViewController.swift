@@ -18,9 +18,13 @@ class VerifyMnemonicViewController: UIViewController {
     
     @IBOutlet weak var veryfyCollectionView: UICollectionView!
     @IBOutlet weak var selectCollectionView: UICollectionView!
+    @IBOutlet weak var errorLabel: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.errorLabel.alpha = 0
+        self.errorLabel.isHidden = true
         
         self.veryfyCollectionView.register(UINib(nibName: "MnemonicCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "mnemonicCell")
         self.selectCollectionView.register(UINib(nibName: "MnemonicCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "mnemonicCell")
@@ -46,10 +50,24 @@ class VerifyMnemonicViewController: UIViewController {
     }
 
     @IBAction func mainButtonPressed(_ sender: Any) {
-        let alertVC = self.alert.alert()
-        
-        self.present(alertVC, animated: true, completion: nil)
+        if self.verifyedMnemonicPhrase == self.mnemonicPhrase {
+            let alertVC = self.alert.alert()
+            self.present(alertVC, animated: true, completion: nil)
+        } else {
+            self.errorLabel.isHidden = false
+            UIView.animate(withDuration: 1) {
+                self.errorLabel.alpha = 1
+            }
+        }
     }
+    
+    @IBAction func clouseErrorLabel(_ sender: Any) {
+        UIView.animate(withDuration: 1) {
+            self.errorLabel.alpha = 0
+        }
+        self.errorLabel.isHidden = true
+    }
+    
 }
 
 extension VerifyMnemonicViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -73,6 +91,7 @@ extension VerifyMnemonicViewController: UICollectionViewDelegate, UICollectionVi
             cell.mnemonicWord.text = "\(self.indexes[indexPath.row]). \(self.verifyedMnemonicPhrase[indexPath.row])"
             if indexPath > [0,5] && cell.mnemonicWord.text != "\(self.indexes[indexPath.row]). " {
                 cell.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
+                cell.mnemonicWord.tintColor = .white
             } else {
                 cell.backgroundColor = .systemBackground
             }
@@ -80,6 +99,7 @@ extension VerifyMnemonicViewController: UICollectionViewDelegate, UICollectionVi
         case self.selectCollectionView:
             cell.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
             cell.mnemonicWord.text = "\(self.selectPhrase[indexPath.row])"
+            cell.mnemonicWord.tintColor = .white
             return cell
         default:
             return cell

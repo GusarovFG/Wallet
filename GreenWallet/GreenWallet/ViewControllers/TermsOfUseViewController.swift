@@ -29,7 +29,7 @@ class TermsOfUseViewController: UIViewController {
             }
         }
         
-        
+
         
     }
     
@@ -64,7 +64,13 @@ class TermsOfUseViewController: UIViewController {
             self.continueButton.backgroundColor = #colorLiteral(red: 0.6106664538, green: 0.6106664538, blue: 0.6106664538, alpha: 1)
             self.continueButton.isEnabled = false
         }
-        
+
+    }
+    @IBAction func continueButtonPressed(_ sender: Any) {
+        UserDefaultsManager.shared.userDefaults.set("First", forKey: UserDefaultsStringKeys.firstSession.rawValue)
+        let storyboard = UIStoryboard(name: "Main", bundle: .main)
+        let mainTabBarVC = storyboard.instantiateViewController(withIdentifier: "MainTabBarController") as! MainTabBarController
+        self.view.window?.rootViewController = mainTabBarVC
     }
     
 }

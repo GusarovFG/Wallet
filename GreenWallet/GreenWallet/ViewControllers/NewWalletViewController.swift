@@ -9,12 +9,17 @@ import UIKit
 
 class NewWalletViewController: UIViewController {
 
+    @IBOutlet weak var creatingNewWalletView: UIView!
     @IBOutlet weak var agreeLabel: UILabel!
     @IBOutlet weak var checkBoxButton: UIButton!
     @IBOutlet weak var createNewWalletButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.creatingNewWalletView.isHidden = true
+        self.creatingNewWalletView.alpha = 0
+        
         self.createNewWalletButton.isEnabled = false
         self.createNewWalletButton.backgroundColor = #colorLiteral(red: 0.6106664538, green: 0.6106664538, blue: 0.6106664538, alpha: 1)
         self.createNewWalletButton.contentMode = .center
@@ -27,6 +32,12 @@ class NewWalletViewController: UIViewController {
                 UIApplication.shared.open(url!, options: [:])
             }
         }
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        self.creatingNewWalletView.isHidden = true
+
     }
     
     private func setupAgreeLabel() {
@@ -73,8 +84,17 @@ class NewWalletViewController: UIViewController {
     }
     
     @IBAction func createButtonPressed(_ sender: Any) {
-        guard let creatingVC = storyboard?.instantiateViewController(withIdentifier: "WalletCreating") else { return }
-        self.present(creatingVC, animated: true, completion: nil)
+        
+        self.creatingNewWalletView.isHidden = false
+        UIView.animate(withDuration: 0.5) {
+            self.creatingNewWalletView.alpha = 1
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            
+
+            guard let creatingVC = self.storyboard?.instantiateViewController(withIdentifier: "MnemonicViewController") else { return }
+            self.present(creatingVC, animated: true, completion: nil)
+        }
         
     }
     

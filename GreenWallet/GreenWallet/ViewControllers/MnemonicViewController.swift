@@ -96,6 +96,9 @@ class MnemonicViewController: UIViewController {
         
         UIPasteboard.general.string = self.mnemonicPhrase.joined(separator: ", ")
     }
+    @IBAction func backButtonPressed(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "mnemonicSegue" {
