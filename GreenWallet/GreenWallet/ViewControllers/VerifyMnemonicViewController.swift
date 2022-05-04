@@ -14,6 +14,7 @@ class VerifyMnemonicViewController: UIViewController {
     private var verifyedMnemonicPhrase: [String] = []
     private var selectPhrase: [String] = []
     private var selectIndex = 0
+    private let alert = AlertService()
     
     @IBOutlet weak var veryfyCollectionView: UICollectionView!
     @IBOutlet weak var selectCollectionView: UICollectionView!
@@ -43,17 +44,12 @@ class VerifyMnemonicViewController: UIViewController {
     @IBAction func backButtonPressed(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
-    
+
+    @IBAction func mainButtonPressed(_ sender: Any) {
+        let alertVC = self.alert.alert()
+        
+        self.present(alertVC, animated: true, completion: nil)
+    }
 }
 
 extension VerifyMnemonicViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
