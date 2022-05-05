@@ -41,6 +41,8 @@ class VerifyMnemonicViewController: UIViewController {
                 self.selectPhrase.append(self.mnemonicPhrase[i])
             }
         }
+        self.selectPhrase.shuffle()
+        
         print(verifyedMnemonicPhrase)
         print(selectPhrase)
     }
@@ -110,14 +112,17 @@ extension VerifyMnemonicViewController: UICollectionViewDelegate, UICollectionVi
         switch collectionView {
         case self.veryfyCollectionView:
             if indexPath > [0,5] {
+                let cell = self.veryfyCollectionView.cellForItem(at: indexPath) as! MnemonicCollectionViewCell
+                cell.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
                 self.selectIndex = indexPath.row
                 if self.verifyedMnemonicPhrase[indexPath.row] != "" {
                     self.selectPhrase.append(self.verifyedMnemonicPhrase[indexPath.row])
                     self.verifyedMnemonicPhrase.remove(at: indexPath.row)
                     self.verifyedMnemonicPhrase.insert("", at: indexPath.row)
-                    
                     self.veryfyCollectionView.reloadData()
                     self.selectCollectionView.reloadData()
+                    
+                    
                 }
             }
         case self.selectCollectionView:

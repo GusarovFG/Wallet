@@ -61,6 +61,9 @@ extension SelectSystemViewController: UITableViewDelegate, UITableViewDataSource
             case [0,0]:
                 guard let newWalletVC = storyboard?.instantiateViewController(withIdentifier: "NewWalletViewController") else { return }
                 self.present(newWalletVC, animated: true, completion: nil)
+            case [0,1]:
+                guard let newWalletVC = storyboard?.instantiateViewController(withIdentifier: "qwes") else { return }
+                self.present(newWalletVC, animated: true, completion: nil)
             default:
                 break
             }

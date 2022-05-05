@@ -38,6 +38,9 @@
 		FB59404C281694DD00037DFA /* TermsOfUseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB59404B281694DD00037DFA /* TermsOfUseViewController.swift */; };
 		FB5940532816AC8800037DFA /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5940522816AC8800037DFA /* Extensions.swift */; };
 		FB5940552816AEF400037DFA /* CustomClasses.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5940542816AEF400037DFA /* CustomClasses.swift */; };
+		FB5947492823D8DD00C74E73 /* ImportMnemonicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5947482823D8DD00C74E73 /* ImportMnemonicViewController.swift */; };
+		FB59474C2823FCAF00C74E73 /* ImportMnemonicCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB59474A2823FCAD00C74E73 /* ImportMnemonicCollectionViewCell.swift */; };
+		FB59474D2823FCAF00C74E73 /* ImportMnemonicCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB59474B2823FCAF00C74E73 /* ImportMnemonicCollectionViewCell.xib */; };
 		FB6A2A3128226E36008DD449 /* AllertWalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB6A2A2F28226E36008DD449 /* AllertWalletViewController.swift */; };
 		FB6A2A342822995C008DD449 /* AlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB6A2A332822995C008DD449 /* AlertService.swift */; };
 		FB6A2A3628229A9C008DD449 /* Alert.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FB6A2A3528229A9C008DD449 /* Alert.storyboard */; };
@@ -92,6 +95,9 @@
 		FB59404B281694DD00037DFA /* TermsOfUseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfUseViewController.swift; sourceTree = "<group>"; };
 		FB5940522816AC8800037DFA /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		FB5940542816AEF400037DFA /* CustomClasses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomClasses.swift; sourceTree = "<group>"; };
+		FB5947482823D8DD00C74E73 /* ImportMnemonicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportMnemonicViewController.swift; sourceTree = "<group>"; };
+		FB59474A2823FCAD00C74E73 /* ImportMnemonicCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportMnemonicCollectionViewCell.swift; sourceTree = "<group>"; };
+		FB59474B2823FCAF00C74E73 /* ImportMnemonicCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImportMnemonicCollectionViewCell.xib; sourceTree = "<group>"; };
 		FB6A2A2F28226E36008DD449 /* AllertWalletViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllertWalletViewController.swift; sourceTree = "<group>"; };
 		FB6A2A332822995C008DD449 /* AlertService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertService.swift; sourceTree = "<group>"; };
 		FB6A2A3528229A9C008DD449 /* Alert.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Alert.storyboard; sourceTree = "<group>"; };
@@ -183,6 +189,7 @@
 				FB2F369328208286007576FE /* MainTabBarController.swift */,
 				FB3754AA28214F2000882338 /* MnemonicViewController.swift */,
 				FB3754B12821BE8F00882338 /* VerifyMnemonicViewController.swift */,
+				FB5947482823D8DD00C74E73 /* ImportMnemonicViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -192,6 +199,8 @@
 			children = (
 				FB3754AD2821511900882338 /* MnemonicCollectionViewCell.swift */,
 				FB3754AE2821511900882338 /* MnemonicCollectionViewCell.xib */,
+				FB59474A2823FCAD00C74E73 /* ImportMnemonicCollectionViewCell.swift */,
+				FB59474B2823FCAF00C74E73 /* ImportMnemonicCollectionViewCell.xib */,
 			);
 			path = CustomCollectionCells;
 			sourceTree = "<group>";
@@ -403,6 +412,7 @@
 				FBFE57A2281B2EDD0016E74A /* LanguageTableViewCell.xib in Resources */,
 				FB6A2A3628229A9C008DD449 /* Alert.storyboard in Resources */,
 				FBFE577C281AB9250016E74A /* ThemesTableViewCell.xib in Resources */,
+				FB59474D2823FCAF00C74E73 /* ImportMnemonicCollectionViewCell.xib in Resources */,
 				FB59403C2816856700037DFA /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -420,6 +430,7 @@
 				FBFE579E281B28880016E74A /* LanguageViewController.swift in Sources */,
 				FB3754AB28214F2000882338 /* MnemonicViewController.swift in Sources */,
 				FBFE578A281AC2B70016E74A /* SupportTableViewCell.swift in Sources */,
+				FB59474C2823FCAF00C74E73 /* ImportMnemonicCollectionViewCell.swift in Sources */,
 				FB3754B22821BE8F00882338 /* VerifyMnemonicViewController.swift in Sources */,
 				FBFE57A4281B4AFE0016E74A /* InfoViewController.swift in Sources */,
 				FB0FCA702819629D00BB0527 /* Models.swift in Sources */,
@@ -439,6 +450,7 @@
 				FB0FCA6D2819600400BB0527 /* SelectSystemTableViewCell.swift in Sources */,
 				FBFE578F281AC4050016E74A /* PushAndAllSettingsTableViewCell.swift in Sources */,
 				FB2F369028206ACB007576FE /* NewWalletViewController.swift in Sources */,
+				FB5947492823D8DD00C74E73 /* ImportMnemonicViewController.swift in Sources */,
 				FB0883DC281BE21F001D4317 /* CustomThumbView.swift in Sources */,
 				FB2F369228207BC0007576FE /* CreatingViewController.swift in Sources */,
 				FBFE5795281AF4F90016E74A /* AllSettingsViewController.swift in Sources */,

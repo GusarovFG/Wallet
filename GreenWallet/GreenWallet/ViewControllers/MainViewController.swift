@@ -66,9 +66,9 @@ class MainViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        let qwe = self.walletsTableView.visibleCells.map{$0.frame.height}.reduce(0, +)
+        let height = self.walletsTableView.visibleCells.map{$0.frame.height}.reduce(0, +)
         
-        self.stackViewHeightConstraint.constant = self.headerView.frame.height + qwe + self.footerView.frame.height
+        self.stackViewHeightConstraint.constant = self.headerView.frame.height + height + self.footerView.frame.height
     }
     
     private func presentSelectSystemVC() {
