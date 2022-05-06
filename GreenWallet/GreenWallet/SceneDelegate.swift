@@ -29,7 +29,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         } else {
             self.window?.rootViewController = startVC
         }
-        
+        UserDefaultsManager.shared.userDefaults.set(false, forKey: UserDefaultsStringKeys.hideWalletsBalance.rawValue)
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

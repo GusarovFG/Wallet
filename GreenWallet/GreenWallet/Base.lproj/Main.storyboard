@@ -529,8 +529,8 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                                 <color key="textColor" red="0.2274509804" green="0.67450980390000004" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Потеря менмонической фразы может повлечь за собой активов" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1AU-wh-zeW">
-                                <rect key="frame" x="67" y="162" width="280" height="43"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Потеря мнемонической фразы может повлечь за собой потерю активов" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1AU-wh-zeW">
+                                <rect key="frame" x="30" y="162" width="354" height="43"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="43" id="TxS-wg-KPD"/>
                                 </constraints>
@@ -638,7 +638,7 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                                     <action selector="checkBoxPressed:" destination="ruV-4q-VUH" eventType="touchUpInside" id="LSA-Xf-tOB"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Я подтверждаю что сохранил мнемоническую фразу" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BLU-dJ-RTc">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Я подтверждаю, что сохранил мнемоническую фразу" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BLU-dJ-RTc">
                                 <rect key="frame" x="42" y="678" width="357" height="48"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <nil key="textColor"/>
@@ -681,9 +681,9 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                             <constraint firstItem="1Vh-Tj-bcQ" firstAttribute="top" secondItem="qVR-Qo-gZa" secondAttribute="bottom" constant="25" id="lUa-oz-RWS"/>
                             <constraint firstItem="176-Es-Hbj" firstAttribute="leading" secondItem="39w-rU-upT" secondAttribute="leading" constant="15" id="rRZ-SV-Lna"/>
                             <constraint firstItem="jv2-Pf-DJj" firstAttribute="top" secondItem="39w-rU-upT" secondAttribute="top" id="rVh-QS-kpa"/>
-                            <constraint firstItem="39w-rU-upT" firstAttribute="trailing" secondItem="1AU-wh-zeW" secondAttribute="trailing" constant="67" id="sLl-SV-ISx"/>
+                            <constraint firstItem="39w-rU-upT" firstAttribute="trailing" secondItem="1AU-wh-zeW" secondAttribute="trailing" constant="30" id="sLl-SV-ISx"/>
                             <constraint firstItem="BLU-dJ-RTc" firstAttribute="leading" secondItem="1Vh-Tj-bcQ" secondAttribute="trailing" constant="7" id="uAe-WO-nte"/>
-                            <constraint firstItem="1AU-wh-zeW" firstAttribute="leading" secondItem="39w-rU-upT" secondAttribute="leading" constant="67" id="wA3-ep-MDm"/>
+                            <constraint firstItem="1AU-wh-zeW" firstAttribute="leading" secondItem="39w-rU-upT" secondAttribute="leading" constant="30" id="wA3-ep-MDm"/>
                             <constraint firstItem="JhJ-Jd-9Xg" firstAttribute="top" secondItem="1AU-wh-zeW" secondAttribute="bottom" constant="29" id="wNs-bd-Nq8"/>
                             <constraint firstItem="qVR-Qo-gZa" firstAttribute="top" secondItem="JhJ-Jd-9Xg" secondAttribute="bottom" constant="19" id="wt6-L7-zbY"/>
                             <constraint firstItem="39w-rU-upT" firstAttribute="trailing" secondItem="176-Es-Hbj" secondAttribute="trailing" constant="15" id="yFQ-Qc-ZRK"/>
@@ -706,7 +706,7 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
         <!--Main View Controller-->
         <scene sceneID="rD9-JV-rzT">
             <objects>
-                <viewController storyboardIdentifier="MainViewController" modalPresentationStyle="fullScreen" id="6t9-aC-OYq" customClass="MainViewController" customModule="GreenWallet" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController restorationIdentifier="MainViewController" storyboardIdentifier="MainViewController" modalPresentationStyle="fullScreen" id="6t9-aC-OYq" customClass="MainViewController" customModule="GreenWallet" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cKo-uq-5Xq">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1508,7 +1508,7 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                                 <color key="textColor" red="0.2274509804" green="0.67450980390000004" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Подтвердите фразу для востановления" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Xh-4b-AIu">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Подтвердите фразу для воcстановления" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Xh-4b-AIu">
                                 <rect key="frame" x="67" y="151" width="280" height="43"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="43" id="x92-vn-9iX"/>
@@ -1577,7 +1577,7 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                                     <outlet property="delegate" destination="d4Y-us-RBk" id="NAB-4w-Un2"/>
                                 </connections>
                             </collectionView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Пожалуйста заполните следующие слова, словами из списка ниже" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zC3-Wm-DlC">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Пожалуйста, заполните следующие ячейки словами из списка ниже" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zC3-Wm-DlC">
                                 <rect key="frame" x="50" y="577" width="314" height="39"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="39" id="ibb-DR-EzE"/>
@@ -1601,7 +1601,7 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                                             <action selector="clouseErrorLabel:" destination="d4Y-us-RBk" eventType="touchUpInside" id="H4D-5o-3tZ"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Выделенны неправильные фразы, попробуйте еще раз" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="swx-qk-5Ra">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Выделены неправильные фразы, попробуйте еще раз" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="swx-qk-5Ra">
                                         <rect key="frame" x="40" y="14" width="325" height="36"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>

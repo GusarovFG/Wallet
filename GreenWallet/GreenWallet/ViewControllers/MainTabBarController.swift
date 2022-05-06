@@ -12,25 +12,32 @@ class MainTabBarController: UITabBarController, UINavigationBarDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         addTabs()
-        // Do any additional setup after loading the view.
+        self.tabBar.tintColor = #colorLiteral(red: 0.2274509804, green: 0.6745098039, blue: 0.3490196078, alpha: 1)
     }
     
     private func addTabs() {
         let mainVC = storyboard?.instantiateViewController(withIdentifier: "navi") as! UINavigationController
         mainVC.tabBarItem = UITabBarItem(title: "Кошелек", image: UIImage(named: "wallet")!, selectedImage: UIImage(named: "wallet")!)
         
-        let selectSystemVC = UIViewController()
-        selectSystemVC.tabBarItem = UITabBarItem(title: "Получить", image: UIImage(named: "wallet")!, selectedImage: UIImage(named: "wallet")!)
+        let secondMainVC = storyboard?.instantiateViewController(withIdentifier: "navi") as! UINavigationController
+        secondMainVC.tabBarItem = UITabBarItem(title: "Получить", image: UIImage(named: "get")!, selectedImage: UIImage(named: "get")!)
 
-        self.setViewControllers([mainVC, selectSystemVC], animated: true)
+        self.setViewControllers([mainVC, secondMainVC], animated: true)
         self.navigationController?.navigationBar.delegate = self
     }
     
     override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
         if tabBar.selectedItem?.title == "Получить" {
-            let selectSystemVC = storyboard?.instantiateViewController(withIdentifier: "SelectSystemViewController") as! SelectSystemViewController
-            selectSystemVC.modalPresentationStyle = .pageSheet
-            self.present(selectSystemVC, animated: true, completion: nil)
+            let detailViewController = storyboard?.instantiateViewController(withIdentifier: "SelectSystemViewController") as! SelectSystemViewController
+            let nav = UINavigationController(rootViewController: detailViewController)
+            
+            nav.modalPresentationStyle = .pageSheet
+            
+            if let sheet = nav.sheetPresentationController {
+                sheet.detents = [.medium()]
+            }
+            
+            self.present(nav, animated: true, completion: nil)
         }
     }
     
