@@ -14,6 +14,7 @@ class VerifyMnemonicViewController: UIViewController {
     private var verifyedMnemonicPhrase: [String] = []
     private var selectPhrase: [String] = []
     private var selectIndex = 0
+    private var errorVarify = false
     private let alert = AlertService()
     
     @IBOutlet weak var veryfyCollectionView: UICollectionView!
@@ -61,8 +62,10 @@ class VerifyMnemonicViewController: UIViewController {
             self.errorLabel.isHidden = false
             UIView.animate(withDuration: 1) {
                 self.errorLabel.alpha = 1
+                self.errorVarify = true
                 self.veryfyCollectionView.visibleCells.forEach({$0.layer.borderColor = #colorLiteral(red: 1, green: 0.2360929251, blue: 0.1714096665, alpha: 0.8980392157) })
                 self.veryfyCollectionView.visibleCells.forEach({$0.backgroundColor = .systemBackground })
+                self.veryfyCollectionView.reloadData()
 
             }
             DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
@@ -80,6 +83,7 @@ class VerifyMnemonicViewController: UIViewController {
                             self.verifyedMnemonicPhrase.append("")
                             self.selectPhrase.append(self.mnemonicPhrase[i])
                             self.selectPhrase.shuffle()
+                            self.errorVarify = false
                             self.veryfyCollectionView.reloadData()
                             self.selectCollectionView.reloadData()
                         }
@@ -119,6 +123,12 @@ extension VerifyMnemonicViewController: UICollectionViewDelegate, UICollectionVi
         switch collectionView {
         case self.veryfyCollectionView:
             cell.mnemonicWord.text = "\(self.indexes[indexPath.row]). \(self.verifyedMnemonicPhrase[indexPath.row])"
+            if self.errorVarify {
+                cell.mnemonicWord.textColor = #colorLiteral(red: 1, green: 0.2360929251, blue: 0.1714096665, alpha: 0.8980392157)
+                
+            } else {
+                cell.mnemonicWord.textColor = .white
+            }
             if indexPath > [0,5] && cell.mnemonicWord.text != "\(self.indexes[indexPath.row]). " {
                 cell.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
                 cell.mnemonicWord.tintColor = .white
