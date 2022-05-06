@@ -10,6 +10,8 @@ import UIKit
 class ImportMnemonicCollectionViewCell: UICollectionViewCell {
 
     var appendInPhrase: (() -> ())?
+    var endEditing: (() -> ())?
+    var tap: (() -> ())?
     
     @IBOutlet weak var cellTextLabel: UITextField!
     
@@ -23,4 +25,13 @@ class ImportMnemonicCollectionViewCell: UICollectionViewCell {
     @IBAction func didEditingChangedTextField(_ sender: UITextField) {
         self.appendInPhrase?()
     }
+    
+    @IBAction func endEditingForTextView(_ sender: Any) {
+        self.endEditing?()
+    }
+    
+    @IBAction func tap(_ sender: Any) {
+        self.tap?()
+    }
+    
 }

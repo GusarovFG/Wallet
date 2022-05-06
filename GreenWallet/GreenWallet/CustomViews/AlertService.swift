@@ -10,11 +10,12 @@ import UIKit
 class AlertService {
     
     
-    func alert() -> AllertWalletViewController {
+    func alert(title: String, discription: String) -> AllertWalletViewController {
         
         let storyboard = UIStoryboard(name: "Alert", bundle: .main)
         
         let alertVC = storyboard.instantiateViewController(withIdentifier: "AllertWalletViewController") as! AllertWalletViewController
+        alertVC.setupUI(label: title, discription: discription)
         
         return alertVC
         

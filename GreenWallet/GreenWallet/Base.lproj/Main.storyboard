@@ -1751,6 +1751,7 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                                             </view>
                                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Pci-fm-uhj">
                                                 <rect key="frame" x="29" y="249.5" width="356" height="51"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="V5p-ia-f3d"/>
                                                 </constraints>
@@ -1758,6 +1759,7 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                                                     <segment title="12 слов"/>
                                                     <segment title="24 слова"/>
                                                 </segments>
+                                                <color key="selectedSegmentTintColor" systemColor="systemBackgroundColor"/>
                                                 <connections>
                                                     <action selector="segmentedControlIsChanged:" destination="Ljn-W9-MGr" eventType="valueChanged" id="Qnj-PP-wbN"/>
                                                 </connections>
@@ -1896,8 +1898,8 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                                                     </label>
                                                 </subviews>
                                             </stackView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Слова должны отличаться друг от друга" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eZp-ZY-CAc">
-                                                <rect key="frame" x="15" y="705.5" width="335" height="19.5"/>
+                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Слова должны отличаться друг от друга" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eZp-ZY-CAc">
+                                                <rect key="frame" x="15" y="705.5" width="313.5" height="19.5"/>
                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                                 <color key="textColor" red="1" green="0.13333333333333333" blue="0.13333333333333333" alpha="0.89803921568627454" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -1925,13 +1927,16 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                                                         <integer key="value" value="30"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="continueButtonPressed:" destination="Ljn-W9-MGr" eventType="touchUpInside" id="9ce-mo-e1u"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstItem="GLG-Bw-OL1" firstAttribute="top" secondItem="a17-ZD-paY" secondAttribute="bottom" constant="21" id="3uf-yh-7C9"/>
                                             <constraint firstItem="a17-ZD-paY" firstAttribute="leading" secondItem="pEn-3w-P8K" secondAttribute="leading" id="4Gu-X2-5Mk"/>
-                                            <constraint firstAttribute="trailing" secondItem="eZp-ZY-CAc" secondAttribute="trailing" constant="64" id="55J-iD-VNf"/>
+                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="eZp-ZY-CAc" secondAttribute="trailing" constant="20" symbolic="YES" id="55J-iD-VNf"/>
                                             <constraint firstItem="a17-ZD-paY" firstAttribute="top" secondItem="pEn-3w-P8K" secondAttribute="top" id="65F-yT-Jyy"/>
                                             <constraint firstItem="9O9-Fi-PYD" firstAttribute="top" secondItem="hAH-V3-p1h" secondAttribute="bottom" constant="15" id="7p3-fP-PD5"/>
                                             <constraint firstAttribute="trailing" secondItem="Pci-fm-uhj" secondAttribute="trailing" constant="29" id="BUw-zl-bjU"/>
@@ -1979,6 +1984,8 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                     </view>
                     <size key="freeformSize" width="414" height="1240"/>
                     <connections>
+                        <outlet property="alertLabel" destination="RPX-zz-Uyh" id="htY-6s-TTa"/>
+                        <outlet property="alertView" destination="tN3-Zu-aLm" id="bkT-99-b8N"/>
                         <outlet property="bottomConstraint" destination="1r7-ll-hzs" id="ZAK-d1-pKg"/>
                         <outlet property="checkBoxButton" destination="0pw-Jr-w0k" id="68H-r0-42E"/>
                         <outlet property="collectionView" destination="hAH-V3-p1h" id="qTs-GN-b4i"/>

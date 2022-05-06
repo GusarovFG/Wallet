@@ -24,6 +24,8 @@
                         <textInputTraits key="textInputTraits"/>
                         <connections>
                             <action selector="didEditingChangedTextField:" destination="act-Sm-MZa" eventType="editingChanged" id="kL4-xg-aBz"/>
+                            <action selector="endEditingForTextView:" destination="act-Sm-MZa" eventType="editingDidEnd" id="O63-LZ-Rqu"/>
+                            <action selector="tap:" destination="act-Sm-MZa" eventType="touchDown" id="VGq-kJ-eSZ"/>
                         </connections>
                     </textField>
                 </subviews>

@@ -11,6 +11,7 @@ class ImportMnemonicViewController: UIViewController {
     
     private var mnemonicPhrase: [String] = []
     private var countOfItems = 12
+    private var checkBoxPress = false
     
     
     @IBOutlet weak var continueButton: UIButton!
@@ -21,6 +22,8 @@ class ImportMnemonicViewController: UIViewController {
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var termsLabel: UILabel!
+    @IBOutlet weak var alertView: UIView!
+    @IBOutlet weak var alertLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,8 +39,8 @@ class ImportMnemonicViewController: UIViewController {
         self.scrollView.isScrollEnabled = false
         self.continueButton.backgroundColor = #colorLiteral(red: 0.6106664538, green: 0.6106664538, blue: 0.6106664538, alpha: 1)
         self.continueButton.isEnabled = false
-        self.errorLabel.isHidden = true
-        
+        self.segmentedControl.setTitleTextAttributes([.foregroundColor: #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1), .font: UIFont(name: "Helvetica-Bold", size: 18.0) ], for: .selected)
+        self.segmentedControl.setTitleTextAttributes([.foregroundColor: #colorLiteral(red: 0.2784313725, green: 0.2784313725, blue: 0.2784313725, alpha: 1) ], for: .normal)
         self.termsLabel.addRangeGesture(stringRange: "условиями пользования") {
             let url = URL(string: "https://devushka.ru/upload/posts/a1797083197722a6b1ab8e2f4beb2b08.jpg")
             if UIApplication.shared.canOpenURL(url!) {
@@ -66,44 +69,28 @@ class ImportMnemonicViewController: UIViewController {
             
             for _ in 0...5 {
                 self.mnemonicPhrase.removeLast()
-                print(self.mnemonicPhrase)
-
             }
             for _ in 0...5 {
                 self.mnemonicPhrase.remove(at: 6)
-                print(self.mnemonicPhrase)
-
             }
-            
-            
+
             self.scrollView.isScrollEnabled = false
             self.scrollView.setContentOffset(.zero, animated: true)
             self.collectionView.reloadData()
             self.bottomConstraint.constant = self.bottomConstraint.constant - (50 * 6)
-            
-//            print(self.mnemonicPhrase)
-//            print(self.mnemonicPhrase.count)
         } else {
             self.countOfItems = 24
             
             for _ in 0...5 {
                 self.mnemonicPhrase.insert("", at: 6)
-                print(self.mnemonicPhrase)
             }
             for _ in 0...5 {
                 self.mnemonicPhrase.insert("", at: 18)
-                print(self.mnemonicPhrase)
-
             }
-            
-            
+ 
             self.scrollView.isScrollEnabled = true
             self.collectionView.reloadData()
             self.bottomConstraint.constant = self.bottomConstraint.constant + (50 * 6)
-
-//            print(self.mnemonicPhrase)
-//            print(self.mnemonicPhrase.count)
-            
         }
     }
     
@@ -114,12 +101,20 @@ class ImportMnemonicViewController: UIViewController {
             sender.backgroundColor = .white
             sender.imageView?.layer.cornerRadius = 5
             
-            self.continueButton.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
-            self.continueButton.isEnabled = true
+            self.checkBoxPress = true
+            self.collectionView.reloadData()
+            
+            if self.mnemonicPhrase.filter({$0 == ""}).count == 0 {
+                self.continueButton.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
+                self.continueButton.isEnabled = true
+            }
+            
         } else {
             sender.setImage(UIImage(systemName: "squareshape.fill"), for: .normal)
             sender.imageView?.layer.cornerRadius = 5
             sender.tintColor = .white
+            
+            self.checkBoxPress = false
             
             self.continueButton.backgroundColor = #colorLiteral(red: 0.6106664538, green: 0.6106664538, blue: 0.6106664538, alpha: 1)
             self.continueButton.isEnabled = false
@@ -128,6 +123,32 @@ class ImportMnemonicViewController: UIViewController {
     
     @IBAction func backButtonPressed(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    
+    @IBAction func continueButtonPressed(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "spinner", bundle: .main)
+        let spinnerVC = storyboard.instantiateViewController(withIdentifier: "spinner") as! SprinnerViewController
+        
+        self.present(spinnerVC, animated: true, completion: nil)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3.5) {
+            self.alertView.backgroundColor = #colorLiteral(red: 1, green: 0.2360929251, blue: 0.1714096665, alpha: 1)
+            self.alertLabel.text = "Проверьте правильность введенной комбинации слов"
+            self.collectionView.visibleCells.forEach { cell in
+                cell.layer.borderColor = #colorLiteral(red: 1, green: 0.2360929251, blue: 0.1714096665, alpha: 0.8980392157)
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                
+                let storyboard = UIStoryboard(name: "Alert", bundle: .main)
+                let spinnerVC = storyboard.instantiateViewController(withIdentifier: "AllertImportViewController") as! AllertWalletViewController
+                
+                
+                
+                self.present(spinnerVC, animated: true, completion: nil)
+                
+            }
+        }
     }
 }
 
@@ -142,38 +163,82 @@ extension ImportMnemonicViewController: UICollectionViewDelegate, UICollectionVi
         if mnemonicWord == "" {
             cell.cellTextLabel.placeholder = "\(indexPath.row + 1)."
             cell.cellTextLabel.text = mnemonicWord
+            cell.layer.borderColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
         } else {
             cell.cellTextLabel.text = mnemonicWord
+            
         }
         
         let dicimalCharacters = CharacterSet.decimalDigits
-        let dicimalRange = cell.cellTextLabel.text?.rangeOfCharacter(from: dicimalCharacters
-        )
+        let dicimalRange = cell.cellTextLabel.text?.rangeOfCharacter(from: dicimalCharacters)
+        
         if dicimalRange != nil {
             cell.layer.borderColor = #colorLiteral(red: 1, green: 0.2360929251, blue: 0.1714096665, alpha: 0.8980392157)
         } else {
             cell.layer.borderColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
         }
         
+        if cell.cellTextLabel.text == "" && self.checkBoxPress {
+            cell.layer.borderColor = #colorLiteral(red: 1, green: 0.2360929251, blue: 0.1714096665, alpha: 0.8980392157)
+        } else {
+            cell.layer.borderColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
+        }
+        
+        if self.mnemonicPhrase.count == 24 && self.mnemonicPhrase.filter({$0 == ""}).count == 12 {
+            if indexPath >= [0,6], indexPath <= [0,11] {
+                cell.layer.borderColor = #colorLiteral(red: 1, green: 0.2360929251, blue: 0.1714096665, alpha: 0.8980392157)
+            } else if indexPath >= [0,18], indexPath <= [0,23] {
+                cell.layer.borderColor = #colorLiteral(red: 1, green: 0.2360929251, blue: 0.1714096665, alpha: 0.8980392157)
+            }
+        }
+        
+//        for i in 0..<self.mnemonicPhrase.count  {
+//            if self.mnemonicPhrase[i] == cell.cellTextLabel.text, self.mnemonicPhrase[i] != ""   {
+////                cell.layer.borderColor = #colorLiteral(red: 1, green: 0.2360929251, blue: 0.1714096665, alpha: 0.8980392157)
+//                self.collectionView.cellForItem(at: [0,i])?.layer.borderColor = #colorLiteral(red: 1, green: 0.2360929251, blue: 0.1714096665, alpha: 0.8980392157)
+//            }
+//        }
+
         cell.appendInPhrase = { [unowned self] in
+            
             if cell.cellTextLabel.text != "" {
-                self.mnemonicPhrase.remove(at: indexPath.row)
-                
+                self.errorLabel.isHidden = true
+                                
                 let dicimalCharacters = CharacterSet.decimalDigits
-                let dicimalRange = cell.cellTextLabel.text?.rangeOfCharacter(from: dicimalCharacters
-                )
+                let dicimalRange = cell.cellTextLabel.text?.rangeOfCharacter(from: dicimalCharacters)
                 
                 if dicimalRange != nil {
                     cell.layer.borderColor = #colorLiteral(red: 1, green: 0.2360929251, blue: 0.1714096665, alpha: 0.8980392157)
                 } else {
                     cell.layer.borderColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
                 }
+                
+                for i in 0..<self.mnemonicPhrase.count  {
+                    if self.mnemonicPhrase[i] == cell.cellTextLabel.text   {
+                        cell.layer.borderColor = #colorLiteral(red: 1, green: 0.2360929251, blue: 0.1714096665, alpha: 0.8980392157)
+                        self.collectionView.cellForItem(at: [0,i])?.layer.borderColor = #colorLiteral(red: 1, green: 0.2360929251, blue: 0.1714096665, alpha: 0.8980392157)
+                        print(self.mnemonicPhrase)
+                        self.errorLabel.isHidden = false
+                    }
+                }
+                
+                self.mnemonicPhrase.remove(at: indexPath.row)
                 self.mnemonicPhrase.insert(cell.cellTextLabel.text ?? "", at: indexPath.row)
+            } else {
+                self.mnemonicPhrase.remove(at: indexPath.row)
+                self.mnemonicPhrase.insert("", at: indexPath.row)
+                cell.cellTextLabel.placeholder = "\(indexPath.row + 1)."
+                cell.layer.borderColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
             }
         }
+        
+        cell.endEditing = { [unowned self] in
+            self.errorLabel.isHidden = true
+        }
+
         return cell
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         CGSize(width: 178, height: 45)
     }

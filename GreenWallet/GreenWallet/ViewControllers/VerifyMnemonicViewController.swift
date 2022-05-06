@@ -53,7 +53,7 @@ class VerifyMnemonicViewController: UIViewController {
 
     @IBAction func mainButtonPressed(_ sender: Any) {
         if self.verifyedMnemonicPhrase == self.mnemonicPhrase {
-            let alertVC = self.alert.alert()
+            let alertVC = self.alert.alert(title: "Поздравляем", discription: "Вы успешно защитили свой кошелек. Пожалуйста убедитесь, что ваши секретные фразы в безопасности")
             self.present(alertVC, animated: true, completion: nil)
         } else {
             self.errorLabel.isHidden = false

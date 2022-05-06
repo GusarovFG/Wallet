@@ -92,6 +92,94 @@
             </objects>
             <point key="canvasLocation" x="314.49275362318843" y="-135.26785714285714"/>
         </scene>
+        <!--Allert Wallet View Controller-->
+        <scene sceneID="wjM-4H-yoU">
+            <objects>
+                <viewController storyboardIdentifier="AllertImportViewController" modalTransitionStyle="crossDissolve" modalPresentationStyle="overFullScreen" id="F5p-em-wEv" customClass="AllertWalletViewController" customModule="GreenWallet" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="TZy-fc-52a">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hsN-v4-IDj">
+                                <rect key="frame" x="35" y="212" width="344" height="457"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="seccessWalletImage" translatesAutoresizingMaskIntoConstraints="NO" id="GQt-IW-zZb">
+                                        <rect key="frame" x="62" y="15" width="220" height="198"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Импортировано" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="esf-Mp-XPo">
+                                        <rect key="frame" x="16" y="228" width="312" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="25"/>
+                                        <color key="textColor" red="0.2274509804" green="0.67450980390000004" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="axW-Y5-51D">
+                                        <rect key="frame" x="68" y="376.5" width="208" height="48.5"/>
+                                        <color key="backgroundColor" red="0.2274509804" green="0.67450980390000004" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="48.5" id="sRC-n6-qgq"/>
+                                        </constraints>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Готово"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <integer key="value" value="20"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="mainButtonPressed:" destination="F5p-em-wEv" eventType="touchUpInside" id="H1B-NI-gVE"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Мнемоническая фраза успешно импротированна" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kcx-8q-az6">
+                                        <rect key="frame" x="26" y="266" width="293" height="81.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.58039215690000001" green="0.58039215690000001" blue="0.58039215690000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.18823529410000001" green="0.18823529410000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" red="0.18823529410000001" green="0.18823529410000001" blue="0.18823529410000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="GQt-IW-zZb" firstAttribute="top" secondItem="hsN-v4-IDj" secondAttribute="top" constant="15" id="JN6-hp-Ezl"/>
+                                    <constraint firstItem="axW-Y5-51D" firstAttribute="top" secondItem="kcx-8q-az6" secondAttribute="bottom" constant="29" id="KAQ-vK-Y6Y"/>
+                                    <constraint firstAttribute="trailing" secondItem="GQt-IW-zZb" secondAttribute="trailing" constant="62" id="MVt-Og-kOr"/>
+                                    <constraint firstItem="kcx-8q-az6" firstAttribute="leading" secondItem="hsN-v4-IDj" secondAttribute="leading" constant="26" id="MZu-Oh-Dew"/>
+                                    <constraint firstAttribute="trailing" secondItem="axW-Y5-51D" secondAttribute="trailing" constant="68" id="ND3-Av-1Qj"/>
+                                    <constraint firstItem="esf-Mp-XPo" firstAttribute="leading" secondItem="hsN-v4-IDj" secondAttribute="leading" constant="16" id="OmH-xl-vem"/>
+                                    <constraint firstItem="esf-Mp-XPo" firstAttribute="top" secondItem="GQt-IW-zZb" secondAttribute="bottom" constant="15" id="Q4R-Pq-4uL"/>
+                                    <constraint firstItem="GQt-IW-zZb" firstAttribute="leading" secondItem="hsN-v4-IDj" secondAttribute="leading" constant="62" id="WA3-rP-PC1"/>
+                                    <constraint firstAttribute="bottom" secondItem="axW-Y5-51D" secondAttribute="bottom" constant="32" id="Yzu-0s-5Nh"/>
+                                    <constraint firstItem="kcx-8q-az6" firstAttribute="top" secondItem="esf-Mp-XPo" secondAttribute="bottom" constant="8" symbolic="YES" id="bxG-Yj-vKg"/>
+                                    <constraint firstAttribute="trailing" secondItem="esf-Mp-XPo" secondAttribute="trailing" constant="16" id="cdA-et-wQx"/>
+                                    <constraint firstAttribute="trailing" secondItem="kcx-8q-az6" secondAttribute="trailing" constant="25" id="dnA-ns-Un0"/>
+                                    <constraint firstItem="axW-Y5-51D" firstAttribute="leading" secondItem="hsN-v4-IDj" secondAttribute="leading" constant="68" id="omd-Oc-wjr"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <integer key="value" value="15"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="g5r-wN-UoF"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.34999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="hsN-v4-IDj" firstAttribute="top" secondItem="g5r-wN-UoF" secondAttribute="top" constant="168" id="9WH-vy-i4q"/>
+                            <constraint firstItem="g5r-wN-UoF" firstAttribute="bottom" secondItem="hsN-v4-IDj" secondAttribute="bottom" constant="193" id="HU7-Qv-wEF"/>
+                            <constraint firstItem="hsN-v4-IDj" firstAttribute="centerX" secondItem="TZy-fc-52a" secondAttribute="centerX" id="wSz-ON-j91"/>
+                            <constraint firstItem="hsN-v4-IDj" firstAttribute="leading" secondItem="g5r-wN-UoF" secondAttribute="leading" constant="35" id="xmf-Wo-yTy"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="descriptionLabel" destination="kcx-8q-az6" id="tCn-9g-9EK"/>
+                        <outlet property="mainButton" destination="axW-Y5-51D" id="IEl-SY-rJU"/>
+                        <outlet property="mainLabel" destination="esf-Mp-XPo" id="JAU-QJ-L0O"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8EL-fg-ssC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="999" y="-135"/>
+        </scene>
     </scenes>
     <resources>
         <image name="seccessWalletImage" width="222" height="198"/>
