@@ -1725,7 +1725,7 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Убедитесь, что в ваш экран никто не смотрит" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RPX-zz-Uyh">
-                                                        <rect key="frame" x="35" y="13" width="329" height="28"/>
+                                                        <rect key="frame" x="35" y="5" width="329" height="44"/>
                                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1734,12 +1734,12 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                                                 </subviews>
                                                 <color key="backgroundColor" red="0.2274509804" green="0.67450980390000004" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="bottom" secondItem="RPX-zz-Uyh" secondAttribute="bottom" constant="13" id="2LV-EM-JsD"/>
+                                                    <constraint firstAttribute="bottom" secondItem="RPX-zz-Uyh" secondAttribute="bottom" constant="5" id="2LV-EM-JsD"/>
                                                     <constraint firstAttribute="bottom" secondItem="Hge-Jh-2Kf" secondAttribute="bottom" constant="15" id="Agq-zJ-M4y"/>
                                                     <constraint firstAttribute="trailing" secondItem="RPX-zz-Uyh" secondAttribute="trailing" constant="20" id="TFx-Jy-pG1"/>
                                                     <constraint firstItem="Hge-Jh-2Kf" firstAttribute="leading" secondItem="tN3-Zu-aLm" secondAttribute="leading" constant="20" id="Wj2-tT-YUi"/>
                                                     <constraint firstItem="RPX-zz-Uyh" firstAttribute="leading" secondItem="Hge-Jh-2Kf" secondAttribute="trailing" constant="7" id="ZoY-I2-yoZ"/>
-                                                    <constraint firstItem="RPX-zz-Uyh" firstAttribute="top" secondItem="tN3-Zu-aLm" secondAttribute="top" constant="13" id="dYx-ny-JJJ"/>
+                                                    <constraint firstItem="RPX-zz-Uyh" firstAttribute="top" secondItem="tN3-Zu-aLm" secondAttribute="top" constant="5" id="dYx-ny-JJJ"/>
                                                     <constraint firstAttribute="height" constant="54" id="oHu-7u-i3g"/>
                                                     <constraint firstItem="Hge-Jh-2Kf" firstAttribute="top" secondItem="tN3-Zu-aLm" secondAttribute="top" constant="15" id="pE7-dA-okm"/>
                                                 </constraints>

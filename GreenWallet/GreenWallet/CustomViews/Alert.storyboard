@@ -130,7 +130,7 @@
                                             <action selector="mainButtonPressed:" destination="F5p-em-wEv" eventType="touchUpInside" id="H1B-NI-gVE"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Мнемоническая фраза успешно импротированна" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kcx-8q-az6">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Мнемоническая фраза успешно импротирована" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kcx-8q-az6">
                                         <rect key="frame" x="26" y="266" width="293" height="81.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.58039215690000001" green="0.58039215690000001" blue="0.58039215690000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

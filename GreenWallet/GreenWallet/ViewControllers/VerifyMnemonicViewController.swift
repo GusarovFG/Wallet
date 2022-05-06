@@ -53,13 +53,41 @@ class VerifyMnemonicViewController: UIViewController {
 
     @IBAction func mainButtonPressed(_ sender: Any) {
         if self.verifyedMnemonicPhrase == self.mnemonicPhrase {
-            let alertVC = self.alert.alert(title: "Поздравляем", discription: "Вы успешно защитили свой кошелек. Пожалуйста убедитесь, что ваши секретные фразы в безопасности")
-            self.present(alertVC, animated: true, completion: nil)
+            let storyboard = UIStoryboard(name: "Alert", bundle: .main)
+            let spinnerVC = storyboard.instantiateViewController(withIdentifier: "AllertWalletViewController") as! AllertWalletViewController
+            
+            self.present(spinnerVC, animated: true, completion: nil)
         } else {
             self.errorLabel.isHidden = false
             UIView.animate(withDuration: 1) {
                 self.errorLabel.alpha = 1
+                self.veryfyCollectionView.visibleCells.forEach({$0.layer.borderColor = #colorLiteral(red: 1, green: 0.2360929251, blue: 0.1714096665, alpha: 0.8980392157) })
+                self.veryfyCollectionView.visibleCells.forEach({$0.backgroundColor = .systemBackground })
+
             }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
+                UIView.animate(withDuration: 1) {
+                    self.errorLabel.alpha = 0
+                    self.veryfyCollectionView.visibleCells.forEach({$0.layer.borderColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1) })
+                    
+                    self.verifyedMnemonicPhrase.removeAll()
+                    self.selectPhrase.removeAll()
+                    for i in 0..<self.mnemonicPhrase.count {
+                        if i < 6 {
+                            self.verifyedMnemonicPhrase.append(self.mnemonicPhrase[i])
+                        } else {
+                            
+                            self.verifyedMnemonicPhrase.append("")
+                            self.selectPhrase.append(self.mnemonicPhrase[i])
+                            self.selectPhrase.shuffle()
+                            self.veryfyCollectionView.reloadData()
+                            self.selectCollectionView.reloadData()
+                        }
+                    }
+                    
+                }
+            }
+            
         }
     }
     
@@ -86,7 +114,7 @@ extension VerifyMnemonicViewController: UICollectionViewDelegate, UICollectionVi
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "mnemonicCell", for: indexPath) as! MnemonicCollectionViewCell
-        
+        cell.tag = indexPath.row
         
         switch collectionView {
         case self.veryfyCollectionView:

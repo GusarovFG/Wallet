@@ -35,7 +35,7 @@ class ImportMnemonicViewController: UIViewController {
         self.collectionView.register(UINib(nibName: "ImportMnemonicCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "ImportMnemonicCollectionViewCell")
         
         setuptermsLabel()
-        
+        registerFromKeyBoardNotifications()
         self.scrollView.isScrollEnabled = false
         self.continueButton.backgroundColor = #colorLiteral(red: 0.6106664538, green: 0.6106664538, blue: 0.6106664538, alpha: 1)
         self.continueButton.isEnabled = false
@@ -48,6 +48,29 @@ class ImportMnemonicViewController: UIViewController {
             }
         }
         
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        
+        self.view.endEditing(true)
+    }
+    
+    private func registerFromKeyBoardNotifications() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    @objc private func keyboardWillShow(notification: NSNotification) {
+        guard let userInfo = notification.userInfo else {return}
+        guard let keyboardSize = userInfo[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue else {return}
+        let keyboardFrame = keyboardSize.cgRectValue
+        
+        self.scrollView.contentOffset = CGPoint(x: 0, y: keyboardFrame.height - 100)
+    }
+    
+    @objc private func keyboardWillHide() {
+        self.scrollView.contentOffset = CGPoint.zero
     }
     
     private func setuptermsLabel() {
@@ -73,7 +96,7 @@ class ImportMnemonicViewController: UIViewController {
             for _ in 0...5 {
                 self.mnemonicPhrase.remove(at: 6)
             }
-
+            
             self.scrollView.isScrollEnabled = false
             self.scrollView.setContentOffset(.zero, animated: true)
             self.collectionView.reloadData()
@@ -87,7 +110,7 @@ class ImportMnemonicViewController: UIViewController {
             for _ in 0...5 {
                 self.mnemonicPhrase.insert("", at: 18)
             }
- 
+            
             self.scrollView.isScrollEnabled = true
             self.collectionView.reloadData()
             self.bottomConstraint.constant = self.bottomConstraint.constant + (50 * 6)
@@ -143,8 +166,6 @@ class ImportMnemonicViewController: UIViewController {
                 let storyboard = UIStoryboard(name: "Alert", bundle: .main)
                 let spinnerVC = storyboard.instantiateViewController(withIdentifier: "AllertImportViewController") as! AllertWalletViewController
                 
-                
-                
                 self.present(spinnerVC, animated: true, completion: nil)
                 
             }
@@ -159,6 +180,10 @@ extension ImportMnemonicViewController: UICollectionViewDelegate, UICollectionVi
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImportMnemonicCollectionViewCell", for: indexPath) as! ImportMnemonicCollectionViewCell
+        
+        cell.cellTextLabel.tag = indexPath.row
+        cell.cellTextLabel.delegate = self
+        
         let mnemonicWord = self.mnemonicPhrase[indexPath.row]
         if mnemonicWord == "" {
             cell.cellTextLabel.placeholder = "\(indexPath.row + 1)."
@@ -166,7 +191,6 @@ extension ImportMnemonicViewController: UICollectionViewDelegate, UICollectionVi
             cell.layer.borderColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
         } else {
             cell.cellTextLabel.text = mnemonicWord
-            
         }
         
         let dicimalCharacters = CharacterSet.decimalDigits
@@ -192,18 +216,11 @@ extension ImportMnemonicViewController: UICollectionViewDelegate, UICollectionVi
             }
         }
         
-//        for i in 0..<self.mnemonicPhrase.count  {
-//            if self.mnemonicPhrase[i] == cell.cellTextLabel.text, self.mnemonicPhrase[i] != ""   {
-////                cell.layer.borderColor = #colorLiteral(red: 1, green: 0.2360929251, blue: 0.1714096665, alpha: 0.8980392157)
-//                self.collectionView.cellForItem(at: [0,i])?.layer.borderColor = #colorLiteral(red: 1, green: 0.2360929251, blue: 0.1714096665, alpha: 0.8980392157)
-//            }
-//        }
-
         cell.appendInPhrase = { [unowned self] in
             
             if cell.cellTextLabel.text != "" {
                 self.errorLabel.isHidden = true
-                                
+                
                 let dicimalCharacters = CharacterSet.decimalDigits
                 let dicimalRange = cell.cellTextLabel.text?.rangeOfCharacter(from: dicimalCharacters)
                 
@@ -212,6 +229,8 @@ extension ImportMnemonicViewController: UICollectionViewDelegate, UICollectionVi
                 } else {
                     cell.layer.borderColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
                 }
+                
+
                 
                 for i in 0..<self.mnemonicPhrase.count  {
                     if self.mnemonicPhrase[i] == cell.cellTextLabel.text   {
@@ -222,6 +241,7 @@ extension ImportMnemonicViewController: UICollectionViewDelegate, UICollectionVi
                     }
                 }
                 
+
                 self.mnemonicPhrase.remove(at: indexPath.row)
                 self.mnemonicPhrase.insert(cell.cellTextLabel.text ?? "", at: indexPath.row)
             } else {
@@ -234,17 +254,39 @@ extension ImportMnemonicViewController: UICollectionViewDelegate, UICollectionVi
         
         cell.endEditing = { [unowned self] in
             self.errorLabel.isHidden = true
+            if cell.cellTextLabel.text!.contains(" ") || cell.cellTextLabel.text!.contains("-") {
+                cell.cellTextLabel.text = ""
+                self.mnemonicPhrase.remove(at: indexPath.row)
+                self.mnemonicPhrase.insert("", at: indexPath.row)
+            }
         }
-
+        
         return cell
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         CGSize(width: 178, height: 45)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         5
+    }
+}
+
+extension ImportMnemonicViewController: UITextFieldDelegate {
+    
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField.tag == (self.countOfItems - 1) {
+            textField.resignFirstResponder()
+        } else {
+            let nextCell = self.collectionView?.cellForItem(at: IndexPath.init(row: textField.tag + 1, section: 0)) as! ImportMnemonicCollectionViewCell
+            if let nextField = nextCell.cellTextLabel {
+                nextField.becomeFirstResponder()
+            }
+        }
+        
+        return true
     }
 }
 

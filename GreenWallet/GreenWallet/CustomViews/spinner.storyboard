@@ -25,7 +25,7 @@
                                         <color key="textColor" red="0.22745098039215686" green="0.67450980392156867" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Пожалуйста подождите..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qk4-gF-pAk">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Пожалуйста, подождите..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qk4-gF-pAk">
                                         <rect key="frame" x="50" y="164.5" width="246" height="19.5"/>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                         <color key="textColor" red="0.58039215686274503" green="0.58039215686274503" blue="0.58039215686274503" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
