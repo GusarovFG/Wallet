@@ -28,16 +28,16 @@ class MainTabBarController: UITabBarController, UINavigationBarDelegate {
     
     override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
         if tabBar.selectedItem?.title == "Получить" {
-            let detailViewController = storyboard?.instantiateViewController(withIdentifier: "SelectSystemViewController") as! SelectSystemViewController
-            let nav = UINavigationController(rootViewController: detailViewController)
+            let getTokenViewController = storyboard?.instantiateViewController(withIdentifier: "GetTokenViewController") as! GetTokenViewController
+//            let nav = UINavigationController(rootViewController: getTokenViewController)
             
-            nav.modalPresentationStyle = .pageSheet
+            getTokenViewController.modalPresentationStyle = .fullScreen
             
-            if let sheet = nav.sheetPresentationController {
-                sheet.detents = [.medium()]
-            }
-            
-            self.present(nav, animated: true, completion: nil)
+//            if let sheet = nav.sheetPresentationController {
+//                sheet.detents = [.medium()]
+//            }
+//
+            self.present(getTokenViewController, animated: true, completion: nil)
         }
     }
     
