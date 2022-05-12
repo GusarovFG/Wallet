@@ -21,6 +21,7 @@ class GetTokenViewController: UIViewController {
     @IBOutlet weak var menuView: UIView!
     @IBOutlet weak var chiaMenuButton: UIButton!
     @IBOutlet weak var chivesMenuButton: UIButton!
+    @IBOutlet weak var copyLabel: UILabel!
     
     
     override func viewDidLoad() {
@@ -47,6 +48,8 @@ class GetTokenViewController: UIViewController {
         
         self.menuView.layer.borderWidth = 1
         self.menuView.layer.borderColor = #colorLiteral(red: 0.2901960784, green: 0.2901960784, blue: 0.2901960784, alpha: 1)
+        
+        self.copyLabel.alpha = 0
     }
 
     @IBAction func backButtonPressed(_ sender: Any) {
@@ -109,5 +112,19 @@ class GetTokenViewController: UIViewController {
         self.chiaMenuButton.backgroundColor = .systemBackground
         self.chiaMenuButton.titleLabel?.textColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
     }
+    @IBAction func copyButtonPressed(_ sender: Any) {
+        UIView.animate(withDuration: 1) {
+            self.copyLabel.alpha = 1
+        }
+        UIPasteboard.general.string = self.linkLabel.text
+        UIView.animate(withDuration: 2) {
+            self.copyLabel.alpha = 0
+
+        }
+    }
     
+    @IBAction func shareButtonPressed(_ sender: Any) {
+        let shareController = UIActivityViewController(activityItems: [self.linkLabel.text ?? ""], applicationActivities: nil)
+        self.present(shareController, animated: true, completion: nil)
+    }
 }
