@@ -12,4 +12,14 @@ struct System {
     var name: String
     var token: String
     var image: UIImage
+    var balance: Double
+}
+
+struct Wallet {
+    
+    var name: String
+    var number: Int
+    var image: UIImage
+    var tokens: [System]
+    
 }

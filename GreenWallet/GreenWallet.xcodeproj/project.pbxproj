@@ -45,6 +45,8 @@
 		FB6A2A3128226E36008DD449 /* AllertWalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB6A2A2F28226E36008DD449 /* AllertWalletViewController.swift */; };
 		FB6A2A342822995C008DD449 /* AlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB6A2A332822995C008DD449 /* AlertService.swift */; };
 		FB6A2A3628229A9C008DD449 /* Alert.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FB6A2A3528229A9C008DD449 /* Alert.storyboard */; };
+		FB90380F282D52EE004023F5 /* PushTokensViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB90380E282D52EE004023F5 /* PushTokensViewController.swift */; };
+		FB903811282D60DA004023F5 /* WalletManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB903810282D60DA004023F5 /* WalletManager.swift */; };
 		FBB49A492824DE3800250553 /* SpinnerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB49A482824DE3800250553 /* SpinnerView.swift */; };
 		FBB49A4B2824DEA700250553 /* spinner.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FBB49A4A2824DEA700250553 /* spinner.storyboard */; };
 		FBB49A4D2824E1A600250553 /* SprinnerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB49A4C2824E1A600250553 /* SprinnerViewController.swift */; };
@@ -106,6 +108,8 @@
 		FB6A2A2F28226E36008DD449 /* AllertWalletViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllertWalletViewController.swift; sourceTree = "<group>"; };
 		FB6A2A332822995C008DD449 /* AlertService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertService.swift; sourceTree = "<group>"; };
 		FB6A2A3528229A9C008DD449 /* Alert.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Alert.storyboard; sourceTree = "<group>"; };
+		FB90380E282D52EE004023F5 /* PushTokensViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushTokensViewController.swift; sourceTree = "<group>"; };
+		FB903810282D60DA004023F5 /* WalletManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletManager.swift; sourceTree = "<group>"; };
 		FBB49A482824DE3800250553 /* SpinnerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinnerView.swift; sourceTree = "<group>"; };
 		FBB49A4A2824DEA700250553 /* spinner.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = spinner.storyboard; sourceTree = "<group>"; };
 		FBB49A4C2824E1A600250553 /* SprinnerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SprinnerViewController.swift; sourceTree = "<group>"; };
@@ -202,6 +206,7 @@
 				FB3754B12821BE8F00882338 /* VerifyMnemonicViewController.swift */,
 				FB5947482823D8DD00C74E73 /* ImportMnemonicViewController.swift */,
 				FB3BC16D282C0BD2001B539E /* GetTokenViewController.swift */,
+				FB90380E282D52EE004023F5 /* PushTokensViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -240,6 +245,7 @@
 				FB5940362816856700037DFA /* SceneDelegate.swift */,
 				FB0FCA6F2819629D00BB0527 /* Models.swift */,
 				FBFE5796281B121A0016E74A /* UserDefaultsManager.swift */,
+				FB903810282D60DA004023F5 /* WalletManager.swift */,
 				FB3208072818285100F1ADCA /* ViewControllers */,
 				FB3208062818279E00F1ADCA /* CustomViews */,
 				FB5940512816AC7800037DFA /* Extensions */,
@@ -437,6 +443,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FB903811282D60DA004023F5 /* WalletManager.swift in Sources */,
 				FBFE5781281ABE2D0016E74A /* SecureBalanceTableViewCell.swift in Sources */,
 				FB59404C281694DD00037DFA /* TermsOfUseViewController.swift in Sources */,
 				FB2F369428208286007576FE /* MainTabBarController.swift in Sources */,
@@ -449,6 +456,7 @@
 				FB0FCA702819629D00BB0527 /* Models.swift in Sources */,
 				FB6A2A342822995C008DD449 /* AlertService.swift in Sources */,
 				FBFE5797281B121B0016E74A /* UserDefaultsManager.swift in Sources */,
+				FB90380F282D52EE004023F5 /* PushTokensViewController.swift in Sources */,
 				FB6A2A3128226E36008DD449 /* AllertWalletViewController.swift in Sources */,
 				FB5940532816AC8800037DFA /* Extensions.swift in Sources */,
 				FB5940552816AEF400037DFA /* CustomClasses.swift in Sources */,

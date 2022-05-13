@@ -9,7 +9,7 @@ import UIKit
 
 class ImportTokensViewController: UIViewController {
     
-    private var tokens = [System(name: "Green App Development", token: "GAD", image: UIImage(named: "emptyLogo")!), System(name: "Marmot", token: "MRT", image: UIImage(named: "emptyLogo")!), System(name: "Chia MEM", token: "CMM", image: UIImage(named: "emptyLogo")!), System(name: "USD Stable", token: "USDS", image: UIImage(named: "emptyLogo")!), System(name: "Gem NTF", token: "GEM", image: UIImage(named: "emptyLogo")!),  System(name: "Gem NTF", token: "GEM", image: UIImage(named: "emptyLogo")!), System(name: "Gem NTF", token: "GEM", image: UIImage(named: "emptyLogo")!), System(name: "Gem NTF", token: "GEM", image: UIImage(named: "emptyLogo")!), System(name: "Gem NTF", token: "GEM", image: UIImage(named: "emptyLogo")!)]
+    private var tokens = [System(name: "Green App Development", token: "GAD", image: UIImage(named: "emptyLogo")!, balance: 0), System(name: "Marmot", token: "MRT", image: UIImage(named: "emptyLogo")!, balance: 0), System(name: "Chia MEM", token: "CMM", image: UIImage(named: "emptyLogo")!, balance: 0), System(name: "USD Stable", token: "USDS", image: UIImage(named: "emptyLogo")!, balance: 0), System(name: "Gem NTF", token: "GEM", image: UIImage(named: "emptyLogo")!, balance: 0),  System(name: "Gem NTF", token: "GEM", image: UIImage(named: "emptyLogo")!, balance: 0), System(name: "Gem NTF", token: "GEM", image: UIImage(named: "emptyLogo")!, balance: 0), System(name: "Gem NTF", token: "GEM", image: UIImage(named: "emptyLogo")!, balance: 0), System(name: "Gem NTF", token: "GEM", image: UIImage(named: "emptyLogo")!, balance: 0)]
     private var filteredTokens: [System] = []
     
     @IBOutlet weak var numberOFWalletLabel: UILabel!

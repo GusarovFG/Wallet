@@ -28,4 +28,13 @@ extension UILabel {
     }
 }
 
-
+extension UITextField {
+    func bottomCorner() {
+        
+        let bottomLine = CALayer()
+                bottomLine.frame = CGRect(x: 0, y: self.frame.size.height - 2, width: self.frame.size.width, height: 1)
+                bottomLine.backgroundColor = #colorLiteral(red: 0.3578948975, green: 0.3578948975, blue: 0.3578948975, alpha: 1)
+                borderStyle = .none
+                layer.addSublayer(bottomLine)
+    }
+}

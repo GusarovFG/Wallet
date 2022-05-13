@@ -21,8 +21,11 @@ class MainTabBarController: UITabBarController, UINavigationBarDelegate {
         
         let secondMainVC = storyboard?.instantiateViewController(withIdentifier: "navi") as! UINavigationController
         secondMainVC.tabBarItem = UITabBarItem(title: "Получить", image: UIImage(named: "get")!, selectedImage: UIImage(named: "get")!)
+        
+        let thirdMainVC = storyboard?.instantiateViewController(withIdentifier: "navi") as! UINavigationController
+        thirdMainVC.tabBarItem = UITabBarItem(title: "Отправить", image: UIImage(named: "push")!, selectedImage: UIImage(named: "push")!)
 
-        self.setViewControllers([mainVC, secondMainVC], animated: true)
+        self.setViewControllers([mainVC, secondMainVC, thirdMainVC], animated: true)
         self.navigationController?.navigationBar.delegate = self
     }
     
@@ -38,6 +41,19 @@ class MainTabBarController: UITabBarController, UINavigationBarDelegate {
 //            }
 //
             self.present(getTokenViewController, animated: true, completion: nil)
+        }
+        
+        if tabBar.selectedItem?.title == "Отправить" {
+            guard let pushTokenViewController = storyboard?.instantiateViewController(withIdentifier: "PushTokensViewController") else { return }
+            //            let nav = UINavigationController(rootViewController: getTokenViewController)
+            
+            pushTokenViewController.modalPresentationStyle = .fullScreen
+            
+            //            if let sheet = nav.sheetPresentationController {
+            //                sheet.detents = [.medium()]
+            //            }
+            //
+            self.present(pushTokenViewController, animated: true, completion: nil)
         }
     }
     

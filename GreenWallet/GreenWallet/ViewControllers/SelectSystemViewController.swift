@@ -9,7 +9,7 @@ import UIKit
 
 class SelectSystemViewController: UIViewController {
 
-    private let systems: [System] = [System(name: "Chia", token: "XCH", image: UIImage(named: "LogoChia")!), System(name: "Chives", token: "XCC", image: UIImage(named: "ChivesLogo")!)]
+    private let systems: [System] = [System(name: "Chia", token: "XCH", image: UIImage(named: "LogoChia")!, balance: 0), System(name: "Chives", token: "XCC", image: UIImage(named: "ChivesLogo")!, balance: 0)]
     private let typseOfNewWallet = ["Новый", "Импорт мнемоники"]
     private var isSelectedSystem = false
     

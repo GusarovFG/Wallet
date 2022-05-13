@@ -10,8 +10,9 @@ import UIKit
 class MainViewController: UIViewController {
     
     private var balance = 0
-    private var wallets: [System] = []
-//    [System(name: "Green App Development", token: "GAD", image: UIImage(named: "emptyLogo")!), System(name: "Marmot", token: "MRT", image: UIImage(named: "emptyLogo")!), System(name: "Chia MEM", token: "CMM", image: UIImage(named: "emptyLogo")!), System(name: "USD Stable", token: "USDS", image: UIImage(named: "emptyLogo")!)]
+    private var tokens: [System] = []
+    private var wallets: [Wallet] = []
+
     private var footerButtonTitle = "Все кошельки"
 
     let userDefaults = UserDefaults.standard
@@ -25,9 +26,15 @@ class MainViewController: UIViewController {
     @IBOutlet weak var footerView: UIView!
     @IBOutlet weak var stackViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var footerButtom: UIButton!
+    @IBOutlet weak var nameOfWalletLabel: UILabel!
+    @IBOutlet weak var pageControl: UIPageControl!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.wallets = WalletManager.share.vallets
+        self.tokens = self.wallets[0].tokens
+        self.pageControl.numberOfPages = WalletManager.share.vallets.count
         
         if UserDefaultsManager.shared.userDefaults.bool(forKey: UserDefaultsStringKeys.hideWalletsBalance.rawValue) {
             self.balanceLabel.text = "***** USD"
@@ -44,7 +51,7 @@ class MainViewController: UIViewController {
         self.footerView.layer.cornerRadius = 15
         self.footerView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
         
-        if self.wallets.isEmpty {
+        if self.tokens.isEmpty {
             self.footerButtom.setTitle("Добавить кошелек", for: .normal)
             self.footerButtom.addTarget(self, action: #selector(addWalletButtonPressed), for: .touchUpInside)
         } else {
@@ -60,6 +67,14 @@ class MainViewController: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(hideWallet), name: NSNotification.Name(rawValue: "hideWallet"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(showWallet), name: NSNotification.Name(rawValue: "showWallet"), object: nil)
+        
+        
+        let leftSwipeRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(swipeGastuer))
+        let rightSwipeRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(swipeGastuer))
+        leftSwipeRecognizer.direction = .left
+        rightSwipeRecognizer.direction = .right
+        self.walletsTableView.addGestureRecognizer(leftSwipeRecognizer)
+        self.walletsTableView.addGestureRecognizer(rightSwipeRecognizer)
         
     }
     
@@ -109,6 +124,20 @@ class MainViewController: UIViewController {
         
     }
     
+    @objc func swipeGastuer(sender: UISwipeGestureRecognizer) {
+        if sender.direction == .left {
+            self.tokens = self.wallets[1].tokens
+            self.walletsTableView.reloadData()
+            self.pageControl.currentPage = 1
+            self.nameOfWalletLabel.text = self.wallets[1].name
+        } else if sender.direction == .right {
+            self.tokens = self.wallets[0].tokens
+            self.walletsTableView.reloadData()
+            self.pageControl.currentPage = 0
+            self.nameOfWalletLabel.text = self.wallets[0].name
+        }
+    }
+    
     @IBAction @objc func addWalletButtonPressed(_ sender: Any) {
         presentSelectSystemVC()
        
@@ -118,19 +147,19 @@ class MainViewController: UIViewController {
 
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        self.wallets.count
+        self.tokens.count + 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let importCell = tableView.dequeueReusableCell(withIdentifier: "importCell", for: indexPath) as! ImportTableViewCell
         let walletCell = tableView.dequeueReusableCell(withIdentifier: "walletCell", for: indexPath) as! BalanceTableViewCell
         switch indexPath {
-        case [0,self.wallets.count - 1]:
+        case [0,self.tokens.count]:
             return importCell
         default:
-            let wallet = self.wallets[indexPath.row]
+            let wallet = self.tokens[indexPath.row]
             walletCell.cellImage.image = wallet.image
-            walletCell.balanceLabel.text = "0 \(wallet.token)"
+            walletCell.balanceLabel.text = "\(wallet.balance) \(wallet.token)"
             walletCell.convertLabel.text = "⁓ 504.99 USD"
             walletCell.tokenLabel.text = wallet.name
             
@@ -140,7 +169,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath {
-        case [0,self.wallets.count - 1]:
+        case [0,self.tokens.count - 1]:
             let importTokensVC = storyboard?.instantiateViewController(withIdentifier: "ImportTokensViewController") as! ImportTokensViewController
             importTokensVC.modalPresentationStyle = .fullScreen
             self.navigationController!.present(importTokensVC, animated: true, completion: nil)
