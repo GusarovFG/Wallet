@@ -55,17 +55,9 @@ class QRScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
         guard metadataObjects.count > 0 else { return }
         if let object = metadataObjects.first as? AVMetadataMachineReadableCodeObject {
             if object.type == AVMetadataObject.ObjectType.qr {
-                let alert = UIAlertController(title: "QR Code", message: object.stringValue, preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "Перейти", style: .default, handler: { (action) in
-                    print(object.stringValue)
-                }))
-                alert.addAction(UIAlertAction(title: "Копировать", style: .default, handler: { (action) in
-                    UIPasteboard.general.string = object.stringValue
-                    self.view.layer.sublayers?.removeLast()
-                    self.session.stopRunning()
-                    print(object.stringValue)
-                }))
-                present(alert, animated: true, completion: nil)
+                let superView = self.navigationController?.presentingViewController as! PushTokensViewController
+                superView.adressTextField.text = object.stringValue
+                self.dismiss(animated: true)
             }
         }
     }

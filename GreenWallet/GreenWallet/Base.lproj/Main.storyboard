@@ -1665,6 +1665,10 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                                     <constraint firstItem="D5H-JY-B2n" firstAttribute="top" secondItem="7AU-7a-QaI" secondAttribute="top" constant="230" id="TaH-RI-pBD"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bmv-RL-rBj">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="n7w-Dy-b0g"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -1675,8 +1679,11 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                             <constraint firstItem="1q9-NY-1X7" firstAttribute="leading" secondItem="n7w-Dy-b0g" secondAttribute="leading" constant="39" id="3OY-CQ-xMY"/>
                             <constraint firstItem="cuE-nu-YpR" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Or0-KX-yYM" secondAttribute="trailing" constant="8" symbolic="YES" id="3SI-ax-loL"/>
                             <constraint firstItem="n7w-Dy-b0g" firstAttribute="trailing" secondItem="cuE-nu-YpR" secondAttribute="trailing" constant="15" id="3bE-Od-166"/>
+                            <constraint firstItem="bmv-RL-rBj" firstAttribute="top" secondItem="r99-q5-ntG" secondAttribute="top" id="Ava-2i-Xol"/>
+                            <constraint firstItem="bmv-RL-rBj" firstAttribute="leading" secondItem="n7w-Dy-b0g" secondAttribute="leading" id="C6W-4H-fjY"/>
                             <constraint firstItem="n7w-Dy-b0g" firstAttribute="trailing" secondItem="TWZ-p9-liZ" secondAttribute="trailing" constant="15" id="Dgy-uz-glL"/>
                             <constraint firstItem="TOO-Ci-1W7" firstAttribute="top" secondItem="hhu-UT-iR5" secondAttribute="bottom" constant="-3" id="E8j-Vp-9Xw"/>
+                            <constraint firstAttribute="bottom" secondItem="bmv-RL-rBj" secondAttribute="bottom" id="ERD-rl-QNB"/>
                             <constraint firstItem="7AU-7a-QaI" firstAttribute="trailing" secondItem="n7w-Dy-b0g" secondAttribute="trailing" id="F8r-gg-Buh"/>
                             <constraint firstItem="n7w-Dy-b0g" firstAttribute="trailing" secondItem="LGy-uT-4y7" secondAttribute="trailing" constant="32" id="HIk-t1-ygi"/>
                             <constraint firstItem="n7w-Dy-b0g" firstAttribute="trailing" secondItem="KHb-Wj-1Oq" secondAttribute="trailing" constant="38" id="MKj-5z-yJ6"/>
@@ -1701,6 +1708,7 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                             <constraint firstItem="TWZ-p9-liZ" firstAttribute="top" secondItem="Uf7-X1-KTj" secondAttribute="bottom" constant="12" id="qKh-YV-sXb"/>
                             <constraint firstItem="TWZ-p9-liZ" firstAttribute="leading" secondItem="n7w-Dy-b0g" secondAttribute="leading" constant="15" id="u1e-En-ASq"/>
                             <constraint firstItem="cuE-nu-YpR" firstAttribute="top" secondItem="n7w-Dy-b0g" secondAttribute="top" constant="1" id="wN1-UK-9xf"/>
+                            <constraint firstItem="bmv-RL-rBj" firstAttribute="trailing" secondItem="n7w-Dy-b0g" secondAttribute="trailing" id="wpW-du-iwA"/>
                             <constraint firstItem="7AU-7a-QaI" firstAttribute="top" secondItem="r99-q5-ntG" secondAttribute="top" id="zA4-mQ-ST6"/>
                         </constraints>
                     </view>
@@ -1712,6 +1720,7 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                         <outlet property="balanceStackView" destination="TOO-Ci-1W7" id="gEd-DN-zhA"/>
                         <outlet property="balanceView" destination="FW4-UB-cxW" id="gcT-Wc-fDA"/>
                         <outlet property="balanceViewConstraint" destination="yui-b6-Umx" id="s0w-o2-kLQ"/>
+                        <outlet property="cameraView" destination="bmv-RL-rBj" id="Ya5-6c-KIu"/>
                         <outlet property="checkboxButtonConstraint" destination="E0b-FI-ft0" id="mee-Mc-bAK"/>
                         <outlet property="checkboxLabelConstraint" destination="ws3-ZT-u9N" id="V86-8d-O1e"/>
                         <outlet property="comissionTextField" destination="bf2-aF-Cv7" id="BAF-d5-8VB"/>
@@ -2133,21 +2142,6 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xmL-Yg-IIy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="5934.7826086956529" y="147.99107142857142"/>
-        </scene>
-        <!--Scan View Controller-->
-        <scene sceneID="2Kt-cm-HIB">
-            <objects>
-                <viewController storyboardIdentifier="QRScanViewController" id="YGU-dq-Fff" customClass="QRScanViewController" customModule="GreenWallet" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="cXW-BG-eXv">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="qe2-Cr-Zdv"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="FNo-yG-bq6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="6681" y="142"/>
         </scene>
         <!--Main View Controller-->
         <scene sceneID="rD9-JV-rzT">

@@ -57,6 +57,7 @@ class PushTokensViewController: UIViewController {
     @IBOutlet weak var transitionBlockchainLabel: UILabel!
     @IBOutlet weak var transitinSumLabel: UILabel!
     @IBOutlet weak var transitionLinkLabel: UILabel!
+    @IBOutlet weak var cameraView: UIView!
     
     
     override func viewDidLoad() {
@@ -86,7 +87,8 @@ class PushTokensViewController: UIViewController {
         
         self.balanceView.layer.borderWidth = 1
         self.balanceView.layer.borderColor = #colorLiteral(red: 0.2901960784, green: 0.2901960784, blue: 0.2901960784, alpha: 1)
-        
+        self.cameraView.isHidden = true
+        setupVideo()
         
         NotificationCenter.default.addObserver(self, selector: #selector(showSeccessAlert), name: NSNotification.Name(rawValue: "Seccess"), object: nil)
 
@@ -328,8 +330,8 @@ class PushTokensViewController: UIViewController {
     }
     
     @IBAction func qrScanButtonPressed(_ sender: Any) {
-        let qrscanVC = storyboard?.instantiateViewController(withIdentifier: "QRScanViewController") as! QRScanViewController
-        self.present(qrscanVC, animated: true)
+        startRunning()
+        self.cameraView.isHidden = false
     }
     
     @IBAction func backButtonPressed(_ sender: Any) {
@@ -350,6 +352,48 @@ class PushTokensViewController: UIViewController {
     @IBAction func transitionBackButtomPressed(_ sender: Any) {
         self.transitionView.isHidden = true
     }
+}
+extension PushTokensViewController: AVCaptureMetadataOutputObjectsDelegate {
+    
+
+    func setupVideo() {
+        let captureDevice = AVCaptureDevice.default(for: AVMediaType.video)
+        do {
+            let input = try AVCaptureDeviceInput(device: captureDevice!)
+            session.addInput(input)
+        } catch {
+            fatalError(error.localizedDescription)
+        }
+        let output = AVCaptureMetadataOutput()
+        session.addOutput(output)
+        
+        output.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
+        output.metadataObjectTypes = [AVMetadataObject.ObjectType.qr]
+        
+        video = AVCaptureVideoPreviewLayer(session: session)
+        video.frame = self.cameraView.layer.bounds
+    }
+    
+    func startRunning() {
+        self.cameraView.layer.addSublayer(video)
+        session.startRunning()
+    }
+    
+
+        
+
+    
+    func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
+        guard metadataObjects.count > 0 else { return }
+        if let object = metadataObjects.first as? AVMetadataMachineReadableCodeObject {
+            if object.type == AVMetadataObject.ObjectType.qr {
+                self.adressTextField.text = object.stringValue
+                self.cameraView.isHidden = true
+            }
+        }
+    }
+    
+
 }
 
 

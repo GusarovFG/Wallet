@@ -66,20 +66,30 @@ class PasswordViewController: UIViewController {
     
     @IBAction func faceIDButtonPressed(_ sender: Any) {
         let context = LAContext()
-        
-        if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil) {
-            context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: "Please authenticate to proceed.") { (success, error) in
-                if success {
+            var error: NSError?
+
+            if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
+                let reason = "Identify yourself!"
+
+                context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) {
+                    [weak self] success, authenticationError in
+
                     DispatchQueue.main.async {
-                        self.dismiss(animated: true, completion: nil)
-                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "Seccess"), object: nil, userInfo: self.userInfo)
+                        if success {
+                            self?.dismiss(animated: true)
+                            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "Seccess"), object: nil, userInfo: self?.userInfo)
+                        } else {
+                            let ac = UIAlertController(title: "Authentication failed", message: "You could not be verified; please try again.", preferredStyle: .alert)
+                            ac.addAction(UIAlertAction(title: "OK", style: .default))
+                            self?.present(ac, animated: true)
+                        }
                     }
-                } else {
-                    guard let error = error else { return }
-                    print(error.localizedDescription)
                 }
+            } else {
+                let ac = UIAlertController(title: "Authentication failed", message: "You could not be verified; please try again.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "OK", style: .default))
+                self.present(ac, animated: true)
             }
-        }
     }
     
     
