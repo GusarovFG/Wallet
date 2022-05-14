@@ -13,6 +13,7 @@ class PasswordViewController: UIViewController {
     
     private var password = ""
     private var enteringPassword = ""
+    private let userInfo = ["seccsess": ""]
 
     @IBOutlet weak var stackView: UIStackView!
     @IBOutlet weak var errorLabel: UILabel!
@@ -31,6 +32,8 @@ class PasswordViewController: UIViewController {
         
     }
     
+
+    
     @IBAction func enterIngDigit(_ sender: UIButton) {
         if self.enteringPassword.count < 6 {
             self.enteringPassword += (sender.titleLabel?.text)!
@@ -42,6 +45,7 @@ class PasswordViewController: UIViewController {
         
         if self.enteringPassword == self.password {
             self.dismiss(animated: true)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "Seccess"), object: nil, userInfo: self.userInfo)
         } else {
             if self.enteringPassword.count == self.password.count {
                 self.errorLabel.alpha = 1
@@ -68,6 +72,7 @@ class PasswordViewController: UIViewController {
                 if success {
                     DispatchQueue.main.async {
                         self.dismiss(animated: true, completion: nil)
+                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "Seccess"), object: nil, userInfo: self.userInfo)
                     }
                 } else {
                     guard let error = error else { return }

@@ -78,6 +78,15 @@ class PushTokensViewController: UIViewController {
         self.linkOfWalletTextField.bottomCorner()
         self.adressTextField.bottomCorner()
         
+        NotificationCenter.default.addObserver(self, selector: #selector(showSeccessAlert), name: NSNotification.Name(rawValue: "Seccess"), object: nil)
+
+    }
+    
+    @objc func showSeccessAlert(notification: Notification) {
+        let storyboard = UIStoryboard(name: "Alert", bundle: .main)
+        let seccsessAlertVC = storyboard.instantiateViewController(withIdentifier: "seccsessTransitViewController") as! AllertWalletViewController
+        self.transitionView.isHidden = true
+        self.present(seccsessAlertVC, animated: true)
     }
     
     @IBAction func walletMenuOpen(_ sender: Any) {
