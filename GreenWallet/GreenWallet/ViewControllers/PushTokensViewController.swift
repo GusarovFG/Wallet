@@ -50,6 +50,11 @@ class PushTokensViewController: UIViewController {
     @IBOutlet weak var transferTokenLabel: UILabel!
     @IBOutlet weak var walletLinkError: UILabel!
     
+    @IBOutlet weak var transitionView: UIView!
+    @IBOutlet weak var transitionTokenLabel: UILabel!
+    @IBOutlet weak var transitionBlockchainLabel: UILabel!
+    @IBOutlet weak var transitinSumLabel: UILabel!
+    @IBOutlet weak var transitionLinkLabel: UILabel!
     
     
     override func viewDidLoad() {
@@ -65,6 +70,7 @@ class PushTokensViewController: UIViewController {
         self.secondTransferErrorLabel.alpha = 0
         self.contactLabel.isHidden = true
         self.walletLinkError.alpha = 0
+        self.transitionView.isHidden = true
 
         self.contactTextField.bottomCorner()
         self.transferTextField.bottomCorner()
@@ -250,6 +256,20 @@ class PushTokensViewController: UIViewController {
     @IBAction func backButtonPressed(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
+    
+    @IBAction func continueButtonPressed(_ sender: Any) {
+        self.transitionView.isHidden = false
+        self.transitionTokenLabel.text = self.wallet?.tokens[0].name
+        self.transitionBlockchainLabel.text = self.wallet?.name
+        self.transitinSumLabel.text = self.transferTextField.text
+        self.transitionLinkLabel.text = self.adressTextField.text
+        
+    }
+    @IBAction func transitionBackButtomPressed(_ sender: Any) {
+        self.transitionView.isHidden = true
+
+    }
+    
 }
 
 extension PushTokensViewController: AVCaptureMetadataOutputObjectsDelegate {
