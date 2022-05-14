@@ -45,6 +45,7 @@
 		FB6A2A3128226E36008DD449 /* AllertWalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB6A2A2F28226E36008DD449 /* AllertWalletViewController.swift */; };
 		FB6A2A342822995C008DD449 /* AlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB6A2A332822995C008DD449 /* AlertService.swift */; };
 		FB6A2A3628229A9C008DD449 /* Alert.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FB6A2A3528229A9C008DD449 /* Alert.storyboard */; };
+		FB8BF8DB282FFDF70067CD0B /* QRScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8BF8DA282FFDF70067CD0B /* QRScanViewController.swift */; };
 		FB8EAC1F282FC8B4007244C1 /* PasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8EAC1E282FC8B4007244C1 /* PasswordViewController.swift */; };
 		FB90380F282D52EE004023F5 /* PushTokensViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB90380E282D52EE004023F5 /* PushTokensViewController.swift */; };
 		FB903811282D60DA004023F5 /* WalletManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB903810282D60DA004023F5 /* WalletManager.swift */; };
@@ -109,6 +110,7 @@
 		FB6A2A2F28226E36008DD449 /* AllertWalletViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllertWalletViewController.swift; sourceTree = "<group>"; };
 		FB6A2A332822995C008DD449 /* AlertService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertService.swift; sourceTree = "<group>"; };
 		FB6A2A3528229A9C008DD449 /* Alert.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Alert.storyboard; sourceTree = "<group>"; };
+		FB8BF8DA282FFDF70067CD0B /* QRScanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRScanViewController.swift; sourceTree = "<group>"; };
 		FB8EAC1E282FC8B4007244C1 /* PasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordViewController.swift; sourceTree = "<group>"; };
 		FB90380E282D52EE004023F5 /* PushTokensViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushTokensViewController.swift; sourceTree = "<group>"; };
 		FB903810282D60DA004023F5 /* WalletManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletManager.swift; sourceTree = "<group>"; };
@@ -210,6 +212,7 @@
 				FB3BC16D282C0BD2001B539E /* GetTokenViewController.swift */,
 				FB90380E282D52EE004023F5 /* PushTokensViewController.swift */,
 				FB8EAC1E282FC8B4007244C1 /* PasswordViewController.swift */,
+				FB8BF8DA282FFDF70067CD0B /* QRScanViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -470,6 +473,7 @@
 				FB383FE7281BE1C700939B6D /* CustomSwitch.swift in Sources */,
 				FBB49A4D2824E1A600250553 /* SprinnerViewController.swift in Sources */,
 				FBFE5773281AAB040016E74A /* SettingsViewController.swift in Sources */,
+				FB8BF8DB282FFDF70067CD0B /* QRScanViewController.swift in Sources */,
 				FB3754AF2821511900882338 /* MnemonicCollectionViewCell.swift in Sources */,
 				FB0FCA6328193CCC00BB0527 /* ImportTableViewCell.swift in Sources */,
 				FBFE579A281B269E0016E74A /* LanguageTableViewCell.swift in Sources */,

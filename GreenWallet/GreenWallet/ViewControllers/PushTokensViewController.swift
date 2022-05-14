@@ -96,6 +96,12 @@ class PushTokensViewController: UIViewController {
         setupWalletButton()
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+
+        self.view.endEditing(true)
+    }
+    
     private func setupWalletButton() {
         self.tokenButton.titleLabel?.lineBreakMode = NSLineBreakMode.byWordWrapping
         let qwe = ("\(self.wallet?.number ?? 0)")
@@ -322,7 +328,8 @@ class PushTokensViewController: UIViewController {
     }
     
     @IBAction func qrScanButtonPressed(_ sender: Any) {
-        startRunning()
+        let qrscanVC = storyboard?.instantiateViewController(withIdentifier: "QRScanViewController") as! QRScanViewController
+        self.present(qrscanVC, animated: true)
     }
     
     @IBAction func backButtonPressed(_ sender: Any) {
@@ -345,39 +352,4 @@ class PushTokensViewController: UIViewController {
     }
 }
 
-extension PushTokensViewController: AVCaptureMetadataOutputObjectsDelegate {
-    
-    func setupVideo() {
-        let captureDevice = AVCaptureDevice.default(for: AVMediaType.video)
-        do {
-            let input = try AVCaptureDeviceInput(device: captureDevice!)
-            self.session.addInput(input)
-        } catch {
-            fatalError(error.localizedDescription)
-        }
-        let output = AVCaptureMetadataOutput()
-        self.session.addOutput(output)
-        
-        output.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
-        output.metadataObjectTypes = [AVMetadataObject.ObjectType.qr]
-        
-        self.video = AVCaptureVideoPreviewLayer(session: self.session)
-        self.video.frame = view.layer.bounds
-    }
-    
-    func startRunning() {
-        self.view.layer.addSublayer(video)
-        self.session.startRunning()
-    }
-    
-    func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
-        guard metadataObjects.count > 0 else { return }
-        if let object = metadataObjects.first as? AVMetadataMachineReadableCodeObject {
-            if object.type == AVMetadataObject.ObjectType.qr {
-                self.linkOfWalletTextField.text = object.stringValue
-                self.view.layer.sublayers?.removeLast()
-                self.session.stopRunning()
-            }
-        }
-    }
-}
+
