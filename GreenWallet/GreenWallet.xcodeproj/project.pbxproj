@@ -45,6 +45,7 @@
 		FB6A2A3128226E36008DD449 /* AllertWalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB6A2A2F28226E36008DD449 /* AllertWalletViewController.swift */; };
 		FB6A2A342822995C008DD449 /* AlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB6A2A332822995C008DD449 /* AlertService.swift */; };
 		FB6A2A3628229A9C008DD449 /* Alert.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FB6A2A3528229A9C008DD449 /* Alert.storyboard */; };
+		FB8EAC1F282FC8B4007244C1 /* PasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8EAC1E282FC8B4007244C1 /* PasswordViewController.swift */; };
 		FB90380F282D52EE004023F5 /* PushTokensViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB90380E282D52EE004023F5 /* PushTokensViewController.swift */; };
 		FB903811282D60DA004023F5 /* WalletManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB903810282D60DA004023F5 /* WalletManager.swift */; };
 		FBB49A492824DE3800250553 /* SpinnerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB49A482824DE3800250553 /* SpinnerView.swift */; };
@@ -108,6 +109,7 @@
 		FB6A2A2F28226E36008DD449 /* AllertWalletViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllertWalletViewController.swift; sourceTree = "<group>"; };
 		FB6A2A332822995C008DD449 /* AlertService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertService.swift; sourceTree = "<group>"; };
 		FB6A2A3528229A9C008DD449 /* Alert.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Alert.storyboard; sourceTree = "<group>"; };
+		FB8EAC1E282FC8B4007244C1 /* PasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordViewController.swift; sourceTree = "<group>"; };
 		FB90380E282D52EE004023F5 /* PushTokensViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushTokensViewController.swift; sourceTree = "<group>"; };
 		FB903810282D60DA004023F5 /* WalletManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletManager.swift; sourceTree = "<group>"; };
 		FBB49A482824DE3800250553 /* SpinnerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinnerView.swift; sourceTree = "<group>"; };
@@ -207,6 +209,7 @@
 				FB5947482823D8DD00C74E73 /* ImportMnemonicViewController.swift */,
 				FB3BC16D282C0BD2001B539E /* GetTokenViewController.swift */,
 				FB90380E282D52EE004023F5 /* PushTokensViewController.swift */,
+				FB8EAC1E282FC8B4007244C1 /* PasswordViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -447,6 +450,7 @@
 				FBFE5781281ABE2D0016E74A /* SecureBalanceTableViewCell.swift in Sources */,
 				FB59404C281694DD00037DFA /* TermsOfUseViewController.swift in Sources */,
 				FB2F369428208286007576FE /* MainTabBarController.swift in Sources */,
+				FB8EAC1F282FC8B4007244C1 /* PasswordViewController.swift in Sources */,
 				FBFE579E281B28880016E74A /* LanguageViewController.swift in Sources */,
 				FB3754AB28214F2000882338 /* MnemonicViewController.swift in Sources */,
 				FBFE578A281AC2B70016E74A /* SupportTableViewCell.swift in Sources */,
