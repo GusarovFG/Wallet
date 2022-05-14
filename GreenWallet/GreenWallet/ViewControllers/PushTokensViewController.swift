@@ -16,6 +16,7 @@ class PushTokensViewController: UIViewController {
     private var wallets: [Wallet] = []
     
     private let link = "qwertyuiopasdfghjkl"
+    private let contact = "Faddey"
     
     @IBOutlet weak var tokenImage: UIImageView!
     @IBOutlet weak var tokenButton: UIButton!
@@ -46,6 +47,8 @@ class PushTokensViewController: UIViewController {
     @IBOutlet weak var checkboxButtonConstraint: NSLayoutConstraint!
     @IBOutlet weak var checkboxLabelConstraint: NSLayoutConstraint!
     @IBOutlet weak var adressTextField: UITextField!
+    @IBOutlet weak var transferTokenLabel: UILabel!
+    @IBOutlet weak var walletLinkError: UILabel!
     
     
     
@@ -61,6 +64,7 @@ class PushTokensViewController: UIViewController {
         self.transferErrorLabel.alpha = 0
         self.secondTransferErrorLabel.alpha = 0
         self.contactLabel.isHidden = true
+        self.walletLinkError.alpha = 0
 
         self.contactTextField.bottomCorner()
         self.transferTextField.bottomCorner()
@@ -141,10 +145,46 @@ class PushTokensViewController: UIViewController {
         let engCharacters = "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM"
         let digits = "1234567890"
         sender.text = text.filter { engCharacters.contains($0) || digits.contains($0) }
-
+        
+        if sender.text != "" {
+            self.walletErrorLabel.alpha = 1
+            
+        } else {
+            self.walletErrorLabel.alpha = 0
+        }
+        
+ 
+    }
+    
+    @IBAction func linkCheck(_ sender: UITextField) {
+        if sender.text != self.link && sender.text != "" {
+            self.walletLinkError.alpha = 1
+            sender.textColor = #colorLiteral(red: 1, green: 0.2360929251, blue: 0.1714096665, alpha: 0.8980392157)
+            self.walletErrorLabel.textColor = #colorLiteral(red: 1, green: 0.2360929251, blue: 0.1714096665, alpha: 0.8980392157)
+        } else {
+            self.walletLinkError.alpha = 0
+            sender.textColor = .white
+            self.walletErrorLabel.textColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
+        }
+    }
+    
+    @IBAction func contactCheck(_ sender: UITextField) {
+        if sender.text == self.contact {
+            self.walletLinkError.text = "Адрес уже есть в адресной книге"
+            self.walletLinkError.textColor = #colorLiteral(red: 0.1176470588, green: 0.5764705882, blue: 1, alpha: 1)
+            self.walletLinkError.alpha = 1
+        } else if self.adressTextField.text != self.link {
+                self.walletLinkError.textColor = #colorLiteral(red: 1, green: 0.2360929251, blue: 0.1714096665, alpha: 0.8980392157)
+                self.walletLinkError.text = "Несуществующий адрес"
+            } else if self.adressTextField.text == "" {
+                self.walletLinkError.alpha = 0
+            
+        }
     }
     
     @IBAction func transferSummCheck(_ sender: UITextField) {
+        self.comissionTextField.text = sender.text
+        self.transferTokenLabel.text = self.balanceButton.currentTitle?.filter{!$0.isNumber && !$0.isPunctuation}
         if (Double(sender.text ?? "") ?? 0) > NSString(string: self.balanceButton.currentTitle ?? "").doubleValue && sender.text != ""{
             self.transferErrorLabel.alpha = 1
             self.transferErrorLabel.textColor = #colorLiteral(red: 1, green: 0.2360929251, blue: 0.1714096665, alpha: 0.8980392157)
@@ -190,6 +230,15 @@ class PushTokensViewController: UIViewController {
         }
         
     }
+    @IBAction func transferSuccsessCheck(_ sender: Any) {
+        if self.adressTextField.text == self.link && (Double(self.transferTextField.text ?? "") ?? 0) < NSString(string: self.balanceButton.currentTitle ?? "").doubleValue  {
+            
+            self.continueButton.isEnabled = true
+        } else {
+            self.continueButton.isEnabled = false
+        }
+    }
+    
     
     @IBAction func contactsButtonPressed(_ sender: Any) {
     }

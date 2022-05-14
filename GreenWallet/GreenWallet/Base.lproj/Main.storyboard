@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -1111,6 +1111,8 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                                                 <textInputTraits key="textInputTraits"/>
                                                 <connections>
                                                     <action selector="CyrillicCheck:" destination="cnF-1c-1r2" eventType="editingChanged" id="3nH-yZ-KcD"/>
+                                                    <action selector="linkCheck:" destination="cnF-1c-1r2" eventType="editingDidEnd" id="0rU-G5-r4r"/>
+                                                    <action selector="transferSuccsessCheck:" destination="cnF-1c-1r2" eventType="editingChanged" id="TCQ-it-aoJ"/>
                                                 </connections>
                                             </textField>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BuF-8e-m1q">
@@ -1181,6 +1183,9 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <action selector="contactCheck:" destination="cnF-1c-1r2" eventType="editingChanged" id="0ZU-we-7ta"/>
+                                        </connections>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Введите название адреса" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mnu-tB-kkH">
                                         <rect key="frame" x="15" y="72" width="354" height="17"/>
@@ -1188,16 +1193,27 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                                         <color key="textColor" red="0.2274509804" green="0.67450980390000004" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Несуществующий адрес" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VMd-u1-UHe">
+                                        <rect key="frame" x="15" y="116" width="354" height="20"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="20" id="Qxl-iT-NAU"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <color key="textColor" red="1" green="0.1333333333" blue="0.1333333333" alpha="0.8980392157" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" red="0.10980392156862745" green="0.10980392156862745" blue="0.10980392156862745" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="PCl-rX-ODh" firstAttribute="leading" secondItem="Uf7-X1-KTj" secondAttribute="leading" constant="15" id="17p-Ct-yKq"/>
+                                    <constraint firstItem="VMd-u1-UHe" firstAttribute="leading" secondItem="Uf7-X1-KTj" secondAttribute="leading" constant="15" id="1c3-0N-lCB"/>
                                     <constraint firstItem="5bp-F0-POt" firstAttribute="top" secondItem="mnu-tB-kkH" secondAttribute="bottom" constant="6" id="5lw-1b-HJK"/>
                                     <constraint firstItem="5bp-F0-POt" firstAttribute="top" secondItem="PCl-rX-ODh" secondAttribute="bottom" constant="30" id="AgT-F3-wRj"/>
                                     <constraint firstItem="Yvr-1n-Ywa" firstAttribute="top" secondItem="PCl-rX-ODh" secondAttribute="bottom" constant="20" id="E0b-FI-ft0"/>
                                     <constraint firstItem="mnu-tB-kkH" firstAttribute="leading" secondItem="Uf7-X1-KTj" secondAttribute="leading" constant="15" id="PlE-sC-WFv"/>
                                     <constraint firstItem="Vbd-3U-43A" firstAttribute="top" secondItem="Uf7-X1-KTj" secondAttribute="top" constant="21" id="T97-0Y-gY7"/>
                                     <constraint firstItem="PCl-rX-ODh" firstAttribute="top" secondItem="Vbd-3U-43A" secondAttribute="bottom" constant="3" id="cWJ-0l-pvP"/>
+                                    <constraint firstAttribute="trailing" secondItem="VMd-u1-UHe" secondAttribute="trailing" constant="15" id="dkS-sX-ouT"/>
                                     <constraint firstAttribute="trailing" secondItem="hVU-57-gCy" secondAttribute="trailing" constant="61" id="eEE-nG-tBx"/>
                                     <constraint firstAttribute="trailing" secondItem="5bp-F0-POt" secondAttribute="trailing" constant="15" id="g3v-3n-NkQ"/>
                                     <constraint firstAttribute="width" constant="384" id="hvm-L0-Qay"/>
@@ -1210,6 +1226,7 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                                     <constraint firstAttribute="height" constant="145.5" id="vtG-o2-mId"/>
                                     <constraint firstItem="hVU-57-gCy" firstAttribute="top" secondItem="PCl-rX-ODh" secondAttribute="bottom" constant="21" id="ws3-ZT-u9N"/>
                                     <constraint firstItem="hVU-57-gCy" firstAttribute="leading" secondItem="Yvr-1n-Ywa" secondAttribute="trailing" constant="8" id="wt5-fj-8fO"/>
+                                    <constraint firstAttribute="bottom" secondItem="VMd-u1-UHe" secondAttribute="bottom" constant="9.5" id="xR5-j0-jW7"/>
                                     <constraint firstItem="Vbd-3U-43A" firstAttribute="leading" secondItem="Uf7-X1-KTj" secondAttribute="leading" constant="15" id="yeX-ZO-2Fj"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
@@ -1230,6 +1247,7 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                 <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                                                 <connections>
+                                                    <action selector="transferSuccsessCheck:" destination="cnF-1c-1r2" eventType="editingChanged" id="mTr-Zr-9pD"/>
                                                     <action selector="transferSummCheck:" destination="cnF-1c-1r2" eventType="editingChanged" id="nh7-k9-JrZ"/>
                                                 </connections>
                                             </textField>
@@ -1380,7 +1398,7 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LGy-uT-4y7">
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LGy-uT-4y7">
                                 <rect key="frame" x="32" y="686" width="350" height="62"/>
                                 <color key="backgroundColor" red="0.2274509804" green="0.67450980390000004" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <constraints>
@@ -1534,11 +1552,13 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                         <outlet property="tokenImage" destination="ovj-nE-n01" id="Quv-U5-14u"/>
                         <outlet property="transferErrorLabel" destination="8K2-p9-8gN" id="MMw-CU-PZb"/>
                         <outlet property="transferTextField" destination="rto-f1-S9V" id="8aB-Tt-0D5"/>
+                        <outlet property="transferTokenLabel" destination="yFO-aj-gME" id="FaK-nr-S3j"/>
                         <outlet property="transferView" destination="TWZ-p9-liZ" id="wfR-EW-Vrh"/>
                         <outlet property="transferViewConstraint" destination="Zyx-7M-zb6" id="X91-XA-saV"/>
                         <outlet property="usdLabel" destination="0Y4-c7-6R8" id="eWu-hi-Nd0"/>
                         <outlet property="walletAdressViewConstraint" destination="vtG-o2-mId" id="Qtq-fX-JEu"/>
                         <outlet property="walletErrorLabel" destination="Vbd-3U-43A" id="nvx-xc-dpP"/>
+                        <outlet property="walletLinkError" destination="VMd-u1-UHe" id="Y5o-DX-aTw"/>
                         <outlet property="walletStackView" destination="zUk-ei-7q2" id="sqx-Kr-kXN"/>
                         <outlet property="walletStackViewConstraint" destination="NXB-nm-zKg" id="npQ-9h-GrA"/>
                         <outlet property="walletsView" destination="1q9-NY-1X7" id="atH-eh-lAO"/>
@@ -2854,12 +2874,12 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
         <image name="LaunchScreenLogo" width="252" height="54"/>
         <image name="NewWallet" width="119" height="116"/>
         <image name="button1" width="28" height="28"/>
-        <image name="chevron.backward" catalog="system" width="96" height="128"/>
-        <image name="chevron.down" catalog="system" width="128" height="72"/>
+        <image name="chevron.backward" catalog="system" width="32" height="32"/>
+        <image name="chevron.down" catalog="system" width="32" height="32"/>
         <image name="contacts" width="16" height="20"/>
         <image name="hydeImage" width="20" height="16"/>
-        <image name="plus" catalog="system" width="128" height="113"/>
-        <image name="qrcode" catalog="system" width="128" height="114"/>
+        <image name="plus" catalog="system" width="32" height="32"/>
+        <image name="qrcode" catalog="system" width="32" height="32"/>
         <image name="qrscan" width="20" height="20"/>
         <image name="walletCreate" width="104" height="104"/>
         <namedColor name="LightThemeLogo">
