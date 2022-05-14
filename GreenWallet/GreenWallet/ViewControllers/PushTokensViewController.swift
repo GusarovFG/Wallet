@@ -78,8 +78,57 @@ class PushTokensViewController: UIViewController {
         self.linkOfWalletTextField.bottomCorner()
         self.adressTextField.bottomCorner()
         
+        
+        
         NotificationCenter.default.addObserver(self, selector: #selector(showSeccessAlert), name: NSNotification.Name(rawValue: "Seccess"), object: nil)
 
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        setupWalletButton()
+    }
+    
+    private func setupWalletButton() {
+        self.tokenButton.titleLabel?.lineBreakMode = NSLineBreakMode.byWordWrapping
+        let qwe = ("\(self.wallet?.number ?? 0)")
+        var numberOfWallet = ""
+        for numb in qwe {
+            
+            if numberOfWallet.count < qwe.count - 4 {
+                numberOfWallet += "*"
+            } else {
+                numberOfWallet.append(numb)
+            }
+        }
+        
+        let buttonText: NSString = numberOfWallet + "\n\(self.wallet?.name ?? "")" as NSString
+
+            //getting the range to separate the button title strings
+            let newlineRange: NSRange = buttonText.range(of: "\n")
+
+            //getting both substrings
+            var substring1 = ""
+            var substring2 = ""
+
+            if(newlineRange.location != NSNotFound) {
+                substring1 = buttonText.substring(to: newlineRange.location)
+                substring2 = buttonText.substring(from: newlineRange.location)
+            }
+
+            //assigning diffrent fonts to both substrings
+            let font1: UIFont = UIFont(name: "Arial", size: 12.0)!
+            let attributes1 = [NSMutableAttributedString.Key.font: font1]
+            let attrString1 = NSMutableAttributedString(string: substring1, attributes: attributes1)
+
+            let font2: UIFont = UIFont(name: "Arial", size: 18.0)!
+            let attributes2 = [NSMutableAttributedString.Key.font: font2]
+            let attrString2 = NSMutableAttributedString(string: substring2, attributes: attributes2)
+
+            //appending both attributed strings
+            attrString1.append(attrString2)
+
+            //assigning the resultant attributed strings to the button
+        self.tokenButton.setAttributedTitle(attrString1, for: [])
     }
     
     @objc func showSeccessAlert(notification: Notification) {
@@ -135,9 +184,7 @@ class PushTokensViewController: UIViewController {
             self.walletStackView.arrangedSubviews[i].backgroundColor = .systemBackground
             if sender == self.walletStackView.arrangedSubviews[i] {
                 self.wallet = self.wallets[i]
-                self.tokenButton.setTitle(self.wallet?.name, for: .normal)
-                self.tokenImage.image = self.wallet?.image
-                self.balanceButton.setTitle("\(self.wallet?.tokens[0].balance ?? 0) \(self.wallet?.tokens[0].token ?? "")", for: .normal)
+                setupWalletButton()
                 sender.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
             }
         }

@@ -82,4 +82,9 @@ class PasswordViewController: UIViewController {
         }
     }
     
+    
+    @IBAction func cancelButtonPressed(_ sender: Any) {
+        self.dismiss(animated: true)
+    }
+    
 }

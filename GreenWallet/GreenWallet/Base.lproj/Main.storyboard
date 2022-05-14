@@ -1829,6 +1829,9 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                                         <integer key="value" value="30"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="cancelButtonPressed:" destination="Hvd-wX-fc0" eventType="touchUpInside" id="cwg-kd-rMG"/>
+                                </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="60" translatesAutoresizingMaskIntoConstraints="NO" id="Od1-Ec-iUy">
                                 <rect key="frame" x="69" y="331" width="276" height="358"/>
