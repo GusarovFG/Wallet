@@ -15,6 +15,7 @@ class PushTokensViewController: UIViewController {
     private var wallet: Wallet?
     private var wallets: [Wallet] = []
     
+    
     private let link = "qwertyuiopasdfghjkl"
     private let contact = "Faddey"
     
@@ -23,6 +24,7 @@ class PushTokensViewController: UIViewController {
     @IBOutlet weak var balanceButton: UIButton!
     @IBOutlet weak var balanceStackView: UIStackView!
     @IBOutlet weak var balanceViewConstraint: NSLayoutConstraint!
+    @IBOutlet weak var balaceStackViewConstraint: NSLayoutConstraint!
     @IBOutlet weak var balanceView: UIView!
     @IBOutlet weak var systemButton: UIButton!
     @IBOutlet weak var linkOfWalletTextField: UITextField!
@@ -170,12 +172,15 @@ class PushTokensViewController: UIViewController {
                     button.setTitle(token, for: .normal)
                     self.balanceStackView.addArrangedSubview(button)
                     self.balanceViewConstraint.constant += button.frame.height
+                    self.balaceStackViewConstraint.constant += button.frame.height
                     button.addTarget(self, action: #selector(setupBalanceMenuButtons), for: .touchUpInside)
                 }
             }
         } else {
             self.balanceView.isHidden = true
-            return
+            self.balanceStackView.removeAllSubviews()
+            self.balanceViewConstraint.constant = 0
+            self.balaceStackViewConstraint.constant = 0
         }
     }
     
@@ -184,8 +189,13 @@ class PushTokensViewController: UIViewController {
             self.walletStackView.arrangedSubviews[i].backgroundColor = .systemBackground
             if sender == self.walletStackView.arrangedSubviews[i] {
                 self.wallet = self.wallets[i]
+                self.tokenImage.image = self.wallet?.image
                 setupWalletButton()
                 sender.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
+                self.balanceView.isHidden = true
+                self.balanceStackView.removeAllSubviews()
+                self.balanceViewConstraint.constant = 0
+                self.balaceStackViewConstraint.constant = 0
             }
         }
     }
@@ -196,8 +206,6 @@ class PushTokensViewController: UIViewController {
             if sender == self.balanceStackView.arrangedSubviews[i] {
                 self.balanceButton.setTitle("\(self.wallet?.tokens[i].balance ?? 0) \(self.wallet?.tokens[i].token ?? "")", for: .normal)
                 sender.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
-            } else {
-                return
             }
         }
     }

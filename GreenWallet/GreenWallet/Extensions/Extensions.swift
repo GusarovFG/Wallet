@@ -38,3 +38,11 @@ extension UITextField {
                 layer.addSublayer(bottomLine)
     }
 }
+
+extension UIStackView {
+    func removeAllSubviews() {
+        subviews.forEach { (view) in
+            view.removeFromSuperview()
+        }
+    }
+}

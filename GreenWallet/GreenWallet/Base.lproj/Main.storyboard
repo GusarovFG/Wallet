@@ -1268,7 +1268,7 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="GBS-Rd-e6P">
                                                 <rect key="frame" x="0.0" y="0.0" width="282.5" height="40"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Y4-c7-6R8">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="⁓0.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Y4-c7-6R8">
                                                         <rect key="frame" x="0.0" y="0.0" width="282.5" height="20.5"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="282.5" id="6lW-Zx-uS5"/>
@@ -1283,7 +1283,7 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VfE-rm-jzL">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="⁓0.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VfE-rm-jzL">
                                                         <rect key="frame" x="0.0" y="20.5" width="282.5" height="19.5"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <color key="textColor" red="0.58039215690000001" green="0.58039215690000001" blue="0.58039215690000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -1481,11 +1481,14 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                                     <constraint firstAttribute="height" constant="80" id="nbn-vw-cAr"/>
                                 </constraints>
                             </view>
-                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FW4-UB-cxW">
+                            <view hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FW4-UB-cxW">
                                 <rect key="frame" x="214" y="155" width="168" height="40"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="TOO-Ci-1W7">
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="TOO-Ci-1W7">
                                         <rect key="frame" x="0.0" y="0.0" width="168" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="CnE-8c-Wqq"/>
+                                        </constraints>
                                     </stackView>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -1493,9 +1496,8 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                                     <constraint firstItem="TOO-Ci-1W7" firstAttribute="top" secondItem="FW4-UB-cxW" secondAttribute="top" id="3vn-Kk-bMm"/>
                                     <constraint firstAttribute="trailing" secondItem="TOO-Ci-1W7" secondAttribute="trailing" id="DqT-x6-hiV"/>
                                     <constraint firstAttribute="width" constant="168" id="Vda-8f-40l"/>
-                                    <constraint firstAttribute="height" constant="40" id="YnK-QC-QuW"/>
-                                    <constraint firstAttribute="bottom" secondItem="TOO-Ci-1W7" secondAttribute="bottom" id="fFg-cX-uez"/>
                                     <constraint firstItem="TOO-Ci-1W7" firstAttribute="leading" secondItem="FW4-UB-cxW" secondAttribute="leading" id="yI8-1x-chg"/>
+                                    <constraint firstAttribute="height" constant="40" id="yui-b6-Umx"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7AU-7a-QaI">
@@ -1701,14 +1703,20 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                             <constraint firstItem="cuE-nu-YpR" firstAttribute="top" secondItem="n7w-Dy-b0g" secondAttribute="top" constant="1" id="wN1-UK-9xf"/>
                             <constraint firstItem="7AU-7a-QaI" firstAttribute="top" secondItem="r99-q5-ntG" secondAttribute="top" id="zA4-mQ-ST6"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="7AU-7a-QaI"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
                         <outlet property="addContactLabel" destination="hVU-57-gCy" id="C5r-RW-SbD"/>
                         <outlet property="adressTextField" destination="cpj-2N-66D" id="gqa-X3-NuA"/>
+                        <outlet property="balaceStackViewConstraint" destination="CnE-8c-Wqq" id="g8I-ps-7Pp"/>
                         <outlet property="balanceButton" destination="uII-NX-pL2" id="35X-fz-lTR"/>
-                        <outlet property="balanceStackView" destination="TOO-Ci-1W7" id="89u-or-7sp"/>
+                        <outlet property="balanceStackView" destination="TOO-Ci-1W7" id="gEd-DN-zhA"/>
                         <outlet property="balanceView" destination="FW4-UB-cxW" id="gcT-Wc-fDA"/>
-                        <outlet property="balanceViewConstraint" destination="YnK-QC-QuW" id="4jc-sO-bRG"/>
+                        <outlet property="balanceViewConstraint" destination="yui-b6-Umx" id="s0w-o2-kLQ"/>
                         <outlet property="checkboxButtonConstraint" destination="E0b-FI-ft0" id="mee-Mc-bAK"/>
                         <outlet property="checkboxLabelConstraint" destination="ws3-ZT-u9N" id="V86-8d-O1e"/>
                         <outlet property="comissionTextField" destination="bf2-aF-Cv7" id="BAF-d5-8VB"/>
