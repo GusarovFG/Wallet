@@ -73,6 +73,7 @@ class PushTokensViewController: UIViewController {
         self.contactLabel.isHidden = true
         self.walletLinkError.alpha = 0
         self.transitionView.isHidden = true
+        self.transitionView.alpha = 0
 
         self.contactTextField.bottomCorner()
         self.transferTextField.bottomCorner()
@@ -80,6 +81,11 @@ class PushTokensViewController: UIViewController {
         self.linkOfWalletTextField.bottomCorner()
         self.adressTextField.bottomCorner()
         
+        self.walletsView.layer.borderWidth = 1
+        self.walletsView.layer.borderColor = #colorLiteral(red: 0.2901960784, green: 0.2901960784, blue: 0.2901960784, alpha: 1)
+        
+        self.balanceView.layer.borderWidth = 1
+        self.balanceView.layer.borderColor = #colorLiteral(red: 0.2901960784, green: 0.2901960784, blue: 0.2901960784, alpha: 1)
         
         
         NotificationCenter.default.addObserver(self, selector: #selector(showSeccessAlert), name: NSNotification.Name(rawValue: "Seccess"), object: nil)
@@ -157,6 +163,7 @@ class PushTokensViewController: UIViewController {
                 self.walletStackView.addArrangedSubview(button)
                 self.walletStackViewConstraint.constant += button.frame.height
                 button.addTarget(self, action: #selector(setupWalletsMenuButtons), for: .touchUpInside)
+                
             }
         }
     }
@@ -174,6 +181,7 @@ class PushTokensViewController: UIViewController {
                     self.balanceViewConstraint.constant += button.frame.height
                     self.balaceStackViewConstraint.constant += button.frame.height
                     button.addTarget(self, action: #selector(setupBalanceMenuButtons), for: .touchUpInside)
+                    
                 }
             }
         } else {
@@ -323,6 +331,9 @@ class PushTokensViewController: UIViewController {
     
     @IBAction func continueButtonPressed(_ sender: Any) {
         self.transitionView.isHidden = false
+        UIView.animate(withDuration: 0.5) {
+            self.transitionView.alpha = 1
+        }
         self.transitionTokenLabel.text = self.wallet?.tokens[0].name
         self.transitionBlockchainLabel.text = self.wallet?.name
         self.transitinSumLabel.text = self.transferTextField.text
@@ -331,9 +342,7 @@ class PushTokensViewController: UIViewController {
     }
     @IBAction func transitionBackButtomPressed(_ sender: Any) {
         self.transitionView.isHidden = true
-
     }
-    
 }
 
 extension PushTokensViewController: AVCaptureMetadataOutputObjectsDelegate {

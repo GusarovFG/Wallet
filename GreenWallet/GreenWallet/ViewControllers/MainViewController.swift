@@ -130,11 +130,15 @@ class MainViewController: UIViewController {
             self.walletsTableView.reloadData()
             self.pageControl.currentPage = 1
             self.nameOfWalletLabel.text = self.wallets[1].name
+            let height = self.walletsTableView.visibleCells.map{$0.frame.height}.reduce(0, +)
+            self.stackViewHeightConstraint.constant = self.headerView.frame.height + height + self.footerView.frame.height
         } else if sender.direction == .right {
             self.tokens = self.wallets[0].tokens
             self.walletsTableView.reloadData()
             self.pageControl.currentPage = 0
             self.nameOfWalletLabel.text = self.wallets[0].name
+            let height = self.walletsTableView.visibleCells.map{$0.frame.height}.reduce(0, +)
+            self.stackViewHeightConstraint.constant = self.headerView.frame.height + height + self.footerView.frame.height
         }
     }
     
