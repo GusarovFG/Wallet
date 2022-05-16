@@ -88,7 +88,6 @@ class PushTokensViewController: UIViewController {
         self.balanceView.layer.borderWidth = 1
         self.balanceView.layer.borderColor = #colorLiteral(red: 0.2901960784, green: 0.2901960784, blue: 0.2901960784, alpha: 1)
         self.cameraView.isHidden = true
-        setupVideo()
         
         NotificationCenter.default.addObserver(self, selector: #selector(showSeccessAlert), name: NSNotification.Name(rawValue: "Seccess"), object: nil)
 
@@ -330,8 +329,14 @@ class PushTokensViewController: UIViewController {
     }
     
     @IBAction func qrScanButtonPressed(_ sender: Any) {
+        setupVideo()
         startRunning()
         self.cameraView.isHidden = false
+    }
+    
+    @IBAction func qrScanBackButton(_ sender: Any) {
+        self.cameraView.isHidden = true
+        self.session.stopRunning()
     }
     
     @IBAction func backButtonPressed(_ sender: Any) {
@@ -357,9 +362,9 @@ extension PushTokensViewController: AVCaptureMetadataOutputObjectsDelegate {
     
 
     func setupVideo() {
-        let captureDevice = AVCaptureDevice.default(for: AVMediaType.video)
+        guard let captureDevice = AVCaptureDevice.default(for: AVMediaType.video) else { return }
         do {
-            let input = try AVCaptureDeviceInput(device: captureDevice!)
+            let input = try AVCaptureDeviceInput(device: captureDevice)
             session.addInput(input)
         } catch {
             fatalError(error.localizedDescription)
@@ -376,7 +381,7 @@ extension PushTokensViewController: AVCaptureMetadataOutputObjectsDelegate {
     
     func startRunning() {
         self.cameraView.layer.addSublayer(video)
-        session.startRunning()
+        self.session.startRunning()
     }
     
 

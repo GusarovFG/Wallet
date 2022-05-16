@@ -1667,7 +1667,30 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bmv-RL-rBj">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" verticalCompressionResistancePriority="754" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Iyx-0z-A85">
+                                        <rect key="frame" x="0.0" y="52" width="85.5" height="31.5"/>
+                                        <color key="tintColor" red="0.45882352939999999" green="0.45882352939999999" blue="0.45882352939999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <buttonConfiguration key="configuration" style="plain" image="chevron.backward" catalog="system">
+                                            <attributedString key="attributedTitle">
+                                                <fragment content=" Назад">
+                                                    <attributes>
+                                                        <font key="NSFont" size="15" name="Helvetica"/>
+                                                    </attributes>
+                                                </fragment>
+                                            </attributedString>
+                                        </buttonConfiguration>
+                                        <connections>
+                                            <action selector="backButtonPressed:" destination="ToR-sa-bct" eventType="touchUpInside" id="zqW-Qh-WLF"/>
+                                            <action selector="qrScanBackButton:" destination="cnF-1c-1r2" eventType="touchUpInside" id="jYK-g9-vPH"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="Iyx-0z-A85" firstAttribute="leading" secondItem="bmv-RL-rBj" secondAttribute="leading" id="Jfc-eM-W5j"/>
+                                    <constraint firstItem="Iyx-0z-A85" firstAttribute="top" secondItem="bmv-RL-rBj" secondAttribute="top" constant="52" id="yTf-0S-TLO"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="n7w-Dy-b0g"/>
@@ -3449,14 +3472,14 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
         <image name="LaunchScreenLogo" width="252" height="54"/>
         <image name="NewWallet" width="119" height="116"/>
         <image name="button1" width="28" height="28"/>
-        <image name="chevron.backward" catalog="system" width="32" height="32"/>
-        <image name="chevron.down" catalog="system" width="32" height="32"/>
+        <image name="chevron.backward" catalog="system" width="96" height="128"/>
+        <image name="chevron.down" catalog="system" width="128" height="72"/>
         <image name="contacts" width="16" height="20"/>
         <image name="deleteDigit" width="52" height="52"/>
         <image name="faceID" width="52" height="52"/>
         <image name="hydeImage" width="20" height="16"/>
-        <image name="plus" catalog="system" width="32" height="32"/>
-        <image name="qrcode" catalog="system" width="32" height="32"/>
+        <image name="plus" catalog="system" width="128" height="113"/>
+        <image name="qrcode" catalog="system" width="128" height="114"/>
         <image name="qrscan" width="20" height="20"/>
         <image name="walletCreate" width="104" height="104"/>
         <namedColor name="LightThemeLogo">
