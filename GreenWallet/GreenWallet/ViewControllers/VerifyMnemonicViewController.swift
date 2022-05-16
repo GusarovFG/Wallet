@@ -88,10 +88,8 @@ class VerifyMnemonicViewController: UIViewController {
                             self.selectCollectionView.reloadData()
                         }
                     }
-                    
                 }
             }
-            
         }
     }
     

@@ -51,6 +51,9 @@ class PushTokensViewController: UIViewController {
     @IBOutlet weak var adressTextField: UITextField!
     @IBOutlet weak var transferTokenLabel: UILabel!
     @IBOutlet weak var walletLinkError: UILabel!
+    @IBOutlet weak var systemView: UIView!
+    @IBOutlet weak var systemChiaButton: UIButton!
+    @IBOutlet weak var systemChivesButton: UIButton!
     
     @IBOutlet weak var transitionView: UIView!
     @IBOutlet weak var transitionTokenLabel: UILabel!
@@ -88,6 +91,11 @@ class PushTokensViewController: UIViewController {
         self.balanceView.layer.borderWidth = 1
         self.balanceView.layer.borderColor = #colorLiteral(red: 0.2901960784, green: 0.2901960784, blue: 0.2901960784, alpha: 1)
         self.cameraView.isHidden = true
+        
+        self.systemView.layer.borderWidth = 1
+        self.systemView.layer.borderColor = #colorLiteral(red: 0.2901960784, green: 0.2901960784, blue: 0.2901960784, alpha: 1)
+        self.systemView.isHidden = true
+        self.systemView.alpha = 0
         
         NotificationCenter.default.addObserver(self, selector: #selector(showSeccessAlert), name: NSNotification.Name(rawValue: "Seccess"), object: nil)
 
@@ -139,10 +147,8 @@ class PushTokensViewController: UIViewController {
             let attributes2 = [NSMutableAttributedString.Key.font: font2]
             let attrString2 = NSMutableAttributedString(string: substring2, attributes: attributes2)
 
-            //appending both attributed strings
             attrString1.append(attrString2)
 
-            //assigning the resultant attributed strings to the button
         self.tokenButton.setAttributedTitle(attrString1, for: [])
     }
     
@@ -152,6 +158,53 @@ class PushTokensViewController: UIViewController {
         self.transitionView.isHidden = true
         self.present(seccsessAlertVC, animated: true)
     }
+    
+    
+    @IBAction func systemButton(_ sender: UIButton) {
+        if self.systemView.isHidden {
+            UIView.animate(withDuration: 0.5) {
+                self.systemView.isHidden = false
+                self.systemView.alpha = 1
+            }
+        } else {
+            UIView.animate(withDuration: 0.5) {
+                self.systemView.alpha = 0
+                self.systemView.isHidden = true
+            }
+        }
+        
+        if sender.titleLabel?.text == "Chia Network" {
+            self.systemChiaButton.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
+            self.systemChiaButton.titleLabel?.textColor = .white
+            self.systemChivesButton.backgroundColor = .systemBackground
+            self.systemChivesButton.titleLabel?.textColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
+        } else {
+            self.systemChivesButton.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
+            self.systemChivesButton.titleLabel?.textColor = .white
+            self.systemChiaButton.backgroundColor = .systemBackground
+            self.systemChiaButton.titleLabel?.textColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
+        }
+    
+    }
+    
+    @IBAction func systemButtonsPressed(_ sender: UIButton) {
+        self.systemButton.setTitle("Chia Network", for: .normal)
+        self.systemChiaButton.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
+        self.systemChiaButton.titleLabel?.textColor = .white
+        self.systemChivesButton.backgroundColor = .systemBackground
+        self.systemChivesButton.titleLabel?.textColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
+        self.systemView.isHidden = true
+    }
+    
+    @IBAction func systemChivesButtonPressed(_ sender: Any) {
+        self.systemButton.setTitle("Chives Network", for: .normal)
+        self.systemChivesButton.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
+        self.systemChivesButton.titleLabel?.textColor = .white
+        self.systemChiaButton.backgroundColor = .systemBackground
+        self.systemChiaButton.titleLabel?.textColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
+        self.systemView.isHidden = true
+    }
+    
     
     @IBAction func walletMenuOpen(_ sender: Any) {
         if self.walletsView.isHidden == true {
@@ -193,6 +246,7 @@ class PushTokensViewController: UIViewController {
             }
         } else {
             self.balanceView.isHidden = true
+            self.walletsView.isHidden = true
             self.balanceStackView.removeAllSubviews()
             self.balanceViewConstraint.constant = 0
             self.balaceStackViewConstraint.constant = 0
@@ -208,6 +262,7 @@ class PushTokensViewController: UIViewController {
                 setupWalletButton()
                 sender.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
                 self.balanceView.isHidden = true
+                self.walletsView.isHidden = true
                 self.balanceStackView.removeAllSubviews()
                 self.balanceViewConstraint.constant = 0
                 self.balaceStackViewConstraint.constant = 0
@@ -221,6 +276,9 @@ class PushTokensViewController: UIViewController {
             if sender == self.balanceStackView.arrangedSubviews[i] {
                 self.balanceButton.setTitle("\(self.wallet?.tokens[i].balance ?? 0) \(self.wallet?.tokens[i].token ?? "")", for: .normal)
                 sender.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
+                self.balanceView.isHidden = true
+                self.walletsView.isHidden = true
+                
             }
         }
     }
@@ -301,6 +359,7 @@ class PushTokensViewController: UIViewController {
             self.walletAdressViewConstraint.constant += 65
             self.checkboxLabelConstraint.constant += 65
             self.checkboxButtonConstraint.constant += 65
+            self.contactTextField.text = "My Binance Wallet"
             
         } else {
             sender.setImage(UIImage(systemName: "squareshape.fill"), for: .normal)
@@ -312,6 +371,7 @@ class PushTokensViewController: UIViewController {
             self.walletAdressViewConstraint.constant -= 65
             self.checkboxLabelConstraint.constant -= 65
             self.checkboxButtonConstraint.constant -= 65
+            
         }
         
     }

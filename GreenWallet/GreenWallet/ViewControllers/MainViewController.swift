@@ -10,7 +10,6 @@ import UIKit
 class MainViewController: UIViewController {
     
     private var balance = 0
-    private var tokens: [System] = []
     private var wallets: [Wallet] = []
 
     private var footerButtonTitle = "Все кошельки"
@@ -20,44 +19,26 @@ class MainViewController: UIViewController {
     @IBOutlet weak var balanceLabel: UILabel!
     @IBOutlet weak var riseLabel: UILabel!
     @IBOutlet weak var percentLabel: UILabel!
-    @IBOutlet weak var walletsTableView: UITableView!
-    @IBOutlet weak var stackView: UIStackView!
-    @IBOutlet weak var headerView: UIView!
-    @IBOutlet weak var footerView: UIView!
-    @IBOutlet weak var stackViewHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var footerButtom: UIButton!
-    @IBOutlet weak var nameOfWalletLabel: UILabel!
     @IBOutlet weak var pageControl: UIPageControl!
+    @IBOutlet weak var cellectionView: UICollectionView!
+    @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+    
         self.wallets = WalletManager.share.vallets
-        self.tokens = self.wallets[0].tokens
         self.pageControl.numberOfPages = WalletManager.share.vallets.count
+        self.cellectionView.register(UINib(nibName: "mCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "mCollectionViewCell")
+        
         
         if UserDefaultsManager.shared.userDefaults.bool(forKey: UserDefaultsStringKeys.hideWalletsBalance.rawValue) {
             self.balanceLabel.text = "***** USD"
         } else {
             self.balanceLabel.text = "\(self.balance) USD"
         }
-        
-        self.walletsTableView.register(UINib(nibName: "BalanceTableViewCell", bundle: nil), forCellReuseIdentifier: "walletCell")
-        self.walletsTableView.register(UINib(nibName: "ImportTableViewCell", bundle: nil), forCellReuseIdentifier: "importCell")        
-        
-        self.headerView.layer.cornerRadius = 15
-        self.headerView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-        
-        self.footerView.layer.cornerRadius = 15
-        self.footerView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
-        
-        if self.tokens.isEmpty {
-            self.footerButtom.setTitle("Добавить кошелек", for: .normal)
-            self.footerButtom.addTarget(self, action: #selector(addWalletButtonPressed), for: .touchUpInside)
-        } else {
-            self.footerButtom.setTitle(self.footerButtonTitle, for: .normal)
-        }
-        
+
         self.navigationController?.navigationBar.isHidden = false
         let navigationItem = UINavigationItem()
         let settingsItem = UIBarButtonItem(image: UIImage(named: "Menu")!, style: .done, target: self, action: #selector(pushSettingsController))
@@ -67,23 +48,7 @@ class MainViewController: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(hideWallet), name: NSNotification.Name(rawValue: "hideWallet"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(showWallet), name: NSNotification.Name(rawValue: "showWallet"), object: nil)
-        
-        
-        let leftSwipeRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(swipeGastuer))
-        let rightSwipeRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(swipeGastuer))
-        leftSwipeRecognizer.direction = .left
-        rightSwipeRecognizer.direction = .right
-        self.walletsTableView.addGestureRecognizer(leftSwipeRecognizer)
-        self.walletsTableView.addGestureRecognizer(rightSwipeRecognizer)
-        
-    }
-    
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        let height = self.walletsTableView.visibleCells.map{$0.frame.height}.reduce(0, +)
-        
-        self.stackViewHeightConstraint.constant = self.headerView.frame.height + height + self.footerView.frame.height
+
     }
     
     private func presentSelectSystemVC() {
@@ -124,62 +89,43 @@ class MainViewController: UIViewController {
         
     }
     
-    @objc func swipeGastuer(sender: UISwipeGestureRecognizer) {
-        if sender.direction == .left {
-            self.tokens = self.wallets[1].tokens
-            self.walletsTableView.reloadData()
-            self.pageControl.currentPage = 1
-            self.nameOfWalletLabel.text = self.wallets[1].name
-            let height = self.walletsTableView.visibleCells.map{$0.frame.height}.reduce(0, +)
-            self.stackViewHeightConstraint.constant = self.headerView.frame.height + height + self.footerView.frame.height
-        } else if sender.direction == .right {
-            self.tokens = self.wallets[0].tokens
-            self.walletsTableView.reloadData()
-            self.pageControl.currentPage = 0
-            self.nameOfWalletLabel.text = self.wallets[0].name
-            let height = self.walletsTableView.visibleCells.map{$0.frame.height}.reduce(0, +)
-            self.stackViewHeightConstraint.constant = self.headerView.frame.height + height + self.footerView.frame.height
-        }
-    }
     
-    @IBAction @objc func addWalletButtonPressed(_ sender: Any) {
-        presentSelectSystemVC()
-       
-        
-    }
 }
 
-extension MainViewController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        self.tokens.count + 1
-    }
+
+extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let importCell = tableView.dequeueReusableCell(withIdentifier: "importCell", for: indexPath) as! ImportTableViewCell
-        let walletCell = tableView.dequeueReusableCell(withIdentifier: "walletCell", for: indexPath) as! BalanceTableViewCell
-        switch indexPath {
-        case [0,self.tokens.count]:
-            return importCell
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        switch self.wallets.count {
+        case 0:
+            return 1
         default:
-            let wallet = self.tokens[indexPath.row]
-            walletCell.cellImage.image = wallet.image
-            walletCell.balanceLabel.text = "\(wallet.balance) \(wallet.token)"
-            walletCell.convertLabel.text = "⁓ 504.99 USD"
-            walletCell.tokenLabel.text = wallet.name
-            
-            return walletCell
+            return self.wallets.count
         }
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        switch indexPath {
-        case [0,self.tokens.count - 1]:
-            let importTokensVC = storyboard?.instantiateViewController(withIdentifier: "ImportTokensViewController") as! ImportTokensViewController
-            importTokensVC.modalPresentationStyle = .fullScreen
-            self.navigationController!.present(importTokensVC, animated: true, completion: nil)
-        default:
-            break
-        }
-        tableView.deselectRow(at: indexPath, animated: true)
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "mCollectionViewCell", for: indexPath) as! mCollectionViewCell
+        cell.wallet = self.wallets[indexPath.row]
+        cell.controller = self
+        cell.frame.size.height = cell.stackView.frame.height
+        return cell
     }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+
+        return CGSize(width: self.cellectionView.frame.width, height: self.cellectionView.frame.height)
+    }
+
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let visibleRect = CGRect(origin: self.cellectionView.contentOffset, size: self.cellectionView.bounds.size)
+        let visiblePoint = CGPoint(x: visibleRect.midX, y: visibleRect.midY)
+        if let visibleIndexPath = self.cellectionView.indexPathForItem(at: visiblePoint) {
+            self.pageControl.currentPage = visibleIndexPath.row
+        }
+    }
+
 }
+
+

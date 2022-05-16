@@ -52,6 +52,8 @@
 		FBB49A492824DE3800250553 /* SpinnerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB49A482824DE3800250553 /* SpinnerView.swift */; };
 		FBB49A4B2824DEA700250553 /* spinner.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FBB49A4A2824DEA700250553 /* spinner.storyboard */; };
 		FBB49A4D2824E1A600250553 /* SprinnerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB49A4C2824E1A600250553 /* SprinnerViewController.swift */; };
+		FBBECA8B2832CF250042D1B8 /* mCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBBECA892832CF250042D1B8 /* mCollectionViewCell.swift */; };
+		FBBECA8C2832CF250042D1B8 /* mCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBBECA8A2832CF250042D1B8 /* mCollectionViewCell.xib */; };
 		FBFE5773281AAB040016E74A /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBFE5772281AAB040016E74A /* SettingsViewController.swift */; };
 		FBFE577B281AB9250016E74A /* ThemesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBFE5779281AB9250016E74A /* ThemesTableViewCell.swift */; };
 		FBFE577C281AB9250016E74A /* ThemesTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBFE577A281AB9250016E74A /* ThemesTableViewCell.xib */; };
@@ -117,6 +119,8 @@
 		FBB49A482824DE3800250553 /* SpinnerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinnerView.swift; sourceTree = "<group>"; };
 		FBB49A4A2824DEA700250553 /* spinner.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = spinner.storyboard; sourceTree = "<group>"; };
 		FBB49A4C2824E1A600250553 /* SprinnerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SprinnerViewController.swift; sourceTree = "<group>"; };
+		FBBECA892832CF250042D1B8 /* mCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mCollectionViewCell.swift; sourceTree = "<group>"; };
+		FBBECA8A2832CF250042D1B8 /* mCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = mCollectionViewCell.xib; sourceTree = "<group>"; };
 		FBFE5772281AAB040016E74A /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		FBFE5779281AB9250016E74A /* ThemesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemesTableViewCell.swift; sourceTree = "<group>"; };
 		FBFE577A281AB9250016E74A /* ThemesTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ThemesTableViewCell.xib; sourceTree = "<group>"; };
@@ -171,6 +175,8 @@
 			isa = PBXGroup;
 			children = (
 				FB0883DF281BF4B9001D4317 /* MainVCCells */,
+				FBBECA892832CF250042D1B8 /* mCollectionViewCell.swift */,
+				FBBECA8A2832CF250042D1B8 /* mCollectionViewCell.xib */,
 			);
 			path = CutomCells;
 			sourceTree = "<group>";
@@ -430,6 +436,7 @@
 				FBFE5790281AC4060016E74A /* PushAndAllSettingsTableViewCell.xib in Resources */,
 				FB0FCA6E2819600400BB0527 /* SelectSystemTableViewCell.xib in Resources */,
 				FB0FCA6428193CCC00BB0527 /* ImportTableViewCell.xib in Resources */,
+				FBBECA8C2832CF250042D1B8 /* mCollectionViewCell.xib in Resources */,
 				FB0FCA7428197A4000BB0527 /* ImportTokensTableViewCell.xib in Resources */,
 				FBB49A4B2824DEA700250553 /* spinner.storyboard in Resources */,
 				FBFE5793281AE8C60016E74A /* SecureBalanceTableViewCell.xib in Resources */,
@@ -462,6 +469,7 @@
 				FBFE57A4281B4AFE0016E74A /* InfoViewController.swift in Sources */,
 				FB0FCA702819629D00BB0527 /* Models.swift in Sources */,
 				FB6A2A342822995C008DD449 /* AlertService.swift in Sources */,
+				FBBECA8B2832CF250042D1B8 /* mCollectionViewCell.swift in Sources */,
 				FBFE5797281B121B0016E74A /* UserDefaultsManager.swift in Sources */,
 				FB90380F282D52EE004023F5 /* PushTokensViewController.swift in Sources */,
 				FB6A2A3128226E36008DD449 /* AllertWalletViewController.swift in Sources */,
