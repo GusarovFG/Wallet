@@ -131,12 +131,15 @@ class GetTokenViewController: UIViewController {
     }
     
     @IBAction func copyButtonPressed(_ sender: Any) {
-        UIView.animate(withDuration: 3) {
+        UIView.animate(withDuration: 1) {
             self.copyLabel.alpha = 1
         }
-        UIPasteboard.general.string = self.linkLabel.text
-        UIView.animate(withDuration: 3) {
-            self.copyLabel.alpha = 0
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+            UIPasteboard.general.string = self.linkLabel.text
+            UIView.animate(withDuration: 1) {
+                self.copyLabel.alpha = 0
+            }
+            
         }
     }
     
