@@ -18,7 +18,7 @@ class SelectSystemViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.view.window?.frame.size = CGSize(width: 414, height: 238)
         self.tableView.register(UINib(nibName: "SelectSystemTableViewCell", bundle: nil), forCellReuseIdentifier: "systemCell")
         self.navigationController?.navigationBar.isHidden = true
     }

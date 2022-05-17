@@ -45,6 +45,8 @@
 		FB6A2A3128226E36008DD449 /* AllertWalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB6A2A2F28226E36008DD449 /* AllertWalletViewController.swift */; };
 		FB6A2A342822995C008DD449 /* AlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB6A2A332822995C008DD449 /* AlertService.swift */; };
 		FB6A2A3628229A9C008DD449 /* Alert.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FB6A2A3528229A9C008DD449 /* Alert.storyboard */; };
+		FB7A88682833B310005D05D8 /* qrCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7A88662833B310005D05D8 /* qrCollectionViewCell.swift */; };
+		FB7A88692833B310005D05D8 /* qrCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB7A88672833B310005D05D8 /* qrCollectionViewCell.xib */; };
 		FB8BF8DB282FFDF70067CD0B /* QRScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8BF8DA282FFDF70067CD0B /* QRScanViewController.swift */; };
 		FB8EAC1F282FC8B4007244C1 /* PasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8EAC1E282FC8B4007244C1 /* PasswordViewController.swift */; };
 		FB90380F282D52EE004023F5 /* PushTokensViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB90380E282D52EE004023F5 /* PushTokensViewController.swift */; };
@@ -112,6 +114,8 @@
 		FB6A2A2F28226E36008DD449 /* AllertWalletViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllertWalletViewController.swift; sourceTree = "<group>"; };
 		FB6A2A332822995C008DD449 /* AlertService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertService.swift; sourceTree = "<group>"; };
 		FB6A2A3528229A9C008DD449 /* Alert.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Alert.storyboard; sourceTree = "<group>"; };
+		FB7A88662833B310005D05D8 /* qrCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = qrCollectionViewCell.swift; sourceTree = "<group>"; };
+		FB7A88672833B310005D05D8 /* qrCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = qrCollectionViewCell.xib; sourceTree = "<group>"; };
 		FB8BF8DA282FFDF70067CD0B /* QRScanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRScanViewController.swift; sourceTree = "<group>"; };
 		FB8EAC1E282FC8B4007244C1 /* PasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordViewController.swift; sourceTree = "<group>"; };
 		FB90380E282D52EE004023F5 /* PushTokensViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushTokensViewController.swift; sourceTree = "<group>"; };
@@ -193,6 +197,8 @@
 				FBB49A482824DE3800250553 /* SpinnerView.swift */,
 				FBB49A4A2824DEA700250553 /* spinner.storyboard */,
 				FBB49A4C2824E1A600250553 /* SprinnerViewController.swift */,
+				FB7A88662833B310005D05D8 /* qrCollectionViewCell.swift */,
+				FB7A88672833B310005D05D8 /* qrCollectionViewCell.xib */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -226,10 +232,10 @@
 		FB3754AC282150DA00882338 /* CustomCollectionCells */ = {
 			isa = PBXGroup;
 			children = (
-				FB3754AD2821511900882338 /* MnemonicCollectionViewCell.swift */,
 				FB3754AE2821511900882338 /* MnemonicCollectionViewCell.xib */,
 				FB59474A2823FCAD00C74E73 /* ImportMnemonicCollectionViewCell.swift */,
 				FB59474B2823FCAF00C74E73 /* ImportMnemonicCollectionViewCell.xib */,
+				FB3754AD2821511900882338 /* MnemonicCollectionViewCell.swift */,
 			);
 			path = CustomCollectionCells;
 			sourceTree = "<group>";
@@ -440,6 +446,7 @@
 				FB0FCA7428197A4000BB0527 /* ImportTokensTableViewCell.xib in Resources */,
 				FBB49A4B2824DEA700250553 /* spinner.storyboard in Resources */,
 				FBFE5793281AE8C60016E74A /* SecureBalanceTableViewCell.xib in Resources */,
+				FB7A88692833B310005D05D8 /* qrCollectionViewCell.xib in Resources */,
 				FB3754B02821511900882338 /* MnemonicCollectionViewCell.xib in Resources */,
 				FBFE57A2281B2EDD0016E74A /* LanguageTableViewCell.xib in Resources */,
 				FB6A2A3628229A9C008DD449 /* Alert.storyboard in Resources */,
@@ -501,6 +508,7 @@
 				FB5940372816856700037DFA /* SceneDelegate.swift in Sources */,
 				FB3207F92818018F00F1ADCA /* BalanceTableViewCell.swift in Sources */,
 				FB3BC16E282C0BD2001B539E /* GetTokenViewController.swift in Sources */,
+				FB7A88682833B310005D05D8 /* qrCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

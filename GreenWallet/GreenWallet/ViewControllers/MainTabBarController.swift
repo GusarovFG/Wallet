@@ -41,18 +41,12 @@ class MainTabBarController: UITabBarController, UINavigationBarDelegate {
 //            }
 //
             self.present(getTokenViewController, animated: true, completion: nil)
+            
         }
         
         if tabBar.selectedItem?.title == "Отправить" {
             guard let pushTokenViewController = storyboard?.instantiateViewController(withIdentifier: "PushTokensViewController") else { return }
-            //            let nav = UINavigationController(rootViewController: getTokenViewController)
-            
             pushTokenViewController.modalPresentationStyle = .fullScreen
-            
-            //            if let sheet = nav.sheetPresentationController {
-            //                sheet.detents = [.medium()]
-            //            }
-            //
             self.present(pushTokenViewController, animated: true, completion: nil)
         }
     }

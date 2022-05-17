@@ -13,8 +13,9 @@ class VerifyMnemonicViewController: UIViewController {
     private let indexes: [Int] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
     private var verifyedMnemonicPhrase: [String] = []
     private var selectPhrase: [String] = []
-    private var selectIndex = 0
+    private var selectIndex = 6
     private var errorVarify = false
+    private var firstWord = true
     private let alert = AlertService()
     
     @IBOutlet weak var veryfyCollectionView: UICollectionView!
@@ -128,6 +129,10 @@ extension VerifyMnemonicViewController: UICollectionViewDelegate, UICollectionVi
                 cell.mnemonicWord.textColor = .white
             }
             if indexPath > [0,5] && cell.mnemonicWord.text != "\(self.indexes[indexPath.row]). " {
+                
+                cell.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
+                cell.mnemonicWord.tintColor = .white
+            } else if indexPath == [0,self.selectIndex] && self.firstWord && cell.mnemonicWord.text == "\(self.indexes[indexPath.row]). " {
                 cell.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
                 cell.mnemonicWord.tintColor = .white
             } else {
@@ -155,9 +160,9 @@ extension VerifyMnemonicViewController: UICollectionViewDelegate, UICollectionVi
                     self.selectPhrase.append(self.verifyedMnemonicPhrase[indexPath.row])
                     self.verifyedMnemonicPhrase.remove(at: indexPath.row)
                     self.verifyedMnemonicPhrase.insert("", at: indexPath.row)
+                    self.firstWord = false
                     self.veryfyCollectionView.reloadData()
                     self.selectCollectionView.reloadData()
-                    
                     
                 }
             }
@@ -167,11 +172,14 @@ extension VerifyMnemonicViewController: UICollectionViewDelegate, UICollectionVi
                 self.verifyedMnemonicPhrase.insert(self.selectPhrase[indexPath.row], at: self.selectIndex)
                 
                 self.selectPhrase.remove(at: indexPath.row)
+                if self.selectIndex < 12 {
+                    self.selectIndex += 1
+                } else {
+                    self.selectIndex = 6
+                }
                 
                 self.veryfyCollectionView.reloadData()
                 self.selectCollectionView.reloadData()
-                
-                self.selectIndex = 0
             }
             
         default:

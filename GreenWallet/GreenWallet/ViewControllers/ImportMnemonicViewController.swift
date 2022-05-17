@@ -139,7 +139,7 @@ class ImportMnemonicViewController: UIViewController {
             
             self.checkBoxPress = false
             
-            self.continueButton.backgroundColor = #colorLiteral(red: 0.6106664538, green: 0.6106664538, blue: 0.6106664538, alpha: 1)
+            self.continueButton.backgroundColor = #colorLiteral(red: 0.2666666667, green: 0.2666666667, blue: 0.2666666667, alpha: 1)
             self.continueButton.isEnabled = false
         }
     }

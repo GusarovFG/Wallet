@@ -9,7 +9,7 @@ import UIKit
 
 class SettingsViewController: UIViewController {
     
-    private var titlesOfCells = ["Скрыть баланс кошельков", "Push-уведомления", "Поддержка", "Уведомления", "Все настройки"]
+    private var titlesOfCells = ["Скрыть баланс кошельков", "Push-уведомления", "Поддержка", "Уведомления", "Показать больше"]
     private var detailOfCells = ["На главном экране", "Рекомендуется", "Ответим на вопросы"]
 
     @IBOutlet weak var tableView: UITableView!

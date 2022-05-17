@@ -113,11 +113,11 @@ class PushTokensViewController: UIViewController {
     
     private func setupWalletButton() {
         self.tokenButton.titleLabel?.lineBreakMode = NSLineBreakMode.byWordWrapping
-        let qwe = ("\(self.wallet?.number ?? 0)")
+        let numbers = ("\(self.wallet?.number ?? 0)")
         var numberOfWallet = ""
-        for numb in qwe {
+        for numb in numbers {
             
-            if numberOfWallet.count < qwe.count - 4 {
+            if numberOfWallet.count < numbers.count - 4 {
                 numberOfWallet += "*"
             } else {
                 numberOfWallet.append(numb)

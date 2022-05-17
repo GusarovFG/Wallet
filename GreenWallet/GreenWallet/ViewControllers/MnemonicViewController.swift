@@ -12,7 +12,7 @@ class MnemonicViewController: UIViewController {
     private var mnemonicPhrase: [String] = ["Дверь", "Будущее", "Слово", "Криптовалюта", "Деньги", "Музыка", "Компьютер", "Плавание", "Кошелек", "Дизайн", "Дом", "Яблоко"]
     private var secureMnemonicPhrase: [String] = []
     private let indexes: [Int] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
-    private var hide = false
+    private var hide = true
 
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var hydeButton: UIButton!
@@ -24,9 +24,8 @@ class MnemonicViewController: UIViewController {
         super.viewDidLoad()
         
         self.mnemonicPhrase.shuffle()
-        
         self.secureMnemonicPhrase = self.mnemonicPhrase
-        
+        secureMnemonic()
         self.continueButton.isEnabled = false
         self.copyLabel.alpha = 0
         
@@ -53,14 +52,16 @@ class MnemonicViewController: UIViewController {
         }
     }
     
-    @IBAction func hydeButtonPressed(_ sender: Any) {
+    @IBAction func hydeButtonPressed(_ sender: UIButton) {
         if self.hide {
             self.secureMnemonicPhrase = self.mnemonicPhrase
             self.hide.toggle()
+            sender.setImage(UIImage(named: "EyeCross")!, for: .normal)
             self.collectionView.reloadData()
         } else {
             secureMnemonic()
             self.hide.toggle()
+            sender.setImage(UIImage(named: "Eye2")!, for: .normal)
             self.collectionView.reloadData()
             
         }

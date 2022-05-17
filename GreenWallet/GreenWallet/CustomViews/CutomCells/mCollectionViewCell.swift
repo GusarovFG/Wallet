@@ -36,7 +36,7 @@ class mCollectionViewCell: UICollectionViewCell {
         
         if self.wallet.tokens.isEmpty  {
             self.footerButton.setTitle("Добавить кошелек", for: .normal)
-//            self.footerButton.addTarget(self, action: #selector(addWalletButtonPressed), for: .touchUpInside)
+            self.footerButton.addTarget(self, action: #selector(addWalletButtonPressed), for: .touchUpInside)
         } else {
             self.footerButton.setTitle("Все кошельки", for: .normal)
         }
@@ -49,6 +49,15 @@ class mCollectionViewCell: UICollectionViewCell {
 
     }
     
+    @objc func addWalletButtonPressed() {
+        let storyboard = UIStoryboard(name: "Main", bundle: .main)
+        let newWalletVC = storyboard.instantiateViewController(withIdentifier: "NewWalletViewController") as! NewWalletViewController
+        newWalletVC.modalPresentationStyle = .fullScreen
+        self.controller.present(newWalletVC, animated: true)
+    }
+    @IBAction func newwalletButtomPressed(_ sender: Any) {
+        addWalletButtonPressed()
+    }
     
 }
 

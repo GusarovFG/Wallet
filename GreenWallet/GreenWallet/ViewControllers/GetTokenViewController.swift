@@ -8,12 +8,14 @@
 import UIKit
 
 class GetTokenViewController: UIViewController {
+    
+    private var qrs = [UIImage(named: "qrwallet")!,UIImage(named: "qrwallet")!,UIImage(named: "qrwallet")!]
+    private var wallets: [Wallet] = []
 
+    @IBOutlet weak var qrCollectionView: UICollectionView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var walletLabel: UILabel!
-    @IBOutlet weak var qrImage: UIImageView!
     @IBOutlet weak var pageControl: UIPageControl!
-    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var linkLabel: UILabel!
     @IBOutlet weak var copyButton: UIButton!
     @IBOutlet weak var shareBatton: UIButton!
@@ -27,12 +29,14 @@ class GetTokenViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.qrCollectionView.register(UINib(nibName: "qrCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "qrCell")
+        
+        self.wallets = WalletManager.share.vallets
         self.menuView.alpha = 0
         self.menuView.isHidden = true
         self.titleLabel.text = "Chia Network"
-        self.walletLabel.text = "Chia ******5630"
-        self.qrImage.image = UIImage(named: "qrwallet")!
         
+        setupLabel(index: self.pageControl.currentPage)
         self.chiaMenuButton.setTitle("Chia Network", for: .normal)
         self.chivesMenuButton.setTitle("Chives Network", for: .normal)
         
@@ -51,6 +55,21 @@ class GetTokenViewController: UIViewController {
         
         self.copyLabel.alpha = 0
     }
+    
+    private func setupLabel(index: Int) {
+        
+        let numbers = "\(self.wallets[index].number )"
+        var numberOfWallet = ""
+        for numb in numbers {
+            
+            if numberOfWallet.count < numbers.count - 4 {
+                numberOfWallet += "*"
+            } else {
+                numberOfWallet.append(numb)
+            }
+        }
+        self.walletLabel.text = "\(self.wallets[index].name )" + numberOfWallet
+    }
 
     @IBAction func backButtonPressed(_ sender: Any) {
         self.dismiss(animated: true)
@@ -63,7 +82,6 @@ class GetTokenViewController: UIViewController {
             self.chiaMenuButton.titleLabel?.textColor = .white
             self.menuButton.setTitle("• Chia Network", for: .normal)
             self.titleLabel.text = "Chia Network"
-            self.walletLabel.text = "Chia ******5630"
             self.chivesMenuButton.backgroundColor = .systemBackground
             self.chivesMenuButton.titleLabel?.textColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
         } else {
@@ -72,7 +90,6 @@ class GetTokenViewController: UIViewController {
             self.chivesMenuButton.titleLabel?.textColor = .white
             self.menuButton.titleLabel?.text = "Chives Network"
             self.titleLabel.text = "Chives Network"
-            self.walletLabel.text = "Chives ******5630"
             self.chiaMenuButton.backgroundColor = .systemBackground
             self.chiaMenuButton.titleLabel?.textColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
         }
@@ -97,9 +114,9 @@ class GetTokenViewController: UIViewController {
         self.chiaMenuButton.titleLabel?.textColor = .white
         self.menuButton.setTitle("• Chia Network", for: .normal)
         self.titleLabel.text = "Chia Network"
-        self.walletLabel.text = "Chia ******5630"
         self.chivesMenuButton.backgroundColor = .systemBackground
         self.chivesMenuButton.titleLabel?.textColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
+        self.menuView.alpha = 0
     }
     
     @IBAction func chivesButtonPressed(_ sender: UIButton) {
@@ -108,18 +125,18 @@ class GetTokenViewController: UIViewController {
         self.chivesMenuButton.titleLabel?.textColor = .white
         self.menuButton.titleLabel?.text = "Chives Network"
         self.titleLabel.text = "Chives Network"
-        self.walletLabel.text = "Chives ******5630"
         self.chiaMenuButton.backgroundColor = .systemBackground
         self.chiaMenuButton.titleLabel?.textColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
+        self.menuView.alpha = 0
     }
+    
     @IBAction func copyButtonPressed(_ sender: Any) {
-        UIView.animate(withDuration: 1) {
+        UIView.animate(withDuration: 3) {
             self.copyLabel.alpha = 1
         }
         UIPasteboard.general.string = self.linkLabel.text
-        UIView.animate(withDuration: 2) {
+        UIView.animate(withDuration: 3) {
             self.copyLabel.alpha = 0
-
         }
     }
     
@@ -127,4 +144,35 @@ class GetTokenViewController: UIViewController {
         let shareController = UIActivityViewController(activityItems: [self.linkLabel.text ?? ""], applicationActivities: nil)
         self.present(shareController, animated: true, completion: nil)
     }
+}
+
+extension GetTokenViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        self.qrs.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "qrCell", for: indexPath) as! qrCollectionViewCell
+        cell.imageCell.image = self.qrs[indexPath.row]
+        setupLabel(index: indexPath.row)
+       
+        return cell
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let visibleRect = CGRect(origin: self.qrCollectionView.contentOffset, size: self.qrCollectionView.bounds.size)
+        let visiblePoint = CGPoint(x: visibleRect.midX, y: visibleRect.midY)
+        if let visibleIndexPath = self.qrCollectionView.indexPathForItem(at: visiblePoint) {
+            self.pageControl.currentPage = visibleIndexPath.row
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        CGSize(width: 190, height: 190)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        UIEdgeInsets(top: 0, left: 55, bottom: 0, right: 190)
+    }
+    
 }
