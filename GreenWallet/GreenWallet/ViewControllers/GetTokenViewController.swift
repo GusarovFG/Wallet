@@ -172,7 +172,7 @@ extension GetTokenViewController: UICollectionViewDelegate, UICollectionViewData
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        UIEdgeInsets(top: 0, left: 55, bottom: 0, right: 190)
+        UIEdgeInsets(top: 0, left: 55, bottom: 0, right: 55)
     }
     
 }
