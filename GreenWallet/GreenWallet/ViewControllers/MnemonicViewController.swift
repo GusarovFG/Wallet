@@ -88,11 +88,14 @@ class MnemonicViewController: UIViewController {
     }
     @IBAction func copyButtonPressed(_ sender: Any) {
 
-        UIView.animate(withDuration: 2) {
+        UIView.animate(withDuration: 1) {
             self.copyLabel.alpha = 1
         }
-        UIView.animate(withDuration: 2) {
-            self.copyLabel.alpha = 0
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+            UIView.animate(withDuration: 1) {
+                self.copyLabel.alpha = 0
+            }
+            
         }
         
         UIPasteboard.general.string = self.mnemonicPhrase.joined(separator: ", ")

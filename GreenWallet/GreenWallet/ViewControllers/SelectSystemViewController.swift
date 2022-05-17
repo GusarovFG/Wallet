@@ -11,7 +11,9 @@ class SelectSystemViewController: UIViewController {
 
     private let systems: [System] = [System(name: "Chia", token: "XCH", image: UIImage(named: "LogoChia")!, balance: 0), System(name: "Chives", token: "XCC", image: UIImage(named: "ChivesLogo")!, balance: 0)]
     private let typseOfNewWallet = ["Новый", "Импорт мнемоники"]
-    private var isSelectedSystem = false
+     var isSelectedSystem = false
+     var isGetToken = false
+     var isPushToken = false
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var titleLabel: UILabel!
@@ -21,7 +23,11 @@ class SelectSystemViewController: UIViewController {
         self.view.window?.frame.size = CGSize(width: 414, height: 238)
         self.tableView.register(UINib(nibName: "SelectSystemTableViewCell", bundle: nil), forCellReuseIdentifier: "systemCell")
         self.navigationController?.navigationBar.isHidden = true
+        
+
     }
+    
+
 }
 
 extension SelectSystemViewController: UITableViewDelegate, UITableViewDataSource {
@@ -56,7 +62,7 @@ extension SelectSystemViewController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if self.isSelectedSystem {
+        if self.isSelectedSystem && !self.isGetToken && !self.isPushToken {
             switch indexPath {
             case [0,0]:
                 guard let newWalletVC = storyboard?.instantiateViewController(withIdentifier: "NewWalletViewController") else { return }
@@ -67,10 +73,38 @@ extension SelectSystemViewController: UITableViewDelegate, UITableViewDataSource
             default:
                 break
             }
+        } else if !self.isSelectedSystem && self.isGetToken && !self.isPushToken  {
+            switch indexPath  {
+            case [0,0]:
+                let gettVC = storyboard?.instantiateViewController(withIdentifier: "GetTokenViewController") as! GetTokenViewController
+                gettVC.modalPresentationStyle = .fullScreen
+                self.present(gettVC, animated: true, completion: nil)
+            case [0,1]:
+                let gettVC = storyboard?.instantiateViewController(withIdentifier: "GetTokenViewController") as! GetTokenViewController
+                gettVC.modalPresentationStyle = .fullScreen
+                self.present(gettVC, animated: true, completion: nil)
+            default:
+                break
+            }
+        } else if !self.isSelectedSystem && !self.isGetToken && self.isPushToken  {
+            switch indexPath  {
+            case [0,0]:
+                let gettVC = storyboard?.instantiateViewController(withIdentifier: "PushTokensViewController") as! PushTokensViewController
+                gettVC.modalPresentationStyle = .fullScreen
+                self.present(gettVC, animated: true, completion: nil)
+            case [0,1]:
+                let gettVC = storyboard?.instantiateViewController(withIdentifier: "PushTokensViewController") as! PushTokensViewController
+                gettVC.modalPresentationStyle = .fullScreen
+                self.present(gettVC, animated: true, completion: nil)
+            default:
+                break
+            }
         } else {
             self.isSelectedSystem = true
-            tableView.reloadData()
+            self.tableView.reloadData()
         }
+        
+        
         tableView.deselectRow(at: indexPath, animated: true)
     }
     

@@ -82,6 +82,13 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
             self.present(allSettingsVC, animated: true, completion: nil)
             self.navigationController?.navigationBar.isHidden = false
         }
+        if indexPath == [0,3] {
+            let supportVC = storyboard?.instantiateViewController(withIdentifier: "SupportViewController") as! SupportViewController
+            supportVC.modalPresentationStyle = .overFullScreen
+            
+            self.present(supportVC, animated: true, completion: nil)
+            self.navigationController?.navigationBar.isHidden = false
+        }
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }

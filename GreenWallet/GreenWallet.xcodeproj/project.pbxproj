@@ -29,6 +29,7 @@
 		FB3754B22821BE8F00882338 /* VerifyMnemonicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB3754B12821BE8F00882338 /* VerifyMnemonicViewController.swift */; };
 		FB383FE7281BE1C700939B6D /* CustomSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB383FE6281BE1C700939B6D /* CustomSwitch.swift */; };
 		FB3BC16E282C0BD2001B539E /* GetTokenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB3BC16D282C0BD2001B539E /* GetTokenViewController.swift */; };
+		FB42B6E72833E91C0022A8FB /* SupportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB42B6E62833E91C0022A8FB /* SupportViewController.swift */; };
 		FB5940352816856700037DFA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5940342816856700037DFA /* AppDelegate.swift */; };
 		FB5940372816856700037DFA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5940362816856700037DFA /* SceneDelegate.swift */; };
 		FB5940392816856700037DFA /* SelectLanguageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5940382816856700037DFA /* SelectLanguageViewController.swift */; };
@@ -96,6 +97,7 @@
 		FB3754B12821BE8F00882338 /* VerifyMnemonicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyMnemonicViewController.swift; sourceTree = "<group>"; };
 		FB383FE6281BE1C700939B6D /* CustomSwitch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSwitch.swift; sourceTree = "<group>"; };
 		FB3BC16D282C0BD2001B539E /* GetTokenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetTokenViewController.swift; sourceTree = "<group>"; };
+		FB42B6E62833E91C0022A8FB /* SupportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportViewController.swift; sourceTree = "<group>"; };
 		FB5940312816856700037DFA /* GreenWallet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GreenWallet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB5940342816856700037DFA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FB5940362816856700037DFA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -225,6 +227,7 @@
 				FB90380E282D52EE004023F5 /* PushTokensViewController.swift */,
 				FB8EAC1E282FC8B4007244C1 /* PasswordViewController.swift */,
 				FB8BF8DA282FFDF70067CD0B /* QRScanViewController.swift */,
+				FB42B6E62833E91C0022A8FB /* SupportViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -464,6 +467,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FB903811282D60DA004023F5 /* WalletManager.swift in Sources */,
+				FB42B6E72833E91C0022A8FB /* SupportViewController.swift in Sources */,
 				FBFE5781281ABE2D0016E74A /* SecureBalanceTableViewCell.swift in Sources */,
 				FB59404C281694DD00037DFA /* TermsOfUseViewController.swift in Sources */,
 				FB2F369428208286007576FE /* MainTabBarController.swift in Sources */,

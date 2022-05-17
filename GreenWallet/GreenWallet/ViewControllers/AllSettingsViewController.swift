@@ -85,6 +85,11 @@ extension AllSettingsViewController: UITableViewDelegate, UITableViewDataSource 
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath {
+        case [0,3]:
+            let supportVC = storyboard?.instantiateViewController(withIdentifier: "SupportViewController") as! SupportViewController
+            supportVC.modalPresentationStyle = .fullScreen
+            
+            self.present(supportVC, animated: true, completion: nil)
         case [0,5]:
             let languageVC = storyboard?.instantiateViewController(withIdentifier: "LanguageViewController") as! LanguageViewController
             languageVC.modalPresentationStyle = .fullScreen
@@ -99,3 +104,4 @@ extension AllSettingsViewController: UITableViewDelegate, UITableViewDataSource 
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }
+

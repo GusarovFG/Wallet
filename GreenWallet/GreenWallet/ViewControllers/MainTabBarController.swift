@@ -31,23 +31,12 @@ class MainTabBarController: UITabBarController, UINavigationBarDelegate {
     
     override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
         if tabBar.selectedItem?.title == "Получить" {
-            let getTokenViewController = storyboard?.instantiateViewController(withIdentifier: "GetTokenViewController") as! GetTokenViewController
-//            let nav = UINavigationController(rootViewController: getTokenViewController)
-            
-            getTokenViewController.modalPresentationStyle = .fullScreen
-            
-//            if let sheet = nav.sheetPresentationController {
-//                sheet.detents = [.medium()]
-//            }
-//
-            self.present(getTokenViewController, animated: true, completion: nil)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "showGetVC"), object: nil)
             
         }
         
         if tabBar.selectedItem?.title == "Отправить" {
-            guard let pushTokenViewController = storyboard?.instantiateViewController(withIdentifier: "PushTokensViewController") else { return }
-            pushTokenViewController.modalPresentationStyle = .fullScreen
-            self.present(pushTokenViewController, animated: true, completion: nil)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "showPushVC"), object: nil)
         }
     }
     

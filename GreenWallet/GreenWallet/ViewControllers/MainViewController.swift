@@ -26,28 +26,17 @@ class MainViewController: UIViewController {
     @IBOutlet weak var percentLabel: UILabel!
     @IBOutlet weak var pageControl: UIPageControl!
     @IBOutlet weak var cellectionView: UICollectionView!
-    @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     
-    @IBOutlet weak var systemBackgroundView: UIView!
-    @IBOutlet weak var systemViewConstraint: NSLayoutConstraint!
-    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var selectSystemView: UIView!
+    @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
+
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if self.tabBarController?.selectedIndex == 1 {
-            self.systemBackgroundView.isHidden = false
-        }
         
-        self.systemBackgroundView.isHidden = true
-        self.systemViewConstraint.constant = self.view.frame.height
-        self.tableView.register(UINib(nibName: "SelectSystemTableViewCell", bundle: nil), forCellReuseIdentifier: "systemCell")
         self.navigationController?.navigationBar.isHidden = true
-        self.tableView.backgroundColor = #colorLiteral(red: 0.246493727, green: 0.246493727, blue: 0.246493727, alpha: 1)
-        self.selectSystemView.layer.cornerRadius = 15
+
         
         self.wallets = WalletManager.share.vallets
         self.pageControl.numberOfPages = WalletManager.share.vallets.count
@@ -69,12 +58,16 @@ class MainViewController: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(hideWallet), name: NSNotification.Name(rawValue: "hideWallet"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(showWallet), name: NSNotification.Name(rawValue: "showWallet"), object: nil)
-
+        NotificationCenter.default.addObserver(self, selector: #selector(showGetSystem), name: NSNotification.Name(rawValue: "showGetVC"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(showPushSystem), name: NSNotification.Name(rawValue: "showPushVC"), object: nil)
     }
+    
+
     
     private func presentSelectSystemVC() {
         
         let detailViewController = storyboard?.instantiateViewController(withIdentifier: "SelectSystemViewController") as! SelectSystemViewController
+        detailViewController.isSelectedSystem = true
         let nav = UINavigationController(rootViewController: detailViewController)
         
         nav.modalPresentationStyle = .pageSheet
@@ -108,11 +101,38 @@ class MainViewController: UIViewController {
     @objc private func showWallet(notification: Notification) {
         self.balanceLabel.text = "\(self.balance) USD"
         
+
     }
     
+    @objc private func showGetSystem(notification: Notification) {
+        let selectSystemVC = storyboard?.instantiateViewController(withIdentifier: "SelectSystemViewController") as! SelectSystemViewController
+        selectSystemVC.isGetToken = true
+            let nav = UINavigationController(rootViewController: selectSystemVC)
+        
+        selectSystemVC.modalPresentationStyle = .fullScreen
+        
+            if let sheet = nav.sheetPresentationController {
+                sheet.detents = [.medium()]
+            }
+
+        self.present(nav, animated: true, completion: nil)
+    }
+    
+    @objc private func showPushSystem(notification: Notification) {
+        let selectSystemVC = storyboard?.instantiateViewController(withIdentifier: "SelectSystemViewController") as! SelectSystemViewController
+        selectSystemVC.isPushToken = true
+            let nav = UINavigationController(rootViewController: selectSystemVC)
+        
+        selectSystemVC.modalPresentationStyle = .fullScreen
+        
+            if let sheet = nav.sheetPresentationController {
+                sheet.detents = [.medium()]
+            }
+
+        self.present(nav, animated: true, completion: nil)
+    }
     
 }
-
 
 extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
@@ -146,60 +166,7 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
             self.pageControl.currentPage = visibleIndexPath.row
         }
     }
-
 }
 
-extension MainViewController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if self.isSelectedSystem {
-            return self.typseOfNewWallet.count
-        } else {
-            return self.systems.count
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let selectedSystemCell = tableView.dequeueReusableCell(withIdentifier: "systemCell", for: indexPath) as! SelectSystemTableViewCell
-        
-        selectedSystemCell.nameOfSystemLabel.text = self.systems[indexPath.row].name
-        selectedSystemCell.tokensLabel.text = self.systems[indexPath.row].token
-        selectedSystemCell.systemImage.image = self.systems[indexPath.row].image
-        
-        let selectTypeOfWalletCell = tableView.dequeueReusableCell(withIdentifier: "typeOfWalletCell", for: indexPath)
-        
-        selectTypeOfWalletCell.accessoryType = .disclosureIndicator
-        var content = selectTypeOfWalletCell.defaultContentConfiguration()
-        content.text = self.typseOfNewWallet[indexPath.row]
-        selectTypeOfWalletCell.contentConfiguration = content
-        selectedSystemCell.backgroundColor = #colorLiteral(red: 0.246493727, green: 0.246493727, blue: 0.246493727, alpha: 1)
-
-        switch self.isSelectedSystem {
-        case false:
-            return selectedSystemCell
-        case true:
-            return selectTypeOfWalletCell
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if self.isSelectedSystem {
-            switch indexPath {
-            case [0,0]:
-                guard let newWalletVC = storyboard?.instantiateViewController(withIdentifier: "NewWalletViewController") else { return }
-                self.present(newWalletVC, animated: true, completion: nil)
-            case [0,1]:
-                guard let newWalletVC = storyboard?.instantiateViewController(withIdentifier: "qwes") else { return }
-                self.present(newWalletVC, animated: true, completion: nil)
-            default:
-                break
-            }
-        } else {
-            self.isSelectedSystem = true
-            tableView.reloadData()
-        }
-        tableView.deselectRow(at: indexPath, animated: true)
-    }
-    
-}
 
 
