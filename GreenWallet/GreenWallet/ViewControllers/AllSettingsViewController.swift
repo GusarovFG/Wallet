@@ -22,8 +22,10 @@ class AllSettingsViewController: UIViewController {
         self.tableView.register(UINib(nibName: "SecureBalanceTableViewCell", bundle: nil), forCellReuseIdentifier: "secureAndPushCell")
         self.tableView.register(UINib(nibName: "SupportTableViewCell", bundle: nil), forCellReuseIdentifier: "supportCell")
         self.tableView.register(UINib(nibName: "PushAndAllSettingsTableViewCell", bundle: nil), forCellReuseIdentifier: "pushAndAllSettingsCell")
+        
     }
 
+    
     @IBAction func backButtonPressed(_ sender: Any) {
         self.dismiss(animated: true)
     }

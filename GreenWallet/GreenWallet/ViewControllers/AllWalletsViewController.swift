@@ -21,7 +21,14 @@ class AllWalletsViewController: UIViewController {
         self.wallets = WalletManager.share.vallets
         self.walletsTableView.register(UINib(nibName: "AddWalletTableViewCell", bundle: nil), forCellReuseIdentifier: "AddWalletTableViewCell")
         self.walletsTableView.register(UINib(nibName: "AllWalletsTableViewCell", bundle: nil), forCellReuseIdentifier: "AllWalletsTableViewCell")
-        
+
+        NotificationCenter.default.addObserver(self, selector: #selector(openAlert), name: NSNotification.Name("closeAlert"), object: nil)
+    }
+    
+    @objc func openAlert(notification: Notification)  {
+        let storyBoard = UIStoryboard(name: "Alert", bundle: .main)
+        let alertVC = storyBoard.instantiateViewController(withIdentifier: "DeletingAlert") as! AllertWalletViewController
+        self.present(alertVC, animated: true)
     }
     
     @IBAction func backButtonPressed(_ sender: Any) {
@@ -84,7 +91,10 @@ extension AllWalletsViewController: UITableViewDelegate, UITableViewDataSource {
         
         let trash = UIContextualAction(style: .normal,
                                        title: "") { (action, view, completionHandler) in
-            
+            let storyBoard = UIStoryboard(name: "Alert", bundle: .main)
+            let alertVC = storyBoard.instantiateViewController(withIdentifier: "DeleteWallet") as! AllertWalletViewController
+            alertVC.controller = self
+            self.present(alertVC, animated: true)
             completionHandler(true)
         }
         
@@ -97,5 +107,4 @@ extension AllWalletsViewController: UITableViewDelegate, UITableViewDataSource {
         return configuration
     }
 
-    
 }

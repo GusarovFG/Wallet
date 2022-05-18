@@ -45,7 +45,8 @@ class PasswordViewController: UIViewController {
         
         if self.enteringPassword == self.password {
             self.dismiss(animated: true)
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "Seccess"), object: nil, userInfo: self.userInfo)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "Seccess"), object: nil)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "closeAlert"), object: nil)
         } else {
             if self.enteringPassword.count == self.password.count {
                 self.errorLabel.alpha = 1
@@ -77,7 +78,8 @@ class PasswordViewController: UIViewController {
                     DispatchQueue.main.async {
                         if success {
                             self?.dismiss(animated: true)
-                            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "Seccess"), object: nil, userInfo: self?.userInfo)
+                            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "Seccess"), object: nil)
+                            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "closeAlert"), object: nil)
                         } else {
                             let ac = UIAlertController(title: "Authentication failed", message: "You could not be verified; please try again.", preferredStyle: .alert)
                             ac.addAction(UIAlertAction(title: "OK", style: .default))

@@ -9,6 +9,7 @@ import UIKit
 
 class AllertWalletViewController: UIViewController {
 
+    var controller = UIViewController()
     
     @IBOutlet weak var mainLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
@@ -18,7 +19,8 @@ class AllertWalletViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        NotificationCenter.default.addObserver(self, selector: #selector(closeAlert), name: NSNotification.Name("Seccess"), object: nil)
+        
     }
 
 
@@ -26,9 +28,20 @@ class AllertWalletViewController: UIViewController {
         self.mainLabel.text = label
         self.descriptionLabel.text = discription
     }
+    
+    @objc func closeAlert(notification: Notification) {
+        self.dismiss(animated: false)
+        
+    }
   
     @IBAction func mainButtonPressed(_ sender: Any) {
         self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
     }
     
+    @IBAction func confirmButtonPressed(_ sender: Any) {
+        let storyBoard = UIStoryboard(name: "Main", bundle: .main)
+        let passwordVC = storyBoard.instantiateViewController(withIdentifier: "PasswordViewController") as! PasswordViewController
+        self.dismiss(animated: true)
+        self.controller.present(passwordVC, animated: true)
+    }
 }
