@@ -268,6 +268,94 @@
             </objects>
             <point key="canvasLocation" x="1623" y="-135"/>
         </scene>
+        <!--Allert Wallet View Controller-->
+        <scene sceneID="JQX-vm-tYn">
+            <objects>
+                <viewController storyboardIdentifier="seccsessTransitViewController" modalTransitionStyle="crossDissolve" modalPresentationStyle="overFullScreen" id="HEZ-sv-zOt" customClass="AllertWalletViewController" customModule="GreenWallet" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="jLN-KT-top">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EK8-9O-N5s">
+                                <rect key="frame" x="35" y="212" width="344" height="457"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="seccessWalletImage" translatesAutoresizingMaskIntoConstraints="NO" id="fNw-yC-uL5">
+                                        <rect key="frame" x="62" y="15" width="220" height="198"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Успешно" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0GB-iM-Kxh">
+                                        <rect key="frame" x="16" y="228" width="312" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="25"/>
+                                        <color key="textColor" red="0.2274509804" green="0.67450980390000004" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="656-nv-uo8">
+                                        <rect key="frame" x="68" y="376.5" width="208" height="48.5"/>
+                                        <color key="backgroundColor" red="0.2274509804" green="0.67450980390000004" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="48.5" id="tDd-vm-NGC"/>
+                                        </constraints>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Готово"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <integer key="value" value="20"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="mainButtonPressed:" destination="HEZ-sv-zOt" eventType="touchUpInside" id="vQZ-hl-BFo"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Обычно транзакция занимает 2-3 минуты" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WLJ-NX-ySW">
+                                        <rect key="frame" x="26" y="266" width="293" height="81.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.58039215690000001" green="0.58039215690000001" blue="0.58039215690000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.18823529410000001" green="0.18823529410000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" red="0.18823529410000001" green="0.18823529410000001" blue="0.18823529410000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="656-nv-uo8" secondAttribute="bottom" constant="32" id="3Ug-Dk-7BQ"/>
+                                    <constraint firstItem="WLJ-NX-ySW" firstAttribute="top" secondItem="0GB-iM-Kxh" secondAttribute="bottom" constant="8" symbolic="YES" id="Cog-Ue-0Oj"/>
+                                    <constraint firstAttribute="trailing" secondItem="fNw-yC-uL5" secondAttribute="trailing" constant="62" id="FkY-UF-cB4"/>
+                                    <constraint firstItem="fNw-yC-uL5" firstAttribute="leading" secondItem="EK8-9O-N5s" secondAttribute="leading" constant="62" id="Hia-Ki-N2u"/>
+                                    <constraint firstItem="656-nv-uo8" firstAttribute="top" secondItem="WLJ-NX-ySW" secondAttribute="bottom" constant="29" id="JIx-Ln-wDa"/>
+                                    <constraint firstItem="WLJ-NX-ySW" firstAttribute="leading" secondItem="EK8-9O-N5s" secondAttribute="leading" constant="26" id="Oxn-fK-WNx"/>
+                                    <constraint firstAttribute="trailing" secondItem="656-nv-uo8" secondAttribute="trailing" constant="68" id="PJE-1t-WzH"/>
+                                    <constraint firstItem="0GB-iM-Kxh" firstAttribute="leading" secondItem="EK8-9O-N5s" secondAttribute="leading" constant="16" id="R7a-JL-t0i"/>
+                                    <constraint firstAttribute="trailing" secondItem="0GB-iM-Kxh" secondAttribute="trailing" constant="16" id="RwM-ZH-OqN"/>
+                                    <constraint firstAttribute="trailing" secondItem="WLJ-NX-ySW" secondAttribute="trailing" constant="25" id="YID-sw-Rev"/>
+                                    <constraint firstItem="0GB-iM-Kxh" firstAttribute="top" secondItem="fNw-yC-uL5" secondAttribute="bottom" constant="15" id="euR-Qt-Mlm"/>
+                                    <constraint firstItem="656-nv-uo8" firstAttribute="leading" secondItem="EK8-9O-N5s" secondAttribute="leading" constant="68" id="qZy-je-7aZ"/>
+                                    <constraint firstItem="fNw-yC-uL5" firstAttribute="top" secondItem="EK8-9O-N5s" secondAttribute="top" constant="15" id="x43-Nm-Tqt"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <integer key="value" value="15"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="CYf-Pd-dHR"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.34999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="EK8-9O-N5s" firstAttribute="top" secondItem="CYf-Pd-dHR" secondAttribute="top" constant="168" id="1iL-Ve-bVE"/>
+                            <constraint firstItem="CYf-Pd-dHR" firstAttribute="bottom" secondItem="EK8-9O-N5s" secondAttribute="bottom" constant="193" id="Cjd-2z-3BB"/>
+                            <constraint firstItem="EK8-9O-N5s" firstAttribute="leading" secondItem="CYf-Pd-dHR" secondAttribute="leading" constant="35" id="WyK-BX-uTq"/>
+                            <constraint firstItem="EK8-9O-N5s" firstAttribute="centerX" secondItem="jLN-KT-top" secondAttribute="centerX" id="p4J-Uy-EkL"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="descriptionLabel" destination="WLJ-NX-ySW" id="aMr-iv-1pi"/>
+                        <outlet property="mainButton" destination="656-nv-uo8" id="vDj-Qy-DpG"/>
+                        <outlet property="mainLabel" destination="0GB-iM-Kxh" id="Rgy-Mq-her"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="my9-ha-XhP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2297" y="-135"/>
+        </scene>
     </scenes>
     <resources>
         <image name="seccessWalletImage" width="222" height="198"/>

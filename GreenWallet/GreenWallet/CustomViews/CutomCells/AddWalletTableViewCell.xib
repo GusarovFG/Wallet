@@ -29,6 +29,9 @@
                                 </fragment>
                             </attributedString>
                         </buttonConfiguration>
+                        <connections>
+                            <action selector="addButtonPressed:" destination="xnP-rN-fYz" eventType="touchUpInside" id="3Z0-bo-e9X"/>
+                        </connections>
                     </button>
                 </subviews>
                 <constraints>
@@ -39,10 +42,13 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="d64-SD-zge"/>
             <color key="backgroundColor" red="0.18823529410000001" green="0.18823529410000001" blue="0.18823529410000001" alpha="1" colorSpace="calibratedRGB"/>
+            <connections>
+                <outlet property="addButton" destination="rPc-n3-26r" id="1n2-xr-23k"/>
+            </connections>
             <point key="canvasLocation" x="231.8840579710145" y="88.392857142857139"/>
         </tableViewCell>
     </objects>
     <resources>
-        <image name="plus" catalog="system" width="128" height="113"/>
+        <image name="plus" catalog="system" width="32" height="32"/>
     </resources>
 </document>

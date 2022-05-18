@@ -6,19 +6,15 @@
 //
 
 import UIKit
+import AVFAudio
 
 class MainViewController: UIViewController {
     
     private var balance = 0
     private var wallets: [Wallet] = []
-    private let systems: [System] = [System(name: "Chia", token: "XCH", image: UIImage(named: "LogoChia")!, balance: 0), System(name: "Chives", token: "XCC", image: UIImage(named: "ChivesLogo")!, balance: 0)]
-    private let typseOfNewWallet = ["Новый", "Импорт мнемоники"]
-    private var isSelectedSystem = false
-    private var gerToken = false
-    private var pushToken = false
-
+    
     private var footerButtonTitle = "Все кошельки"
-
+    
     let userDefaults = UserDefaults.standard
     
     @IBOutlet weak var balanceLabel: UILabel!
@@ -28,7 +24,7 @@ class MainViewController: UIViewController {
     @IBOutlet weak var cellectionView: UICollectionView!
     
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
-
+    
     
     
     override func viewDidLoad() {
@@ -36,10 +32,10 @@ class MainViewController: UIViewController {
         
         
         self.navigationController?.navigationBar.isHidden = true
-
         
-        self.wallets = WalletManager.share.vallets
-        self.pageControl.numberOfPages = WalletManager.share.vallets.count
+        
+        self.wallets = WalletManager.share.favoritesWallets
+        self.pageControl.numberOfPages = WalletManager.share.favoritesWallets.count
         self.cellectionView.register(UINib(nibName: "mCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "mCollectionViewCell")
         
         
@@ -48,7 +44,7 @@ class MainViewController: UIViewController {
         } else {
             self.balanceLabel.text = "\(self.balance) USD"
         }
-
+        
         self.navigationController?.navigationBar.isHidden = false
         let navigationItem = UINavigationItem()
         let settingsItem = UIBarButtonItem(image: UIImage(named: "Menu")!, style: .done, target: self, action: #selector(pushSettingsController))
@@ -62,7 +58,13 @@ class MainViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(showPushSystem), name: NSNotification.Name(rawValue: "showPushVC"), object: nil)
     }
     
-
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.wallets = WalletManager.share.favoritesWallets
+        self.pageControl.numberOfPages = self.wallets.count
+        self.cellectionView.reloadData()
+    }
+    
     
     private func presentSelectSystemVC() {
         
@@ -101,34 +103,34 @@ class MainViewController: UIViewController {
     @objc private func showWallet(notification: Notification) {
         self.balanceLabel.text = "\(self.balance) USD"
         
-
+        
     }
     
     @objc private func showGetSystem(notification: Notification) {
         let selectSystemVC = storyboard?.instantiateViewController(withIdentifier: "SelectSystemViewController") as! SelectSystemViewController
         selectSystemVC.isGetToken = true
-            let nav = UINavigationController(rootViewController: selectSystemVC)
+        let nav = UINavigationController(rootViewController: selectSystemVC)
         
         selectSystemVC.modalPresentationStyle = .fullScreen
         
-            if let sheet = nav.sheetPresentationController {
-                sheet.detents = [.medium()]
-            }
-
+        if let sheet = nav.sheetPresentationController {
+            sheet.detents = [.medium()]
+        }
+        
         self.present(nav, animated: true, completion: nil)
     }
     
     @objc private func showPushSystem(notification: Notification) {
         let selectSystemVC = storyboard?.instantiateViewController(withIdentifier: "SelectSystemViewController") as! SelectSystemViewController
         selectSystemVC.isPushToken = true
-            let nav = UINavigationController(rootViewController: selectSystemVC)
+        let nav = UINavigationController(rootViewController: selectSystemVC)
         
         selectSystemVC.modalPresentationStyle = .fullScreen
         
-            if let sheet = nav.sheetPresentationController {
-                sheet.detents = [.medium()]
-            }
-
+        if let sheet = nav.sheetPresentationController {
+            sheet.detents = [.medium()]
+        }
+        
         self.present(nav, animated: true, completion: nil)
     }
     
@@ -147,17 +149,33 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "mCollectionViewCell", for: indexPath) as! mCollectionViewCell
-        cell.wallet = self.wallets[indexPath.row]
-        cell.controller = self
-        cell.frame.size.height = cell.stackView.frame.height
+        if WalletManager.share.favoritesWallets.isEmpty {
+            cell.wallet = Wallet(name: "", number: 0, image: UIImage(), tokens: [], toket: "")
+            cell.tableView.reloadData()
+            
+        } else {
+            if cell.stackView.arrangedSubviews.contains(where: {$0 == cell.tableView}) {
+                cell.wallet = WalletManager.share.favoritesWallets[indexPath.row]
+                cell.controller = self
+                cell.tableView.reloadData()
+            } else {
+                cell.stackView.addArrangedSubview(cell.tableView)
+                cell.wallet = WalletManager.share.favoritesWallets[indexPath.row]
+                cell.controller = self
+                cell.tableView.reloadData()
+            }
+            
+        }
         return cell
+        
+        
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-
+        
         return CGSize(width: self.cellectionView.frame.width, height: self.cellectionView.frame.height)
     }
-
+    
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let visibleRect = CGRect(origin: self.cellectionView.contentOffset, size: self.cellectionView.bounds.size)

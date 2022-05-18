@@ -2332,7 +2332,6 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                     <navigationItem key="navigationItem" id="ygC-JQ-O32"/>
                     <connections>
                         <outlet property="balanceLabel" destination="2Vr-bL-6TF" id="lh9-uy-8cl"/>
-                        <outlet property="bottomConstraint" destination="WiT-hn-Nc9" id="hv4-9d-YUX"/>
                         <outlet property="cellectionView" destination="osZ-w1-XVa" id="O0Z-Ck-hk7"/>
                         <outlet property="pageControl" destination="ITP-eL-ev8" id="2BL-fa-AiR"/>
                         <outlet property="percentLabel" destination="q8X-eN-3k7" id="kuj-dn-Fon"/>
@@ -2603,7 +2602,7 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
         <!--All Wallets View Controller-->
         <scene sceneID="whD-dD-X1c">
             <objects>
-                <viewController id="O4O-Q9-iZl" customClass="AllWalletsViewController" customModule="GreenWallet" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AllWalletsViewController" id="O4O-Q9-iZl" customClass="AllWalletsViewController" customModule="GreenWallet" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="uxk-0w-ALY">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2651,6 +2650,10 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="O4O-Q9-iZl" id="ePb-NG-zGF"/>
+                                    <outlet property="delegate" destination="O4O-Q9-iZl" id="HIV-rH-B7O"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="BIU-jI-NSb"/>
@@ -3513,8 +3516,8 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
         <image name="LaunchScreenLogo" width="252" height="54"/>
         <image name="NewWallet" width="119" height="116"/>
         <image name="button1" width="28" height="28"/>
-        <image name="chevron.backward" catalog="system" width="96" height="128"/>
-        <image name="chevron.down" catalog="system" width="128" height="72"/>
+        <image name="chevron.backward" catalog="system" width="32" height="32"/>
+        <image name="chevron.down" catalog="system" width="32" height="32"/>
         <image name="contacts" width="16" height="20"/>
         <image name="deleteDigit" width="52" height="52"/>
         <image name="faceID" width="52" height="52"/>

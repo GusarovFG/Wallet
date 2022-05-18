@@ -8,14 +8,14 @@
 import Foundation
 import UIKit
 
-struct System {
+struct System: Equatable {
     var name: String
     var token: String
     var image: UIImage
     var balance: Double
 }
 
-struct Wallet {
+struct Wallet: Equatable {
     
     var name: String
     var number: Int

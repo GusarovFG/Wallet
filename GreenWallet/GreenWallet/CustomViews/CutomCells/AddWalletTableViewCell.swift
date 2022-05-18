@@ -9,6 +9,9 @@ import UIKit
 
 class AddWalletTableViewCell: UITableViewCell {
 
+    var addPressed: (() -> ())?
+    
+    @IBOutlet weak var addButton: UIButton!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -18,6 +21,9 @@ class AddWalletTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    @IBAction func addButtonPressed(_ sender: UIButton) {
+        self.addPressed?()
     }
     
 }

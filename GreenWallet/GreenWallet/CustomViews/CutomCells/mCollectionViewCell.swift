@@ -9,7 +9,7 @@ import UIKit
 
 class mCollectionViewCell: UICollectionViewCell {
     
-    var wallet = Wallet(name: "", number: 0, image: UIImage(systemName: "eye")!, tokens: [], toket: "XCH")
+    var wallet = Wallet(name: "", number: 0, image: UIImage(), tokens: [], toket: "")
     var controller = UIViewController()
     var height: CGFloat = 0
     
@@ -22,6 +22,8 @@ class mCollectionViewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        
         self.tableView.dataSource = self
         self.tableView.delegate = self
         
@@ -34,27 +36,38 @@ class mCollectionViewCell: UICollectionViewCell {
         self.footerView.layer.cornerRadius = 15
         self.footerView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
         
-        if self.wallet.tokens.isEmpty  {
+        if WalletManager.share.favoritesWallets.isEmpty  {
+            self.footerButton.setTitle("Добавить кошелек", for: .normal)
+            self.footerButton.addTarget(self, action: #selector(newwalletButtomPressed), for: .touchUpInside)
+        } else {
             self.footerButton.setTitle("Все кошельки", for: .normal)
             self.footerButton.addTarget(self, action: #selector(allWalletButtonPressed), for: .touchUpInside)
-        } else {
-            self.footerButton.setTitle("Добавить кошелек", for: .normal)
         }
-    }
-    
-    override func layoutSubviews(){
-        super.layoutSubviews()
-        self.heightConstraint.constant = self.frame.height - (self.footerView.frame.height + self.headerView.frame.height + CGFloat((76 * self.wallet.tokens.count )) + 46)
-    }
-    
-    @objc func allWalletButtonPressed() {
-        let storyboard = UIStoryboard(name: "Main", bundle: .main)
-        let selectSystemVC = storyboard.instantiateViewController(withIdentifier: "AllWalletsViewController") as! AllWalletsViewController
+        
         
     }
     
     
-    @IBAction func newwalletButtomPressed(_ sender: Any) {
+    override func layoutSubviews(){
+        super.layoutSubviews()
+        if self.stackView.arrangedSubviews.count == 2 {
+            self.heightConstraint.constant = (self.frame.size.height) - (self.footerView.frame.height + self.headerView.frame.height)
+        } else {
+            
+            self.heightConstraint.constant = (self.frame.size.height) - (self.footerView.frame.height + self.headerView.frame.height + CGFloat((76 * self.wallet.tokens.count )) + 46)
+        }
+    }
+    
+    @objc func allWalletButtonPressed() {
+        let storyboard = UIStoryboard(name: "Main", bundle: .main)
+        let allWalletsVC = storyboard.instantiateViewController(withIdentifier: "AllWalletsViewController") as! AllWalletsViewController
+        allWalletsVC.modalPresentationStyle = .fullScreen
+        self.controller.present(allWalletsVC, animated: true)
+        
+    }
+    
+    
+    @objc func newwalletButtomPressed(_ sender: Any) {
         let storyboard = UIStoryboard(name: "Main", bundle: .main)
         let selectSystemVC = storyboard.instantiateViewController(withIdentifier: "SelectSystemViewController") as! SelectSystemViewController
         let nav = UINavigationController(rootViewController: selectSystemVC)
@@ -69,6 +82,14 @@ class mCollectionViewCell: UICollectionViewCell {
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "newWallet"), object: nil)
     }
     
+    @IBAction func footerButtonPressed(_ sender: UIButton) {
+        if sender.titleLabel?.text == "Добавить кошелек"  {
+            self.newwalletButtomPressed(sender)
+        } else {
+            self.allWalletButtonPressed()
+        }
+    }
+    
 }
 
 extension mCollectionViewCell: UITableViewDelegate, UITableViewDataSource {
@@ -76,7 +97,7 @@ extension mCollectionViewCell: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch self.wallet.tokens.count {
         case 0:
-            return 1
+            return 0
         default:
             return self.wallet.tokens.count + 1
         }

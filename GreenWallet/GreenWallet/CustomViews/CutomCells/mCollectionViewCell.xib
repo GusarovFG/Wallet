@@ -79,6 +79,9 @@
                                             <directionalEdgeInsets key="contentInsets" top="1" leading="0.0" bottom="0.0" trailing="0.0"/>
                                             <color key="baseForegroundColor" red="0.2274509804" green="0.67450980390000004" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                         </buttonConfiguration>
+                                        <connections>
+                                            <action selector="footerButtonPressed:" destination="at6-i4-rhb" eventType="touchUpInside" id="wYt-bI-ujV"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.18823529410000001" green="0.18823529410000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -120,6 +123,6 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="plus" catalog="system" width="128" height="113"/>
+        <image name="plus" catalog="system" width="32" height="32"/>
     </resources>
 </document>
