@@ -9,7 +9,7 @@ import UIKit
 
 class mCollectionViewCell: UICollectionViewCell {
     
-    var wallet = Wallet(name: "", number: 0, image: UIImage(systemName: "eye")!, tokens: [])
+    var wallet = Wallet(name: "", number: 0, image: UIImage(systemName: "eye")!, tokens: [], toket: "XCH")
     var controller = UIViewController()
     var height: CGFloat = 0
     
@@ -36,7 +36,7 @@ class mCollectionViewCell: UICollectionViewCell {
         
         if self.wallet.tokens.isEmpty  {
             self.footerButton.setTitle("Все кошельки", for: .normal)
-            //            self.footerButton.addTarget(self, action: #selector(addWalletButtonPressed), for: .touchUpInside)
+            self.footerButton.addTarget(self, action: #selector(allWalletButtonPressed), for: .touchUpInside)
         } else {
             self.footerButton.setTitle("Добавить кошелек", for: .normal)
         }
@@ -47,22 +47,28 @@ class mCollectionViewCell: UICollectionViewCell {
         self.heightConstraint.constant = self.frame.height - (self.footerView.frame.height + self.headerView.frame.height + CGFloat((76 * self.wallet.tokens.count )) + 46)
     }
     
-
-@IBAction func newwalletButtomPressed(_ sender: Any) {
-    let storyboard = UIStoryboard(name: "Main", bundle: .main)
-    let selectSystemVC = storyboard.instantiateViewController(withIdentifier: "SelectSystemViewController") as! SelectSystemViewController
-    let nav = UINavigationController(rootViewController: selectSystemVC)
-    
-    selectSystemVC.modalPresentationStyle = .fullScreen
-    
-    if let sheet = nav.sheetPresentationController {
-        sheet.detents = [.medium()]
+    @objc func allWalletButtonPressed() {
+        let storyboard = UIStoryboard(name: "Main", bundle: .main)
+        let selectSystemVC = storyboard.instantiateViewController(withIdentifier: "AllWalletsViewController") as! AllWalletsViewController
+        
     }
     
-    self.controller.present(nav, animated: true, completion: nil)
-    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "newWallet"), object: nil)
-}
-
+    
+    @IBAction func newwalletButtomPressed(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Main", bundle: .main)
+        let selectSystemVC = storyboard.instantiateViewController(withIdentifier: "SelectSystemViewController") as! SelectSystemViewController
+        let nav = UINavigationController(rootViewController: selectSystemVC)
+        
+        selectSystemVC.modalPresentationStyle = .fullScreen
+        
+        if let sheet = nav.sheetPresentationController {
+            sheet.detents = [.medium()]
+        }
+        
+        self.controller.present(nav, animated: true, completion: nil)
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "newWallet"), object: nil)
+    }
+    
 }
 
 extension mCollectionViewCell: UITableViewDelegate, UITableViewDataSource {

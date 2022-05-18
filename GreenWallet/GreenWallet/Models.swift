@@ -21,5 +21,5 @@ struct Wallet {
     var number: Int
     var image: UIImage
     var tokens: [System]
-    
+    var toket: String
 }
