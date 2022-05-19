@@ -14,9 +14,12 @@ class AllWalletsViewController: UIViewController {
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var mainLabel: UILabel!
     @IBOutlet weak var walletsTableView: UITableView!
+    @IBOutlet weak var favoriteLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.favoriteLabel.alpha = 0
         
         self.wallets = WalletManager.share.vallets
         self.walletsTableView.register(UINib(nibName: "AddWalletTableViewCell", bundle: nil), forCellReuseIdentifier: "AddWalletTableViewCell")
@@ -75,8 +78,28 @@ extension AllWalletsViewController: UITableViewDelegate, UITableViewDataSource {
                                          title: "") {  (action, view, completionHandler) in
             if WalletManager.share.favoritesWallets.filter({$0 == wallet}).count == 0 {
                 WalletManager.share.favoritesWallets.append(wallet)
+                self.favoriteLabel.backgroundColor = #colorLiteral(red: 0.2274509804, green: 0.6745098039, blue: 0.3490196078, alpha: 1)
+                self.favoriteLabel.text = "     Добавлен на главный экран"
+                UIView.animate(withDuration: 1, delay: 0) {
+                    self.favoriteLabel.alpha = 1
+                }
+                DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                    UIView.animate(withDuration: 1, delay: 0) {
+                        self.favoriteLabel.alpha = 0
+                    }
+                }
             } else {
                 WalletManager.share.favoritesWallets.removeAll(where: {$0 == wallet})
+                self.favoriteLabel.backgroundColor = #colorLiteral(red: 1, green: 0.2360929251, blue: 0.1714096665, alpha: 1)
+                self.favoriteLabel.text = "     Убран с главного экрана"
+                UIView.animate(withDuration: 1, delay: 0) {
+                    self.favoriteLabel.alpha = 1
+                }
+                DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                    UIView.animate(withDuration: 1, delay: 0) {
+                        self.favoriteLabel.alpha = 0
+                    }
+                }
             }
             completionHandler(true)
         }

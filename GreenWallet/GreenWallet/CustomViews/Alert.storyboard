@@ -306,7 +306,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <action selector="mainButtonPressed:" destination="HEZ-sv-zOt" eventType="touchUpInside" id="vQZ-hl-BFo"/>
+                                            <action selector="dismissButtonPressed:" destination="HEZ-sv-zOt" eventType="touchUpInside" id="LTj-sv-ctS"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Данное действие невозможно отменить. Убедитесь что вы сохранили мнемоническую фразу" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WLJ-NX-ySW">
@@ -423,7 +423,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <action selector="mainButtonPressed:" destination="jpr-m5-yKx" eventType="touchUpInside" id="dye-Lv-uif"/>
+                                            <action selector="dismissButtonPressed:" destination="jpr-m5-yKx" eventType="touchUpInside" id="HZV-vg-ibZ"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Кошелек успешно удален" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bV6-pT-N6x">

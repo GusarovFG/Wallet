@@ -2630,7 +2630,7 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="SC2-LE-xLr">
-                                <rect key="frame" x="0.0" y="171" width="414" height="691"/>
+                                <rect key="frame" x="0.0" y="189" width="414" height="673"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="AllWalletsTableViewCell" id="g99-aP-jZY" customClass="AllWalletsTableViewCell" customModule="GreenWallet" customModuleProvider="target">
@@ -2655,23 +2655,40 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                                     <outlet property="delegate" destination="O4O-Q9-iZl" id="HIV-rH-B7O"/>
                                 </connections>
                             </tableView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="384" translatesAutoresizingMaskIntoConstraints="NO" id="j6n-7a-WqJ">
+                                <rect key="frame" x="15" y="135" width="384" height="47"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                                <size key="shadowOffset" width="0.0" height="0.0"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <integer key="value" value="15"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="BIU-jI-NSb"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="BIU-jI-NSb" firstAttribute="trailing" secondItem="j6n-7a-WqJ" secondAttribute="trailing" constant="15" id="00z-Dr-Crv"/>
                             <constraint firstItem="SC2-LE-xLr" firstAttribute="bottom" secondItem="BIU-jI-NSb" secondAttribute="bottom" id="2bv-uv-ZGg"/>
                             <constraint firstItem="SC2-LE-xLr" firstAttribute="leading" secondItem="BIU-jI-NSb" secondAttribute="leading" id="41u-bI-iTz"/>
                             <constraint firstItem="WMl-sU-6H0" firstAttribute="leading" secondItem="BIU-jI-NSb" secondAttribute="leading" id="ARL-32-cm0"/>
+                            <constraint firstItem="j6n-7a-WqJ" firstAttribute="top" secondItem="uMN-7I-uTp" secondAttribute="bottom" constant="8" symbolic="YES" id="Jre-dX-sJt"/>
                             <constraint firstItem="uMN-7I-uTp" firstAttribute="top" secondItem="WMl-sU-6H0" secondAttribute="bottom" constant="21" id="Pdz-2t-Jl1"/>
                             <constraint firstItem="BIU-jI-NSb" firstAttribute="trailing" secondItem="uMN-7I-uTp" secondAttribute="trailing" constant="89" id="Xq9-0F-01d"/>
                             <constraint firstItem="SC2-LE-xLr" firstAttribute="trailing" secondItem="BIU-jI-NSb" secondAttribute="trailing" id="Zu1-Kv-nlx"/>
-                            <constraint firstItem="SC2-LE-xLr" firstAttribute="top" secondItem="uMN-7I-uTp" secondAttribute="bottom" constant="44" id="sa6-xT-eiJ"/>
+                            <constraint firstItem="SC2-LE-xLr" firstAttribute="top" secondItem="j6n-7a-WqJ" secondAttribute="bottom" constant="7" id="chf-sA-1V9"/>
+                            <constraint firstItem="j6n-7a-WqJ" firstAttribute="leading" secondItem="BIU-jI-NSb" secondAttribute="leading" constant="15" id="kQT-LR-cIn"/>
+                            <constraint firstItem="SC2-LE-xLr" firstAttribute="top" secondItem="uMN-7I-uTp" secondAttribute="bottom" constant="62" id="sa6-xT-eiJ"/>
                             <constraint firstItem="WMl-sU-6H0" firstAttribute="top" secondItem="BIU-jI-NSb" secondAttribute="top" id="szr-Tu-Tdq"/>
                             <constraint firstItem="uMN-7I-uTp" firstAttribute="leading" secondItem="BIU-jI-NSb" secondAttribute="leading" constant="89" id="yxY-Vq-kS7"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="backButton" destination="WMl-sU-6H0" id="CBh-ED-KME"/>
+                        <outlet property="favoriteLabel" destination="j6n-7a-WqJ" id="ncE-W5-syL"/>
                         <outlet property="mainLabel" destination="uMN-7I-uTp" id="i8x-59-KmX"/>
                         <outlet property="walletsTableView" destination="SC2-LE-xLr" id="l9N-6W-38l"/>
                     </connections>
@@ -3516,8 +3533,8 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
         <image name="LaunchScreenLogo" width="252" height="54"/>
         <image name="NewWallet" width="119" height="116"/>
         <image name="button1" width="28" height="28"/>
-        <image name="chevron.backward" catalog="system" width="32" height="32"/>
-        <image name="chevron.down" catalog="system" width="32" height="32"/>
+        <image name="chevron.backward" catalog="system" width="96" height="128"/>
+        <image name="chevron.down" catalog="system" width="128" height="72"/>
         <image name="contacts" width="16" height="20"/>
         <image name="deleteDigit" width="52" height="52"/>
         <image name="faceID" width="52" height="52"/>

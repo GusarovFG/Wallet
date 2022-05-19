@@ -44,4 +44,7 @@ class AllertWalletViewController: UIViewController {
         self.dismiss(animated: true)
         self.controller.present(passwordVC, animated: true)
     }
+    @IBAction func dismissButtonPressed(_ sender: Any) {
+        self.dismiss(animated: true)
+    }
 }
