@@ -11,9 +11,11 @@ import LocalAuthentication
 
 class PasswordViewController: UIViewController {
     
+    var index = 0
+    
     private var password = ""
     private var enteringPassword = ""
-    private let userInfo = ["seccsess": ""]
+    private var userInfo = ["seccsess": 0]
 
     @IBOutlet weak var stackView: UIStackView!
     @IBOutlet weak var errorLabel: UILabel!
@@ -30,6 +32,8 @@ class PasswordViewController: UIViewController {
             view.layer.borderColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         }
         
+        self.userInfo = ["index": self.index]
+        
     }
     
 
@@ -45,7 +49,7 @@ class PasswordViewController: UIViewController {
         
         if self.enteringPassword == self.password {
             self.dismiss(animated: true)
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "Seccess"), object: nil)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "Seccess"), object: nil, userInfo: self.userInfo)
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "closeAlert"), object: nil)
         } else {
             if self.enteringPassword.count == self.password.count {
@@ -78,7 +82,7 @@ class PasswordViewController: UIViewController {
                     DispatchQueue.main.async {
                         if success {
                             self?.dismiss(animated: true)
-                            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "Seccess"), object: nil)
+                            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "Seccess"), object: nil, userInfo: self?.userInfo)
                             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "closeAlert"), object: nil)
                         } else {
                             let ac = UIAlertController(title: "Authentication failed", message: "You could not be verified; please try again.", preferredStyle: .alert)
