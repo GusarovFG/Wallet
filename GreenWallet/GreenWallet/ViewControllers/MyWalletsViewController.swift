@@ -75,7 +75,6 @@ class MyWalletsViewController: UIViewController {
         guard let userInfo = notification.userInfo else { return }
         self.index = userInfo["index"] as! Int
         self.isShowDetail = true
-        self.walletCollectionView.reloadData()
         print(self.index)
     }
     
@@ -86,7 +85,6 @@ class MyWalletsViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.scrollToNextCell()
-        print(self.index)
     }
     
     private func scrollToNextCell(){
