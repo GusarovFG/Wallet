@@ -281,10 +281,13 @@
                                 <rect key="frame" x="35" y="212" width="344" height="457"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="error" translatesAutoresizingMaskIntoConstraints="NO" id="fNw-yC-uL5">
-                                        <rect key="frame" x="62" y="54" width="220" height="88"/>
+                                        <rect key="frame" x="62" y="54" width="220" height="78"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Подтвредите удаление" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0GB-iM-Kxh">
-                                        <rect key="frame" x="62" y="170" width="220" height="60"/>
+                                        <rect key="frame" x="50" y="160" width="244" height="70"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="70" id="qdf-q8-NPS"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="25"/>
                                         <color key="textColor" red="1" green="0.13333333333333333" blue="0.13333333333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -354,8 +357,8 @@
                                     <constraint firstItem="i5h-xk-FgN" firstAttribute="top" secondItem="656-nv-uo8" secondAttribute="bottom" constant="12" id="McM-lU-3u7"/>
                                     <constraint firstItem="WLJ-NX-ySW" firstAttribute="leading" secondItem="EK8-9O-N5s" secondAttribute="leading" constant="26" id="Oxn-fK-WNx"/>
                                     <constraint firstAttribute="trailing" secondItem="656-nv-uo8" secondAttribute="trailing" constant="68" id="PJE-1t-WzH"/>
-                                    <constraint firstItem="0GB-iM-Kxh" firstAttribute="leading" secondItem="EK8-9O-N5s" secondAttribute="leading" constant="62" id="R7a-JL-t0i"/>
-                                    <constraint firstAttribute="trailing" secondItem="0GB-iM-Kxh" secondAttribute="trailing" constant="62" id="RwM-ZH-OqN"/>
+                                    <constraint firstItem="0GB-iM-Kxh" firstAttribute="leading" secondItem="EK8-9O-N5s" secondAttribute="leading" constant="50" id="R7a-JL-t0i"/>
+                                    <constraint firstAttribute="trailing" secondItem="0GB-iM-Kxh" secondAttribute="trailing" constant="50" id="RwM-ZH-OqN"/>
                                     <constraint firstAttribute="trailing" secondItem="WLJ-NX-ySW" secondAttribute="trailing" constant="25" id="YID-sw-Rev"/>
                                     <constraint firstItem="0GB-iM-Kxh" firstAttribute="top" secondItem="fNw-yC-uL5" secondAttribute="bottom" constant="28" id="euR-Qt-Mlm"/>
                                     <constraint firstItem="656-nv-uo8" firstAttribute="top" secondItem="WLJ-NX-ySW" secondAttribute="bottom" constant="8" symbolic="YES" id="jOy-Uy-crn"/>

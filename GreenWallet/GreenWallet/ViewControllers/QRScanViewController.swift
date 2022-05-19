@@ -16,7 +16,7 @@ class QRScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupVideo()
+//        setupVideo()
         startRunning()
     }
     
@@ -62,5 +62,8 @@ class QRScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
         }
     }
     
-
+    @IBAction func backButtonPressed(_ sender: Any) {
+        self.dismiss(animated: true)
+    }
+    
 }

@@ -13,12 +13,12 @@ class MyWalletsViewController: UIViewController {
     private var actionButtons: [MyWalletsButtons] = [MyWalletsButtons(image: UIImage(named: "wallet")!,
                                                                       title: "Send",
                                                                       discription: "Send coins and tokens at any time from your mobile phone"),
-                                                     MyWalletsButtons(image: UIImage(named: "recive")!,
-                                                                      title: "Recieve",
-                                                                      discription: "Here you will find everything you need to get green tokens and coins"),
                                                      MyWalletsButtons(image: UIImage(named: "share")!,
                                                                       title: "Share",
                                                                       discription: "Share your wallet with friends on social networks and instant messengers"),
+                                                     MyWalletsButtons(image: UIImage(named: "recive")!,
+                                                                      title: "Recieve",
+                                                                      discription: "Here you will find everything you need to get green tokens and coins"),
                                                      MyWalletsButtons(image: UIImage(named: "qr")!,
                                                                       title: "Scan address",
                                                                       discription: "Scan the QR code from the screen of your computer or smartphone for a quick transaction")]
@@ -40,7 +40,7 @@ class MyWalletsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.wallets = WalletManager.share.vallets
+        
         
         self.copyLabel.alpha = 0
         self.copyLabel.text = "   Скопировано"
@@ -52,7 +52,23 @@ class MyWalletsViewController: UIViewController {
         self.walletCollectionView.presentationIndexPath(forDataSourceIndexPath: [0,self.index])
         
         NotificationCenter.default.addObserver(self, selector: #selector(showDetailCell), name: NSNotification.Name("Seccess"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(openAlert), name: NSNotification.Name("closeAlert"), object: nil)
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.wallets = WalletManager.share.vallets
+        self.pageControl.numberOfPages = self.wallets.count
+        self.walletCollectionView.reloadData()
+    }
+    
+    @objc func openAlert(notification: Notification)  {
+        let storyBoard = UIStoryboard(name: "Alert", bundle: .main)
+        let alertVC = storyBoard.instantiateViewController(withIdentifier: "DeletingAlert") as! AllertWalletViewController
+        self.present(alertVC, animated: true)
+        WalletManager.share.vallets.removeAll(where: {$0 == self.wallet})
+        self.walletCollectionView.reloadData()
     }
     
     @objc func showDetailCell(notification: Notification) {
@@ -88,6 +104,10 @@ class MyWalletsViewController: UIViewController {
     }
     
     @IBAction func deleteButtonPressed(_ sender: Any) {
+        let storyBoard = UIStoryboard(name: "Alert", bundle: .main)
+        let alertVC = storyBoard.instantiateViewController(withIdentifier: "DeleteWallet") as! AllertWalletViewController
+        alertVC.controller = self
+        self.present(alertVC, animated: true)
     }
     
 }
@@ -167,6 +187,51 @@ extension MyWalletsViewController: UICollectionViewDelegate, UICollectionViewDat
             return CGSize.zero
         }
         
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        switch collectionView {
+        case self.walletCollectionView:
+            return
+        case self.actionCollectionView:
+            switch indexPath {
+            case [0,0]:
+                let selectSystemVC = storyboard?.instantiateViewController(withIdentifier: "SelectSystemViewController") as! SelectSystemViewController
+                let nav = UINavigationController(rootViewController: selectSystemVC)
+                
+                nav.modalPresentationStyle = .pageSheet
+                
+                if let sheet = nav.sheetPresentationController {
+                    sheet.detents = [.medium()]
+                }
+                
+                self.present(nav, animated: true, completion: nil)
+            case [0,2]:
+                let selectSystemVC = storyboard?.instantiateViewController(withIdentifier: "SelectSystemViewController") as! SelectSystemViewController
+                selectSystemVC.isGetToken = true
+                let nav = UINavigationController(rootViewController: selectSystemVC)
+                
+                selectSystemVC.modalPresentationStyle = .fullScreen
+                
+                if let sheet = nav.sheetPresentationController {
+                    sheet.detents = [.medium()]
+                }
+                
+                self.present(nav, animated: true, completion: nil)
+            case [0,1]:
+                let shareController = UIActivityViewController(activityItems: [self.wallets[index].name], applicationActivities: nil)
+                self.present(shareController, animated: true, completion: nil)
+           
+            default:
+                let qrScanVC = storyboard?.instantiateViewController(withIdentifier: "QRScanViewController") as! QRScanViewController
+                qrScanVC.modalPresentationStyle = .fullScreen
+                self.present(qrScanVC, animated: true)
+            
+            
+            }
+        default:
+            break
+        }
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {

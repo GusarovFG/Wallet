@@ -2176,6 +2176,45 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
             </objects>
             <point key="canvasLocation" x="5934.7826086956529" y="147.99107142857142"/>
         </scene>
+        <!--Scan View Controller-->
+        <scene sceneID="1XX-BG-LfS">
+            <objects>
+                <viewController storyboardIdentifier="QRScanViewController" id="dWs-F6-D5P" customClass="QRScanViewController" customModule="GreenWallet" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Z9e-8j-4xJ">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" verticalCompressionResistancePriority="754" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qtu-Sw-qgU">
+                                <rect key="frame" x="0.0" y="44" width="85.5" height="31.5"/>
+                                <color key="tintColor" red="0.45882352939999999" green="0.45882352939999999" blue="0.45882352939999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <buttonConfiguration key="configuration" style="plain" image="chevron.backward" catalog="system">
+                                    <attributedString key="attributedTitle">
+                                        <fragment content=" Назад">
+                                            <attributes>
+                                                <font key="NSFont" size="15" name="Helvetica"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="backButtonPressed:" destination="ToR-sa-bct" eventType="touchUpInside" id="YbR-e9-SUg"/>
+                                    <action selector="backButtonPressed:" destination="dWs-F6-D5P" eventType="touchUpInside" id="eqi-OI-wLX"/>
+                                    <action selector="qrScanBackButton:" destination="cnF-1c-1r2" eventType="touchUpInside" id="iWE-ZS-Gpa"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="E24-BZ-YDJ"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="qtu-Sw-qgU" firstAttribute="leading" secondItem="E24-BZ-YDJ" secondAttribute="leading" id="HDB-Oa-o4u"/>
+                            <constraint firstItem="qtu-Sw-qgU" firstAttribute="top" secondItem="E24-BZ-YDJ" secondAttribute="top" id="vDz-65-fEf"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Oor-Yu-Osd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6681" y="148"/>
+        </scene>
         <!--Main View Controller-->
         <scene sceneID="rD9-JV-rzT">
             <objects>
@@ -2767,7 +2806,7 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain">
                                             <attributedString key="attributedTitle">
-                                                <fragment content="Поделиться">
+                                                <fragment content="История транзакций">
                                                     <attributes>
                                                         <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                         <font key="NSFont" size="16" name="Helvetica"/>
@@ -2786,9 +2825,20 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J88-aG-dCr">
-                                        <rect key="frame" x="32" y="772" width="350" height="31"/>
+                                        <rect key="frame" x="32" y="772" width="350" height="32.5"/>
+                                        <color key="tintColor" red="1" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain">
+                                            <attributedString key="attributedTitle">
+                                                <fragment content="Удалить кошелек">
+                                                    <attributes>
+                                                        <color key="NSColor" red="1" green="0.13333333333333333" blue="0.13333333333333333" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <font key="NSFont" size="16" name="Helvetica"/>
+                                                        <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                    </attributes>
+                                                </fragment>
+                                            </attributedString>
+                                        </buttonConfiguration>
                                         <connections>
                                             <action selector="deleteButtonPressed:" destination="68I-i9-5qP" eventType="touchUpInside" id="bfy-8d-9w1"/>
                                         </connections>

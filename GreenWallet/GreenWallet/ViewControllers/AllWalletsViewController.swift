@@ -21,11 +21,18 @@ class AllWalletsViewController: UIViewController {
         
         self.favoriteLabel.alpha = 0
         
-        self.wallets = WalletManager.share.vallets
+        
         self.walletsTableView.register(UINib(nibName: "AddWalletTableViewCell", bundle: nil), forCellReuseIdentifier: "AddWalletTableViewCell")
         self.walletsTableView.register(UINib(nibName: "AllWalletsTableViewCell", bundle: nil), forCellReuseIdentifier: "AllWalletsTableViewCell")
 
         NotificationCenter.default.addObserver(self, selector: #selector(openAlert), name: NSNotification.Name("closeAlert"), object: nil)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.wallets = WalletManager.share.vallets
+        self.walletsTableView.reloadData()
+
     }
     
     @objc func openAlert(notification: Notification)  {
@@ -33,6 +40,7 @@ class AllWalletsViewController: UIViewController {
         let alertVC = storyBoard.instantiateViewController(withIdentifier: "DeletingAlert") as! AllertWalletViewController
         self.present(alertVC, animated: true)
     }
+
     
     @IBAction func backButtonPressed(_ sender: Any) {
         self.dismiss(animated: true)
