@@ -328,24 +328,7 @@ class PushTokensViewController: UIViewController {
     @IBAction func transferSummCheck(_ sender: UITextField) {
         self.comissionTextField.text = sender.text
         self.transferTokenLabel.text = self.balanceButton.currentTitle?.filter{!$0.isNumber && !$0.isPunctuation}
-        if (Double(sender.text ?? "") ?? 0) > NSString(string: self.balanceButton.currentTitle ?? "").doubleValue && sender.text != ""{
-            self.transferErrorLabel.alpha = 1
-            self.transferErrorLabel.textColor = #colorLiteral(red: 1, green: 0.2360929251, blue: 0.1714096665, alpha: 0.8980392157)
-            self.secondTransferErrorLabel.alpha = 1
-            sender.textColor = #colorLiteral(red: 1, green: 0.2360929251, blue: 0.1714096665, alpha: 0.8980392157)
-            self.transferViewConstraint.constant = 165
-        } else if sender.text != "" {
-            self.transferErrorLabel.alpha = 1
-            self.transferErrorLabel.textColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
-            sender.textColor = .white
-            self.secondTransferErrorLabel.alpha = 0
-            self.transferViewConstraint.constant = 130
-        } else {
-            self.transferErrorLabel.alpha = 0
-            sender.textColor = .white
-            self.secondTransferErrorLabel.alpha = 0
-            self.transferViewConstraint.constant = 130
-        }
+
     }
     
     @IBAction func checkBoxButtonPressed(_ sender: UIButton) {
@@ -375,8 +358,9 @@ class PushTokensViewController: UIViewController {
         }
         
     }
-    @IBAction func transferSuccsessCheck(_ sender: Any) {
-        if self.adressTextField.text == self.link && (Double(self.transferTextField.text ?? "") ?? 0) < NSString(string: self.balanceButton.currentTitle ?? "").doubleValue  {
+    @IBAction func transferSuccsessCheck(_ sender: UITextField) {
+      
+        if sender.text != "" && self.linkOfWalletTextField.text != "" {
             
             self.continueButton.isEnabled = true
         } else {
@@ -404,14 +388,19 @@ class PushTokensViewController: UIViewController {
     }
     
     @IBAction func continueButtonPressed(_ sender: Any) {
-        self.transitionView.isHidden = false
-        UIView.animate(withDuration: 0.5) {
-            self.transitionView.alpha = 1
+        if self.adressTextField.text == self.link && (Double(self.transferTextField.text ?? "") ?? 0) < NSString(string: self.balanceButton.currentTitle ?? "").doubleValue && self.linkOfWalletTextField.text == self.link {
+            
+            self.transitionView.isHidden = false
+            UIView.animate(withDuration: 0.5) {
+                self.transitionView.alpha = 1
+            }
+            self.transitionTokenLabel.text = self.wallet?.tokens[0].name
+            self.transitionBlockchainLabel.text = self.wallet?.name
+            self.transitinSumLabel.text = self.transferTextField.text
+            self.transitionLinkLabel.text = self.adressTextField.text
+        } else {
+            
         }
-        self.transitionTokenLabel.text = self.wallet?.tokens[0].name
-        self.transitionBlockchainLabel.text = self.wallet?.name
-        self.transitinSumLabel.text = self.transferTextField.text
-        self.transitionLinkLabel.text = self.adressTextField.text
         
     }
     @IBAction func transitionBackButtomPressed(_ sender: Any) {

@@ -1117,7 +1117,6 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                                                 <connections>
                                                     <action selector="CyrillicCheck:" destination="cnF-1c-1r2" eventType="editingChanged" id="3nH-yZ-KcD"/>
                                                     <action selector="linkCheck:" destination="cnF-1c-1r2" eventType="editingDidEnd" id="0rU-G5-r4r"/>
-                                                    <action selector="transferSuccsessCheck:" destination="cnF-1c-1r2" eventType="editingChanged" id="TCQ-it-aoJ"/>
                                                 </connections>
                                             </textField>
                                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BuF-8e-m1q">
@@ -2762,7 +2761,7 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                                 </connections>
                             </button>
                             <scrollView verifyAmbiguity="off" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="anU-6Y-xe5">
-                                <rect key="frame" x="0.0" y="96" width="414" height="884"/>
+                                <rect key="frame" x="0.0" y="96" width="414" height="886"/>
                                 <subviews>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="vYe-Ph-0gj">
                                         <rect key="frame" x="24" y="0.0" width="366" height="251"/>
@@ -2888,7 +2887,6 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                                     <constraint firstItem="mFC-QA-eeL" firstAttribute="leading" secondItem="anU-6Y-xe5" secondAttribute="leading" constant="15" id="Nf6-3D-iTv"/>
                                     <constraint firstItem="J88-aG-dCr" firstAttribute="top" secondItem="qAT-XB-rfd" secondAttribute="bottom" constant="18" id="OQn-gu-ecl"/>
                                     <constraint firstAttribute="trailing" secondItem="mFC-QA-eeL" secondAttribute="trailing" constant="15" id="Odl-ky-FPU"/>
-                                    <constraint firstAttribute="height" constant="884" id="QDQ-Dv-a9E"/>
                                     <constraint firstItem="qAT-XB-rfd" firstAttribute="top" secondItem="mFC-QA-eeL" secondAttribute="bottom" constant="18" id="Qwl-Cn-UDD"/>
                                     <constraint firstAttribute="trailing" secondItem="qAT-XB-rfd" secondAttribute="trailing" constant="32" id="Uf4-wd-70W"/>
                                     <constraint firstItem="mFC-QA-eeL" firstAttribute="top" secondItem="3XB-58-nVn" secondAttribute="bottom" constant="10" id="WzH-eI-cZX"/>
@@ -2916,16 +2914,18 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                         <viewLayoutGuide key="safeArea" id="CZ0-9H-ctp"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="anU-6Y-xe5" firstAttribute="leading" secondItem="CZ0-9H-ctp" secondAttribute="leading" id="3vy-AQ-mXG"/>
                             <constraint firstItem="wwu-Ga-UbT" firstAttribute="leading" secondItem="CZ0-9H-ctp" secondAttribute="leading" id="92T-Ed-7BZ"/>
                             <constraint firstItem="CZ0-9H-ctp" firstAttribute="trailing" secondItem="anU-6Y-xe5" secondAttribute="trailing" id="BRF-M7-uJ0"/>
                             <constraint firstItem="CZ0-9H-ctp" firstAttribute="trailing" secondItem="EIe-sf-LN7" secondAttribute="trailing" constant="89" id="FUb-8m-Bl1"/>
+                            <constraint firstAttribute="bottom" secondItem="anU-6Y-xe5" secondAttribute="bottom" id="Hln-eh-2k3"/>
+                            <constraint firstItem="anU-6Y-xe5" firstAttribute="top" secondItem="wwu-Ga-UbT" secondAttribute="bottom" constant="20.5" id="LKD-nN-IwG"/>
                             <constraint firstItem="anU-6Y-xe5" firstAttribute="width" secondItem="hFk-Ey-U3f" secondAttribute="width" id="Pk2-g0-FG9"/>
                             <constraint firstAttribute="bottom" secondItem="anU-6Y-xe5" secondAttribute="bottom" id="V9o-gV-2sl"/>
-                            <constraint firstItem="anU-6Y-xe5" firstAttribute="top" secondItem="CZ0-9H-ctp" secondAttribute="top" constant="52" id="cES-8v-UUO"/>
+                            <constraint firstItem="anU-6Y-xe5" firstAttribute="trailing" secondItem="CZ0-9H-ctp" secondAttribute="trailing" id="aG1-3Q-fBo"/>
                             <constraint firstItem="wwu-Ga-UbT" firstAttribute="top" secondItem="CZ0-9H-ctp" secondAttribute="top" id="cEt-R6-oEu"/>
                             <constraint firstItem="anU-6Y-xe5" firstAttribute="leading" secondItem="CZ0-9H-ctp" secondAttribute="leading" id="fk4-FW-xk2"/>
                             <constraint firstItem="EIe-sf-LN7" firstAttribute="top" secondItem="CZ0-9H-ctp" secondAttribute="top" constant="1" id="j0J-V3-X6m"/>
-                            <constraint firstItem="anU-6Y-xe5" firstAttribute="bottom" secondItem="CZ0-9H-ctp" secondAttribute="bottom" constant="34" id="z4D-iA-W9y"/>
                         </constraints>
                     </view>
                     <size key="freeformSize" width="414" height="982"/>
