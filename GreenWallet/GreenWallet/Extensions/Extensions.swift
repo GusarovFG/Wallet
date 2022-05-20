@@ -17,7 +17,7 @@ extension UILabel {
         tapgesture.numberOfTapsRequired = 1
         self.addGestureRecognizer(tapgesture)
     }
-
+    
     @objc func tappedOnLabel(_ gesture: RangeGestureRecognizer) {
         guard let text = self.text else { return }
         let stringRange = (text as NSString).range(of: RangeGestureRecognizer.stringRange ?? "")
@@ -32,12 +32,13 @@ extension UITextField {
     func bottomCorner() {
         
         let bottomLine = CALayer()
-                bottomLine.frame = CGRect(x: 0, y: self.frame.size.height - 2, width: self.frame.size.width, height: 1)
-                bottomLine.backgroundColor = #colorLiteral(red: 0.3578948975, green: 0.3578948975, blue: 0.3578948975, alpha: 1)
-                borderStyle = .none
-                layer.addSublayer(bottomLine)
+        bottomLine.frame = CGRect(x: 0, y: self.frame.size.height - 2, width: self.frame.size.width, height: 1)
+        bottomLine.backgroundColor = #colorLiteral(red: 0.3578948975, green: 0.3578948975, blue: 0.3578948975, alpha: 1)
+        borderStyle = .none
+        layer.addSublayer(bottomLine)
     }
 }
+
 
 extension UIStackView {
     func removeAllSubviews() {
@@ -45,4 +46,15 @@ extension UIStackView {
             view.removeFromSuperview()
         }
     }
+}
+
+extension UIView {
+    func buttonStroke() {
+        let bottomLine = CALayer()
+            
+            bottomLine.frame = CGRect(x: 0, y: self.frame.size.height - 2, width: self.frame.size.width, height: 1)
+            bottomLine.backgroundColor = #colorLiteral(red: 0.3578948975, green: 0.3578948975, blue: 0.3578948975, alpha: 1)
+            self.layer.addSublayer(bottomLine)
+        }
+    
 }
