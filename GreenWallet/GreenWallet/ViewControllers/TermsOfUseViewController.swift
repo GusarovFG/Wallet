@@ -66,11 +66,11 @@ class TermsOfUseViewController: UIViewController {
         }
 
     }
+    
     @IBAction func continueButtonPressed(_ sender: Any) {
-        UserDefaultsManager.shared.userDefaults.set("First", forKey: UserDefaultsStringKeys.firstSession.rawValue)
-        let storyboard = UIStoryboard(name: "Main", bundle: .main)
-        let mainTabBarVC = storyboard.instantiateViewController(withIdentifier: "MainTabBarController") as! MainTabBarController
-        self.view.window?.rootViewController = mainTabBarVC
+        let passwordVC = storyboard?.instantiateViewController(withIdentifier: "PasswordViewController") as! PasswordViewController
+        self.present(passwordVC, animated: true)
+
     }
     
 }

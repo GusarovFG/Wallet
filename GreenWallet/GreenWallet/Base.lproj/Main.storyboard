@@ -1798,7 +1798,7 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="753" text="Введите пароль" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="72f-yu-HI4">
-                                <rect key="frame" x="90" y="94" width="234" height="30"/>
+                                <rect key="frame" x="20" y="94" width="374" height="30"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="25"/>
                                 <color key="textColor" red="0.2274509804" green="0.67450980390000004" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -2136,18 +2136,37 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                                 </subviews>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Пароль неверный" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZD1-J3-FmP">
-                                <rect key="frame" x="101" y="257" width="212" height="21.5"/>
+                                <rect key="frame" x="101" y="257" width="212" height="22"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <color key="textColor" red="1" green="0.13333333333333333" blue="0.13333333333333333" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" verticalCompressionResistancePriority="754" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9ei-oL-ddy">
+                                <rect key="frame" x="0.0" y="44" width="85.5" height="31.5"/>
+                                <color key="tintColor" red="0.45882352939999999" green="0.45882352939999999" blue="0.45882352939999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <buttonConfiguration key="configuration" style="plain" image="chevron.backward" catalog="system">
+                                    <attributedString key="attributedTitle">
+                                        <fragment content=" Назад">
+                                            <attributes>
+                                                <font key="NSFont" size="15" name="Helvetica"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="backButtonPressed:" destination="ToR-sa-bct" eventType="touchUpInside" id="TSs-H4-8un"/>
+                                    <action selector="backButtonPressed:" destination="Hvd-wX-fc0" eventType="touchUpInside" id="moZ-7a-dcV"/>
+                                    <action selector="qrScanBackButton:" destination="cnF-1c-1r2" eventType="touchUpInside" id="z0X-wd-N0C"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="myL-qS-37Y"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="rj9-UH-ymj" firstAttribute="leading" secondItem="myL-qS-37Y" secondAttribute="leading" constant="101" id="1Ps-OT-gOd"/>
                             <constraint firstItem="2Lc-Pq-wk8" firstAttribute="leading" secondItem="myL-qS-37Y" secondAttribute="leading" constant="49" id="2qJ-AI-8ua"/>
-                            <constraint firstItem="72f-yu-HI4" firstAttribute="leading" secondItem="myL-qS-37Y" secondAttribute="leading" constant="90" id="6Om-Aj-uLR"/>
+                            <constraint firstItem="9ei-oL-ddy" firstAttribute="leading" secondItem="myL-qS-37Y" secondAttribute="leading" id="5i5-Sv-FAH"/>
+                            <constraint firstItem="72f-yu-HI4" firstAttribute="leading" secondItem="myL-qS-37Y" secondAttribute="leading" constant="20" id="6Om-Aj-uLR"/>
                             <constraint firstItem="myL-qS-37Y" firstAttribute="trailing" secondItem="Od1-Ec-iUy" secondAttribute="trailing" constant="69" id="7j5-Oh-rKx"/>
                             <constraint firstItem="Od1-Ec-iUy" firstAttribute="leading" secondItem="myL-qS-37Y" secondAttribute="leading" constant="69" id="9zn-lx-gK6"/>
                             <constraint firstItem="tI4-Gw-wqp" firstAttribute="top" secondItem="Od1-Ec-iUy" secondAttribute="bottom" constant="67" id="FHh-G9-b3Y"/>
@@ -2160,15 +2179,29 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                             <constraint firstItem="myL-qS-37Y" firstAttribute="trailing" secondItem="2Lc-Pq-wk8" secondAttribute="trailing" constant="49" id="QOi-lq-lDj"/>
                             <constraint firstItem="Od1-Ec-iUy" firstAttribute="top" secondItem="rj9-UH-ymj" secondAttribute="bottom" constant="89" id="QtV-yz-80i"/>
                             <constraint firstItem="2Lc-Pq-wk8" firstAttribute="top" secondItem="72f-yu-HI4" secondAttribute="bottom" constant="6" id="RPV-02-wem"/>
-                            <constraint firstItem="myL-qS-37Y" firstAttribute="trailing" secondItem="72f-yu-HI4" secondAttribute="trailing" constant="90" id="Yxo-RF-WpC"/>
+                            <constraint firstItem="myL-qS-37Y" firstAttribute="bottom" secondItem="Od1-Ec-iUy" secondAttribute="bottom" constant="173" id="TDR-xA-i6M"/>
+                            <constraint firstItem="myL-qS-37Y" firstAttribute="trailing" secondItem="72f-yu-HI4" secondAttribute="trailing" constant="20" id="Yxo-RF-WpC"/>
+                            <constraint firstItem="Od1-Ec-iUy" firstAttribute="top" secondItem="ZD1-J3-FmP" secondAttribute="bottom" constant="52" id="bbc-Qm-GAo"/>
                             <constraint firstItem="myL-qS-37Y" firstAttribute="trailing" secondItem="rj9-UH-ymj" secondAttribute="trailing" constant="101" id="iYc-Ho-eSp"/>
                             <constraint firstItem="myL-qS-37Y" firstAttribute="bottom" secondItem="tI4-Gw-wqp" secondAttribute="bottom" constant="44" id="mKF-t2-2v0"/>
                             <constraint firstItem="myL-qS-37Y" firstAttribute="trailing" secondItem="ZD1-J3-FmP" secondAttribute="trailing" constant="101" id="sEZ-EZ-EUq"/>
+                            <constraint firstItem="9ei-oL-ddy" firstAttribute="top" secondItem="myL-qS-37Y" secondAttribute="top" id="sO0-An-9Hs"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="backButton" destination="9ei-oL-ddy" id="CXx-ak-M2j"/>
+                        <outlet property="discriptionTitle" destination="2Lc-Pq-wk8" id="pXe-tb-no0"/>
+                        <outlet property="dotsBottomConstraint" destination="QtV-yz-80i" id="U0A-Ti-S3V"/>
+                        <outlet property="dotsTopConstraint" destination="PwJ-qA-pcq" id="h0J-b9-jK5"/>
+                        <outlet property="errorButtonConstraint" destination="bbc-Qm-GAo" id="Bdu-aa-dLX"/>
                         <outlet property="errorLabel" destination="ZD1-J3-FmP" id="VnU-tb-GJt"/>
+                        <outlet property="faceIDButton" destination="Jnx-AF-hmV" id="uuA-hz-Wnd"/>
+                        <outlet property="mainButton" destination="tI4-Gw-wqp" id="Dfp-Nv-aY0"/>
+                        <outlet property="mainTitle" destination="72f-yu-HI4" id="CUS-QP-Lnd"/>
                         <outlet property="stackView" destination="rj9-UH-ymj" id="PGj-gn-ACz"/>
+                        <outlet property="stackViewConstraint" destination="TDR-xA-i6M" id="mTo-Wj-3HO"/>
+                        <outlet property="stackViewTopConstraint" destination="QtV-yz-80i" id="FKf-Hs-7DY"/>
+                        <outlet property="titleConstraint" destination="NA3-YK-sJe" id="Yvq-av-R5A"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xmL-Yg-IIy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
