@@ -24,8 +24,11 @@ class MainTabBarController: UITabBarController, UINavigationBarDelegate {
         
         let thirdMainVC = storyboard?.instantiateViewController(withIdentifier: "navi") as! UINavigationController
         thirdMainVC.tabBarItem = UITabBarItem(title: "Отправить", image: UIImage(named: "push")!, selectedImage: UIImage(named: "push")!)
+        
+        let fourMainVC = storyboard?.instantiateViewController(withIdentifier: "navi") as! UINavigationController
+        fourMainVC.tabBarItem = UITabBarItem(title: "Транзакции", image: UIImage(named: "transaction")!, selectedImage: UIImage(named: "transaction")!)
 
-        self.setViewControllers([mainVC, secondMainVC, thirdMainVC], animated: true)
+        self.setViewControllers([mainVC, secondMainVC, thirdMainVC, fourMainVC], animated: true)
         self.navigationController?.navigationBar.delegate = self
     }
     
@@ -37,6 +40,10 @@ class MainTabBarController: UITabBarController, UINavigationBarDelegate {
         
         if tabBar.selectedItem?.title == "Отправить" {
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "showPushVC"), object: nil)
+        }
+        
+        if tabBar.selectedItem?.title == "Транзакции" {
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "showTransVC"), object: nil)
         }
     }
     

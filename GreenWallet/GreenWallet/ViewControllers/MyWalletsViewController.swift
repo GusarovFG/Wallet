@@ -73,9 +73,7 @@ class MyWalletsViewController: UIViewController {
     
     @objc func showDetailCell(notification: Notification) {
         guard let userInfo = notification.userInfo else { return }
-        self.index = userInfo["index"] as! Int
         self.isShowDetail = true
-        print(self.index)
     }
     
     override func viewWillLayoutSubviews() {

@@ -134,7 +134,7 @@ class PasswordViewController: UIViewController {
                     self.dismiss(animated: true)
                 }
             }
-        } else if self.enteringPassword == self.password && UserDefaultsManager.shared.userDefaults.string(forKey: UserDefaultsStringKeys.firstSession.rawValue) != "First" && !self.isRepitingPassword && !self.isEntering {
+        } else if self.enteringPassword == self.password && UserDefaultsManager.shared.userDefaults.string(forKey: UserDefaultsStringKeys.firstSession.rawValue) == "First" && !self.isRepitingPassword && !self.isEntering {
             self.dismiss(animated: true)
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "Seccess"), object: nil, userInfo: self.userInfo)
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "closeAlert"), object: nil)

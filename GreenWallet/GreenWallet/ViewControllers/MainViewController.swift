@@ -56,6 +56,7 @@ class MainViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(showWallet), name: NSNotification.Name(rawValue: "showWallet"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(showGetSystem), name: NSNotification.Name(rawValue: "showGetVC"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(showPushSystem), name: NSNotification.Name(rawValue: "showPushVC"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(showTransVC), name: NSNotification.Name(rawValue: "showTransVC"), object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -79,6 +80,12 @@ class MainViewController: UIViewController {
         }
         
         self.present(nav, animated: true, completion: nil)
+    }
+    
+    @objc func showTransVC(notification: Notification) {
+        let transVC = storyboard?.instantiateViewController(withIdentifier: "TransactionHistoryVC") as! TransactionHistoryViewController
+        transVC.modalPresentationStyle = .fullScreen
+        self.present(transVC, animated: true)
     }
     
     @objc private func pushSettingsController() {
