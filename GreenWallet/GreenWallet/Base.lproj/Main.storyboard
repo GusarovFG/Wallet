@@ -2136,7 +2136,7 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                                 </subviews>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Пароль неверный" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZD1-J3-FmP">
-                                <rect key="frame" x="101" y="257" width="212" height="22"/>
+                                <rect key="frame" x="20" y="257" width="374" height="22"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <color key="textColor" red="1" green="0.13333333333333333" blue="0.13333333333333333" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -2171,7 +2171,7 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                             <constraint firstItem="Od1-Ec-iUy" firstAttribute="leading" secondItem="myL-qS-37Y" secondAttribute="leading" constant="69" id="9zn-lx-gK6"/>
                             <constraint firstItem="tI4-Gw-wqp" firstAttribute="top" secondItem="Od1-Ec-iUy" secondAttribute="bottom" constant="67" id="FHh-G9-b3Y"/>
                             <constraint firstItem="tI4-Gw-wqp" firstAttribute="leading" secondItem="myL-qS-37Y" secondAttribute="leading" constant="50" id="HH7-7e-tUs"/>
-                            <constraint firstItem="ZD1-J3-FmP" firstAttribute="leading" secondItem="myL-qS-37Y" secondAttribute="leading" constant="101" id="JpU-dU-awd"/>
+                            <constraint firstItem="ZD1-J3-FmP" firstAttribute="leading" secondItem="myL-qS-37Y" secondAttribute="leading" constant="20" id="JpU-dU-awd"/>
                             <constraint firstItem="72f-yu-HI4" firstAttribute="top" secondItem="myL-qS-37Y" secondAttribute="top" constant="50" id="NA3-YK-sJe"/>
                             <constraint firstItem="ZD1-J3-FmP" firstAttribute="top" secondItem="rj9-UH-ymj" secondAttribute="bottom" constant="15" id="OEC-68-PVM"/>
                             <constraint firstItem="rj9-UH-ymj" firstAttribute="top" secondItem="2Lc-Pq-wk8" secondAttribute="bottom" constant="34" id="PwJ-qA-pcq"/>
@@ -2184,7 +2184,7 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                             <constraint firstItem="Od1-Ec-iUy" firstAttribute="top" secondItem="ZD1-J3-FmP" secondAttribute="bottom" constant="52" id="bbc-Qm-GAo"/>
                             <constraint firstItem="myL-qS-37Y" firstAttribute="trailing" secondItem="rj9-UH-ymj" secondAttribute="trailing" constant="101" id="iYc-Ho-eSp"/>
                             <constraint firstItem="myL-qS-37Y" firstAttribute="bottom" secondItem="tI4-Gw-wqp" secondAttribute="bottom" constant="44" id="mKF-t2-2v0"/>
-                            <constraint firstItem="myL-qS-37Y" firstAttribute="trailing" secondItem="ZD1-J3-FmP" secondAttribute="trailing" constant="101" id="sEZ-EZ-EUq"/>
+                            <constraint firstItem="myL-qS-37Y" firstAttribute="trailing" secondItem="ZD1-J3-FmP" secondAttribute="trailing" constant="20" id="sEZ-EZ-EUq"/>
                             <constraint firstItem="9ei-oL-ddy" firstAttribute="top" secondItem="myL-qS-37Y" secondAttribute="top" id="sO0-An-9Hs"/>
                         </constraints>
                     </view>
