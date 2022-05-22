@@ -35,6 +35,7 @@ class MainTabBarController: UITabBarController, UINavigationBarDelegate {
     override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
         if tabBar.selectedItem?.title == "Получить" {
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "showGetVC"), object: nil)
+
             
         }
         
@@ -48,4 +49,11 @@ class MainTabBarController: UITabBarController, UINavigationBarDelegate {
     }
     
     
+}
+
+extension MainTabBarController: UIPopoverPresentationControllerDelegate {
+    
+    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+        .none
+    }
 }

@@ -59,19 +59,10 @@ extension AllWalletsViewController: UITableViewDelegate, UITableViewDataSource {
         switch indexPath {
         case [0,self.wallets.count]:
             addWalletCell.addPressed = {
-                let detailViewController = self.storyboard?.instantiateViewController(withIdentifier: "SelectSystemViewController") as! SelectSystemViewController
-                let nav = UINavigationController(rootViewController: detailViewController)
+                let systemViewController = self.storyboard?.instantiateViewController(withIdentifier: "SelectSystemViewController") as! SelectSystemViewController
                 
-                nav.modalPresentationStyle = .pageSheet
-                
-                if let sheet = nav.sheetPresentationController {
-                    sheet.detents = [.medium()]
-                }
-                
-                self.present(nav, animated: true, completion: nil)
+                self.present(systemViewController, animated: true, completion: nil)
             }
-                
-            
             return addWalletCell
         default:
             walletCell.setupCell(wallet: self.wallets[indexPath.row])

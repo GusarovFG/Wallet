@@ -69,17 +69,10 @@ class MainViewController: UIViewController {
     
     private func presentSelectSystemVC() {
         
-        let detailViewController = storyboard?.instantiateViewController(withIdentifier: "SelectSystemViewController") as! SelectSystemViewController
-        detailViewController.isSelectedSystem = true
-        let nav = UINavigationController(rootViewController: detailViewController)
-        
-        nav.modalPresentationStyle = .pageSheet
-        
-        if let sheet = nav.sheetPresentationController {
-            sheet.detents = [.medium()]
-        }
-        
-        self.present(nav, animated: true, completion: nil)
+        let selectSystemVC = storyboard?.instantiateViewController(withIdentifier: "SelectSystemViewController") as! SelectSystemViewController
+        selectSystemVC.isSelectedSystem = true
+        selectSystemVC.modalPresentationStyle = .overFullScreen
+        self.present(selectSystemVC, animated: true)
     }
     
     @objc func showTransVC(notification: Notification) {
@@ -116,29 +109,15 @@ class MainViewController: UIViewController {
     @objc private func showGetSystem(notification: Notification) {
         let selectSystemVC = storyboard?.instantiateViewController(withIdentifier: "SelectSystemViewController") as! SelectSystemViewController
         selectSystemVC.isGetToken = true
-        let nav = UINavigationController(rootViewController: selectSystemVC)
-        
-        selectSystemVC.modalPresentationStyle = .fullScreen
-        
-        if let sheet = nav.sheetPresentationController {
-            sheet.detents = [.medium()]
-        }
-        
-        self.present(nav, animated: true, completion: nil)
+        selectSystemVC.modalPresentationStyle = .overFullScreen
+        self.present(selectSystemVC, animated: true)
     }
     
     @objc private func showPushSystem(notification: Notification) {
         let selectSystemVC = storyboard?.instantiateViewController(withIdentifier: "SelectSystemViewController") as! SelectSystemViewController
         selectSystemVC.isPushToken = true
-        let nav = UINavigationController(rootViewController: selectSystemVC)
-        
-        selectSystemVC.modalPresentationStyle = .fullScreen
-        
-        if let sheet = nav.sheetPresentationController {
-            sheet.detents = [.medium()]
-        }
-        
-        self.present(nav, animated: true, completion: nil)
+        selectSystemVC.modalPresentationStyle = .overFullScreen
+        self.present(selectSystemVC, animated: true)
     }
     
 }
@@ -163,12 +142,12 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
         } else {
             if cell.stackView.arrangedSubviews.contains(where: {$0 == cell.tableView}) {
                 cell.wallet = WalletManager.share.favoritesWallets[indexPath.row]
-                cell.controller = self
+                cell.controller = self.tabBarController ?? self
                 cell.tableView.reloadData()
             } else {
                 cell.stackView.addArrangedSubview(cell.tableView)
                 cell.wallet = WalletManager.share.favoritesWallets[indexPath.row]
-                cell.controller = self
+                cell.controller = self.tabBarController ?? self
                 cell.tableView.reloadData()
             }
             

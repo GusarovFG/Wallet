@@ -17,16 +17,40 @@ class SelectSystemViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var headerView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.window?.frame.size = CGSize(width: 414, height: 238)
         self.tableView.register(UINib(nibName: "SelectSystemTableViewCell", bundle: nil), forCellReuseIdentifier: "systemCell")
         self.navigationController?.navigationBar.isHidden = true
+        self.headerView.layer.cornerRadius = 15
+        self.headerView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        self.view.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
         
-
+        let swipeGasture = UISwipeGestureRecognizer(target: self, action: #selector(dismissSwipe))
+        swipeGasture.direction = .down
+        self.view.addGestureRecognizer(swipeGasture)
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        UIView.animate(withDuration: 0.1, delay: 0) {
+            self.view.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.3481637311)
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+    }
+    
+    @objc func dismissSwipe() {
+        UIView.animate(withDuration: 0.1, delay: 0) {
+            self.view.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
+        }
+        self.dismiss(animated: true)
+    }
 
 }
 

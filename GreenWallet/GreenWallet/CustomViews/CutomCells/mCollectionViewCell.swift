@@ -70,15 +70,9 @@ class mCollectionViewCell: UICollectionViewCell {
     @objc func newwalletButtomPressed(_ sender: Any) {
         let storyboard = UIStoryboard(name: "Main", bundle: .main)
         let selectSystemVC = storyboard.instantiateViewController(withIdentifier: "SelectSystemViewController") as! SelectSystemViewController
-        let nav = UINavigationController(rootViewController: selectSystemVC)
         
-        selectSystemVC.modalPresentationStyle = .fullScreen
         
-        if let sheet = nav.sheetPresentationController {
-            sheet.detents = [.medium()]
-        }
-        
-        self.controller.present(nav, animated: true, completion: nil)
+        self.controller.present(selectSystemVC, animated: true)
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "newWallet"), object: nil)
     }
     
