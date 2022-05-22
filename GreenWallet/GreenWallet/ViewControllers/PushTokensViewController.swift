@@ -82,7 +82,6 @@ class PushTokensViewController: UIViewController {
         self.contactTextField.bottomCorner()
         self.transferTextField.bottomCorner()
         self.comissionTextField.bottomCorner()
-        self.linkOfWalletTextField.bottomCorner()
         self.adressTextField.bottomCorner()
         
         self.walletsView.layer.borderWidth = 1
@@ -291,9 +290,12 @@ class PushTokensViewController: UIViewController {
         
         if sender.text != "" {
             self.walletErrorLabel.alpha = 1
-            
+            sender.textColor = .white
+            self.walletErrorLabel.textColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
+            self.walletLinkError.alpha = 0
         } else {
             self.walletErrorLabel.alpha = 0
+            sender.textColor = .white
         }
         
  
@@ -301,13 +303,9 @@ class PushTokensViewController: UIViewController {
     
     @IBAction func linkCheck(_ sender: UITextField) {
         if sender.text != self.link && sender.text != "" {
-            self.walletLinkError.alpha = 1
-            sender.textColor = #colorLiteral(red: 1, green: 0.2360929251, blue: 0.1714096665, alpha: 0.8980392157)
-            self.walletErrorLabel.textColor = #colorLiteral(red: 1, green: 0.2360929251, blue: 0.1714096665, alpha: 0.8980392157)
+   
         } else {
-            self.walletLinkError.alpha = 0
-            sender.textColor = .white
-            self.walletErrorLabel.textColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
+            
         }
     }
     
@@ -360,11 +358,16 @@ class PushTokensViewController: UIViewController {
     }
     @IBAction func transferSuccsessCheck(_ sender: UITextField) {
       
-        if sender.text != "" && self.linkOfWalletTextField.text != "" {
+        if sender.text != "" && self.adressTextField.text != "" {
             
             self.continueButton.isEnabled = true
+            self.transferErrorLabel.alpha = 1
+            self.transferErrorLabel.textColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
+            sender.textColor = .white
+            self.secondTransferErrorLabel.alpha = 0
         } else {
             self.continueButton.isEnabled = false
+            self.transferErrorLabel.alpha = 0
         }
     }
     
@@ -388,18 +391,39 @@ class PushTokensViewController: UIViewController {
     }
     
     @IBAction func continueButtonPressed(_ sender: Any) {
-        if self.adressTextField.text == self.link && (Double(self.transferTextField.text ?? "") ?? 0) < NSString(string: self.balanceButton.currentTitle ?? "").doubleValue && self.linkOfWalletTextField.text == self.link {
+        
+        if (Double(self.transferTextField.text ?? "") ?? 0) < NSString(string: self.balanceButton.currentTitle ?? "").doubleValue {
+            self.secondTransferErrorLabel.alpha = 0
+            self.transferErrorLabel.textColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
+        } else {
+            self.secondTransferErrorLabel.alpha = 1
+            self.transferErrorLabel.alpha = 1
+            self.transferTextField.textColor = #colorLiteral(red: 1, green: 0.2360929251, blue: 0.1714096665, alpha: 0.8980392157)
+            self.transferErrorLabel.textColor = #colorLiteral(red: 1, green: 0.2360929251, blue: 0.1714096665, alpha: 0.8980392157)
+        }
+        
+        if self.adressTextField.text == self.link  {
+
+            self.walletLinkError.alpha = 0
+            self.adressTextField.textColor = .white
+            self.walletErrorLabel.textColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
             
-            self.transitionView.isHidden = false
-            UIView.animate(withDuration: 0.5) {
-                self.transitionView.alpha = 1
-            }
+
             self.transitionTokenLabel.text = self.wallet?.tokens[0].name
             self.transitionBlockchainLabel.text = self.wallet?.name
             self.transitinSumLabel.text = self.transferTextField.text
             self.transitionLinkLabel.text = self.adressTextField.text
         } else {
+            self.walletLinkError.alpha = 1
+            self.adressTextField.textColor = #colorLiteral(red: 1, green: 0.2360929251, blue: 0.1714096665, alpha: 0.8980392157)
+            self.walletErrorLabel.textColor = #colorLiteral(red: 1, green: 0.2360929251, blue: 0.1714096665, alpha: 0.8980392157)
+        }
+        if (Double(self.transferTextField.text ?? "") ?? 0) < NSString(string: self.balanceButton.currentTitle ?? "").doubleValue && self.adressTextField.text == self.link {
             
+            self.transitionView.isHidden = false
+            UIView.animate(withDuration: 0.5) {
+                self.transitionView.alpha = 1
+            }
         }
         
     }

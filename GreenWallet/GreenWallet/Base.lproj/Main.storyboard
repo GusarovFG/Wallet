@@ -1240,7 +1240,7 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TWZ-p9-liZ">
-                                <rect key="frame" x="15" y="360" width="384" height="130"/>
+                                <rect key="frame" x="15" y="360" width="384" height="150"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="XOb-BD-HYh">
                                         <rect key="frame" x="15" y="35" width="354" height="25"/>
@@ -1252,7 +1252,6 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                                                 <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                                                 <connections>
                                                     <action selector="transferSuccsessCheck:" destination="cnF-1c-1r2" eventType="editingChanged" id="mTr-Zr-9pD"/>
-                                                    <action selector="transferSummCheck:" destination="cnF-1c-1r2" eventType="editingChanged" id="nh7-k9-JrZ"/>
                                                 </connections>
                                             </textField>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yFO-aj-gME">
@@ -1334,7 +1333,7 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Недостаточно средств" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bE3-Hw-2NN">
-                                        <rect key="frame" x="15" y="88" width="354" height="17"/>
+                                        <rect key="frame" x="15" y="108" width="354" height="17"/>
                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
                                         <color key="textColor" red="1" green="0.1333333333" blue="0.1333333333" alpha="0.8980392157" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -1349,7 +1348,7 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                                     <constraint firstAttribute="trailing" secondItem="8K2-p9-8gN" secondAttribute="trailing" constant="15" id="NYO-hJ-OfE"/>
                                     <constraint firstItem="XOb-BD-HYh" firstAttribute="top" secondItem="8K2-p9-8gN" secondAttribute="bottom" constant="3" id="TkB-Cv-o7m"/>
                                     <constraint firstAttribute="trailing" secondItem="XOb-BD-HYh" secondAttribute="trailing" constant="15" id="Tty-Wz-wVZ"/>
-                                    <constraint firstAttribute="height" constant="130" id="Zyx-7M-zb6"/>
+                                    <constraint firstAttribute="height" constant="150" id="Zyx-7M-zb6"/>
                                     <constraint firstItem="XOb-BD-HYh" firstAttribute="leading" secondItem="TWZ-p9-liZ" secondAttribute="leading" constant="15" id="eTL-5c-PzZ"/>
                                     <constraint firstAttribute="trailing" secondItem="ZRA-od-fLC" secondAttribute="trailing" constant="15" id="mNQ-7B-ql1"/>
                                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="ZRA-od-fLC" secondAttribute="bottom" constant="25" id="nbg-aH-GG5"/>
@@ -1366,7 +1365,7 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6NQ-Zx-au7">
-                                <rect key="frame" x="15" y="502" width="384" height="106"/>
+                                <rect key="frame" x="15" y="522" width="384" height="106"/>
                                 <subviews>
                                     <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Комиссия" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bf2-aF-Cv7">
                                         <rect key="frame" x="15" y="30" width="354" height="30"/>
@@ -1403,7 +1402,7 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LGy-uT-4y7">
-                                <rect key="frame" x="32" y="686" width="350" height="62"/>
+                                <rect key="frame" x="32" y="706" width="350" height="62"/>
                                 <color key="backgroundColor" red="0.2274509804" green="0.67450980390000004" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="62" id="bop-yN-DVG"/>
@@ -1757,7 +1756,6 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                         <outlet property="contactTextField" destination="5bp-F0-POt" id="xi8-gZ-m18"/>
                         <outlet property="continueButton" destination="LGy-uT-4y7" id="0dK-Th-jYB"/>
                         <outlet property="gadLabel" destination="VfE-rm-jzL" id="M3E-Iv-HnM"/>
-                        <outlet property="linkOfWalletTextField" destination="cpj-2N-66D" id="rNZ-Om-dJC"/>
                         <outlet property="recomendedComissionLabel" destination="i9s-S0-U7y" id="XIH-3N-BSZ"/>
                         <outlet property="secondTransferErrorLabel" destination="bE3-Hw-2NN" id="Jh1-71-3dE"/>
                         <outlet property="systemButton" destination="cuE-nu-YpR" id="Ghg-PY-kvR"/>
@@ -1770,7 +1768,6 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                         <outlet property="transferTextField" destination="rto-f1-S9V" id="8aB-Tt-0D5"/>
                         <outlet property="transferTokenLabel" destination="yFO-aj-gME" id="FaK-nr-S3j"/>
                         <outlet property="transferView" destination="TWZ-p9-liZ" id="wfR-EW-Vrh"/>
-                        <outlet property="transferViewConstraint" destination="Zyx-7M-zb6" id="X91-XA-saV"/>
                         <outlet property="transitinSumLabel" destination="LUw-I8-VHi" id="L3h-LY-zri"/>
                         <outlet property="transitionBlockchainLabel" destination="oSI-Py-DJu" id="3OD-SZ-JEy"/>
                         <outlet property="transitionLinkLabel" destination="6ng-hi-KyK" id="uuf-sk-fRa"/>
@@ -2980,7 +2977,6 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
         <!--Transaction History View Controller-->
         <scene sceneID="unP-cN-jyk">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="XAm-X3-GaG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="TransactionHistoryVC" id="U2U-I9-5M3" customClass="TransactionHistoryViewController" customModule="GreenWallet" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="CRV-Ok-9W7">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
@@ -3376,6 +3372,7 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                         <outlet property="yesterdayDayeButton" destination="jmw-pc-TtC" id="jAP-aP-4qS"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XAm-X3-GaG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="7544.9275362318849" y="797.54464285714278"/>
         </scene>
@@ -4215,8 +4212,8 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
         <image name="LaunchScreenLogo" width="252" height="54"/>
         <image name="NewWallet" width="119" height="116"/>
         <image name="button1" width="28" height="28"/>
-        <image name="chevron.backward" catalog="system" width="96" height="128"/>
-        <image name="chevron.down" catalog="system" width="128" height="72"/>
+        <image name="chevron.backward" catalog="system" width="32" height="32"/>
+        <image name="chevron.down" catalog="system" width="32" height="32"/>
         <image name="contacts" width="16" height="20"/>
         <image name="deleteDigit" width="52" height="52"/>
         <image name="faceID" width="52" height="52"/>
