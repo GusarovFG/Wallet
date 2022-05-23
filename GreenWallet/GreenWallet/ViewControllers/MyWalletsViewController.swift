@@ -94,7 +94,7 @@ class MyWalletsViewController: UIViewController {
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 30) {
             self.isShowDetail = false
-            self.walletCollectionView.reloadItems(at: [[0,self.index]])
+            self.walletCollectionView.reloadData()
         }
     }
 
