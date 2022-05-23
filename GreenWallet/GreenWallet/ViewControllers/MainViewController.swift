@@ -61,6 +61,7 @@ class MainViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        WalletManager.share.favoritesWallets = WalletManager.share.vallets
         self.wallets = WalletManager.share.favoritesWallets
         self.pageControl.numberOfPages = self.wallets.count
         self.cellectionView.reloadData()

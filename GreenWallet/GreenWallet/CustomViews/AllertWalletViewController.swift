@@ -39,8 +39,9 @@ class AllertWalletViewController: UIViewController {
     }
     
     @IBAction func confirmButtonPressed(_ sender: Any) {
-        let storyBoard = UIStoryboard(name: "Main", bundle: .main)
-        let passwordVC = storyBoard.instantiateViewController(withIdentifier: "PasswordViewController") as! PasswordViewController
+        let passwordStoryboard = UIStoryboard(name: "PasswordStoryboard", bundle: .main)
+        let passwordVC = passwordStoryboard.instantiateViewController(withIdentifier: "PasswordViewController") as! PasswordViewController
+        passwordVC.modalPresentationStyle = .fullScreen
         self.dismiss(animated: true)
         self.controller.present(passwordVC, animated: true)
     }

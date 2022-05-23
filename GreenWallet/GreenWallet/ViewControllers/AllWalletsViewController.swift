@@ -10,6 +10,7 @@ import UIKit
 class AllWalletsViewController: UIViewController {
     
     var wallets: [Wallet] = []
+    var index = 0
     
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var mainLabel: UILabel!
@@ -39,6 +40,8 @@ class AllWalletsViewController: UIViewController {
         let storyBoard = UIStoryboard(name: "Alert", bundle: .main)
         let alertVC = storyBoard.instantiateViewController(withIdentifier: "DeletingAlert") as! AllertWalletViewController
         self.present(alertVC, animated: true)
+        WalletManager.share.vallets.removeAll(where: {$0 == self.wallets[index]})
+        self.walletsTableView.reloadData()
     }
 
     
@@ -109,20 +112,19 @@ extension AllWalletsViewController: UITableViewDelegate, UITableViewDataSource {
         } else {
             favorite.image = UIImage(named: "favoriteIs")!
         }
-        favorite.accessibilityFrame.size.width = 49
         
         let trash = UIContextualAction(style: .normal,
                                        title: "") { (action, view, completionHandler) in
             let storyBoard = UIStoryboard(name: "Alert", bundle: .main)
             let alertVC = storyBoard.instantiateViewController(withIdentifier: "DeleteWallet") as! AllertWalletViewController
             alertVC.controller = self
+            self.index = indexPath.row
             self.present(alertVC, animated: true)
             completionHandler(true)
         }
         
         trash.backgroundColor = .systemRed
         trash.image = UIImage(named: "Trash")!
-        trash.accessibilityFrame.size.width = 49
         
         let configuration = UISwipeActionsConfiguration(actions: [favorite, trash])
         configuration.performsFirstActionWithFullSwipe = false

@@ -21,11 +21,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let _ = (scene as? UIWindowScene) else { return }
         
         let storyboard = UIStoryboard(name: "Main", bundle: .main)
-        let mainTabBarVC = storyboard.instantiateViewController(withIdentifier: "MainTabBarController") as! MainTabBarController
         let startVC = storyboard.instantiateViewController(withIdentifier: "startVC")
         
+        let passwordStoryboard = UIStoryboard(name: "PasswordStoryboard", bundle: .main)
+        let enterPasswordVC = passwordStoryboard.instantiateViewController(withIdentifier: "EnteringPasswordViewController") as! PasswordViewController
+        enterPasswordVC.modalPresentationStyle = .fullScreen
+        
+        
         if UserDefaultsManager.shared.userDefaults.string(forKey: UserDefaultsStringKeys.firstSession.rawValue) == "First" {
-            self.window?.rootViewController = mainTabBarVC
+            self.window?.rootViewController = enterPasswordVC
         } else {
             self.window?.rootViewController = startVC
         }

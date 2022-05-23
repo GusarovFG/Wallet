@@ -68,7 +68,9 @@ class TermsOfUseViewController: UIViewController {
     }
     
     @IBAction func continueButtonPressed(_ sender: Any) {
-        let passwordVC = storyboard?.instantiateViewController(withIdentifier: "PasswordViewController") as! PasswordViewController
+        let passwordStoryboard = UIStoryboard(name: "PasswordStoryboard", bundle: .main)
+        let passwordVC = passwordStoryboard.instantiateViewController(withIdentifier: "CreatingPasswordViewController") as! PasswordViewController
+        passwordVC.modalPresentationStyle = .fullScreen
         self.present(passwordVC, animated: true)
 
     }

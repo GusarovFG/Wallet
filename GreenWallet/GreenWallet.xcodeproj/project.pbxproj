@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EDAF23A7FAA648A790DD2CB7 /* Pods_GreenWallet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED23606911404945CE9F819D /* Pods_GreenWallet.framework */; };
 		FB0883DC281BE21F001D4317 /* CustomThumbView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0883DB281BE21F001D4317 /* CustomThumbView.swift */; };
 		FB0FCA6328193CCC00BB0527 /* ImportTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0FCA6128193CCC00BB0527 /* ImportTableViewCell.swift */; };
 		FB0FCA6428193CCC00BB0527 /* ImportTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB0FCA6228193CCC00BB0527 /* ImportTableViewCell.xib */; };
@@ -72,6 +73,8 @@
 		FBBECA8B2832CF250042D1B8 /* mCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBBECA892832CF250042D1B8 /* mCollectionViewCell.swift */; };
 		FBBECA8C2832CF250042D1B8 /* mCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBBECA8A2832CF250042D1B8 /* mCollectionViewCell.xib */; };
 		FBC4AB752836A5AA00566683 /* TransactionHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC4AB742836A5AA00566683 /* TransactionHistoryViewController.swift */; };
+		FBD1CCAA283B90570081AF3E /* KeyChainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD1CCA9283B90570081AF3E /* KeyChainManager.swift */; };
+		FBD63A44283B7460006CE0A8 /* PasswordStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FBD63A43283B745F006CE0A8 /* PasswordStoryboard.storyboard */; };
 		FBFE5773281AAB040016E74A /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBFE5772281AAB040016E74A /* SettingsViewController.swift */; };
 		FBFE577B281AB9250016E74A /* ThemesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBFE5779281AB9250016E74A /* ThemesTableViewCell.swift */; };
 		FBFE577C281AB9250016E74A /* ThemesTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBFE577A281AB9250016E74A /* ThemesTableViewCell.xib */; };
@@ -90,6 +93,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E8E3D1CD28ED67C02EEC1172 /* Pods-GreenWallet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GreenWallet.debug.xcconfig"; path = "Target Support Files/Pods-GreenWallet/Pods-GreenWallet.debug.xcconfig"; sourceTree = "<group>"; };
+		ED23606911404945CE9F819D /* Pods_GreenWallet.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GreenWallet.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB0883DB281BE21F001D4317 /* CustomThumbView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomThumbView.swift; sourceTree = "<group>"; };
 		FB0FCA6128193CCC00BB0527 /* ImportTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportTableViewCell.swift; sourceTree = "<group>"; };
 		FB0FCA6228193CCC00BB0527 /* ImportTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImportTableViewCell.xib; sourceTree = "<group>"; };
@@ -157,6 +162,8 @@
 		FBBECA892832CF250042D1B8 /* mCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mCollectionViewCell.swift; sourceTree = "<group>"; };
 		FBBECA8A2832CF250042D1B8 /* mCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = mCollectionViewCell.xib; sourceTree = "<group>"; };
 		FBC4AB742836A5AA00566683 /* TransactionHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionHistoryViewController.swift; sourceTree = "<group>"; };
+		FBD1CCA9283B90570081AF3E /* KeyChainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainManager.swift; sourceTree = "<group>"; };
+		FBD63A43283B745F006CE0A8 /* PasswordStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PasswordStoryboard.storyboard; sourceTree = "<group>"; };
 		FBFE5772281AAB040016E74A /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		FBFE5779281AB9250016E74A /* ThemesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemesTableViewCell.swift; sourceTree = "<group>"; };
 		FBFE577A281AB9250016E74A /* ThemesTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ThemesTableViewCell.xib; sourceTree = "<group>"; };
@@ -172,6 +179,7 @@
 		FBFE579D281B28880016E74A /* LanguageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageViewController.swift; sourceTree = "<group>"; };
 		FBFE57A1281B2EDD0016E74A /* LanguageTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LanguageTableViewCell.xib; sourceTree = "<group>"; };
 		FBFE57A3281B4AFE0016E74A /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
+		FEA55796C3E3CCFEE4C98AB4 /* Pods-GreenWallet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GreenWallet.release.xcconfig"; path = "Target Support Files/Pods-GreenWallet/Pods-GreenWallet.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -179,12 +187,30 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EDAF23A7FAA648A790DD2CB7 /* Pods_GreenWallet.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		69E1947848511733B494B6A0 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E8E3D1CD28ED67C02EEC1172 /* Pods-GreenWallet.debug.xcconfig */,
+				FEA55796C3E3CCFEE4C98AB4 /* Pods-GreenWallet.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		B7970CC696E5C9756E9A3115 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				ED23606911404945CE9F819D /* Pods_GreenWallet.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		FB0883DD281BF48F001D4317 /* CustomSwitch */ = {
 			isa = PBXGroup;
 			children = (
@@ -293,6 +319,8 @@
 			children = (
 				FB5940332816856700037DFA /* GreenWallet */,
 				FB5940322816856700037DFA /* Products */,
+				69E1947848511733B494B6A0 /* Pods */,
+				B7970CC696E5C9756E9A3115 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -312,10 +340,12 @@
 				FB0FCA6F2819629D00BB0527 /* Models.swift */,
 				FBFE5796281B121A0016E74A /* UserDefaultsManager.swift */,
 				FB903810282D60DA004023F5 /* WalletManager.swift */,
+				FBD1CCA9283B90570081AF3E /* KeyChainManager.swift */,
 				FB3208072818285100F1ADCA /* ViewControllers */,
 				FB3208062818279E00F1ADCA /* CustomViews */,
 				FB5940512816AC7800037DFA /* Extensions */,
 				FB59403A2816856700037DFA /* Main.storyboard */,
+				FBD63A43283B745F006CE0A8 /* PasswordStoryboard.storyboard */,
 				FB5940402816856A00037DFA /* Assets.xcassets */,
 				FB5940422816856A00037DFA /* LaunchScreen.storyboard */,
 				FB5940452816856A00037DFA /* Info.plist */,
@@ -432,9 +462,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FB5940482816856A00037DFA /* Build configuration list for PBXNativeTarget "GreenWallet" */;
 			buildPhases = (
+				C0EB99883CA29495043FAA55 /* [CP] Check Pods Manifest.lock */,
 				FB59402D2816856700037DFA /* Sources */,
 				FB59402E2816856700037DFA /* Frameworks */,
 				FB59402F2816856700037DFA /* Resources */,
+				4E6D24687CBB1FCA76EDCFD6 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -493,6 +525,7 @@
 				FBBECA8C2832CF250042D1B8 /* mCollectionViewCell.xib in Resources */,
 				FB0FCA7428197A4000BB0527 /* ImportTokensTableViewCell.xib in Resources */,
 				FBB49A4B2824DEA700250553 /* spinner.storyboard in Resources */,
+				FBD63A44283B7460006CE0A8 /* PasswordStoryboard.storyboard in Resources */,
 				FB6D93DD2834F1E200B11E80 /* AllWalletsTableViewCell.xib in Resources */,
 				FBB9CF652836604D0094742E /* MyWalletCollectionViewCell.xib in Resources */,
 				FBFE5793281AE8C60016E74A /* SecureBalanceTableViewCell.xib in Resources */,
@@ -511,6 +544,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		4E6D24687CBB1FCA76EDCFD6 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-GreenWallet/Pods-GreenWallet-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-GreenWallet/Pods-GreenWallet-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-GreenWallet/Pods-GreenWallet-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C0EB99883CA29495043FAA55 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-GreenWallet-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		FB59402D2816856700037DFA /* Sources */ = {
@@ -554,6 +629,7 @@
 				FB8BF8DB282FFDF70067CD0B /* QRScanViewController.swift in Sources */,
 				FB3754AF2821511900882338 /* MnemonicCollectionViewCell.swift in Sources */,
 				FB0FCA6328193CCC00BB0527 /* ImportTableViewCell.swift in Sources */,
+				FBD1CCAA283B90570081AF3E /* KeyChainManager.swift in Sources */,
 				FBFE579A281B269E0016E74A /* LanguageTableViewCell.swift in Sources */,
 				FBB9CF68283673500094742E /* MyWalletsButtonsCollectionViewCell.swift in Sources */,
 				FB0FCA6D2819600400BB0527 /* SelectSystemTableViewCell.swift in Sources */,
@@ -716,6 +792,7 @@
 		};
 		FB5940492816856A00037DFA /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E8E3D1CD28ED67C02EEC1172 /* Pods-GreenWallet.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -745,6 +822,7 @@
 		};
 		FB59404A2816856A00037DFA /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FEA55796C3E3CCFEE4C98AB4 /* Pods-GreenWallet.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

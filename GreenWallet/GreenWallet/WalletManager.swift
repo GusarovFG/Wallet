@@ -22,7 +22,7 @@ class Password {
     
     static let sahre = Password()
     
-    let password = "323508"
+    var password = "323508"
     
     private init(){}
 }

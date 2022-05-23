@@ -8,13 +8,13 @@
 import UIKit
 import AVFAudio
 import LocalAuthentication
+import AVFoundation
 
 class PasswordViewController: UIViewController {
     
     var index = 0
     
-    private var isEntering = false
-    private var isRepitingPassword = false
+    private var isFirstSession = false
     private var password = ""
     private var enteringPassword = ""
     private var repitingPassword = ""
@@ -38,21 +38,6 @@ class PasswordViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if UserDefaultsManager.shared.userDefaults.string(forKey: UserDefaultsStringKeys.firstSession.rawValue) != "First" && !self.isRepitingPassword && !self.isEntering {
-            self.mainButton.removeFromSuperview()
-            self.stackViewConstraint.constant -= 120
-            self.stackViewTopConstraint.constant += 120
-            self.dotsTopConstraint.constant += 120
-            self.dotsBottomConstraint.constant -= 120
-            self.faceIDButton.alpha = 0
-            self.faceIDButton.isEnabled = false
-            
-            self.discriptionTitle.text = "Используйте код-пароль котрый вы точно не забудете"
-            self.mainTitle.text = "Создайте код - пароль"
-            self.errorLabel.text = "Пароль должен содержать 6 цифр"
-        }
-        
-        self.backButton.isHidden = true
         self.password = Password.sahre.password
         self.stackView.arrangedSubviews.forEach { view in
             view.layer.cornerRadius = view.frame.height / 2
@@ -60,11 +45,6 @@ class PasswordViewController: UIViewController {
             view.layer.borderWidth = 2
             view.layer.borderColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         }
-        
-        
-        
-        
-        
     }
     
     @IBAction func backButtonPressed(_ sender: Any) {
@@ -74,75 +54,34 @@ class PasswordViewController: UIViewController {
     
     @IBAction func enterIngDigit(_ sender: UIButton) {
         
-        
-        
         if self.enteringPassword.count < 6  {
             self.enteringPassword += (sender.titleLabel?.text)!
             self.stackView.arrangedSubviews[self.enteringPassword.count - 1].backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
             self.stackView.arrangedSubviews[self.enteringPassword.count - 1].layer.borderWidth = 0
-            print(self.enteringPassword)
-            print(self.repitingPassword)
+
         }
-        
-        if UserDefaultsManager.shared.userDefaults.string(forKey: UserDefaultsStringKeys.firstSession.rawValue) != "First" && !self.isRepitingPassword && !self.isEntering {
-            if self.enteringPassword.count == 6 && !self.isRepitingPassword {
-                self.isRepitingPassword = true
-                self.repitingPassword = self.enteringPassword
-                
-                self.enteringPassword = ""
-                
-                self.mainTitle.text = "Повторите код - пароль"
-                self.discriptionTitle.text = "Повторите пароль введенный раннее"
-                self.errorLabel.text = "Данный пароль отличается от предыдущего"
-                self.stackView.arrangedSubviews.forEach { view in
-                    view.layer.cornerRadius = view.frame.height / 2
-                    view.backgroundColor = UIColor(red: 255, green: 255, blue: 255, alpha: 0)
-                    view.layer.borderWidth = 2
-                    view.layer.borderColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-                }
-            }
-        }
-        if UserDefaultsManager.shared.userDefaults.string(forKey: UserDefaultsStringKeys.firstSession.rawValue) != "First" && self.isRepitingPassword && !self.isEntering {
-            
-            if self.enteringPassword.count == 6 && self.repitingPassword == self.enteringPassword {
-                print("qw;ljkaw")
-                self.isEntering = true
-                self.finalPassword = enteringPassword
-                self.enteringPassword = ""
-                self.mainTitle.text = "Введите пароль"
-//                self.titleConstraint.constant += 52.5
-                self.errorButtonConstraint.constant = 0
-                self.errorLabel.alpha = 0
-                self.stackView.arrangedSubviews.forEach { view in
-                    view.layer.cornerRadius = view.frame.height / 2
-                    view.backgroundColor = UIColor(red: 255, green: 255, blue: 255, alpha: 0)
-                    view.layer.borderWidth = 2
-                    view.layer.borderColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-                    
-                }
-            }
-            
-        }
-        
-        if UserDefaultsManager.shared.userDefaults.string(forKey: UserDefaultsStringKeys.firstSession.rawValue) != "First" && self.isRepitingPassword && self.isEntering {
-            if self.enteringPassword.count == 6  {
-                if self.finalPassword == self.enteringPassword {
-                            UserDefaultsManager.shared.userDefaults.set("First", forKey: UserDefaultsStringKeys.firstSession.rawValue)
-                            let storyboard = UIStoryboard(name: "Main", bundle: .main)
-                            let mainTabBarVC = storyboard.instantiateViewController(withIdentifier: "MainTabBarController") as! MainTabBarController
-                            self.view.window?.rootViewController = mainTabBarVC
-                    self.dismiss(animated: true)
-                }
-            }
-        } else if self.enteringPassword == self.password && UserDefaultsManager.shared.userDefaults.string(forKey: UserDefaultsStringKeys.firstSession.rawValue) == "First" && !self.isRepitingPassword && !self.isEntering {
+
+        if self.enteringPassword == self.password  {
             self.dismiss(animated: true)
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "Seccess"), object: nil, userInfo: self.userInfo)
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "closeAlert"), object: nil)
-        } else {
-            if self.enteringPassword.count == self.password.count {
+        } else if self.enteringPassword.count == 6 && self.enteringPassword != KeyChainManager.share.loadPassword() {
+            self.stackView.arrangedSubviews.forEach { view in
+                view.layer.cornerRadius = view.frame.height / 2
+                view.backgroundColor = #colorLiteral(red: 1, green: 0.1333333333, blue: 0.1333333333, alpha: 1)
+                view.layer.borderWidth = 0
+                view.layer.borderColor = #colorLiteral(red: 1, green: 0.1333333333, blue: 0.1333333333, alpha: 1)
                 self.errorLabel.alpha = 1
-            } else {
-                self.errorLabel.alpha = 0
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                    self.stackView.arrangedSubviews.forEach { view in
+                        view.layer.cornerRadius = view.frame.height / 2
+                        view.backgroundColor = UIColor(red: 255, green: 255, blue: 255, alpha: 0)
+                        view.layer.borderWidth = 2
+                        view.layer.borderColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+                        self.enteringPassword = ""
+                        self.errorLabel.alpha = 0
+                    }
+                }
             }
         }
         
@@ -155,6 +94,7 @@ class PasswordViewController: UIViewController {
             self.stackView.arrangedSubviews[self.enteringPassword.count - 1].layer.borderWidth = 2
             self.stackView.arrangedSubviews[self.enteringPassword.count - 1].layer.borderColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
             self.enteringPassword.removeLast()
+        
         }
     }
     
@@ -168,11 +108,17 @@ class PasswordViewController: UIViewController {
             context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) {
                 [weak self] success, authenticationError in
                 
-                DispatchQueue.main.async {
+                DispatchQueue.main.async { [unowned self] in
                     if success {
-                        self?.dismiss(animated: true)
-                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "Seccess"), object: nil, userInfo: self?.userInfo)
-                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "closeAlert"), object: nil)
+                        if self!.isFirstSession {
+                            let storyboard = UIStoryboard(name: "Main", bundle: .main)
+                            let startVC = storyboard.instantiateViewController(withIdentifier: "MainTabBarController") as! MainTabBarController
+                            self!.view.window?.rootViewController = startVC
+                        } else {
+                            self?.dismiss(animated: true)
+                            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "Seccess"), object: nil, userInfo: self?.userInfo)
+                            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "closeAlert"), object: nil)
+                        }
                     } else {
                         let ac = UIAlertController(title: "Authentication failed", message: "You could not be verified; please try again.", preferredStyle: .alert)
                         ac.addAction(UIAlertAction(title: "OK", style: .default))
@@ -192,4 +138,99 @@ class PasswordViewController: UIViewController {
         self.dismiss(animated: true)
     }
     
+    
+    @IBAction func creatingPassword(_ sender: UIButton) {
+        if self.enteringPassword.count < 6 {
+            self.enteringPassword += sender.titleLabel?.text ?? ""
+            self.stackView.arrangedSubviews[self.enteringPassword.count - 1].backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
+            self.stackView.arrangedSubviews[self.enteringPassword.count - 1].layer.borderWidth = 0
+        }
+        
+        if self.enteringPassword.count == 6 {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                let passwordStoryboard = UIStoryboard(name: "PasswordStoryboard", bundle: .main)
+                let repeatingPasswordVC = passwordStoryboard.instantiateViewController(withIdentifier: "RepeatingPasswordViewController") as! PasswordViewController
+                repeatingPasswordVC.modalPresentationStyle = .fullScreen
+                repeatingPasswordVC.repitingPassword = self.enteringPassword
+                self.present(repeatingPasswordVC, animated: true)
+                
+            }
+        }
+    }
+    
+    @IBAction func repeatingPassword(_ sender: UIButton) {
+        if self.enteringPassword.count < 6 {
+            self.enteringPassword += sender.titleLabel?.text ?? ""
+            self.stackView.arrangedSubviews[self.enteringPassword.count - 1].backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
+            self.stackView.arrangedSubviews[self.enteringPassword.count - 1].layer.borderWidth = 0
+        }
+        
+        if self.enteringPassword == self.repitingPassword {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                let passwordStoryboard = UIStoryboard(name: "PasswordStoryboard", bundle: .main)
+                let enterPasswordVC = passwordStoryboard.instantiateViewController(withIdentifier: "EnteringPasswordViewController") as! PasswordViewController
+                enterPasswordVC.modalPresentationStyle = .fullScreen
+                enterPasswordVC.isFirstSession = true
+                enterPasswordVC.finalPassword = self.enteringPassword
+                Password.sahre.password = self.enteringPassword
+                UserDefaultsManager.shared.userDefaults.set("First", forKey: UserDefaultsStringKeys.firstSession.rawValue)
+                KeyChainManager.share.savePassword(self.enteringPassword)
+                self.present(enterPasswordVC, animated: true)
+                
+            }
+        } else if self.enteringPassword.count == 6 && self.enteringPassword != self.repitingPassword{
+            self.stackView.arrangedSubviews.forEach { view in
+                view.layer.cornerRadius = view.frame.height / 2
+                view.backgroundColor = #colorLiteral(red: 1, green: 0.1333333333, blue: 0.1333333333, alpha: 1)
+                view.layer.borderWidth = 0
+                view.layer.borderColor = #colorLiteral(red: 1, green: 0.1333333333, blue: 0.1333333333, alpha: 1)
+                self.errorLabel.alpha = 1
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                    self.stackView.arrangedSubviews.forEach { view in
+                        view.layer.cornerRadius = view.frame.height / 2
+                        view.backgroundColor = UIColor(red: 255, green: 255, blue: 255, alpha: 0)
+                        view.layer.borderWidth = 2
+                        view.layer.borderColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+                        self.enteringPassword = ""
+                        self.errorLabel.alpha = 0
+                    }
+                }
+            }
+        }
+    }
+    
+    @IBAction func enterPassword(_ sender: UIButton) {
+        if self.enteringPassword.count < 6 {
+            self.enteringPassword += sender.titleLabel?.text ?? ""
+            self.stackView.arrangedSubviews[self.enteringPassword.count - 1].backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
+            self.stackView.arrangedSubviews[self.enteringPassword.count - 1].layer.borderWidth = 0
+        }
+        
+        if self.enteringPassword == KeyChainManager.share.loadPassword() {
+            
+            let storyboard = UIStoryboard(name: "Main", bundle: .main)
+            let startVC = storyboard.instantiateViewController(withIdentifier: "MainTabBarController") as! MainTabBarController
+            self.view.window?.rootViewController = startVC
+        } else if self.enteringPassword.count == 6 && self.enteringPassword != KeyChainManager.share.loadPassword() {
+            self.stackView.arrangedSubviews.forEach { view in
+                view.layer.cornerRadius = view.frame.height / 2
+                view.backgroundColor = #colorLiteral(red: 1, green: 0.1333333333, blue: 0.1333333333, alpha: 1)
+                view.layer.borderWidth = 0
+                view.layer.borderColor = #colorLiteral(red: 1, green: 0.1333333333, blue: 0.1333333333, alpha: 1)
+                self.errorLabel.alpha = 1
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                    self.stackView.arrangedSubviews.forEach { view in
+                        view.layer.cornerRadius = view.frame.height / 2
+                        view.backgroundColor = UIColor(red: 255, green: 255, blue: 255, alpha: 0)
+                        view.layer.borderWidth = 2
+                        view.layer.borderColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+                        self.enteringPassword = ""
+                        self.errorLabel.alpha = 0
+                    }
+                }
+            }
+        }
+    }
+    
+
 }

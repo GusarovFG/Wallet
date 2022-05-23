@@ -371,6 +371,12 @@ class PushTokensViewController: UIViewController {
         }
     }
     
+    @IBAction func confirmationButtonPressed(_ sender: Any) {
+        let passwordStoryboard = UIStoryboard(name: "PasswordStoryboard", bundle: .main)
+        let passwordVC = passwordStoryboard.instantiateViewController(withIdentifier: "PasswordViewController") as! PasswordViewController
+        passwordVC.modalPresentationStyle = .fullScreen
+        self.present(passwordVC, animated: true)
+    }
     
     @IBAction func contactsButtonPressed(_ sender: Any) {
     }
