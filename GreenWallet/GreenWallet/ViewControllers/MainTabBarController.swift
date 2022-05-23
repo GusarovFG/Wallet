@@ -25,7 +25,8 @@ class MainTabBarController: UITabBarController, UINavigationBarDelegate {
         let thirdMainVC = storyboard?.instantiateViewController(withIdentifier: "navi") as! UINavigationController
         thirdMainVC.tabBarItem = UITabBarItem(title: "Отправить", image: UIImage(named: "push")!, selectedImage: UIImage(named: "push")!)
         
-        let fourMainVC = storyboard?.instantiateViewController(withIdentifier: "navi") as! UINavigationController
+        let fourMainVC = storyboard?.instantiateViewController(withIdentifier: "TransactionHistoryVC") as! TransactionHistoryViewController
+        fourMainVC.modalPresentationStyle = .fullScreen
         fourMainVC.tabBarItem = UITabBarItem(title: "Транзакции", image: UIImage(named: "transaction")!, selectedImage: UIImage(named: "transaction")!)
 
         self.setViewControllers([mainVC, secondMainVC, thirdMainVC, fourMainVC], animated: true)
@@ -43,9 +44,7 @@ class MainTabBarController: UITabBarController, UINavigationBarDelegate {
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "showPushVC"), object: nil)
         }
         
-        if tabBar.selectedItem?.title == "Транзакции" {
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "showTransVC"), object: nil)
-        }
+
     }
     
     

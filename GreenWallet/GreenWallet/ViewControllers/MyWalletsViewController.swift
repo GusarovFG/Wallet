@@ -193,27 +193,15 @@ extension MyWalletsViewController: UICollectionViewDelegate, UICollectionViewDat
             switch indexPath {
             case [0,0]:
                 let selectSystemVC = storyboard?.instantiateViewController(withIdentifier: "SelectSystemViewController") as! SelectSystemViewController
-                let nav = UINavigationController(rootViewController: selectSystemVC)
-                
-                nav.modalPresentationStyle = .pageSheet
-                
-                if let sheet = nav.sheetPresentationController {
-                    sheet.detents = [.medium()]
-                }
-                
-                self.present(nav, animated: true, completion: nil)
+                selectSystemVC.isPushToken = true
+                selectSystemVC.modalPresentationStyle = .overFullScreen
+                self.present(selectSystemVC, animated: true)
             case [0,2]:
                 let selectSystemVC = storyboard?.instantiateViewController(withIdentifier: "SelectSystemViewController") as! SelectSystemViewController
                 selectSystemVC.isGetToken = true
-                let nav = UINavigationController(rootViewController: selectSystemVC)
+                selectSystemVC.modalPresentationStyle = .overFullScreen
+                self.present(selectSystemVC, animated: true)
                 
-                selectSystemVC.modalPresentationStyle = .fullScreen
-                
-                if let sheet = nav.sheetPresentationController {
-                    sheet.detents = [.medium()]
-                }
-                
-                self.present(nav, animated: true, completion: nil)
             case [0,1]:
                 let shareController = UIActivityViewController(activityItems: [self.wallets[index].name], applicationActivities: nil)
                 self.present(shareController, animated: true, completion: nil)
