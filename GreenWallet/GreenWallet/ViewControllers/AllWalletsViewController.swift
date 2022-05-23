@@ -39,6 +39,7 @@ class AllWalletsViewController: UIViewController {
     @objc func openAlert(notification: Notification)  {
         let storyBoard = UIStoryboard(name: "Alert", bundle: .main)
         let alertVC = storyBoard.instantiateViewController(withIdentifier: "DeletingAlert") as! AllertWalletViewController
+        alertVC.isInMyWallet = true
         self.present(alertVC, animated: true)
         WalletManager.share.vallets.removeAll(where: {$0 == self.wallets[index]})
         self.walletsTableView.reloadData()

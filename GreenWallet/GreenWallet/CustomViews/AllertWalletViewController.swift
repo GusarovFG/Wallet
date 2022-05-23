@@ -10,6 +10,8 @@ import UIKit
 class AllertWalletViewController: UIViewController {
 
     var controller = UIViewController()
+    var index = 0
+    var isInMyWallet = false
     
     @IBOutlet weak var mainLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
@@ -42,8 +44,12 @@ class AllertWalletViewController: UIViewController {
         let passwordStoryboard = UIStoryboard(name: "PasswordStoryboard", bundle: .main)
         let passwordVC = passwordStoryboard.instantiateViewController(withIdentifier: "PasswordViewController") as! PasswordViewController
         passwordVC.modalPresentationStyle = .fullScreen
+        passwordVC.index = self.index
         self.dismiss(animated: true)
         self.controller.present(passwordVC, animated: true)
+        if self.isInMyWallet {
+            NotificationCenter.default.post(name: NSNotification.Name("deleteInMyWallet"), object: nil)
+        }
     }
     @IBAction func dismissButtonPressed(_ sender: Any) {
         self.dismiss(animated: true)

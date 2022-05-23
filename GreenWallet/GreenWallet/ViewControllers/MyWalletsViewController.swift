@@ -10,7 +10,7 @@ import UIKit
 class MyWalletsViewController: UIViewController {
     
     private var wallets: [Wallet] = []
-    private var actionButtons: [MyWalletsButtons] = [MyWalletsButtons(image: UIImage(named: "wallet")!,
+    private var actionButtons: [MyWalletsButtons] = [MyWalletsButtons(image: UIImage(named: "getArrow")!,
                                                                       title: "Send",
                                                                       discription: "Send coins and tokens at any time from your mobile phone"),
                                                      MyWalletsButtons(image: UIImage(named: "share")!,
@@ -24,6 +24,7 @@ class MyWalletsViewController: UIViewController {
                                                                       discription: "Scan the QR code from the screen of your computer or smartphone for a quick transaction")]
     
     var isShowDetail = false
+    var isScrolling = true
     var index = 0
     private var wallet: Wallet?
     
@@ -48,45 +49,64 @@ class MyWalletsViewController: UIViewController {
         self.walletCollectionView.register(UINib(nibName: "MyWalletCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "MyWalletCollectionViewCell")
         self.walletCollectionView.register(UINib(nibName: "MyWalletDetailCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "MyWalletDetailCollectionViewCell")
         self.actionCollectionView.register(UINib(nibName: "MyWalletsButtonsCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "MyWalletsButtonsCollectionViewCell")
-        
-        self.walletCollectionView.presentationIndexPath(forDataSourceIndexPath: [0,self.index])
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(showDetailCell), name: NSNotification.Name("Seccess"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(openAlert), name: NSNotification.Name("closeAlert"), object: nil)
-        
+                
+        NotificationCenter.default.addObserver(self, selector: #selector(showDetail), name: NSNotification.Name("showDetail"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(deleteWalletAtIntex), name: NSNotification.Name("deleteWalletAtIntex"), object: nil)
+
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.wallets = WalletManager.share.vallets
+        print(self.index)
         self.pageControl.numberOfPages = self.wallets.count
         self.walletCollectionView.reloadData()
     }
     
-    @objc func openAlert(notification: Notification)  {
-        let storyBoard = UIStoryboard(name: "Alert", bundle: .main)
-        let alertVC = storyBoard.instantiateViewController(withIdentifier: "DeletingAlert") as! AllertWalletViewController
-        self.present(alertVC, animated: true)
-        WalletManager.share.vallets.removeAll(where: {$0 == self.wallet})
-        self.walletCollectionView.reloadData()
-    }
-    
-    @objc func showDetailCell(notification: Notification) {
-        guard let userInfo = notification.userInfo else { return }
-        self.isShowDetail = true
-    }
-    
     override func viewWillLayoutSubviews() {
         self.scrollView.contentSize = self.view.bounds.size
+        
+
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.scrollToNextCell()
+        print("-------------------------_______-----____-__-__-__-__-_-_--_-_-- \(self.index)")
+        self.scrollToNextCell(index: self.index)
     }
     
-    private func scrollToNextCell(){
-        self.walletCollectionView.scrollToItem(at: [0,self.index], at: .right, animated: true)
+    @objc func deleteWalletAtIntex() {
+        let storyBoard = UIStoryboard(name: "Alert", bundle: .main)
+        let alertVC = storyBoard.instantiateViewController(withIdentifier: "DeletingAlert") as! AllertWalletViewController
+        self.present(alertVC, animated: true)
+
+        WalletManager.share.vallets.removeAll(where: {$0 == self.wallet})
+        self.wallets = WalletManager.share.vallets
+        self.walletCollectionView.reloadData()
+    }
+    
+    @objc func showDetail(notification: Notification) {
+        self.isShowDetail = true
+        self.walletCollectionView.reloadItems(at: [[0,self.index]])
+        self.isScrolling = false
+        self.isShowDetail = false
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 30) {
+            self.isShowDetail = false
+            self.walletCollectionView.reloadItems(at: [[0,self.index]])
+        }
+    }
+
+    
+
+    
+    private func scrollToNextCell(index: Int){
+        if !self.isShowDetail && self.isScrolling {
+            
+            self.walletCollectionView.scrollToItem(at: [0,index], at: .right, animated: true)
+        }
+        
     }
 
     @IBAction func backButtomPressed(_ sender: Any) {
@@ -103,6 +123,7 @@ class MyWalletsViewController: UIViewController {
         let storyBoard = UIStoryboard(name: "Alert", bundle: .main)
         let alertVC = storyBoard.instantiateViewController(withIdentifier: "DeleteWallet") as! AllertWalletViewController
         alertVC.controller = self
+        alertVC.index = self.index
         self.present(alertVC, animated: true)
     }
     
@@ -138,8 +159,10 @@ extension MyWalletsViewController: UICollectionViewDelegate, UICollectionViewDat
                 mainCell.walletSystemLabel.text = wallet.name + " Network"
                 mainCell.publicKeyLabel.text = "Приватный ключ с публичным отпечатком 8745635630"
                 mainCell.complitionHandler = { [unowned self] in
-                    let passwordVC = storyboard?.instantiateViewController(withIdentifier: "PasswordViewController") as! PasswordViewController
-                    passwordVC.index = self.index
+                    let passwordStoryboard = UIStoryboard(name: "PasswordStoryboard", bundle: .main)
+                    let passwordVC = passwordStoryboard.instantiateViewController(withIdentifier: "PasswordViewController") as! PasswordViewController
+                    passwordVC.modalPresentationStyle = .fullScreen
+                    passwordVC.isShowDetail = true
                     self.present(passwordVC, animated: true)
                     
                 }
@@ -225,6 +248,8 @@ extension MyWalletsViewController: UICollectionViewDelegate, UICollectionViewDat
             self.pageControl.currentPage = visibleIndexPath.row
             self.wallet = self.wallets[visibleIndexPath.row]
             self.index = visibleIndexPath.row
+            
+
         }
     }
     

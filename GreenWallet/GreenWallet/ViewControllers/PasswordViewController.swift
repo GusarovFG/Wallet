@@ -13,6 +13,8 @@ import AVFoundation
 class PasswordViewController: UIViewController {
     
     var index = 0
+    var isShowDetail = false
+    var isMyWallet = false
     
     private var isFirstSession = false
     private var enteringPassword = ""
@@ -37,12 +39,20 @@ class PasswordViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        NotificationCenter.default.addObserver(self, selector: #selector(deleteInMyWallet), name: NSNotification.Name("deleteInMyWallet"), object: nil)
+        
+        print(self.isMyWallet)
+        
         self.stackView.arrangedSubviews.forEach { view in
             view.layer.cornerRadius = view.frame.height / 2
             view.backgroundColor = UIColor(red: 255, green: 255, blue: 255, alpha: 0)
             view.layer.borderWidth = 2
             view.layer.borderColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         }
+    }
+    
+    @objc func deleteInMyWallet() {
+        self.isMyWallet = true
     }
     
     @IBAction func backButtonPressed(_ sender: Any) {
@@ -61,8 +71,16 @@ class PasswordViewController: UIViewController {
 
         if self.enteringPassword == KeyChainManager.share.loadPassword()  {
             self.dismiss(animated: true)
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "Seccess"), object: nil, userInfo: self.userInfo)
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "closeAlert"), object: nil)
+            if !self.isShowDetail && !self.isMyWallet {
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "Seccess"), object: nil, userInfo: self.userInfo)
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "closeAlert"), object: nil)
+            }
+            if self.isShowDetail && !self.isMyWallet {
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "showDetail"), object: nil)
+            }
+            if self.isMyWallet && !self.isShowDetail {
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "deleteWalletAtIntex"), object: nil)
+            }
         } else if self.enteringPassword.count == 6 && self.enteringPassword != KeyChainManager.share.loadPassword() {
             self.stackView.arrangedSubviews.forEach { view in
                 view.layer.cornerRadius = view.frame.height / 2
@@ -114,8 +132,11 @@ class PasswordViewController: UIViewController {
                             self!.view.window?.rootViewController = startVC
                         } else {
                             self?.dismiss(animated: true)
-                            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "Seccess"), object: nil, userInfo: self?.userInfo)
-                            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "closeAlert"), object: nil)
+                            if !self!.isShowDetail {
+                                
+                                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "Seccess"), object: nil, userInfo: self?.userInfo)
+                                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "closeAlert"), object: nil)
+                            }
                         }
                     } else {
                         let ac = UIAlertController(title: "Authentication failed", message: "You could not be verified; please try again.", preferredStyle: .alert)
