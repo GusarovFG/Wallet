@@ -114,6 +114,7 @@
             <connections>
                 <outlet property="footerButton" destination="Qm9-ip-H3M" id="Rg0-sZ-8FE"/>
                 <outlet property="footerView" destination="2U9-0a-Pp8" id="Me7-Ug-16h"/>
+                <outlet property="headerButton" destination="azq-px-qfr" id="nZk-Wu-0dT"/>
                 <outlet property="headerView" destination="k05-sA-9e5" id="XR0-JJ-xxV"/>
                 <outlet property="heightConstraint" destination="DEC-Mc-rMq" id="mTH-WK-M1v"/>
                 <outlet property="stackView" destination="1Ax-zd-cIX" id="iid-SO-NcT"/>
@@ -123,6 +124,6 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="plus" catalog="system" width="32" height="32"/>
+        <image name="plus" catalog="system" width="128" height="113"/>
     </resources>
 </document>

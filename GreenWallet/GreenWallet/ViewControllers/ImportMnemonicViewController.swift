@@ -37,7 +37,7 @@ class ImportMnemonicViewController: UIViewController {
         setuptermsLabel()
         registerFromKeyBoardNotifications()
         self.scrollView.isScrollEnabled = false
-        self.continueButton.backgroundColor = #colorLiteral(red: 0.6106664538, green: 0.6106664538, blue: 0.6106664538, alpha: 1)
+        self.continueButton.backgroundColor = #colorLiteral(red: 0.2666666667, green: 0.2666666667, blue: 0.2666666667, alpha: 1)
         self.continueButton.isEnabled = false
         self.segmentedControl.setTitleTextAttributes([.foregroundColor: #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1), .font: UIFont(name: "Helvetica-Bold", size: 18.0) ], for: .selected)
         self.segmentedControl.setTitleTextAttributes([.foregroundColor: #colorLiteral(red: 0.2784313725, green: 0.2784313725, blue: 0.2784313725, alpha: 1) ], for: .normal)
@@ -90,12 +90,10 @@ class ImportMnemonicViewController: UIViewController {
         if sender.selectedSegmentIndex == 0 {
             self.countOfItems = 12
             
-            for _ in 0...5 {
+            for _ in 0...11 {
                 self.mnemonicPhrase.removeLast()
             }
-            for _ in 0...5 {
-                self.mnemonicPhrase.remove(at: 6)
-            }
+            
             
             self.scrollView.isScrollEnabled = false
             self.scrollView.setContentOffset(.zero, animated: true)
@@ -104,14 +102,13 @@ class ImportMnemonicViewController: UIViewController {
         } else {
             self.countOfItems = 24
             
-            for _ in 0...5 {
-                self.mnemonicPhrase.insert("", at: 6)
+            for _ in 0...11 {
+                self.mnemonicPhrase.insert("", at: 12)
             }
-            for _ in 0...5 {
-                self.mnemonicPhrase.insert("", at: 18)
-            }
+           
             
             self.scrollView.isScrollEnabled = true
+
             self.collectionView.reloadData()
             self.bottomConstraint.constant = self.bottomConstraint.constant + (50 * 6)
         }
@@ -184,6 +181,8 @@ extension ImportMnemonicViewController: UICollectionViewDelegate, UICollectionVi
         cell.cellTextLabel.tag = indexPath.row
         cell.cellTextLabel.delegate = self
         
+        
+        
         let mnemonicWord = self.mnemonicPhrase[indexPath.row]
         if mnemonicWord == "" {
             cell.cellTextLabel.placeholder = "\(indexPath.row + 1)."
@@ -191,15 +190,6 @@ extension ImportMnemonicViewController: UICollectionViewDelegate, UICollectionVi
             cell.layer.borderColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
         } else {
             cell.cellTextLabel.text = mnemonicWord
-        }
-        
-        let dicimalCharacters = CharacterSet.decimalDigits
-        let dicimalRange = cell.cellTextLabel.text?.rangeOfCharacter(from: dicimalCharacters)
-        
-        if dicimalRange != nil {
-            cell.layer.borderColor = #colorLiteral(red: 1, green: 0.2360929251, blue: 0.1714096665, alpha: 0.8980392157)
-        } else {
-            cell.layer.borderColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
         }
         
         if cell.cellTextLabel.text == "" && self.checkBoxPress {
@@ -221,23 +211,21 @@ extension ImportMnemonicViewController: UICollectionViewDelegate, UICollectionVi
             if cell.cellTextLabel.text != "" {
                 self.errorLabel.isHidden = true
                 
-                let dicimalCharacters = CharacterSet.decimalDigits
-                let dicimalRange = cell.cellTextLabel.text?.rangeOfCharacter(from: dicimalCharacters)
-                
-                if dicimalRange != nil {
-                    cell.layer.borderColor = #colorLiteral(red: 1, green: 0.2360929251, blue: 0.1714096665, alpha: 0.8980392157)
-                } else {
-                    cell.layer.borderColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
-                }
-                
-
-                
                 for i in 0..<self.mnemonicPhrase.count  {
                     if self.mnemonicPhrase[i] == cell.cellTextLabel.text   {
                         cell.layer.borderColor = #colorLiteral(red: 1, green: 0.2360929251, blue: 0.1714096665, alpha: 0.8980392157)
                         self.collectionView.cellForItem(at: [0,i])?.layer.borderColor = #colorLiteral(red: 1, green: 0.2360929251, blue: 0.1714096665, alpha: 0.8980392157)
                         print(self.mnemonicPhrase)
                         self.errorLabel.isHidden = false
+                    }
+                }
+                if self.countOfItems == 12 || self.countOfItems == 24 {
+                    if self.mnemonicPhrase.filter({$0 == ""}).count == 0 && self.checkBoxPress {
+                        self.continueButton.isEnabled = true
+                        self.continueButton.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
+                    } else {
+                        self.continueButton.isEnabled = false
+                        self.continueButton.backgroundColor = #colorLiteral(red: 0.2666666667, green: 0.2666666667, blue: 0.2666666667, alpha: 1)
                     }
                 }
                 
@@ -253,13 +241,27 @@ extension ImportMnemonicViewController: UICollectionViewDelegate, UICollectionVi
         }
         
         cell.endEditing = { [unowned self] in
-            self.errorLabel.isHidden = true
-            if cell.cellTextLabel.text!.contains(" ") || cell.cellTextLabel.text!.contains("-") {
-                cell.cellTextLabel.text = ""
-                self.mnemonicPhrase.remove(at: indexPath.row)
-                self.mnemonicPhrase.insert("", at: indexPath.row)
+            if self.countOfItems == 12 || self.countOfItems == 24 {
+                if self.mnemonicPhrase.filter({$0 == ""}).count == 0 && self.checkBoxPress && cell.cellTextLabel.text != "" && cell.cellTextLabel.text != " " {
+                    self.continueButton.isEnabled = true
+                    self.continueButton.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
+                } else {
+                    self.continueButton.isEnabled = false
+                    self.continueButton.backgroundColor = #colorLiteral(red: 0.2666666667, green: 0.2666666667, blue: 0.2666666667, alpha: 1)
+                }
             }
         }
+        
+        if self.countOfItems == 24 {
+            if cell.cellTextLabel.text == "" {
+                cell.layer.borderColor = #colorLiteral(red: 1, green: 0.2360929251, blue: 0.1714096665, alpha: 0.8980392157)
+            } else {
+                
+                cell.layer.borderColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
+            }
+        }
+        
+        
         
         return cell
     }

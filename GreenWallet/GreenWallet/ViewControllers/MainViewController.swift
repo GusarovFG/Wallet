@@ -60,14 +60,15 @@ class MainViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        WalletManager.share.favoritesWallets = WalletManager.share.vallets
         self.wallets = WalletManager.share.favoritesWallets
         self.pageControl.numberOfPages = self.wallets.count
         self.cellectionView.reloadData()
+        
     }
     
     
-    private func presentSelectSystemVC() {
+    
+    @objc private func presentSelectSystemVC() {
         
         let selectSystemVC = storyboard?.instantiateViewController(withIdentifier: "SelectSystemViewController") as! SelectSystemViewController
         selectSystemVC.isSelectedSystem = true
@@ -75,7 +76,7 @@ class MainViewController: UIViewController {
         self.present(selectSystemVC, animated: true)
     }
     
-
+    
     
     @objc private func pushSettingsController() {
         
@@ -133,6 +134,11 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "mCollectionViewCell", for: indexPath) as! mCollectionViewCell
         if WalletManager.share.favoritesWallets.isEmpty {
             cell.wallet = Wallet(name: "", number: 0, image: UIImage(), tokens: [], toket: "")
+            cell.footerButton.setTitle("+ Добавить кошелек", for: .normal)
+            cell.footerButton.addTarget(self, action: #selector(presentSelectSystemVC), for: .touchUpInside)
+            cell.tableView.backgroundColor = #colorLiteral(red: 0.1882352941, green: 0.1882352941, blue: 0.1882352941, alpha: 1)
+            cell.headerButton.isHidden = true
+            
             cell.tableView.reloadData()
             
         } else {

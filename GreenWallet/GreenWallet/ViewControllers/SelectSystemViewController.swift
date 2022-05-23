@@ -14,6 +14,7 @@ class SelectSystemViewController: UIViewController {
      var isSelectedSystem = false
      var isGetToken = false
      var isPushToken = false
+    var isNewWallet = true
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var titleLabel: UILabel!
@@ -27,6 +28,10 @@ class SelectSystemViewController: UIViewController {
         self.headerView.layer.cornerRadius = 15
         self.headerView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         self.view.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
+        
+        if self.isNewWallet {
+            self.titleLabel.text = "Добавить новый кошелек"
+        }
         
         let swipeGasture = UISwipeGestureRecognizer(target: self, action: #selector(dismissSwipe))
         swipeGasture.direction = .down

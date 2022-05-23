@@ -19,6 +19,7 @@ class mCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var heightConstraint: NSLayoutConstraint!
     @IBOutlet weak var stackView: UIStackView!
+    @IBOutlet weak var headerButton: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -36,14 +37,9 @@ class mCollectionViewCell: UICollectionViewCell {
         self.footerView.layer.cornerRadius = 15
         self.footerView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
         
-        if WalletManager.share.favoritesWallets.isEmpty  {
-            self.footerButton.setTitle("Добавить кошелек", for: .normal)
-            self.footerButton.addTarget(self, action: #selector(newwalletButtomPressed), for: .touchUpInside)
-        } else {
-            self.footerButton.setTitle("Все кошельки", for: .normal)
-            self.footerButton.addTarget(self, action: #selector(allWalletButtonPressed), for: .touchUpInside)
-        }
         
+        self.footerButton.setTitle("Все кошельки", for: .normal)
+        self.footerButton.addTarget(self, action: #selector(allWalletButtonPressed), for: .touchUpInside)
         
     }
     
@@ -71,13 +67,12 @@ class mCollectionViewCell: UICollectionViewCell {
         let storyboard = UIStoryboard(name: "Main", bundle: .main)
         let selectSystemVC = storyboard.instantiateViewController(withIdentifier: "SelectSystemViewController") as! SelectSystemViewController
         
-        
         self.controller.present(selectSystemVC, animated: true)
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "newWallet"), object: nil)
     }
     
     @IBAction func footerButtonPressed(_ sender: UIButton) {
-        if sender.titleLabel?.text == "Добавить кошелек"  {
+        if sender.titleLabel?.text == "+ Добавить кошелек"  {
             self.newwalletButtomPressed(sender)
         } else {
             self.allWalletButtonPressed()
@@ -109,6 +104,7 @@ extension mCollectionViewCell: UITableViewDelegate, UITableViewDataSource {
         default:
             self.height += walletCell.frame.height
             let wallet = self.wallet.tokens[indexPath.row]
+            
             walletCell.cellImage.image = wallet.image
             walletCell.balanceLabel.text = "\(wallet.balance) \(wallet.token)"
             walletCell.convertLabel.text = "⁓ 504.99 USD"
