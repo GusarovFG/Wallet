@@ -113,6 +113,7 @@
             <size key="customSize" width="373" height="496"/>
             <connections>
                 <outlet property="footerButton" destination="Qm9-ip-H3M" id="Rg0-sZ-8FE"/>
+                <outlet property="footerButtonConstraint" destination="vsa-Oo-XxJ" id="Kce-Bb-3lP"/>
                 <outlet property="footerView" destination="2U9-0a-Pp8" id="Me7-Ug-16h"/>
                 <outlet property="headerButton" destination="azq-px-qfr" id="nZk-Wu-0dT"/>
                 <outlet property="headerView" destination="k05-sA-9e5" id="XR0-JJ-xxV"/>

@@ -138,7 +138,7 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
             cell.footerButton.addTarget(self, action: #selector(presentSelectSystemVC), for: .touchUpInside)
             cell.tableView.backgroundColor = #colorLiteral(red: 0.1882352941, green: 0.1882352941, blue: 0.1882352941, alpha: 1)
             cell.headerButton.isHidden = true
-            
+            cell.footerButtonConstraint.constant = 0
             cell.tableView.reloadData()
             
         } else {

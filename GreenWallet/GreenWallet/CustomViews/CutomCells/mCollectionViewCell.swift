@@ -20,6 +20,7 @@ class mCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var heightConstraint: NSLayoutConstraint!
     @IBOutlet weak var stackView: UIStackView!
     @IBOutlet weak var headerButton: UIButton!
+    @IBOutlet weak var footerButtonConstraint: NSLayoutConstraint!
     
     override func awakeFromNib() {
         super.awakeFromNib()
