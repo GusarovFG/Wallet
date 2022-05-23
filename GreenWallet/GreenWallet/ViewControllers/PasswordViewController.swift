@@ -15,7 +15,6 @@ class PasswordViewController: UIViewController {
     var index = 0
     
     private var isFirstSession = false
-    private var password = ""
     private var enteringPassword = ""
     private var repitingPassword = ""
     private var finalPassword = ""
@@ -38,7 +37,6 @@ class PasswordViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.password = Password.sahre.password
         self.stackView.arrangedSubviews.forEach { view in
             view.layer.cornerRadius = view.frame.height / 2
             view.backgroundColor = UIColor(red: 255, green: 255, blue: 255, alpha: 0)
@@ -61,7 +59,7 @@ class PasswordViewController: UIViewController {
 
         }
 
-        if self.enteringPassword == self.password  {
+        if self.enteringPassword == KeyChainManager.share.loadPassword()  {
             self.dismiss(animated: true)
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "Seccess"), object: nil, userInfo: self.userInfo)
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "closeAlert"), object: nil)

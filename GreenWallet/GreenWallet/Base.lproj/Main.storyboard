@@ -2072,10 +2072,10 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="55V-h2-7G0">
-                                <rect key="frame" x="0.0" y="666" width="414" height="230"/>
+                                <rect key="frame" x="0.0" y="688" width="414" height="200"/>
                                 <color key="backgroundColor" red="0.18823529410000001" green="0.18823529410000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="230" id="gmA-ka-S5s"/>
+                                    <constraint firstAttribute="height" constant="200" id="gmA-ka-S5s"/>
                                 </constraints>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="systemCell" id="ute-45-KQo" customClass="SelectSystemTableViewCell" customModule="GreenWallet" customModuleProvider="target">
@@ -2103,7 +2103,7 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                                 </connections>
                             </tableView>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vmO-aU-tWR">
-                                <rect key="frame" x="0.0" y="608" width="414" height="59"/>
+                                <rect key="frame" x="0.0" y="629" width="414" height="59"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Выберите сеть" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6j7-jE-JJK">
                                         <rect key="frame" x="15" y="27" width="143" height="24"/>
@@ -2119,6 +2119,7 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                                 <constraints>
                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="6j7-jE-JJK" secondAttribute="trailing" constant="20" symbolic="YES" id="RW3-d0-a46"/>
                                     <constraint firstItem="6j7-jE-JJK" firstAttribute="leading" secondItem="vmO-aU-tWR" secondAttribute="leading" constant="15" id="TLE-BH-ZsS"/>
+                                    <constraint firstAttribute="height" constant="59" id="kOn-e2-MVb"/>
                                     <constraint firstItem="6j7-jE-JJK" firstAttribute="top" secondItem="vmO-aU-tWR" secondAttribute="top" constant="27" id="q8p-6N-JmX"/>
                                 </constraints>
                             </view>
@@ -2126,12 +2127,11 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                         <viewLayoutGuide key="safeArea" id="MkD-X3-35e"/>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="vmO-aU-tWR" firstAttribute="top" secondItem="MkD-X3-35e" secondAttribute="top" constant="564" id="SGs-sX-J6V"/>
-                            <constraint firstItem="55V-h2-7G0" firstAttribute="top" secondItem="vmO-aU-tWR" secondAttribute="bottom" constant="-1" id="YXD-KC-9oS"/>
+                            <constraint firstItem="vmO-aU-tWR" firstAttribute="top" secondItem="MkD-X3-35e" secondAttribute="top" constant="585" id="SGs-sX-J6V"/>
+                            <constraint firstItem="55V-h2-7G0" firstAttribute="top" secondItem="vmO-aU-tWR" secondAttribute="bottom" id="YXD-KC-9oS"/>
                             <constraint firstItem="55V-h2-7G0" firstAttribute="trailing" secondItem="MkD-X3-35e" secondAttribute="trailing" id="fqQ-eK-ibK"/>
                             <constraint firstItem="vmO-aU-tWR" firstAttribute="leading" secondItem="MkD-X3-35e" secondAttribute="leading" id="j35-97-OuZ"/>
                             <constraint firstItem="55V-h2-7G0" firstAttribute="leading" secondItem="MkD-X3-35e" secondAttribute="leading" id="nWO-jC-3Si"/>
-                            <constraint firstItem="MkD-X3-35e" firstAttribute="bottom" secondItem="55V-h2-7G0" secondAttribute="bottom" constant="-34" id="qS5-wG-lwz"/>
                             <constraint firstItem="MkD-X3-35e" firstAttribute="trailing" secondItem="vmO-aU-tWR" secondAttribute="trailing" id="rX8-gy-aZo"/>
                         </constraints>
                     </view>
