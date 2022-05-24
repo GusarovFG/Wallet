@@ -52,7 +52,7 @@ class VerifyMnemonicViewController: UIViewController {
     @IBAction func backButtonPressed(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
-
+    
     @IBAction func mainButtonPressed(_ sender: Any) {
         if self.verifyedMnemonicPhrase == self.mnemonicPhrase {
             let storyboard = UIStoryboard(name: "Alert", bundle: .main)
@@ -67,7 +67,7 @@ class VerifyMnemonicViewController: UIViewController {
                 self.veryfyCollectionView.visibleCells.forEach({$0.layer.borderColor = #colorLiteral(red: 1, green: 0.2360929251, blue: 0.1714096665, alpha: 0.8980392157) })
                 self.veryfyCollectionView.visibleCells.forEach({$0.backgroundColor = .systemBackground })
                 self.veryfyCollectionView.reloadData()
-
+                
             }
             DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
                 UIView.animate(withDuration: 1) {
@@ -167,13 +167,17 @@ extension VerifyMnemonicViewController: UICollectionViewDelegate, UICollectionVi
                 }
             }
         case self.selectCollectionView:
+            let cell = self.veryfyCollectionView.cellForItem(at: indexPath) as! MnemonicCollectionViewCell
             if self.selectIndex >= 6 {
+                
+                
                 self.verifyedMnemonicPhrase.remove(at: self.selectIndex)
                 self.verifyedMnemonicPhrase.insert(self.selectPhrase[indexPath.row], at: self.selectIndex)
                 
                 self.selectPhrase.remove(at: indexPath.row)
                 if self.selectIndex < 12 {
                     self.selectIndex += 1
+                    
                 } else {
                     self.selectIndex = 6
                 }

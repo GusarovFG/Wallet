@@ -245,6 +245,48 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
             </objects>
             <point key="canvasLocation" x="2647.826086956522" y="97.767857142857139"/>
         </scene>
+        <!--Greating View Controller-->
+        <scene sceneID="lBE-Ce-Tsz">
+            <objects>
+                <viewController storyboardIdentifier="GreatingViewController" id="1DF-jQ-US1" customClass="GreatingViewController" customModule="GreenWallet" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="9Om-NJ-AYJ">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="goodMorning" translatesAutoresizingMaskIntoConstraints="NO" id="HAN-ce-fja">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Доброе утро!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zI0-nY-7Kg">
+                                <rect key="frame" x="48" y="244" width="318" height="43"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="43" id="RDt-Re-Cao"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="SIA-U0-nse"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="HAN-ce-fja" firstAttribute="leading" secondItem="SIA-U0-nse" secondAttribute="leading" id="Iuv-Dq-BFy"/>
+                            <constraint firstItem="SIA-U0-nse" firstAttribute="trailing" secondItem="zI0-nY-7Kg" secondAttribute="trailing" constant="48" id="UfA-R8-AwM"/>
+                            <constraint firstItem="HAN-ce-fja" firstAttribute="trailing" secondItem="SIA-U0-nse" secondAttribute="trailing" id="WkK-Rx-Vt0"/>
+                            <constraint firstItem="zI0-nY-7Kg" firstAttribute="top" secondItem="SIA-U0-nse" secondAttribute="top" constant="200" id="Ye6-j8-IpT"/>
+                            <constraint firstAttribute="bottom" secondItem="HAN-ce-fja" secondAttribute="bottom" id="u08-HP-2bX"/>
+                            <constraint firstItem="zI0-nY-7Kg" firstAttribute="leading" secondItem="SIA-U0-nse" secondAttribute="leading" constant="48" id="uhU-s5-rI2"/>
+                            <constraint firstItem="HAN-ce-fja" firstAttribute="top" secondItem="9Om-NJ-AYJ" secondAttribute="top" id="vJT-aT-YSI"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="backGroundImage" destination="HAN-ce-fja" id="TqD-Yn-SEz"/>
+                        <outlet property="mainTitle" destination="zI0-nY-7Kg" id="uat-PD-Lfe"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fta-Hn-Hw7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3378.2608695652175" y="97.767857142857139"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="WfF-RW-GbI">
             <objects>
@@ -3814,6 +3856,7 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
         <image name="chevron.down" catalog="system" width="128" height="72"/>
         <image name="contacts" width="16" height="20"/>
         <image name="filter" width="16" height="16"/>
+        <image name="goodMorning" width="375" height="812"/>
         <image name="hydeImage" width="20" height="16"/>
         <image name="qrscan" width="20" height="20"/>
         <image name="walletCreate" width="104" height="104"/>

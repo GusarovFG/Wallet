@@ -226,10 +226,16 @@ class PasswordViewController: UIViewController {
         }
         
         if self.enteringPassword == KeyChainManager.share.loadPassword() {
-            
             let storyboard = UIStoryboard(name: "Main", bundle: .main)
-            let startVC = storyboard.instantiateViewController(withIdentifier: "MainTabBarController") as! MainTabBarController
-            self.view.window?.rootViewController = startVC
+            let greatingVC = storyboard.instantiateViewController(withIdentifier: "GreatingViewController") as! GreatingViewController
+            greatingVC.modalPresentationStyle = .fullScreen
+            greatingVC.modalTransitionStyle = .crossDissolve
+
+            self.present(greatingVC, animated: true)
+            
+            
+            
+
         } else if self.enteringPassword.count == 6 && self.enteringPassword != KeyChainManager.share.loadPassword() {
             self.stackView.arrangedSubviews.forEach { view in
                 view.layer.cornerRadius = view.frame.height / 2

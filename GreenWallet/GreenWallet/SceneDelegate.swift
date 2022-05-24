@@ -13,6 +13,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+        
+        
         if #available(iOS 12, *), UserDefaultsManager.shared.userDefaults.string(forKey: UserDefaultsStringKeys.theme.rawValue) == "dark" || UserDefaultsManager.shared.userDefaults.string(forKey: UserDefaultsStringKeys.theme.rawValue) == nil {
             self.window?.overrideUserInterfaceStyle = .dark
         } else if #available(iOS 12, *), UserDefaultsManager.shared.userDefaults.string(forKey: UserDefaultsStringKeys.theme.rawValue) == "light" {
@@ -34,6 +36,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             self.window?.rootViewController = startVC
         }
         UserDefaultsManager.shared.userDefaults.set(false, forKey: UserDefaultsStringKeys.hideWalletsBalance.rawValue)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(setupRootVC), name: NSNotification.Name("setupRootVC"), object: nil)
+        
+    }
+    
+    @objc func setupRootVC() {
+        let storyboard = UIStoryboard(name: "Main", bundle: .main)
+        let startVC = storyboard.instantiateViewController(withIdentifier: "MainTabBarController")
+        self.window?.rootViewController = startVC
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

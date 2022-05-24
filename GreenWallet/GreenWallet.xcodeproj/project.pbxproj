@@ -54,6 +54,8 @@
 		FB6D93E32834F53100B11E80 /* AllWalletsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB6D93E22834F53100B11E80 /* AllWalletsViewController.swift */; };
 		FB7A88682833B310005D05D8 /* qrCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7A88662833B310005D05D8 /* qrCollectionViewCell.swift */; };
 		FB7A88692833B310005D05D8 /* qrCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB7A88672833B310005D05D8 /* qrCollectionViewCell.xib */; };
+		FB85BA3E283CCB210068E9DE /* TimeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB85BA3D283CCB210068E9DE /* TimeManager.swift */; };
+		FB85BA40283CCC470068E9DE /* GreatingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB85BA3F283CCC470068E9DE /* GreatingViewController.swift */; };
 		FB8BF8DB282FFDF70067CD0B /* QRScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8BF8DA282FFDF70067CD0B /* QRScanViewController.swift */; };
 		FB8EAC1F282FC8B4007244C1 /* PasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8EAC1E282FC8B4007244C1 /* PasswordViewController.swift */; };
 		FB90380F282D52EE004023F5 /* PushTokensViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB90380E282D52EE004023F5 /* PushTokensViewController.swift */; };
@@ -143,6 +145,8 @@
 		FB6D93E22834F53100B11E80 /* AllWalletsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllWalletsViewController.swift; sourceTree = "<group>"; };
 		FB7A88662833B310005D05D8 /* qrCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = qrCollectionViewCell.swift; sourceTree = "<group>"; };
 		FB7A88672833B310005D05D8 /* qrCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = qrCollectionViewCell.xib; sourceTree = "<group>"; };
+		FB85BA3D283CCB210068E9DE /* TimeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeManager.swift; sourceTree = "<group>"; };
+		FB85BA3F283CCC470068E9DE /* GreatingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GreatingViewController.swift; sourceTree = "<group>"; };
 		FB8BF8DA282FFDF70067CD0B /* QRScanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRScanViewController.swift; sourceTree = "<group>"; };
 		FB8EAC1E282FC8B4007244C1 /* PasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordViewController.swift; sourceTree = "<group>"; };
 		FB90380E282D52EE004023F5 /* PushTokensViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushTokensViewController.swift; sourceTree = "<group>"; };
@@ -297,6 +301,7 @@
 				FB6D93E22834F53100B11E80 /* AllWalletsViewController.swift */,
 				FBB9CF6028365EA70094742E /* MyWalletsViewController.swift */,
 				FBC4AB742836A5AA00566683 /* TransactionHistoryViewController.swift */,
+				FB85BA3F283CCC470068E9DE /* GreatingViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -341,6 +346,7 @@
 				FBFE5796281B121A0016E74A /* UserDefaultsManager.swift */,
 				FB903810282D60DA004023F5 /* WalletManager.swift */,
 				FBD1CCA9283B90570081AF3E /* KeyChainManager.swift */,
+				FB85BA3D283CCB210068E9DE /* TimeManager.swift */,
 				FB3208072818285100F1ADCA /* ViewControllers */,
 				FB3208062818279E00F1ADCA /* CustomViews */,
 				FB5940512816AC7800037DFA /* Extensions */,
@@ -618,6 +624,7 @@
 				FB5940532816AC8800037DFA /* Extensions.swift in Sources */,
 				FBB9CF6128365EA70094742E /* MyWalletsViewController.swift in Sources */,
 				FB5940552816AEF400037DFA /* CustomClasses.swift in Sources */,
+				FB85BA3E283CCB210068E9DE /* TimeManager.swift in Sources */,
 				FB0FCA6628194D4300BB0527 /* SelectSystemViewController.swift in Sources */,
 				FB0FCA7628197B4800BB0527 /* ImportTokensViewController.swift in Sources */,
 				FB5940392816856700037DFA /* SelectLanguageViewController.swift in Sources */,
@@ -633,6 +640,7 @@
 				FBFE579A281B269E0016E74A /* LanguageTableViewCell.swift in Sources */,
 				FBB9CF68283673500094742E /* MyWalletsButtonsCollectionViewCell.swift in Sources */,
 				FB0FCA6D2819600400BB0527 /* SelectSystemTableViewCell.swift in Sources */,
+				FB85BA40283CCC470068E9DE /* GreatingViewController.swift in Sources */,
 				FBFE578F281AC4050016E74A /* PushAndAllSettingsTableViewCell.swift in Sources */,
 				FB2F369028206ACB007576FE /* NewWalletViewController.swift in Sources */,
 				FB5947492823D8DD00C74E73 /* ImportMnemonicViewController.swift in Sources */,
