@@ -1109,7 +1109,7 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                                     <stackView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="PCl-rX-ODh">
                                         <rect key="frame" x="15" y="40" width="354" height="25"/>
                                         <subviews>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Введиие адрес кошелька" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cpj-2N-66D">
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Введите адрес кошелька" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cpj-2N-66D">
                                                 <rect key="frame" x="0.0" y="0.0" width="308" height="25"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                 <textInputTraits key="textInputTraits"/>
@@ -1738,11 +1738,6 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                             <constraint firstItem="bmv-RL-rBj" firstAttribute="trailing" secondItem="n7w-Dy-b0g" secondAttribute="trailing" id="wpW-du-iwA"/>
                             <constraint firstItem="7AU-7a-QaI" firstAttribute="top" secondItem="r99-q5-ntG" secondAttribute="top" id="zA4-mQ-ST6"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="subviews">
-                                <exclude reference="bmv-RL-rBj"/>
-                            </mask>
-                        </variation>
                     </view>
                     <connections>
                         <outlet property="addContactLabel" destination="hVU-57-gCy" id="C5r-RW-SbD"/>
