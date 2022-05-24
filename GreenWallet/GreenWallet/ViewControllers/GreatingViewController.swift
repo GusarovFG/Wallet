@@ -6,6 +6,7 @@
 //
 import LocalAuthentication
 import UIKit
+import UserNotifications
 
 class GreatingViewController: UIViewController {
     
@@ -16,8 +17,10 @@ class GreatingViewController: UIViewController {
         super.viewDidLoad()
         
         if UserDefaultsManager.shared.userDefaults.string(forKey: UserDefaultsStringKeys.firstSession.rawValue) != "First" {
-            
+            self.qwe()
             UserDefaultsManager.shared.userDefaults.set("First", forKey: UserDefaultsStringKeys.firstSession.rawValue)
+        } else {
+            self.dismissController()
         }
         
         
@@ -39,18 +42,56 @@ class GreatingViewController: UIViewController {
             
         }
         
+
+    }
+    
+    private func qwe() {
+        let context = LAContext()
+        var error: NSError?
+        
+        if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
+            let reason = "Identify yourself!"
+            
+            context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { success, authenticationError in
+                UNUserNotificationCenter.current().requestAuthorization(options: [.alert,.sound, .badge]) { (granted, error) in
+                    
+                    guard granted else { return }
+                    UNUserNotificationCenter.current().getNotificationSettings { (settings) in
+                        print(settings)
+                        guard settings.authorizationStatus == .authorized else { return }
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+
+
+                            UIView.animate(withDuration: 5, delay: 0) {
+                                self.view.alpha = 0
+                            }
+
+                            NotificationCenter.default.post(name: NSNotification.Name("setupRootVC"), object: nil)
+
+
+                        }
+                    }
+                }
+                
+            }
+        } else {
+            let ac = UIAlertController(title: "Authentication failed", message: "You could not be verified; please try again.", preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .default))
+            self.present(ac, animated: true)
+        }
+    }
+    
+    private func dismissController() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-            
-            
+
+
             UIView.animate(withDuration: 5, delay: 0) {
                 self.view.alpha = 0
             }
-            
+
             NotificationCenter.default.post(name: NSNotification.Name("setupRootVC"), object: nil)
-            
-            
+
+
         }
     }
-
-    
 }
