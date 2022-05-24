@@ -133,6 +133,12 @@ class PasswordViewController: UIViewController {
                         } else {
                             self?.dismiss(animated: true)
                             if !self!.isShowDetail {
+                                let storyboard = UIStoryboard(name: "Main", bundle: .main)
+                                let greatingVC = storyboard.instantiateViewController(withIdentifier: "GreatingViewController") as! GreatingViewController
+                                greatingVC.modalPresentationStyle = .fullScreen
+                                greatingVC.modalTransitionStyle = .crossDissolve
+
+                                self?.present(greatingVC, animated: true)
                                 
                                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: "Seccess"), object: nil, userInfo: self?.userInfo)
                                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: "closeAlert"), object: nil)
@@ -192,9 +198,13 @@ class PasswordViewController: UIViewController {
                 enterPasswordVC.isFirstSession = true
                 enterPasswordVC.finalPassword = self.enteringPassword
                 Password.sahre.password = self.enteringPassword
-                UserDefaultsManager.shared.userDefaults.set("First", forKey: UserDefaultsStringKeys.firstSession.rawValue)
                 KeyChainManager.share.savePassword(self.enteringPassword)
-                self.present(enterPasswordVC, animated: true)
+                let storyboard = UIStoryboard(name: "Main", bundle: .main)
+                let greatingVC = storyboard.instantiateViewController(withIdentifier: "GreatingViewController") as! GreatingViewController
+                greatingVC.modalPresentationStyle = .fullScreen
+                greatingVC.modalTransitionStyle = .crossDissolve
+
+                self.present(greatingVC, animated: true)
                 
             }
         } else if self.enteringPassword.count == 6 && self.enteringPassword != self.repitingPassword{

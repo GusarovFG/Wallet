@@ -4,17 +4,23 @@
 //
 //  Created by Фаддей Гусаров on 24.05.2022.
 //
-
+import LocalAuthentication
 import UIKit
 
 class GreatingViewController: UIViewController {
     
     @IBOutlet weak var backGroundImage: UIImageView!
     @IBOutlet weak var mainTitle: UILabel!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        if UserDefaultsManager.shared.userDefaults.string(forKey: UserDefaultsStringKeys.firstSession.rawValue) != "First" {
+            
+            UserDefaultsManager.shared.userDefaults.set("First", forKey: UserDefaultsStringKeys.firstSession.rawValue)
+        }
+        
+        
         switch TimeManager.share.getTime() {
         case 6..<12:
             self.backGroundImage.image = UIImage(named: "goodMorning")!
@@ -34,18 +40,17 @@ class GreatingViewController: UIViewController {
         }
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-
-
+            
+            
             UIView.animate(withDuration: 5, delay: 0) {
                 self.view.alpha = 0
             }
             
             NotificationCenter.default.post(name: NSNotification.Name("setupRootVC"), object: nil)
-
+            
             
         }
     }
-    
-    
 
+    
 }
