@@ -10,7 +10,7 @@ import UIKit
 class GetTokenViewController: UIViewController {
     
     private var qrs = [UIImage(named: "qrwallet")!,UIImage(named: "qrwallet")!,UIImage(named: "qrwallet")!]
-    private var wallets: [Wallet] = []
+    private var wallets: [WalletModel] = []
 
     @IBOutlet weak var qrCollectionView: UICollectionView!
     @IBOutlet weak var titleLabel: UILabel!

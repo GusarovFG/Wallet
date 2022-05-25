@@ -9,7 +9,7 @@ import UIKit
 
 class MyWalletsViewController: UIViewController {
     
-    private var wallets: [Wallet] = []
+    private var wallets: [WalletModel] = []
     private var actionButtons: [MyWalletsButtons] = [MyWalletsButtons(image: UIImage(named: "getArrow")!,
                                                                       title: "Send",
                                                                       discription: "Send coins and tokens at any time from your mobile phone"),
@@ -26,7 +26,7 @@ class MyWalletsViewController: UIViewController {
     var isShowDetail = false
     var isScrolling = true
     var index = 0
-    private var wallet: Wallet?
+    private var wallet: WalletModel?
     
     
     @IBOutlet weak var backButton: UIButton!

@@ -9,7 +9,7 @@ import UIKit
 
 class AllWalletsViewController: UIViewController {
     
-    var wallets: [Wallet] = []
+    var wallets: [WalletModel] = []
     var index = 0
     
     @IBOutlet weak var backButton: UIButton!

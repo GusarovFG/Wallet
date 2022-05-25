@@ -26,7 +26,7 @@ class AllWalletsTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func setupCell(wallet: Wallet) {
+    func setupCell(wallet: WalletModel) {
         self.cellImage.image = wallet.image
         self.walletLabel.text = wallet.name
         self.tokenLabel.text = wallet.toket

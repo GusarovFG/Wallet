@@ -12,8 +12,8 @@ class PushTokensViewController: UIViewController {
     
     private var video = AVCaptureVideoPreviewLayer()
     private let session = AVCaptureSession()
-    private var wallet: Wallet?
-    private var wallets: [Wallet] = []
+    private var wallet: WalletModel?
+    private var wallets: [WalletModel] = []
     
     
     private let link = "qwertyuiopasdfghjkl"

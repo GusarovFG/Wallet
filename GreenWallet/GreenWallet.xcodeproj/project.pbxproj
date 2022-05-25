@@ -18,6 +18,7 @@
 		FB0FCA7328197A4000BB0527 /* ImportTokensTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0FCA7128197A4000BB0527 /* ImportTokensTableViewCell.swift */; };
 		FB0FCA7428197A4000BB0527 /* ImportTokensTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB0FCA7228197A4000BB0527 /* ImportTokensTableViewCell.xib */; };
 		FB0FCA7628197B4800BB0527 /* ImportTokensViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0FCA7528197B4800BB0527 /* ImportTokensViewController.swift */; };
+		FB16685E283E21D000155670 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB16685D283E21D000155670 /* NetworkManager.swift */; };
 		FB2F369028206ACB007576FE /* NewWalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB2F368F28206ACB007576FE /* NewWalletViewController.swift */; };
 		FB2F369228207BC0007576FE /* CreatingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB2F369128207BC0007576FE /* CreatingViewController.swift */; };
 		FB2F369428208286007576FE /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB2F369328208286007576FE /* MainTabBarController.swift */; };
@@ -65,6 +66,7 @@
 		FBB49A492824DE3800250553 /* SpinnerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB49A482824DE3800250553 /* SpinnerView.swift */; };
 		FBB49A4B2824DEA700250553 /* spinner.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FBB49A4A2824DEA700250553 /* spinner.storyboard */; };
 		FBB49A4D2824E1A600250553 /* SprinnerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB49A4C2824E1A600250553 /* SprinnerViewController.swift */; };
+		FBB682E2283E4A3E00CC5959 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB682E1283E4A3E00CC5959 /* CoreDataManager.swift */; };
 		FBB9CF6128365EA70094742E /* MyWalletsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB9CF6028365EA70094742E /* MyWalletsViewController.swift */; };
 		FBB9CF642836604D0094742E /* MyWalletCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB9CF622836604D0094742E /* MyWalletCollectionViewCell.swift */; };
 		FBB9CF652836604D0094742E /* MyWalletCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBB9CF632836604D0094742E /* MyWalletCollectionViewCell.xib */; };
@@ -107,6 +109,7 @@
 		FB0FCA7128197A4000BB0527 /* ImportTokensTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportTokensTableViewCell.swift; sourceTree = "<group>"; };
 		FB0FCA7228197A4000BB0527 /* ImportTokensTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImportTokensTableViewCell.xib; sourceTree = "<group>"; };
 		FB0FCA7528197B4800BB0527 /* ImportTokensViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportTokensViewController.swift; sourceTree = "<group>"; };
+		FB16685D283E21D000155670 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		FB2F368F28206ACB007576FE /* NewWalletViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewWalletViewController.swift; sourceTree = "<group>"; };
 		FB2F369128207BC0007576FE /* CreatingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatingViewController.swift; sourceTree = "<group>"; };
 		FB2F369328208286007576FE /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
@@ -156,6 +159,7 @@
 		FBB49A482824DE3800250553 /* SpinnerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinnerView.swift; sourceTree = "<group>"; };
 		FBB49A4A2824DEA700250553 /* spinner.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = spinner.storyboard; sourceTree = "<group>"; };
 		FBB49A4C2824E1A600250553 /* SprinnerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SprinnerViewController.swift; sourceTree = "<group>"; };
+		FBB682E1283E4A3E00CC5959 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		FBB9CF6028365EA70094742E /* MyWalletsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyWalletsViewController.swift; sourceTree = "<group>"; };
 		FBB9CF622836604D0094742E /* MyWalletCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyWalletCollectionViewCell.swift; sourceTree = "<group>"; };
 		FBB9CF632836604D0094742E /* MyWalletCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyWalletCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -347,6 +351,8 @@
 				FB903810282D60DA004023F5 /* WalletManager.swift */,
 				FBD1CCA9283B90570081AF3E /* KeyChainManager.swift */,
 				FB85BA3D283CCB210068E9DE /* TimeManager.swift */,
+				FB16685D283E21D000155670 /* NetworkManager.swift */,
+				FBB682E1283E4A3E00CC5959 /* CoreDataManager.swift */,
 				FB3208072818285100F1ADCA /* ViewControllers */,
 				FB3208062818279E00F1ADCA /* CustomViews */,
 				FB5940512816AC7800037DFA /* Extensions */,
@@ -610,6 +616,7 @@
 				FB3754AB28214F2000882338 /* MnemonicViewController.swift in Sources */,
 				FBFE578A281AC2B70016E74A /* SupportTableViewCell.swift in Sources */,
 				FB59474C2823FCAF00C74E73 /* ImportMnemonicCollectionViewCell.swift in Sources */,
+				FB16685E283E21D000155670 /* NetworkManager.swift in Sources */,
 				FB3754B22821BE8F00882338 /* VerifyMnemonicViewController.swift in Sources */,
 				FBFE57A4281B4AFE0016E74A /* InfoViewController.swift in Sources */,
 				FB0FCA702819629D00BB0527 /* Models.swift in Sources */,
@@ -640,6 +647,7 @@
 				FBFE579A281B269E0016E74A /* LanguageTableViewCell.swift in Sources */,
 				FBB9CF68283673500094742E /* MyWalletsButtonsCollectionViewCell.swift in Sources */,
 				FB0FCA6D2819600400BB0527 /* SelectSystemTableViewCell.swift in Sources */,
+				FBB682E2283E4A3E00CC5959 /* CoreDataManager.swift in Sources */,
 				FB85BA40283CCC470068E9DE /* GreatingViewController.swift in Sources */,
 				FBFE578F281AC4050016E74A /* PushAndAllSettingsTableViewCell.swift in Sources */,
 				FB2F369028206ACB007576FE /* NewWalletViewController.swift in Sources */,

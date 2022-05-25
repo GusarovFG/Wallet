@@ -9,7 +9,7 @@ import UIKit
 
 class mCollectionViewCell: UICollectionViewCell {
     
-    var wallet = Wallet(name: "", number: 0, image: UIImage(), tokens: [], toket: "")
+    var wallet = WalletModel(name: "", number: 0, image: UIImage(), tokens: [], toket: "")
     var controller = UIViewController()
     var height: CGFloat = 0
     

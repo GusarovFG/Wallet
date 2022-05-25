@@ -11,7 +11,7 @@ import AVFAudio
 class MainViewController: UIViewController {
     
     private var balance = 0
-    private var wallets: [Wallet] = []
+    private var wallets: [WalletModel] = []
     
     private var footerButtonTitle = "Все кошельки"
     
@@ -133,7 +133,7 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "mCollectionViewCell", for: indexPath) as! mCollectionViewCell
         if WalletManager.share.favoritesWallets.isEmpty {
-            cell.wallet = Wallet(name: "", number: 0, image: UIImage(), tokens: [], toket: "")
+            cell.wallet = WalletModel(name: "", number: 0, image: UIImage(), tokens: [], toket: "")
             cell.footerButton.setTitle("+ Добавить кошелек", for: .normal)
             cell.footerButton.addTarget(self, action: #selector(presentSelectSystemVC), for: .touchUpInside)
             cell.tableView.backgroundColor = #colorLiteral(red: 0.1882352941, green: 0.1882352941, blue: 0.1882352941, alpha: 1)

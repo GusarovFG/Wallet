@@ -32,7 +32,7 @@ class GreatingViewController: UIViewController {
             self.backGroundImage.image = UIImage(named: "goodDay")!
             self.mainTitle.text = "Добрый день!"
             self.mainTitle.textColor = .black
-        case 18..<00:
+        case 18..<23:
             self.backGroundImage.image = UIImage(named: "goodevening")!
             self.mainTitle.text = "Добрый вечер!"
             
