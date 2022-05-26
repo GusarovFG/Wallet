@@ -24,11 +24,14 @@ class GetTokenViewController: UIViewController {
     @IBOutlet weak var chiaMenuButton: UIButton!
     @IBOutlet weak var chivesMenuButton: UIButton!
     @IBOutlet weak var copyLabel: UILabel!
+    @IBOutlet weak var backButton: UIButton!
+    @IBOutlet weak var adresOfWalletLabel: UILabel!
+
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        localization()
         self.qrCollectionView.register(UINib(nibName: "qrCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "qrCell")
         
         self.wallets = WalletManager.share.vallets
@@ -54,6 +57,14 @@ class GetTokenViewController: UIViewController {
         self.menuView.layer.borderColor = #colorLiteral(red: 0.2901960784, green: 0.2901960784, blue: 0.2901960784, alpha: 1)
         
         self.copyLabel.alpha = 0
+    }
+    
+    private func localization() {
+        self.titleLabel.text = LocalizationManager.share.translate?.result.list.import_tokens.import_tokens_title
+        self.adresOfWalletLabel.text = LocalizationManager.share.translate?.result.list.receive_a_token.receive_a_token_adress
+        self.copyLabel.text = LocalizationManager.share.translate?.result.list.all.lable_copied
+        self.copyButton.setTitle(LocalizationManager.share.translate?.result.list.receive_a_token.receive_a_token_copy, for: .normal)
+        self.shareBatton.setTitle(LocalizationManager.share.translate?.result.list.all.share_btn, for: .normal)
     }
     
     private func setupLabel(index: Int) {

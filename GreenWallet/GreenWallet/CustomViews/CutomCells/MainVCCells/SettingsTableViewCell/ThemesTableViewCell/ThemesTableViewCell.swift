@@ -14,7 +14,8 @@ class ThemesTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+        self.lightThemeButton.setTitle(LocalizationManager.share.translate?.result.list.menu.menu_light_theme, for: .normal)
+        self.darkThemeButton.setTitle(LocalizationManager.share.translate?.result.list.menu.menu_dark_theme, for: .normal)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

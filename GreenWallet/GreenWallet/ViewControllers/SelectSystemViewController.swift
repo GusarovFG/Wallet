@@ -8,13 +8,13 @@
 import UIKit
 
 class SelectSystemViewController: UIViewController {
-
+    
     private let systems: [System] = [System(name: "Chia", token: "XCH", image: UIImage(named: "LogoChia")!, balance: 0), System(name: "Chives", token: "XCC", image: UIImage(named: "ChivesLogo")!, balance: 0)]
     private let typseOfNewWallet = ["Новый", "Импорт мнемоники"]
-     var isSelectedSystem = false
-     var isGetToken = false
-     var isPushToken = false
-    var isNewWallet = true
+    var isSelectedSystem = false
+    var isGetToken = false
+    var isPushToken = false
+    var isNewWallet = false
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var titleLabel: UILabel!
@@ -28,15 +28,18 @@ class SelectSystemViewController: UIViewController {
         self.headerView.layer.cornerRadius = 15
         self.headerView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         self.view.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
-        
+        localization()
         if self.isNewWallet {
-            self.titleLabel.text = "Добавить новый кошелек"
+            self.titleLabel.text = LocalizationManager.share.translate?.result.list.all.add_wallet_title
         }
         
         let swipeGasture = UISwipeGestureRecognizer(target: self, action: #selector(dismissSwipe))
         swipeGasture.direction = .down
         self.view.addGestureRecognizer(swipeGasture)
+        
     }
+    
+
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -44,10 +47,9 @@ class SelectSystemViewController: UIViewController {
             self.view.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.3481637311)
         }
     }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        
+
+    private func localization() {
+        self.titleLabel.text = LocalizationManager.share.translate?.result.list.all.select_network
     }
     
     @objc func dismissSwipe() {
@@ -56,7 +58,7 @@ class SelectSystemViewController: UIViewController {
         }
         self.dismiss(animated: true)
     }
-
+    
 }
 
 extension SelectSystemViewController: UITableViewDelegate, UITableViewDataSource {

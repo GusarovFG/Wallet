@@ -9,15 +9,15 @@ import UIKit
 
 class TransactionHistoryViewController: UIViewController {
     
-    private var walletsTransactions: [Transaction] = [Transaction(type: .input, height: 1098726, summ: "4,555", token: "XCH", date: "today"),
-                                                      Transaction(type: .output, height: 1098726, summ: "4,555", token: "XCH", date: "yesterday"),
-                                                      Transaction(type: .output, height: 1098726, summ: "4,555", token: "XCC", date: "yesterday"),
-                                                      Transaction(type: .output, height: 1098726, summ: "4,555", token: "XCH", date: "lastMonth"),
-                                                      Transaction(type: .input, height: 1098726, summ: "4,555", token: "XCC", date: "today"),
-                                                      Transaction(type: .input, height: 1098726, summ: "4,555", token: "XCC", date: "lastWeek"),
-                                                      Transaction(type: .waiting, height: 1098726, summ: "4,555", token: "XCC", date: "yesterday"),
-                                                      Transaction(type: .input, height: 1098726, summ: "4,555", token: "XCH", date: "lastMonth"),
-                                                      Transaction(type: .input, height: 1098726, summ: "4,555", token: "XCH", date: "lastMonth")]
+    private var walletsTransactions: [Transaction] = [Transaction(type: LocalizationManager.share.translate?.result.list.transactions.transactions_incoming ?? "", height: 1098726, summ: "4,555", token: "XCH", date: "today"),
+                                                      Transaction(type: LocalizationManager.share.translate?.result.list.transactions.transactions_incoming ?? "", height: 1098726, summ: "4,555", token: "XCH", date: "yesterday"),
+                                                      Transaction(type: LocalizationManager.share.translate?.result.list.transactions.incoming_outgoing ?? "", height: 1098726, summ: "4,555", token: "XCC", date: "yesterday"),
+                                                      Transaction(type: LocalizationManager.share.translate?.result.list.transactions.transactions_pendind ?? "", height: 1098726, summ: "4,555", token: "XCH", date: "lastMonth"),
+                                                      Transaction(type: LocalizationManager.share.translate?.result.list.transactions.transactions_pendind ?? "", height: 1098726, summ: "4,555", token: "XCC", date: "today"),
+                                                      Transaction(type: LocalizationManager.share.translate?.result.list.transactions.incoming_outgoing ?? "", height: 1098726, summ: "4,555", token: "XCC", date: "lastWeek"),
+                                                      Transaction(type: LocalizationManager.share.translate?.result.list.transactions.transactions_pendind ?? "", height: 1098726, summ: "4,555", token: "XCC", date: "yesterday"),
+                                                      Transaction(type: LocalizationManager.share.translate?.result.list.transactions.transactions_pendind ?? "", height: 1098726, summ: "4,555", token: "XCH", date: "lastMonth"),
+                                                      Transaction(type: LocalizationManager.share.translate?.result.list.transactions.incoming_outgoing ?? "", height: 1098726, summ: "4,555", token: "XCH", date: "lastMonth")]
     private var filterWalletsTransactions: [Transaction] = []
     
     @IBOutlet weak var backButton: UIButton!
@@ -43,6 +43,7 @@ class TransactionHistoryViewController: UIViewController {
     @IBOutlet weak var chiaSystemButton: UIButton!
     @IBOutlet weak var chivesSystemButton: UIButton!
     
+    @IBOutlet weak var titleLabel: UILabel!
     
     
     override func viewDidLoad() {
@@ -88,7 +89,7 @@ class TransactionHistoryViewController: UIViewController {
         self.allDateButton.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
         self.allDateButton.tintColor = .white
         
-        
+        localization()
         
         self.filterWalletsTransactions = self.walletsTransactions
         self.tableView.register(UINib(nibName: "TransitionsTableViewCell", bundle: nil), forCellReuseIdentifier: "TransitionsTableViewCell")
@@ -108,6 +109,24 @@ class TransactionHistoryViewController: UIViewController {
         self.searchBar.searchTextField.rightView = imageView
         self.searchBar.searchTextField.rightViewMode = .always
         self.searchBar.searchTextField.backgroundColor = #colorLiteral(red: 0.1882352941, green: 0.1882352941, blue: 0.1882352941, alpha: 0)
+    }
+    
+    private func localization() {
+        self.titleLabel.text = LocalizationManager.share.translate?.result.list.transactions.transactions_title
+        self.searchBar.searchTextField.placeholder = LocalizationManager.share.translate?.result.list.all.search
+        self.todayDateButton.setTitle(LocalizationManager.share.translate?.result.list.transactions.transactions_today, for: .normal)
+        self.yesterdayDayeButton.setTitle(LocalizationManager.share.translate?.result.list.transactions.transactions_yesterday, for: .normal)
+        self.backButton.setTitle(LocalizationManager.share.translate?.result.list.all.back_btn, for: .normal)
+        self.allDateButton.setTitle(LocalizationManager.share.translate?.result.list.transactions.transactions_all, for: .normal)
+//        self.heightLabel.text = LocalizationManager.share.translate?.result.list.transactions.transactions_height
+//        self.statusLabel.text = LocalizationManager.share.translate?.result.list.transactions.transactions_status
+//        self.summLabel.text = LocalizationManager.share.translate?.result.list.transactions.transactions_amoun
+        self.allDateButton.setTitle(LocalizationManager.share.translate?.result.list.transactions.transactions_all, for: .normal)
+        self.filterInButton.setTitle(LocalizationManager.share.translate?.result.list.transactions.transactions_incoming, for: .normal)
+        self.filterOutButton.setTitle(LocalizationManager.share.translate?.result.list.transactions.incoming_outgoing, for: .normal)
+        self.backButton.setTitle(LocalizationManager.share.translate?.result.list.all.back_btn, for: .normal)
+        self.filterSystemButton.setTitle(LocalizationManager.share.translate?.result.list.transactions.transactions_all, for: .normal)
+        self.filterAllButton.setTitle(LocalizationManager.share.translate?.result.list.transactions.transactions_all, for: .normal)
     }
     
     @IBAction func backButtonPressed(_ sender: Any) {
@@ -135,7 +154,7 @@ class TransactionHistoryViewController: UIViewController {
         self.filterAllButton.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         self.filterAllButton.tintColor = #colorLiteral(red: 0.5803921569, green: 0.5803921569, blue: 0.5803921569, alpha: 1)
         self.filterOutButton.tintColor = #colorLiteral(red: 0.5803921569, green: 0.5803921569, blue: 0.5803921569, alpha: 1)
-        self.filterWalletsTransactions = self.walletsTransactions.filter({$0.type == TransactionType.input})
+        self.filterWalletsTransactions = self.walletsTransactions.filter({$0.type == LocalizationManager.share.translate?.result.list.transactions.transactions_incoming})
         self.tableView.reloadData()
     }
     
@@ -146,7 +165,7 @@ class TransactionHistoryViewController: UIViewController {
         self.filterInButton.backgroundColor = #colorLiteral(red: 0.1882352941, green: 0.1882352941, blue: 0.1882352941, alpha: 1)
         self.filterInButton.tintColor = #colorLiteral(red: 0.5803921569, green: 0.5803921569, blue: 0.5803921569, alpha: 1)
         self.filterAllButton.tintColor = #colorLiteral(red: 0.5803921569, green: 0.5803921569, blue: 0.5803921569, alpha: 1)
-        self.filterWalletsTransactions = self.walletsTransactions.filter({$0.type == TransactionType.output})
+        self.filterWalletsTransactions = self.walletsTransactions.filter({$0.type == LocalizationManager.share.translate?.result.list.transactions.incoming_outgoing})
         self.tableView.reloadData()
     }
     @IBAction func filetrDateMenuOpen(_ sender: UIButton) {
@@ -271,15 +290,17 @@ extension TransactionHistoryViewController: UITableViewDelegate, UITableViewData
         let transiction = self.filterWalletsTransactions[indexPath.row]
         switch transiction.type {
             
-        case .input:
+        case LocalizationManager.share.translate?.result.list.transactions.transactions_incoming :
             cell.typeOfTransitionLabel.textColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
-        case .output:
+        case LocalizationManager.share.translate?.result.list.transactions.incoming_outgoing :
             cell.typeOfTransitionLabel.textColor = #colorLiteral(red: 1, green: 0.1333333333, blue: 0.1333333333, alpha: 1)
-        case .waiting:
+        case LocalizationManager.share.translate?.result.list.transactions.transactions_pendind :
             cell.typeOfTransitionLabel.textColor = #colorLiteral(red: 0.1176470588, green: 0.5764705882, blue: 1, alpha: 1)
+        default:
+            break
         }
         cell.heightLabel.text = "\(transiction.height)"
-        cell.typeOfTransitionLabel.text = transiction.type.rawValue
+        cell.typeOfTransitionLabel.text = transiction.type
         cell.summLabel.text = transiction.summ + " " + transiction.token
         return cell
     }
@@ -288,16 +309,10 @@ extension TransactionHistoryViewController: UITableViewDelegate, UITableViewData
 
 
 struct Transaction {
-    var type: TransactionType
+    var type: String
     var height: Int
     var summ: String
     var token: String
     var date: String
 }
 
-enum TransactionType: String {
-    case input = "Входящие"
-    case output = "Исходящие"
-    case waiting = "В обработке"
-    
-}

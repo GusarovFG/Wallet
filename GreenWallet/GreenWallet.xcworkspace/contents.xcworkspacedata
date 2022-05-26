@@ -2,24 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:LanguageResultCD+CoreDataClass.swift">
-   </FileRef>
-   <FileRef
-      location = "group:LanguageResultCD+CoreDataProperties.swift">
-   </FileRef>
-   <FileRef
-      location = "group:ListOfLanguageCD+CoreDataClass.swift">
-   </FileRef>
-   <FileRef
-      location = "group:ListOfLanguageCD+CoreDataProperties.swift">
-   </FileRef>
-   <FileRef
-      location = "group:LanguageCD+CoreDataClass.swift">
-   </FileRef>
-   <FileRef
-      location = "group:LanguageCD+CoreDataProperties.swift">
-   </FileRef>
-   <FileRef
       location = "group:GreenWallet.xcodeproj">
    </FileRef>
    <FileRef

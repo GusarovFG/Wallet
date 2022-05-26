@@ -120,11 +120,12 @@
                 <outlet property="heightConstraint" destination="DEC-Mc-rMq" id="mTH-WK-M1v"/>
                 <outlet property="stackView" destination="1Ax-zd-cIX" id="iid-SO-NcT"/>
                 <outlet property="tableView" destination="ejB-l3-5ah" id="ZAD-qI-xWB"/>
+                <outlet property="walletTitle" destination="Gyo-1Y-het" id="0Ac-e4-UCo"/>
             </connections>
             <point key="canvasLocation" x="200.00000000000003" y="104.46428571428571"/>
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="plus" catalog="system" width="128" height="113"/>
+        <image name="plus" catalog="system" width="32" height="32"/>
     </resources>
 </document>

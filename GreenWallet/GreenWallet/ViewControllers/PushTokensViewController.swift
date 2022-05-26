@@ -61,10 +61,12 @@ class PushTokensViewController: UIViewController {
     @IBOutlet weak var transitinSumLabel: UILabel!
     @IBOutlet weak var transitionLinkLabel: UILabel!
     @IBOutlet weak var cameraView: UIView!
+    @IBOutlet weak var backButton: UIButton!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        localization()
         self.wallets = WalletManager.share.vallets
         self.wallet = self.wallets.first
         self.balanceButton.setTitle("\(self.wallet?.tokens[0].balance ?? 0) \(self.wallet?.tokens[0].token ?? "")", for: .normal)
@@ -108,6 +110,22 @@ class PushTokensViewController: UIViewController {
         super.touchesBegan(touches, with: event)
 
         self.view.endEditing(true)
+    }
+    
+    private func localization() {
+        self.backButton.setTitle(LocalizationManager.share.translate?.result.list.all.back_btn, for: .normal)
+        self.walletErrorLabel.text = LocalizationManager.share.translate?.result.list.send_token.send_token_adress
+        self.adressTextField.placeholder = LocalizationManager.share.translate?.result.list.send_token.send_token_adress
+        self.contactLabel.text = LocalizationManager.share.translate?.result.list.send_token.send_token_name_of_adres
+        self.contactTextField.placeholder = LocalizationManager.share.translate?.result.list.send_token.send_token_name_of_adres
+        self.addContactLabel.text = LocalizationManager.share.translate?.result.list.send_token.send_token_add_address
+        self.walletLinkError.text = LocalizationManager.share.translate?.result.list.all.non_existent_adress_error
+        self.transferErrorLabel.text = LocalizationManager.share.translate?.result.list.send_token.send_token_amount
+        self.transferTextField.placeholder = LocalizationManager.share.translate?.result.list.send_token.send_token_amount
+        self.secondTransferErrorLabel.text = LocalizationManager.share.translate?.result.list.send_token.send_token_insufficient_funds_error
+        self.comissionTextField.placeholder = LocalizationManager.share.translate?.result.list.send_token.send_token_commission_amount
+        self.recomendedComissionLabel.text = LocalizationManager.share.translate?.result.list.send_token.send_token_commission_recommended
+        self.continueButton.setTitle(LocalizationManager.share.translate?.result.list.all.next_btn, for: .normal)
     }
     
     private func setupWalletButton() {
@@ -311,12 +329,12 @@ class PushTokensViewController: UIViewController {
     
     @IBAction func contactCheck(_ sender: UITextField) {
         if sender.text == self.contact {
-            self.walletLinkError.text = "Адрес уже есть в адресной книге"
+            self.walletLinkError.text = LocalizationManager.share.translate?.result.list.send_token.send_token_address_is_already_exist
             self.walletLinkError.textColor = #colorLiteral(red: 0.1176470588, green: 0.5764705882, blue: 1, alpha: 1)
             self.walletLinkError.alpha = 1
         } else if self.adressTextField.text != self.link {
                 self.walletLinkError.textColor = #colorLiteral(red: 1, green: 0.2360929251, blue: 0.1714096665, alpha: 0.8980392157)
-                self.walletLinkError.text = "Несуществующий адрес"
+                self.walletLinkError.text = LocalizationManager.share.translate?.result.list.all.non_existent_adress_error
             } else if self.adressTextField.text == "" {
                 self.walletLinkError.alpha = 0
             

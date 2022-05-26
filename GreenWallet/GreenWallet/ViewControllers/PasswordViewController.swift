@@ -36,9 +36,21 @@ class PasswordViewController: UIViewController {
     @IBOutlet weak var stackView: UIStackView!
     @IBOutlet weak var errorLabel: UILabel!
     
+    @IBOutlet weak var createTitleLabel: UILabel!
+    @IBOutlet weak var createDiscriptionTitle: UILabel!
+    @IBOutlet weak var createErrorLabel: UILabel!
+    
+    @IBOutlet weak var repeatTitleLabel: UILabel!
+    @IBOutlet weak var repeatDiscriptionTitle: UILabel!
+    @IBOutlet weak var repeatErrorLabel: UILabel!
+    
+    @IBOutlet weak var enterTitleLabel: UILabel!
+    @IBOutlet weak var enterErrorLabel: UILabel!
+    @IBOutlet weak var resetButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        localization()
         NotificationCenter.default.addObserver(self, selector: #selector(deleteInMyWallet), name: NSNotification.Name("deleteInMyWallet"), object: nil)
         
         print(self.isMyWallet)
@@ -49,6 +61,32 @@ class PasswordViewController: UIViewController {
             view.layer.borderWidth = 2
             view.layer.borderColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         }
+    }
+    
+    private func localization() {
+        
+        if self.restorationIdentifier == "CreatingPasswordViewController" {
+            self.createTitleLabel.text = LocalizationManager.share.translate?.result.list.create_a_passcode.creating_a_password_titel
+            self.createDiscriptionTitle.text = LocalizationManager.share.translate?.result.list.create_a_passcode.creating_a_password_description
+            self.createErrorLabel.text = LocalizationManager.share.translate?.result.list.create_a_passcode.creating_a_password_error_amount_of_characters
+        } else if self.restorationIdentifier == "RepeatingPasswordViewController" {
+            self.repeatTitleLabel.text = LocalizationManager.share.translate?.result.list.create_a_passcode.repeat_passcode_title
+            self.repeatDiscriptionTitle.text = LocalizationManager.share.translate?.result.list.create_a_passcode.repeat_passcode_description
+            self.repeatErrorLabel.text = LocalizationManager.share.translate?.result.list.create_a_passcode.creating_a_password_error_difference
+        } else if self.restorationIdentifier == "EnteringPasswordViewController" {
+            self.enterTitleLabel.text = LocalizationManager.share.translate?.result.list.all.passcode_confirmation_title
+            self.enterErrorLabel.text = LocalizationManager.share.translate?.result.list.passcode_entry_screen.passcode_entry_screen_error
+            self.resetButton.setTitle(LocalizationManager.share.translate?.result.list.passcode_entry_screen.passcode_entry_screen_reset, for: .normal)
+            
+        } else {
+            self.mainTitle.text = LocalizationManager.share.translate?.result.list.all.passcode_confirmation_title
+            self.discriptionTitle.text = LocalizationManager.share.translate?.result.list.all.passcode_confirmation_description
+            self.errorLabel.text = LocalizationManager.share.translate?.result.list.passcode_entry_screen.passcode_entry_screen_error
+            self.mainButton.setTitle(LocalizationManager.share.translate?.result.list.all.return_btn, for: .normal)
+        }
+        
+       
+
     }
     
     @objc func deleteInMyWallet() {
@@ -213,7 +251,7 @@ class PasswordViewController: UIViewController {
                 view.backgroundColor = #colorLiteral(red: 1, green: 0.1333333333, blue: 0.1333333333, alpha: 1)
                 view.layer.borderWidth = 0
                 view.layer.borderColor = #colorLiteral(red: 1, green: 0.1333333333, blue: 0.1333333333, alpha: 1)
-                self.errorLabel.alpha = 1
+                self.repeatErrorLabel.alpha = 1
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
                     self.stackView.arrangedSubviews.forEach { view in
                         view.layer.cornerRadius = view.frame.height / 2
@@ -221,7 +259,7 @@ class PasswordViewController: UIViewController {
                         view.layer.borderWidth = 2
                         view.layer.borderColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
                         self.enteringPassword = ""
-                        self.errorLabel.alpha = 0
+                        self.repeatErrorLabel.alpha = 0
                     }
                 }
             }
@@ -252,7 +290,7 @@ class PasswordViewController: UIViewController {
                 view.backgroundColor = #colorLiteral(red: 1, green: 0.1333333333, blue: 0.1333333333, alpha: 1)
                 view.layer.borderWidth = 0
                 view.layer.borderColor = #colorLiteral(red: 1, green: 0.1333333333, blue: 0.1333333333, alpha: 1)
-                self.errorLabel.alpha = 1
+                self.enterErrorLabel.alpha = 1
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
                     self.stackView.arrangedSubviews.forEach { view in
                         view.layer.cornerRadius = view.frame.height / 2
@@ -260,7 +298,7 @@ class PasswordViewController: UIViewController {
                         view.layer.borderWidth = 2
                         view.layer.borderColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
                         self.enteringPassword = ""
-                        self.errorLabel.alpha = 0
+                        self.enterErrorLabel.alpha = 0
                     }
                 }
             }

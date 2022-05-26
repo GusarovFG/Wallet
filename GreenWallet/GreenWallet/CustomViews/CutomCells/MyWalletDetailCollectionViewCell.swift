@@ -20,7 +20,13 @@ class MyWalletDetailCollectionViewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        localization()
+    }
+    
+    private func localization() {
+        self.linkTitleLabel.text = LocalizationManager.share.translate?.result.list.wallet.wallet_data_adress
+        self.publicTitleLabel.text = LocalizationManager.share.translate?.result.list.wallet.wallet_data_public_key
+        self.mnemonicLabel.text = LocalizationManager.share.translate?.result.list.wallet.wallet_data_mnemonics
     }
 
     @IBAction func copyingLink(_ sender: Any) {

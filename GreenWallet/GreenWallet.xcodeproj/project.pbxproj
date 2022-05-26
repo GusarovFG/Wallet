@@ -61,6 +61,7 @@
 		FB8EAC1F282FC8B4007244C1 /* PasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8EAC1E282FC8B4007244C1 /* PasswordViewController.swift */; };
 		FB90380F282D52EE004023F5 /* PushTokensViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB90380E282D52EE004023F5 /* PushTokensViewController.swift */; };
 		FB903811282D60DA004023F5 /* WalletManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB903810282D60DA004023F5 /* WalletManager.swift */; };
+		FB98D0CE283F850500885E73 /* LocalizationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB98D0CD283F850500885E73 /* LocalizationManager.swift */; };
 		FB9A982C283776B20018BBFA /* TransitionsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9A982A283776B20018BBFA /* TransitionsTableViewCell.swift */; };
 		FB9A982D283776B20018BBFA /* TransitionsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB9A982B283776B20018BBFA /* TransitionsTableViewCell.xib */; };
 		FBB49A492824DE3800250553 /* SpinnerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB49A482824DE3800250553 /* SpinnerView.swift */; };
@@ -154,6 +155,7 @@
 		FB8EAC1E282FC8B4007244C1 /* PasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordViewController.swift; sourceTree = "<group>"; };
 		FB90380E282D52EE004023F5 /* PushTokensViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushTokensViewController.swift; sourceTree = "<group>"; };
 		FB903810282D60DA004023F5 /* WalletManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletManager.swift; sourceTree = "<group>"; };
+		FB98D0CD283F850500885E73 /* LocalizationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizationManager.swift; sourceTree = "<group>"; };
 		FB9A982A283776B20018BBFA /* TransitionsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionsTableViewCell.swift; sourceTree = "<group>"; };
 		FB9A982B283776B20018BBFA /* TransitionsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TransitionsTableViewCell.xib; sourceTree = "<group>"; };
 		FBB49A482824DE3800250553 /* SpinnerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinnerView.swift; sourceTree = "<group>"; };
@@ -353,6 +355,7 @@
 				FB85BA3D283CCB210068E9DE /* TimeManager.swift */,
 				FB16685D283E21D000155670 /* NetworkManager.swift */,
 				FBB682E1283E4A3E00CC5959 /* CoreDataManager.swift */,
+				FB98D0CD283F850500885E73 /* LocalizationManager.swift */,
 				FB3208072818285100F1ADCA /* ViewControllers */,
 				FB3208062818279E00F1ADCA /* CustomViews */,
 				FB5940512816AC7800037DFA /* Extensions */,
@@ -642,6 +645,7 @@
 				FBFE5773281AAB040016E74A /* SettingsViewController.swift in Sources */,
 				FB8BF8DB282FFDF70067CD0B /* QRScanViewController.swift in Sources */,
 				FB3754AF2821511900882338 /* MnemonicCollectionViewCell.swift in Sources */,
+				FB98D0CE283F850500885E73 /* LocalizationManager.swift in Sources */,
 				FB0FCA6328193CCC00BB0527 /* ImportTableViewCell.swift in Sources */,
 				FBD1CCAA283B90570081AF3E /* KeyChainManager.swift in Sources */,
 				FBFE579A281B269E0016E74A /* LanguageTableViewCell.swift in Sources */,

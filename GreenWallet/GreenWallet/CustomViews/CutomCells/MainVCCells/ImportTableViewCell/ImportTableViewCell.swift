@@ -9,9 +9,11 @@ import UIKit
 
 class ImportTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var titleLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        self.titleLabel.text = "+ \(LocalizationManager.share.translate?.result.list.main_screen.main_screen_purse_import ?? "")"
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

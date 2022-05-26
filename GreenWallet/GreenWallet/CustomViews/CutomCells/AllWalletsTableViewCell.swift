@@ -30,7 +30,7 @@ class AllWalletsTableViewCell: UITableViewCell {
         self.cellImage.image = wallet.image
         self.walletLabel.text = wallet.name
         self.tokenLabel.text = wallet.toket
-        self.keyLabel.text = "Приватный ключ с публичным отпечатком 8745635630"
+        self.keyLabel.text = LocalizationManager.share.translate?.result.list.wallet.wallet_data_public_key
     }
     
 }

@@ -13,6 +13,7 @@ class mCollectionViewCell: UICollectionViewCell {
     var controller = UIViewController()
     var height: CGFloat = 0
     
+    @IBOutlet weak var walletTitle: UILabel!
     @IBOutlet weak var footerButton: UIButton!
     @IBOutlet weak var footerView: UIView!
     @IBOutlet weak var headerView: UIView!
@@ -25,7 +26,7 @@ class mCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        
+        localization()
         self.tableView.dataSource = self
         self.tableView.delegate = self
         
@@ -39,8 +40,7 @@ class mCollectionViewCell: UICollectionViewCell {
         self.footerView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
         
         
-        self.footerButton.setTitle("Все кошельки", for: .normal)
-        self.footerButton.addTarget(self, action: #selector(allWalletButtonPressed), for: .touchUpInside)
+        
         
     }
     
@@ -55,6 +55,13 @@ class mCollectionViewCell: UICollectionViewCell {
         }
     }
     
+    private func localization() {
+        self.walletTitle.text = LocalizationManager.share.translate?.result.list.main_screen.main_screen_title_purse
+        
+        self.footerButton.setTitle(LocalizationManager.share.translate?.result.list.main_screen.main_screen_purse_all_wallets, for: .normal)
+        self.footerButton.addTarget(self, action: #selector(allWalletButtonPressed), for: .touchUpInside)
+    }
+    
     @objc func allWalletButtonPressed() {
         let storyboard = UIStoryboard(name: "Main", bundle: .main)
         let allWalletsVC = storyboard.instantiateViewController(withIdentifier: "AllWalletsViewController") as! AllWalletsViewController
@@ -67,6 +74,7 @@ class mCollectionViewCell: UICollectionViewCell {
     @objc func newwalletButtomPressed(_ sender: Any) {
         let storyboard = UIStoryboard(name: "Main", bundle: .main)
         let selectSystemVC = storyboard.instantiateViewController(withIdentifier: "SelectSystemViewController") as! SelectSystemViewController
+        selectSystemVC.isNewWallet = true
         
         self.controller.present(selectSystemVC, animated: true)
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "newWallet"), object: nil)

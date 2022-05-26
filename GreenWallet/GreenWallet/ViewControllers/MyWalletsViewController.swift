@@ -29,6 +29,7 @@ class MyWalletsViewController: UIViewController {
     private var wallet: WalletModel?
     
     
+    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var walletCollectionView: UICollectionView!
     @IBOutlet weak var actionCollectionView: UICollectionView!
@@ -52,7 +53,7 @@ class MyWalletsViewController: UIViewController {
                 
         NotificationCenter.default.addObserver(self, selector: #selector(showDetail), name: NSNotification.Name("showDetail"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(deleteWalletAtIntex), name: NSNotification.Name("deleteWalletAtIntex"), object: nil)
-
+        localization()
 
     }
     
@@ -74,6 +75,13 @@ class MyWalletsViewController: UIViewController {
         super.viewDidAppear(animated)
         print("-------------------------_______-----____-__-__-__-__-_-_--_-_-- \(self.index)")
         self.scrollToNextCell(index: self.index)
+    }
+    
+    private func localization() {
+        self.titleLabel.text = LocalizationManager.share.translate?.result.list.wallet.wallet_title
+        self.copyLabel.text = LocalizationManager.share.translate?.result.list.all.lable_copied
+        self.transactionButton.setTitle(LocalizationManager.share.translate?.result.list.wallet.wallet_transaction_history_btn, for: .normal)
+        self.deleteButton.setTitle(LocalizationManager.share.translate?.result.list.wallet.wallet_delete_wallet_btn, for: .normal)
     }
     
     @objc func deleteWalletAtIntex() {
@@ -153,11 +161,8 @@ extension MyWalletsViewController: UICollectionViewDelegate, UICollectionViewDat
                 self.wallet = wallet
                 mainCell.walletImage.image = wallet.image
                 mainCell.balanceLabel.text = "8,5478614578 XCH"
-                mainCell.balanceTitleLabel.text = "Баланс"
                 mainCell.usdLabel.text = "⁓762,14 USDT"
-                mainCell.detailButton.setTitle("Показать данные", for: .normal)
                 mainCell.walletSystemLabel.text = wallet.name + " Network"
-                mainCell.publicKeyLabel.text = "Приватный ключ с публичным отпечатком 8745635630"
                 mainCell.complitionHandler = { [unowned self] in
                     let passwordStoryboard = UIStoryboard(name: "PasswordStoryboard", bundle: .main)
                     let passwordVC = passwordStoryboard.instantiateViewController(withIdentifier: "PasswordViewController") as! PasswordViewController
@@ -168,11 +173,8 @@ extension MyWalletsViewController: UICollectionViewDelegate, UICollectionViewDat
                 }
                 return mainCell
             default:
-                detailCell.linkTitleLabel.text = "Адрес"
                 detailCell.linkLabel.text = "xch1gju63fm8tv00sk6gj44kr8chp02lngk473cjcug593wquuej9qzqwhpyen"
-                detailCell.publicTitleLabel.text = "Публичный ключ"
                 detailCell.publicKeyDetailLabel.text = "b7dafa7a6036dc58b1798932ff941716b3fca4315e1af01e5b0bf500acb7a66d59d8d9b342b4b047e8fcf0d6f8873d1a"
-                detailCell.mnemonicTitleLabel.text = "Мнемоника"
                 detailCell.mnemonicLabel.text = "************"
                 detailCell.complitionHandler = { [unowned self] in
                     UIView.animate(withDuration: 1, delay: 0) {
@@ -188,11 +190,29 @@ extension MyWalletsViewController: UICollectionViewDelegate, UICollectionViewDat
             }
             
         default:
-            let actionButton = self.actionButtons[indexPath.row]
-            actionsCell.actionDiscriptionLabel.text = actionButton.discription
-            actionsCell.actionImage.image = actionButton.image
-            actionsCell.actionTitleLabel.text = actionButton.title
-            return actionsCell
+            switch indexPath {
+            case [0,0]:
+                actionsCell.actionImage.image = UIImage(named: "getArrow")!
+                actionsCell.actionTitleLabel.text = LocalizationManager.share.translate?.result.list.wallet.wallet_send_title
+                actionsCell.actionDiscriptionLabel.text = LocalizationManager.share.translate?.result.list.wallet.wallet_send_description
+                return actionsCell
+            case [0,1]:
+                actionsCell.actionImage.image = UIImage(named: "share")!
+                actionsCell.actionTitleLabel.text = LocalizationManager.share.translate?.result.list.wallet.wallet_receive_title
+                actionsCell.actionDiscriptionLabel.text = LocalizationManager.share.translate?.result.list.wallet.wallet_receive_description
+                return actionsCell
+            case [0,2]:
+                actionsCell.actionImage.image = UIImage(named: "recive")!
+                actionsCell.actionTitleLabel.text = LocalizationManager.share.translate?.result.list.wallet.wallet_share_title
+                actionsCell.actionDiscriptionLabel.text = LocalizationManager.share.translate?.result.list.wallet.wallet_share_description
+                return actionsCell
+            default:
+                actionsCell.actionImage.image = UIImage(named: "qr")!
+                actionsCell.actionTitleLabel.text = LocalizationManager.share.translate?.result.list.wallet.wallet_scan_address_title
+                actionsCell.actionDiscriptionLabel.text = LocalizationManager.share.translate?.result.list.wallet.wallet_scan_address_description
+                return actionsCell
+            }
+            
         }
     }
     

@@ -17,30 +17,30 @@ class MainTabBarController: UITabBarController, UINavigationBarDelegate {
     
     private func addTabs() {
         let mainVC = storyboard?.instantiateViewController(withIdentifier: "navi") as! UINavigationController
-        mainVC.tabBarItem = UITabBarItem(title: "Кошелек", image: UIImage(named: "wallet")!, selectedImage: UIImage(named: "wallet")!)
+        mainVC.tabBarItem = UITabBarItem(title: LocalizationManager.share.translate?.result.list.main_screen.main_screen_title_purse, image: UIImage(named: "wallet")!, selectedImage: UIImage(named: "wallet")!)
         
         let secondMainVC = storyboard?.instantiateViewController(withIdentifier: "navi") as! UINavigationController
-        secondMainVC.tabBarItem = UITabBarItem(title: "Получить", image: UIImage(named: "get")!, selectedImage: UIImage(named: "get")!)
+        secondMainVC.tabBarItem = UITabBarItem(title: LocalizationManager.share.translate?.result.list.main_screen.main_screen_recive_btn, image: UIImage(named: "get")!, selectedImage: UIImage(named: "get")!)
         
         let thirdMainVC = storyboard?.instantiateViewController(withIdentifier: "navi") as! UINavigationController
-        thirdMainVC.tabBarItem = UITabBarItem(title: "Отправить", image: UIImage(named: "push")!, selectedImage: UIImage(named: "push")!)
+        thirdMainVC.tabBarItem = UITabBarItem(title: LocalizationManager.share.translate?.result.list.main_screen.main_screen_send_btn, image: UIImage(named: "push")!, selectedImage: UIImage(named: "push")!)
         
         let fourMainVC = storyboard?.instantiateViewController(withIdentifier: "TransactionHistoryVC") as! TransactionHistoryViewController
         fourMainVC.modalPresentationStyle = .fullScreen
-        fourMainVC.tabBarItem = UITabBarItem(title: "Транзакции", image: UIImage(named: "transaction")!, selectedImage: UIImage(named: "transaction")!)
+        fourMainVC.tabBarItem = UITabBarItem(title: LocalizationManager.share.translate?.result.list.main_screen.main_screen_transaction_btn, image: UIImage(named: "transaction")!, selectedImage: UIImage(named: "transaction")!)
 
         self.setViewControllers([mainVC, secondMainVC, thirdMainVC, fourMainVC], animated: true)
         self.navigationController?.navigationBar.delegate = self
     }
     
     override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
-        if tabBar.selectedItem?.title == "Получить" {
+        if tabBar.selectedItem?.title == LocalizationManager.share.translate?.result.list.main_screen.main_screen_recive_btn {
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "showGetVC"), object: nil)
 
             
         }
         
-        if tabBar.selectedItem?.title == "Отправить" {
+        if tabBar.selectedItem?.title == LocalizationManager.share.translate?.result.list.main_screen.main_screen_send_btn {
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "showPushVC"), object: nil)
         }
         

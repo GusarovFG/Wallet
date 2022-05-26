@@ -24,7 +24,10 @@ class MyWalletCollectionViewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        self.publicKeyLabel.text = LocalizationManager.share.translate?.result.list.wallet.wallet_data_public_key
+        self.balanceLabel.text = LocalizationManager.share.translate?.result.list.main_screen.main_screen_title_balance
+        self.detailButton.setTitle(LocalizationManager.share.translate?.result.list.wallet.wallet_show_data, for: .normal)
+        
     }
 
     

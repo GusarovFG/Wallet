@@ -14,15 +14,19 @@ class MnemonicViewController: UIViewController {
     private let indexes: [Int] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
     private var hide = true
 
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var discriptionLabel: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var hydeButton: UIButton!
     @IBOutlet weak var copyButton: UIButton!
     @IBOutlet weak var continueButton: UIButton!
     @IBOutlet weak var copyLabel: UILabel!
+    @IBOutlet weak var backButton: UIButton!
+    @IBOutlet weak var confirmLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        localization()
         self.mnemonicPhrase.shuffle()
         self.secureMnemonicPhrase = self.mnemonicPhrase
         secureMnemonic()
@@ -39,6 +43,16 @@ class MnemonicViewController: UIViewController {
         self.copyButton.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMaxXMaxYCorner]
         
         self.collectionView.register(UINib(nibName: "MnemonicCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "mnemonicCell")
+    }
+    
+    private func localization() {
+        self.titleLabel.text = LocalizationManager.share.translate?.result.list.create_a_mnemonic_phrase.create_a_mnemonic_phrase_title
+        self.discriptionLabel.text = LocalizationManager.share.translate?.result.list.create_a_mnemonic_phrase.create_a_mnemonic_phrase_description
+        self.copyLabel.text = LocalizationManager.share.translate?.result.list.all.lable_copied
+        self.backButton.setTitle(LocalizationManager.share.translate?.result.list.all.back_btn, for: .normal)
+        self.continueButton.setTitle(LocalizationManager.share.translate?.result.list.all.next_btn, for: .normal)
+        self.copyLabel.text = LocalizationManager.share.translate?.result.list.all.lable_copied
+        self.confirmLabel.text = LocalizationManager.share.translate?.result.list.create_a_mnemonic_phrase.create_a_mnemonic_phrase_agreement
     }
     
     private func secureMnemonic() {

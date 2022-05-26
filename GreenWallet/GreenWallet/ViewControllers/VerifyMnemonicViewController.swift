@@ -18,13 +18,18 @@ class VerifyMnemonicViewController: UIViewController {
     private var firstWord = true
     private let alert = AlertService()
     
+    @IBOutlet weak var pleaseLabel: UILabel!
+    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var veryfyCollectionView: UICollectionView!
     @IBOutlet weak var selectCollectionView: UICollectionView!
     @IBOutlet weak var errorLabel: UIView!
+    @IBOutlet weak var discriptionLabel: UILabel!
+    @IBOutlet weak var errorTitle: UILabel!
+    @IBOutlet weak var continueButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        localization()
         self.errorLabel.alpha = 0
         self.errorLabel.isHidden = true
         
@@ -47,6 +52,15 @@ class VerifyMnemonicViewController: UIViewController {
         
         print(verifyedMnemonicPhrase)
         print(selectPhrase)
+    }
+    
+    private func localization() {
+        self.titleLabel.text = LocalizationManager.share.translate?.result.list.mnemonic_phrase_verification.mnemonic_phrase_verification_title
+        self.discriptionLabel.text = LocalizationManager.share.translate?.result.list.mnemonic_phrase_verification.mnemonic_phrase_verification_description
+        self.pleaseLabel.text = LocalizationManager.share.translate?.result.list.mnemonic_phrase_verification.mnemonic_phrase_verification_task
+        self.continueButton.setTitle(LocalizationManager.share.translate?.result.list.all.next_btn, for: .normal)
+        self.errorTitle.text = LocalizationManager.share.translate?.result.list.mnemonic_phrase_verification.mnemonic_phrase_verification_error
+        
     }
     
     @IBAction func backButtonPressed(_ sender: Any) {

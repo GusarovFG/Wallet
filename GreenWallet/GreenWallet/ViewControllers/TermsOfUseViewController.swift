@@ -12,6 +12,8 @@ class TermsOfUseViewController: UIViewController {
     @IBOutlet weak var continueButton: UIButton!
     @IBOutlet weak var checkBoxButton: UIButton!
     @IBOutlet weak var agreeLabel: UILabel!
+    @IBOutlet weak var termOfUseTextView: UITextView!
+    @IBOutlet weak var mainTitile: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,8 +21,8 @@ class TermsOfUseViewController: UIViewController {
         self.continueButton.isEnabled = false
         self.continueButton.backgroundColor = #colorLiteral(red: 0.6106664538, green: 0.6106664538, blue: 0.6106664538, alpha: 1)
         self.checkBoxButton.contentMode = .center
-        
-        setupAgreeLabel()
+        localization()
+//        setupAgreeLabel()
         
         self.agreeLabel.addRangeGesture(stringRange: "условиями пользования") {
             let url = URL(string: "https://devushka.ru/upload/posts/a1797083197722a6b1ab8e2f4beb2b08.jpg")
@@ -31,6 +33,14 @@ class TermsOfUseViewController: UIViewController {
         
 
         
+    }
+    
+    private func localization() {
+        self.continueButton.setTitle(LocalizationManager.share.translate?.result.list.all.next_btn, for: .normal)
+        self.agreeLabel.text = LocalizationManager.share.translate?.result.list.all.agreement_with_terms_of_use_chekbox
+        self.agreeLabel.text = LocalizationManager.share.translate?.result.list.all.agreement_with_terms_of_use_chekbox
+        self.termOfUseTextView.text = LocalizationManager.share.translate?.result.list.terms_of_use.terms_of_use_text
+        self.mainTitile.text = LocalizationManager.share.translate?.result.list.terms_of_use.trms_of_use_title
     }
     
     private func setupAgreeLabel() {

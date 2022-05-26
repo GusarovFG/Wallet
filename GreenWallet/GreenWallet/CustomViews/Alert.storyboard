@@ -11,7 +11,7 @@
         <!--Allert Wallet View Controller-->
         <scene sceneID="2jQ-MA-K0B">
             <objects>
-                <viewController storyboardIdentifier="AllertWalletViewController" modalTransitionStyle="crossDissolve" modalPresentationStyle="overFullScreen" id="wpt-hb-iV1" customClass="AllertWalletViewController" customModule="GreenWallet" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AllertWalletViewController" modalTransitionStyle="crossDissolve" modalPresentationStyle="overFullScreen" useStoryboardIdentifierAsRestorationIdentifier="YES" id="wpt-hb-iV1" customClass="AllertWalletViewController" customModule="GreenWallet" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="O0F-GT-c98">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -96,7 +96,7 @@
         <!--Allert Wallet View Controller-->
         <scene sceneID="wjM-4H-yoU">
             <objects>
-                <viewController storyboardIdentifier="AllertImportViewController" modalTransitionStyle="crossDissolve" modalPresentationStyle="overFullScreen" id="F5p-em-wEv" customClass="AllertWalletViewController" customModule="GreenWallet" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AllertImportViewController" modalTransitionStyle="crossDissolve" modalPresentationStyle="overFullScreen" useStoryboardIdentifierAsRestorationIdentifier="YES" id="F5p-em-wEv" customClass="AllertWalletViewController" customModule="GreenWallet" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="TZy-fc-52a">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -172,9 +172,9 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="descriptionLabel" destination="kcx-8q-az6" id="tCn-9g-9EK"/>
+                        <outlet property="importDescription" destination="kcx-8q-az6" id="Hht-0t-8c5"/>
+                        <outlet property="importTitle" destination="esf-Mp-XPo" id="NkG-3f-XPd"/>
                         <outlet property="mainButton" destination="axW-Y5-51D" id="IEl-SY-rJU"/>
-                        <outlet property="mainLabel" destination="esf-Mp-XPo" id="JAU-QJ-L0O"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8EL-fg-ssC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -184,7 +184,7 @@
         <!--Allert Wallet View Controller-->
         <scene sceneID="JP6-Ju-8FH">
             <objects>
-                <viewController storyboardIdentifier="seccsessTransitViewController" modalTransitionStyle="crossDissolve" modalPresentationStyle="overFullScreen" id="bHm-uc-qDr" customClass="AllertWalletViewController" customModule="GreenWallet" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="seccsessTransitViewController" modalTransitionStyle="crossDissolve" modalPresentationStyle="overFullScreen" useStoryboardIdentifierAsRestorationIdentifier="YES" id="bHm-uc-qDr" customClass="AllertWalletViewController" customModule="GreenWallet" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="A9N-sa-9uk">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -260,9 +260,9 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="descriptionLabel" destination="Quq-mL-p96" id="fyJ-2g-tuq"/>
                         <outlet property="mainButton" destination="IPn-uH-jbb" id="PUj-YH-Vgm"/>
-                        <outlet property="mainLabel" destination="gDB-TA-Uod" id="CLj-qq-L0I"/>
+                        <outlet property="transactionDescription" destination="Quq-mL-p96" id="YhP-Ym-VGn"/>
+                        <outlet property="transactionLabel" destination="gDB-TA-Uod" id="GvO-IO-PqL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lcH-4A-4R5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -272,7 +272,7 @@
         <!--Allert Wallet View Controller-->
         <scene sceneID="JQX-vm-tYn">
             <objects>
-                <viewController storyboardIdentifier="DeleteWallet" modalTransitionStyle="crossDissolve" modalPresentationStyle="overFullScreen" id="HEZ-sv-zOt" customClass="AllertWalletViewController" customModule="GreenWallet" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DeleteWallet" modalTransitionStyle="crossDissolve" modalPresentationStyle="overFullScreen" useStoryboardIdentifierAsRestorationIdentifier="YES" id="HEZ-sv-zOt" customClass="AllertWalletViewController" customModule="GreenWallet" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="jLN-KT-top">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -382,9 +382,10 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="descriptionLabel" destination="WLJ-NX-ySW" id="aMr-iv-1pi"/>
-                        <outlet property="mainButton" destination="656-nv-uo8" id="vDj-Qy-DpG"/>
-                        <outlet property="mainLabel" destination="0GB-iM-Kxh" id="Rgy-Mq-her"/>
+                        <outlet property="cancelButton" destination="656-nv-uo8" id="TOC-hR-zkH"/>
+                        <outlet property="deleteButton" destination="i5h-xk-FgN" id="AFg-Na-GAf"/>
+                        <outlet property="deleteDescription" destination="WLJ-NX-ySW" id="7qK-rZ-Fx0"/>
+                        <outlet property="deleteTitle" destination="0GB-iM-Kxh" id="tNc-PH-ml5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="my9-ha-XhP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -394,7 +395,7 @@
         <!--Allert Wallet View Controller-->
         <scene sceneID="fLl-UJ-oHM">
             <objects>
-                <viewController storyboardIdentifier="DeletingAlert" modalTransitionStyle="crossDissolve" modalPresentationStyle="overFullScreen" id="jpr-m5-yKx" customClass="AllertWalletViewController" customModule="GreenWallet" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DeletingAlert" modalTransitionStyle="crossDissolve" modalPresentationStyle="overFullScreen" useStoryboardIdentifierAsRestorationIdentifier="YES" id="jpr-m5-yKx" customClass="AllertWalletViewController" customModule="GreenWallet" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="bNd-wo-uYM">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -470,9 +471,9 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="descriptionLabel" destination="bV6-pT-N6x" id="Tve-CK-cJb"/>
                         <outlet property="mainButton" destination="WGF-bd-X2j" id="WBX-6d-f9I"/>
-                        <outlet property="mainLabel" destination="OJi-bQ-Shd" id="yTF-Iy-ZKi"/>
+                        <outlet property="wasDeletedDescription" destination="bV6-pT-N6x" id="id0-oB-CTC"/>
+                        <outlet property="wasDeletedTitle" destination="OJi-bQ-Shd" id="tz9-iQ-vA6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h3D-wH-7bt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

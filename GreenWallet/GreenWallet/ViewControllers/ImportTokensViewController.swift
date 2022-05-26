@@ -16,12 +16,23 @@ class ImportTokensViewController: UIViewController {
     @IBOutlet weak var addedWalletLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var backButton: UIButton!
+    @IBOutlet weak var addLabel: UILabel!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.tableView.register(UINib(nibName: "ImportTokensTableViewCell", bundle: nil), forCellReuseIdentifier: "importTokenCell")
         self.filteredTokens = self.tokens
+        localization()
+    }
+
+    
+    private func localization() {
+        self.titleLabel.text = LocalizationManager.share.translate?.result.list.import_tokens.import_tokens_title
+        self.addLabel.text = LocalizationManager.share.translate?.result.list.import_tokens.import_tokens_label_add
     }
     
     @IBAction func backButtonPressed(_ sender: Any) {

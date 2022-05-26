@@ -13,6 +13,18 @@ class NewWalletViewController: UIViewController {
     @IBOutlet weak var agreeLabel: UILabel!
     @IBOutlet weak var checkBoxButton: UIButton!
     @IBOutlet weak var createNewWalletButton: UIButton!
+    @IBOutlet weak var backButton: UIButton!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var disctriptionLabel: UILabel!
+    @IBOutlet weak var disctiption: UILabel!
+    @IBOutlet weak var characteristicsTitle: UILabel!
+    @IBOutlet weak var emissionLabel: UILabel!
+    @IBOutlet weak var praymanLabel: UILabel!
+    @IBOutlet weak var iCOLabel: UILabel!
+    @IBOutlet weak var stackingLAbel: UILabel!
+    @IBOutlet weak var supportTokensLabel: UILabel!
+    @IBOutlet weak var newWalletLAbel: UILabel!
+    @IBOutlet weak var creatingNewWalletLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,7 +36,7 @@ class NewWalletViewController: UIViewController {
         self.createNewWalletButton.backgroundColor = #colorLiteral(red: 0.6106664538, green: 0.6106664538, blue: 0.6106664538, alpha: 1)
         self.createNewWalletButton.contentMode = .center
         
-        setupAgreeLabel()
+//        setupAgreeLabel()
         
         self.agreeLabel.addRangeGesture(stringRange: "условиями пользования") {
             let url = URL(string: "https://devushka.ru/upload/posts/a1797083197722a6b1ab8e2f4beb2b08.jpg")
@@ -34,10 +46,20 @@ class NewWalletViewController: UIViewController {
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        localization()
+    }
+    
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         self.creatingNewWalletView.isHidden = true
 
+    }
+    
+    private func localization() {
+        self.newWalletLAbel.text = LocalizationManager.share.translate?.result.list.screen_for_creating_a_new_wallet.screen_for_creating_a_new_wallet_title
+        self.creatingNewWalletLabel.text = LocalizationManager.share.translate?.result.list.screen_for_creating_a_new_wallet.screen_for_creating_a_new_wallet_description
     }
     
     private func setupAgreeLabel() {

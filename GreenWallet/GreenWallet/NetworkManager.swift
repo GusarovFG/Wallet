@@ -13,8 +13,8 @@ class NetworkManager {
     
     private init(){}
     
-    func getLocalization() {
-        guard let url = URL(string: MainURLS.API.rawValue + "localization" + "/languages") else { return }
+    func getLocalization(from url: String?, with complition: @escaping (Language) -> Void) {
+        guard let url = URL(string: url ?? "") else { return }
         let session = URLSession.shared
         session.dataTask(with: url) { data, response, error in
             if let response = response {
@@ -28,20 +28,42 @@ class NetworkManager {
                 decoder.keyDecodingStrategy = .convertFromSnakeCase
                 let json = try decoder.decode(Language.self, from: data)
                 
-                print(json)
+                print(json.result.version)
+                DispatchQueue.main.async {
+                    complition(json)
+                }
             } catch {
                 print(error)
             }
-
         }.resume()
-        
     }
     
-
-    
+    func getTranslate(from url: String, languageCode: String, version: String, with complition: @escaping (ListOfTranslate) -> Void) {
+        guard let url = URL(string: "\(url)/localization/translate?code=\(languageCode)&version=\(version)") else { return }
+        print(url)
+        let session = URLSession.shared
+        session.dataTask(with: url) { data, response, error in
+            if let response = response {
+                print(response)
+            }
+            
+            guard let data = data else { return }
+            
+            do {
+               
+                let json = try JSONDecoder().decode(ListOfTranslate.self, from: data)
+                
+                DispatchQueue.main.async {
+                    complition(json)
+                }
+            } catch {
+                print(error)
+            }
+        }.resume()
+    }
 }
 
 enum MainURLS: String {
-    case API = "https://greenapp.siterepository.ru/api/v1.0/"
+    case API = "https://greenapp.siterepository.ru/api/v1.0"
     case language = "https://greenapp.siterepository.ru/api/v1.0/localization/languages"
 }

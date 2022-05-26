@@ -239,6 +239,8 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                         <outlet property="agreeLabel" destination="hKk-XR-LOz" id="uws-qa-oZB"/>
                         <outlet property="checkBoxButton" destination="Tra-sT-UXl" id="jqT-dR-dOF"/>
                         <outlet property="continueButton" destination="Kz9-9X-jED" id="cOY-2M-LMG"/>
+                        <outlet property="mainTitile" destination="NKe-ZQ-9kH" id="fME-Do-7Ib"/>
+                        <outlet property="termOfUseTextView" destination="okl-XG-SSv" id="oML-Ve-n2l"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="N7f-wb-bfK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -528,9 +530,21 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                     <navigationItem key="navigationItem" id="Akq-hL-zWV"/>
                     <connections>
                         <outlet property="agreeLabel" destination="0nE-2s-1pd" id="PCv-L9-vhB"/>
+                        <outlet property="backButton" destination="5ES-sY-Jgm" id="Da5-lf-mcJ"/>
+                        <outlet property="characteristicsTitle" destination="ltk-tc-mAE" id="AFW-TN-JVQ"/>
                         <outlet property="checkBoxButton" destination="4BU-vD-uva" id="Qe0-W2-Jqn"/>
                         <outlet property="createNewWalletButton" destination="gNk-yQ-KHO" id="jtb-VG-3GE"/>
+                        <outlet property="creatingNewWalletLabel" destination="L35-mG-2dZ" id="kRc-Ie-S7c"/>
                         <outlet property="creatingNewWalletView" destination="56k-pg-ba4" id="Y5m-WC-wOx"/>
+                        <outlet property="disctiption" destination="8Ia-dC-0XL" id="tHr-O1-qCL"/>
+                        <outlet property="disctriptionLabel" destination="n0S-eP-Xrv" id="VM6-Py-x6v"/>
+                        <outlet property="emissionLabel" destination="Oqk-9Z-lDI" id="Vcm-Ga-B3P"/>
+                        <outlet property="iCOLabel" destination="heR-cj-Fb8" id="cea-uw-Qkb"/>
+                        <outlet property="newWalletLAbel" destination="o9w-z2-uzT" id="cxM-Jl-Ly0"/>
+                        <outlet property="praymanLabel" destination="6d9-Od-Ema" id="Q8C-bR-qwJ"/>
+                        <outlet property="stackingLAbel" destination="d0I-xo-Oa8" id="ljJ-sN-pWu"/>
+                        <outlet property="supportTokensLabel" destination="HJV-2O-R5j" id="1dj-IO-gCD"/>
+                        <outlet property="titleLabel" destination="Vak-Gd-HqX" id="wxz-aJ-6ea"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g3S-PL-QUO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -626,6 +640,7 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                                     </button>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstItem="OYs-IQ-vIi" firstAttribute="width" secondItem="NEf-gW-JQq" secondAttribute="width" id="6hy-i0-H9N"/>
                                     <constraint firstAttribute="height" constant="40" id="AZK-LF-uiN"/>
                                 </constraints>
                             </stackView>
@@ -734,11 +749,15 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="backButton" destination="jv2-Pf-DJj" id="m3v-tE-cav"/>
                         <outlet property="collectionView" destination="JhJ-Jd-9Xg" id="ZLm-vk-yZ2"/>
+                        <outlet property="confirmLabel" destination="BLU-dJ-RTc" id="TnV-dH-NBU"/>
                         <outlet property="continueButton" destination="OIM-1O-6Sf" id="Geq-as-tEI"/>
                         <outlet property="copyButton" destination="OYs-IQ-vIi" id="356-0L-HJa"/>
                         <outlet property="copyLabel" destination="176-Es-Hbj" id="Oj7-GZ-9fR"/>
+                        <outlet property="discriptionLabel" destination="1AU-wh-zeW" id="VBs-PE-AQd"/>
                         <outlet property="hydeButton" destination="NEf-gW-JQq" id="2Mh-Pf-yu6"/>
+                        <outlet property="titleLabel" destination="LyD-ft-yyg" id="16h-Di-0dT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SoI-bc-9SM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1003,10 +1022,12 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="adresOfWalletLabel" destination="m9W-82-dXn" id="5HR-hP-LgF"/>
+                        <outlet property="backButton" destination="LfF-7b-FmR" id="Hnx-92-1R9"/>
                         <outlet property="chiaMenuButton" destination="s9U-TQ-GjW" id="ePT-Id-c5C"/>
                         <outlet property="chivesMenuButton" destination="i8V-sk-hWA" id="50k-tD-tCS"/>
                         <outlet property="copyButton" destination="Xk3-xj-fjf" id="Lod-CS-49c"/>
-                        <outlet property="copyLabel" destination="97L-wo-3MF" id="hkt-A5-wzN"/>
+                        <outlet property="copyLabel" destination="97L-wo-3MF" id="MIJ-xf-0Rm"/>
                         <outlet property="linkLabel" destination="Nxg-TE-rqb" id="Gi4-kH-EXC"/>
                         <outlet property="menuButton" destination="9Ks-5X-qGb" id="gDU-gO-yAC"/>
                         <outlet property="menuView" destination="EbW-eG-rqV" id="oGe-1C-q2D"/>
@@ -1780,10 +1801,17 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                             <constraint firstItem="bmv-RL-rBj" firstAttribute="trailing" secondItem="n7w-Dy-b0g" secondAttribute="trailing" id="wpW-du-iwA"/>
                             <constraint firstItem="7AU-7a-QaI" firstAttribute="top" secondItem="r99-q5-ntG" secondAttribute="top" id="zA4-mQ-ST6"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="7AU-7a-QaI"/>
+                                <exclude reference="bmv-RL-rBj"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
                         <outlet property="addContactLabel" destination="hVU-57-gCy" id="C5r-RW-SbD"/>
                         <outlet property="adressTextField" destination="cpj-2N-66D" id="gqa-X3-NuA"/>
+                        <outlet property="backButton" destination="Or0-KX-yYM" id="pEC-JB-dZX"/>
                         <outlet property="balaceStackViewConstraint" destination="CnE-8c-Wqq" id="g8I-ps-7Pp"/>
                         <outlet property="balanceButton" destination="uII-NX-pL2" id="35X-fz-lTR"/>
                         <outlet property="balanceStackView" destination="TOO-Ci-1W7" id="gEd-DN-zhA"/>
@@ -1924,7 +1952,7 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                                     <constraint firstItem="fGo-lH-5NH" firstAttribute="top" secondItem="D3F-W3-Jpm" secondAttribute="top" constant="15" id="U8Q-gT-VOi"/>
                                     <constraint firstItem="2Vr-bL-6TF" firstAttribute="top" secondItem="fGo-lH-5NH" secondAttribute="bottom" constant="15" id="bCl-yj-M3W"/>
                                     <constraint firstAttribute="trailing" secondItem="2Vr-bL-6TF" secondAttribute="trailing" constant="15" id="fkd-7d-Fvd"/>
-                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="fGo-lH-5NH" secondAttribute="trailing" symbolic="YES" id="hlf-Ih-PkD"/>
+                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="fGo-lH-5NH" secondAttribute="trailing" constant="20" symbolic="YES" id="hlf-Ih-PkD"/>
                                     <constraint firstAttribute="bottom" secondItem="pNy-sL-HT5" secondAttribute="bottom" constant="12" id="npy-FY-Jt2"/>
                                     <constraint firstAttribute="trailing" secondItem="pNy-sL-HT5" secondAttribute="trailing" constant="140" id="rd4-fC-70w"/>
                                     <constraint firstAttribute="height" constant="120" id="vmN-nG-Qhk"/>
@@ -2022,6 +2050,7 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                     <navigationItem key="navigationItem" id="ygC-JQ-O32"/>
                     <connections>
                         <outlet property="balanceLabel" destination="2Vr-bL-6TF" id="lh9-uy-8cl"/>
+                        <outlet property="balandeTitle" destination="fGo-lH-5NH" id="4Ya-3D-4Dm"/>
                         <outlet property="cellectionView" destination="osZ-w1-XVa" id="O0Z-Ck-hk7"/>
                         <outlet property="pageControl" destination="ITP-eL-ev8" id="2BL-fa-AiR"/>
                         <outlet property="percentLabel" destination="q8X-eN-3k7" id="kuj-dn-Fon"/>
@@ -2292,10 +2321,13 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                         <barButtonItem key="backBarButtonItem" title="Назад" id="zaH-1L-L9W"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="addLabel" destination="PoU-AQ-0vp" id="TRp-5r-qjO"/>
                         <outlet property="addedWalletLabel" destination="PoU-AQ-0vp" id="inL-bP-sUl"/>
+                        <outlet property="backButton" destination="h7d-Ky-eV6" id="alX-zl-lA0"/>
                         <outlet property="numberOFWalletLabel" destination="sLP-T1-FGd" id="Rwn-25-Ogw"/>
                         <outlet property="searchBar" destination="B3u-bv-gnj" id="aRz-pg-Ub8"/>
                         <outlet property="tableView" destination="OWq-IL-ydH" id="4fi-MA-kRc"/>
+                        <outlet property="titleLabel" destination="frK-gj-Kgx" id="A6W-Al-jch"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vCB-4g-cg7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -2606,6 +2638,7 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                         <outlet property="deleteButton" destination="J88-aG-dCr" id="zvL-lx-zfH"/>
                         <outlet property="pageControl" destination="3XB-58-nVn" id="Rha-M7-76V"/>
                         <outlet property="scrollView" destination="anU-6Y-xe5" id="lLa-sI-JEK"/>
+                        <outlet property="titleLabel" destination="EIe-sf-LN7" id="gML-r9-jh3"/>
                         <outlet property="transactionButton" destination="qAT-XB-rfd" id="TbA-pD-b7p"/>
                         <outlet property="walletCollectionView" destination="vYe-Ph-0gj" id="U8l-2M-JAX"/>
                     </connections>
@@ -2635,8 +2668,6 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                                     </attributedString>
                                 </buttonConfiguration>
                                 <connections>
-                                    <action selector="backButtomPressed:" destination="68I-i9-5qP" eventType="touchUpInside" id="Rkd-Ph-LPk"/>
-                                    <action selector="backButtonPressed:" destination="O4O-Q9-iZl" eventType="touchUpInside" id="oLe-Pq-6hA"/>
                                     <action selector="backButtonPressed:" destination="U2U-I9-5M3" eventType="touchUpInside" id="qej-Ug-XIv"/>
                                 </connections>
                             </button>
@@ -2991,7 +3022,7 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                     </view>
                     <connections>
                         <outlet property="allDateButton" destination="e7I-Zn-xbX" id="dW5-Pb-BoM"/>
-                        <outlet property="backButton" destination="0Gk-7f-Ba2" id="z85-Q5-1Jg"/>
+                        <outlet property="backButton" destination="0Gk-7f-Ba2" id="MbL-Hw-dVd"/>
                         <outlet property="chiaSystemButton" destination="K9R-oL-ZgE" id="3wO-2f-eHL"/>
                         <outlet property="chivesSystemButton" destination="Itf-Pi-Jbj" id="17T-3u-xT2"/>
                         <outlet property="filterAllButton" destination="nrP-iJ-nbl" id="lC2-dC-V3f"/>
@@ -3008,6 +3039,7 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                         <outlet property="summLabel" destination="gwF-us-5Lk" id="sGG-cc-Ipg"/>
                         <outlet property="systemMenuView" destination="1UX-KO-0ql" id="tGd-7L-pEL"/>
                         <outlet property="tableView" destination="Nog-ra-Sc2" id="GvH-Tv-wvZ"/>
+                        <outlet property="titleLabel" destination="MtN-Zf-ahr" id="uOV-RU-tbA"/>
                         <outlet property="todayDateButton" destination="ZtH-j9-ohy" id="fAM-m2-Rtn"/>
                         <outlet property="yesterdayDayeButton" destination="jmw-pc-TtC" id="jAP-aP-4qS"/>
                     </connections>
@@ -3096,6 +3128,7 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                     </view>
                     <navigationItem key="navigationItem" id="GK7-NS-Ppb"/>
                     <connections>
+                        <outlet property="backButton" destination="EmW-7C-cIY" id="ItQ-Mc-nzf"/>
                         <outlet property="tableView" destination="N7G-ev-Yxv" id="XOF-25-7GZ"/>
                     </connections>
                 </viewController>
@@ -3501,8 +3534,13 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                     </view>
                     <value key="contentSizeForViewInPopover" type="size" width="414" height="1009"/>
                     <connections>
+                        <outlet property="continueButton" destination="Tl3-u5-MSQ" id="G3n-69-TrK"/>
+                        <outlet property="discriptionLabel" destination="5Xh-4b-AIu" id="d7H-QP-rHb"/>
                         <outlet property="errorLabel" destination="lfS-hb-u2w" id="nVQ-0X-oro"/>
+                        <outlet property="errorTitle" destination="swx-qk-5Ra" id="eLw-Ra-B8b"/>
+                        <outlet property="pleaseLabel" destination="zC3-Wm-DlC" id="DT9-IS-AKj"/>
                         <outlet property="selectCollectionView" destination="P6I-m1-eO2" id="4Ca-hQ-1nA"/>
+                        <outlet property="titleLabel" destination="Qyu-0U-OQb" id="QPx-ZX-foi"/>
                         <outlet property="veryfyCollectionView" destination="Xsl-Ls-Mh0" id="eb5-Ys-ATA"/>
                     </connections>
                 </viewController>
@@ -3828,16 +3866,18 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                     </view>
                     <size key="freeformSize" width="414" height="1240"/>
                     <connections>
-                        <outlet property="alertLabel" destination="RPX-zz-Uyh" id="htY-6s-TTa"/>
+                        <outlet property="alertLabel" destination="RPX-zz-Uyh" id="1sx-f4-B3D"/>
                         <outlet property="alertView" destination="tN3-Zu-aLm" id="bkT-99-b8N"/>
                         <outlet property="bottomConstraint" destination="1r7-ll-hzs" id="ZAK-d1-pKg"/>
                         <outlet property="checkBoxButton" destination="0pw-Jr-w0k" id="68H-r0-42E"/>
                         <outlet property="collectionView" destination="hAH-V3-p1h" id="qTs-GN-b4i"/>
                         <outlet property="continueButton" destination="yqw-xe-81K" id="0AY-CG-xAV"/>
+                        <outlet property="descriptionLabel" destination="NIE-tz-rWt" id="dja-Pd-Ss6"/>
                         <outlet property="errorLabel" destination="eZp-ZY-CAc" id="xp4-TB-yKd"/>
                         <outlet property="scrollView" destination="N4v-Uo-rRn" id="nms-29-OWK"/>
                         <outlet property="segmentedControl" destination="Pci-fm-uhj" id="rw9-aE-QaP"/>
                         <outlet property="termsLabel" destination="aG2-Ir-Ejf" id="XoU-cf-hFI"/>
+                        <outlet property="titleLabel" destination="GLG-Bw-OL1" id="GgJ-JO-qpz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bKl-R0-UhM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -3852,8 +3892,8 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
         <image name="LaunchScreenLogo" width="252" height="54"/>
         <image name="NewWallet" width="119" height="116"/>
         <image name="button1" width="28" height="28"/>
-        <image name="chevron.backward" catalog="system" width="96" height="128"/>
-        <image name="chevron.down" catalog="system" width="128" height="72"/>
+        <image name="chevron.backward" catalog="system" width="32" height="32"/>
+        <image name="chevron.down" catalog="system" width="32" height="32"/>
         <image name="contacts" width="16" height="20"/>
         <image name="filter" width="16" height="16"/>
         <image name="goodMorning" width="375" height="812"/>

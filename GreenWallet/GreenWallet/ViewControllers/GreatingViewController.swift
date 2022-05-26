@@ -17,7 +17,7 @@ class GreatingViewController: UIViewController {
         super.viewDidLoad()
         
         if UserDefaultsManager.shared.userDefaults.string(forKey: UserDefaultsStringKeys.firstSession.rawValue) != "First" {
-            self.qwe()
+            self.showPermissions()
             UserDefaultsManager.shared.userDefaults.set("First", forKey: UserDefaultsStringKeys.firstSession.rawValue)
         } else {
             self.dismissController()
@@ -27,25 +27,25 @@ class GreatingViewController: UIViewController {
         switch TimeManager.share.getTime() {
         case 6..<12:
             self.backGroundImage.image = UIImage(named: "goodMorning")!
-            self.mainTitle.text = "Доброе утро!"
+            self.mainTitle.text = LocalizationManager.share.translate?.result.list.welcome_screen.welcome_screen_titel_morning
         case 12..<18:
             self.backGroundImage.image = UIImage(named: "goodDay")!
-            self.mainTitle.text = "Добрый день!"
+            self.mainTitle.text = LocalizationManager.share.translate?.result.list.welcome_screen.welcome_screen_titel_afternoon
             self.mainTitle.textColor = .black
         case 18..<23:
             self.backGroundImage.image = UIImage(named: "goodevening")!
-            self.mainTitle.text = "Добрый вечер!"
+            self.mainTitle.text = LocalizationManager.share.translate?.result.list.welcome_screen.welcome_screen_titel_evening
             
         default:
             self.backGroundImage.image = UIImage(named: "goodNight")!
-            self.mainTitle.text = "Доброй ночи!"
+            self.mainTitle.text = LocalizationManager.share.translate?.result.list.welcome_screen.welcome_screen_titel_night
             
         }
         
 
     }
     
-    private func qwe() {
+    private func showPermissions() {
         let context = LAContext()
         var error: NSError?
         

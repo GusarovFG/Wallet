@@ -17,6 +17,7 @@ class MainViewController: UIViewController {
     
     let userDefaults = UserDefaults.standard
     
+    @IBOutlet weak var balandeTitle: UILabel!
     @IBOutlet weak var balanceLabel: UILabel!
     @IBOutlet weak var riseLabel: UILabel!
     @IBOutlet weak var percentLabel: UILabel!
@@ -55,6 +56,7 @@ class MainViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(showWallet), name: NSNotification.Name(rawValue: "showWallet"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(showGetSystem), name: NSNotification.Name(rawValue: "showGetVC"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(showPushSystem), name: NSNotification.Name(rawValue: "showPushVC"), object: nil)
+        localization()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -66,7 +68,13 @@ class MainViewController: UIViewController {
         
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        
+    }
     
+    private func localization() {
+        self.balandeTitle.text = LocalizationManager.share.translate?.result.list.main_screen.main_screen_title_balance
+    }
     
     @objc private func presentSelectSystemVC() {
         
@@ -134,7 +142,7 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "mCollectionViewCell", for: indexPath) as! mCollectionViewCell
         if WalletManager.share.favoritesWallets.isEmpty {
             cell.wallet = WalletModel(name: "", number: 0, image: UIImage(), tokens: [], toket: "")
-            cell.footerButton.setTitle("+ Добавить кошелек", for: .normal)
+            cell.footerButton.setTitle(LocalizationManager.share.translate?.result.list.main_screen.main_screen_purse_add_wallet, for: .normal)
             cell.footerButton.addTarget(self, action: #selector(presentSelectSystemVC), for: .touchUpInside)
             cell.tableView.backgroundColor = #colorLiteral(red: 0.1882352941, green: 0.1882352941, blue: 0.1882352941, alpha: 1)
             cell.headerButton.isHidden = true

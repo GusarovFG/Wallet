@@ -19,7 +19,7 @@ class AllWalletsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        localization()
         self.favoriteLabel.alpha = 0
         
         
@@ -44,6 +44,11 @@ class AllWalletsViewController: UIViewController {
         WalletManager.share.vallets.removeAll(where: {$0 == self.wallets[index]})
         self.walletsTableView.reloadData()
     }
+    
+    private func localization() {
+        self.mainLabel.text = LocalizationManager.share.translate?.result.list.my_wallets.my_wallets_title
+        self.backButton.setTitle(LocalizationManager.share.translate?.result.list.all.back_btn, for: .normal)
+    }
 
     
     @IBAction func backButtonPressed(_ sender: Any) {
@@ -64,7 +69,7 @@ extension AllWalletsViewController: UITableViewDelegate, UITableViewDataSource {
         case [0,self.wallets.count]:
             addWalletCell.addPressed = {
                 let systemViewController = self.storyboard?.instantiateViewController(withIdentifier: "SelectSystemViewController") as! SelectSystemViewController
-                
+                systemViewController.isNewWallet = true
                 self.present(systemViewController, animated: true, completion: nil)
             }
             return addWalletCell
@@ -82,7 +87,7 @@ extension AllWalletsViewController: UITableViewDelegate, UITableViewDataSource {
             if WalletManager.share.favoritesWallets.filter({$0 == wallet}).count == 0 {
                 WalletManager.share.favoritesWallets.append(wallet)
                 self.favoriteLabel.backgroundColor = #colorLiteral(red: 0.2274509804, green: 0.6745098039, blue: 0.3490196078, alpha: 1)
-                self.favoriteLabel.text = "     Добавлен на главный экран"
+                self.favoriteLabel.text = LocalizationManager.share.translate?.result.list.my_wallets.my_wallets_label_added
                 UIView.animate(withDuration: 1, delay: 0) {
                     self.favoriteLabel.alpha = 1
                 }
@@ -94,7 +99,7 @@ extension AllWalletsViewController: UITableViewDelegate, UITableViewDataSource {
             } else {
                 WalletManager.share.favoritesWallets.removeAll(where: {$0 == wallet})
                 self.favoriteLabel.backgroundColor = #colorLiteral(red: 1, green: 0.2360929251, blue: 0.1714096665, alpha: 1)
-                self.favoriteLabel.text = "     Убран с главного экрана"
+                self.favoriteLabel.text = LocalizationManager.share.translate?.result.list.my_wallets.my_wallets_label_removed
                 UIView.animate(withDuration: 1, delay: 0) {
                     self.favoriteLabel.alpha = 1
                 }

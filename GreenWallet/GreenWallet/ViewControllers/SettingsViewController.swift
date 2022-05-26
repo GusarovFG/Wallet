@@ -9,8 +9,6 @@ import UIKit
 
 class SettingsViewController: UIViewController {
     
-    private var titlesOfCells = ["Скрыть баланс кошельков", "Push-уведомления", "Поддержка", "Уведомления", "Показать больше"]
-    private var detailOfCells = ["На главном экране", "Рекомендуется", "Ответим на вопросы"]
 
     @IBOutlet weak var tableView: UITableView!
     
@@ -22,7 +20,11 @@ class SettingsViewController: UIViewController {
         self.tableView.register(UINib(nibName: "SupportTableViewCell", bundle: nil), forCellReuseIdentifier: "supportCell")
         self.tableView.register(UINib(nibName: "PushAndAllSettingsTableViewCell", bundle: nil), forCellReuseIdentifier: "pushAndAllSettingsCell")
     }
-
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.tableView.reloadData()
+    }
 }
 
 extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
@@ -42,8 +44,8 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
             return themeCell
         case [0,1]:
             secureAndPushCell.eyeImageView?.image = UIImage(named: "Eye")!
-            secureAndPushCell.mainLabel?.text = self.titlesOfCells[0]
-            secureAndPushCell.detailLabel?.text = self.detailOfCells[0]
+            secureAndPushCell.mainLabel?.text = LocalizationManager.share.translate?.result.list.menu.menu_hide_wallet_balance_title
+            secureAndPushCell.detailLabel?.text = LocalizationManager.share.translate?.result.list.menu.menu_hide_wallet_balance_description
             secureAndPushCell.cellSwitch?.isOn = false
             secureAndPushCell.secure = true
             if UserDefaultsManager.shared.userDefaults.bool(forKey: UserDefaultsStringKeys.hideWalletsBalance.rawValue) {
@@ -54,22 +56,22 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
             return secureAndPushCell
         case [0,2]:
             secureAndPushCell.eyeImageView?.image = UIImage(named: "Notification")!
-            secureAndPushCell.detailLabel?.text = self.detailOfCells[1]
-            secureAndPushCell.mainLabel?.text = self.titlesOfCells[1]
+            secureAndPushCell.detailLabel?.text = LocalizationManager.share.translate?.result.list.menu.menu_push_notifications_title
+            secureAndPushCell.mainLabel?.text = LocalizationManager.share.translate?.result.list.menu.menu_push_notifications_description
             secureAndPushCell.cellSwitch?.isOn = true
             return secureAndPushCell
         case [0,3]:
-            supportCell.mainLabel?.text = self.titlesOfCells[2]
-            supportCell.detailLabel?.text = self.detailOfCells[2]
+            supportCell.mainLabel?.text = LocalizationManager.share.translate?.result.list.menu.menu_support_title
+            supportCell.detailLabel?.text = LocalizationManager.share.translate?.result.list.menu.menu_push_notifications_description
             supportCell.cellImage?.image = UIImage(named: "support")!
             return supportCell
         case [0,4]:
             pushAndAllSettingsCell.cellImage.image = UIImage(named: "Notification")!
-            pushAndAllSettingsCell.mainLabel.text = self.titlesOfCells[3]
+            pushAndAllSettingsCell.mainLabel.text = LocalizationManager.share.translate?.result.list.menu.menu_notifications
             return pushAndAllSettingsCell
         default:
             pushAndAllSettingsCell.cellImage.image = UIImage(named: "settings")!
-            pushAndAllSettingsCell.mainLabel.text = self.titlesOfCells[4]
+            pushAndAllSettingsCell.mainLabel.text = LocalizationManager.share.translate?.result.list.menu.menu_show_more_title
             return pushAndAllSettingsCell
         }
     }

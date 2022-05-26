@@ -22,21 +22,16 @@ class SelectLanguageViewController: UIViewController {
 extension SelectLanguageViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        2
+        LanguageManager.share.language?.result.list.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "languageCell", for: indexPath)
         var content = cell.defaultContentConfiguration()
         
-        switch indexPath.row {
-        case 0:
-            content.text = "English"
-        case 1:
-            content.text = "Русский"
-        default:
-            break
-        }
+            content.text = LanguageManager.share.language?.result.list[indexPath.row].nameBtn
+
+        print(LanguageManager.share.language?.result.list[indexPath.row].nameBtn ?? "блябля")
         
         cell.contentConfiguration = content
         
@@ -44,16 +39,18 @@ extension SelectLanguageViewController: UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        switch indexPath.row {
-        case 1:
+
             let termsOfUseVC = storyboard?.instantiateViewController(withIdentifier: "TermsOfUseViewController") as! TermsOfUseViewController
-            UserDefaultsManager.shared.userDefaults.set("Russian", forKey: UserDefaultsStringKeys.Language.rawValue)
-            self.navigationController?.pushViewController(termsOfUseVC, animated: true)
-        default:
-            let termsOfUseVC = storyboard?.instantiateViewController(withIdentifier: "TermsOfUseViewController") as! TermsOfUseViewController
-            UserDefaultsManager.shared.userDefaults.set("English", forKey: UserDefaultsStringKeys.Language.rawValue)
-            self.navigationController?.pushViewController(termsOfUseVC, animated: true)
-        }
+            let language = LanguageManager.share.language?.result.list[indexPath.row]
+            NetworkManager.share.getTranslate(from: MainURLS.API.rawValue, languageCode: language?.code ?? "", version: LanguageManager.share.language?.result.version ?? "") { TranslateManager in
+                LocalizationManager.share.translate = TranslateManager
+                CoreDataManager.share.saveLanguage(language?.code ?? "", version: LanguageManager.share.language?.result.version ?? "" )
+                self.present(termsOfUseVC, animated: true)
+            }
+        print(language?.code ?? "")
+            
+
+        
     }
 }
 

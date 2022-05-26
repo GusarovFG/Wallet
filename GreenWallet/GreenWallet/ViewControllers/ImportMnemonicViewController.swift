@@ -14,6 +14,8 @@ class ImportMnemonicViewController: UIViewController {
     private var checkBoxPress = false
     
     
+    @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var continueButton: UIButton!
     @IBOutlet weak var errorLabel: UILabel!
     @IBOutlet weak var checkBoxButton: UIButton!
@@ -27,7 +29,7 @@ class ImportMnemonicViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        localization()
         for _ in 0..<countOfItems {
             self.mnemonicPhrase.append("")
         }
@@ -54,6 +56,16 @@ class ImportMnemonicViewController: UIViewController {
         super.touchesBegan(touches, with: event)
         
         self.view.endEditing(true)
+    }
+    
+    private func localization() {
+        self.titleLabel.text = LocalizationManager.share.translate?.result.list.import_mnemonics.import_mnemonics_title
+        self.descriptionLabel.text = LocalizationManager.share.translate?.result.list.import_mnemonics.import_mnemonics_description
+        self.alertLabel.text = LocalizationManager.share.translate?.result.list.import_mnemonics.import_mnemonics_warning
+        self.continueButton.setTitle(LocalizationManager.share.translate?.result.list.all.next_btn, for: .normal)
+        self.errorLabel.text = LocalizationManager.share.translate?.result.list.import_mnemonics.import_mnemonics_same_words_error
+        self.termsLabel.text = LocalizationManager.share.translate?.result.list.all.agreement_with_terms_of_use_chekbox
+        
     }
     
     private func registerFromKeyBoardNotifications() {
@@ -154,7 +166,7 @@ class ImportMnemonicViewController: UIViewController {
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 3.5) {
             self.alertView.backgroundColor = #colorLiteral(red: 1, green: 0.2360929251, blue: 0.1714096665, alpha: 1)
-            self.alertLabel.text = "Проверьте правильность введенной комбинации слов"
+            self.alertLabel.text = LocalizationManager.share.translate?.result.list.import_mnemonics.import_mnemonics_wrong_words_error
             self.collectionView.visibleCells.forEach { cell in
                 cell.layer.borderColor = #colorLiteral(red: 1, green: 0.2360929251, blue: 0.1714096665, alpha: 0.8980392157)
             }
