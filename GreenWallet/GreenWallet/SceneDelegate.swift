@@ -35,6 +35,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         if UserDefaultsManager.shared.userDefaults.string(forKey: UserDefaultsStringKeys.firstSession.rawValue) == "First" {
             NetworkManager.share.getLocalization(from: MainURLS.language.rawValue) { language in
                 LanguageManager.share.language = language
+                print(language.result.version)
                 
             }
             

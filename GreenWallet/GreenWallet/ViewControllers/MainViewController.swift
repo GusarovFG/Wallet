@@ -22,9 +22,9 @@ class MainViewController: UIViewController {
     @IBOutlet weak var riseLabel: UILabel!
     @IBOutlet weak var percentLabel: UILabel!
     @IBOutlet weak var pageControl: UIPageControl!
-    @IBOutlet weak var cellectionView: UICollectionView!
+    @IBOutlet weak var cellectionView: CustomMainCollectionView!
     
-    @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var collectionViewHeightConstraint: NSLayoutConstraint!
     
     
     
@@ -57,6 +57,9 @@ class MainViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(showGetSystem), name: NSNotification.Name(rawValue: "showGetVC"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(showPushSystem), name: NSNotification.Name(rawValue: "showPushVC"), object: nil)
         localization()
+        
+        self.cellectionView.reloadData()
+        self.cellectionView.layoutIfNeeded()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -69,12 +72,20 @@ class MainViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
         
     }
     
     private func localization() {
         self.balandeTitle.text = LocalizationManager.share.translate?.result.list.main_screen.main_screen_title_balance
     }
+    
+
     
     @objc private func presentSelectSystemVC() {
         
@@ -148,17 +159,20 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
             cell.headerButton.isHidden = true
             cell.footerButtonConstraint.constant = 0
             cell.tableView.reloadData()
-            
+            self.collectionViewHeightConstraint.constant = cell.frame.height
         } else {
             if cell.stackView.arrangedSubviews.contains(where: {$0 == cell.tableView}) {
                 cell.wallet = WalletManager.share.favoritesWallets[indexPath.row]
                 cell.controller = self.tabBarController ?? self
-                cell.tableView.reloadData()
+                self.collectionViewHeightConstraint.constant = cell.frame.height
+                print(self.collectionViewHeightConstraint.constant)
             } else {
                 cell.stackView.addArrangedSubview(cell.tableView)
                 cell.wallet = WalletManager.share.favoritesWallets[indexPath.row]
                 cell.controller = self.tabBarController ?? self
                 cell.tableView.reloadData()
+                self.collectionViewHeightConstraint.constant = cell.frame.height
+                
             }
             
         }
@@ -169,7 +183,7 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        return CGSize(width: self.cellectionView.frame.width, height: self.cellectionView.frame.height)
+        return CGSize(width: collectionView.bounds.width, height: collectionView.bounds.height)
     }
     
     
@@ -178,8 +192,11 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
         let visiblePoint = CGPoint(x: visibleRect.midX, y: visibleRect.midY)
         if let visibleIndexPath = self.cellectionView.indexPathForItem(at: visiblePoint) {
             self.pageControl.currentPage = visibleIndexPath.row
+
         }
     }
+    
+    
 }
 
 

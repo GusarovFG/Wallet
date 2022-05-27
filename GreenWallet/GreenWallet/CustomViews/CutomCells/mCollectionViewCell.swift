@@ -12,6 +12,7 @@ class mCollectionViewCell: UICollectionViewCell {
     var wallet = WalletModel(name: "", number: 0, image: UIImage(), tokens: [], toket: "")
     var controller = UIViewController()
     var height: CGFloat = 0
+    var collectionVieww = NSLayoutConstraint()
     
     @IBOutlet weak var walletTitle: UILabel!
     @IBOutlet weak var footerButton: UIButton!
@@ -26,7 +27,7 @@ class mCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        localization()
+        
         self.tableView.dataSource = self
         self.tableView.delegate = self
         
@@ -40,7 +41,7 @@ class mCollectionViewCell: UICollectionViewCell {
         self.footerView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
         
         
-        
+        localization()
         
     }
     
@@ -49,10 +50,24 @@ class mCollectionViewCell: UICollectionViewCell {
         super.layoutSubviews()
         if self.stackView.arrangedSubviews.count == 2 {
             self.heightConstraint.constant = (self.frame.size.height) - (self.footerView.frame.height + self.headerView.frame.height)
+            self.collectionVieww.constant = self.heightConstraint.constant
         } else {
-            
-            self.heightConstraint.constant = (self.frame.size.height) - (self.footerView.frame.height + self.headerView.frame.height + CGFloat((76 * self.wallet.tokens.count )) + 46)
+            if self.tableView.visibleCells.count >= 5 {
+                self.heightConstraint.constant = (self.frame.size.height) - (self.footerView.frame.height + self.headerView.frame.height + CGFloat((76 * 5)) + 46)
+                self.collectionVieww.constant = self.heightConstraint.constant
+            } else {
+                self.tableView.reloadData()
+                self.heightConstraint.constant = (self.frame.size.height) - (self.footerView.frame.height + self.headerView.frame.height + CGFloat((76 * self.wallet.tokens.count )) + 46)
+                self.collectionVieww.constant = self.heightConstraint.constant
+            }
         }
+        
+        if self.tableView.visibleCells.count >= 5 {
+            self.tableView.isScrollEnabled = true
+        } else {
+            self.tableView.isScrollEnabled = false
+        }
+
     }
     
     private func localization() {

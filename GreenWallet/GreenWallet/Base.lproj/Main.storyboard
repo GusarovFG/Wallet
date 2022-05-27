@@ -1997,9 +1997,12 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </button>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceHorizontal="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="osZ-w1-XVa">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceHorizontal="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="osZ-w1-XVa" customClass="CustomMainCollectionView" customModule="GreenWallet" customModuleProvider="target">
                                 <rect key="frame" x="15" y="231" width="384" height="398"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" priority="999" constant="398" id="Vhf-dz-tOj"/>
+                                </constraints>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="mlE-4t-YUA">
                                     <size key="itemSize" width="50" height="50"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -2022,7 +2025,7 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                                 </connections>
                             </collectionView>
                             <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="ITP-eL-ev8">
-                                <rect key="frame" x="149" y="637" width="116" height="26"/>
+                                <rect key="frame" x="149" y="767" width="116" height="26"/>
                                 <color key="currentPageIndicatorTintColor" red="0.2274509804" green="0.67450980390000004" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                             </pageControl>
                         </subviews>
@@ -2036,11 +2039,11 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                             <constraint firstItem="neh-Z2-VSf" firstAttribute="top" secondItem="m6P-Tb-zTL" secondAttribute="bottom" constant="10" id="EUn-N4-PpV"/>
                             <constraint firstItem="m6P-Tb-zTL" firstAttribute="top" secondItem="jMi-1S-2e6" secondAttribute="top" constant="15" id="L8B-hH-HNh"/>
                             <constraint firstItem="jMi-1S-2e6" firstAttribute="trailing" secondItem="osZ-w1-XVa" secondAttribute="trailing" constant="15" id="MoN-vU-xr3"/>
-                            <constraint firstItem="jMi-1S-2e6" firstAttribute="bottom" secondItem="ITP-eL-ev8" secondAttribute="bottom" constant="150" id="WiT-hn-Nc9"/>
-                            <constraint firstItem="ITP-eL-ev8" firstAttribute="top" secondItem="osZ-w1-XVa" secondAttribute="bottom" constant="8" symbolic="YES" id="YbU-ai-v9V"/>
                             <constraint firstItem="m6P-Tb-zTL" firstAttribute="leading" secondItem="D3F-W3-Jpm" secondAttribute="trailing" constant="15" id="cgq-RU-PCl"/>
                             <constraint firstItem="osZ-w1-XVa" firstAttribute="top" secondItem="D3F-W3-Jpm" secondAttribute="bottom" constant="8" symbolic="YES" id="i7r-TR-DPk"/>
+                            <constraint firstItem="jMi-1S-2e6" firstAttribute="bottom" secondItem="ITP-eL-ev8" secondAttribute="bottom" constant="20" id="iGI-uU-dJs"/>
                             <constraint firstItem="neh-Z2-VSf" firstAttribute="leading" secondItem="D3F-W3-Jpm" secondAttribute="trailing" constant="15" id="ixB-g7-TYe"/>
+                            <constraint firstItem="jMi-1S-2e6" firstAttribute="bottom" relation="lessThanOrEqual" secondItem="osZ-w1-XVa" secondAttribute="bottom" constant="184" id="mSE-1Q-FbO"/>
                             <constraint firstItem="jMi-1S-2e6" firstAttribute="trailing" secondItem="m6P-Tb-zTL" secondAttribute="trailing" constant="15" id="nBL-6d-ytf"/>
                             <constraint firstItem="jMi-1S-2e6" firstAttribute="trailing" secondItem="ITP-eL-ev8" secondAttribute="trailing" constant="149" id="o5B-xA-b7K"/>
                             <constraint firstItem="ITP-eL-ev8" firstAttribute="leading" secondItem="jMi-1S-2e6" secondAttribute="leading" constant="149" id="o6q-CK-nut"/>
@@ -2052,6 +2055,7 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                         <outlet property="balanceLabel" destination="2Vr-bL-6TF" id="lh9-uy-8cl"/>
                         <outlet property="balandeTitle" destination="fGo-lH-5NH" id="4Ya-3D-4Dm"/>
                         <outlet property="cellectionView" destination="osZ-w1-XVa" id="O0Z-Ck-hk7"/>
+                        <outlet property="collectionViewHeightConstraint" destination="Vhf-dz-tOj" id="Qor-p2-sWO"/>
                         <outlet property="pageControl" destination="ITP-eL-ev8" id="2BL-fa-AiR"/>
                         <outlet property="percentLabel" destination="q8X-eN-3k7" id="kuj-dn-Fon"/>
                         <outlet property="riseLabel" destination="aKl-mN-fcL" id="ByR-je-BZb"/>
