@@ -222,7 +222,22 @@ class PasswordViewController: UIViewController {
     }
     
     @IBAction func repeatingPassword(_ sender: UIButton) {
+        
+
+        
         if self.enteringPassword.count < 6 {
+            self.enteringPassword += sender.titleLabel?.text ?? ""
+            self.stackView.arrangedSubviews[self.enteringPassword.count - 1].backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
+            self.stackView.arrangedSubviews[self.enteringPassword.count - 1].layer.borderWidth = 0
+        } else if self.enteringPassword.count == 6 && self.enteringPassword != self.repitingPassword {
+            self.stackView.arrangedSubviews.forEach { view in
+                view.layer.cornerRadius = view.frame.height / 2
+                view.backgroundColor = UIColor(red: 255, green: 255, blue: 255, alpha: 0)
+                view.layer.borderWidth = 2
+                view.layer.borderColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+                self.repeatErrorLabel.alpha = 0
+            }
+            self.enteringPassword = ""
             self.enteringPassword += sender.titleLabel?.text ?? ""
             self.stackView.arrangedSubviews[self.enteringPassword.count - 1].backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
             self.stackView.arrangedSubviews[self.enteringPassword.count - 1].layer.borderWidth = 0
@@ -252,22 +267,27 @@ class PasswordViewController: UIViewController {
                 view.layer.borderWidth = 0
                 view.layer.borderColor = #colorLiteral(red: 1, green: 0.1333333333, blue: 0.1333333333, alpha: 1)
                 self.repeatErrorLabel.alpha = 1
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                    self.stackView.arrangedSubviews.forEach { view in
-                        view.layer.cornerRadius = view.frame.height / 2
-                        view.backgroundColor = UIColor(red: 255, green: 255, blue: 255, alpha: 0)
-                        view.layer.borderWidth = 2
-                        view.layer.borderColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-                        self.enteringPassword = ""
-                        self.repeatErrorLabel.alpha = 0
-                    }
-                }
+
             }
         }
+        
+
     }
     
     @IBAction func enterPassword(_ sender: UIButton) {
         if self.enteringPassword.count < 6 {
+            self.enteringPassword += sender.titleLabel?.text ?? ""
+            self.stackView.arrangedSubviews[self.enteringPassword.count - 1].backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
+            self.stackView.arrangedSubviews[self.enteringPassword.count - 1].layer.borderWidth = 0
+        } else if self.enteringPassword.count == 6 && self.enteringPassword != KeyChainManager.share.loadPassword() {
+            self.stackView.arrangedSubviews.forEach { view in
+                view.layer.cornerRadius = view.frame.height / 2
+                view.backgroundColor = UIColor(red: 255, green: 255, blue: 255, alpha: 0)
+                view.layer.borderWidth = 2
+                view.layer.borderColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+                self.enterErrorLabel.alpha = 0
+            }
+            self.enteringPassword = ""
             self.enteringPassword += sender.titleLabel?.text ?? ""
             self.stackView.arrangedSubviews[self.enteringPassword.count - 1].backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
             self.stackView.arrangedSubviews[self.enteringPassword.count - 1].layer.borderWidth = 0
@@ -291,16 +311,7 @@ class PasswordViewController: UIViewController {
                 view.layer.borderWidth = 0
                 view.layer.borderColor = #colorLiteral(red: 1, green: 0.1333333333, blue: 0.1333333333, alpha: 1)
                 self.enterErrorLabel.alpha = 1
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                    self.stackView.arrangedSubviews.forEach { view in
-                        view.layer.cornerRadius = view.frame.height / 2
-                        view.backgroundColor = UIColor(red: 255, green: 255, blue: 255, alpha: 0)
-                        view.layer.borderWidth = 2
-                        view.layer.borderColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-                        self.enteringPassword = ""
-                        self.enterErrorLabel.alpha = 0
-                    }
-                }
+
             }
         }
     }
