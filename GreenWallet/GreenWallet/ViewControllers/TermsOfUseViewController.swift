@@ -14,6 +14,7 @@ class TermsOfUseViewController: UIViewController {
     @IBOutlet weak var agreeLabel: UILabel!
     @IBOutlet weak var termOfUseTextView: UITextView!
     @IBOutlet weak var mainTitile: UILabel!
+    @IBOutlet weak var backButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,6 +42,7 @@ class TermsOfUseViewController: UIViewController {
         self.agreeLabel.text = LocalizationManager.share.translate?.result.list.all.agreement_with_terms_of_use_chekbox
         self.termOfUseTextView.text = LocalizationManager.share.translate?.result.list.terms_of_use.terms_of_use_text
         self.mainTitile.text = LocalizationManager.share.translate?.result.list.terms_of_use.trms_of_use_title
+        self.backButton.setTitle(LocalizationManager.share.translate?.result.list.all.back_btn, for: .normal)
     }
     
     private func setupAgreeLabel() {
@@ -83,6 +85,9 @@ class TermsOfUseViewController: UIViewController {
         passwordVC.modalPresentationStyle = .fullScreen
         self.present(passwordVC, animated: true)
 
+    }
+    @IBAction func backButtonPressed(_ sender: Any) {
+        self.dismiss(animated: true)
     }
     
 }

@@ -216,6 +216,23 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                                     </label>
                                 </subviews>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" verticalCompressionResistancePriority="754" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k58-ol-ffV">
+                                <rect key="frame" x="1" y="44" width="85.5" height="31.5"/>
+                                <color key="tintColor" red="0.45882352939999999" green="0.45882352939999999" blue="0.45882352939999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <buttonConfiguration key="configuration" style="plain" image="chevron.backward" catalog="system">
+                                    <attributedString key="attributedTitle">
+                                        <fragment content=" Назад">
+                                            <attributes>
+                                                <font key="NSFont" size="15" name="Helvetica"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="backButtonPressed:" destination="ToR-sa-bct" eventType="touchUpInside" id="8LV-uh-i0W"/>
+                                    <action selector="backButtonPressed:" destination="4be-6a-BYw" eventType="touchUpInside" id="F92-h9-7cI"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="cdW-il-QJr"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -227,9 +244,11 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                             <constraint firstItem="cdW-il-QJr" firstAttribute="bottom" secondItem="Kz9-9X-jED" secondAttribute="bottom" constant="54" id="Hlx-fN-gkr"/>
                             <constraint firstItem="cdW-il-QJr" firstAttribute="trailing" secondItem="zML-Z8-jof" secondAttribute="trailing" constant="41" id="Iek-wE-aZm"/>
                             <constraint firstItem="Kz9-9X-jED" firstAttribute="leading" secondItem="cdW-il-QJr" secondAttribute="leading" constant="32" id="WIt-00-DwG"/>
+                            <constraint firstItem="k58-ol-ffV" firstAttribute="leading" secondItem="cdW-il-QJr" secondAttribute="leading" id="XJN-D8-Tf1"/>
                             <constraint firstItem="Kz9-9X-jED" firstAttribute="top" secondItem="zML-Z8-jof" secondAttribute="bottom" constant="31" id="Y8J-Zj-MWu"/>
                             <constraint firstItem="okl-XG-SSv" firstAttribute="leading" secondItem="cdW-il-QJr" secondAttribute="leading" constant="14" id="dny-hM-koc"/>
                             <constraint firstItem="zML-Z8-jof" firstAttribute="leading" secondItem="cdW-il-QJr" secondAttribute="leading" constant="20" id="iJk-uo-2GV"/>
+                            <constraint firstItem="k58-ol-ffV" firstAttribute="top" secondItem="cdW-il-QJr" secondAttribute="top" id="jVg-Ir-Qo8"/>
                             <constraint firstItem="zML-Z8-jof" firstAttribute="top" secondItem="okl-XG-SSv" secondAttribute="bottom" constant="27" id="pkP-d3-z0i"/>
                             <constraint firstItem="cdW-il-QJr" firstAttribute="trailing" secondItem="Kz9-9X-jED" secondAttribute="trailing" constant="32" id="rZz-Re-Lfr"/>
                             <constraint firstItem="okl-XG-SSv" firstAttribute="top" secondItem="NKe-ZQ-9kH" secondAttribute="bottom" constant="23" id="rgk-ff-dVM"/>
@@ -237,6 +256,7 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                     </view>
                     <connections>
                         <outlet property="agreeLabel" destination="hKk-XR-LOz" id="uws-qa-oZB"/>
+                        <outlet property="backButton" destination="k58-ol-ffV" id="uMJ-ia-nvP"/>
                         <outlet property="checkBoxButton" destination="Tra-sT-UXl" id="jqT-dR-dOF"/>
                         <outlet property="continueButton" destination="Kz9-9X-jED" id="cOY-2M-LMG"/>
                         <outlet property="mainTitile" destination="NKe-ZQ-9kH" id="fME-Do-7Ib"/>
