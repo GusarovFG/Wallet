@@ -103,6 +103,7 @@ class MyWalletsViewController: UIViewController {
         DispatchQueue.main.asyncAfter(deadline: .now() + 30) {
             self.isShowDetail = false
             self.walletCollectionView.reloadData()
+            
         }
     }
 
@@ -219,7 +220,7 @@ extension MyWalletsViewController: UICollectionViewDelegate, UICollectionViewDat
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         switch collectionView {
         case self.walletCollectionView:
-            return CGSize(width: 350, height: 220)
+            return CGSize(width: 360, height: 220)
         case self.actionCollectionView:
             return CGSize(width: 190, height: 190)
         default:
@@ -267,9 +268,13 @@ extension MyWalletsViewController: UICollectionViewDelegate, UICollectionViewDat
             self.pageControl.currentPage = visibleIndexPath.row
             self.wallet = self.wallets[visibleIndexPath.row]
             self.index = visibleIndexPath.row
-            
 
         }
+        
+    }
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        self.walletCollectionView.reloadData()
     }
     
 }
