@@ -33,7 +33,7 @@ class NewWalletViewController: UIViewController {
         self.creatingNewWalletView.alpha = 0
         
         self.createNewWalletButton.isEnabled = false
-        self.createNewWalletButton.backgroundColor = #colorLiteral(red: 0.6106664538, green: 0.6106664538, blue: 0.6106664538, alpha: 1)
+        self.createNewWalletButton.backgroundColor = #colorLiteral(red: 0.2666666667, green: 0.2666666667, blue: 0.2666666667, alpha: 1)
         self.createNewWalletButton.contentMode = .center
         
 //        setupAgreeLabel()
