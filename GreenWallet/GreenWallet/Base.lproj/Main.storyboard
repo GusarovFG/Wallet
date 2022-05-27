@@ -1334,6 +1334,7 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                                                 <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                                                 <connections>
                                                     <action selector="transferSuccsessCheck:" destination="cnF-1c-1r2" eventType="editingChanged" id="mTr-Zr-9pD"/>
+                                                    <action selector="transferSummCheck:" destination="cnF-1c-1r2" eventType="editingDidEnd" id="ZuI-uJ-VUG"/>
                                                 </connections>
                                             </textField>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yFO-aj-gME">
@@ -1823,7 +1824,6 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
-                                <exclude reference="7AU-7a-QaI"/>
                                 <exclude reference="bmv-RL-rBj"/>
                             </mask>
                         </variation>
@@ -1831,22 +1831,26 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                     <connections>
                         <outlet property="addContactLabel" destination="hVU-57-gCy" id="C5r-RW-SbD"/>
                         <outlet property="adressTextField" destination="cpj-2N-66D" id="gqa-X3-NuA"/>
+                        <outlet property="arderLabel" destination="uZ1-wb-tRe" id="Vhi-rf-MZ3"/>
                         <outlet property="backButton" destination="Or0-KX-yYM" id="pEC-JB-dZX"/>
                         <outlet property="balaceStackViewConstraint" destination="CnE-8c-Wqq" id="g8I-ps-7Pp"/>
                         <outlet property="balanceButton" destination="uII-NX-pL2" id="35X-fz-lTR"/>
                         <outlet property="balanceStackView" destination="TOO-Ci-1W7" id="gEd-DN-zhA"/>
                         <outlet property="balanceView" destination="FW4-UB-cxW" id="gcT-Wc-fDA"/>
                         <outlet property="balanceViewConstraint" destination="yui-b6-Umx" id="s0w-o2-kLQ"/>
+                        <outlet property="blockchainTitle" destination="6hq-L8-aSh" id="hfM-mb-3ap"/>
                         <outlet property="cameraView" destination="bmv-RL-rBj" id="Ya5-6c-KIu"/>
                         <outlet property="checkboxButtonConstraint" destination="E0b-FI-ft0" id="mee-Mc-bAK"/>
                         <outlet property="checkboxLabelConstraint" destination="ws3-ZT-u9N" id="V86-8d-O1e"/>
                         <outlet property="comissionTextField" destination="bf2-aF-Cv7" id="BAF-d5-8VB"/>
+                        <outlet property="confirmButton" destination="J8p-gD-ZQe" id="WP8-6P-leJ"/>
                         <outlet property="contactLabel" destination="mnu-tB-kkH" id="45P-dI-2ED"/>
                         <outlet property="contactTextField" destination="5bp-F0-POt" id="xi8-gZ-m18"/>
                         <outlet property="continueButton" destination="LGy-uT-4y7" id="0dK-Th-jYB"/>
                         <outlet property="gadLabel" destination="VfE-rm-jzL" id="M3E-Iv-HnM"/>
                         <outlet property="recomendedComissionLabel" destination="i9s-S0-U7y" id="XIH-3N-BSZ"/>
                         <outlet property="secondTransferErrorLabel" destination="bE3-Hw-2NN" id="Jh1-71-3dE"/>
+                        <outlet property="summTitle" destination="fTf-Bp-7PI" id="mJH-bY-485"/>
                         <outlet property="systemButton" destination="cuE-nu-YpR" id="Ghg-PY-kvR"/>
                         <outlet property="systemChiaButton" destination="zZr-fV-r8b" id="6EZ-iO-fcK"/>
                         <outlet property="systemChivesButton" destination="hhu-UT-iR5" id="FV0-zv-mZ3"/>
@@ -1861,6 +1865,7 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                         <outlet property="transitionBlockchainLabel" destination="oSI-Py-DJu" id="3OD-SZ-JEy"/>
                         <outlet property="transitionLinkLabel" destination="6ng-hi-KyK" id="uuf-sk-fRa"/>
                         <outlet property="transitionTokenLabel" destination="WL4-25-vdE" id="ZKe-He-G4G"/>
+                        <outlet property="transitionTokenTitle" destination="a0y-Rg-BUy" id="X8L-f5-h2Z"/>
                         <outlet property="transitionView" destination="7AU-7a-QaI" id="MzN-Js-rO1"/>
                         <outlet property="usdLabel" destination="0Y4-c7-6R8" id="eWu-hi-Nd0"/>
                         <outlet property="walletAdressViewConstraint" destination="vtG-o2-mId" id="Qtq-fX-JEu"/>

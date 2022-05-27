@@ -63,6 +63,11 @@ class PushTokensViewController: UIViewController {
     @IBOutlet weak var cameraView: UIView!
     @IBOutlet weak var backButton: UIButton!
     
+    @IBOutlet weak var transitionTokenTitle: UILabel!
+    @IBOutlet weak var blockchainTitle: UILabel!
+    @IBOutlet weak var summTitle: UILabel!
+    @IBOutlet weak var arderLabel: UILabel!
+    @IBOutlet weak var confirmButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -126,6 +131,10 @@ class PushTokensViewController: UIViewController {
         self.comissionTextField.placeholder = LocalizationManager.share.translate?.result.list.send_token.send_token_commission_amount
         self.recomendedComissionLabel.text = LocalizationManager.share.translate?.result.list.send_token.send_token_commission_recommended
         self.continueButton.setTitle(LocalizationManager.share.translate?.result.list.all.next_btn, for: .normal)
+        
+        self.blockchainTitle.text = LocalizationManager.share.translate?.result.list.listing_request.listing_request_blockchain
+        self.arderLabel.text = LocalizationManager.share.translate?.result.list.wallet.wallet_data_adress
+        self.confirmButton.setTitle(LocalizationManager.share.translate?.result.list.all.confirm_btn, for: .normal)
     }
     
     private func setupWalletButton() {

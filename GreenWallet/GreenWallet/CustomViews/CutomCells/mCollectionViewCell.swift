@@ -62,7 +62,7 @@ class mCollectionViewCell: UICollectionViewCell {
             }
         }
         
-        if self.tableView.visibleCells.count >= 5 {
+        if self.wallet.tokens.count > 5 {
             self.tableView.isScrollEnabled = true
         } else {
             self.tableView.isScrollEnabled = false
