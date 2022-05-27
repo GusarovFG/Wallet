@@ -41,6 +41,7 @@ extension SelectLanguageViewController: UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
             let termsOfUseVC = storyboard?.instantiateViewController(withIdentifier: "TermsOfUseViewController") as! TermsOfUseViewController
+        termsOfUseVC.modalPresentationStyle = .fullScreen
             let language = LanguageManager.share.language?.result.list[indexPath.row]
             NetworkManager.share.getTranslate(from: MainURLS.API.rawValue, languageCode: language?.code ?? "", version: LanguageManager.share.language?.result.version ?? "") { TranslateManager in
                 LocalizationManager.share.translate = TranslateManager
