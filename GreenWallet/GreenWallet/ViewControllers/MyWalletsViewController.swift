@@ -198,12 +198,12 @@ extension MyWalletsViewController: UICollectionViewDelegate, UICollectionViewDat
                 return actionsCell
             case [0,1]:
                 actionsCell.actionImage.image = UIImage(named: "share")!
-                actionsCell.actionTitleLabel.text = LocalizationManager.share.translate?.result.list.wallet.wallet_receive_title
+                actionsCell.actionTitleLabel.text = LocalizationManager.share.translate?.result.list.wallet.wallet_share_title
                 actionsCell.actionDiscriptionLabel.text = LocalizationManager.share.translate?.result.list.wallet.wallet_receive_description
                 return actionsCell
             case [0,2]:
                 actionsCell.actionImage.image = UIImage(named: "recive")!
-                actionsCell.actionTitleLabel.text = LocalizationManager.share.translate?.result.list.wallet.wallet_share_title
+                actionsCell.actionTitleLabel.text = LocalizationManager.share.translate?.result.list.wallet.wallet_receive_title
                 actionsCell.actionDiscriptionLabel.text = LocalizationManager.share.translate?.result.list.wallet.wallet_share_description
                 return actionsCell
             default:
@@ -240,10 +240,9 @@ extension MyWalletsViewController: UICollectionViewDelegate, UICollectionViewDat
                 selectSystemVC.modalPresentationStyle = .overFullScreen
                 self.present(selectSystemVC, animated: true)
             case [0,2]:
-                let selectSystemVC = storyboard?.instantiateViewController(withIdentifier: "SelectSystemViewController") as! SelectSystemViewController
-                selectSystemVC.isGetToken = true
-                selectSystemVC.modalPresentationStyle = .overFullScreen
-                self.present(selectSystemVC, animated: true)
+                let getTokenViewController = storyboard?.instantiateViewController(withIdentifier: "GetTokenViewController") as! GetTokenViewController
+                getTokenViewController.modalPresentationStyle = .fullScreen
+                self.present(getTokenViewController, animated: true)
                 
             case [0,1]:
                 let shareController = UIActivityViewController(activityItems: [self.wallets[index].name], applicationActivities: nil)
