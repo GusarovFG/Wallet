@@ -110,7 +110,7 @@ class ImportMnemonicViewController: UIViewController {
             self.scrollView.isScrollEnabled = false
             self.scrollView.setContentOffset(.zero, animated: true)
             self.collectionView.reloadData()
-            self.bottomConstraint.constant = self.bottomConstraint.constant - (50 * 6)
+            self.bottomConstraint.constant = self.bottomConstraint.constant - (55 * 6)
         } else {
             self.countOfItems = 24
             
@@ -122,7 +122,7 @@ class ImportMnemonicViewController: UIViewController {
             self.scrollView.isScrollEnabled = true
 
             self.collectionView.reloadData()
-            self.bottomConstraint.constant = self.bottomConstraint.constant + (50 * 6)
+            self.bottomConstraint.constant = self.bottomConstraint.constant + (55 * 6)
         }
     }
     
@@ -279,7 +279,7 @@ extension ImportMnemonicViewController: UICollectionViewDelegate, UICollectionVi
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        CGSize(width: 178, height: 45)
+        CGSize(width: 178, height: 50)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
