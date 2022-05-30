@@ -9,6 +9,8 @@ import UIKit
 
 class TransactionHistoryViewController: UIViewController {
     
+    var isHistoryWallet = false
+    
     private var walletsTransactions: [Transaction] = [Transaction(type: LocalizationManager.share.translate?.result.list.transactions.transactions_incoming ?? "", height: 1098726, summ: "4,555", token: "XCH", date: "today"),
                                                       Transaction(type: LocalizationManager.share.translate?.result.list.transactions.transactions_incoming ?? "", height: 1098726, summ: "4,555", token: "XCH", date: "yesterday"),
                                                       Transaction(type: LocalizationManager.share.translate?.result.list.transactions.incoming_outgoing ?? "", height: 1098726, summ: "4,555", token: "XCC", date: "yesterday"),
@@ -23,6 +25,7 @@ class TransactionHistoryViewController: UIViewController {
     private var isInFilter = false
     private var isOutFilter = false
     private var isPendindFilter = false
+    
     
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
@@ -52,7 +55,13 @@ class TransactionHistoryViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-
+        if self.isHistoryWallet {
+            self.backButton.alpha = 1
+            self.backButton.isEnabled = true
+        } else {
+            self.backButton.alpha = 0
+            self.backButton.isEnabled = false
+        }
         
         self.statusLabel.text = "Статус"
         self.heightLabel.text = "Высота"

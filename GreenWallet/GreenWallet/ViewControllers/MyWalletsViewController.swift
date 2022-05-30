@@ -123,8 +123,9 @@ class MyWalletsViewController: UIViewController {
     }
     
     @IBAction func transactionButtonPressed(_ sender: Any) {
-        guard let transactionHistoryVC = storyboard?.instantiateViewController(withIdentifier: "TransactionHistoryVC") else { return }
+        guard let transactionHistoryVC = storyboard?.instantiateViewController(withIdentifier: "TransactionHistoryVC") as? TransactionHistoryViewController  else { return }
         transactionHistoryVC.modalPresentationStyle = .fullScreen
+        transactionHistoryVC.isHistoryWallet = true
         self.present(transactionHistoryVC, animated: true)
     }
     

@@ -36,6 +36,11 @@
                 <constraint firstItem="aoN-Mk-fbT" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="rdo-4G-2dz"/>
             </constraints>
             <size key="customSize" width="104" height="30"/>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                    <integer key="value" value="15"/>
+                </userDefinedRuntimeAttribute>
+            </userDefinedRuntimeAttributes>
             <connections>
                 <outlet property="cellLabel" destination="aoN-Mk-fbT" id="85g-Xn-ujT"/>
             </connections>
