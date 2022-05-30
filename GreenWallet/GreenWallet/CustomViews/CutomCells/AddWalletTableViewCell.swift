@@ -14,7 +14,7 @@ class AddWalletTableViewCell: UITableViewCell {
     @IBOutlet weak var addButton: UIButton!
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.addButton.setTitle(LocalizationManager.share.translate?.result.list.all.add_wallet_new, for: .normal)
+        self.addButton.setTitle(LocalizationManager.share.translate?.result.list.my_wallets.my_wallets_add_wallet, for: .normal)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

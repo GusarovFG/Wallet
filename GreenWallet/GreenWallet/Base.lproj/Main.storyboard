@@ -2724,6 +2724,31 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </searchBar>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="DpX-34-PBJ">
+                                <rect key="frame" x="15" y="203" width="310" height="42"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="SrX-Qo-Z8T">
+                                    <size key="itemSize" width="128" height="40"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="TransictionFilterCollectionViewCell" id="i5x-iV-iQC">
+                                        <rect key="frame" x="0.0" y="1" width="128" height="40"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="ce0-K5-Rkb">
+                                            <rect key="frame" x="0.0" y="0.0" width="128" height="40"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </collectionViewCellContentView>
+                                        <size key="customSize" width="128" height="40"/>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="U2U-I9-5M3" id="oay-bV-9Jh"/>
+                                    <outlet property="delegate" destination="U2U-I9-5M3" id="EOk-Fx-lDf"/>
+                                </connections>
+                            </collectionView>
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tld-Li-6gF">
                                 <rect key="frame" x="352" y="142" width="51" height="51"/>
                                 <color key="backgroundColor" red="0.18823529410000001" green="0.18823529410000001" blue="0.18823529410000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -2745,53 +2770,6 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                                     <action selector="filetrDateMenuOpen:" destination="U2U-I9-5M3" eventType="touchUpInside" id="pz8-Tw-jTT"/>
                                 </connections>
                             </button>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="VLS-OR-aaV">
-                                <rect key="frame" x="15" y="208" width="385" height="31"/>
-                                <subviews>
-                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nrP-iJ-nbl">
-                                        <rect key="frame" x="0.0" y="0.0" width="125" height="31"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" title="Button"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <integer key="value" value="15"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="filterAllButtonPressed:" destination="U2U-I9-5M3" eventType="touchUpInside" id="fRy-Zt-KYi"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H3W-3o-Pe7">
-                                        <rect key="frame" x="130" y="0.0" width="125" height="31"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" title="Button"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <integer key="value" value="15"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="filterInButtonPressed:" destination="U2U-I9-5M3" eventType="touchUpInside" id="gHY-Gt-o1c"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qop-Rm-dW4">
-                                        <rect key="frame" x="260" y="0.0" width="125" height="31"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" title="Button"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <integer key="value" value="15"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="filterOutButtonPressed:" destination="U2U-I9-5M3" eventType="touchUpInside" id="lpE-dJ-wQ3"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="31" id="1iz-fx-Ynd"/>
-                                </constraints>
-                            </stackView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Nog-ra-Sc2">
                                 <rect key="frame" x="0.0" y="298" width="414" height="598"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -3021,20 +2999,20 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                             <constraint firstItem="A6T-nj-v6K" firstAttribute="top" secondItem="Tld-Li-6gF" secondAttribute="bottom" id="3KK-tn-3U3"/>
                             <constraint firstItem="rdw-Bd-OTg" firstAttribute="trailing" secondItem="MtN-Zf-ahr" secondAttribute="trailing" constant="89" id="85X-Za-XA4"/>
                             <constraint firstItem="Nog-ra-Sc2" firstAttribute="top" secondItem="xQm-J0-OI0" secondAttribute="bottom" id="BN7-6H-uHd"/>
-                            <constraint firstItem="xQm-J0-OI0" firstAttribute="top" secondItem="VLS-OR-aaV" secondAttribute="bottom" constant="14" id="ERM-o9-f6P"/>
-                            <constraint firstItem="VLS-OR-aaV" firstAttribute="leading" secondItem="rdw-Bd-OTg" secondAttribute="leading" constant="15" id="IKA-e2-hjN"/>
+                            <constraint firstItem="1UX-KO-0ql" firstAttribute="top" secondItem="DpX-34-PBJ" secondAttribute="bottom" constant="2" id="Beb-Wu-7nS"/>
+                            <constraint firstItem="xQm-J0-OI0" firstAttribute="top" secondItem="DpX-34-PBJ" secondAttribute="bottom" constant="8" symbolic="YES" id="Hk5-AO-fMG"/>
                             <constraint firstItem="MtN-Zf-ahr" firstAttribute="leading" secondItem="rdw-Bd-OTg" secondAttribute="leading" constant="89" id="IdV-a6-BMe"/>
                             <constraint firstItem="Tld-Li-6gF" firstAttribute="leading" secondItem="c9t-89-7Dd" secondAttribute="trailing" constant="9" id="JRP-Ut-j0D"/>
-                            <constraint firstItem="rdw-Bd-OTg" firstAttribute="trailing" secondItem="VLS-OR-aaV" secondAttribute="trailing" constant="14" id="LQi-xC-ggT"/>
                             <constraint firstItem="c9t-89-7Dd" firstAttribute="leading" secondItem="rdw-Bd-OTg" secondAttribute="leading" constant="15" id="PlK-Q4-t6t"/>
                             <constraint firstItem="rrf-dC-4X1" firstAttribute="trailing" secondItem="rdw-Bd-OTg" secondAttribute="trailing" id="PyY-Oq-Wug"/>
+                            <constraint firstItem="rrf-dC-4X1" firstAttribute="leading" secondItem="DpX-34-PBJ" secondAttribute="trailing" constant="5" id="RTJ-zZ-IOE"/>
                             <constraint firstItem="xQm-J0-OI0" firstAttribute="trailing" secondItem="rdw-Bd-OTg" secondAttribute="trailing" id="SJU-Sj-mJF"/>
                             <constraint firstItem="rdw-Bd-OTg" firstAttribute="trailing" secondItem="Tld-Li-6gF" secondAttribute="trailing" constant="11" id="TQQ-Jd-1Ek"/>
                             <constraint firstItem="MtN-Zf-ahr" firstAttribute="top" secondItem="0Gk-7f-Ba2" secondAttribute="bottom" constant="21" id="VPl-iW-Gtk"/>
                             <constraint firstItem="xQm-J0-OI0" firstAttribute="leading" secondItem="rdw-Bd-OTg" secondAttribute="leading" id="WC4-xF-oYv"/>
                             <constraint firstItem="Tld-Li-6gF" firstAttribute="top" secondItem="MtN-Zf-ahr" secondAttribute="bottom" constant="15.5" id="Y43-lN-0Rf"/>
                             <constraint firstItem="rdw-Bd-OTg" firstAttribute="trailing" secondItem="1UX-KO-0ql" secondAttribute="trailing" constant="11" id="aGd-49-Vvk"/>
-                            <constraint firstItem="VLS-OR-aaV" firstAttribute="top" secondItem="c9t-89-7Dd" secondAttribute="bottom" constant="15" id="dzF-cs-ECT"/>
+                            <constraint firstItem="DpX-34-PBJ" firstAttribute="leading" secondItem="rdw-Bd-OTg" secondAttribute="leading" constant="15" id="fIl-ey-8AN"/>
                             <constraint firstItem="0Gk-7f-Ba2" firstAttribute="leading" secondItem="rdw-Bd-OTg" secondAttribute="leading" id="jmm-Ix-13y"/>
                             <constraint firstItem="rrf-dC-4X1" firstAttribute="top" secondItem="c9t-89-7Dd" secondAttribute="bottom" constant="10" id="kUa-cI-VK0"/>
                             <constraint firstItem="Nog-ra-Sc2" firstAttribute="leading" secondItem="rdw-Bd-OTg" secondAttribute="leading" id="m9s-i4-WEx"/>
@@ -3042,10 +3020,8 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                             <constraint firstItem="1UX-KO-0ql" firstAttribute="top" secondItem="rrf-dC-4X1" secondAttribute="bottom" constant="13" id="mjj-PR-2fu"/>
                             <constraint firstItem="rdw-Bd-OTg" firstAttribute="trailing" secondItem="A6T-nj-v6K" secondAttribute="trailing" constant="11" id="mwF-pK-FhW"/>
                             <constraint firstAttribute="bottom" secondItem="Nog-ra-Sc2" secondAttribute="bottom" id="s4I-5C-EpN"/>
-                            <constraint firstItem="VLS-OR-aaV" firstAttribute="top" secondItem="Tld-Li-6gF" secondAttribute="bottom" constant="15" id="taz-4O-0wZ"/>
-                            <constraint firstItem="1UX-KO-0ql" firstAttribute="leading" secondItem="VLS-OR-aaV" secondAttribute="trailing" constant="-175" id="uRx-YL-kVt"/>
+                            <constraint firstItem="DpX-34-PBJ" firstAttribute="top" secondItem="c9t-89-7Dd" secondAttribute="bottom" constant="10" id="uhS-s5-7hL"/>
                             <constraint firstItem="0Gk-7f-Ba2" firstAttribute="top" secondItem="rdw-Bd-OTg" secondAttribute="top" id="us4-go-HCs"/>
-                            <constraint firstItem="VLS-OR-aaV" firstAttribute="leading" secondItem="rdw-Bd-OTg" secondAttribute="leading" constant="15" id="vSu-39-fes"/>
                             <constraint firstItem="Nog-ra-Sc2" firstAttribute="trailing" secondItem="rdw-Bd-OTg" secondAttribute="trailing" id="w69-C8-X6O"/>
                         </constraints>
                     </view>
@@ -3054,10 +3030,8 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                         <outlet property="backButton" destination="0Gk-7f-Ba2" id="MbL-Hw-dVd"/>
                         <outlet property="chiaSystemButton" destination="K9R-oL-ZgE" id="3wO-2f-eHL"/>
                         <outlet property="chivesSystemButton" destination="Itf-Pi-Jbj" id="17T-3u-xT2"/>
-                        <outlet property="filterAllButton" destination="nrP-iJ-nbl" id="lC2-dC-V3f"/>
+                        <outlet property="filterCollectionView" destination="DpX-34-PBJ" id="s8y-SR-hBT"/>
                         <outlet property="filterDateView" destination="A6T-nj-v6K" id="6wo-cf-Rga"/>
-                        <outlet property="filterInButton" destination="H3W-3o-Pe7" id="m3i-bV-4MX"/>
-                        <outlet property="filterOutButton" destination="Qop-Rm-dW4" id="Xl5-lH-7EG"/>
                         <outlet property="filterSystemButton" destination="rrf-dC-4X1" id="myG-VB-nR6"/>
                         <outlet property="filterTimeButton" destination="Tld-Li-6gF" id="3Zi-sx-hmw"/>
                         <outlet property="heightLabel" destination="UlD-X7-53F" id="cOv-sA-qdb"/>

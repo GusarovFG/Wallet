@@ -19,12 +19,14 @@ class TransactionHistoryViewController: UIViewController {
                                                       Transaction(type: LocalizationManager.share.translate?.result.list.transactions.transactions_pendind ?? "", height: 1098726, summ: "4,555", token: "XCH", date: "lastMonth"),
                                                       Transaction(type: LocalizationManager.share.translate?.result.list.transactions.incoming_outgoing ?? "", height: 1098726, summ: "4,555", token: "XCH", date: "lastMonth")]
     private var filterWalletsTransactions: [Transaction] = []
+    private var isAllFilter = true
+    private var isInFilter = false
+    private var isOutFilter = false
+    private var isPendindFilter = false
     
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var filterAllButton: UIButton!
-    @IBOutlet weak var filterInButton: UIButton!
-    @IBOutlet weak var filterOutButton: UIButton!
+
     @IBOutlet weak var filterTimeButton: UIButton!
     @IBOutlet weak var filterSystemButton: UIButton!
     @IBOutlet weak var statusLabel: UILabel!
@@ -44,21 +46,13 @@ class TransactionHistoryViewController: UIViewController {
     @IBOutlet weak var chivesSystemButton: UIButton!
     
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var filterCollectionView: UICollectionView!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.filterAllButton.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
-        self.filterInButton.backgroundColor = #colorLiteral(red: 0.1882352941, green: 0.1882352941, blue: 0.1882352941, alpha: 1)
-        self.filterOutButton.backgroundColor = #colorLiteral(red: 0.1882352941, green: 0.1882352941, blue: 0.1882352941, alpha: 1)
-        self.filterAllButton.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-        self.filterInButton.tintColor = #colorLiteral(red: 0.5803921569, green: 0.5803921569, blue: 0.5803921569, alpha: 1)
-        self.filterOutButton.tintColor = #colorLiteral(red: 0.5803921569, green: 0.5803921569, blue: 0.5803921569, alpha: 1)
-        
-        self.filterAllButton.setTitle("Все", for: .normal)
-        self.filterInButton.setTitle("Входящие", for: .normal)
-        self.filterOutButton.setTitle("Исходящие", for: .normal)
+
         
         self.statusLabel.text = "Статус"
         self.heightLabel.text = "Высота"
@@ -93,7 +87,11 @@ class TransactionHistoryViewController: UIViewController {
         
         self.filterWalletsTransactions = self.walletsTransactions
         self.tableView.register(UINib(nibName: "TransitionsTableViewCell", bundle: nil), forCellReuseIdentifier: "TransitionsTableViewCell")
-        
+        self.filterCollectionView.register(UINib(nibName: "TransictionFilterCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "TransictionFilterCollectionViewCell")
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
     }
     
     override func viewDidLayoutSubviews() {
@@ -122,52 +120,16 @@ class TransactionHistoryViewController: UIViewController {
 //        self.statusLabel.text = LocalizationManager.share.translate?.result.list.transactions.transactions_status
 //        self.summLabel.text = LocalizationManager.share.translate?.result.list.transactions.transactions_amoun
         self.allDateButton.setTitle(LocalizationManager.share.translate?.result.list.transactions.transactions_all, for: .normal)
-        self.filterInButton.setTitle(LocalizationManager.share.translate?.result.list.transactions.transactions_incoming, for: .normal)
-        self.filterOutButton.setTitle(LocalizationManager.share.translate?.result.list.transactions.incoming_outgoing, for: .normal)
+
         self.backButton.setTitle(LocalizationManager.share.translate?.result.list.all.back_btn, for: .normal)
         self.filterSystemButton.setTitle(LocalizationManager.share.translate?.result.list.transactions.transactions_all, for: .normal)
-        self.filterAllButton.setTitle(LocalizationManager.share.translate?.result.list.transactions.transactions_all, for: .normal)
     }
     
     @IBAction func backButtonPressed(_ sender: Any) {
         self.dismiss(animated: true)
     }
-    @IBAction func filterAllButtonPressed(_ sender: UIButton) {
-        sender.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
-        sender.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-        
-        self.filterInButton.backgroundColor = #colorLiteral(red: 0.1882352941, green: 0.1882352941, blue: 0.1882352941, alpha: 1)
-        self.filterOutButton.backgroundColor = #colorLiteral(red: 0.1882352941, green: 0.1882352941, blue: 0.1882352941, alpha: 1)
-        self.filterAllButton.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-        self.filterInButton.tintColor = #colorLiteral(red: 0.5803921569, green: 0.5803921569, blue: 0.5803921569, alpha: 1)
-        self.filterOutButton.tintColor = #colorLiteral(red: 0.5803921569, green: 0.5803921569, blue: 0.5803921569, alpha: 1)
-        self.filterWalletsTransactions = self.walletsTransactions
-        self.tableView.reloadData()
-    }
-    
-    @IBAction func filterInButtonPressed(_ sender: UIButton) {
-        sender.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
-        sender.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-        
-        self.filterAllButton.backgroundColor = #colorLiteral(red: 0.1882352941, green: 0.1882352941, blue: 0.1882352941, alpha: 1)
-        self.filterOutButton.backgroundColor = #colorLiteral(red: 0.1882352941, green: 0.1882352941, blue: 0.1882352941, alpha: 1)
-        self.filterAllButton.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-        self.filterAllButton.tintColor = #colorLiteral(red: 0.5803921569, green: 0.5803921569, blue: 0.5803921569, alpha: 1)
-        self.filterOutButton.tintColor = #colorLiteral(red: 0.5803921569, green: 0.5803921569, blue: 0.5803921569, alpha: 1)
-        self.filterWalletsTransactions = self.walletsTransactions.filter({$0.type == LocalizationManager.share.translate?.result.list.transactions.transactions_incoming})
-        self.tableView.reloadData()
-    }
-    
-    @IBAction func filterOutButtonPressed(_ sender: UIButton) {
-        sender.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
-        sender.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-        self.filterAllButton.backgroundColor = #colorLiteral(red: 0.1882352941, green: 0.1882352941, blue: 0.1882352941, alpha: 1)
-        self.filterInButton.backgroundColor = #colorLiteral(red: 0.1882352941, green: 0.1882352941, blue: 0.1882352941, alpha: 1)
-        self.filterInButton.tintColor = #colorLiteral(red: 0.5803921569, green: 0.5803921569, blue: 0.5803921569, alpha: 1)
-        self.filterAllButton.tintColor = #colorLiteral(red: 0.5803921569, green: 0.5803921569, blue: 0.5803921569, alpha: 1)
-        self.filterWalletsTransactions = self.walletsTransactions.filter({$0.type == LocalizationManager.share.translate?.result.list.transactions.incoming_outgoing})
-        self.tableView.reloadData()
-    }
+
+
     @IBAction func filetrDateMenuOpen(_ sender: UIButton) {
         if self.filterDateView.isHidden {
             self.filterTimeButton.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
@@ -303,6 +265,135 @@ extension TransactionHistoryViewController: UITableViewDelegate, UITableViewData
         cell.typeOfTransitionLabel.text = transiction.type
         cell.summLabel.text = transiction.summ + " " + transiction.token
         return cell
+    }
+}
+
+extension TransactionHistoryViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        4
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TransictionFilterCollectionViewCell", for: indexPath) as! TransictionFilterCollectionViewCell
+        switch indexPath {
+        case [0,0]:
+            if self.isAllFilter {
+                cell.cellLabel.text = LocalizationManager.share.translate?.result.list.transactions.transactions_all
+                cell.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
+                cell.cellLabel.textColor = .white
+            } else {
+                
+                cell.cellLabel.text = LocalizationManager.share.translate?.result.list.transactions.transactions_all
+                cell.backgroundColor = #colorLiteral(red: 0.1882352941, green: 0.1882352941, blue: 0.1882352941, alpha: 1)
+                cell.cellLabel.textColor = #colorLiteral(red: 0.5803921569, green: 0.5803921569, blue: 0.5803921569, alpha: 1)
+            }
+            return cell
+        case [0,1]:
+            if self.isInFilter {
+                cell.cellLabel.text = LocalizationManager.share.translate?.result.list.transactions.transactions_incoming
+                cell.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
+                cell.cellLabel.textColor = .white
+            } else {
+                
+                cell.cellLabel.text = LocalizationManager.share.translate?.result.list.transactions.transactions_incoming
+                cell.backgroundColor = #colorLiteral(red: 0.1882352941, green: 0.1882352941, blue: 0.1882352941, alpha: 1)
+                cell.cellLabel.textColor = #colorLiteral(red: 0.5803921569, green: 0.5803921569, blue: 0.5803921569, alpha: 1)
+            }
+            return cell
+        case [0,2]:
+            if self.isOutFilter {
+                cell.cellLabel.text = LocalizationManager.share.translate?.result.list.transactions.incoming_outgoing
+                cell.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
+                cell.cellLabel.textColor = .white
+            } else {
+                
+                cell.cellLabel.text = LocalizationManager.share.translate?.result.list.transactions.incoming_outgoing
+                cell.backgroundColor = #colorLiteral(red: 0.1882352941, green: 0.1882352941, blue: 0.1882352941, alpha: 1)
+                cell.cellLabel.textColor = #colorLiteral(red: 0.5803921569, green: 0.5803921569, blue: 0.5803921569, alpha: 1)
+            }
+            return cell
+        default:
+            if self.isPendindFilter {
+                cell.cellLabel.text = LocalizationManager.share.translate?.result.list.transactions.transactions_pendind
+                cell.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
+                cell.cellLabel.textColor = .white
+            } else {
+                cell.cellLabel.text = LocalizationManager.share.translate?.result.list.transactions.transactions_pendind
+                cell.backgroundColor = #colorLiteral(red: 0.1882352941, green: 0.1882352941, blue: 0.1882352941, alpha: 1)
+                cell.cellLabel.textColor = #colorLiteral(red: 0.5803921569, green: 0.5803921569, blue: 0.5803921569, alpha: 1)
+                
+            }
+            return cell
+        }
+        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let cell = self.filterCollectionView.cellForItem(at: indexPath) as! TransictionFilterCollectionViewCell
+        
+        switch indexPath {
+        case [0,0]:
+
+            self.filterCollectionView.visibleCells.forEach { cell in
+                if cell is TransictionFilterCollectionViewCell {
+                    (cell.viewWithTag(1) as! UILabel).textColor = #colorLiteral(red: 0.5803921569, green: 0.5803921569, blue: 0.5803921569, alpha: 1)
+                    cell.backgroundColor = #colorLiteral(red: 0.1882352941, green: 0.1882352941, blue: 0.1882352941, alpha: 1)
+                }
+            }
+            cell.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
+            cell.cellLabel.textColor = .white
+            self.filterWalletsTransactions = self.walletsTransactions
+            self.isAllFilter = true
+            self.isInFilter = false
+            self.isOutFilter = false
+            self.isPendindFilter = false
+            self.tableView.reloadData()
+        case [0,1]:
+            self.filterCollectionView.visibleCells.forEach { cell in
+                if cell is TransictionFilterCollectionViewCell {
+                    (cell.viewWithTag(1) as! UILabel).textColor = #colorLiteral(red: 0.5803921569, green: 0.5803921569, blue: 0.5803921569, alpha: 1)
+                    cell.backgroundColor = #colorLiteral(red: 0.1882352941, green: 0.1882352941, blue: 0.1882352941, alpha: 1)
+                }
+            }
+            cell.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
+            cell.cellLabel.textColor = .white
+            self.filterWalletsTransactions = self.walletsTransactions.filter({$0.type == LocalizationManager.share.translate?.result.list.transactions.transactions_incoming})
+            self.isAllFilter = false
+            self.isInFilter = true
+            self.isOutFilter = false
+            self.isPendindFilter = false
+            self.tableView.reloadData()
+        case [0,2]:
+            self.filterCollectionView.visibleCells.forEach { cell in
+                if cell is TransictionFilterCollectionViewCell {
+                    (cell.viewWithTag(1) as! UILabel).textColor = #colorLiteral(red: 0.5803921569, green: 0.5803921569, blue: 0.5803921569, alpha: 1)
+                    cell.backgroundColor = #colorLiteral(red: 0.1882352941, green: 0.1882352941, blue: 0.1882352941, alpha: 1)
+                }
+            }
+            cell.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
+            cell.cellLabel.textColor = .white
+            self.filterWalletsTransactions = self.walletsTransactions.filter({$0.type == LocalizationManager.share.translate?.result.list.transactions.incoming_outgoing})
+            self.isAllFilter = false
+            self.isInFilter = false
+            self.isOutFilter = true
+            self.isPendindFilter = false
+            self.tableView.reloadData()
+        default:
+            self.filterCollectionView.visibleCells.forEach { cell in
+                if cell is TransictionFilterCollectionViewCell {
+                    (cell.viewWithTag(1) as! UILabel).textColor = #colorLiteral(red: 0.5803921569, green: 0.5803921569, blue: 0.5803921569, alpha: 1)
+                    cell.backgroundColor = #colorLiteral(red: 0.1882352941, green: 0.1882352941, blue: 0.1882352941, alpha: 1)
+                }
+            }
+            cell.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
+            cell.cellLabel.textColor = .white
+            self.filterWalletsTransactions = self.walletsTransactions.filter({$0.type == LocalizationManager.share.translate?.result.list.transactions.transactions_pendind})
+            self.isAllFilter = false
+            self.isInFilter = false
+            self.isOutFilter = false
+            self.isPendindFilter = true
+            self.tableView.reloadData()
+        }
     }
 }
 
