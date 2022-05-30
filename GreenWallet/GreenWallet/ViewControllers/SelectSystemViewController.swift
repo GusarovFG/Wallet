@@ -47,6 +47,12 @@ class SelectSystemViewController: UIViewController {
             self.view.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.3481637311)
         }
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.post(name: NSNotification.Name("ChangeIndex"), object: nil)
+    }
+
 
     private func localization() {
         self.titleLabel.text = LocalizationManager.share.translate?.result.list.all.select_network
