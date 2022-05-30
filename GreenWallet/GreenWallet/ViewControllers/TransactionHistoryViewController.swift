@@ -47,6 +47,7 @@ class TransactionHistoryViewController: UIViewController {
     @IBOutlet weak var systemMenuView: UIView!
     @IBOutlet weak var chiaSystemButton: UIButton!
     @IBOutlet weak var chivesSystemButton: UIButton!
+    @IBOutlet weak var allSystemButton: UIButton!
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var filterCollectionView: UICollectionView!
@@ -79,6 +80,7 @@ class TransactionHistoryViewController: UIViewController {
         self.todayDateButton.buttonStroke()
         self.yesterdayDayeButton.buttonStroke()
         self.lastWeekDateButton.buttonStroke()
+        self.allSystemButton.buttonStroke()
         
         self.systemMenuView.isHidden = true
         self.systemMenuView.alpha = 0
@@ -132,6 +134,7 @@ class TransactionHistoryViewController: UIViewController {
 
         self.backButton.setTitle(LocalizationManager.share.translate?.result.list.all.back_btn, for: .normal)
         self.filterSystemButton.setTitle(LocalizationManager.share.translate?.result.list.transactions.transactions_all, for: .normal)
+        self.allSystemButton.setTitle(LocalizationManager.share.translate?.result.list.transactions.transactions_all, for: .normal)
     }
     
     @IBAction func backButtonPressed(_ sender: Any) {
@@ -238,6 +241,7 @@ class TransactionHistoryViewController: UIViewController {
     @IBAction func chiaButtonPressed(_ sender: UIButton) {
         sender.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
         self.chivesSystemButton.backgroundColor = .systemBackground
+        self.allSystemButton.backgroundColor = .systemBackground
         self.filterWalletsTransactions = self.walletsTransactions.filter({$0.token == "XCH"})
         self.tableView.reloadData()
     }
@@ -245,6 +249,16 @@ class TransactionHistoryViewController: UIViewController {
         sender.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
         
         self.filterWalletsTransactions = self.walletsTransactions.filter({$0.token == "XCC"})
+        self.chiaSystemButton.backgroundColor = .systemBackground
+        self.allSystemButton.backgroundColor = .systemBackground
+        self.tableView.reloadData()
+    }
+    
+    @IBAction func allSystemButtonPresed(_ sender: UIButton) {
+        self.allSystemButton.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
+        
+        self.filterWalletsTransactions = self.walletsTransactions
+        self.chivesSystemButton.backgroundColor = .systemBackground
         self.chiaSystemButton.backgroundColor = .systemBackground
         self.tableView.reloadData()
     }

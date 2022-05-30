@@ -2843,10 +2843,24 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1UX-KO-0ql">
-                                <rect key="frame" x="225" y="247" width="178" height="80"/>
+                                <rect key="frame" x="225" y="247" width="178" height="120"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K9R-oL-ZgE">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7ho-ot-z8N">
                                         <rect key="frame" x="0.0" y="0.0" width="178" height="40"/>
+                                        <color key="backgroundColor" red="0.2274509804" green="0.67450980390000004" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="07C-3F-J63"/>
+                                            <constraint firstAttribute="height" constant="40" id="cjT-la-2u7"/>
+                                        </constraints>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                        <connections>
+                                            <action selector="allSystemButtonPresed:" destination="U2U-I9-5M3" eventType="touchUpInside" id="FIb-oc-eGf"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K9R-oL-ZgE">
+                                        <rect key="frame" x="0.0" y="40" width="178" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="IIa-0b-Epc"/>
                                         </constraints>
@@ -2858,7 +2872,7 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Itf-Pi-Jbj">
-                                        <rect key="frame" x="0.0" y="40" width="178" height="40"/>
+                                        <rect key="frame" x="0.0" y="80" width="178" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="lOz-fH-Cfh"/>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="tKa-2H-yDk"/>
@@ -2873,14 +2887,18 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
+                                    <constraint firstItem="Itf-Pi-Jbj" firstAttribute="top" secondItem="K9R-oL-ZgE" secondAttribute="bottom" id="3kw-9E-oak"/>
                                     <constraint firstAttribute="width" constant="178" id="4Qy-NU-idk"/>
+                                    <constraint firstItem="7ho-ot-z8N" firstAttribute="top" secondItem="1UX-KO-0ql" secondAttribute="top" id="90t-0F-Qcm"/>
                                     <constraint firstItem="Itf-Pi-Jbj" firstAttribute="leading" secondItem="1UX-KO-0ql" secondAttribute="leading" id="9eJ-5p-9UB"/>
+                                    <constraint firstAttribute="trailing" secondItem="7ho-ot-z8N" secondAttribute="trailing" id="KuE-VR-i1H"/>
                                     <constraint firstAttribute="trailing" secondItem="Itf-Pi-Jbj" secondAttribute="trailing" id="KvT-41-tCJ"/>
+                                    <constraint firstItem="7ho-ot-z8N" firstAttribute="leading" secondItem="1UX-KO-0ql" secondAttribute="leading" id="Ogh-5u-1L6"/>
                                     <constraint firstAttribute="bottom" secondItem="Itf-Pi-Jbj" secondAttribute="bottom" id="RNv-yt-hyh"/>
-                                    <constraint firstAttribute="height" constant="80" id="dDn-TY-miV"/>
+                                    <constraint firstAttribute="height" constant="120" id="dDn-TY-miV"/>
+                                    <constraint firstItem="K9R-oL-ZgE" firstAttribute="top" secondItem="7ho-ot-z8N" secondAttribute="bottom" id="fMU-9x-LDO"/>
                                     <constraint firstItem="K9R-oL-ZgE" firstAttribute="leading" secondItem="1UX-KO-0ql" secondAttribute="leading" id="hJq-S9-8JD"/>
                                     <constraint firstAttribute="trailing" secondItem="K9R-oL-ZgE" secondAttribute="trailing" id="htO-5K-U3C"/>
-                                    <constraint firstItem="K9R-oL-ZgE" firstAttribute="top" secondItem="1UX-KO-0ql" secondAttribute="top" id="xVh-xx-5SX"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A6T-nj-v6K">
@@ -3024,9 +3042,15 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                             <constraint firstItem="0Gk-7f-Ba2" firstAttribute="top" secondItem="rdw-Bd-OTg" secondAttribute="top" id="us4-go-HCs"/>
                             <constraint firstItem="Nog-ra-Sc2" firstAttribute="trailing" secondItem="rdw-Bd-OTg" secondAttribute="trailing" id="w69-C8-X6O"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="A6T-nj-v6K"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
                         <outlet property="allDateButton" destination="e7I-Zn-xbX" id="dW5-Pb-BoM"/>
+                        <outlet property="allSystemButton" destination="7ho-ot-z8N" id="zzq-yw-nUp"/>
                         <outlet property="backButton" destination="0Gk-7f-Ba2" id="MbL-Hw-dVd"/>
                         <outlet property="chiaSystemButton" destination="K9R-oL-ZgE" id="3wO-2f-eHL"/>
                         <outlet property="chivesSystemButton" destination="Itf-Pi-Jbj" id="17T-3u-xT2"/>
