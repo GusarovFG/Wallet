@@ -332,12 +332,12 @@ struct MainScreen: Codable {
 
 // MARK: - Menu
 struct Menu: Codable {
-    let menu_all_settings, menu_dark_theme, menu_hide_wallet_balance_description, menu_hide_wallet_balance_title: String
+    let menu_dark_theme, menu_hide_wallet_balance_description, menu_hide_wallet_balance_title: String
     let menu_light_theme, menu_notifications, menu_push_notifications_description, menu_push_notifications_title: String
     let menu_show_more_title, menu_support_description, menu_support_title: String
 
     enum CodingKeys: String, CodingKey {
-        case menu_all_settings
+//        case menu_all_settings
         case menu_dark_theme
         case menu_hide_wallet_balance_description
         case menu_hide_wallet_balance_title
