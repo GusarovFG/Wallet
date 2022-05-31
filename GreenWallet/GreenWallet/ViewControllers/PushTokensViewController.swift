@@ -68,6 +68,8 @@ class PushTokensViewController: UIViewController {
     @IBOutlet weak var summTitle: UILabel!
     @IBOutlet weak var arderLabel: UILabel!
     @IBOutlet weak var confirmButton: UIButton!
+    @IBOutlet weak var confirmTitle: UILabel!
+    @IBOutlet weak var confitmBackButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -135,6 +137,14 @@ class PushTokensViewController: UIViewController {
         self.blockchainTitle.text = LocalizationManager.share.translate?.result.list.listing_request.listing_request_blockchain
         self.arderLabel.text = LocalizationManager.share.translate?.result.list.wallet.wallet_data_adress
         self.confirmButton.setTitle(LocalizationManager.share.translate?.result.list.all.confirm_btn, for: .normal)
+        
+        self.transitionTokenTitle.text = LocalizationManager.share.translate?.result.list.send_token.send_token_pop_up_confirmation_token
+        self.blockchainTitle.text = LocalizationManager.share.translate?.result.list.send_token.send_token_pop_up_confirmation_blockchain
+        self.summTitle.text = LocalizationManager.share.translate?.result.list.send_token.send_token_pop_up_confirmation_amount
+        self.arderLabel.text = LocalizationManager.share.translate?.result.list.send_token.send_token_pop_up_confirmation_adress
+        self.confirmButton.setTitle(LocalizationManager.share.translate?.result.list.all.confirm_btn, for: .normal)
+        self.confirmTitle.text = LocalizationManager.share.translate?.result.list.send_token.send_token_pop_up_confirmation
+        self.confitmBackButton.setTitle(LocalizationManager.share.translate?.result.list.all.back_btn, for: .normal)
     }
     
     private func setupWalletButton() {

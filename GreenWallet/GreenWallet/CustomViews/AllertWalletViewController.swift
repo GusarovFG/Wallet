@@ -32,6 +32,7 @@ class AllertWalletViewController: UIViewController {
         super.viewDidLoad()
         localization()
         NotificationCenter.default.addObserver(self, selector: #selector(closeAlert), name: NSNotification.Name("Seccess"), object: nil)
+
         
     }
     
@@ -59,6 +60,7 @@ class AllertWalletViewController: UIViewController {
         } else if self.restorationIdentifier == "seccsessTransitViewController" {
             self.transactionLabel.text = LocalizationManager.share.translate?.result.list.send_token.send_token_pop_up_succsess_title
             self.transactionDescription.text = LocalizationManager.share.translate?.result.list.send_token.send_token_pop_up_succsess_description
+            self.mainButton.setTitle(LocalizationManager.share.translate?.result.list.all.ready_btn, for: .normal)
         }
     }
 

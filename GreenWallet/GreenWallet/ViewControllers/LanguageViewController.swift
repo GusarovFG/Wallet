@@ -61,7 +61,7 @@ extension LanguageViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let language = LanguageManager.share.language?.result.list[indexPath.row]
-        NetworkManager.share.getTranslate(from: MainURLS.API.rawValue, languageCode: language?.code ?? "", version: LanguageManager.share.language?.result.version ?? "") { translate in
+        NetworkManager.share.getTranslate(from: MainURLS.API.rawValue, languageCode: language?.code ?? "") { translate in
             LocalizationManager.share.translate = translate
             CoreDataManager.share.changeLanguage(LanguageManager.share.language?.result.list[indexPath.row].code ?? "", version: LanguageManager.share.language?.result.version ?? "")
             self.viewDidLoad()

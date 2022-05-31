@@ -267,7 +267,16 @@ class PasswordViewController: UIViewController {
                 view.layer.borderWidth = 0
                 view.layer.borderColor = #colorLiteral(red: 1, green: 0.1333333333, blue: 0.1333333333, alpha: 1)
                 self.repeatErrorLabel.alpha = 1
-
+                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                    self.stackView.arrangedSubviews.forEach { view in
+                        view.layer.cornerRadius = view.frame.height / 2
+                        view.backgroundColor = UIColor(red: 255, green: 255, blue: 255, alpha: 0)
+                        view.layer.borderWidth = 2
+                        view.layer.borderColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+                        self.enterErrorLabel.alpha = 0
+                    }
+                    self.enteringPassword = ""
+                }
             }
         }
         
@@ -311,7 +320,16 @@ class PasswordViewController: UIViewController {
                 view.layer.borderWidth = 0
                 view.layer.borderColor = #colorLiteral(red: 1, green: 0.1333333333, blue: 0.1333333333, alpha: 1)
                 self.enterErrorLabel.alpha = 1
-
+                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                    self.stackView.arrangedSubviews.forEach { view in
+                        view.layer.cornerRadius = view.frame.height / 2
+                        view.backgroundColor = UIColor(red: 255, green: 255, blue: 255, alpha: 0)
+                        view.layer.borderWidth = 2
+                        view.layer.borderColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+                        self.enterErrorLabel.alpha = 0
+                    }
+                    self.enteringPassword = ""
+                }
             }
         }
     }

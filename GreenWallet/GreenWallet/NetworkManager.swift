@@ -38,8 +38,8 @@ class NetworkManager {
         }.resume()
     }
     
-    func getTranslate(from url: String, languageCode: String, version: String, with complition: @escaping (ListOfTranslate) -> Void) {
-        guard let url = URL(string: "\(url)/localization/translate?code=\(languageCode)&version=\(version)") else { return }
+    func getTranslate(from url: String, languageCode: String, with complition: @escaping (ListOfTranslate) -> Void) {
+        guard let url = URL(string: "\(url)/localization/translate?code=\(languageCode)") else { return }
         print(url)
         let session = URLSession.shared
         session.dataTask(with: url) { data, response, error in
@@ -48,7 +48,7 @@ class NetworkManager {
             }
             
             guard let data = data else { return }
-            
+            print(data)
             do {
                
                 let json = try JSONDecoder().decode(ListOfTranslate.self, from: data)
@@ -67,3 +67,5 @@ enum MainURLS: String {
     case API = "https://greenapp.siterepository.ru/api/v1.0"
     case language = "https://greenapp.siterepository.ru/api/v1.0/localization/languages"
 }
+
+

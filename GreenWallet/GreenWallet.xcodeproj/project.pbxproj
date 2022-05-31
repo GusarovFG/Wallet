@@ -109,7 +109,7 @@
 		FB0FCA6528194D4300BB0527 /* SelectSystemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectSystemViewController.swift; sourceTree = "<group>"; };
 		FB0FCA6B2819600400BB0527 /* SelectSystemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectSystemTableViewCell.swift; sourceTree = "<group>"; };
 		FB0FCA6C2819600400BB0527 /* SelectSystemTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectSystemTableViewCell.xib; sourceTree = "<group>"; };
-		FB0FCA6F2819629D00BB0527 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		FB0FCA6F2819629D00BB0527 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		FB0FCA7128197A4000BB0527 /* ImportTokensTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportTokensTableViewCell.swift; sourceTree = "<group>"; };
 		FB0FCA7228197A4000BB0527 /* ImportTokensTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImportTokensTableViewCell.xib; sourceTree = "<group>"; };
 		FB0FCA7528197B4800BB0527 /* ImportTokensViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportTokensViewController.swift; sourceTree = "<group>"; };
@@ -357,7 +357,7 @@
 			children = (
 				FB5940342816856700037DFA /* AppDelegate.swift */,
 				FB5940362816856700037DFA /* SceneDelegate.swift */,
-				FB0FCA6F2819629D00BB0527 /* Models.swift */,
+				FBC44E35284531EA00A0A56B /* Models */,
 				FBFE5796281B121A0016E74A /* UserDefaultsManager.swift */,
 				FB903810282D60DA004023F5 /* WalletManager.swift */,
 				FBD1CCA9283B90570081AF3E /* KeyChainManager.swift */,
@@ -385,6 +385,14 @@
 				FB5940542816AEF400037DFA /* CustomClasses.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		FBC44E35284531EA00A0A56B /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				FB0FCA6F2819629D00BB0527 /* Models.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		FBFE5774281AB8CC0016E74A /* SelectSystemTableViewCell */ = {

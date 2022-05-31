@@ -1844,6 +1844,8 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                         <outlet property="checkboxLabelConstraint" destination="ws3-ZT-u9N" id="V86-8d-O1e"/>
                         <outlet property="comissionTextField" destination="bf2-aF-Cv7" id="BAF-d5-8VB"/>
                         <outlet property="confirmButton" destination="J8p-gD-ZQe" id="WP8-6P-leJ"/>
+                        <outlet property="confirmTitle" destination="4io-Wy-11j" id="zcD-38-tsm"/>
+                        <outlet property="confitmBackButton" destination="djY-QT-RXe" id="Fsx-F1-lDQ"/>
                         <outlet property="contactLabel" destination="mnu-tB-kkH" id="45P-dI-2ED"/>
                         <outlet property="contactTextField" destination="5bp-F0-POt" id="xi8-gZ-m18"/>
                         <outlet property="continueButton" destination="LGy-uT-4y7" id="0dK-Th-jYB"/>
@@ -2723,6 +2725,9 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                                         <integer key="value" value="15"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <outlet property="delegate" destination="U2U-I9-5M3" id="KhW-Bq-C1S"/>
+                                </connections>
                             </searchBar>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="DpX-34-PBJ">
                                 <rect key="frame" x="15" y="203" width="310" height="42"/>
@@ -3012,6 +3017,7 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="rdw-Bd-OTg"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="Tld-Li-6gF" firstAttribute="height" secondItem="c9t-89-7Dd" secondAttribute="height" id="3Fw-PH-UKY"/>
                             <constraint firstItem="A6T-nj-v6K" firstAttribute="top" secondItem="Tld-Li-6gF" secondAttribute="bottom" id="3KK-tn-3U3"/>
@@ -3042,11 +3048,6 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                             <constraint firstItem="0Gk-7f-Ba2" firstAttribute="top" secondItem="rdw-Bd-OTg" secondAttribute="top" id="us4-go-HCs"/>
                             <constraint firstItem="Nog-ra-Sc2" firstAttribute="trailing" secondItem="rdw-Bd-OTg" secondAttribute="trailing" id="w69-C8-X6O"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="subviews">
-                                <exclude reference="A6T-nj-v6K"/>
-                            </mask>
-                        </variation>
                     </view>
                     <connections>
                         <outlet property="allDateButton" destination="e7I-Zn-xbX" id="dW5-Pb-BoM"/>
@@ -3561,6 +3562,7 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                     </view>
                     <value key="contentSizeForViewInPopover" type="size" width="414" height="1009"/>
                     <connections>
+                        <outlet property="backButton" destination="RiR-UH-uP8" id="eQD-NM-Qda"/>
                         <outlet property="continueButton" destination="Tl3-u5-MSQ" id="G3n-69-TrK"/>
                         <outlet property="discriptionLabel" destination="5Xh-4b-AIu" id="d7H-QP-rHb"/>
                         <outlet property="errorLabel" destination="lfS-hb-u2w" id="nVQ-0X-oro"/>
@@ -3858,6 +3860,7 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <gestureRecognizers/>
                                         <constraints>
                                             <constraint firstItem="GLG-Bw-OL1" firstAttribute="top" secondItem="a17-ZD-paY" secondAttribute="bottom" constant="21" id="3uf-yh-7C9"/>
                                             <constraint firstItem="a17-ZD-paY" firstAttribute="leading" secondItem="pEn-3w-P8K" secondAttribute="leading" id="4Gu-X2-5Mk"/>
@@ -3887,6 +3890,9 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                                             <constraint firstItem="NIE-tz-rWt" firstAttribute="top" secondItem="GLG-Bw-OL1" secondAttribute="bottom" constant="5" id="w9s-Zw-ggx"/>
                                             <constraint firstItem="9O9-Fi-PYD" firstAttribute="leading" secondItem="pEn-3w-P8K" secondAttribute="leading" constant="15" id="wTg-ut-bFH"/>
                                         </constraints>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="zVF-nK-6gB" appends="YES" id="fIM-1T-ieO"/>
+                                        </connections>
                                     </view>
                                 </subviews>
                                 <constraints>
@@ -3924,6 +3930,11 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bKl-R0-UhM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="zVF-nK-6gB">
+                    <connections>
+                        <action selector="tapHideKeyBoard:" destination="Ljn-W9-MGr" id="xCI-nC-UDX"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="9113.04347826087" y="1619.8660714285713"/>
         </scene>

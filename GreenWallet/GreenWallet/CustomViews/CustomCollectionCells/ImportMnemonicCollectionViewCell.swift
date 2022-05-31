@@ -12,6 +12,7 @@ class ImportMnemonicCollectionViewCell: UICollectionViewCell {
     var appendInPhrase: (() -> ())?
     var endEditing: (() -> ())?
     var tap: (() -> ())?
+    var controller = UIViewController()
     
     @IBOutlet weak var cellTextLabel: UITextField!
     
@@ -20,6 +21,12 @@ class ImportMnemonicCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
         self.layer.borderWidth = 1
         self.layer.borderColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(hideCellKeyboard), name: NSNotification.Name("HideCellKeyboard"), object: nil)
+    }
+    
+    @objc func hideCellKeyboard() {
+        self.cellTextLabel.resignFirstResponder()
     }
 
     @IBAction func didEditingChangedTextField(_ sender: UITextField) {

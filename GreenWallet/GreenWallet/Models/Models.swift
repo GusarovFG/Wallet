@@ -25,17 +25,17 @@ struct WalletModel: Equatable {
 }
 
 
-struct Language: Codable {
+struct Language: Decodable {
     let success: Bool
     let result: LanguageResult
 }
 
 // MARK: - Result
-struct LanguageResult: Codable {
+struct LanguageResult: Decodable {
     let version: String
     let list: [DefaultLanguage]
     let defaultLanguage: DefaultLanguage
-
+    
     enum CodingKeys: String, CodingKey {
         case version, list
         case defaultLanguage
@@ -43,9 +43,9 @@ struct LanguageResult: Codable {
 }
 
 // MARK: - DefaultLanguage
-struct DefaultLanguage: Codable {
+struct DefaultLanguage: Decodable {
     let name, nameBtn, code: String
-
+    
     enum CodingKeys: String, CodingKey {
         case name
         case nameBtn
@@ -54,16 +54,27 @@ struct DefaultLanguage: Codable {
 }
 
 
+
 // MARK: - ListOfTranslate
 struct ListOfTranslate: Codable {
     let success: Bool
     let result: Result
+
+    enum CodingKeys: String, CodingKey {
+        case success
+        case result
+    }
 }
 
 // MARK: - Result
 struct Result: Codable {
     let version: String
     let list: List
+
+    enum CodingKeys: String, CodingKey {
+        case version
+        case list
+    }
 }
 
 // MARK: - List
@@ -116,9 +127,12 @@ struct List: Codable {
         case transactions
         case address_book
         case my_wallets
-        case menu, support
+        case menu
+        case support
         case ask_a_question
-        case wallet, notifications, faq
+        case wallet
+        case notifications
+        case faq
         case listing_request
         case no_connection
         case slow_connection
@@ -128,7 +142,8 @@ struct List: Codable {
 
 // MARK: - AboutTheApplication
 struct AboutTheApplication: Codable {
-    let about_the_application_info, about_the_application_title: String
+    let about_the_application_info: String
+    let about_the_application_title: String
 
     enum CodingKeys: String, CodingKey {
         case about_the_application_info
@@ -138,11 +153,27 @@ struct AboutTheApplication: Codable {
 
 // MARK: - AddressBook
 struct AddressBook: Codable {
-    let address_book_add_adress, address_book_add_contact_add_btn, address_book_add_contact_adress, address_book_add_contact_description: String
-    let address_book_add_contact_name, address_book_add_contact_title, address_book_edit_contact_description, address_book_edit_contact_name: String
-    let address_book_edit_contact_title, address_book_pop_up_delete_description, address_book_pop_up_delete_title, address_book_title: String
-    let address_book_wrong_adress_error, adress_book_edit_contact_pop_up_changed_description, adress_book_edit_contact_pop_up_changed_title, adress_book_loading_remove_description: String
-    let adress_book_loading_remove_title, adress_book_pop_up_removed_description, adress_book_pop_up_removed_title: String
+    let address_book_add_adress: String
+    let address_book_add_contact_add_btn: String
+    let address_book_add_contact_adress: String
+    let address_book_add_contact_description: String
+    let address_book_add_contact_name: String
+    let address_book_add_contact_title: String
+    let address_book_edit_contact_description: String
+    let address_book_edit_contact_name: String
+    let address_book_edit_contact_title: String
+    let address_book_pop_up_added_description: String
+    let address_book_pop_up_added_title: String
+    let address_book_pop_up_delete_description: String
+    let address_book_pop_up_delete_title: String
+    let address_book_title: String
+    let address_book_wrong_adress_error: String
+    let adress_book_edit_contact_pop_up_changed_description: String
+    let adress_book_edit_contact_pop_up_changed_title: String
+    let adress_book_loading_remove_description: String
+    let adress_book_loading_remove_title: String
+    let adress_book_pop_up_removed_description: String
+    let adress_book_pop_up_removed_title: String
 
     enum CodingKeys: String, CodingKey {
         case address_book_add_adress
@@ -154,6 +185,8 @@ struct AddressBook: Codable {
         case address_book_edit_contact_description
         case address_book_edit_contact_name
         case address_book_edit_contact_title
+        case address_book_pop_up_added_description
+        case address_book_pop_up_added_title
         case address_book_pop_up_delete_description
         case address_book_pop_up_delete_title
         case address_book_title
@@ -169,14 +202,39 @@ struct AddressBook: Codable {
 
 // MARK: - All
 struct All: Codable {
-    let add_wallet_import, add_wallet_new, add_wallet_title, agreement_with_terms_of_use_chekbox: String
-    let back_btn, confirm_btn, delet_wallet_warning_cancel_btn, delet_wallet_warning_confirml_btn: String
-    let delet_wallet_warning_description, delet_wallet_warning_title, lable_copied, loading_pop_up_description: String
-    let loading_pop_up_title, next_btn, non_existent_adress_error, passcode_confirmation_description: String
-    let passcode_confirmation_title, personal_data_agreement_chekbox, pop_up_failed_error_description, pop_up_failed_error_return_btn: String
-    let pop_up_failed_error_title, pop_up_sent_title, pop_up_wallet_removed_description, pop_up_wallet_removed_title: String
-    let ready_btn, reconnect_btn, return_btn, search: String
-    let select_network, share_btn, transaction_pop_up_info_title: String
+    let add_wallet_import: String
+    let add_wallet_new: String
+    let add_wallet_title: String
+    let agreement_with_terms_of_use_chekbox: String
+    let back_btn: String
+    let camera_permission_missing: String
+    let cancel_btn: String
+    let confirm_btn: String
+    let delet_wallet_warning_cancel_btn: String
+    let delet_wallet_warning_confirml_btn: String
+    let delet_wallet_warning_description: String
+    let delet_wallet_warning_title: String
+    let lable_copied: String
+    let loading_pop_up_description: String
+    let loading_pop_up_title: String
+    let next_btn: String
+    let non_existent_adress_error: String
+    let passcode_confirmation_description: String
+    let passcode_confirmation_title: String
+    let personal_data_agreement_chekbox: String
+    let pop_up_failed_error_description: String
+    let pop_up_failed_error_return_btn: String
+    let pop_up_failed_error_title: String
+    let pop_up_sent_title: String
+    let pop_up_wallet_removed_description: String
+    let pop_up_wallet_removed_title: String
+    let ready_btn: String
+    let reconnect_btn: String
+    let return_btn: String
+    let save_btn: String
+    let search: String
+    let select_network: String
+    let share_btn: String
 
     enum CodingKeys: String, CodingKey {
         case add_wallet_import
@@ -184,6 +242,8 @@ struct All: Codable {
         case add_wallet_title
         case agreement_with_terms_of_use_chekbox
         case back_btn
+        case camera_permission_missing
+        case cancel_btn
         case confirm_btn
         case delet_wallet_warning_cancel_btn
         case delet_wallet_warning_confirml_btn
@@ -206,16 +266,19 @@ struct All: Codable {
         case ready_btn
         case reconnect_btn
         case return_btn
+        case save_btn
         case search
         case select_network
         case share_btn
-        case transaction_pop_up_info_title
     }
 }
 
 // MARK: - AskAQuestion
 struct AskAQuestion: Codable {
-    let ask_a_question_e_mail, ask_a_question_name, ask_a_question_question, ask_a_question_title: String
+    let ask_a_question_e_mail: String
+    let ask_a_question_name: String
+    let ask_a_question_question: String
+    let ask_a_question_title: String
     let pop_up_sent_a_question_description: String
 
     enum CodingKeys: String, CodingKey {
@@ -229,7 +292,10 @@ struct AskAQuestion: Codable {
 
 // MARK: - CreateAMnemonicPhrase
 struct CreateAMnemonicPhrase: Codable {
-    let create_a_mnemonic_phrase_agreement, create_a_mnemonic_phrase_description, create_a_mnemonic_phrase_title, pop_up_failed_create_a_mnemonic_phrase_title: String
+    let create_a_mnemonic_phrase_agreement: String
+    let create_a_mnemonic_phrase_description: String
+    let create_a_mnemonic_phrase_title: String
+    let pop_up_failed_create_a_mnemonic_phrase_title: String
 
     enum CodingKeys: String, CodingKey {
         case create_a_mnemonic_phrase_agreement
@@ -241,8 +307,12 @@ struct CreateAMnemonicPhrase: Codable {
 
 // MARK: - CreateAPasscode
 struct CreateAPasscode: Codable {
-    let creating_a_password_description, creating_a_password_error_amount_of_characters, creating_a_password_error_difference, creating_a_password_titel: String
-    let repeat_passcode_description, repeat_passcode_title: String
+    let creating_a_password_description: String
+    let creating_a_password_error_amount_of_characters: String
+    let creating_a_password_error_difference: String
+    let creating_a_password_titel: String
+    let repeat_passcode_description: String
+    let repeat_passcode_title: String
 
     enum CodingKeys: String, CodingKey {
         case creating_a_password_description
@@ -265,8 +335,14 @@ struct FAQ: Codable {
 
 // MARK: - ImportMnemonics
 struct ImportMnemonics: Codable {
-    let import_mnemonics_description, import_mnemonics_pop_up_sucsess_description, import_mnemonics_same_words_error, import_mnemonics_title: String
-    let import_mnemonics_twelve_words_btn, import_mnemonics_twenty_four_words_btn, import_mnemonics_warning, import_mnemonics_wrong_words_error: String
+    let import_mnemonics_description: String
+    let import_mnemonics_pop_up_sucsess_description: String
+    let import_mnemonics_same_words_error: String
+    let import_mnemonics_title: String
+    let import_mnemonics_twelve_words_btn: String
+    let import_mnemonics_twenty_four_words_btn: String
+    let import_mnemonics_warning: String
+    let import_mnemonics_wrong_words_error: String
     let pop_up_failed_import_mnemonics_title: String
 
     enum CodingKeys: String, CodingKey {
@@ -284,7 +360,9 @@ struct ImportMnemonics: Codable {
 
 // MARK: - ImportTokens
 struct ImportTokens: Codable {
-    let import_mnemonics_pop_up_sucsess_title, import_tokens_label_add, import_tokens_title: String
+    let import_mnemonics_pop_up_sucsess_title: String
+    let import_tokens_label_add: String
+    let import_tokens_title: String
 
     enum CodingKeys: String, CodingKey {
         case import_mnemonics_pop_up_sucsess_title
@@ -295,8 +373,14 @@ struct ImportTokens: Codable {
 
 // MARK: - ListingRequest
 struct ListingRequest: Codable {
-    let listing_request_blockchain, listing_request_e_mail, listing_request_name, listing_request_project_description: String
-    let listing_request_project_name, listing_request_title, listing_request_twitter, pop_up_listing_request_description: String
+    let listing_request_blockchain: String
+    let listing_request_e_mail: String
+    let listing_request_name: String
+    let listing_request_project_description: String
+    let listing_request_project_name: String
+    let listing_request_title: String
+    let listing_request_twitter: String
+    let pop_up_listing_request_description: String
 
     enum CodingKeys: String, CodingKey {
         case listing_request_blockchain
@@ -312,9 +396,16 @@ struct ListingRequest: Codable {
 
 // MARK: - MainScreen
 struct MainScreen: Codable {
-    let main_screen_addresses_btn, main_screen_purse_add_wallet, main_screen_purse_all_wallets, main_screen_purse_btn: String
-    let main_screen_purse_import, main_screen_recive_btn, main_screen_send_btn, main_screen_title_balance: String
-    let main_screen_title_purse, main_screen_transaction_btn: String
+    let main_screen_addresses_btn: String
+    let main_screen_purse_add_wallet: String
+    let main_screen_purse_all_wallets: String
+    let main_screen_purse_btn: String
+    let main_screen_purse_import: String
+    let main_screen_recive_btn: String
+    let main_screen_send_btn: String
+    let main_screen_title_balance: String
+    let main_screen_title_purse: String
+    let main_screen_transaction_btn: String
 
     enum CodingKeys: String, CodingKey {
         case main_screen_addresses_btn
@@ -332,12 +423,18 @@ struct MainScreen: Codable {
 
 // MARK: - Menu
 struct Menu: Codable {
-    let menu_dark_theme, menu_hide_wallet_balance_description, menu_hide_wallet_balance_title: String
-    let menu_light_theme, menu_notifications, menu_push_notifications_description, menu_push_notifications_title: String
-    let menu_show_more_title, menu_support_description, menu_support_title: String
+    let menu_dark_theme: String
+    let menu_hide_wallet_balance_description: String
+    let menu_hide_wallet_balance_title: String
+    let menu_light_theme: String
+    let menu_notifications: String
+    let menu_push_notifications_description: String
+    let menu_push_notifications_title: String
+    let menu_show_more_title: String
+    let menu_support_description: String
+    let menu_support_title: String
 
     enum CodingKeys: String, CodingKey {
-//        case menu_all_settings
         case menu_dark_theme
         case menu_hide_wallet_balance_description
         case menu_hide_wallet_balance_title
@@ -353,8 +450,12 @@ struct Menu: Codable {
 
 // MARK: - MnemonicPhraseVerification
 struct MnemonicPhraseVerification: Codable {
-    let mnemonic_phrase_verification_description, mnemonic_phrase_verification_error, mnemonic_phrase_verification_pop_up_sucsess_description, mnemonic_phrase_verification_pop_up_sucsess_title: String
-    let mnemonic_phrase_verification_task, mnemonic_phrase_verification_title: String
+    let mnemonic_phrase_verification_description: String
+    let mnemonic_phrase_verification_error: String
+    let mnemonic_phrase_verification_pop_up_sucsess_description: String
+    let mnemonic_phrase_verification_pop_up_sucsess_title: String
+    let mnemonic_phrase_verification_task: String
+    let mnemonic_phrase_verification_title: String
 
     enum CodingKeys: String, CodingKey {
         case mnemonic_phrase_verification_description
@@ -368,7 +469,10 @@ struct MnemonicPhraseVerification: Codable {
 
 // MARK: - MyWallets
 struct MyWallets: Codable {
-    let my_wallets_add_wallet, my_wallets_label_added, my_wallets_label_removed, my_wallets_title: String
+    let my_wallets_add_wallet: String
+    let my_wallets_label_added: String
+    let my_wallets_label_removed: String
+    let my_wallets_title: String
 
     enum CodingKeys: String, CodingKey {
         case my_wallets_add_wallet
@@ -389,7 +493,8 @@ struct NetworkDescription: Codable {
 
 // MARK: - NoConnection
 struct NoConnection: Codable {
-    let no_connection_description, no_connection_title: String
+    let no_connection_description: String
+    let no_connection_title: String
 
     enum CodingKeys: String, CodingKey {
         case no_connection_description
@@ -399,10 +504,20 @@ struct NoConnection: Codable {
 
 // MARK: - Notifications
 struct Notifications: Codable {
-    let notifications_all, notifications_credited_to_chia_wallet, notifications_credited_to_chives_wallet, notifications_enrollments: String
-    let notifications_month, notifications_other, notifications_title, notifications_today: String
-    let notifications_week, notifications_withdrawn_from_chia_wallet, notifications_withdrawn_from_chives_wallet, notifications_write_off: String
-    let notifications_year, notifications_yesterday: String
+    let notifications_all: String
+    let notifications_credited_to_chia_wallet: String
+    let notifications_credited_to_chives_wallet: String
+    let notifications_enrollments: String
+    let notifications_month: String
+    let notifications_other: String
+    let notifications_title: String
+    let notifications_today: String
+    let notifications_week: String
+    let notifications_withdrawn_from_chia_wallet: String
+    let notifications_withdrawn_from_chives_wallet: String
+    let notifications_write_off: String
+    let notifications_year: String
+    let notifications_yesterday: String
 
     enum CodingKeys: String, CodingKey {
         case notifications_all
@@ -424,7 +539,8 @@ struct Notifications: Codable {
 
 // MARK: - PasscodeEntryScreen
 struct PasscodeEntryScreen: Codable {
-    let passcode_entry_screen_error, passcode_entry_screen_reset: String
+    let passcode_entry_screen_error: String
+    let passcode_entry_screen_reset: String
 
     enum CodingKeys: String, CodingKey {
         case passcode_entry_screen_error
@@ -434,7 +550,8 @@ struct PasscodeEntryScreen: Codable {
 
 // MARK: - ReceiveAToken
 struct ReceiveAToken: Codable {
-    let receive_a_token_adress, receive_a_token_copy: String
+    let receive_a_token_adress: String
+    let receive_a_token_copy: String
 
     enum CodingKeys: String, CodingKey {
         case receive_a_token_adress
@@ -444,7 +561,8 @@ struct ReceiveAToken: Codable {
 
 // MARK: - ScreenForCreatingANewWallet
 struct ScreenForCreatingANewWallet: Codable {
-    let screen_for_creating_a_new_wallet_description, screen_for_creating_a_new_wallet_title: String
+    let screen_for_creating_a_new_wallet_description: String
+    let screen_for_creating_a_new_wallet_title: String
 
     enum CodingKeys: String, CodingKey {
         case screen_for_creating_a_new_wallet_description
@@ -463,10 +581,24 @@ struct SelectLanguage: Codable {
 
 // MARK: - SendToken
 struct SendToken: Codable {
-    let send_token_add_address, send_token_address_is_already_exist, send_token_adress, send_token_amount: String
-    let send_token_commission_amount, send_token_commission_recommended, send_token_insufficient_funds_error, send_token_name_of_adres: String
-    let send_token_password_error, send_token_pop_up_confirmation, send_token_pop_up_succsess_description, send_token_pop_up_succsess_title: String
-    let send_token_pop_up_transaction_fail_error_description, send_token_pop_up_transaction_fail_error_title: String
+    let send_token_add_address: String
+    let send_token_address_is_already_exist: String
+    let send_token_adress: String
+    let send_token_amount: String
+    let send_token_commission_amount: String
+    let send_token_commission_recommended: String
+    let send_token_insufficient_funds_error: String
+    let send_token_name_of_adres: String
+    let send_token_password_error: String
+    let send_token_pop_up_confirmation: String
+    let send_token_pop_up_confirmation_adress: String
+    let send_token_pop_up_confirmation_amount: String
+    let send_token_pop_up_confirmation_blockchain: String
+    let send_token_pop_up_confirmation_token: String
+    let send_token_pop_up_succsess_description: String
+    let send_token_pop_up_succsess_title: String
+    let send_token_pop_up_transaction_fail_error_description: String
+    let send_token_pop_up_transaction_fail_error_title: String
 
     enum CodingKeys: String, CodingKey {
         case send_token_add_address
@@ -479,6 +611,10 @@ struct SendToken: Codable {
         case send_token_name_of_adres
         case send_token_password_error
         case send_token_pop_up_confirmation
+        case send_token_pop_up_confirmation_adress
+        case send_token_pop_up_confirmation_amount
+        case send_token_pop_up_confirmation_blockchain
+        case send_token_pop_up_confirmation_token
         case send_token_pop_up_succsess_description
         case send_token_pop_up_succsess_title
         case send_token_pop_up_transaction_fail_error_description
@@ -488,7 +624,8 @@ struct SendToken: Codable {
 
 // MARK: - SlowConnection
 struct SlowConnection: Codable {
-    let slow_connection_description, slow_connection_title: String
+    let slow_connection_description: String
+    let slow_connection_title: String
 
     enum CodingKeys: String, CodingKey {
         case slow_connection_description
@@ -498,7 +635,10 @@ struct SlowConnection: Codable {
 
 // MARK: - Support
 struct Support: Codable {
-    let support_about_app, support_ask_a_question, support_FAQ, support_listing: String
+    let support_about_app: String
+    let support_ask_a_question: String
+    let support_FAQ: String
+    let support_listing: String
 
     enum CodingKeys: String, CodingKey {
         case support_about_app
@@ -510,7 +650,8 @@ struct Support: Codable {
 
 // MARK: - TermsOfUse
 struct TermsOfUse: Codable {
-    let terms_of_use_text, trms_of_use_title: String
+    let terms_of_use_text: String
+    let trms_of_use_title: String
 
     enum CodingKeys: String, CodingKey {
         case terms_of_use_text
@@ -520,17 +661,39 @@ struct TermsOfUse: Codable {
 
 // MARK: - Transactions
 struct Transactions: Codable {
-    let incoming_outgoing, transactions_all, transactions_incoming, transactions_last_month: String
-    let transactions_last_week, transactions_pendind, transactions_title, transactions_today: String
+    let incoming_outgoing: String
+    let transaction_pop_up_info_block_height: String
+    let transaction_pop_up_info_commission: String
+    let transaction_pop_up_info_date: String
+    let transaction_pop_up_info_sum: String
+    let transaction_pop_up_info_title: String
+    let transactions_all: String
+    let transactions_amount: String
+    let transactions_height: String
+    let transactions_incoming: String
+    let transactions_last_month: String
+    let transactions_last_week: String
+    let transactions_pendind: String
+    let transactions_status: String
+    let transactions_title: String
+    let transactions_today: String
     let transactions_yesterday: String
 
     enum CodingKeys: String, CodingKey {
         case incoming_outgoing
+        case transaction_pop_up_info_block_height
+        case transaction_pop_up_info_commission
+        case transaction_pop_up_info_date
+        case transaction_pop_up_info_sum
+        case transaction_pop_up_info_title
         case transactions_all
+        case transactions_amount
+        case transactions_height
         case transactions_incoming
         case transactions_last_month
         case transactions_last_week
         case transactions_pendind
+        case transactions_status
         case transactions_title
         case transactions_today
         case transactions_yesterday
@@ -539,10 +702,21 @@ struct Transactions: Codable {
 
 // MARK: - Wallet
 struct Wallet: Codable {
-    let wallet_data_adress, wallet_data_mnemonics, wallet_data_public_key, wallet_delete_wallet_btn: String
-    let wallet_receive_description, wallet_receive_title, wallet_scan_address_description, wallet_scan_address_title: String
-    let wallet_send_description, wallet_send_title, wallet_share_description, wallet_share_title: String
-    let wallet_show_data, wallet_title, wallet_transaction_history_btn: String
+    let wallet_data_adress: String
+    let wallet_data_mnemonics: String
+    let wallet_data_public_key: String
+    let wallet_delete_wallet_btn: String
+    let wallet_receive_description: String
+    let wallet_receive_title: String
+    let wallet_scan_address_description: String
+    let wallet_scan_address_title: String
+    let wallet_send_description: String
+    let wallet_send_title: String
+    let wallet_share_description: String
+    let wallet_share_title: String
+    let wallet_show_data: String
+    let wallet_title: String
+    let wallet_transaction_history_btn: String
 
     enum CodingKeys: String, CodingKey {
         case wallet_data_adress
@@ -565,7 +739,10 @@ struct Wallet: Codable {
 
 // MARK: - WelcomeScreen
 struct WelcomeScreen: Codable {
-    let welcome_screen_titel_afternoon, welcome_screen_titel_evening, welcome_screen_titel_morning, welcome_screen_titel_night: String
+    let welcome_screen_titel_afternoon: String
+    let welcome_screen_titel_evening: String
+    let welcome_screen_titel_morning: String
+    let welcome_screen_titel_night: String
 
     enum CodingKeys: String, CodingKey {
         case welcome_screen_titel_afternoon
@@ -574,3 +751,4 @@ struct WelcomeScreen: Codable {
         case welcome_screen_titel_night
     }
 }
+

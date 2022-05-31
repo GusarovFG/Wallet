@@ -10,7 +10,7 @@ import UIKit
 class SelectSystemViewController: UIViewController {
     
     private let systems: [System] = [System(name: "Chia", token: "XCH", image: UIImage(named: "LogoChia")!, balance: 0), System(name: "Chives", token: "XCC", image: UIImage(named: "ChivesLogo")!, balance: 0)]
-    private let typseOfNewWallet = ["Новый", "Импорт мнемоники"]
+    private var typseOfNewWallet: [String] = []
     var isSelectedSystem = false
     var isGetToken = false
     var isPushToken = false
@@ -32,7 +32,7 @@ class SelectSystemViewController: UIViewController {
         if self.isNewWallet {
             self.titleLabel.text = LocalizationManager.share.translate?.result.list.all.add_wallet_title
         }
-        
+        self.typseOfNewWallet = [LocalizationManager.share.translate?.result.list.all.add_wallet_new ?? "", LocalizationManager.share.translate?.result.list.all.add_wallet_import ?? ""]
         let swipeGasture = UISwipeGestureRecognizer(target: self, action: #selector(dismissSwipe))
         swipeGasture.direction = .down
         self.view.addGestureRecognizer(swipeGasture)

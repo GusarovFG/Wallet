@@ -43,12 +43,13 @@ extension SelectLanguageViewController: UITableViewDelegate, UITableViewDataSour
             let termsOfUseVC = storyboard?.instantiateViewController(withIdentifier: "TermsOfUseViewController") as! TermsOfUseViewController
         termsOfUseVC.modalPresentationStyle = .fullScreen
             let language = LanguageManager.share.language?.result.list[indexPath.row]
-            NetworkManager.share.getTranslate(from: MainURLS.API.rawValue, languageCode: language?.code ?? "", version: LanguageManager.share.language?.result.version ?? "") { TranslateManager in
+            NetworkManager.share.getTranslate(from: MainURLS.API.rawValue, languageCode: language?.code ?? "" ) { TranslateManager in
+                
                 LocalizationManager.share.translate = TranslateManager
                 CoreDataManager.share.saveLanguage(language?.code ?? "", version: LanguageManager.share.language?.result.version ?? "" )
+                print(TranslateManager)
                 self.present(termsOfUseVC, animated: true)
             }
-        print(language?.code ?? "")
             
 
         

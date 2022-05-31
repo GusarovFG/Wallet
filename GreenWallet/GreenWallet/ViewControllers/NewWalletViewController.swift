@@ -60,6 +60,9 @@ class NewWalletViewController: UIViewController {
     private func localization() {
         self.newWalletLAbel.text = LocalizationManager.share.translate?.result.list.screen_for_creating_a_new_wallet.screen_for_creating_a_new_wallet_title
         self.creatingNewWalletLabel.text = LocalizationManager.share.translate?.result.list.screen_for_creating_a_new_wallet.screen_for_creating_a_new_wallet_description
+        self.backButton.setTitle(LocalizationManager.share.translate?.result.list.all.back_btn, for: .normal)
+        self.createNewWalletButton.setTitle(LocalizationManager.share.translate?.result.list.network_description.network_description_btn, for: .normal)
+        self.agreeLabel.text = LocalizationManager.share.translate?.result.list.all.agreement_with_terms_of_use_chekbox
     }
     
     private func setupAgreeLabel() {

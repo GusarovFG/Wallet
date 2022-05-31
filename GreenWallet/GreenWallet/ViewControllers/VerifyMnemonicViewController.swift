@@ -26,6 +26,7 @@ class VerifyMnemonicViewController: UIViewController {
     @IBOutlet weak var discriptionLabel: UILabel!
     @IBOutlet weak var errorTitle: UILabel!
     @IBOutlet weak var continueButton: UIButton!
+    @IBOutlet weak var backButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,7 +36,8 @@ class VerifyMnemonicViewController: UIViewController {
         
         self.veryfyCollectionView.register(UINib(nibName: "MnemonicCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "mnemonicCell")
         self.selectCollectionView.register(UINib(nibName: "MnemonicCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "mnemonicCell")
-        
+        self.continueButton.isEnabled = false
+        self.continueButton.backgroundColor = #colorLiteral(red: 0.246493727, green: 0.246493727, blue: 0.246493727, alpha: 1)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -60,7 +62,7 @@ class VerifyMnemonicViewController: UIViewController {
         self.pleaseLabel.text = LocalizationManager.share.translate?.result.list.mnemonic_phrase_verification.mnemonic_phrase_verification_task
         self.continueButton.setTitle(LocalizationManager.share.translate?.result.list.all.next_btn, for: .normal)
         self.errorTitle.text = LocalizationManager.share.translate?.result.list.mnemonic_phrase_verification.mnemonic_phrase_verification_error
-        
+        self.backButton.setTitle(LocalizationManager.share.translate?.result.list.all.back_btn, for: .normal)
     }
     
     @IBAction func backButtonPressed(_ sender: Any) {
@@ -133,6 +135,7 @@ extension VerifyMnemonicViewController: UICollectionViewDelegate, UICollectionVi
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "mnemonicCell", for: indexPath) as! MnemonicCollectionViewCell
         cell.tag = indexPath.row
         
+        print(self.verifyedMnemonicPhrase)
         switch collectionView {
         case self.veryfyCollectionView:
             cell.mnemonicWord.text = "\(self.indexes[indexPath.row]). \(self.verifyedMnemonicPhrase[indexPath.row])"
@@ -152,11 +155,13 @@ extension VerifyMnemonicViewController: UICollectionViewDelegate, UICollectionVi
             } else {
                 cell.backgroundColor = .systemBackground
             }
+            
             return cell
         case self.selectCollectionView:
             cell.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
             cell.mnemonicWord.text = "\(self.selectPhrase[indexPath.row])"
             cell.mnemonicWord.tintColor = .white
+            
             return cell
         default:
             return cell
@@ -166,7 +171,7 @@ extension VerifyMnemonicViewController: UICollectionViewDelegate, UICollectionVi
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch collectionView {
         case self.veryfyCollectionView:
-            if indexPath > [0,5] {
+            if indexPath == [0,self.verifyedMnemonicPhrase.filter({$0 != ""}).count - 1] {
                 let cell = self.veryfyCollectionView.cellForItem(at: indexPath) as! MnemonicCollectionViewCell
                 cell.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
                 self.selectIndex = indexPath.row
@@ -174,11 +179,16 @@ extension VerifyMnemonicViewController: UICollectionViewDelegate, UICollectionVi
                     self.selectPhrase.append(self.verifyedMnemonicPhrase[indexPath.row])
                     self.verifyedMnemonicPhrase.remove(at: indexPath.row)
                     self.verifyedMnemonicPhrase.insert("", at: indexPath.row)
-                    self.firstWord = false
                     self.veryfyCollectionView.reloadData()
                     self.selectCollectionView.reloadData()
                     
+                    if !self.selectPhrase.isEmpty {
+                        self.continueButton.isEnabled = false
+                        self.continueButton.backgroundColor = #colorLiteral(red: 0.246493727, green: 0.246493727, blue: 0.246493727, alpha: 1)
+                        self.pleaseLabel.alpha = 1
+                    }
                 }
+                
             }
         case self.selectCollectionView:
             let cell = self.veryfyCollectionView.cellForItem(at: indexPath) as! MnemonicCollectionViewCell
@@ -198,6 +208,12 @@ extension VerifyMnemonicViewController: UICollectionViewDelegate, UICollectionVi
                 
                 self.veryfyCollectionView.reloadData()
                 self.selectCollectionView.reloadData()
+                if self.selectPhrase.isEmpty {
+                    self.continueButton.isEnabled = true
+                    self.continueButton.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
+                    self.pleaseLabel.alpha = 0
+                }
+                
             }
             
         default:

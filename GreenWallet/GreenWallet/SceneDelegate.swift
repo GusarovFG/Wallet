@@ -14,7 +14,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         
-        
+//        UserDefaultsManager.shared.userDefaults.set("First", forKey: UserDefaultsStringKeys.firstSession.rawValue)
         
         if #available(iOS 12, *), UserDefaultsManager.shared.userDefaults.string(forKey: UserDefaultsStringKeys.theme.rawValue) == "dark" || UserDefaultsManager.shared.userDefaults.string(forKey: UserDefaultsStringKeys.theme.rawValue) == nil {
             self.window?.overrideUserInterfaceStyle = .dark
@@ -40,7 +40,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             }
             
             print("\(CoreDataManager.share.fetchLanguage().count) + ---------------------------------__-_-_--_-_-_----")
-            NetworkManager.share.getTranslate(from: MainURLS.API.rawValue, languageCode: CoreDataManager.share.fetchLanguage()[0].languageCode ?? "", version: CoreDataManager.share.fetchLanguage()[0].version ?? "") { translate in
+            NetworkManager.share.getTranslate(from: MainURLS.API.rawValue, languageCode: CoreDataManager.share.fetchLanguage()[0].languageCode ?? "") { translate in
                 LocalizationManager.share.translate = translate
                 enterPasswordVC.viewDidLoad()
                 UIView.animate(withDuration: 1, delay: 0) {

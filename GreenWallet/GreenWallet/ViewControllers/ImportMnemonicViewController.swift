@@ -12,7 +12,7 @@ class ImportMnemonicViewController: UIViewController {
     private var mnemonicPhrase: [String] = []
     private var countOfItems = 12
     private var checkBoxPress = false
-    
+    private var frameY: CGFloat = 0
     
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
@@ -49,15 +49,9 @@ class ImportMnemonicViewController: UIViewController {
                 UIApplication.shared.open(url!, options: [:])
             }
         }
-        
     }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesBegan(touches, with: event)
         
-        self.view.endEditing(true)
-    }
-    
+
     private func localization() {
         self.titleLabel.text = LocalizationManager.share.translate?.result.list.import_mnemonics.import_mnemonics_title
         self.descriptionLabel.text = LocalizationManager.share.translate?.result.list.import_mnemonics.import_mnemonics_description
@@ -67,6 +61,8 @@ class ImportMnemonicViewController: UIViewController {
         self.termsLabel.text = LocalizationManager.share.translate?.result.list.all.agreement_with_terms_of_use_chekbox
         
     }
+    
+    
     
     private func registerFromKeyBoardNotifications() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
@@ -78,12 +74,20 @@ class ImportMnemonicViewController: UIViewController {
         guard let keyboardSize = userInfo[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue else {return}
         let keyboardFrame = keyboardSize.cgRectValue
         
+        let bottomOffset = CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.bounds.height + scrollView.contentInset.bottom)
+        self.scrollView.setContentOffset(bottomOffset, animated: false)
         self.scrollView.contentOffset = CGPoint(x: 0, y: keyboardFrame.height - 100)
+        self.scrollView.isScrollEnabled = true
     }
     
     @objc private func keyboardWillHide() {
         self.scrollView.contentOffset = CGPoint.zero
+        if self.countOfItems == 12 {
+            self.scrollView.isScrollEnabled = false
+        }
     }
+
+    
     
     private func setuptermsLabel() {
         let prefixString = "Я соглашаюсь с  "
@@ -159,26 +163,40 @@ class ImportMnemonicViewController: UIViewController {
     
     
     @IBAction func continueButtonPressed(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "spinner", bundle: .main)
-        let spinnerVC = storyboard.instantiateViewController(withIdentifier: "spinner") as! SprinnerViewController
+
         
-        self.present(spinnerVC, animated: true, completion: nil)
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3.5) {
-            self.alertView.backgroundColor = #colorLiteral(red: 1, green: 0.2360929251, blue: 0.1714096665, alpha: 1)
-            self.alertLabel.text = LocalizationManager.share.translate?.result.list.import_mnemonics.import_mnemonics_wrong_words_error
-            self.collectionView.visibleCells.forEach { cell in
-                cell.layer.borderColor = #colorLiteral(red: 1, green: 0.2360929251, blue: 0.1714096665, alpha: 0.8980392157)
-            }
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                
-                let storyboard = UIStoryboard(name: "Alert", bundle: .main)
-                let spinnerVC = storyboard.instantiateViewController(withIdentifier: "AllertImportViewController") as! AllertWalletViewController
+        for i in 0..<self.mnemonicPhrase.count{
+            if self.mnemonicPhrase.filter({$0 == self.mnemonicPhrase[i]}).count > 2 {
+                self.alertView.backgroundColor = #colorLiteral(red: 1, green: 0.2360929251, blue: 0.1714096665, alpha: 1)
+                self.alertLabel.text = LocalizationManager.share.translate?.result.list.import_mnemonics.import_mnemonics_wrong_words_error
+                self.collectionView.visibleCells.forEach { cell in
+                    cell.layer.borderColor = #colorLiteral(red: 1, green: 0.2360929251, blue: 0.1714096665, alpha: 0.8980392157)
+                    
+                }
+            } else {
+                let storyboard = UIStoryboard(name: "spinner", bundle: .main)
+                let spinnerVC = storyboard.instantiateViewController(withIdentifier: "spinner") as! SprinnerViewController
                 
                 self.present(spinnerVC, animated: true, completion: nil)
                 
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                    
+                    let storyboard = UIStoryboard(name: "Alert", bundle: .main)
+                    let alert = storyboard.instantiateViewController(withIdentifier: "AllertImportViewController") as! AllertWalletViewController
+                    
+                    self.present(alert, animated: true, completion: nil)
+                    
+                
+            }
             }
         }
+
+
+           
+    }
+    @IBAction func tapHideKeyBoard(_ sender: Any) {
+        NotificationCenter.default.post(name: NSNotification.Name("HideCellKeyboard"), object: nil)
+        self.view.frame.origin.y = 0
     }
 }
 
@@ -192,6 +210,7 @@ extension ImportMnemonicViewController: UICollectionViewDelegate, UICollectionVi
         
         cell.cellTextLabel.tag = indexPath.row
         cell.cellTextLabel.delegate = self
+        cell.controller = self
         
         
         
@@ -225,10 +244,13 @@ extension ImportMnemonicViewController: UICollectionViewDelegate, UICollectionVi
                 
                 for i in 0..<self.mnemonicPhrase.count  {
                     if self.mnemonicPhrase[i] == cell.cellTextLabel.text   {
-                        cell.layer.borderColor = #colorLiteral(red: 1, green: 0.2360929251, blue: 0.1714096665, alpha: 0.8980392157)
                         self.collectionView.cellForItem(at: [0,i])?.layer.borderColor = #colorLiteral(red: 1, green: 0.2360929251, blue: 0.1714096665, alpha: 0.8980392157)
-                        print(self.mnemonicPhrase)
+                        cell.layer.borderColor = #colorLiteral(red: 1, green: 0.2360929251, blue: 0.1714096665, alpha: 0.8980392157)
                         self.errorLabel.isHidden = false
+                    } else {
+                        cell.layer.borderColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
+                        self.continueButton.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
+                        self.continueButton.isEnabled = true
                     }
                 }
                 if self.countOfItems == 12 || self.countOfItems == 24 {
@@ -277,6 +299,7 @@ extension ImportMnemonicViewController: UICollectionViewDelegate, UICollectionVi
         
         return cell
     }
+
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         CGSize(width: 178, height: 50)
@@ -288,15 +311,29 @@ extension ImportMnemonicViewController: UICollectionViewDelegate, UICollectionVi
 }
 
 extension ImportMnemonicViewController: UITextFieldDelegate {
-    
+
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+
+        
         if textField.tag == (self.countOfItems - 1) {
             textField.resignFirstResponder()
+            self.view.frame.origin.y = 0
         } else {
             let nextCell = self.collectionView?.cellForItem(at: IndexPath.init(row: textField.tag + 1, section: 0)) as! ImportMnemonicCollectionViewCell
             if let nextField = nextCell.cellTextLabel {
                 nextField.becomeFirstResponder()
+                if self.countOfItems == 24 {
+                    if textField.tag >= 5 && textField.tag <= 10 || textField.tag > 16 {
+                        self.view.frame.origin.y -= nextCell.frame.height
+                        
+                    } else if textField.tag == 11 {
+                        self.view.frame.origin.y = 0
+                    }
+                    
+                } else {
+                    return true
+                }
             }
         }
         

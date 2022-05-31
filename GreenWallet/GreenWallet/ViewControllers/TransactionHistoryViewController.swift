@@ -11,15 +11,15 @@ class TransactionHistoryViewController: UIViewController {
     
     var isHistoryWallet = false
     
-    private var walletsTransactions: [Transaction] = [Transaction(type: LocalizationManager.share.translate?.result.list.transactions.transactions_incoming ?? "", height: 1098726, summ: "4,555", token: "XCH", date: "today"),
-                                                      Transaction(type: LocalizationManager.share.translate?.result.list.transactions.transactions_incoming ?? "", height: 1098726, summ: "4,555", token: "XCH", date: "yesterday"),
-                                                      Transaction(type: LocalizationManager.share.translate?.result.list.transactions.incoming_outgoing ?? "", height: 1098726, summ: "4,555", token: "XCC", date: "yesterday"),
-                                                      Transaction(type: LocalizationManager.share.translate?.result.list.transactions.transactions_pendind ?? "", height: 1098726, summ: "4,555", token: "XCH", date: "lastMonth"),
-                                                      Transaction(type: LocalizationManager.share.translate?.result.list.transactions.transactions_pendind ?? "", height: 1098726, summ: "4,555", token: "XCC", date: "today"),
-                                                      Transaction(type: LocalizationManager.share.translate?.result.list.transactions.incoming_outgoing ?? "", height: 1098726, summ: "4,555", token: "XCC", date: "lastWeek"),
-                                                      Transaction(type: LocalizationManager.share.translate?.result.list.transactions.transactions_pendind ?? "", height: 1098726, summ: "4,555", token: "XCC", date: "yesterday"),
-                                                      Transaction(type: LocalizationManager.share.translate?.result.list.transactions.transactions_pendind ?? "", height: 1098726, summ: "4,555", token: "XCH", date: "lastMonth"),
-                                                      Transaction(type: LocalizationManager.share.translate?.result.list.transactions.incoming_outgoing ?? "", height: 1098726, summ: "4,555", token: "XCH", date: "lastMonth")]
+    private var walletsTransactions: [Transaction] = [Transaction(type: LocalizationManager.share.translate?.result.list.transactions.transactions_incoming ?? "", height: "1098726", summ: "4,555", token: "XCH", date: "today"),
+                                                      Transaction(type: LocalizationManager.share.translate?.result.list.transactions.transactions_incoming ?? "", height: "1098726", summ: "4,555", token: "XCH", date: "yesterday"),
+                                                      Transaction(type: LocalizationManager.share.translate?.result.list.transactions.incoming_outgoing ?? "", height: "456782", summ: "4,555", token: "XCC", date: "yesterday"),
+                                                      Transaction(type: LocalizationManager.share.translate?.result.list.transactions.transactions_pendind ?? "", height: "323234", summ: "4,555", token: "XCH", date: "lastMonth"),
+                                                      Transaction(type: LocalizationManager.share.translate?.result.list.transactions.transactions_pendind ?? "", height: "32098726", summ: "4,555", token: "XCC", date: "today"),
+                                                      Transaction(type: LocalizationManager.share.translate?.result.list.transactions.incoming_outgoing ?? "", height: "8998726", summ: "4,555", token: "XCC", date: "lastWeek"),
+                                                      Transaction(type: LocalizationManager.share.translate?.result.list.transactions.transactions_pendind ?? "", height: "77098726", summ: "4,555", token: "XCC", date: "yesterday"),
+                                                      Transaction(type: LocalizationManager.share.translate?.result.list.transactions.transactions_pendind ?? "", height: "6698766", summ: "4,555", token: "XCH", date: "lastMonth"),
+                                                      Transaction(type: LocalizationManager.share.translate?.result.list.transactions.incoming_outgoing ?? "", height: "5598726", summ: "4,555", token: "XCH", date: "lastMonth")]
     private var filterWalletsTransactions: [Transaction] = []
     private var isAllFilter = true
     private var isInFilter = false
@@ -99,6 +99,13 @@ class TransactionHistoryViewController: UIViewController {
         self.filterWalletsTransactions = self.walletsTransactions
         self.tableView.register(UINib(nibName: "TransitionsTableViewCell", bundle: nil), forCellReuseIdentifier: "TransitionsTableViewCell")
         self.filterCollectionView.register(UINib(nibName: "TransictionFilterCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "TransictionFilterCollectionViewCell")
+        
+        let tapGastureRecognizer = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+        self.tableView.addGestureRecognizer(tapGastureRecognizer)
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -127,9 +134,9 @@ class TransactionHistoryViewController: UIViewController {
         self.yesterdayDayeButton.setTitle(LocalizationManager.share.translate?.result.list.transactions.transactions_yesterday, for: .normal)
         self.backButton.setTitle(LocalizationManager.share.translate?.result.list.all.back_btn, for: .normal)
         self.allDateButton.setTitle(LocalizationManager.share.translate?.result.list.transactions.transactions_all, for: .normal)
-//        self.heightLabel.text = LocalizationManager.share.translate?.result.list.transactions.transactions_height
-//        self.statusLabel.text = LocalizationManager.share.translate?.result.list.transactions.transactions_status
-//        self.summLabel.text = LocalizationManager.share.translate?.result.list.transactions.transactions_amoun
+        self.heightLabel.text = LocalizationManager.share.translate?.result.list.transactions.transactions_height
+        self.statusLabel.text = LocalizationManager.share.translate?.result.list.transactions.transactions_status
+        self.summLabel.text = LocalizationManager.share.translate?.result.list.transactions.transactions_amount
         self.allDateButton.setTitle(LocalizationManager.share.translate?.result.list.transactions.transactions_all, for: .normal)
 
         self.backButton.setTitle(LocalizationManager.share.translate?.result.list.all.back_btn, for: .normal)
@@ -261,6 +268,10 @@ class TransactionHistoryViewController: UIViewController {
         self.chivesSystemButton.backgroundColor = .systemBackground
         self.chiaSystemButton.backgroundColor = .systemBackground
         self.tableView.reloadData()
+    }
+
+    @objc func hideKeyboard(_ sender: Any) {
+        self.searchBar.resignFirstResponder()
     }
     
 }
@@ -420,11 +431,28 @@ extension TransactionHistoryViewController: UICollectionViewDelegate, UICollecti
     }
 }
 
+extension TransactionHistoryViewController: UISearchBarDelegate {
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText.isEmpty {
+            self.filterWalletsTransactions = self.walletsTransactions
+            self.tableView.reloadData()
+            return
+        } else {
+            self.filterWalletsTransactions = self.walletsTransactions.filter{$0.height.contains(searchText) || $0.summ.contains(searchText)}
+          
+            self.tableView.reloadData()
+            
+        }
+    }
+    
+    
+}
 
 
 struct Transaction {
     var type: String
-    var height: Int
+    var height: String
     var summ: String
     var token: String
     var date: String

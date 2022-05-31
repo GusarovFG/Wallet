@@ -82,6 +82,7 @@ class MyWalletsViewController: UIViewController {
         self.copyLabel.text = LocalizationManager.share.translate?.result.list.all.lable_copied
         self.transactionButton.setTitle(LocalizationManager.share.translate?.result.list.wallet.wallet_transaction_history_btn, for: .normal)
         self.deleteButton.setTitle(LocalizationManager.share.translate?.result.list.wallet.wallet_delete_wallet_btn, for: .normal)
+        self.backButton.setTitle(LocalizationManager.share.translate?.result.list.all.back_btn, for: .normal)
     }
     
     @objc func deleteWalletAtIntex() {

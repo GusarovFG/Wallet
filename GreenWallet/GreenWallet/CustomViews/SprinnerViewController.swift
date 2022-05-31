@@ -19,7 +19,7 @@ class SprinnerViewController: UIViewController {
         
         self.spinner.beginRefreshing()
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             self.dismiss(animated: true, completion: nil)
         }
     }
