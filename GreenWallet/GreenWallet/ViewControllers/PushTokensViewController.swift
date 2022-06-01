@@ -416,6 +416,9 @@ class PushTokensViewController: UIViewController {
     }
     
     @IBAction func contactsButtonPressed(_ sender: Any) {
+        let contactsVC = storyboard?.instantiateViewController(withIdentifier: "ContactsViewController") as! ContactsViewController
+        contactsVC.modalPresentationStyle = .fullScreen
+        self.present(contactsVC, animated: true)
     }
     
     @IBAction func qrScanButtonPressed(_ sender: Any) {

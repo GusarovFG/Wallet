@@ -3471,6 +3471,7 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                         <outlet property="descriptinLabel" destination="hfa-ee-Uzu" id="7Dm-mZ-vms"/>
                         <outlet property="descriptionTextField" destination="bIl-SB-CB3" id="reb-Y7-NGD"/>
                         <outlet property="errorLabel" destination="Twh-FH-dEH" id="3Mb-bV-F8b"/>
+                        <outlet property="mainTitle" destination="qf1-M3-o5u" id="vNN-3z-d1l"/>
                         <outlet property="textViewheight" destination="TAz-1N-aSa" id="iHt-f1-bSL"/>
                         <outlet property="viewHeightConstraint" destination="8W5-3D-41I" id="IqX-2I-Vwj"/>
                     </connections>

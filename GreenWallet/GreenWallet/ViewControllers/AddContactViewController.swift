@@ -21,6 +21,7 @@ class AddContactViewController: UIViewController {
     @IBOutlet weak var addContactButton: UIButton!
     @IBOutlet weak var viewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var textViewheight: NSLayoutConstraint!
+    @IBOutlet weak var mainTitle: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,6 +51,7 @@ class AddContactViewController: UIViewController {
         self.descriptinLabel.text = LocalizationManager.share.translate?.result.list.address_book.address_book_add_contact_description
 
         self.addContactButton.setTitle(LocalizationManager.share.translate?.result.list.address_book.address_book_add_contact_add_btn, for: .normal)
+        self.mainTitle.text = LocalizationManager.share.translate?.result.list.address_book.address_book_add_contact_title
     }
     
     private func setupRightButtonInTextField() {
@@ -63,7 +65,8 @@ class AddContactViewController: UIViewController {
     }
     
     @objc func presentQRScan() {
-        
+        let qrScanVC = storyboard?.instantiateViewController(withIdentifier: "QRScanViewController") as! QRScanViewController
+        self.present(qrScanVC, animated: true)
     }
     @IBAction func checkTextFields(_ sender: UITextField) {
         if self.contactNameTextField.text != "" && self.contactAdresTextField.text != "" {
