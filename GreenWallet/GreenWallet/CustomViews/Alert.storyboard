@@ -480,6 +480,94 @@
             </objects>
             <point key="canvasLocation" x="2986" y="-135"/>
         </scene>
+        <!--Allert Wallet View Controller-->
+        <scene sceneID="WNo-10-YL9">
+            <objects>
+                <viewController storyboardIdentifier="AddContactAlert" modalTransitionStyle="crossDissolve" modalPresentationStyle="overFullScreen" useStoryboardIdentifierAsRestorationIdentifier="YES" id="syc-Bu-bWb" customClass="AllertWalletViewController" customModule="GreenWallet" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="HYD-wL-aKY">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nEC-o4-89n">
+                                <rect key="frame" x="35" y="212" width="344" height="457"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="seccessWalletImage" translatesAutoresizingMaskIntoConstraints="NO" id="omb-Cf-9la">
+                                        <rect key="frame" x="62" y="15" width="220" height="198"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Удалено" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GNe-u9-mTn">
+                                        <rect key="frame" x="16" y="228" width="312" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="25"/>
+                                        <color key="textColor" red="0.2274509804" green="0.67450980390000004" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ehe-Qz-HKv">
+                                        <rect key="frame" x="68" y="376.5" width="208" height="48.5"/>
+                                        <color key="backgroundColor" red="0.2274509804" green="0.67450980390000004" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="48.5" id="OSO-f2-gY7"/>
+                                        </constraints>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Готово"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <integer key="value" value="20"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="dismissButtonPressed:" destination="syc-Bu-bWb" eventType="touchUpInside" id="pHh-VB-BBZ"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Кошелек успешно удален" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xnd-rB-v6c">
+                                        <rect key="frame" x="26" y="266" width="293" height="55.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.58039215690000001" green="0.58039215690000001" blue="0.58039215690000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.18823529410000001" green="0.18823529410000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" red="0.18823529410000001" green="0.18823529410000001" blue="0.18823529410000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="Ehe-Qz-HKv" firstAttribute="leading" secondItem="nEC-o4-89n" secondAttribute="leading" constant="68" id="3bJ-Wm-VSw"/>
+                                    <constraint firstAttribute="trailing" secondItem="GNe-u9-mTn" secondAttribute="trailing" constant="16" id="Fkf-Xm-X34"/>
+                                    <constraint firstItem="omb-Cf-9la" firstAttribute="top" secondItem="nEC-o4-89n" secondAttribute="top" constant="15" id="HGs-HE-p7D"/>
+                                    <constraint firstAttribute="bottom" secondItem="Ehe-Qz-HKv" secondAttribute="bottom" constant="32" id="IPA-Jl-Iyf"/>
+                                    <constraint firstItem="omb-Cf-9la" firstAttribute="leading" secondItem="nEC-o4-89n" secondAttribute="leading" constant="62" id="KMw-iM-2Y4"/>
+                                    <constraint firstItem="GNe-u9-mTn" firstAttribute="leading" secondItem="nEC-o4-89n" secondAttribute="leading" constant="16" id="RoU-tY-U5Y"/>
+                                    <constraint firstItem="Ehe-Qz-HKv" firstAttribute="top" secondItem="xnd-rB-v6c" secondAttribute="bottom" constant="55" id="T6d-EF-YzJ"/>
+                                    <constraint firstItem="xnd-rB-v6c" firstAttribute="leading" secondItem="nEC-o4-89n" secondAttribute="leading" constant="26" id="V9j-Lb-CC2"/>
+                                    <constraint firstItem="GNe-u9-mTn" firstAttribute="top" secondItem="omb-Cf-9la" secondAttribute="bottom" constant="15" id="WE9-bq-6zB"/>
+                                    <constraint firstItem="xnd-rB-v6c" firstAttribute="top" secondItem="GNe-u9-mTn" secondAttribute="bottom" constant="8" symbolic="YES" id="pFm-1U-vdP"/>
+                                    <constraint firstAttribute="trailing" secondItem="Ehe-Qz-HKv" secondAttribute="trailing" constant="68" id="q1p-TE-5PH"/>
+                                    <constraint firstAttribute="trailing" secondItem="omb-Cf-9la" secondAttribute="trailing" constant="62" id="qXY-Zq-tKT"/>
+                                    <constraint firstAttribute="trailing" secondItem="xnd-rB-v6c" secondAttribute="trailing" constant="25" id="vM8-it-qbG"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <integer key="value" value="15"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="2eC-dR-6fG"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.34999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="nEC-o4-89n" firstAttribute="centerX" secondItem="HYD-wL-aKY" secondAttribute="centerX" id="H6I-Hv-Y3U"/>
+                            <constraint firstItem="nEC-o4-89n" firstAttribute="leading" secondItem="2eC-dR-6fG" secondAttribute="leading" constant="35" id="XGM-fU-0H7"/>
+                            <constraint firstItem="nEC-o4-89n" firstAttribute="top" secondItem="2eC-dR-6fG" secondAttribute="top" constant="168" id="vgl-5c-fOx"/>
+                            <constraint firstItem="2eC-dR-6fG" firstAttribute="bottom" secondItem="nEC-o4-89n" secondAttribute="bottom" constant="193" id="wv9-ux-qwS"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="mainButton" destination="Ehe-Qz-HKv" id="AuE-FD-CMi"/>
+                        <outlet property="wasDeletedDescription" destination="xnd-rB-v6c" id="Awb-9U-MsU"/>
+                        <outlet property="wasDeletedTitle" destination="GNe-u9-mTn" id="KjY-lN-6eg"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="E1i-Rc-clH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3681" y="-135"/>
+        </scene>
     </scenes>
     <resources>
         <image name="error" width="88" height="88"/>

@@ -49,12 +49,22 @@ extension UIStackView {
 }
 
 extension UIView {
-    func buttonStroke() {
+    func buttonStroke(_ color: CGColor) {
         let bottomLine = CALayer()
             
             bottomLine.frame = CGRect(x: 0, y: self.frame.size.height - 2, width: self.frame.size.width, height: 1)
-            bottomLine.backgroundColor = #colorLiteral(red: 0.3578948975, green: 0.3578948975, blue: 0.3578948975, alpha: 1)
+            bottomLine.backgroundColor = color
             self.layer.addSublayer(bottomLine)
         }
     
+}
+
+extension UITextView {
+
+    func numberOfLines() -> Int{
+        if let fontUnwrapped = self.font{
+            return Int(self.contentSize.height / fontUnwrapped.lineHeight)
+        }
+        return 0
+    }
 }

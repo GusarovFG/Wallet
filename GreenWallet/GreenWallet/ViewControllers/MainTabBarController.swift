@@ -39,8 +39,12 @@ class MainTabBarController: UITabBarController, UINavigationBarDelegate {
         let fourMainVC = storyboard?.instantiateViewController(withIdentifier: "TransactionHistoryVC") as! TransactionHistoryViewController
         fourMainVC.modalPresentationStyle = .fullScreen
         fourMainVC.tabBarItem = UITabBarItem(title: LocalizationManager.share.translate?.result.list.main_screen.main_screen_transaction_btn, image: UIImage(named: "transaction")!, selectedImage: UIImage(named: "transaction")!)
+        
+        let fiveMainVC = storyboard?.instantiateViewController(withIdentifier: "ContactsViewController") as! ContactsViewController
+        fiveMainVC.modalPresentationStyle = .fullScreen
+        fiveMainVC.tabBarItem = UITabBarItem(title: LocalizationManager.share.translate?.result.list.main_screen.main_screen_addresses_btn, image: UIImage(named: "adress")!, selectedImage: UIImage(named: "adress")!)
 
-        self.setViewControllers([mainVC, secondMainVC, thirdMainVC, fourMainVC], animated: true)
+        self.setViewControllers([mainVC, secondMainVC, thirdMainVC, fourMainVC, fiveMainVC], animated: true)
         self.navigationController?.navigationBar.delegate = self
     }
     

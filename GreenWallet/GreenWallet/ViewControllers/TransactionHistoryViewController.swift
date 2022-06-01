@@ -76,17 +76,17 @@ class TransactionHistoryViewController: UIViewController {
         self.lastWeekDateButton.setTitle("Последняя неделя", for: .normal)
         self.lastMonthButton.setTitle("Последний месяц", for: .normal)
         
-        self.allDateButton.buttonStroke()
-        self.todayDateButton.buttonStroke()
-        self.yesterdayDayeButton.buttonStroke()
-        self.lastWeekDateButton.buttonStroke()
-        self.allSystemButton.buttonStroke()
+        self.allDateButton.buttonStroke(#colorLiteral(red: 0.3578948975, green: 0.3578948975, blue: 0.3578948975, alpha: 1))
+        self.todayDateButton.buttonStroke(#colorLiteral(red: 0.3578948975, green: 0.3578948975, blue: 0.3578948975, alpha: 1))
+        self.yesterdayDayeButton.buttonStroke(#colorLiteral(red: 0.3578948975, green: 0.3578948975, blue: 0.3578948975, alpha: 1))
+        self.lastWeekDateButton.buttonStroke(#colorLiteral(red: 0.3578948975, green: 0.3578948975, blue: 0.3578948975, alpha: 1))
+        self.allSystemButton.buttonStroke(#colorLiteral(red: 0.3578948975, green: 0.3578948975, blue: 0.3578948975, alpha: 1))
         
         self.systemMenuView.isHidden = true
         self.systemMenuView.alpha = 0
         
-        self.chivesSystemButton.buttonStroke()
-        self.chiaSystemButton.buttonStroke()
+        self.chivesSystemButton.buttonStroke(#colorLiteral(red: 0.3578948975, green: 0.3578948975, blue: 0.3578948975, alpha: 1))
+        self.chiaSystemButton.buttonStroke(#colorLiteral(red: 0.3578948975, green: 0.3578948975, blue: 0.3578948975, alpha: 1))
         
         self.chiaSystemButton.setTitle("Chia Network", for: .normal)
         self.chivesSystemButton.setTitle("Chives Network", for: .normal)

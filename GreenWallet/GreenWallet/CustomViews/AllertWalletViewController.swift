@@ -61,6 +61,10 @@ class AllertWalletViewController: UIViewController {
             self.transactionLabel.text = LocalizationManager.share.translate?.result.list.send_token.send_token_pop_up_succsess_title
             self.transactionDescription.text = LocalizationManager.share.translate?.result.list.send_token.send_token_pop_up_succsess_description
             self.mainButton.setTitle(LocalizationManager.share.translate?.result.list.all.ready_btn, for: .normal)
+        } else if self.restorationIdentifier == "AddContactAlert" {
+            self.wasDeletedTitle.text = LocalizationManager.share.translate?.result.list.address_book.address_book_pop_up_added_title
+            self.wasDeletedDescription.text = LocalizationManager.share.translate?.result.list.address_book.address_book_pop_up_added_description
+            self.mainButton.setTitle(LocalizationManager.share.translate?.result.list.all.ready_btn, for: .normal)
         }
     }
 
@@ -92,5 +96,6 @@ class AllertWalletViewController: UIViewController {
     }
     @IBAction func dismissButtonPressed(_ sender: Any) {
         self.dismiss(animated: true)
+        NotificationCenter.default.post(name: NSNotification.Name("dismissAddContactVC"), object: nil)
     }
 }
