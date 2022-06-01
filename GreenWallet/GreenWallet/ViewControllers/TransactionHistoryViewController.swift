@@ -110,6 +110,7 @@ class TransactionHistoryViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        self.searchBar.searchTextField.attributedPlaceholder = NSAttributedString(string: LocalizationManager.share.translate?.result.list.all.search ?? "", attributes: [:])
     }
     
     override func viewDidLayoutSubviews() {
@@ -142,6 +143,9 @@ class TransactionHistoryViewController: UIViewController {
         self.backButton.setTitle(LocalizationManager.share.translate?.result.list.all.back_btn, for: .normal)
         self.filterSystemButton.setTitle(LocalizationManager.share.translate?.result.list.transactions.transactions_all, for: .normal)
         self.allSystemButton.setTitle(LocalizationManager.share.translate?.result.list.transactions.transactions_all, for: .normal)
+        
+        
+            
     }
     
     @IBAction func backButtonPressed(_ sender: Any) {

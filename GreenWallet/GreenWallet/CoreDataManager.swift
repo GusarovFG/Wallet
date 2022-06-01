@@ -47,6 +47,25 @@ class CoreDataManager {
         languages[0].version = version
         saveContext()
     }
+    
+    func fetchContacts() -> [Contact] {
+        
+        let fetchReqest: NSFetchRequest<Contact> = Contact.fetchRequest()
+        let contacts = (try? self.persistentContainer.viewContext.fetch(fetchReqest)) ?? []
+        
+        return contacts
+    }
+    
+    func saveContact(_ name: String, adres: String, description: String) {
+        
+        let contact = Contact(context: self.persistentContainer.viewContext)
+        
+        contact.name = name
+        contact.adres = adres
+        contact.descriptionOfContact = description
+        
+        saveContext()
+    }
 
     func saveContext () {
         let context = persistentContainer.viewContext
