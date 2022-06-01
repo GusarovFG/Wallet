@@ -14,6 +14,7 @@ class SelectLanguageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationItem.backButtonTitle = "Назад"
+        self.languageTableView.register(UINib(nibName: "LanguageTableViewCell", bundle: nil), forCellReuseIdentifier: "LanguageTableViewCell")
     }
 
 
@@ -26,16 +27,21 @@ extension SelectLanguageViewController: UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "languageCell", for: indexPath)
-        var content = cell.defaultContentConfiguration()
-        
-            content.text = LanguageManager.share.language?.result.list[indexPath.row].nameBtn
+        let cell = tableView.dequeueReusableCell(withIdentifier: "LanguageTableViewCell", for: indexPath) as! LanguageTableViewCell
+        cell.titleLabel.text = LanguageManager.share.language?.result.list[indexPath.row].nameBtn
+        switch LanguageManager.share.language?.result.list[indexPath.row].code {
+        case "ru":
+            cell.cellImage.image = UIImage(named: "russia")!
+            return cell
+        case "en":
+            cell.cellImage.image = UIImage(named: "english")!
+            return cell
+        default:
+            cell.cellImage.image = UIImage(named: "germany")!
+            return cell
+            
+        }
 
-        print(LanguageManager.share.language?.result.list[indexPath.row].nameBtn ?? "блябля")
-        
-        cell.contentConfiguration = content
-        
-        return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -53,6 +59,10 @@ extension SelectLanguageViewController: UITableViewDelegate, UITableViewDataSour
             
 
         
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        54
     }
 }
 

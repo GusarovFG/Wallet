@@ -36,7 +36,8 @@ class SelectSystemViewController: UIViewController {
         let swipeGasture = UISwipeGestureRecognizer(target: self, action: #selector(dismissSwipe))
         swipeGasture.direction = .down
         self.view.addGestureRecognizer(swipeGasture)
-        
+        NotificationCenter.default.addObserver(self, selector: #selector(localization), name: NSNotification.Name("localized"), object: nil)
+
     }
     
 
@@ -46,6 +47,7 @@ class SelectSystemViewController: UIViewController {
         UIView.animate(withDuration: 0.1, delay: 0) {
             self.view.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.3481637311)
         }
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -54,7 +56,7 @@ class SelectSystemViewController: UIViewController {
     }
 
 
-    private func localization() {
+    @objc private func localization() {
         self.titleLabel.text = LocalizationManager.share.translate?.result.list.all.select_network
     }
     

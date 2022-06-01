@@ -16,19 +16,11 @@ class LanguageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.titleLabel.text = LocalizationManager.share.translate?.result.list.select_language.select_language_title
-        self.tableView.register(UINib(nibName: "LanguageTableViewCell", bundle: nil), forCellReuseIdentifier: "languageCell")
+        self.tableView.register(UINib(nibName: "LanguageTableViewCell", bundle: nil), forCellReuseIdentifier: "LanguageTableViewCell")
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
+    
     @IBAction func backButtonPressed(_ sender: Any) {
         self.dismiss(animated: true)
     }
@@ -41,7 +33,7 @@ extension LanguageViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "languageCell", for: indexPath) as! LanguageTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "LanguageTableViewCell", for: indexPath) as! LanguageTableViewCell
         let language = LanguageManager.share.language?.result.list[indexPath.row]
         cell.titleLabel.text = language?.nameBtn
         
@@ -49,6 +41,8 @@ extension LanguageViewController: UITableViewDelegate, UITableViewDataSource {
             cell.cellImage.image = UIImage(named: "RussianLanguage")!
         } else if language?.code == "en" {
             cell.cellImage.image = UIImage(named: "EnglishLanguage")!
+        } else if language?.code == "de" {
+            cell.cellImage.image = UIImage(named: "germany")!
         }
         
         if CoreDataManager.share.fetchLanguage()[0].languageCode == language?.code {

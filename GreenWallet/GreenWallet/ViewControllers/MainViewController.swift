@@ -56,6 +56,10 @@ class MainViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(showWallet), name: NSNotification.Name(rawValue: "showWallet"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(showGetSystem), name: NSNotification.Name(rawValue: "showGetVC"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(showPushSystem), name: NSNotification.Name(rawValue: "showPushVC"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(localization), name: NSNotification.Name("localized"), object: nil)
+    
+    
+    
         localization()
         
         self.cellectionView.reloadData()
@@ -65,10 +69,10 @@ class MainViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
 
         super.viewWillAppear(animated)
+        localization()
         self.wallets = WalletManager.share.favoritesWallets
         self.pageControl.numberOfPages = self.wallets.count
         self.cellectionView.reloadData()
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -81,12 +85,11 @@ class MainViewController: UIViewController {
         
     }
     
-    private func localization() {
+    @objc private func localization() {
         self.balandeTitle.text = LocalizationManager.share.translate?.result.list.main_screen.main_screen_title_balance
     }
     
 
-    
     @objc private func presentSelectSystemVC() {
         
         let selectSystemVC = storyboard?.instantiateViewController(withIdentifier: "SelectSystemViewController") as! SelectSystemViewController

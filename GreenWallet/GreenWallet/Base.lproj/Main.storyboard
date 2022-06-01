@@ -81,7 +81,7 @@
                                 <rect key="frame" x="25" y="255" width="364" height="557"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="languageCell" id="SPF-o5-8jL">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="LanguageTableViewCell" id="SPF-o5-8jL" customClass="LanguageTableViewCell" customModule="GreenWallet" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="44.5" width="364" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="SPF-o5-8jL" id="Rpt-OG-pvT">
@@ -130,7 +130,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Пользовательское соглашение" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NKe-ZQ-9kH">
-                                <rect key="frame" x="82" y="94" width="249" height="60"/>
+                                <rect key="frame" x="60" y="94" width="294" height="60"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="25"/>
                                 <color key="textColor" red="0.2274509804" green="0.67450980390000004" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -238,9 +238,9 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="cdW-il-QJr" firstAttribute="trailing" secondItem="okl-XG-SSv" secondAttribute="trailing" constant="15" id="27C-U8-wcw"/>
-                            <constraint firstItem="cdW-il-QJr" firstAttribute="trailing" secondItem="NKe-ZQ-9kH" secondAttribute="trailing" constant="83" id="6zp-Gc-les"/>
+                            <constraint firstItem="cdW-il-QJr" firstAttribute="trailing" secondItem="NKe-ZQ-9kH" secondAttribute="trailing" constant="60" id="6zp-Gc-les"/>
                             <constraint firstItem="NKe-ZQ-9kH" firstAttribute="top" secondItem="cdW-il-QJr" secondAttribute="top" constant="50" id="FA8-QA-fEx"/>
-                            <constraint firstItem="NKe-ZQ-9kH" firstAttribute="leading" secondItem="cdW-il-QJr" secondAttribute="leading" constant="82" id="GdL-Gn-Z0i"/>
+                            <constraint firstItem="NKe-ZQ-9kH" firstAttribute="leading" secondItem="cdW-il-QJr" secondAttribute="leading" constant="60" id="GdL-Gn-Z0i"/>
                             <constraint firstItem="cdW-il-QJr" firstAttribute="bottom" secondItem="Kz9-9X-jED" secondAttribute="bottom" constant="54" id="Hlx-fN-gkr"/>
                             <constraint firstItem="cdW-il-QJr" firstAttribute="trailing" secondItem="zML-Z8-jof" secondAttribute="trailing" constant="41" id="Iek-wE-aZm"/>
                             <constraint firstItem="Kz9-9X-jED" firstAttribute="leading" secondItem="cdW-il-QJr" secondAttribute="leading" constant="32" id="WIt-00-DwG"/>

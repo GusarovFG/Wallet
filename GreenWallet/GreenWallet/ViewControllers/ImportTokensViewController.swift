@@ -27,10 +27,12 @@ class ImportTokensViewController: UIViewController {
         self.tableView.register(UINib(nibName: "ImportTokensTableViewCell", bundle: nil), forCellReuseIdentifier: "importTokenCell")
         self.filteredTokens = self.tokens
         localization()
+        NotificationCenter.default.addObserver(self, selector: #selector(localization), name: NSNotification.Name("localized"), object: nil)
+
     }
 
     
-    private func localization() {
+    @objc private func localization() {
         self.titleLabel.text = LocalizationManager.share.translate?.result.list.import_tokens.import_tokens_title
         self.addLabel.text = LocalizationManager.share.translate?.result.list.import_tokens.import_tokens_label_add
     }

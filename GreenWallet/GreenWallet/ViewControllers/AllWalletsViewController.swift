@@ -29,6 +29,8 @@ class AllWalletsViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(openAlert), name: NSNotification.Name("closeAlert"), object: nil)
     }
     
+    
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.wallets = WalletManager.share.vallets

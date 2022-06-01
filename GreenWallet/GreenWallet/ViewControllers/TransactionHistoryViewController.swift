@@ -102,6 +102,8 @@ class TransactionHistoryViewController: UIViewController {
         
         let tapGastureRecognizer = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
         self.tableView.addGestureRecognizer(tapGastureRecognizer)
+        NotificationCenter.default.addObserver(self, selector: #selector(localization), name: NSNotification.Name("localized"), object: nil)
+
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -128,7 +130,7 @@ class TransactionHistoryViewController: UIViewController {
         self.searchBar.searchTextField.backgroundColor = #colorLiteral(red: 0.1882352941, green: 0.1882352941, blue: 0.1882352941, alpha: 0)
     }
     
-    private func localization() {
+    @objc private func localization() {
         self.titleLabel.text = LocalizationManager.share.translate?.result.list.transactions.transactions_title
         self.searchBar.searchTextField.placeholder = LocalizationManager.share.translate?.result.list.all.search
         self.todayDateButton.setTitle(LocalizationManager.share.translate?.result.list.transactions.transactions_today, for: .normal)

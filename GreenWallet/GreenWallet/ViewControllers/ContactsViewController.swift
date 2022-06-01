@@ -31,7 +31,8 @@ class ContactsViewController: UIViewController {
         self.contacts = CoreDataManager.share.fetchContacts()
         self.filterContacts = self.contacts
         localization()
-        
+        NotificationCenter.default.addObserver(self, selector: #selector(localization), name: NSNotification.Name("localized"), object: nil)
+
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -48,7 +49,7 @@ class ContactsViewController: UIViewController {
     
     
 
-    private func localization() {
+    @objc private func localization() {
         self.backButton.setTitle(LocalizationManager.share.translate?.result.list.all.back_btn, for: .normal)
         self.mainTitleLabel.text = LocalizationManager.share.translate?.result.list.address_book.address_book_title
         self.addContactButton.setTitle(LocalizationManager.share.translate?.result.list.address_book.address_book_add_adress, for: .normal)

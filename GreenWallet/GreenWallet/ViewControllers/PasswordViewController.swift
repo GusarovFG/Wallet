@@ -273,7 +273,7 @@ class PasswordViewController: UIViewController {
                         view.backgroundColor = UIColor(red: 255, green: 255, blue: 255, alpha: 0)
                         view.layer.borderWidth = 2
                         view.layer.borderColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-                        self.enterErrorLabel.alpha = 0
+                        self.repeatErrorLabel.alpha = 0
                     }
                     self.enteringPassword = ""
                 }

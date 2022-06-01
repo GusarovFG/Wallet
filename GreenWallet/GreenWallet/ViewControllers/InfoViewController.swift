@@ -21,6 +21,8 @@ class InfoViewController: UIViewController {
         localization()
     }
 
+
+    
     private func localization() {
         self.backButton.setTitle(LocalizationManager.share.translate?.result.list.all.back_btn, for: .normal)
         self.titleLabel.text = LocalizationManager.share.translate?.result.list.about_the_application.about_the_application_title

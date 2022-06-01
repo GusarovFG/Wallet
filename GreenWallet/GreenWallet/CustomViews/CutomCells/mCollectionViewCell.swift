@@ -42,7 +42,8 @@ class mCollectionViewCell: UICollectionViewCell {
         
         
         localization()
-        
+        NotificationCenter.default.addObserver(self, selector: #selector(localization), name: NSNotification.Name("localized"), object: nil)
+
     }
     
     
@@ -70,7 +71,7 @@ class mCollectionViewCell: UICollectionViewCell {
 
     }
     
-    private func localization() {
+   @objc private func localization() {
         self.walletTitle.text = LocalizationManager.share.translate?.result.list.main_screen.main_screen_title_purse
         
         self.footerButton.setTitle(LocalizationManager.share.translate?.result.list.main_screen.main_screen_purse_all_wallets, for: .normal)

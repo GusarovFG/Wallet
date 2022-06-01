@@ -23,10 +23,17 @@ class AllSettingsViewController: UIViewController {
         self.tableView.register(UINib(nibName: "SecureBalanceTableViewCell", bundle: nil), forCellReuseIdentifier: "secureAndPushCell")
         self.tableView.register(UINib(nibName: "SupportTableViewCell", bundle: nil), forCellReuseIdentifier: "supportCell")
         self.tableView.register(UINib(nibName: "PushAndAllSettingsTableViewCell", bundle: nil), forCellReuseIdentifier: "pushAndAllSettingsCell")
-        
+        NotificationCenter.default.addObserver(self, selector: #selector(localization), name: NSNotification.Name("localized"), object: nil)
     }
 
-   
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tableView.reloadData()
+    }
+    
+    @objc private func localization() {
+        self.backButton.setTitle(LocalizationManager.share.translate?.result.list.all.back_btn, for: .normal)
+    }
     
     @IBAction func backButtonPressed(_ sender: Any) {
         self.dismiss(animated: true)
@@ -47,6 +54,7 @@ extension AllSettingsViewController: UITableViewDelegate, UITableViewDataSource 
         
         switch indexPath {
         case [0,0]:
+            themeCell.localization()
             return themeCell
         case [0,1]:
             secureAndPushCell.eyeImageView?.image = UIImage(named: "Eye")!
