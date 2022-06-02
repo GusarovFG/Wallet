@@ -12,6 +12,8 @@ class AllertWalletViewController: UIViewController {
     var controller = UIViewController()
     var index = 0
     var isInMyWallet = false
+    var isContact = false
+    var isEditingContact = false
     
     @IBOutlet weak var mainLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
@@ -25,6 +27,7 @@ class AllertWalletViewController: UIViewController {
     @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var wasDeletedTitle: UILabel!
     @IBOutlet weak var wasDeletedDescription: UILabel!
+    @IBOutlet weak var confirmutton: UIButton!
     
     @IBOutlet weak var deleteButton: UIButton!
     
@@ -63,12 +66,26 @@ class AllertWalletViewController: UIViewController {
             self.mainButton.setTitle(LocalizationManager.share.translate?.result.list.all.ready_btn, for: .normal)
         } else if self.restorationIdentifier == "AddContactAlert" {
             self.wasDeletedTitle.text = LocalizationManager.share.translate?.result.list.address_book.address_book_pop_up_added_title
-            self.wasDeletedDescription.text = LocalizationManager.share.translate?.result.list.address_book.address_book_pop_up_added_description
+            if !self.isContact {
+                self.wasDeletedDescription.text = LocalizationManager.share.translate?.result.list.address_book.address_book_pop_up_added_description
+            } else if self.isContact {
+                self.wasDeletedDescription.text = LocalizationManager.share.translate?.result.list.address_book.adress_book_pop_up_removed_description
+            } else if isEditingContact {
+                self.wasDeletedTitle.text = LocalizationManager.share.translate?.result.list.address_book.adress_book_edit_contact_pop_up_changed_title
+                self.wasDeletedDescription.text = LocalizationManager.share.translate?.result.list.address_book.adress_book_edit_contact_pop_up_changed_description
+            }
             self.mainButton.setTitle(LocalizationManager.share.translate?.result.list.all.ready_btn, for: .normal)
+        } else if self.restorationIdentifier == "DeleteContact" {
+            self.deleteTitle.text = LocalizationManager.share.translate?.result.list.address_book.address_book_pop_up_delete_title
+            self.deleteDescription.text = LocalizationManager.share.translate?.result.list.address_book.address_book_pop_up_delete_description
+            self.confirmutton.setTitle(LocalizationManager.share.translate?.result.list.all.confirm_btn, for: .normal)
         }
     }
 
-
+    @IBAction func dismissTap(_ sender: Any) {
+        self.dismiss(animated: true)
+    }
+    
     func setupUI(label: String, discription: String) {
         self.mainLabel.text = label
         self.descriptionLabel.text = discription
@@ -83,6 +100,12 @@ class AllertWalletViewController: UIViewController {
         self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
     }
     
+    @IBAction func confirmDeleteContact(_ sender: Any) {
+        CoreDataManager.share.deleteContact(self.index)
+        self.dismiss(animated: true)
+        NotificationCenter.default.post(name: NSNotification.Name("showSpinner"), object: nil)
+        
+    }
     @IBAction func confirmButtonPressed(_ sender: Any) {
         let passwordStoryboard = UIStoryboard(name: "PasswordStoryboard", bundle: .main)
         let passwordVC = passwordStoryboard.instantiateViewController(withIdentifier: "PasswordViewController") as! PasswordViewController

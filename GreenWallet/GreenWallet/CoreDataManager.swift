@@ -66,6 +66,28 @@ class CoreDataManager {
         
         saveContext()
     }
+    
+    func deleteContact(_ index: Int) {
+        let fetchRequest: NSFetchRequest<Contact> = Contact.fetchRequest()
+        let contact = (try? self.persistentContainer.viewContext.fetch(fetchRequest)) ?? []
+        
+        self.persistentContainer.viewContext.delete(contact[index])
+        
+        saveContext()
+    }
+    
+    func editContact(index: Int, name: String, adres: String, description: String) {
+        
+        let fetchRequest: NSFetchRequest<Contact> = Contact.fetchRequest()
+        let contact = (try? self.persistentContainer.viewContext.fetch(fetchRequest)) ?? []
+        
+        
+        contact[index].name = name
+        contact[index].adres = adres
+        contact[index].descriptionOfContact = description
+        saveContext()
+        
+    }
 
     func saveContext () {
         let context = persistentContainer.viewContext

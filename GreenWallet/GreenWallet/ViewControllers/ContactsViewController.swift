@@ -32,7 +32,8 @@ class ContactsViewController: UIViewController {
         self.filterContacts = self.contacts
         localization()
         NotificationCenter.default.addObserver(self, selector: #selector(localization), name: NSNotification.Name("localized"), object: nil)
-
+        NotificationCenter.default.addObserver(self, selector: #selector(showPopUp), name: NSNotification.Name("showPopUp"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(showSpinner), name: NSNotification.Name("showSpinner"), object: nil)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -54,6 +55,24 @@ class ContactsViewController: UIViewController {
         self.mainTitleLabel.text = LocalizationManager.share.translate?.result.list.address_book.address_book_title
         self.addContactButton.setTitle(LocalizationManager.share.translate?.result.list.address_book.address_book_add_adress, for: .normal)
         self.searchBar.searchTextField.attributedPlaceholder = NSAttributedString(string: LocalizationManager.share.translate?.result.list.all.search ?? "", attributes: [:])
+    }
+    
+    @objc private func showSpinner() {
+        let storyoard = UIStoryboard(name: "spinner", bundle: .main)
+        let spinnerVC = storyoard.instantiateViewController(withIdentifier: "spinner")
+        self.present(spinnerVC, animated: true)
+    }
+    
+    
+    @objc func showPopUp() {
+        let storyboard = UIStoryboard(name: "Alert", bundle: .main)
+        let alertVC = storyboard.instantiateViewController(withIdentifier: "AddContactAlert") as! AllertWalletViewController
+        alertVC.isContact = true
+        self.contacts = CoreDataManager.share.fetchContacts()
+        self.filterContacts = self.contacts
+        self.contactsTableView.reloadData()
+        self.present(alertVC, animated: true)
+        
     }
 
     @IBAction func addContactButtonPressed(_ sender: Any) {
@@ -103,6 +122,51 @@ extension ContactsViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
+    }
+    
+    func tableView(_ tableView: UITableView,
+                   trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let contact = self.contacts[indexPath.row]
+        let edit = UIContextualAction(style: .normal,
+                                         title: "") { [weak self] (action, view, completionHandler) in
+            let addContactVC = self?.storyboard?.instantiateViewController(withIdentifier: "AddContactViewController") as! AddContactViewController
+            addContactVC.modalPresentationStyle = .fullScreen
+            addContactVC.isEditingContact = true
+            addContactVC.contact = contact
+            addContactVC.index = indexPath.row
+            self?.present(addContactVC, animated: true)
+            
+            completionHandler(true)
+        }
+        edit.backgroundColor = #colorLiteral(red: 0.1189827248, green: 0.6536024213, blue: 1, alpha: 1)
+        edit.image = UIImage(named: "editContact")!
+
+        let send = UIContextualAction(style: .normal, title: "") { action, view, completionHandler in
+            
+            
+            
+            completionHandler(true)
+        }
+        send.image = UIImage(named: "sendAction")!
+        send.backgroundColor = #colorLiteral(red: 0.2274509804, green: 0.6745098039, blue: 0.3490196078, alpha: 1)
+        
+        let trash = UIContextualAction(style: .normal,
+                                       title: "") { (action, view, completionHandler) in
+            let storyBoard = UIStoryboard(name: "Alert", bundle: .main)
+            let alertVC = storyBoard.instantiateViewController(withIdentifier: "DeleteContact") as! AllertWalletViewController
+            alertVC.index = indexPath.row
+            alertVC.controller = self
+            
+            self.present(alertVC, animated: true)
+            completionHandler(true)
+        }
+        
+        trash.backgroundColor = .systemRed
+        trash.image = UIImage(named: "Trash")!
+        
+        let configuration = UISwipeActionsConfiguration(actions: [send, edit, trash])
+        configuration.performsFirstActionWithFullSwipe = false
+        return configuration
     }
     
 }

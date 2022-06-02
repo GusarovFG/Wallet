@@ -21,6 +21,7 @@ class SprinnerViewController: UIViewController {
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             self.dismiss(animated: true, completion: nil)
+            NotificationCenter.default.post(name: NSNotification.Name("showPopUp"), object: nil)
         }
     }
     

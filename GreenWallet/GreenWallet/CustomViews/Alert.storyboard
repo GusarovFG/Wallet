@@ -390,7 +390,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="my9-ha-XhP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2295.6521739130435" y="-135.26785714285714"/>
+            <point key="canvasLocation" x="2319" y="-135"/>
         </scene>
         <!--Allert Wallet View Controller-->
         <scene sceneID="fLl-UJ-oHM">
@@ -568,8 +568,114 @@
             </objects>
             <point key="canvasLocation" x="3681" y="-135"/>
         </scene>
+        <!--Allert Wallet View Controller-->
+        <scene sceneID="ilL-Ek-Ozs">
+            <objects>
+                <viewController storyboardIdentifier="DeleteContact" modalTransitionStyle="crossDissolve" modalPresentationStyle="overFullScreen" useStoryboardIdentifierAsRestorationIdentifier="YES" id="pKd-8W-v0g" customClass="AllertWalletViewController" customModule="GreenWallet" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="gfk-9B-KYF">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Db6-wu-c1x">
+                                <rect key="frame" x="35" y="212" width="344" height="430"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Подтвредите удаление" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C4R-yN-GgT">
+                                        <rect key="frame" x="50" y="170" width="244" height="70"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="70" id="olX-84-MQy"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="25"/>
+                                        <color key="textColor" red="1" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UcF-kD-0xv">
+                                        <rect key="frame" x="68" y="338" width="208" height="48.5"/>
+                                        <color key="backgroundColor" red="0.2274509804" green="0.67450980390000004" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="48.5" id="vkg-uG-Yk6"/>
+                                        </constraints>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Отменить" cornerStyle="capsule">
+                                            <backgroundConfiguration key="background"/>
+                                        </buttonConfiguration>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <integer key="value" value="20"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="confirmDeleteContact:" destination="pKd-8W-v0g" eventType="touchUpInside" id="yC2-Gw-kS3"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Данное действие невозможно отменить. Убедитесь что вы сохранили мнемоническую фразу" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xgD-5f-Rj2">
+                                        <rect key="frame" x="26" y="250" width="293" height="80"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="80" id="aLU-hZ-aF1"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.58039215690000001" green="0.58039215690000001" blue="0.58039215690000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cousion" translatesAutoresizingMaskIntoConstraints="NO" id="3hx-vK-TGt">
+                                        <rect key="frame" x="85" y="17" width="175" height="153"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.18823529410000001" green="0.18823529410000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" red="0.18823529410000001" green="0.18823529410000001" blue="0.18823529410000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="xgD-5f-Rj2" firstAttribute="top" secondItem="C4R-yN-GgT" secondAttribute="bottom" constant="10" id="7bh-wR-Hvj"/>
+                                    <constraint firstAttribute="bottom" secondItem="UcF-kD-0xv" secondAttribute="bottom" constant="43.5" id="Ahw-V4-rUY"/>
+                                    <constraint firstItem="3hx-vK-TGt" firstAttribute="leading" secondItem="Db6-wu-c1x" secondAttribute="leading" constant="85" id="FnP-mb-Y6z"/>
+                                    <constraint firstAttribute="trailing" secondItem="xgD-5f-Rj2" secondAttribute="trailing" constant="25" id="Kkj-TW-IH9"/>
+                                    <constraint firstItem="xgD-5f-Rj2" firstAttribute="leading" secondItem="Db6-wu-c1x" secondAttribute="leading" constant="26" id="ZX0-sh-OjO"/>
+                                    <constraint firstAttribute="trailing" secondItem="3hx-vK-TGt" secondAttribute="trailing" constant="84" id="cQ3-K4-ruW"/>
+                                    <constraint firstItem="3hx-vK-TGt" firstAttribute="top" secondItem="Db6-wu-c1x" secondAttribute="top" constant="17" id="ca6-fo-ASR"/>
+                                    <constraint firstItem="C4R-yN-GgT" firstAttribute="top" secondItem="3hx-vK-TGt" secondAttribute="bottom" id="g71-A7-1IO"/>
+                                    <constraint firstAttribute="trailing" secondItem="C4R-yN-GgT" secondAttribute="trailing" constant="50" id="gkj-Yl-sIE"/>
+                                    <constraint firstItem="C4R-yN-GgT" firstAttribute="leading" secondItem="Db6-wu-c1x" secondAttribute="leading" constant="50" id="kqR-FB-o4e"/>
+                                    <constraint firstItem="UcF-kD-0xv" firstAttribute="leading" secondItem="Db6-wu-c1x" secondAttribute="leading" constant="68" id="oZa-i6-nYJ"/>
+                                    <constraint firstAttribute="trailing" secondItem="UcF-kD-0xv" secondAttribute="trailing" constant="68" id="uW5-nj-Lr1"/>
+                                    <constraint firstItem="UcF-kD-0xv" firstAttribute="top" secondItem="xgD-5f-Rj2" secondAttribute="bottom" constant="8" symbolic="YES" id="x8O-Gf-Ajh"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <integer key="value" value="15"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="He7-M6-f52"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.34999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                        <gestureRecognizers/>
+                        <constraints>
+                            <constraint firstItem="Db6-wu-c1x" firstAttribute="leading" secondItem="He7-M6-f52" secondAttribute="leading" constant="35" id="41x-6W-CZA"/>
+                            <constraint firstItem="Db6-wu-c1x" firstAttribute="centerX" secondItem="gfk-9B-KYF" secondAttribute="centerX" id="Jsp-1t-0vu"/>
+                            <constraint firstItem="Db6-wu-c1x" firstAttribute="top" secondItem="He7-M6-f52" secondAttribute="top" constant="168" id="QRT-HP-MyC"/>
+                            <constraint firstItem="He7-M6-f52" firstAttribute="bottom" secondItem="Db6-wu-c1x" secondAttribute="bottom" constant="220" id="mNJ-QX-jiL"/>
+                        </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="tJz-lE-j6i" appends="YES" id="2I9-j5-yhj"/>
+                        </connections>
+                    </view>
+                    <connections>
+                        <outlet property="confirmutton" destination="UcF-kD-0xv" id="aUZ-qI-liK"/>
+                        <outlet property="deleteDescription" destination="xgD-5f-Rj2" id="yoW-Co-ELe"/>
+                        <outlet property="deleteTitle" destination="C4R-yN-GgT" id="nAw-5E-hWR"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tLA-Cf-c8K" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="tJz-lE-j6i">
+                    <connections>
+                        <action selector="dismissTap:" destination="pKd-8W-v0g" id="59P-za-qtM"/>
+                    </connections>
+                </tapGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="4357.971014492754" y="-141.29464285714286"/>
+        </scene>
     </scenes>
     <resources>
+        <image name="cousion" width="222" height="198"/>
         <image name="error" width="88" height="88"/>
         <image name="seccessWalletImage" width="222" height="198"/>
         <systemColor name="systemBackgroundColor">

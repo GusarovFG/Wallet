@@ -3464,6 +3464,7 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                     </view>
                     <connections>
                         <outlet property="addContactButton" destination="zBq-WS-hTm" id="oc7-1l-PzT"/>
+                        <outlet property="backutton" destination="OOd-oJ-RPd" id="CFl-2l-0Oc"/>
                         <outlet property="contactAdresLabel" destination="Qj6-rp-cLl" id="Vgz-HW-T1M"/>
                         <outlet property="contactAdresTextField" destination="xWc-fs-lzk" id="bL9-Fw-MtJ"/>
                         <outlet property="contactNameLabel" destination="lHD-Y1-C5t" id="rcw-Ap-RIc"/>
@@ -4262,13 +4263,13 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
         <image name="LaunchScreenLogo" width="252" height="54"/>
         <image name="NewWallet" width="119" height="116"/>
         <image name="button1" width="28" height="28"/>
-        <image name="chevron.backward" catalog="system" width="96" height="128"/>
-        <image name="chevron.down" catalog="system" width="128" height="72"/>
+        <image name="chevron.backward" catalog="system" width="32" height="32"/>
+        <image name="chevron.down" catalog="system" width="32" height="32"/>
         <image name="contacts" width="16" height="20"/>
         <image name="filter" width="16" height="16"/>
         <image name="goodMorning" width="375" height="812"/>
         <image name="hydeImage" width="20" height="16"/>
-        <image name="plus" catalog="system" width="128" height="113"/>
+        <image name="plus" catalog="system" width="32" height="32"/>
         <image name="qrscan" width="20" height="20"/>
         <image name="walletCreate" width="104" height="104"/>
         <namedColor name="LightThemeLogo">
