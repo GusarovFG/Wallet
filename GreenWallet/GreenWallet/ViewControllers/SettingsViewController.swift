@@ -23,6 +23,7 @@ class SettingsViewController: UIViewController {
 
     }
     
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -31,7 +32,6 @@ class SettingsViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        self.tableView.reloadRows(at: self.tableView.indexPathsForVisibleRows ?? [[0,0]], with: .fade)
     }
     
     @objc private func localization() {

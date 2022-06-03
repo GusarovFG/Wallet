@@ -71,10 +71,7 @@ class VerifyMnemonicViewController: UIViewController {
     
     @IBAction func mainButtonPressed(_ sender: Any) {
         if self.verifyedMnemonicPhrase == self.mnemonicPhrase {
-            let storyboard = UIStoryboard(name: "Alert", bundle: .main)
-            let spinnerVC = storyboard.instantiateViewController(withIdentifier: "AllertWalletViewController") as! AllertWalletViewController
-            
-            self.present(spinnerVC, animated: true, completion: nil)
+            AlertManager.share.seccessNewWallet(self)
         } else {
             self.errorLabel.isHidden = false
             UIView.animate(withDuration: 1) {

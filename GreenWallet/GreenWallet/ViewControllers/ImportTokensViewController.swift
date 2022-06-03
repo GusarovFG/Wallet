@@ -35,6 +35,7 @@ class ImportTokensViewController: UIViewController {
     @objc private func localization() {
         self.titleLabel.text = LocalizationManager.share.translate?.result.list.import_tokens.import_tokens_title
         self.addLabel.text = LocalizationManager.share.translate?.result.list.import_tokens.import_tokens_label_add
+        self.backButton.setTitle(LocalizationManager.share.translate?.result.list.all.back_btn, for: .normal)
     }
     
     @IBAction func backButtonPressed(_ sender: Any) {

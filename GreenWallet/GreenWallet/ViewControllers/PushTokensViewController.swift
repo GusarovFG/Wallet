@@ -87,6 +87,8 @@ class PushTokensViewController: UIViewController {
         self.walletLinkError.alpha = 0
         self.transitionView.isHidden = true
         self.transitionView.alpha = 0
+        self.continueButton.isEnabled = false
+        self.continueButton.backgroundColor = #colorLiteral(red: 0.2666666667, green: 0.2666666667, blue: 0.2666666667, alpha: 1)
 
         self.contactTextField.bottomCorner()
         self.transferTextField.bottomCorner()
@@ -189,10 +191,8 @@ class PushTokensViewController: UIViewController {
     }
     
     @objc func showSeccessAlert(notification: Notification) {
-        let storyboard = UIStoryboard(name: "Alert", bundle: .main)
-        let seccsessAlertVC = storyboard.instantiateViewController(withIdentifier: "seccsessTransitViewController") as! AllertWalletViewController
         self.transitionView.isHidden = true
-        self.present(seccsessAlertVC, animated: true)
+        AlertManager.share.seccessSendToken(self)
     }
     
     
@@ -249,13 +249,40 @@ class PushTokensViewController: UIViewController {
             self.walletsView.isHidden = true
             return
         }
+        
+        
+        
+        
         for i in 0...(self.wallets.count - 1) {
             if self.walletStackView.arrangedSubviews.count == self.wallets.count {
                 break
             } else {
+                var numberOfWallet = ""
+                let numbers = ("\(self.wallets[i].number )")
+                for numb in numbers {
+                    
+                    if numberOfWallet.count < numbers.count - 4 {
+                        numberOfWallet += "*"
+                    } else {
+                        numberOfWallet.append(numb)
+                    }
+                }
+                
                 let wallet = self.wallets[i]
                 let button = UIButton(frame: CGRect(x: 0, y: 0, width: self.walletStackView.frame.width, height: 40))
-                button.setTitle(wallet.name, for: .normal)
+                button.setTitle("\(wallet.name) \(numberOfWallet)", for: .normal)
+                let prefixString = wallet.name
+                let infixAttributedString = NSAttributedString(
+                    string: "     \(numberOfWallet)",
+                    attributes: [NSAttributedString.Key.foregroundColor: #colorLiteral(red: 0.4588235294, green: 0.4588235294, blue: 0.4588235294, alpha: 1), NSAttributedString.Key.font: UIFont(name: "System Font Regular", size: 12)!]
+                )
+                
+                let attributedString = NSMutableAttributedString(string: prefixString)
+                attributedString.append(infixAttributedString)
+                
+                button.setAttributedTitle(attributedString, for: .normal)
+                button.contentHorizontalAlignment = .center
+                
                 self.walletStackView.addArrangedSubview(button)
                 self.walletStackViewConstraint.constant += button.frame.height
                 button.addTarget(self, action: #selector(setupWalletsMenuButtons), for: .touchUpInside)
@@ -398,13 +425,16 @@ class PushTokensViewController: UIViewController {
         if sender.text != "" && self.adressTextField.text != "" {
             
             self.continueButton.isEnabled = true
+            self.continueButton.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
             self.transferErrorLabel.alpha = 1
             self.transferErrorLabel.textColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
             sender.textColor = .white
             self.secondTransferErrorLabel.alpha = 0
         } else {
             self.continueButton.isEnabled = false
+            self.continueButton.backgroundColor = #colorLiteral(red: 0.2666666667, green: 0.2666666667, blue: 0.2666666667, alpha: 1)
             self.transferErrorLabel.alpha = 0
+            
         }
     }
     

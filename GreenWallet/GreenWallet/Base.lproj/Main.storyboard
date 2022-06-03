@@ -1139,7 +1139,7 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                                                         </hierarchicalColors>
                                                     </imageReference>
                                                     <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage"/>
-                                                    <fontDescription key="titleFontDescription" type="system" pointSize="12"/>
+                                                    <fontDescription key="titleFontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="12"/>
                                                     <directionalEdgeInsets key="contentInsets" top="0.0" leading="-1" bottom="0.0" trailing="0.0"/>
                                                 </buttonConfiguration>
                                                 <connections>
@@ -1822,11 +1822,6 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                             <constraint firstItem="bmv-RL-rBj" firstAttribute="trailing" secondItem="n7w-Dy-b0g" secondAttribute="trailing" id="wpW-du-iwA"/>
                             <constraint firstItem="7AU-7a-QaI" firstAttribute="top" secondItem="r99-q5-ntG" secondAttribute="top" id="zA4-mQ-ST6"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="subviews">
-                                <exclude reference="bmv-RL-rBj"/>
-                            </mask>
-                        </variation>
                     </view>
                     <connections>
                         <outlet property="addContactLabel" destination="hVU-57-gCy" id="C5r-RW-SbD"/>
@@ -4263,13 +4258,13 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
         <image name="LaunchScreenLogo" width="252" height="54"/>
         <image name="NewWallet" width="119" height="116"/>
         <image name="button1" width="28" height="28"/>
-        <image name="chevron.backward" catalog="system" width="32" height="32"/>
-        <image name="chevron.down" catalog="system" width="32" height="32"/>
+        <image name="chevron.backward" catalog="system" width="96" height="128"/>
+        <image name="chevron.down" catalog="system" width="128" height="72"/>
         <image name="contacts" width="16" height="20"/>
         <image name="filter" width="16" height="16"/>
         <image name="goodMorning" width="375" height="812"/>
         <image name="hydeImage" width="20" height="16"/>
-        <image name="plus" catalog="system" width="32" height="32"/>
+        <image name="plus" catalog="system" width="128" height="113"/>
         <image name="qrscan" width="20" height="20"/>
         <image name="walletCreate" width="104" height="104"/>
         <namedColor name="LightThemeLogo">

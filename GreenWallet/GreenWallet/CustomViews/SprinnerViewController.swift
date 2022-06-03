@@ -8,11 +8,15 @@
 import UIKit
 
 class SprinnerViewController: UIViewController {
-
+    
+    var isDeleting = false
+    
+    @IBOutlet weak var mainTitle: UILabel!
+    @IBOutlet weak var mainDescription: UILabel!
     @IBOutlet weak var spinner: JTMaterialSpinner!
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        localization()
         self.spinner.circleLayer.lineWidth = 5
         self.spinner.circleLayer.strokeColor = #colorLiteral(red: 0.2274509804, green: 0.6745098039, blue: 0.3490196078, alpha: 1)
         self.spinner.animationDuration = 2.5
@@ -25,7 +29,15 @@ class SprinnerViewController: UIViewController {
         }
     }
     
-
+    private func localization() {
+        if !self.isDeleting {
+            self.mainTitle.text = LocalizationManager.share.translate?.result.list.all.loading_pop_up_title
+            self.mainDescription.text = LocalizationManager.share.translate?.result.list.all.loading_pop_up_description
+        } else {
+            self.mainTitle.text = LocalizationManager.share.translate?.result.list.address_book.adress_book_loading_remove_title
+            self.mainDescription.text = LocalizationManager.share.translate?.result.list.all.loading_pop_up_description
+        }
+    }
     /*
     // MARK: - Navigation
 

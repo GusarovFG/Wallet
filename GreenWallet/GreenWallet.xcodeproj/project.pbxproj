@@ -61,6 +61,7 @@
 		FB7A88692833B310005D05D8 /* qrCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB7A88672833B310005D05D8 /* qrCollectionViewCell.xib */; };
 		FB85BA3E283CCB210068E9DE /* TimeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB85BA3D283CCB210068E9DE /* TimeManager.swift */; };
 		FB85BA40283CCC470068E9DE /* GreatingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB85BA3F283CCC470068E9DE /* GreatingViewController.swift */; };
+		FB87F341284A057D009F896C /* AlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB87F340284A057D009F896C /* AlertManager.swift */; };
 		FB8BF8DB282FFDF70067CD0B /* QRScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8BF8DA282FFDF70067CD0B /* QRScanViewController.swift */; };
 		FB8EAC1F282FC8B4007244C1 /* PasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8EAC1E282FC8B4007244C1 /* PasswordViewController.swift */; };
 		FB90380F282D52EE004023F5 /* PushTokensViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB90380E282D52EE004023F5 /* PushTokensViewController.swift */; };
@@ -162,6 +163,7 @@
 		FB7A88672833B310005D05D8 /* qrCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = qrCollectionViewCell.xib; sourceTree = "<group>"; };
 		FB85BA3D283CCB210068E9DE /* TimeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeManager.swift; sourceTree = "<group>"; };
 		FB85BA3F283CCC470068E9DE /* GreatingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GreatingViewController.swift; sourceTree = "<group>"; };
+		FB87F340284A057D009F896C /* AlertManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertManager.swift; sourceTree = "<group>"; };
 		FB8BF8DA282FFDF70067CD0B /* QRScanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRScanViewController.swift; sourceTree = "<group>"; };
 		FB8EAC1E282FC8B4007244C1 /* PasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordViewController.swift; sourceTree = "<group>"; };
 		FB90380E282D52EE004023F5 /* PushTokensViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushTokensViewController.swift; sourceTree = "<group>"; };
@@ -377,6 +379,7 @@
 				FB16685D283E21D000155670 /* NetworkManager.swift */,
 				FBB682E1283E4A3E00CC5959 /* CoreDataManager.swift */,
 				FB98D0CD283F850500885E73 /* LocalizationManager.swift */,
+				FB87F340284A057D009F896C /* AlertManager.swift */,
 				FB3208072818285100F1ADCA /* ViewControllers */,
 				FB3208062818279E00F1ADCA /* CustomViews */,
 				FB5940512816AC7800037DFA /* Extensions */,
@@ -690,6 +693,7 @@
 				FBB682E2283E4A3E00CC5959 /* CoreDataManager.swift in Sources */,
 				FB85BA40283CCC470068E9DE /* GreatingViewController.swift in Sources */,
 				FBFE578F281AC4050016E74A /* PushAndAllSettingsTableViewCell.swift in Sources */,
+				FB87F341284A057D009F896C /* AlertManager.swift in Sources */,
 				FB2F369028206ACB007576FE /* NewWalletViewController.swift in Sources */,
 				FB5947492823D8DD00C74E73 /* ImportMnemonicViewController.swift in Sources */,
 				FB0883DC281BE21F001D4317 /* CustomThumbView.swift in Sources */,

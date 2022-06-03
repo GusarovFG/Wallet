@@ -14,6 +14,9 @@ class AllertWalletViewController: UIViewController {
     var isInMyWallet = false
     var isContact = false
     var isEditingContact = false
+    var isNewWalletError = false
+    var isSendError = false
+    var isImportMnemonicError = false
     
     @IBOutlet weak var mainLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
@@ -69,6 +72,7 @@ class AllertWalletViewController: UIViewController {
             if !self.isContact {
                 self.wasDeletedDescription.text = LocalizationManager.share.translate?.result.list.address_book.address_book_pop_up_added_description
             } else if self.isContact {
+                self.wasDeletedTitle.text = LocalizationManager.share.translate?.result.list.address_book.adress_book_pop_up_removed_title
                 self.wasDeletedDescription.text = LocalizationManager.share.translate?.result.list.address_book.adress_book_pop_up_removed_description
             } else if isEditingContact {
                 self.wasDeletedTitle.text = LocalizationManager.share.translate?.result.list.address_book.adress_book_edit_contact_pop_up_changed_title
@@ -76,9 +80,23 @@ class AllertWalletViewController: UIViewController {
             }
             self.mainButton.setTitle(LocalizationManager.share.translate?.result.list.all.ready_btn, for: .normal)
         } else if self.restorationIdentifier == "DeleteContact" {
-            self.deleteTitle.text = LocalizationManager.share.translate?.result.list.address_book.address_book_pop_up_delete_title
-            self.deleteDescription.text = LocalizationManager.share.translate?.result.list.address_book.address_book_pop_up_delete_description
-            self.confirmutton.setTitle(LocalizationManager.share.translate?.result.list.all.confirm_btn, for: .normal)
+            if !self.isNewWalletError && !self.isSendError {
+                self.deleteTitle.text = LocalizationManager.share.translate?.result.list.address_book.address_book_pop_up_delete_title
+                self.deleteDescription.text = LocalizationManager.share.translate?.result.list.address_book.address_book_pop_up_delete_description
+                self.confirmutton.setTitle(LocalizationManager.share.translate?.result.list.all.confirm_btn, for: .normal)
+            } else if self.isNewWalletError && !self.isSendError {
+                self.deleteTitle.text = LocalizationManager.share.translate?.result.list.create_a_mnemonic_phrase.pop_up_failed_create_a_mnemonic_phrase_title
+                self.deleteDescription.text = LocalizationManager.share.translate?.result.list.all.pop_up_failed_error_description
+                self.confirmutton.setTitle(LocalizationManager.share.translate?.result.list.all.pop_up_failed_error_return_btn, for: .normal)
+            } else if self.isSendError && !self.isNewWalletError {
+                self.deleteTitle.text = LocalizationManager.share.translate?.result.list.all.pop_up_failed_error_title
+                self.deleteDescription.text = LocalizationManager.share.translate?.result.list.send_token.send_token_pop_up_transaction_fail_error_description
+                self.confirmutton.setTitle(LocalizationManager.share.translate?.result.list.all.pop_up_failed_error_return_btn, for: .normal)
+            } else if self.isImportMnemonicError {
+                self.deleteTitle.text = LocalizationManager.share.translate?.result.list.all.pop_up_failed_error_title
+                self.deleteDescription.text = LocalizationManager.share.translate?.result.list.send_token.send_token_pop_up_transaction_fail_error_description
+                self.confirmutton.setTitle(LocalizationManager.share.translate?.result.list.all.pop_up_failed_error_return_btn, for: .normal)
+            }
         }
     }
 
@@ -101,9 +119,13 @@ class AllertWalletViewController: UIViewController {
     }
     
     @IBAction func confirmDeleteContact(_ sender: Any) {
-        CoreDataManager.share.deleteContact(self.index)
-        self.dismiss(animated: true)
-        NotificationCenter.default.post(name: NSNotification.Name("showSpinner"), object: nil)
+        if !self.isNewWalletError && !self.isSendError {
+            CoreDataManager.share.deleteContact(self.index)
+            self.dismiss(animated: true)
+            NotificationCenter.default.post(name: NSNotification.Name("showSpinner"), object: nil)
+        } else {
+            self.dismiss(animated: true)
+        }
         
     }
     @IBAction func confirmButtonPressed(_ sender: Any) {
@@ -121,4 +143,6 @@ class AllertWalletViewController: UIViewController {
         self.dismiss(animated: true)
         NotificationCenter.default.post(name: NSNotification.Name("dismissAddContactVC"), object: nil)
     }
+    
+    
 }

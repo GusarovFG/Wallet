@@ -174,17 +174,11 @@ class ImportMnemonicViewController: UIViewController {
                     
                 }
             } else {
-                let storyboard = UIStoryboard(name: "spinner", bundle: .main)
-                let spinnerVC = storyboard.instantiateViewController(withIdentifier: "spinner") as! SprinnerViewController
-                
-                self.present(spinnerVC, animated: true, completion: nil)
+                AlertManager.share.showSpinner(self, nil)
                 
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                     
-                    let storyboard = UIStoryboard(name: "Alert", bundle: .main)
-                    let alert = storyboard.instantiateViewController(withIdentifier: "AllertImportViewController") as! AllertWalletViewController
-                    
-                    self.present(alert, animated: true, completion: nil)
+                    AlertManager.share.successImportMnemonic(self)
                     
                 
             }

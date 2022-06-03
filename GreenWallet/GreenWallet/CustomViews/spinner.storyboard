@@ -68,6 +68,8 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="mainDescription" destination="Qk4-gF-pAk" id="MPQ-av-mht"/>
+                        <outlet property="mainTitle" destination="P9R-sv-DFC" id="dyg-eU-Bb3"/>
                         <outlet property="spinner" destination="fgA-dl-RzF" id="6Zb-Uw-kfW"/>
                     </connections>
                 </viewController>

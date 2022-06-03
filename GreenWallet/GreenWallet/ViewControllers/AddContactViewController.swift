@@ -122,20 +122,13 @@ class AddContactViewController: UIViewController {
                 self.viewHeightConstraint.constant += 20
             } else {
                 CoreDataManager.share.saveContact(self.contactNameTextField.text ?? "", adres: self.contactAdresTextField.text ?? "", description: self.descriptionTextField.text ?? "")
-                let storyboard = UIStoryboard(name: "Alert", bundle: .main)
-                let alertVC = storyboard.instantiateViewController(withIdentifier: "AddContactAlert")
-                self.present(alertVC, animated: true)
+                AlertManager.share.seccessAddContect(self)
                 
             }
         } else {
             if self.contactNameTextField.text != "" {
                 CoreDataManager.share.editContact(index: self.index, name: self.contactNameTextField.text ?? "", adres: self.contactAdresTextField.text ?? "", description: self.descriptionTextField.text ?? "")
-                let storyboard = UIStoryboard(name: "Alert", bundle: .main)
-                let alertVC = storyboard.instantiateViewController(withIdentifier: "AddContactAlert") as! AllertWalletViewController
-                alertVC.isEditingContact = true
-                alertVC.modalPresentationStyle = .fullScreen
-                alertVC.modalTransitionStyle = .crossDissolve
-                self.present(alertVC, animated: true)
+                AlertManager.share.seccessEditContact(self)
             }
         }
     }

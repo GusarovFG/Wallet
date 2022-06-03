@@ -58,21 +58,15 @@ class ContactsViewController: UIViewController {
     }
     
     @objc private func showSpinner() {
-        let storyoard = UIStoryboard(name: "spinner", bundle: .main)
-        let spinnerVC = storyoard.instantiateViewController(withIdentifier: "spinner")
-        self.present(spinnerVC, animated: true)
+        AlertManager.share.showSpinner(self, true)
     }
     
-    
     @objc func showPopUp() {
-        let storyboard = UIStoryboard(name: "Alert", bundle: .main)
-        let alertVC = storyboard.instantiateViewController(withIdentifier: "AddContactAlert") as! AllertWalletViewController
-        alertVC.isContact = true
+
         self.contacts = CoreDataManager.share.fetchContacts()
         self.filterContacts = self.contacts
         self.contactsTableView.reloadData()
-        self.present(alertVC, animated: true)
-        
+        AlertManager.share.successDeletingContact(self)
     }
 
     @IBAction func addContactButtonPressed(_ sender: Any) {
@@ -103,27 +97,6 @@ extension ContactsViewController: UITableViewDataSource, UITableViewDelegate {
         65
     }
     
-}
-
-extension ContactsViewController: UISearchBarDelegate {
-    
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        if searchText.isEmpty {
-            self.filterContacts = self.contacts
-            self.contactsTableView.reloadData()
-            return
-        } else {
-            
-            self.filterContacts = self.contacts.filter({$0.name?.lowercased().contains(searchText.lowercased()) ?? true})
-            self.contactsTableView.reloadData()
-            
-        }
-    }
-    
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.resignFirstResponder()
-    }
-    
     func tableView(_ tableView: UITableView,
                    trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let contact = self.contacts[indexPath.row]
@@ -152,12 +125,7 @@ extension ContactsViewController: UISearchBarDelegate {
         
         let trash = UIContextualAction(style: .normal,
                                        title: "") { (action, view, completionHandler) in
-            let storyBoard = UIStoryboard(name: "Alert", bundle: .main)
-            let alertVC = storyBoard.instantiateViewController(withIdentifier: "DeleteContact") as! AllertWalletViewController
-            alertVC.index = indexPath.row
-            alertVC.controller = self
-            
-            self.present(alertVC, animated: true)
+            AlertManager.share.confirmDeleteContact(self, indexPath)
             completionHandler(true)
         }
         
@@ -168,5 +136,28 @@ extension ContactsViewController: UISearchBarDelegate {
         configuration.performsFirstActionWithFullSwipe = false
         return configuration
     }
+    
+}
+
+extension ContactsViewController: UISearchBarDelegate {
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText.isEmpty {
+            self.filterContacts = self.contacts
+            self.contactsTableView.reloadData()
+            return
+        } else {
+            
+            self.filterContacts = self.contacts.filter({$0.name?.lowercased().contains(searchText.lowercased()) ?? true})
+            self.contactsTableView.reloadData()
+            
+        }
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+    }
+    
+   
     
 }
