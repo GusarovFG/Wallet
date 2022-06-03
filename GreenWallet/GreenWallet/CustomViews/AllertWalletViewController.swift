@@ -93,8 +93,8 @@ class AllertWalletViewController: UIViewController {
                 self.deleteDescription.text = LocalizationManager.share.translate?.result.list.send_token.send_token_pop_up_transaction_fail_error_description
                 self.confirmutton.setTitle(LocalizationManager.share.translate?.result.list.all.pop_up_failed_error_return_btn, for: .normal)
             } else if self.isImportMnemonicError {
-                self.deleteTitle.text = LocalizationManager.share.translate?.result.list.all.pop_up_failed_error_title
-                self.deleteDescription.text = LocalizationManager.share.translate?.result.list.send_token.send_token_pop_up_transaction_fail_error_description
+                self.deleteTitle.text = LocalizationManager.share.translate?.result.list.import_mnemonics.pop_up_failed_import_mnemonics_title
+                self.deleteDescription.text = LocalizationManager.share.translate?.result.list.all.pop_up_failed_error_description
                 self.confirmutton.setTitle(LocalizationManager.share.translate?.result.list.all.pop_up_failed_error_return_btn, for: .normal)
             }
         }
@@ -119,7 +119,7 @@ class AllertWalletViewController: UIViewController {
     }
     
     @IBAction func confirmDeleteContact(_ sender: Any) {
-        if !self.isNewWalletError && !self.isSendError {
+        if !self.isNewWalletError && !self.isSendError && !self.isImportMnemonicError {
             CoreDataManager.share.deleteContact(self.index)
             self.dismiss(animated: true)
             NotificationCenter.default.post(name: NSNotification.Name("showSpinner"), object: nil)

@@ -58,7 +58,7 @@ extension LanguageViewController: UITableViewDelegate, UITableViewDataSource {
         NetworkManager.share.getTranslate(from: MainURLS.API.rawValue, languageCode: language?.code ?? "") { translate in
             LocalizationManager.share.translate = translate
             CoreDataManager.share.changeLanguage(LanguageManager.share.language?.result.list[indexPath.row].code ?? "", version: LanguageManager.share.language?.result.version ?? "")
-            self.viewDidLoad()
+            NotificationCenter.default.post(name: NSNotification.Name("setupRootVC"), object: nil)
         }
     }
 }
