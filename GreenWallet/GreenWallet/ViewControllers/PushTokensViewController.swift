@@ -448,6 +448,7 @@ class PushTokensViewController: UIViewController {
     @IBAction func contactsButtonPressed(_ sender: Any) {
         let contactsVC = storyboard?.instantiateViewController(withIdentifier: "ContactsViewController") as! ContactsViewController
         contactsVC.modalPresentationStyle = .fullScreen
+        contactsVC.isNotTabbar = true
         self.present(contactsVC, animated: true)
     }
     
