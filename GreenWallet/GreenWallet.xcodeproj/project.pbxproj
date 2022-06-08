@@ -83,12 +83,15 @@
 		FBB9CF69283673500094742E /* MyWalletsButtonsCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBB9CF67283673500094742E /* MyWalletsButtonsCollectionViewCell.xib */; };
 		FBB9CF6C283677320094742E /* MyWalletDetailCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB9CF6A283677320094742E /* MyWalletDetailCollectionViewCell.swift */; };
 		FBB9CF6D283677320094742E /* MyWalletDetailCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBB9CF6B283677320094742E /* MyWalletDetailCollectionViewCell.xib */; };
+		FBBB3DD3284CD32300349EF0 /* FAQController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBBB3DD2284CD32300349EF0 /* FAQController.swift */; };
+		FBBB3DD5284CD75F00349EF0 /* ExpandableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBBB3DD4284CD75F00349EF0 /* ExpandableHeaderView.swift */; };
 		FBBECA8B2832CF250042D1B8 /* mCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBBECA892832CF250042D1B8 /* mCollectionViewCell.swift */; };
 		FBBECA8C2832CF250042D1B8 /* mCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBBECA8A2832CF250042D1B8 /* mCollectionViewCell.xib */; };
 		FBC4AB752836A5AA00566683 /* TransactionHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC4AB742836A5AA00566683 /* TransactionHistoryViewController.swift */; };
 		FBD1CCAA283B90570081AF3E /* KeyChainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD1CCA9283B90570081AF3E /* KeyChainManager.swift */; };
 		FBD63A44283B7460006CE0A8 /* PasswordStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FBD63A43283B745F006CE0A8 /* PasswordStoryboard.storyboard */; };
-		FBD72B7628508E5E00987484 /* ChiaBlockchainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD72B7528508E5E00987484 /* ChiaBlockchainManager.swift */; };
+		FBD72B742850782900987484 /* ChiaBlockchainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD72B732850782900987484 /* ChiaBlockchainManager.swift */; };
+		FBEA97BD2850CF1F00D2F720 /* AskAQuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBEA97BC2850CF1F00D2F720 /* AskAQuestionViewController.swift */; };
 		FBFE5773281AAB040016E74A /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBFE5772281AAB040016E74A /* SettingsViewController.swift */; };
 		FBFE577B281AB9250016E74A /* ThemesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBFE5779281AB9250016E74A /* ThemesTableViewCell.swift */; };
 		FBFE577C281AB9250016E74A /* ThemesTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBFE577A281AB9250016E74A /* ThemesTableViewCell.xib */; };
@@ -186,12 +189,15 @@
 		FBB9CF67283673500094742E /* MyWalletsButtonsCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyWalletsButtonsCollectionViewCell.xib; sourceTree = "<group>"; };
 		FBB9CF6A283677320094742E /* MyWalletDetailCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyWalletDetailCollectionViewCell.swift; sourceTree = "<group>"; };
 		FBB9CF6B283677320094742E /* MyWalletDetailCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyWalletDetailCollectionViewCell.xib; sourceTree = "<group>"; };
+		FBBB3DD2284CD32300349EF0 /* FAQController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FAQController.swift; sourceTree = "<group>"; };
+		FBBB3DD4284CD75F00349EF0 /* ExpandableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableHeaderView.swift; sourceTree = "<group>"; };
 		FBBECA892832CF250042D1B8 /* mCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mCollectionViewCell.swift; sourceTree = "<group>"; };
 		FBBECA8A2832CF250042D1B8 /* mCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = mCollectionViewCell.xib; sourceTree = "<group>"; };
 		FBC4AB742836A5AA00566683 /* TransactionHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionHistoryViewController.swift; sourceTree = "<group>"; };
 		FBD1CCA9283B90570081AF3E /* KeyChainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainManager.swift; sourceTree = "<group>"; };
 		FBD63A43283B745F006CE0A8 /* PasswordStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PasswordStoryboard.storyboard; sourceTree = "<group>"; };
-		FBD72B7528508E5E00987484 /* ChiaBlockchainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChiaBlockchainManager.swift; sourceTree = "<group>"; };
+		FBD72B732850782900987484 /* ChiaBlockchainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChiaBlockchainManager.swift; sourceTree = "<group>"; };
+		FBEA97BC2850CF1F00D2F720 /* AskAQuestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AskAQuestionViewController.swift; sourceTree = "<group>"; };
 		FBFE5772281AAB040016E74A /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		FBFE5779281AB9250016E74A /* ThemesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemesTableViewCell.swift; sourceTree = "<group>"; };
 		FBFE577A281AB9250016E74A /* ThemesTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ThemesTableViewCell.xib; sourceTree = "<group>"; };
@@ -300,6 +306,7 @@
 				FBB49A4A2824DEA700250553 /* spinner.storyboard */,
 				FBB49A4C2824E1A600250553 /* SprinnerViewController.swift */,
 				FB94C6F92840C21500FF4686 /* CustomMainCollectionView.swift */,
+				FBBB3DD4284CD75F00349EF0 /* ExpandableHeaderView.swift */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -325,7 +332,6 @@
 				FB90380E282D52EE004023F5 /* PushTokensViewController.swift */,
 				FB8EAC1E282FC8B4007244C1 /* PasswordViewController.swift */,
 				FB8BF8DA282FFDF70067CD0B /* QRScanViewController.swift */,
-				FB42B6E62833E91C0022A8FB /* SupportViewController.swift */,
 				FBFE5794281AF4F90016E74A /* AllSettingsViewController.swift */,
 				FB6D93E22834F53100B11E80 /* AllWalletsViewController.swift */,
 				FBB9CF6028365EA70094742E /* MyWalletsViewController.swift */,
@@ -333,6 +339,9 @@
 				FB85BA3F283CCC470068E9DE /* GreatingViewController.swift */,
 				FB79E9492847672F0093C180 /* ContactsViewController.swift */,
 				FB79E94B284767400093C180 /* AddContactViewController.swift */,
+				FB42B6E62833E91C0022A8FB /* SupportViewController.swift */,
+				FBBB3DD2284CD32300349EF0 /* FAQController.swift */,
+				FBEA97BC2850CF1F00D2F720 /* AskAQuestionViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -381,8 +390,8 @@
 				FB16685D283E21D000155670 /* NetworkManager.swift */,
 				FBB682E1283E4A3E00CC5959 /* CoreDataManager.swift */,
 				FB98D0CD283F850500885E73 /* LocalizationManager.swift */,
-				FBD72B7528508E5E00987484 /* ChiaBlockchainManager.swift */,
 				FB87F340284A057D009F896C /* AlertManager.swift */,
+				FBD72B732850782900987484 /* ChiaBlockchainManager.swift */,
 				FB3208072818285100F1ADCA /* ViewControllers */,
 				FB3208062818279E00F1ADCA /* CustomViews */,
 				FB5940512816AC7800037DFA /* Extensions */,
@@ -667,6 +676,7 @@
 				FB9A982C283776B20018BBFA /* TransitionsTableViewCell.swift in Sources */,
 				FBB9CF6C283677320094742E /* MyWalletDetailCollectionViewCell.swift in Sources */,
 				FB6D93DC2834F1E200B11E80 /* AllWalletsTableViewCell.swift in Sources */,
+				FBBB3DD3284CD32300349EF0 /* FAQController.swift in Sources */,
 				FB90380F282D52EE004023F5 /* PushTokensViewController.swift in Sources */,
 				FB6A2A3128226E36008DD449 /* AllertWalletViewController.swift in Sources */,
 				FB5940532816AC8800037DFA /* Extensions.swift in Sources */,
@@ -678,8 +688,8 @@
 				FB0FCA7628197B4800BB0527 /* ImportTokensViewController.swift in Sources */,
 				FB96DB6E2844D0850018EC2A /* TransictionFilterCollectionViewCell.swift in Sources */,
 				FB5940392816856700037DFA /* SelectLanguageViewController.swift in Sources */,
-				FBD72B7628508E5E00987484 /* ChiaBlockchainManager.swift in Sources */,
 				FB383FE7281BE1C700939B6D /* CustomSwitch.swift in Sources */,
+				FBEA97BD2850CF1F00D2F720 /* AskAQuestionViewController.swift in Sources */,
 				FBB49A4D2824E1A600250553 /* SprinnerViewController.swift in Sources */,
 				FB6D93E32834F53100B11E80 /* AllWalletsViewController.swift in Sources */,
 				FBC4AB752836A5AA00566683 /* TransactionHistoryViewController.swift in Sources */,
@@ -698,9 +708,11 @@
 				FB85BA40283CCC470068E9DE /* GreatingViewController.swift in Sources */,
 				FBFE578F281AC4050016E74A /* PushAndAllSettingsTableViewCell.swift in Sources */,
 				FB87F341284A057D009F896C /* AlertManager.swift in Sources */,
+				FBD72B742850782900987484 /* ChiaBlockchainManager.swift in Sources */,
 				FB2F369028206ACB007576FE /* NewWalletViewController.swift in Sources */,
 				FB5947492823D8DD00C74E73 /* ImportMnemonicViewController.swift in Sources */,
 				FB0883DC281BE21F001D4317 /* CustomThumbView.swift in Sources */,
+				FBBB3DD5284CD75F00349EF0 /* ExpandableHeaderView.swift in Sources */,
 				FBB49A492824DE3800250553 /* SpinnerView.swift in Sources */,
 				FB2F369228207BC0007576FE /* CreatingViewController.swift in Sources */,
 				FBFE5795281AF4F90016E74A /* AllSettingsViewController.swift in Sources */,

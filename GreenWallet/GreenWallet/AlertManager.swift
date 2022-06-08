@@ -45,7 +45,7 @@ class AlertManager {
     
     func seccessAddContect(_ controller: UIViewController) {
         let storyboard = UIStoryboard(name: "Alert", bundle: .main)
-        let alertVC = storyboard.instantiateViewController(withIdentifier: "AddContactAlert")
+        let alertVC = storyboard.instantiateViewController(withIdentifier: "AddContactAlert") as! AllertWalletViewController
         controller.present(alertVC, animated: true)
     }
     
@@ -90,4 +90,12 @@ class AlertManager {
         controller.present(alert, animated: true, completion: nil)
     }
     
+    func seccessAskAQuestion(_ controller: UIViewController) {
+        let storyboard = UIStoryboard(name: "Alert", bundle: .main)
+        let alert = storyboard.instantiateViewController(withIdentifier: "seccsessTransitViewController") as! AllertWalletViewController
+        alert.isAskAQuestion = true
+        
+        controller.present(alert, animated: true)
+    
+    }
 }

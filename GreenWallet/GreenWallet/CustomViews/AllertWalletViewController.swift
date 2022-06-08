@@ -17,6 +17,7 @@ class AllertWalletViewController: UIViewController {
     var isNewWalletError = false
     var isSendError = false
     var isImportMnemonicError = false
+    var isAskAQuestion = false
     
     @IBOutlet weak var mainLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
@@ -64,9 +65,15 @@ class AllertWalletViewController: UIViewController {
             self.wasDeletedDescription.text = LocalizationManager.share.translate?.result.list.all.pop_up_wallet_removed_description
             self.mainButton.setTitle(LocalizationManager.share.translate?.result.list.all.ready_btn, for: .normal)
         } else if self.restorationIdentifier == "seccsessTransitViewController" {
-            self.transactionLabel.text = LocalizationManager.share.translate?.result.list.send_token.send_token_pop_up_succsess_title
-            self.transactionDescription.text = LocalizationManager.share.translate?.result.list.send_token.send_token_pop_up_succsess_description
-            self.mainButton.setTitle(LocalizationManager.share.translate?.result.list.all.ready_btn, for: .normal)
+            if !self.isAskAQuestion {
+                self.transactionLabel.text = LocalizationManager.share.translate?.result.list.send_token.send_token_pop_up_succsess_title
+                self.transactionDescription.text = LocalizationManager.share.translate?.result.list.send_token.send_token_pop_up_succsess_description
+                self.mainButton.setTitle(LocalizationManager.share.translate?.result.list.all.ready_btn, for: .normal)
+            } else {
+                    self.transactionLabel.text = LocalizationManager.share.translate?.result.list.all.pop_up_sent_title
+                    self.transactionDescription.text = LocalizationManager.share.translate?.result.list.ask_a_question.pop_up_sent_a_question_description
+                
+            }
         } else if self.restorationIdentifier == "AddContactAlert" {
             self.wasDeletedTitle.text = LocalizationManager.share.translate?.result.list.address_book.address_book_pop_up_added_title
             if !self.isContact {
