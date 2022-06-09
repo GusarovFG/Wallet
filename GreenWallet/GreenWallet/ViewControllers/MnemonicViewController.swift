@@ -27,9 +27,14 @@ class MnemonicViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         localization()
-        self.mnemonicPhrase.shuffle()
-        self.secureMnemonicPhrase = self.mnemonicPhrase
+        ChiaBlockchainManager.share.generateMnemonic { mnemonic in
+            self.mnemonicPhrase = mnemonic.mnemonic
+            self.secureMnemonicPhrase = self.mnemonicPhrase
+            
+            print(self.mnemonicPhrase)
+        }
         secureMnemonic()
+        
         self.continueButton.isEnabled = false
         self.continueButton.backgroundColor = #colorLiteral(red: 0.3364975452, green: 0.3364975452, blue: 0.3364975452, alpha: 1)
         self.copyLabel.alpha = 0
@@ -43,6 +48,8 @@ class MnemonicViewController: UIViewController {
         self.copyButton.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMaxXMaxYCorner]
         
         self.collectionView.register(UINib(nibName: "MnemonicCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "mnemonicCell")
+        
+        
     }
     
     private func localization() {
@@ -56,7 +63,6 @@ class MnemonicViewController: UIViewController {
     }
     
     private func secureMnemonic() {
-        self.secureMnemonicPhrase.removeAll()
         
         for word in self.mnemonicPhrase {
             var secureWord = ""
@@ -135,7 +141,7 @@ extension MnemonicViewController: UICollectionViewDelegate, UICollectionViewData
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "mnemonicCell", for: indexPath) as! MnemonicCollectionViewCell
-        let mnemonicWord = self.secureMnemonicPhrase[indexPath.row]
+        let mnemonicWord = self.secureMnemonicPhrase[indexPath.row + 6]
         
         cell.mnemonicWord.text = "\(self.indexes[indexPath.row]). \(mnemonicWord)"
         return cell

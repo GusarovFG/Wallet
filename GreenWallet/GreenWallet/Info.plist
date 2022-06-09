@@ -7,10 +7,6 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
-	<key>NSFaceIDUsageDescription</key>
-	<string>Identify yourself!</string>
-	<key>NSCameraUsageDescription</key>
-	<string>This app need to use your camera</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

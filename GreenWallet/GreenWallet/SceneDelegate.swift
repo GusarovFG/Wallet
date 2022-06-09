@@ -14,7 +14,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         
-//        UserDefaultsManager.shared.userDefaults.set("First", forKey: UserDefaultsStringKeys.firstSession.rawValue)
         
         if #available(iOS 12, *), UserDefaultsManager.shared.userDefaults.string(forKey: UserDefaultsStringKeys.theme.rawValue) == "dark" || UserDefaultsManager.shared.userDefaults.string(forKey: UserDefaultsStringKeys.theme.rawValue) == nil {
             self.window?.overrideUserInterfaceStyle = .dark

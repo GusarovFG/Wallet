@@ -40,7 +40,7 @@ class ChiaBlockchainManager {
         }.resume()
     }
     
-    func generateMnemonic() {
+    func generateMnemonic(with complition: @escaping (ChiaGeneratingMnemonic) -> Void) {
         let method = "generate_mnemonic"
         guard let url = URL(string: self.url + "/wallet/" + method) else { return }
         let parameters = ["":""]
@@ -56,8 +56,10 @@ class ChiaBlockchainManager {
             }
             if let data = data {
                 do {
-                    let json = try JSONSerialization.jsonObject(with: data)
-                    print(json)
+                    let json = try JSONDecoder().decode(ChiaGeneratingMnemonic.self, from: data)
+                    DispatchQueue.main.async {
+                        complition(json)
+                    }
                 } catch {
                     print(error.localizedDescription)
                 }
@@ -66,11 +68,11 @@ class ChiaBlockchainManager {
     }
     
     
-    func addKey(_ mnemonicPhrase: [String]) {
-        let importMnemonicPhrase: ImportMnemonic = ImportMnemonic(mnemonic: mnemonicPhrase, type: "new_wallet")
+    func addKey(_ mnemonicPhrase: [String], with complition: @escaping (ChiaFingerPrint) -> Void) {
+
         let method = "add_key"
         guard let url = URL(string: self.url + "/wallet/" + method) else { return }
-        let parameters = [importMnemonicPhrase]
+        let parameters = ["mnemonic":mnemonicPhrase, "type":"new_wallet"] as [String : Any]
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: []) else { return }
@@ -83,8 +85,37 @@ class ChiaBlockchainManager {
             }
             if let data = data {
                 do {
-                    let json = try JSONSerialization.jsonObject(with: data)
-                    print(json)
+                    let json = try JSONDecoder().decode(ChiaFingerPrint.self, from: data)
+                    DispatchQueue.main.async {
+                        complition(json)
+                    }
+                } catch {
+                    print(error.localizedDescription)
+                }
+            }
+        }.resume()
+    }
+    
+    func getPrivateKey(_ fingerPring: Int, with complition: @escaping (ChiaPrivate) -> Void) {
+        let method = "get_private_key"
+        guard let url = URL(string: self.url + "/wallet/" + method) else { return }
+        let parameters = ["fingerprint":fingerPring ] as [String : Any]
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: []) else { return }
+        request.httpBody = httpBody
+        
+        let session = URLSession.shared
+        session.dataTask(with: request) { data, response, error in
+            if let response = response {
+                print(response)
+            }
+            if let data = data {
+                do {
+                    let json = try JSONDecoder().decode(ChiaPrivate.self, from: data)
+                    DispatchQueue.main.async {
+                        complition(json)
+                    }
                 } catch {
                     print(error.localizedDescription)
                 }
@@ -144,8 +175,5 @@ class ChiaBlockchainManager {
 }
 
 
-struct ImportMnemonic: Codable {
-    var mnemonic: [String]
-    var type: String
-}
+
 
