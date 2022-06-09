@@ -10,6 +10,7 @@ import UIKit
 class AllWalletsViewController: UIViewController {
     
     var wallets: [WalletModel] = []
+    var newWallets = ChiaWalletsManager.share.wallets.wallets
     var index = 0
     
     @IBOutlet weak var backButton: UIButton!
@@ -60,7 +61,12 @@ class AllWalletsViewController: UIViewController {
 
 extension AllWalletsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        self.wallets.count + 1
+        if self.newWallets.isEmpty {
+            return 0
+        } else {
+            
+            return self.newWallets.count + 1
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -68,7 +74,7 @@ extension AllWalletsViewController: UITableViewDelegate, UITableViewDataSource {
         let walletCell = tableView.dequeueReusableCell(withIdentifier: "AllWalletsTableViewCell", for: indexPath) as! AllWalletsTableViewCell
         
         switch indexPath {
-        case [0,self.wallets.count]:
+        case [0,self.newWallets.count]:
             addWalletCell.addPressed = {
                 let systemViewController = self.storyboard?.instantiateViewController(withIdentifier: "SelectSystemViewController") as! SelectSystemViewController
                 systemViewController.isNewWallet = true
@@ -76,7 +82,7 @@ extension AllWalletsViewController: UITableViewDelegate, UITableViewDataSource {
             }
             return addWalletCell
         default:
-            walletCell.setupCell(wallet: self.wallets[indexPath.row])
+            walletCell.setupCell(wallet: self.newWallets[indexPath.row])
             return walletCell
         }
     }

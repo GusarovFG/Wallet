@@ -15,6 +15,32 @@ class ChiaBlockchainManager {
     
     private init(){}
     
+    func logIn(_ fingerprint: Int) {
+        let method = "log_in"
+        guard let url = URL(string: self.url + "/wallet/" + method) else { return }
+        let parameters = ["fingerprint":fingerprint]
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: []) else { return }
+        request.httpBody = httpBody
+        
+        let session = URLSession.shared
+        session.dataTask(with: request) { data, response, error in
+            if let response = response {
+                print(response)
+            }
+            if let data = data {
+                do {
+                    let json = try JSONDecoder().decode(LogIn.self, from: data)
+                    print(json.fingerprint)
+                    print(json.success)
+                } catch {
+                    print(error.localizedDescription)
+                }
+            }
+        }.resume()
+    }
+    
     func getPublicKeys() {
         let method = "get_public_keys"
         guard let url = URL(string: self.url + "/wallet/" + method) else { return }
@@ -123,7 +149,36 @@ class ChiaBlockchainManager {
         }.resume()
     }
     
-    func getWalletBalance(_ walletID: Int) {
+    func getWallets(with complition: @escaping (ChiaWallets) -> Void) {
+        let method = "get_wallets"
+        guard let url = URL(string: self.url + "/wallet/" + method) else { return }
+        let parameters = ["":""]
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: []) else { return }
+        request.httpBody = httpBody
+        
+        let session = URLSession.shared
+        session.dataTask(with: request) { data, response, error in
+            if let response = response {
+                print(response)
+            }
+            if let data = data {
+                do {
+                    let json = try JSONDecoder().decode(ChiaWallets.self, from: data)
+                    DispatchQueue.main.async {
+                        print(json.success)
+                        print(json.wallets)
+                        complition(json)
+                    }
+                } catch {
+                    print(error.localizedDescription)
+                }
+            }
+        }.resume()
+    }
+    
+    func getWalletBalance(_ walletID: Int, with complition: @escaping (ChiaWalletBalance) -> Void) {
         let method = "get_wallet_balance"
         guard let url = URL(string: self.url + "/wallet/" + method) else { return }
         let parameters = ["wallet_id":"\(walletID)"]
@@ -139,8 +194,10 @@ class ChiaBlockchainManager {
             }
             if let data = data {
                 do {
-                    let json = try JSONSerialization.jsonObject(with: data)
-                    print(json)
+                    let json = try JSONDecoder().decode(ChiaWalletBalance.self, from: data)
+                    DispatchQueue.global().async {
+                        complition(json)
+                    }
                 } catch {
                     print(error.localizedDescription)
                 }

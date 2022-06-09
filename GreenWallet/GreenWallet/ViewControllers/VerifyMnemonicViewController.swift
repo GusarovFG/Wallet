@@ -43,9 +43,9 @@ class VerifyMnemonicViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         for i in 0..<self.mnemonicPhrase.count {
-            if i < 6 {
+            if i < 6  {
                 self.verifyedMnemonicPhrase.append(self.mnemonicPhrase[i])
-            } else {
+            } else  if i >= 5 && i <= 11{
                 self.verifyedMnemonicPhrase.append("")
                 self.selectPhrase.append(self.mnemonicPhrase[i])
             }
@@ -70,8 +70,31 @@ class VerifyMnemonicViewController: UIViewController {
     }
     
     @IBAction func mainButtonPressed(_ sender: Any) {
-        if self.verifyedMnemonicPhrase == self.mnemonicPhrase {
-            AlertManager.share.seccessNewWallet(self)
+        if self.verifyedMnemonicPhrase == self.mnemonicPhrase.split()[0] {
+            let storyboardSpin = UIStoryboard(name: "spinner", bundle: .main)
+            let spinnerVC = storyboardSpin.instantiateViewController(withIdentifier: "spinner")
+            self.present(spinnerVC, animated: true)
+            ChiaBlockchainManager.share.addKey(self.mnemonicPhrase) { fingerpring in
+                CoreDataManager.share.saveChiaWaletFingerpring(fingerpring.fingerprint)
+                print(fingerpring.fingerprint)
+                DispatchQueue.global().async {
+                    ChiaBlockchainManager.share.logIn(fingerpring.fingerprint)
+                    ChiaBlockchainManager.share.getWallets { wallets in
+                        ChiaWalletsManager.share.wallets = wallets
+                        
+                    }
+                    ChiaBlockchainManager.share.getWalletBalance(1) { balance in
+                        print(balance.wallet_balance.max_send_amount)
+                        ChiaWalletsManager.share.balance = balance
+                    }
+                    DispatchQueue.main.async {
+                        spinnerVC.dismiss(animated: true, completion: nil)
+                        AlertManager.share.seccessNewWallet(self)
+                    }
+                }
+                
+                
+            }
         } else {
             self.errorLabel.isHidden = false
             UIView.animate(withDuration: 1) {
@@ -120,7 +143,7 @@ extension VerifyMnemonicViewController: UICollectionViewDelegate, UICollectionVi
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch collectionView {
         case self.veryfyCollectionView:
-            return self.verifyedMnemonicPhrase.count
+            return 12
         case self.selectCollectionView:
             return self.selectPhrase.count
         default:

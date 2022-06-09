@@ -33,6 +33,7 @@
 		FB3BC16E282C0BD2001B539E /* GetTokenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB3BC16D282C0BD2001B539E /* GetTokenViewController.swift */; };
 		FB42B6E72833E91C0022A8FB /* SupportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB42B6E62833E91C0022A8FB /* SupportViewController.swift */; };
 		FB58F56A2851D98C006235BD /* ChiaModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB58F5692851D98C006235BD /* ChiaModels.swift */; };
+		FB58F56C28521486006235BD /* ChiaWalletsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB58F56B28521486006235BD /* ChiaWalletsManager.swift */; };
 		FB5940352816856700037DFA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5940342816856700037DFA /* AppDelegate.swift */; };
 		FB5940372816856700037DFA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5940362816856700037DFA /* SceneDelegate.swift */; };
 		FB5940392816856700037DFA /* SelectLanguageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5940382816856700037DFA /* SelectLanguageViewController.swift */; };
@@ -91,7 +92,7 @@
 		FBC4AB752836A5AA00566683 /* TransactionHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC4AB742836A5AA00566683 /* TransactionHistoryViewController.swift */; };
 		FBD1CCAA283B90570081AF3E /* KeyChainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD1CCA9283B90570081AF3E /* KeyChainManager.swift */; };
 		FBD63A44283B7460006CE0A8 /* PasswordStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FBD63A43283B745F006CE0A8 /* PasswordStoryboard.storyboard */; };
-		FBD72B742850782900987484 /* ChiaBlockchainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD72B732850782900987484 /* ChiaBlockchainManager.swift */; };
+		FBD72B742850782900987484 /* ChiaBlockchainConnectingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD72B732850782900987484 /* ChiaBlockchainConnectingManager.swift */; };
 		FBEA97BD2850CF1F00D2F720 /* AskAQuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBEA97BC2850CF1F00D2F720 /* AskAQuestionViewController.swift */; };
 		FBFE5773281AAB040016E74A /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBFE5772281AAB040016E74A /* SettingsViewController.swift */; };
 		FBFE577B281AB9250016E74A /* ThemesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBFE5779281AB9250016E74A /* ThemesTableViewCell.swift */; };
@@ -138,6 +139,7 @@
 		FB3BC16D282C0BD2001B539E /* GetTokenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetTokenViewController.swift; sourceTree = "<group>"; };
 		FB42B6E62833E91C0022A8FB /* SupportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportViewController.swift; sourceTree = "<group>"; };
 		FB58F5692851D98C006235BD /* ChiaModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChiaModels.swift; sourceTree = "<group>"; };
+		FB58F56B28521486006235BD /* ChiaWalletsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChiaWalletsManager.swift; sourceTree = "<group>"; };
 		FB5940312816856700037DFA /* GreenWallet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GreenWallet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB5940342816856700037DFA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FB5940362816856700037DFA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -198,7 +200,7 @@
 		FBC4AB742836A5AA00566683 /* TransactionHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionHistoryViewController.swift; sourceTree = "<group>"; };
 		FBD1CCA9283B90570081AF3E /* KeyChainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainManager.swift; sourceTree = "<group>"; };
 		FBD63A43283B745F006CE0A8 /* PasswordStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PasswordStoryboard.storyboard; sourceTree = "<group>"; };
-		FBD72B732850782900987484 /* ChiaBlockchainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChiaBlockchainManager.swift; sourceTree = "<group>"; };
+		FBD72B732850782900987484 /* ChiaBlockchainConnectingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChiaBlockchainConnectingManager.swift; sourceTree = "<group>"; };
 		FBEA97BC2850CF1F00D2F720 /* AskAQuestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AskAQuestionViewController.swift; sourceTree = "<group>"; };
 		FBFE5772281AAB040016E74A /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		FBFE5779281AB9250016E74A /* ThemesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemesTableViewCell.swift; sourceTree = "<group>"; };
@@ -393,7 +395,8 @@
 				FB98D0CD283F850500885E73 /* LocalizationManager.swift */,
 				FB87F340284A057D009F896C /* AlertManager.swift */,
 				FB16685D283E21D000155670 /* NetworkManager.swift */,
-				FBD72B732850782900987484 /* ChiaBlockchainManager.swift */,
+				FBD72B732850782900987484 /* ChiaBlockchainConnectingManager.swift */,
+				FB58F56B28521486006235BD /* ChiaWalletsManager.swift */,
 				FB3208072818285100F1ADCA /* ViewControllers */,
 				FB3208062818279E00F1ADCA /* CustomViews */,
 				FB5940512816AC7800037DFA /* Extensions */,
@@ -687,6 +690,7 @@
 				FB5940552816AEF400037DFA /* CustomClasses.swift in Sources */,
 				FB85BA3E283CCB210068E9DE /* TimeManager.swift in Sources */,
 				FB0FCA6628194D4300BB0527 /* SelectSystemViewController.swift in Sources */,
+				FB58F56C28521486006235BD /* ChiaWalletsManager.swift in Sources */,
 				FB94C6FA2840C21500FF4686 /* CustomMainCollectionView.swift in Sources */,
 				FB0FCA7628197B4800BB0527 /* ImportTokensViewController.swift in Sources */,
 				FB96DB6E2844D0850018EC2A /* TransictionFilterCollectionViewCell.swift in Sources */,
@@ -711,7 +715,7 @@
 				FB85BA40283CCC470068E9DE /* GreatingViewController.swift in Sources */,
 				FBFE578F281AC4050016E74A /* PushAndAllSettingsTableViewCell.swift in Sources */,
 				FB87F341284A057D009F896C /* AlertManager.swift in Sources */,
-				FBD72B742850782900987484 /* ChiaBlockchainManager.swift in Sources */,
+				FBD72B742850782900987484 /* ChiaBlockchainConnectingManager.swift in Sources */,
 				FB2F369028206ACB007576FE /* NewWalletViewController.swift in Sources */,
 				FB5947492823D8DD00C74E73 /* ImportMnemonicViewController.swift in Sources */,
 				FB0883DC281BE21F001D4317 /* CustomThumbView.swift in Sources */,

@@ -23,10 +23,10 @@ class SprinnerViewController: UIViewController {
         
         self.spinner.beginRefreshing()
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            self.dismiss(animated: true, completion: nil)
-            NotificationCenter.default.post(name: NSNotification.Name("showPopUp"), object: nil)
-        }
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+//            self.dismiss(animated: true, completion: nil)
+//            NotificationCenter.default.post(name: NSNotification.Name("showPopUp"), object: nil)
+//        }
     }
     
     private func localization() {
@@ -38,6 +38,12 @@ class SprinnerViewController: UIViewController {
             self.mainDescription.text = LocalizationManager.share.translate?.result.list.all.loading_pop_up_description
         }
     }
+    
+    func startSpinner() {
+        self.spinner.beginRefreshing()
+    }
+    
+    
     /*
     // MARK: - Navigation
 

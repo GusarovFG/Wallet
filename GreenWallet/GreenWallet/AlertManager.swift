@@ -74,6 +74,9 @@ class AlertManager {
         let spinnerVC = storyoard.instantiateViewController(withIdentifier: "spinner") as! SprinnerViewController
         spinnerVC.isDeleting = isDeleting ?? false
         controller.present(spinnerVC, animated: true)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            spinnerVC.dismiss(animated: true)
+        }
     }
 
     func successDeletingContact(_ controller: UIViewController) {

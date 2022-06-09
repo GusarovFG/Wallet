@@ -9,7 +9,7 @@ import UIKit
 
 class MyWalletsViewController: UIViewController {
     
-    private var wallets: [WalletModel] = []
+    private var wallets: [ChiaWallet] = []
     private var actionButtons: [MyWalletsButtons] = [MyWalletsButtons(image: UIImage(named: "getArrow")!,
                                                                       title: "Send",
                                                                       discription: "Send coins and tokens at any time from your mobile phone"),
@@ -26,7 +26,7 @@ class MyWalletsViewController: UIViewController {
     var isShowDetail = false
     var isScrolling = true
     var index = 0
-    private var wallet: WalletModel?
+    private var wallet: ChiaWallet?
     
     
     @IBOutlet weak var titleLabel: UILabel!
@@ -59,7 +59,7 @@ class MyWalletsViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.wallets = WalletManager.share.vallets
+        self.wallets = ChiaWalletsManager.share.wallets.wallets
         print(self.index)
         self.pageControl.numberOfPages = self.wallets.count
         self.walletCollectionView.reloadData()
@@ -90,8 +90,8 @@ class MyWalletsViewController: UIViewController {
         let alertVC = storyBoard.instantiateViewController(withIdentifier: "DeletingAlert") as! AllertWalletViewController
         self.present(alertVC, animated: true)
 
-        WalletManager.share.vallets.removeAll(where: {$0 == self.wallet})
-        self.wallets = WalletManager.share.vallets
+//        WalletManager.share.vallets.removeAll(where: {$0 == self.wallet})
+//        self.wallets = WalletManager.share.vallets
         self.walletCollectionView.reloadData()
     }
     
@@ -144,7 +144,12 @@ extension MyWalletsViewController: UICollectionViewDelegate, UICollectionViewDat
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch collectionView {
         case self.walletCollectionView:
-            return self.wallets.count
+            if wallets.isEmpty {
+                return 0
+            } else {
+                
+                return self.wallets.count
+            }
         default:
             return self.actionButtons.count
         }
@@ -162,8 +167,8 @@ extension MyWalletsViewController: UICollectionViewDelegate, UICollectionViewDat
             case false:
                 let wallet = self.wallets[indexPath.row]
                 self.wallet = wallet
-                mainCell.walletImage.image = wallet.image
-                mainCell.balanceLabel.text = "8,5478614578 XCH"
+                mainCell.walletImage.image = UIImage(named: "LogoChia")!
+                mainCell.balanceLabel.text = "\(ChiaWalletsManager.share.balance.wallet_balance.max_send_amount) XCH"
                 mainCell.usdLabel.text = "⁓762,14 USDT"
                 mainCell.walletSystemLabel.text = wallet.name + " Network"
                 mainCell.complitionHandler = { [unowned self] in

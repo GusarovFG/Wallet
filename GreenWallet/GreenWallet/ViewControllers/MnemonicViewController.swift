@@ -9,7 +9,7 @@ import UIKit
 
 class MnemonicViewController: UIViewController {
     
-    private var mnemonicPhrase: [String] = ["Дверь", "Будущее", "Слово", "Криптовалюта", "Деньги", "Музыка", "Компьютер", "Плавание", "Кошелек", "Дизайн", "Дом", "Яблоко"]
+    private var mnemonicPhrase: [String] = ["", "", "", "", "", "", "", "", "", "", "", ""]
     private var secureMnemonicPhrase: [String] = []
     private let indexes: [Int] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
     private var hide = true
@@ -27,14 +27,9 @@ class MnemonicViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         localization()
-        ChiaBlockchainManager.share.generateMnemonic { mnemonic in
-            self.mnemonicPhrase = mnemonic.mnemonic
-            self.secureMnemonicPhrase = self.mnemonicPhrase
-            
-            print(self.mnemonicPhrase)
-        }
-        secureMnemonic()
         
+        self.secureMnemonicPhrase = self.mnemonicPhrase
+        self.secureMnemonic()
         self.continueButton.isEnabled = false
         self.continueButton.backgroundColor = #colorLiteral(red: 0.3364975452, green: 0.3364975452, blue: 0.3364975452, alpha: 1)
         self.copyLabel.alpha = 0
@@ -52,6 +47,16 @@ class MnemonicViewController: UIViewController {
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        ChiaBlockchainManager.share.generateMnemonic { mnemonic in
+            AlertManager.share.showSpinner(self, nil)
+            self.mnemonicPhrase = mnemonic.mnemonic
+            self.secureMnemonicPhrase = self.mnemonicPhrase
+            self.secureMnemonic()
+            self.collectionView.reloadData()
+        }
+    }
+    
     private func localization() {
         self.titleLabel.text = LocalizationManager.share.translate?.result.list.create_a_mnemonic_phrase.create_a_mnemonic_phrase_title
         self.discriptionLabel.text = LocalizationManager.share.translate?.result.list.create_a_mnemonic_phrase.create_a_mnemonic_phrase_description
@@ -63,6 +68,7 @@ class MnemonicViewController: UIViewController {
     }
     
     private func secureMnemonic() {
+        self.secureMnemonicPhrase.removeAll()
         
         for word in self.mnemonicPhrase {
             var secureWord = ""
@@ -141,7 +147,7 @@ extension MnemonicViewController: UICollectionViewDelegate, UICollectionViewData
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "mnemonicCell", for: indexPath) as! MnemonicCollectionViewCell
-        let mnemonicWord = self.secureMnemonicPhrase[indexPath.row + 6]
+        let mnemonicWord = self.secureMnemonicPhrase[indexPath.row]
         
         cell.mnemonicWord.text = "\(self.indexes[indexPath.row]). \(mnemonicWord)"
         return cell

@@ -82,16 +82,36 @@ class GreatingViewController: UIViewController {
     }
     
     private func dismissController() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-
-
-            UIView.animate(withDuration: 5, delay: 0) {
-                self.view.alpha = 0
+        
+        if CoreDataManager.share.fetchChiaWaletFingerpring().isFault {
+            
+            DispatchQueue.global().async {
+                ChiaBlockchainManager.share.logIn(Int(CoreDataManager.share.fetchChiaWaletFingerpring().fingerpring))
+                ChiaBlockchainManager.share.getWallets { wallets in
+                    ChiaWalletsManager.share.wallets = wallets
+                    
+                }
+                ChiaBlockchainManager.share.getWalletBalance(1) { balance in
+                    print(balance.wallet_balance.max_send_amount)
+                    ChiaWalletsManager.share.balance = balance
+                }
+                DispatchQueue.main.async {
+                    NotificationCenter.default.post(name: NSNotification.Name("setupRootVC"), object: nil)
+                }
             }
-
-            NotificationCenter.default.post(name: NSNotification.Name("setupRootVC"), object: nil)
-
-
+        } else {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                
+                
+                UIView.animate(withDuration: 5, delay: 0) {
+                    self.view.alpha = 0
+                }
+                
+                NotificationCenter.default.post(name: NSNotification.Name("setupRootVC"), object: nil)
+                
+                
+            }
+            
         }
     }
 }

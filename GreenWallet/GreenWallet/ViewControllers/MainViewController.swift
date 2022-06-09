@@ -71,13 +71,14 @@ class MainViewController: UIViewController {
         super.viewWillAppear(animated)
         localization()
         self.wallets = WalletManager.share.favoritesWallets
+        
         self.pageControl.numberOfPages = self.wallets.count
         self.cellectionView.reloadData()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
+        self.balanceLabel.text = String(ChiaWalletsManager.share.balance.wallet_balance.max_send_amount)
     }
     
     override func viewDidLayoutSubviews() {

@@ -88,6 +88,21 @@ class CoreDataManager {
         saveContext()
         
     }
+    
+    func saveChiaWaletFingerpring(_ fingerprint: Int) {
+        let wlletFingerprint = WalletFingerprint(context: self.persistentContainer.viewContext)
+        
+        wlletFingerprint.fingerpring = Int64(fingerprint)
+        
+        saveContext()
+    }
+    
+    func fetchChiaWaletFingerpring() -> WalletFingerprint {
+        let fetchReqest: NSFetchRequest<WalletFingerprint> = WalletFingerprint.fetchRequest()
+        let fingerprints = (try? self.persistentContainer.viewContext.fetch(fetchReqest)) ?? []
+        
+        return fingerprints[0]
+    }
 
     func saveContext () {
         let context = persistentContainer.viewContext
