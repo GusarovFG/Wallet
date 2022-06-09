@@ -83,23 +83,23 @@ class GreatingViewController: UIViewController {
     
     private func dismissController() {
         
-        if CoreDataManager.share.fetchChiaWaletFingerpring().isFault {
-            
-            DispatchQueue.global().async {
-                ChiaBlockchainManager.share.logIn(Int(CoreDataManager.share.fetchChiaWaletFingerpring().fingerpring))
-                ChiaBlockchainManager.share.getWallets { wallets in
-                    ChiaWalletsManager.share.wallets = wallets
-                    
-                }
-                ChiaBlockchainManager.share.getWalletBalance(1) { balance in
-                    print(balance.wallet_balance.max_send_amount)
-                    ChiaWalletsManager.share.balance = balance
-                }
-                DispatchQueue.main.async {
-                    NotificationCenter.default.post(name: NSNotification.Name("setupRootVC"), object: nil)
-                }
-            }
-        } else {
+//        if CoreDataManager.share.fetchChiaWaletFingerpring() {
+//
+//            DispatchQueue.global().async {
+//                ChiaBlockchainManager.share.logIn(Int(CoreDataManager.share.fetchChiaWaletFingerpring().fingerpring))
+//                ChiaBlockchainManager.share.getWallets { wallets in
+//                    ChiaWalletsManager.share.wallets = wallets
+//
+//                }
+//                ChiaBlockchainManager.share.getWalletBalance(1) { balance in
+//                    print(balance.wallet_balance.max_send_amount)
+//                    ChiaWalletsManager.share.balance = balance
+//                }
+//                DispatchQueue.main.async {
+//                    NotificationCenter.default.post(name: NSNotification.Name("setupRootVC"), object: nil)
+//                }
+//            }
+//        } else {
             DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
                 
                 
@@ -112,6 +112,6 @@ class GreatingViewController: UIViewController {
                 
             }
             
-        }
+//        }
     }
 }
