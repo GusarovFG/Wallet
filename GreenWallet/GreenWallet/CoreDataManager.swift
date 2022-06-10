@@ -103,6 +103,25 @@ class CoreDataManager {
         
         return fingerprints[0]
     }
+    
+    func saveChiaWalletPrivateKey(_ fingerprint: Int,_ pk: String,_ seed: String,_ sk: String) {
+        let privateKey = ChiaWalletPrivateKey(context: self.persistentContainer.viewContext)
+        
+        privateKey.fingerprint = Int64(fingerprint)
+        privateKey.pk = pk
+        privateKey.seed = seed
+        privateKey.sk = sk
+
+        
+        saveContext()
+    }
+    
+    func fetchChiaWalletPrivateKey() -> ChiaWalletPrivateKey {
+        let fetchReqest: NSFetchRequest<ChiaWalletPrivateKey> = ChiaWalletPrivateKey.fetchRequest()
+        let privateKey = (try? self.persistentContainer.viewContext.fetch(fetchReqest)) ?? []
+        
+        return privateKey[0]
+    }
 
     func saveContext () {
         let context = persistentContainer.viewContext

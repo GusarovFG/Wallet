@@ -23,4 +23,5 @@ enum UserDefaultsStringKeys: String {
     case Language = "Language"
     case theme = "Theme"
     case firstSession = "FirstSession"
+    case walletExist = "walletExist"
 }

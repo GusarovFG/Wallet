@@ -68,20 +68,25 @@ class VerifyMnemonicViewController: UIViewController {
     @IBAction func backButtonPressed(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
+
     
     @IBAction func mainButtonPressed(_ sender: Any) {
         if self.verifyedMnemonicPhrase == self.mnemonicPhrase.split()[0] {
             let storyboardSpin = UIStoryboard(name: "spinner", bundle: .main)
             let spinnerVC = storyboardSpin.instantiateViewController(withIdentifier: "spinner")
             self.present(spinnerVC, animated: true)
+            print(self.mnemonicPhrase)
             ChiaBlockchainManager.share.addKey(self.mnemonicPhrase) { fingerpring in
+                                print(fingerpring.fingerprint)
                 CoreDataManager.share.saveChiaWaletFingerpring(fingerpring.fingerprint)
-                print(fingerpring.fingerprint)
-                DispatchQueue.global().async {
                     ChiaBlockchainManager.share.logIn(fingerpring.fingerprint)
                     ChiaBlockchainManager.share.getWallets { wallets in
                         ChiaWalletsManager.share.wallets = wallets
-                        
+                        ChiaBlockchainManager.share.getPrivateKey(fingerpring.fingerprint) { privateKey in
+                            CoreDataManager.share.saveChiaWalletPrivateKey(privateKey.private_key.fingerprint, privateKey.private_key.pk, privateKey.private_key.seed, privateKey.private_key.sk)
+                            UserDefaultsManager.shared.userDefaults.set("Exist", forKey: UserDefaultsStringKeys.walletExist.rawValue )
+                        }
+
                     }
                     ChiaBlockchainManager.share.getWalletBalance(1) { balance in
                         print(balance.wallet_balance.max_send_amount)
@@ -90,11 +95,11 @@ class VerifyMnemonicViewController: UIViewController {
                     DispatchQueue.main.async {
                         spinnerVC.dismiss(animated: true, completion: nil)
                         AlertManager.share.seccessNewWallet(self)
+
+
                     }
                 }
-                
-                
-            }
+ 
         } else {
             self.errorLabel.isHidden = false
             UIView.animate(withDuration: 1) {

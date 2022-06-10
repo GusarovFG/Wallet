@@ -42,7 +42,7 @@ class GreatingViewController: UIViewController {
             
         }
         
-
+        
     }
     
     private func showPermissions() {
@@ -60,15 +60,15 @@ class GreatingViewController: UIViewController {
                         print(settings)
                         guard settings.authorizationStatus == .authorized else { return }
                         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-
-
+                            
+                            
                             UIView.animate(withDuration: 5, delay: 0) {
                                 self.view.alpha = 0
                             }
-
+                            
                             NotificationCenter.default.post(name: NSNotification.Name("setupRootVC"), object: nil)
-
-
+                            
+                            
                         }
                     }
                 }
@@ -83,23 +83,28 @@ class GreatingViewController: UIViewController {
     
     private func dismissController() {
         
-//        if CoreDataManager.share.fetchChiaWaletFingerpring() {
-//
-//            DispatchQueue.global().async {
-//                ChiaBlockchainManager.share.logIn(Int(CoreDataManager.share.fetchChiaWaletFingerpring().fingerpring))
-//                ChiaBlockchainManager.share.getWallets { wallets in
-//                    ChiaWalletsManager.share.wallets = wallets
-//
-//                }
-//                ChiaBlockchainManager.share.getWalletBalance(1) { balance in
-//                    print(balance.wallet_balance.max_send_amount)
-//                    ChiaWalletsManager.share.balance = balance
-//                }
-//                DispatchQueue.main.async {
-//                    NotificationCenter.default.post(name: NSNotification.Name("setupRootVC"), object: nil)
-//                }
-//            }
-//        } else {
+        if UserDefaultsManager.shared.userDefaults.string(forKey: UserDefaultsStringKeys.walletExist.rawValue) == "Exist" {
+            
+            
+            DispatchQueue.global().async {
+                ChiaBlockchainManager.share.logIn(Int(CoreDataManager.share.fetchChiaWalletPrivateKey().fingerprint))
+                ChiaBlockchainManager.share.getWallets { wallets in
+                    ChiaWalletsManager.share.wallets = wallets
+                    print(wallets)
+                    ChiaBlockchainManager.share.getWalletBalance(1) { balance in
+                        print(balance.wallet_balance.max_send_amount)
+                        ChiaWalletsManager.share.balance = balance
+                    }
+                    
+                }
+                
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                    NotificationCenter.default.post(name: NSNotification.Name("setupRootVC"), object: nil)
+                }
+            }
+            
+        } else {
             DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
                 
                 
@@ -112,6 +117,6 @@ class GreatingViewController: UIViewController {
                 
             }
             
-//        }
+        }
     }
 }

@@ -50,8 +50,8 @@ class ImportMnemonicViewController: UIViewController {
             }
         }
     }
-        
-
+    
+    
     private func localization() {
         self.titleLabel.text = LocalizationManager.share.translate?.result.list.import_mnemonics.import_mnemonics_title
         self.descriptionLabel.text = LocalizationManager.share.translate?.result.list.import_mnemonics.import_mnemonics_description
@@ -86,7 +86,7 @@ class ImportMnemonicViewController: UIViewController {
             self.scrollView.isScrollEnabled = false
         }
     }
-
+    
     
     
     private func setuptermsLabel() {
@@ -121,10 +121,10 @@ class ImportMnemonicViewController: UIViewController {
             for _ in 0...11 {
                 self.mnemonicPhrase.insert("", at: 12)
             }
-           
+            
             
             self.scrollView.isScrollEnabled = true
-
+            
             self.collectionView.reloadData()
             self.bottomConstraint.constant = self.bottomConstraint.constant + (55 * 6)
         }
@@ -163,7 +163,7 @@ class ImportMnemonicViewController: UIViewController {
     
     
     @IBAction func continueButtonPressed(_ sender: Any) {
-
+        
         
         for i in 0..<self.mnemonicPhrase.count{
             if self.mnemonicPhrase.filter({$0 == self.mnemonicPhrase[i]}).count > 2 {
@@ -174,19 +174,13 @@ class ImportMnemonicViewController: UIViewController {
                     
                 }
             } else {
-                AlertManager.share.showSpinner(self, nil)
                 
-                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                    
-                    AlertManager.share.successImportMnemonic(self)
-                    
                 
-            }
             }
         }
-
-
-           
+        
+        
+        
     }
     @IBAction func tapHideKeyBoard(_ sender: Any) {
         NotificationCenter.default.post(name: NSNotification.Name("HideCellKeyboard"), object: nil)
@@ -257,7 +251,7 @@ extension ImportMnemonicViewController: UICollectionViewDelegate, UICollectionVi
                     }
                 }
                 
-
+                
                 self.mnemonicPhrase.remove(at: indexPath.row)
                 self.mnemonicPhrase.insert(cell.cellTextLabel.text ?? "", at: indexPath.row)
             } else {
@@ -293,7 +287,7 @@ extension ImportMnemonicViewController: UICollectionViewDelegate, UICollectionVi
         
         return cell
     }
-
+    
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         CGSize(width: 178, height: 50)
@@ -305,10 +299,10 @@ extension ImportMnemonicViewController: UICollectionViewDelegate, UICollectionVi
 }
 
 extension ImportMnemonicViewController: UITextFieldDelegate {
-
+    
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-
+        
         
         if textField.tag == (self.countOfItems - 1) {
             textField.resignFirstResponder()

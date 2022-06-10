@@ -10,8 +10,8 @@ import Foundation
 class ChiaBlockchainManager {
     
     static let share = ChiaBlockchainManager()
-    
-    fileprivate let url = "https://chia.blockchain-list.store/"
+ 
+    fileprivate let url = "https://chia.blockchain-list.store"
     
     private init(){}
     
@@ -93,12 +93,66 @@ class ChiaBlockchainManager {
         }.resume()
     }
     
-    
     func addKey(_ mnemonicPhrase: [String], with complition: @escaping (ChiaFingerPrint) -> Void) {
 
         let method = "add_key"
         guard let url = URL(string: self.url + "/wallet/" + method) else { return }
         let parameters = ["mnemonic":mnemonicPhrase, "type":"new_wallet"] as [String : Any]
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: []) else { return }
+        request.httpBody = httpBody
+        print(httpBody)
+        
+        let session = URLSession.shared
+        session.dataTask(with: request) { data, response, error in
+            if let response = response {
+                print(response)
+            }
+            if let data = data {
+                do {
+                    let json = try JSONDecoder().decode(ChiaFingerPrint.self, from: data)
+                    DispatchQueue.main.async {
+                        complition(json)
+                    }
+                } catch {
+                    print(error.localizedDescription)
+                }
+            }
+        }.resume()
+    }
+    
+    func deleteAllKeys(){
+        let method = "delete_all_keys"
+        guard let url = URL(string: self.url + "/wallet/" + method) else { return }
+        let parameters = ["":""]
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: []) else { return }
+        request.httpBody = httpBody
+        
+        let session = URLSession.shared
+        session.dataTask(with: request) { data, response, error in
+            if let response = response {
+                print(response)
+            }
+            if let data = data {
+                do {
+                    let json = try JSONDecoder().decode(LogIn.self, from: data)
+                    print(json.fingerprint)
+                    print(json.success)
+                } catch {
+                    print(error.localizedDescription)
+                }
+            }
+        }.resume()
+    }
+
+    func importMnemonic(_ mnemonicPhrase: [String], with complition: @escaping (ChiaFingerPrint) -> Void) {
+        
+        let method = "add_key"
+        guard let url = URL(string: self.url + "/wallet/" + method) else { return }
+        let parameters = ["mnemonic":mnemonicPhrase] as [String : Any]
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: []) else { return }
