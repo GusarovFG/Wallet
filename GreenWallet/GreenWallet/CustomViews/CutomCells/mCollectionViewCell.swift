@@ -9,7 +9,7 @@ import UIKit
 
 class mCollectionViewCell: UICollectionViewCell {
     
-    var wallet = WalletModel(name: "", number: 0, image: UIImage(), tokens: [], toket: "")
+    var wallet: ChiaWalletPrivateKey?
     var controller = UIViewController()
     var height: CGFloat = 0
     var collectionVieww = NSLayoutConstraint()
@@ -45,7 +45,7 @@ class mCollectionViewCell: UICollectionViewCell {
         NotificationCenter.default.addObserver(self, selector: #selector(localization), name: NSNotification.Name("localized"), object: nil)
 
     }
-    
+
     
     override func layoutSubviews(){
         super.layoutSubviews()
@@ -58,12 +58,12 @@ class mCollectionViewCell: UICollectionViewCell {
                 self.collectionVieww.constant = self.heightConstraint.constant
             } else {
                 self.tableView.reloadData()
-                self.heightConstraint.constant = (self.frame.size.height) - (self.footerView.frame.height + self.headerView.frame.height + CGFloat((76 * self.wallet.tokens.count )) + 46)
+                self.heightConstraint.constant = (self.frame.size.height) - (self.footerView.frame.height + self.headerView.frame.height + CGFloat((76 * 0)) + 46)
                 self.collectionVieww.constant = self.heightConstraint.constant
             }
         }
         
-        if self.wallet.tokens.count > 5 {
+        if (self.wallet?.wallets as! [NSNumber]).count > 5 {
             self.tableView.isScrollEnabled = true
         } else {
             self.tableView.isScrollEnabled = false
@@ -109,11 +109,11 @@ class mCollectionViewCell: UICollectionViewCell {
 extension mCollectionViewCell: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch self.wallet.tokens.count {
+        switch (self.wallet?.wallets as! [NSNumber]).count {
         case 0:
             return 0
         default:
-            return self.wallet.tokens.count + 1
+            return (self.wallet?.wallets as! [NSNumber]).count + 1
         }
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -121,26 +121,26 @@ extension mCollectionViewCell: UITableViewDelegate, UITableViewDataSource {
         let importCell = tableView.dequeueReusableCell(withIdentifier: "ImportTableViewCell", for: indexPath) as! ImportTableViewCell
         
         switch indexPath {
-        case [0,self.wallet.tokens.count]:
+        case [0,(self.wallet?.wallets as! [NSNumber]).count]:
             self.height += importCell.frame.height
             
             
             return importCell
         default:
             self.height += walletCell.frame.height
-            let wallet = self.wallet.tokens[indexPath.row]
+           
             
-            walletCell.cellImage.image = wallet.image
-            walletCell.balanceLabel.text = "\(wallet.balance) \(wallet.token)"
+            walletCell.cellImage.image = UIImage(named: "LogoChia")!
+            walletCell.balanceLabel.text = "\((self.wallet?.balances as! [NSNumber])[indexPath.row]) \((self.wallet?.wallets as! [NSNumber])[indexPath.row])"
             walletCell.convertLabel.text = "⁓ 504.99 USD"
-            walletCell.tokenLabel.text = wallet.name
+            walletCell.tokenLabel.text = self.wallet?.name ?? ""
             
             return walletCell
         }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath == [0,self.wallet.tokens.count] {
+        if indexPath == [0,(self.wallet?.wallets as! [NSNumber]).count] {
             let storyboard = UIStoryboard(name: "Main", bundle: .main)
             let importVC = storyboard.instantiateViewController(withIdentifier: "ImportTokensViewController") as! ImportTokensViewController
             importVC.modalPresentationStyle = .fullScreen

@@ -12,8 +12,8 @@ class PushTokensViewController: UIViewController {
     
     private var video = AVCaptureVideoPreviewLayer()
     private let session = AVCaptureSession()
-    private var wallet: WalletModel?
-    private var wallets: [WalletModel] = []
+    private var wallet: ChiaWalletPrivateKey?
+    private var wallets: [ChiaWalletPrivateKey] = []
     
     
     private let link = "qwertyuiopasdfghjkl"
@@ -76,7 +76,7 @@ class PushTokensViewController: UIViewController {
         localization()
         self.wallets = WalletManager.share.vallets
         self.wallet = self.wallets.first
-        self.balanceButton.setTitle("\(self.wallet?.tokens[0].balance ?? 0) \(self.wallet?.tokens[0].token ?? "")", for: .normal)
+//        self.balanceButton.setTitle("\(self.wallet?.tokens[0].balance ?? 0) \(self.wallet?.tokens[0].token ?? "")", for: .normal)
         self.tokenButton.setTitle(self.wallet?.name, for: .normal)
         self.walletsView.isHidden = true
         
@@ -151,7 +151,7 @@ class PushTokensViewController: UIViewController {
     
     private func setupWalletButton() {
         self.tokenButton.titleLabel?.lineBreakMode = NSLineBreakMode.byWordWrapping
-        let numbers = ("\(self.wallet?.number ?? 0)")
+        let numbers = ("\(self.wallet?.fingerprint ?? 0)")
         var numberOfWallet = ""
         for numb in numbers {
             
@@ -258,7 +258,7 @@ class PushTokensViewController: UIViewController {
                 break
             } else {
                 var numberOfWallet = ""
-                let numbers = ("\(self.wallets[i].number )")
+                let numbers = ("\(self.wallets[i].fingerprint )")
                 for numb in numbers {
                     
                     if numberOfWallet.count < numbers.count - 4 {
@@ -271,13 +271,13 @@ class PushTokensViewController: UIViewController {
                 let wallet = self.wallets[i]
                 let button = UIButton(frame: CGRect(x: 0, y: 0, width: self.walletStackView.frame.width, height: 40))
                 button.setTitle("\(wallet.name) \(numberOfWallet)", for: .normal)
-                let prefixString = wallet.name
+                let prefixString = wallet.name?.split(separator: " ").first ?? ""
                 let infixAttributedString = NSAttributedString(
                     string: "     \(numberOfWallet)",
                     attributes: [NSAttributedString.Key.foregroundColor: #colorLiteral(red: 0.4588235294, green: 0.4588235294, blue: 0.4588235294, alpha: 1), NSAttributedString.Key.font: UIFont(name: "System Font Regular", size: 12)!]
                 )
                 
-                let attributedString = NSMutableAttributedString(string: prefixString)
+                let attributedString = NSMutableAttributedString(string: String(prefixString))
                 attributedString.append(infixAttributedString)
                 
                 button.setAttributedTitle(attributedString, for: .normal)
@@ -294,12 +294,12 @@ class PushTokensViewController: UIViewController {
     @IBAction func balanceMenuOpen(_ sender: Any) {
         if self.balanceView.isHidden == true {
             self.balanceView.isHidden = false
-            for i in 0..<(self.wallet?.tokens.count)! {
-                if self.balanceStackView.arrangedSubviews.count == (self.wallet?.tokens.count)! {
+            for i in 0..<((self.wallet?.wallets as! [NSNumber]).count) {
+                if self.balanceStackView.arrangedSubviews.count == ((self.wallet?.wallets as! [NSNumber]).count) {
                 } else {
-                    let token = self.wallet?.tokens[i].token
+                    let token = (self.wallet?.wallets as! [NSNumber])[i]
                     let button = UIButton(frame: CGRect(x: 0, y: 0, width: self.balanceStackView.frame.width, height: 40))
-                    button.setTitle(token, for: .normal)
+                    button.setTitle("\(token)", for: .normal)
                     self.balanceStackView.addArrangedSubview(button)
                     self.balanceViewConstraint.constant += button.frame.height
                     self.balaceStackViewConstraint.constant += button.frame.height
@@ -321,7 +321,7 @@ class PushTokensViewController: UIViewController {
             self.walletStackView.arrangedSubviews[i].backgroundColor = .systemBackground
             if sender == self.walletStackView.arrangedSubviews[i] {
                 self.wallet = self.wallets[i]
-                self.tokenImage.image = self.wallet?.image
+                self.tokenImage.image = UIImage(named: "LogoChia")!
                 setupWalletButton()
                 sender.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
                 self.balanceView.isHidden = true
@@ -337,7 +337,7 @@ class PushTokensViewController: UIViewController {
         for i in 0..<self.balanceStackView.arrangedSubviews.count {
             self.balanceStackView.arrangedSubviews[i].backgroundColor = .systemBackground
             if sender == self.balanceStackView.arrangedSubviews[i] {
-                self.balanceButton.setTitle("\(self.wallet?.tokens[i].balance ?? 0) \(self.wallet?.tokens[i].token ?? "")", for: .normal)
+                self.balanceButton.setTitle("\((self.wallet?.balances as! [NSNumber])[i]) \((self.wallet?.wallets as! [NSNumber])[i])", for: .normal)
                 sender.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
                 self.balanceView.isHidden = true
                 self.walletsView.isHidden = true
@@ -486,7 +486,7 @@ class PushTokensViewController: UIViewController {
             self.walletErrorLabel.textColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
             
 
-            self.transitionTokenLabel.text = self.wallet?.tokens[0].name
+            self.transitionTokenLabel.text = "XCH"
             self.transitionBlockchainLabel.text = self.wallet?.name
             self.transitinSumLabel.text = self.transferTextField.text
             self.transitionLinkLabel.text = self.adressTextField.text

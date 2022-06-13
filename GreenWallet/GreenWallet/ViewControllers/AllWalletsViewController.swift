@@ -9,7 +9,7 @@ import UIKit
 
 class AllWalletsViewController: UIViewController {
     
-    var wallets: [WalletModel] = []
+    var wallets: [ChiaWalletPrivateKey] = []
     var newWallets = ChiaWalletsManager.share.wallets.wallets
     var index = 0
     
@@ -34,7 +34,7 @@ class AllWalletsViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.wallets = WalletManager.share.vallets
+        self.wallets = CoreDataManager.share.fetchChiaWalletPrivateKey()
         self.walletsTableView.reloadData()
 
     }
@@ -44,7 +44,7 @@ class AllWalletsViewController: UIViewController {
         let alertVC = storyBoard.instantiateViewController(withIdentifier: "DeletingAlert") as! AllertWalletViewController
         alertVC.isInMyWallet = true
         self.present(alertVC, animated: true)
-        WalletManager.share.vallets.removeAll(where: {$0 == self.wallets[index]})
+//        WalletManager.share.vallets.removeAll(where: {$0 == self.wallets[index]})
         self.walletsTableView.reloadData()
     }
     
@@ -61,11 +61,11 @@ class AllWalletsViewController: UIViewController {
 
 extension AllWalletsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if self.newWallets.isEmpty {
+        if self.wallets.isEmpty {
             return 0
         } else {
             
-            return self.newWallets.count + 1
+            return self.wallets.count + 1
         }
     }
     
@@ -74,7 +74,7 @@ extension AllWalletsViewController: UITableViewDelegate, UITableViewDataSource {
         let walletCell = tableView.dequeueReusableCell(withIdentifier: "AllWalletsTableViewCell", for: indexPath) as! AllWalletsTableViewCell
         
         switch indexPath {
-        case [0,self.newWallets.count]:
+        case [0,self.wallets.count]:
             addWalletCell.addPressed = {
                 let systemViewController = self.storyboard?.instantiateViewController(withIdentifier: "SelectSystemViewController") as! SelectSystemViewController
                 systemViewController.isNewWallet = true
@@ -82,7 +82,7 @@ extension AllWalletsViewController: UITableViewDelegate, UITableViewDataSource {
             }
             return addWalletCell
         default:
-            walletCell.setupCell(wallet: self.newWallets[indexPath.row])
+            walletCell.setupCell(wallet: self.wallets[indexPath.row])
             return walletCell
         }
     }
@@ -119,7 +119,7 @@ extension AllWalletsViewController: UITableViewDelegate, UITableViewDataSource {
             }
             completionHandler(true)
         }
-        
+
         favorite.backgroundColor = #colorLiteral(red: 0.1189827248, green: 0.6536024213, blue: 1, alpha: 1)
         if WalletManager.share.favoritesWallets.filter({$0 == wallet}).count == 0 {
             favorite.image = UIImage(named: "favorite")!

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CoreData
 
 struct ChiaGeneratingMnemonic: Codable {
     let mnemonic: [String]
@@ -138,4 +139,15 @@ struct LogIn: Codable {
 
 }
 
+struct ChiaAdres: Codable {
+    let address: String
+    let success: Bool
+    let wallet_id: Int
+
+    enum CodingKeys: String, CodingKey {
+        case address
+        case success
+        case wallet_id
+    }
+}
 

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 class ChiaBlockchainManager {
     
@@ -93,7 +94,7 @@ class ChiaBlockchainManager {
         }.resume()
     }
     
-    func addKey(_ mnemonicPhrase: [String], with complition: @escaping (ChiaFingerPrint) -> Void) {
+    func addKey(_ mnemonicPhrase: [String],_ controller: UIViewController, with complition: @escaping (ChiaFingerPrint) -> Void) {
 
         let method = "add_key"
         guard let url = URL(string: self.url + "/wallet/" + method) else { return }
@@ -116,7 +117,11 @@ class ChiaBlockchainManager {
                         complition(json)
                     }
                 } catch {
-                    print(error.localizedDescription)
+                    DispatchQueue.main.async {
+                        
+                        AlertManager.share.seccessNewWallet(controller)
+                        print(error.localizedDescription)
+                    }
                 }
             }
         }.resume()
@@ -231,6 +236,35 @@ class ChiaBlockchainManager {
             }
         }.resume()
     }
+    
+    func getNextAddress(walletID: Int64, with complition: @escaping (ChiaAdres) -> Void) {
+        let method = "get_next_address"
+        guard let url = URL(string: self.url + "/wallet/" + method) else { return }
+        let parameters = ["wallet_id": walletID, "new_address":true] as [String : Any]
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: []) else { return }
+        request.httpBody = httpBody
+        
+        let session = URLSession.shared
+        session.dataTask(with: request) { data, response, error in
+            if let response = response {
+                print(response)
+            }
+            if let data = data {
+                do {
+                    let json = try JSONDecoder().decode(ChiaAdres.self, from: data)
+                    DispatchQueue.main.async {
+                        complition(json)
+                    }
+                } catch {
+                    print(error.localizedDescription)
+                }
+            }
+        }.resume()
+    }
+    
+    
     
     func getWalletBalance(_ walletID: Int, with complition: @escaping (ChiaWalletBalance) -> Void) {
         let method = "get_wallet_balance"

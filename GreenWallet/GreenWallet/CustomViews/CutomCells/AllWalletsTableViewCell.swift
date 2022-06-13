@@ -26,11 +26,11 @@ class AllWalletsTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func setupCell(wallet: ChiaWallet) {
+    func setupCell(wallet: ChiaWalletPrivateKey) {
         self.cellImage.image = UIImage(named: "LogoChia")!
         self.walletLabel.text = wallet.name
-        self.tokenLabel.text = wallet.data
-        self.keyLabel.text = LocalizationManager.share.translate?.result.list.wallet.wallet_data_public_key
+        self.tokenLabel.text = "XCH"
+        self.keyLabel.text = "\(String(describing: LocalizationManager.share.translate?.result.list.wallet.wallet_data_public_key ?? "")) \(wallet.fingerprint)"
     }
     
 }

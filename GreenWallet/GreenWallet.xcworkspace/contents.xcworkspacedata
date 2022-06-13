@@ -2,6 +2,12 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:ChiaWalletPrivateKey+CoreDataClass.swift">
+   </FileRef>
+   <FileRef
+      location = "group:ChiaWalletPrivateKey+CoreDataProperties.swift">
+   </FileRef>
+   <FileRef
       location = "group:GreenWallet.xcodeproj">
    </FileRef>
    <FileRef

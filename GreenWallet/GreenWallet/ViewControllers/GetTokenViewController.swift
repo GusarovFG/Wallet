@@ -10,7 +10,7 @@ import UIKit
 class GetTokenViewController: UIViewController {
     
     private var qrs = [UIImage(named: "qrwallet")!,UIImage(named: "qrwallet")!,UIImage(named: "qrwallet")!]
-    private var wallets: [WalletModel] = []
+    private var wallets: [ChiaWalletPrivateKey] = []
 
     @IBOutlet weak var qrCollectionView: UICollectionView!
     @IBOutlet weak var titleLabel: UILabel!
@@ -69,7 +69,7 @@ class GetTokenViewController: UIViewController {
     
     private func setupLabel(index: Int) {
         
-        let numbers = "\(self.wallets[index].number )"
+        let numbers = "\(self.wallets[index].fingerprint)"
         var numberOfWallet = ""
         for numb in numbers {
             

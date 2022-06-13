@@ -86,25 +86,28 @@ class GreatingViewController: UIViewController {
         if UserDefaultsManager.shared.userDefaults.string(forKey: UserDefaultsStringKeys.walletExist.rawValue) == "Exist" {
             
             
-            DispatchQueue.global().async {
-                ChiaBlockchainManager.share.logIn(Int(CoreDataManager.share.fetchChiaWalletPrivateKey().fingerprint))
-                ChiaBlockchainManager.share.getWallets { wallets in
-                    ChiaWalletsManager.share.wallets = wallets
-                    print(wallets)
-                    ChiaBlockchainManager.share.getWalletBalance(1) { balance in
-                        print(balance.wallet_balance.max_send_amount)
-                        ChiaWalletsManager.share.balance = balance
-                    }
-                    
-                }
+//            DispatchQueue.global().async {
+//                ChiaBlockchainManager.share.logIn(Int(CoreDataManager.share.fetchChiaWalletPrivateKey().fingerprint))
+//                ChiaBlockchainManager.share.getWallets { wallets in
+//                    ChiaWalletsManager.share.wallets = wallets
+//                    print(wallets)
+//                    ChiaBlockchainManager.share.getWalletBalance(1) { balance in
+//                        print(balance.wallet_balance.max_send_amount)
+//                        ChiaWalletsManager.share.balance = balance
+//                    }
+//                    
+//                }
                 
-                
+            WalletManager.share.favoritesWallets = CoreDataManager.share.fetchChiaWalletPrivateKey()
+            WalletManager.share.vallets = CoreDataManager.share.fetchChiaWalletPrivateKey()
                 DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
                     NotificationCenter.default.post(name: NSNotification.Name("setupRootVC"), object: nil)
                 }
-            }
+//            }
             
         } else {
+            WalletManager.share.favoritesWallets = CoreDataManager.share.fetchChiaWalletPrivateKey()
+            WalletManager.share.vallets = CoreDataManager.share.fetchChiaWalletPrivateKey()
             DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
                 
                 

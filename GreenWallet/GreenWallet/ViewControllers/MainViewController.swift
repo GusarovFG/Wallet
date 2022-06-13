@@ -11,7 +11,7 @@ import AVFAudio
 class MainViewController: UIViewController {
     
     private var balance = 0
-    private var wallets: [WalletModel] = []
+    private var wallets: [ChiaWalletPrivateKey] = []
     
     private var footerButtonTitle = "Все кошельки"
     
@@ -32,7 +32,6 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
         
         self.navigationController?.navigationBar.isHidden = true
-        
         
         self.wallets = WalletManager.share.favoritesWallets
         self.pageControl.numberOfPages = WalletManager.share.favoritesWallets.count
@@ -156,7 +155,7 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "mCollectionViewCell", for: indexPath) as! mCollectionViewCell
         if WalletManager.share.favoritesWallets.isEmpty {
-            cell.wallet = WalletModel(name: "", number: 0, image: UIImage(), tokens: [], toket: "")
+            
             cell.footerButton.setTitle(LocalizationManager.share.translate?.result.list.main_screen.main_screen_purse_add_wallet, for: .normal)
             cell.footerButton.addTarget(self, action: #selector(presentSelectSystemVC), for: .touchUpInside)
             cell.tableView.backgroundColor = #colorLiteral(red: 0.1882352941, green: 0.1882352941, blue: 0.1882352941, alpha: 1)

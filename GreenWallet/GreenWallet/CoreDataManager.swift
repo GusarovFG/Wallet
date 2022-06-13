@@ -104,25 +104,39 @@ class CoreDataManager {
         return fingerprints[0]
     }
     
-    func saveChiaWalletPrivateKey(_ fingerprint: Int,_ pk: String,_ seed: String,_ sk: String) {
+    func saveChiaWalletPrivateKey(name: String, fingerprint: Int, pk: String, seed: String, sk: String, adress: String, wallets: [NSNumber], balances: [NSNumber]) {
         let privateKey = ChiaWalletPrivateKey(context: self.persistentContainer.viewContext)
         
         privateKey.fingerprint = Int64(fingerprint)
         privateKey.pk = pk
         privateKey.seed = seed
         privateKey.sk = sk
-
+        privateKey.adres = adress
+        privateKey.wallets = wallets as NSObject
+        privateKey.balances = balances as NSObject
+        privateKey.name = name
         
         saveContext()
     }
     
-    func fetchChiaWalletPrivateKey() -> ChiaWalletPrivateKey {
+    func fetchChiaWalletPrivateKey() -> [ChiaWalletPrivateKey] {
         let fetchReqest: NSFetchRequest<ChiaWalletPrivateKey> = ChiaWalletPrivateKey.fetchRequest()
         let privateKey = (try? self.persistentContainer.viewContext.fetch(fetchReqest)) ?? []
         
-        return privateKey[0]
+        return privateKey
     }
-
+    
+    func createWallet(data: String, id: Int, name: String, type: Int) -> ChiaWalletsCD {
+        let wallet = ChiaWalletsCD(context: self.persistentContainer.viewContext)
+        wallet.id = Int64(id)
+        wallet.name = name
+        wallet.data = data
+        wallet.type = Int64(type)
+        
+        return wallet
+    }
+    
+    
     func saveContext () {
         let context = persistentContainer.viewContext
         if context.hasChanges {

@@ -9,7 +9,7 @@ import UIKit
 
 class MyWalletsViewController: UIViewController {
     
-    private var wallets: [ChiaWallet] = []
+    private var wallets: [ChiaWalletPrivateKey] = []
     private var actionButtons: [MyWalletsButtons] = [MyWalletsButtons(image: UIImage(named: "getArrow")!,
                                                                       title: "Send",
                                                                       discription: "Send coins and tokens at any time from your mobile phone"),
@@ -26,7 +26,7 @@ class MyWalletsViewController: UIViewController {
     var isShowDetail = false
     var isScrolling = true
     var index = 0
-    private var wallet: ChiaWallet?
+    private var wallet: ChiaWalletPrivateKey?
     
     
     @IBOutlet weak var titleLabel: UILabel!
@@ -59,7 +59,7 @@ class MyWalletsViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.wallets = ChiaWalletsManager.share.wallets.wallets
+        self.wallets = CoreDataManager.share.fetchChiaWalletPrivateKey()
         print(self.index)
         self.pageControl.numberOfPages = self.wallets.count
         self.walletCollectionView.reloadData()
@@ -168,21 +168,22 @@ extension MyWalletsViewController: UICollectionViewDelegate, UICollectionViewDat
                 let wallet = self.wallets[indexPath.row]
                 self.wallet = wallet
                 mainCell.walletImage.image = UIImage(named: "LogoChia")!
-                mainCell.balanceLabel.text = "\(ChiaWalletsManager.share.balance.wallet_balance.max_send_amount) XCH"
+                mainCell.balanceLabel.text = "\((wallet.balances as! [NSNumber])[indexPath.row]) XCH"
+                mainCell.publicKeyLabel.text = "\(LocalizationManager.share.translate?.result.list.wallet.wallet_data_public_key ?? "") \(wallet.fingerprint ?? 0)"
                 mainCell.usdLabel.text = "⁓762,14 USDT"
-                mainCell.walletSystemLabel.text = wallet.name + " Network"
+                mainCell.walletSystemLabel.text = (wallet.name?.split(separator: " ").first ?? "") + " Network"
                 mainCell.complitionHandler = { [unowned self] in
                     let passwordStoryboard = UIStoryboard(name: "PasswordStoryboard", bundle: .main)
                     let passwordVC = passwordStoryboard.instantiateViewController(withIdentifier: "PasswordViewController") as! PasswordViewController
                     passwordVC.modalPresentationStyle = .fullScreen
                     passwordVC.isShowDetail = true
                     self.present(passwordVC, animated: true)
-                    
+                     
                 }
                 return mainCell
             default:
-                detailCell.linkLabel.text = "xch1gju63fm8tv00sk6gj44kr8chp02lngk473cjcug593wquuej9qzqwhpyen"
-                detailCell.publicKeyDetailLabel.text = "b7dafa7a6036dc58b1798932ff941716b3fca4315e1af01e5b0bf500acb7a66d59d8d9b342b4b047e8fcf0d6f8873d1a"
+                detailCell.linkLabel.text = wallet?.adres
+                detailCell.publicKeyDetailLabel.text = wallet?.pk
                 detailCell.mnemonicLabel.text = "************"
                 detailCell.complitionHandler = { [unowned self] in
                     UIView.animate(withDuration: 1, delay: 0) {
