@@ -57,16 +57,17 @@ class mCollectionViewCell: UICollectionViewCell {
                 self.heightConstraint.constant = (self.frame.size.height) - (self.footerView.frame.height + self.headerView.frame.height + CGFloat((76 * 5)) + 46)
                 self.collectionVieww.constant = self.heightConstraint.constant
             } else {
-                self.tableView.reloadData()
-                self.heightConstraint.constant = (self.frame.size.height) - (self.footerView.frame.height + self.headerView.frame.height + CGFloat((76 * 0)) + 46)
+//                self.tableView.reloadData()
+                self.heightConstraint.constant = (self.frame.size.height) - (self.footerView.frame.height + self.headerView.frame.height + CGFloat((self.wallet?.wallets as! [NSNumber]).count * 76 + 46))
                 self.collectionVieww.constant = self.heightConstraint.constant
             }
         }
-        
-        if (self.wallet?.wallets as! [NSNumber]).count > 5 {
-            self.tableView.isScrollEnabled = true
-        } else {
-            self.tableView.isScrollEnabled = false
+        if self.wallet != nil {
+            if (self.wallet?.wallets as! [NSNumber]).count > 5 {
+                self.tableView.isScrollEnabled = true
+            } else {
+                self.tableView.isScrollEnabled = false
+            }
         }
 
     }
@@ -91,7 +92,6 @@ class mCollectionViewCell: UICollectionViewCell {
         let storyboard = UIStoryboard(name: "Main", bundle: .main)
         let selectSystemVC = storyboard.instantiateViewController(withIdentifier: "SelectSystemViewController") as! SelectSystemViewController
         selectSystemVC.isNewWallet = true
-        
         self.controller.present(selectSystemVC, animated: true)
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "newWallet"), object: nil)
     }
@@ -103,17 +103,21 @@ class mCollectionViewCell: UICollectionViewCell {
             self.allWalletButtonPressed()
         }
     }
-    
+
 }
 
 extension mCollectionViewCell: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch (self.wallet?.wallets as! [NSNumber]).count {
-        case 0:
+        if self.wallet == nil {
             return 0
-        default:
-            return (self.wallet?.wallets as! [NSNumber]).count + 1
+        } else {
+            switch (self.wallet?.wallets as! [NSNumber]).count {
+            case 0:
+                return 0
+            default:
+                return (self.wallet?.wallets as! [NSNumber]).count + 1
+            }
         }
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

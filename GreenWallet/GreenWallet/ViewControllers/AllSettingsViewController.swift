@@ -86,7 +86,7 @@ extension AllSettingsViewController: UITableViewDelegate, UITableViewDataSource 
             return pushAndAllSettingsCell
         case [0,5]:
             pushAndAllSettingsCell.cellImage.image = UIImage(named: "Language")!
-            pushAndAllSettingsCell.mainLabel.text = LocalizationManager.share.translate?.result.list.select_language.select_language_title
+            pushAndAllSettingsCell.mainLabel.text = LocalizationManager.share.translate?.result.list.menu.menu_change_language
             return pushAndAllSettingsCell
         default:
             pushAndAllSettingsCell.cellImage.image = UIImage(named: "info")!
