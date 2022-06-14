@@ -103,7 +103,7 @@ class mCollectionViewCell: UICollectionViewCell {
     }
     
     @IBAction func footerButtonPressed(_ sender: UIButton) {
-        if sender.titleLabel?.text == "+ Добавить кошелек"  {
+        if sender.titleLabel?.text == "Добавить кошелек"  {
             self.newwalletButtomPressed(sender)
         } else {
             self.allWalletButtonPressed()

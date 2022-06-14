@@ -467,6 +467,8 @@ class PushTokensViewController: UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
     
+    
+    
     @IBAction func continueButtonPressed(_ sender: Any) {
         
         if (Double(self.transferTextField.text ?? "") ?? 0) < NSString(string: self.balanceButton.currentTitle ?? "").doubleValue {

@@ -33,7 +33,8 @@ class MainViewController: UIViewController {
         
         self.navigationController?.navigationBar.isHidden = true
         
-        self.wallets = WalletManager.share.favoritesWallets
+        self.wallets = CoreDataManager.share.fetchChiaWalletPrivateKey()
+
         self.pageControl.numberOfPages = WalletManager.share.favoritesWallets.count
         self.cellectionView.register(UINib(nibName: "mCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "mCollectionViewCell")
         
@@ -57,7 +58,7 @@ class MainViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(showPushSystem), name: NSNotification.Name(rawValue: "showPushVC"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(localization), name: NSNotification.Name("localized"), object: nil)
     
-    
+        
     
         localization()
         
@@ -69,7 +70,6 @@ class MainViewController: UIViewController {
 
         super.viewWillAppear(animated)
         localization()
-        self.wallets = WalletManager.share.favoritesWallets
         
         self.pageControl.numberOfPages = self.wallets.count
         self.cellectionView.reloadData()
@@ -77,7 +77,6 @@ class MainViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.balanceLabel.text = String(ChiaWalletsManager.share.balance.wallet_balance.max_send_amount)
     }
     
     override func viewDidLayoutSubviews() {
@@ -154,24 +153,32 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "mCollectionViewCell", for: indexPath) as! mCollectionViewCell
-        if WalletManager.share.favoritesWallets.isEmpty {
+        if CoreDataManager.share.fetchChiaWalletPrivateKey().isEmpty {
             
-            cell.footerButton.setTitle(LocalizationManager.share.translate?.result.list.main_screen.main_screen_purse_add_wallet, for: .normal)
+            cell.footerButton.setTitle("+ \(LocalizationManager.share.translate?.result.list.main_screen.main_screen_purse_add_wallet ?? "")" , for: .normal)
             cell.footerButton.addTarget(self, action: #selector(presentSelectSystemVC), for: .touchUpInside)
             cell.tableView.backgroundColor = #colorLiteral(red: 0.1882352941, green: 0.1882352941, blue: 0.1882352941, alpha: 1)
             cell.headerButton.isHidden = true
             cell.footerButtonConstraint.constant = 0
             cell.tableView.reloadData()
             self.collectionViewHeightConstraint.constant = cell.frame.height
+            if cell.wallet != nil {
+                self.balanceLabel.text = "\((cell.wallet?.balances as! [NSNumber])[indexPath.row]) USD"
+                
+            } else {
+                self.balanceLabel.text = "0 USD"
+            }
         } else {
+            print(CoreDataManager.share.fetchChiaWalletPrivateKey())
             if cell.stackView.arrangedSubviews.contains(where: {$0 == cell.tableView}) {
-                cell.wallet = WalletManager.share.favoritesWallets[indexPath.row]
+                cell.wallet = CoreDataManager.share.fetchChiaWalletPrivateKey()[indexPath.row]
                 cell.controller = self.tabBarController ?? self
+                print(cell.wallet?.seed)
                 self.collectionViewHeightConstraint.constant = cell.frame.height
                 print(self.collectionViewHeightConstraint.constant)
             } else {
                 cell.stackView.addArrangedSubview(cell.tableView)
-                cell.wallet = WalletManager.share.favoritesWallets[indexPath.row]
+                cell.wallet = CoreDataManager.share.fetchChiaWalletPrivateKey()[indexPath.row]
                 cell.controller = self.tabBarController ?? self
                 cell.tableView.reloadData()
                 self.collectionViewHeightConstraint.constant = cell.frame.height

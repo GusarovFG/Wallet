@@ -9,7 +9,7 @@ import UIKit
 
 class MyWalletsViewController: UIViewController {
     
-    private var wallets: [ChiaWalletPrivateKey] = []
+    var wallets: [ChiaWalletPrivateKey] = []
     private var actionButtons: [MyWalletsButtons] = [MyWalletsButtons(image: UIImage(named: "getArrow")!,
                                                                       title: "Send",
                                                                       discription: "Send coins and tokens at any time from your mobile phone"),
@@ -166,10 +166,10 @@ extension MyWalletsViewController: UICollectionViewDelegate, UICollectionViewDat
             switch self.isShowDetail {
             case false:
                 let wallet = self.wallets[indexPath.row]
-                self.wallet = wallet
+                
                 mainCell.walletImage.image = UIImage(named: "LogoChia")!
-                mainCell.balanceLabel.text = "\((wallet.balances as! [NSNumber])[indexPath.row]) XCH"
-                mainCell.publicKeyLabel.text = "\(LocalizationManager.share.translate?.result.list.wallet.wallet_data_public_key ?? "") \(wallet.fingerprint ?? 0)"
+                mainCell.balanceLabel.text = "\((wallet.balances as! [NSNumber]).first ?? 0) XCH"
+                mainCell.publicKeyLabel.text = "\(LocalizationManager.share.translate?.result.list.wallet.wallet_data_public_key ?? "") \(wallets[indexPath.row].fingerprint )"
                 mainCell.usdLabel.text = "⁓762,14 USDT"
                 mainCell.walletSystemLabel.text = (wallet.name?.split(separator: " ").first ?? "") + " Network"
                 mainCell.complitionHandler = { [unowned self] in
@@ -254,7 +254,7 @@ extension MyWalletsViewController: UICollectionViewDelegate, UICollectionViewDat
                 self.present(getTokenViewController, animated: true)
                 
             case [0,1]:
-                let shareController = UIActivityViewController(activityItems: [self.wallets[index].name], applicationActivities: nil)
+                let shareController = UIActivityViewController(activityItems: [self.wallets[index].fingerprint], applicationActivities: nil)
                 self.present(shareController, animated: true, completion: nil)
            
             default:

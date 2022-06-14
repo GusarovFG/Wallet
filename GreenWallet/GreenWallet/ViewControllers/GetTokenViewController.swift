@@ -81,6 +81,33 @@ class GetTokenViewController: UIViewController {
         }
         self.walletLabel.text = "\(self.wallets[index].name )" + numberOfWallet
     }
+    
+    private func generateQRImage(stringQR: NSString) -> UIImage
+    {
+        let filter:CIFilter = CIFilter(name:"CIQRCodeGenerator")!
+        filter.setDefaults()
+
+        let data:NSData = stringQR.data(using: String.Encoding.utf8.rawValue)! as NSData
+        filter.setValue(data, forKey: "inputMessage")
+
+        let outputImg:CIImage = filter.outputImage!
+
+        let context:CIContext = CIContext(options: nil)
+        let cgimg:CGImage = context.createCGImage(outputImg, from: outputImg.extent)!
+
+        var img:UIImage = UIImage(cgImage: cgimg, scale: 1.0, orientation: UIImage.Orientation.up)
+
+        let width  = 200
+        let height = 200
+
+        UIGraphicsBeginImageContext(CGSize(width: width, height: height))
+        let cgContxt:CGContext = UIGraphicsGetCurrentContext()!
+        cgContxt.interpolationQuality = .none
+        img.draw(in: CGRect(x: 0, y: 0, width: width, height: height))
+        img = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+        return img
+    }
 
     @IBAction func backButtonPressed(_ sender: Any) {
         self.dismiss(animated: true)
@@ -162,12 +189,12 @@ class GetTokenViewController: UIViewController {
 
 extension GetTokenViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        self.qrs.count
+        self.wallets.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "qrCell", for: indexPath) as! qrCollectionViewCell
-        cell.imageCell.image = self.qrs[indexPath.row]
+        cell.imageCell.image = self.generateQRImage(stringQR: self.wallets[indexPath.row].adres as! NSString)
         setupLabel(index: indexPath.row)
        
         return cell

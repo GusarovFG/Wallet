@@ -6,5 +6,6 @@ target 'GreenWallet' do
   use_frameworks!
 
   pod 'Locksmith'
+  pod "MnemonicSwift"
 
 end

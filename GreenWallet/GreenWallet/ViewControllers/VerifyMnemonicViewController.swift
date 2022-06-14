@@ -4,7 +4,7 @@
 //
 //  Created by Фаддей Гусаров on 03.05.2022.
 //
-
+import MnemonicSwift
 import UIKit
 
 class VerifyMnemonicViewController: UIViewController {
@@ -76,17 +76,17 @@ class VerifyMnemonicViewController: UIViewController {
             let spinnerVC = storyboardSpin.instantiateViewController(withIdentifier: "spinner")
             self.present(spinnerVC, animated: true)
             print(self.mnemonicPhrase)
-            
+       
             var adreses = ""
             var balances: [Int] = []
             var walletsDict: [Int] = []
             var privateKey = ChiaPrivate(private_key: ChiaPrivateKey(farmer_pk: "", fingerprint: 0, pk: "", pool_pk: "", seed: "", sk: ""), success: true)
             var name = ""
+            let mnemonic = self.mnemonicPhrase
             
             DispatchQueue.global().async {
                 
-                
-                ChiaBlockchainManager.share.addKey(self.mnemonicPhrase, self) { fingerpring in
+                ChiaBlockchainManager.share.addKey(mnemonic, self) { fingerpring in
                     print(fingerpring.fingerprint)
                     CoreDataManager.share.saveChiaWaletFingerpring(fingerpring.fingerprint)
                     ChiaBlockchainManager.share.logIn(fingerpring.fingerprint)

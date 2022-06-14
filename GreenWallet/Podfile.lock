@@ -1,16 +1,20 @@
 PODS:
   - Locksmith (4.0.0)
+  - MnemonicSwift (2.2.4)
 
 DEPENDENCIES:
   - Locksmith
+  - MnemonicSwift
 
 SPEC REPOS:
   trunk:
     - Locksmith
+    - MnemonicSwift
 
 SPEC CHECKSUMS:
   Locksmith: e9bebbaaa4cee3c511bc358a44f843c3fe00e21f
+  MnemonicSwift: 40ba76b951b75b32e2719df989b4d6da5798fe26
 
-PODFILE CHECKSUM: 177ce60b62a2f3bf7e11cef7744186a6ffa453a5
+PODFILE CHECKSUM: f9e48482c0cd8a43e2ed1e35debebdd34df6f643
 
 COCOAPODS: 1.11.2
