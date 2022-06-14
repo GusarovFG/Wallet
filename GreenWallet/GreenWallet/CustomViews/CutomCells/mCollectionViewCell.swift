@@ -57,9 +57,15 @@ class mCollectionViewCell: UICollectionViewCell {
                 self.heightConstraint.constant = (self.frame.size.height) - (self.footerView.frame.height + self.headerView.frame.height + CGFloat((76 * 5)) + 46)
                 self.collectionVieww.constant = self.heightConstraint.constant
             } else {
-//                self.tableView.reloadData()
-                self.heightConstraint.constant = (self.frame.size.height) - (self.footerView.frame.height + self.headerView.frame.height + CGFloat((self.wallet?.wallets as! [NSNumber]).count * 76 + 46))
-                self.collectionVieww.constant = self.heightConstraint.constant
+                if self.wallet != nil {
+                    //                self.tableView.reloadData()
+                    self.heightConstraint.constant = (self.frame.size.height) - (self.footerView.frame.height + self.headerView.frame.height + CGFloat((self.wallet?.wallets as! [NSNumber]).count * 76 + 46))
+                    self.collectionVieww.constant = self.heightConstraint.constant
+                    
+                } else {
+                    self.heightConstraint.constant = (self.frame.size.height) - (self.footerView.frame.height + self.headerView.frame.height)
+                    self.collectionVieww.constant = self.heightConstraint.constant
+                }
             }
         }
         if self.wallet != nil {
