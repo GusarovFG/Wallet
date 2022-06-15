@@ -136,6 +136,14 @@ class CoreDataManager {
         return wallet
     }
     
+    func deleteChiaWalletPrivateKey(index: Int) {
+        let fetchRequest: NSFetchRequest<ChiaWalletPrivateKey> = ChiaWalletPrivateKey.fetchRequest()
+        let wallet = (try? self.persistentContainer.viewContext.fetch(fetchRequest)) ?? []
+        
+        self.persistentContainer.viewContext.delete(wallet[index])
+        
+        saveContext()
+    }
     
     func saveContext () {
         let context = persistentContainer.viewContext

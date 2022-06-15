@@ -42,7 +42,7 @@ class mCollectionViewCell: UICollectionViewCell {
         
         
         localization()
-        NotificationCenter.default.addObserver(self, selector: #selector(localization), name: NSNotification.Name("localized"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadTableView), name: NSNotification.Name("reload"), object: nil)
 
     }
 
@@ -76,6 +76,10 @@ class mCollectionViewCell: UICollectionViewCell {
             }
         }
 
+    }
+    
+    @objc func reloadTableView() {
+        self.tableView.reloadData()
     }
     
    @objc private func localization() {
@@ -133,7 +137,7 @@ extension mCollectionViewCell: UITableViewDelegate, UITableViewDataSource {
         switch indexPath {
         case [0,(self.wallet?.wallets as! [NSNumber]).count]:
             self.height += importCell.frame.height
-            
+          
             
             return importCell
         default:

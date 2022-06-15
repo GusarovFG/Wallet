@@ -97,8 +97,8 @@ class GetTokenViewController: UIViewController {
 
         var img:UIImage = UIImage(cgImage: cgimg, scale: 1.0, orientation: UIImage.Orientation.up)
 
-        let width  = 200
-        let height = 200
+        let width  = 190
+        let height = 190
 
         UIGraphicsBeginImageContext(CGSize(width: width, height: height))
         let cgContxt:CGContext = UIGraphicsGetCurrentContext()!
@@ -205,6 +205,8 @@ extension GetTokenViewController: UICollectionViewDelegate, UICollectionViewData
         let visiblePoint = CGPoint(x: visibleRect.midX, y: visibleRect.midY)
         if let visibleIndexPath = self.qrCollectionView.indexPathForItem(at: visiblePoint) {
             self.pageControl.currentPage = visibleIndexPath.row
+            self.linkLabel.text = self.wallets[visibleIndexPath.row].adres
+            self.walletLabel.text = "\(self.wallets[visibleIndexPath.row].name ?? "") ****\(String(self.wallets[visibleIndexPath.row].fingerprint).suffix(4))"
         }
     }
     

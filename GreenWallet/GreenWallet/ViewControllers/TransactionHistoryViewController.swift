@@ -10,6 +10,7 @@ import UIKit
 class TransactionHistoryViewController: UIViewController {
     
     var isHistoryWallet = false
+    var wallet: ChiaWalletPrivateKey?
     
     private var walletsTransactions: [Transaction] = [Transaction(type: LocalizationManager.share.translate?.result.list.transactions.transactions_incoming ?? "", height: "1098726", summ: "4,555", token: "XCH", date: "today"),
                                                       Transaction(type: LocalizationManager.share.translate?.result.list.transactions.transactions_incoming ?? "", height: "1098726", summ: "4,555", token: "XCH", date: "yesterday"),

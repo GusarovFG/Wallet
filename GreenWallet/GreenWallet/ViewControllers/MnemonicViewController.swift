@@ -4,7 +4,7 @@
 //
 //  Created by Фаддей Гусаров on 03.05.2022.
 //
-
+import MnemonicSwift
 import UIKit
 
 class MnemonicViewController: UIViewController {
@@ -44,17 +44,15 @@ class MnemonicViewController: UIViewController {
         
         self.collectionView.register(UINib(nibName: "MnemonicCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "mnemonicCell")
         
-        
     }
-    
     override func viewWillAppear(_ animated: Bool) {
-        ChiaBlockchainManager.share.generateMnemonic { mnemonic in
             AlertManager.share.showSpinner(self, nil)
-            self.mnemonicPhrase = mnemonic.mnemonic
+        guard let mnemonic = try? Mnemonic.generateMnemonic(strength: 128, language: .english) else { return }
+        self.mnemonicPhrase = mnemonic.components(separatedBy: " ")
             self.secureMnemonicPhrase = self.mnemonicPhrase
             self.secureMnemonic()
             self.collectionView.reloadData()
-        }
+        
     }
     
     private func localization() {

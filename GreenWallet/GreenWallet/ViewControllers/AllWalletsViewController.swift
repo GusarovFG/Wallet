@@ -44,7 +44,8 @@ class AllWalletsViewController: UIViewController {
         let alertVC = storyBoard.instantiateViewController(withIdentifier: "DeletingAlert") as! AllertWalletViewController
         alertVC.isInMyWallet = true
         self.present(alertVC, animated: true)
-//        WalletManager.share.vallets.removeAll(where: {$0 == self.wallets[index]})
+        print(self.index)
+        CoreDataManager.share.deleteChiaWalletPrivateKey(index: self.index)
         self.walletsTableView.reloadData()
     }
     
@@ -55,6 +56,7 @@ class AllWalletsViewController: UIViewController {
 
     
     @IBAction func backButtonPressed(_ sender: Any) {
+        NotificationCenter.default.post(name: NSNotification.Name("reload"), object: nil)
         self.dismiss(animated: true)
     }
 }
@@ -132,6 +134,7 @@ extension AllWalletsViewController: UITableViewDelegate, UITableViewDataSource {
             let storyBoard = UIStoryboard(name: "Alert", bundle: .main)
             let alertVC = storyBoard.instantiateViewController(withIdentifier: "DeleteWallet") as! AllertWalletViewController
             alertVC.controller = self
+            alertVC.index = indexPath.row
             self.index = indexPath.row
             self.present(alertVC, animated: true)
             completionHandler(true)

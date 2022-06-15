@@ -59,16 +59,19 @@ class MyWalletsViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.wallets = CoreDataManager.share.fetchChiaWalletPrivateKey()
-        print(self.index)
-        self.pageControl.numberOfPages = self.wallets.count
-        self.walletCollectionView.reloadData()
+        if CoreDataManager.share.fetchChiaWalletPrivateKey().isEmpty {
+            self.dismiss(animated: true)
+        } else {
+            self.wallets = CoreDataManager.share.fetchChiaWalletPrivateKey()
+            print(self.index)
+            self.pageControl.numberOfPages = self.wallets.count
+            self.walletCollectionView.reloadData()
+        }
+        
     }
     
     override func viewWillLayoutSubviews() {
         self.scrollView.contentSize = self.view.bounds.size
-        
-
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -88,10 +91,11 @@ class MyWalletsViewController: UIViewController {
     @objc func deleteWalletAtIntex() {
         let storyBoard = UIStoryboard(name: "Alert", bundle: .main)
         let alertVC = storyBoard.instantiateViewController(withIdentifier: "DeletingAlert") as! AllertWalletViewController
+        alertVC.isInMyWallet = true
         self.present(alertVC, animated: true)
+//        CoreDataManager.share.deleteChiaWalletPrivateKey(index: self.index)
+        self.wallets = CoreDataManager.share.fetchChiaWalletPrivateKey()
 
-//        WalletManager.share.vallets.removeAll(where: {$0 == self.wallet})
-//        self.wallets = WalletManager.share.vallets
         self.walletCollectionView.reloadData()
     }
     
@@ -134,7 +138,6 @@ class MyWalletsViewController: UIViewController {
         let storyBoard = UIStoryboard(name: "Alert", bundle: .main)
         let alertVC = storyBoard.instantiateViewController(withIdentifier: "DeleteWallet") as! AllertWalletViewController
         alertVC.controller = self
-        alertVC.index = self.index
         self.present(alertVC, animated: true)
     }
     

@@ -71,7 +71,7 @@ class VerifyMnemonicViewController: UIViewController {
     
     
     @IBAction func mainButtonPressed(_ sender: Any) {
-        if self.verifyedMnemonicPhrase == self.mnemonicPhrase.split()[0] {
+        if self.verifyedMnemonicPhrase == self.mnemonicPhrase{
             let storyboardSpin = UIStoryboard(name: "spinner", bundle: .main)
             let spinnerVC = storyboardSpin.instantiateViewController(withIdentifier: "spinner")
             self.present(spinnerVC, animated: true)
@@ -82,8 +82,9 @@ class VerifyMnemonicViewController: UIViewController {
             var walletsDict: [Int] = []
             var privateKey = ChiaPrivate(private_key: ChiaPrivateKey(farmer_pk: "", fingerprint: 0, pk: "", pool_pk: "", seed: "", sk: ""), success: true)
             var name = ""
-            let mnemonic = self.mnemonicPhrase
-            
+            var mnemonic = self.mnemonicPhrase
+
+          
             DispatchQueue.global().async {
                 
                 ChiaBlockchainManager.share.addKey(mnemonic, self) { fingerpring in
@@ -183,6 +184,7 @@ extension VerifyMnemonicViewController: UICollectionViewDelegate, UICollectionVi
         cell.tag = indexPath.row
         
         print(self.verifyedMnemonicPhrase)
+        print(self.mnemonicPhrase)
         switch collectionView {
         case self.veryfyCollectionView:
             cell.mnemonicWord.text = "\(self.indexes[indexPath.row]). \(self.verifyedMnemonicPhrase[indexPath.row])"

@@ -33,7 +33,6 @@ class MainViewController: UIViewController {
         
         self.navigationController?.navigationBar.isHidden = true
         
-        self.wallets = CoreDataManager.share.fetchChiaWalletPrivateKey()
 
         self.pageControl.numberOfPages = WalletManager.share.favoritesWallets.count
         self.cellectionView.register(UINib(nibName: "mCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "mCollectionViewCell")
@@ -57,6 +56,7 @@ class MainViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(showGetSystem), name: NSNotification.Name(rawValue: "showGetVC"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(showPushSystem), name: NSNotification.Name(rawValue: "showPushVC"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(localization), name: NSNotification.Name("localized"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadcellectionView), name: NSNotification.Name("reload"), object: nil)
     
         
     
@@ -67,8 +67,9 @@ class MainViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-
         super.viewWillAppear(animated)
+        self.wallets = CoreDataManager.share.fetchChiaWalletPrivateKey()
+
         localization()
         
         self.pageControl.numberOfPages = self.wallets.count
@@ -88,7 +89,10 @@ class MainViewController: UIViewController {
         self.balandeTitle.text = LocalizationManager.share.translate?.result.list.main_screen.main_screen_title_balance
     }
     
-
+    @objc func reloadcellectionView() {
+        self.cellectionView.reloadData()
+    }
+    
     @objc private func presentSelectSystemVC() {
         
         let selectSystemVC = storyboard?.instantiateViewController(withIdentifier: "SelectSystemViewController") as! SelectSystemViewController
@@ -171,6 +175,7 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
         } else {
             print(CoreDataManager.share.fetchChiaWalletPrivateKey())
             if cell.stackView.arrangedSubviews.contains(where: {$0 == cell.tableView}) {
+                
                 cell.wallet = CoreDataManager.share.fetchChiaWalletPrivateKey()[indexPath.row]
                 cell.controller = self.tabBarController ?? self
                 print(cell.wallet?.seed)
