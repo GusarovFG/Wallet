@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CryptoKit
 
 class mCollectionViewCell: UICollectionViewCell {
     
@@ -57,7 +58,7 @@ class mCollectionViewCell: UICollectionViewCell {
                 self.heightConstraint.constant = (self.frame.size.height) - (self.footerView.frame.height + self.headerView.frame.height + CGFloat((76 * 5)) + 46)
                 self.collectionVieww.constant = self.heightConstraint.constant
             } else {
-                if self.wallet != nil {
+                if self.wallet?.wallets != nil {
                     //                self.tableView.reloadData()
                     self.heightConstraint.constant = (self.frame.size.height) - (self.footerView.frame.height + self.headerView.frame.height + CGFloat((self.wallet?.wallets as! [NSNumber]).count * 76 + 46))
                     self.collectionVieww.constant = self.heightConstraint.constant
@@ -68,7 +69,7 @@ class mCollectionViewCell: UICollectionViewCell {
                 }
             }
         }
-        if self.wallet != nil {
+        if self.wallet?.wallets != nil {
             if (self.wallet?.wallets as! [NSNumber]).count > 5 {
                 self.tableView.isScrollEnabled = true
             } else {
@@ -122,12 +123,12 @@ extension mCollectionViewCell: UITableViewDelegate, UITableViewDataSource {
         if self.wallet == nil {
             return 0
         } else {
-            switch (self.wallet?.wallets as! [NSNumber]).count {
-            case 0:
-                return 0
-            default:
+            if self.wallet?.wallets != nil {
                 return (self.wallet?.wallets as! [NSNumber]).count + 1
+            } else {
+                return 0
             }
+
         }
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

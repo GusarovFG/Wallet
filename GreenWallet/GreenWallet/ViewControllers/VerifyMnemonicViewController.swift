@@ -87,34 +87,34 @@ class VerifyMnemonicViewController: UIViewController {
           
             DispatchQueue.global().async {
                 
-                ChiaBlockchainManager.share.addKey(mnemonic, self) { fingerpring in
-                    DispatchQueue.global().async {
-                        CoreDataManager.share.saveChiaWaletFingerpring(fingerpring.fingerprint)
-                        ChiaBlockchainManager.share.logIn(fingerpring.fingerprint)
-                        ChiaBlockchainManager.share.getWallets { wallets in
-                            
-                            for wallet in wallets.wallets {
-                                walletsDict.append(wallet.id)
-                                name = wallet.name
-                                
-                                ChiaBlockchainManager.share.getWalletBalance(wallet.id) { balance in
-                                    balances.append(balance.wallet_balance.max_send_amount)
-                                    print(balances)
-                                };
-                            }
-                            ChiaBlockchainManager.share.getNextAddress(walletID: Int64(1)) { adres in
-                                adreses = adres.address
-                                print(adreses)
-                            }
-                            ChiaBlockchainManager.share.getPrivateKey(fingerpring.fingerprint) { privateKeys in
-                                privateKey = privateKeys
-                                print(privateKey)
-                                UserDefaultsManager.shared.userDefaults.set("Exist", forKey: UserDefaultsStringKeys.walletExist.rawValue )
-                                CoreDataManager.share.saveChiaWalletPrivateKey(name: name, fingerprint: privateKey.private_key.fingerprint, pk: privateKey.private_key.pk, seed: privateKey.private_key.seed, sk: privateKey.private_key.seed, adress: adreses, wallets: walletsDict as [NSNumber], balances: balances as [NSNumber])
-                            }
-                            
-                            
-                        }
+//                ChiaBlockchainManager.share.addKey(mnemonic, self) { fingerpring in
+//                    DispatchQueue.global().async {
+//                        CoreDataManager.share.saveChiaWaletFingerpring(fingerpring.fingerprint)
+//                        ChiaBlockchainManager.share.logIn(fingerpring.fingerprint)
+//                        ChiaBlockchainManager.share.getWallets { wallets in
+//
+//                            for wallet in wallets.wallets {
+//                                walletsDict.append(wallet.id)
+//                                name = wallet.name
+//
+//                                ChiaBlockchainManager.share.getWalletBalance(wallet.id) { balance in
+//                                    balances.append(balance.wallet_balance.max_send_amount)
+//                                    print(balances)
+//                                };
+//                            }
+//                            ChiaBlockchainManager.share.getNextAddress(walletID: 1) { adres in
+//                                adreses = adres.address
+//                                print(adreses)
+//                            }
+//                            ChiaBlockchainManager.share.getPrivateKey(fingerpring.fingerprint) { privateKeys in
+//                                privateKey = privateKeys
+//                                print(privateKey)
+//                                UserDefaultsManager.shared.userDefaults.set("Exist", forKey: UserDefaultsStringKeys.walletExist.rawValue )
+//                                CoreDataManager.share.saveChiaWalletPrivateKey(name: name, fingerprint: privateKey.private_key.fingerprint, pk: privateKey.private_key.pk, seed: privateKey.private_key.seed, sk: privateKey.private_key.seed, adress: adreses, wallets: walletsDict as [NSNumber], balances: balances as [NSNumber])
+//                            }
+//
+//
+//                        }
                         DispatchQueue.main.async {
                             
                             print(CoreDataManager.share.fetchChiaWalletPrivateKey())
@@ -123,11 +123,7 @@ class VerifyMnemonicViewController: UIViewController {
                         }
                         
                     }
-                    print(fingerpring.fingerprint)
-                }
-            }
-
-        } else {
+                } else {
             self.errorLabel.isHidden = false
             UIView.animate(withDuration: 1) {
                 self.errorLabel.alpha = 1

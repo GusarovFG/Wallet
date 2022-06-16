@@ -191,26 +191,25 @@ class ImportMnemonicViewController: UIViewController {
             DispatchQueue.global().async {
                 
                 
+                
+                
                 ChiaBlockchainManager.share.importMnemonic(self.mnemonicPhrase) { fingerpring in
                     print(fingerpring.fingerprint)
                     CoreDataManager.share.saveChiaWaletFingerpring(fingerpring.fingerprint)
                     ChiaBlockchainManager.share.logIn(fingerpring.fingerprint)
-                    ChiaBlockchainManager.share.getNextAddress(walletID: Int64(1)) { adres in
-                        adreses = adres.address
-                        print(adreses)
-                        
-                        
-                    }
                     ChiaBlockchainManager.share.getWallets { wallets in
                     
                         for wallet in wallets.wallets {
                             walletsDict.append(wallet.id)
                             name = wallet.name
-                            
+                            ChiaBlockchainManager.share.getNextAddress(walletID: Int64(wallet.id)) { adres in
+                                adreses = adres.address
+                                print(adreses)
+                            }
                             ChiaBlockchainManager.share.getWalletBalance(wallet.id) { balance in
                                 balances.append(balance.wallet_balance.max_send_amount)
                                 print(balances)
-                            }
+                            };
                         }
                         ChiaBlockchainManager.share.getPrivateKey(fingerpring.fingerprint) { privateKeys in
                             privateKey = privateKeys

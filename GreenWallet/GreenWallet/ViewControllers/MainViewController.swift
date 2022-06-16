@@ -96,7 +96,7 @@ class MainViewController: UIViewController {
     @objc private func presentSelectSystemVC() {
         
         let selectSystemVC = storyboard?.instantiateViewController(withIdentifier: "SelectSystemViewController") as! SelectSystemViewController
-        selectSystemVC.isSelectedSystem = true
+        selectSystemVC.isNewWallet = true
         selectSystemVC.modalPresentationStyle = .overFullScreen
         self.present(selectSystemVC, animated: true)
     }
@@ -166,7 +166,7 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
             cell.footerButtonConstraint.constant = 0
             cell.tableView.reloadData()
             self.collectionViewHeightConstraint.constant = cell.frame.height
-            if cell.wallet != nil {
+            if cell.wallet?.balances != nil {
                 self.balanceLabel.text = "\((cell.wallet?.balances as! [NSNumber])[indexPath.row]) USD"
                 
             } else {
