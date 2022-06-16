@@ -196,6 +196,7 @@ extension GetTokenViewController: UICollectionViewDelegate, UICollectionViewData
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "qrCell", for: indexPath) as! qrCollectionViewCell
         cell.imageCell.image = self.generateQRImage(stringQR: self.wallets[indexPath.row].adres as! NSString)
+        self.linkLabel.text = self.wallets[indexPath.row].adres
         setupLabel(index: indexPath.row)
        
         return cell

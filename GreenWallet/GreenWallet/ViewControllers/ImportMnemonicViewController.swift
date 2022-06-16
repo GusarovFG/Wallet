@@ -195,6 +195,12 @@ class ImportMnemonicViewController: UIViewController {
                     print(fingerpring.fingerprint)
                     CoreDataManager.share.saveChiaWaletFingerpring(fingerpring.fingerprint)
                     ChiaBlockchainManager.share.logIn(fingerpring.fingerprint)
+                    ChiaBlockchainManager.share.getNextAddress(walletID: Int64(1)) { adres in
+                        adreses = adres.address
+                        print(adreses)
+                        
+                        
+                    }
                     ChiaBlockchainManager.share.getWallets { wallets in
                     
                         for wallet in wallets.wallets {
@@ -205,16 +211,12 @@ class ImportMnemonicViewController: UIViewController {
                                 balances.append(balance.wallet_balance.max_send_amount)
                                 print(balances)
                             }
-                            ChiaBlockchainManager.share.getPrivateKey(fingerpring.fingerprint) { privateKeys in
-                                ChiaBlockchainManager.share.getNextAddress(walletID: Int64(1)) { adres in
-                                    adreses = adres.address
-                                    print(adreses)
-                                }
-                                privateKey = privateKeys
-                                print(privateKey)
-                                UserDefaultsManager.shared.userDefaults.set("Exist", forKey: UserDefaultsStringKeys.walletExist.rawValue )
-                                CoreDataManager.share.saveChiaWalletPrivateKey(name: name, fingerprint: privateKey.private_key.fingerprint, pk: privateKey.private_key.pk, seed: privateKey.private_key.seed, sk: privateKey.private_key.seed, adress: adreses, wallets: walletsDict as [NSNumber], balances: balances as [NSNumber])
-                            }
+                        }
+                        ChiaBlockchainManager.share.getPrivateKey(fingerpring.fingerprint) { privateKeys in
+                            privateKey = privateKeys
+                            print(privateKey)
+                            UserDefaultsManager.shared.userDefaults.set("Exist", forKey: UserDefaultsStringKeys.walletExist.rawValue )
+                            CoreDataManager.share.saveChiaWalletPrivateKey(name: name, fingerprint: privateKey.private_key.fingerprint, pk: privateKey.private_key.pk, seed: privateKey.private_key.seed, sk: privateKey.private_key.seed, adress: adreses, wallets: walletsDict as [NSNumber], balances: balances as [NSNumber])
                         }
                         
 

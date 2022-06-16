@@ -254,9 +254,8 @@ class ChiaBlockchainManager {
             if let data = data {
                 do {
                     let json = try JSONDecoder().decode(ChiaAdres.self, from: data)
-                    DispatchQueue.main.async {
                         complition(json)
-                    }
+                    
                 } catch {
                     print(error.localizedDescription)
                 }
