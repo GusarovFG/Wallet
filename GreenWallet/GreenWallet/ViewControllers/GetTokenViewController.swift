@@ -40,6 +40,7 @@ class GetTokenViewController: UIViewController {
         self.titleLabel.text = "Chia Network"
         
         setupLabel(index: self.pageControl.currentPage)
+        self.pageControl.numberOfPages = self.wallets.count
         self.chiaMenuButton.setTitle("Chia Network", for: .normal)
         self.chivesMenuButton.setTitle("Chives Network", for: .normal)
         

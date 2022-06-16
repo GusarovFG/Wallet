@@ -185,8 +185,9 @@ extension MyWalletsViewController: UICollectionViewDelegate, UICollectionViewDat
                 }
                 return mainCell
             default:
-                detailCell.linkLabel.text = wallet?.adres
-                detailCell.publicKeyDetailLabel.text = wallet?.pk
+                detailCell.linkLabel.text = self.wallets[indexPath.row].adres
+                detailCell.publicKeyDetailLabel.text = self.wallets[indexPath.row].pk
+                print(self.wallet?.seed)
                 detailCell.mnemonicLabel.text = "************"
                 detailCell.complitionHandler = { [unowned self] in
                     UIView.animate(withDuration: 1, delay: 0) {
