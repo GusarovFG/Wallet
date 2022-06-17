@@ -28,6 +28,7 @@ class MyWalletCollectionViewCell: UICollectionViewCell {
         self.balanceLabel.text = LocalizationManager.share.translate?.result.list.main_screen.main_screen_title_balance
         self.detailButton.setTitle(LocalizationManager.share.translate?.result.list.wallet.wallet_show_data, for: .normal)
         self.balanceLabel.text = LocalizationManager.share.translate?.result.list.main_screen.main_screen_title_balance
+        self.balanceTitleLabel.text = LocalizationManager.share.translate?.result.list.main_screen.main_screen_title_balance
     }
 
     
