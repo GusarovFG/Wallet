@@ -24,6 +24,7 @@ class mCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var stackView: UIStackView!
     @IBOutlet weak var headerButton: UIButton!
     @IBOutlet weak var footerButtonConstraint: NSLayoutConstraint!
+    @IBOutlet weak var numberOFWallet: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -146,7 +147,7 @@ extension mCollectionViewCell: UITableViewDelegate, UITableViewDataSource {
            
             
             walletCell.cellImage.image = UIImage(named: "LogoChia")!
-            walletCell.balanceLabel.text = "\((self.wallet?.balances as! [NSNumber])[indexPath.row]) \((self.wallet?.wallets as! [NSNumber])[indexPath.row])"
+            walletCell.balanceLabel.text = "\((self.wallet?.balances as? [NSNumber])?[indexPath.row] ?? 0 ) XCH"
             walletCell.convertLabel.text = "⁓ 504.99 USD"
             walletCell.tokenLabel.text = self.wallet?.name ?? ""
             

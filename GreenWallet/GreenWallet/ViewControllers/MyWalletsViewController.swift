@@ -64,7 +64,7 @@ class MyWalletsViewController: UIViewController {
         } else {
             self.wallets = CoreDataManager.share.fetchChiaWalletPrivateKey()
             print(self.index)
-            self.pageControl.numberOfPages = self.wallets.count
+            
             self.walletCollectionView.reloadData()
         }
         
@@ -76,8 +76,10 @@ class MyWalletsViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        print("-------------------------_______-----____-__-__-__-__-_-_--_-_-- \(self.index)")
+        self.pageControl.numberOfPages = CoreDataManager.share.fetchChiaWalletPrivateKey().count
         self.scrollToNextCell(index: self.index)
+        
+        
     }
     
     private func localization() {

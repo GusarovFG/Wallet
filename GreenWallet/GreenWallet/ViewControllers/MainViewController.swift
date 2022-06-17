@@ -90,6 +90,7 @@ class MainViewController: UIViewController {
     }
     
     @objc func reloadcellectionView() {
+        self.wallets = CoreDataManager.share.fetchChiaWalletPrivateKey()
         self.cellectionView.reloadData()
     }
     
@@ -175,10 +176,10 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
         } else {
             print(CoreDataManager.share.fetchChiaWalletPrivateKey())
             if cell.stackView.arrangedSubviews.contains(where: {$0 == cell.tableView}) {
-                
-                cell.wallet = CoreDataManager.share.fetchChiaWalletPrivateKey()[indexPath.row]
+                let wallet = CoreDataManager.share.fetchChiaWalletPrivateKey()[indexPath.row]
+                cell.wallet = wallet
+                cell.numberOFWallet.text = "\(wallet.name ?? "") ****\(String(wallet.fingerprint).suffix(4))"
                 cell.controller = self.tabBarController ?? self
-                print(cell.wallet?.seed)
                 self.collectionViewHeightConstraint.constant = cell.frame.height
                 print(self.collectionViewHeightConstraint.constant)
             } else {

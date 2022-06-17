@@ -188,40 +188,65 @@ class ImportMnemonicViewController: UIViewController {
         }
         
         if self.mnemonicIsOK {
-            DispatchQueue.global().async {
+            let dispatchGroup = DispatchGroup()
+            let dispatchQueue = DispatchQueue(label: "importWalletQueue")
+            
+            
+            DispatchQueue.global().sync {
                 
                 
                 
-                
+                dispatchGroup.enter()
                 ChiaBlockchainManager.share.importMnemonic(self.mnemonicPhrase) { fingerpring in
                     print(fingerpring.fingerprint)
+                    dispatchGroup.leave()
+                    dispatchGroup.enter()
                     CoreDataManager.share.saveChiaWaletFingerpring(fingerpring.fingerprint)
+                    dispatchGroup.leave()
+                    dispatchGroup.enter()
                     ChiaBlockchainManager.share.logIn(fingerpring.fingerprint)
-                    ChiaBlockchainManager.share.getWallets { wallets in
+                    dispatchGroup.leave()
+                    dispatchGroup.enter()
+                    ChiaBlockchainManager.share.getNextAddress(walletID: Int64(1)) { adres in
+                        adreses = adres.address
+                        print(adreses)
+                        dispatchGroup.leave()
+                    }
                     
+                    ChiaBlockchainManager.share.getWallets { wallets in
+                        dispatchGroup.enter()
                         for wallet in wallets.wallets {
+                            dispatchGroup.enter()
                             walletsDict.append(wallet.id)
                             name = wallet.name
-                            ChiaBlockchainManager.share.getNextAddress(walletID: Int64(wallet.id)) { adres in
-                                adreses = adres.address
-                                print(adreses)
-                            }
+                            dispatchGroup.leave()
+                            dispatchGroup.enter()
+                            dispatchGroup.leave()
+                            dispatchGroup.enter()
                             ChiaBlockchainManager.share.getWalletBalance(wallet.id) { balance in
                                 balances.append(balance.wallet_balance.max_send_amount)
                                 print(balances)
-                            };
+                            }
+                            dispatchGroup.leave()
+                            
                         }
+                        dispatchGroup.enter()
                         ChiaBlockchainManager.share.getPrivateKey(fingerpring.fingerprint) { privateKeys in
                             privateKey = privateKeys
                             print(privateKey)
+                            dispatchGroup.leave()
+                            dispatchGroup.enter()
                             UserDefaultsManager.shared.userDefaults.set("Exist", forKey: UserDefaultsStringKeys.walletExist.rawValue )
                             CoreDataManager.share.saveChiaWalletPrivateKey(name: name, fingerprint: privateKey.private_key.fingerprint, pk: privateKey.private_key.pk, seed: privateKey.private_key.seed, sk: privateKey.private_key.seed, adress: adreses, wallets: walletsDict as [NSNumber], balances: balances as [NSNumber])
+                            dispatchGroup.leave()
                         }
-                        
+                        dispatchGroup.notify(queue: .main) {
+                            print("Downloading complition")
+                        }
 
                     }
                     DispatchQueue.main.async {
-                        
+                        NotificationCenter.default.post(name: NSNotification.Name("reload"), object: nil)
                         print(CoreDataManager.share.fetchChiaWalletPrivateKey())
                         spinnerVC.dismiss(animated: true, completion: nil)
                         AlertManager.share.seccessNewWallet(self)
