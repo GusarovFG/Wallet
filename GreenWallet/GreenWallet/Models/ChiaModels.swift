@@ -103,14 +103,14 @@ struct ChiaWalletBalance: Codable {
 
 // MARK: - WalletBalance
 struct WalletBalance: Codable {
-    let confirmed_wallet_balance: Int
+    let confirmed_wallet_balance: Double
     let fingerprint: Int
-    let max_send_amount: Int
-    let pending_change: Int
-    let pending_coin_removal_count: Int
-    let spendable_balance: Int
-    let unconfirmed_wallet_balance: Int
-    let unspent_coin_count: Int
+    let max_send_amount: Double
+    let pending_change: Double
+    let pending_coin_removal_count: Double
+    let spendable_balance: Double
+    let unconfirmed_wallet_balance: Double
+    let unspent_coin_count: Double
     let wallet_id: Int
 
     enum CodingKeys: String, CodingKey {

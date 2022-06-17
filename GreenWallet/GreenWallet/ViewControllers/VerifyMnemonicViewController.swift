@@ -78,7 +78,7 @@ class VerifyMnemonicViewController: UIViewController {
             print(self.mnemonicPhrase)
        
             var adreses = ""
-            var balances: [Int] = []
+            var balances: [Double] = []
             var walletsDict: [Int] = []
             var privateKey = ChiaPrivate(private_key: ChiaPrivateKey(farmer_pk: "", fingerprint: 0, pk: "", pool_pk: "", seed: "", sk: ""), success: true)
             var name = ""
