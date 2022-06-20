@@ -25,6 +25,11 @@ class LanguageViewController: UIViewController {
         self.dismiss(animated: true)
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.tableView.reloadData()
+    }
+    
 }
 
 extension LanguageViewController: UITableViewDelegate, UITableViewDataSource {
@@ -58,7 +63,7 @@ extension LanguageViewController: UITableViewDelegate, UITableViewDataSource {
         NetworkManager.share.getTranslate(from: MainURLS.API.rawValue, languageCode: language?.code ?? "") { translate in
             LocalizationManager.share.translate = translate
             CoreDataManager.share.changeLanguage(LanguageManager.share.language?.result.list[indexPath.row].code ?? "", version: LanguageManager.share.language?.result.version ?? "")
-            NotificationCenter.default.post(name: NSNotification.Name("setupRootVC"), object: nil)
+//            NotificationCenter.default.post(name: NSNotification.Name("setupRootVC"), object: nil)
         }
     }
 }

@@ -21,6 +21,9 @@
         <attribute name="descriptionOfContact" optional="YES" attributeType="String"/>
         <attribute name="name" attributeType="String" defaultValueString="&quot;&quot;"/>
     </entity>
+    <entity name="ExchangeRatesCD" representedClassName="ExchangeRatesCD" syncable="YES" codeGenerationType="class">
+        <attribute name="exchangeRates" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
+    </entity>
     <entity name="LanguageCD" representedClassName="LanguageCD" syncable="YES" codeGenerationType="class">
         <attribute name="languageCode" optional="YES" attributeType="String"/>
         <attribute name="version" optional="YES" attributeType="String"/>
@@ -32,6 +35,7 @@
         <element name="ChiaWalletPrivateKey" positionX="-54" positionY="18" width="128" height="149"/>
         <element name="ChiaWalletsCD" positionX="-36" positionY="108" width="128" height="89"/>
         <element name="Contact" positionX="-63" positionY="0" width="128" height="74"/>
+        <element name="ExchangeRatesCD" positionX="-45" positionY="72" width="128" height="44"/>
         <element name="LanguageCD" positionX="-63" positionY="-18" width="128" height="59"/>
         <element name="WalletFingerprint" positionX="-54" positionY="27" width="128" height="44"/>
     </elements>

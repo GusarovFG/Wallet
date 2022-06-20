@@ -240,7 +240,7 @@ class ChiaBlockchainManager {
     func getNextAddress(walletID: Int64, with complition: @escaping (ChiaAdres) -> Void) {
         let method = "get_next_address"
         guard let url = URL(string: self.url + "/wallet/" + method) else { return }
-        let parameters = ["wallet_id": walletID, "new_address":true] as [String : Any]
+        let parameters = ["wallet_id": walletID, "new_address":false] as [String : Any]
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: []) else { return }

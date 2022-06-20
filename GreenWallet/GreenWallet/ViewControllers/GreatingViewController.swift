@@ -17,6 +17,23 @@ class GreatingViewController: UIViewController {
         super.viewDidLoad()
         
         if UserDefaultsManager.shared.userDefaults.string(forKey: UserDefaultsStringKeys.firstSession.rawValue) != "First" {
+            NetworkManager.share.getExchangeRates { rates in
+                let rate = rates.data.filter({$0.symbol == "xchusdt"}).first
+                ExchangeRatesManager.share.newRatePerDollar = rate?.bid ?? 0
+                CoreDataManager.share.saveExchangedRates(ratePerDollar: rate?.bid ?? 0)
+            }
+        } else {
+            NetworkManager.share.getExchangeRates { rates in
+                let rate = rates.data.filter({$0.symbol == "xchusdt"}).first
+                ExchangeRatesManager.share.oldRatePerDollar = CoreDataManager.share.fetchExchangeRates()
+                ExchangeRatesManager.share.newRatePerDollar = rate?.bid ?? 0
+                ExchangeRatesManager.share.differenceСalculation()
+                CoreDataManager.share.editExchangeRates(newExchangeRates: rate?.bid ?? 0)
+            }
+        }
+        
+        
+        if UserDefaultsManager.shared.userDefaults.string(forKey: UserDefaultsStringKeys.firstSession.rawValue) != "First" {
             self.showPermissions()
             UserDefaultsManager.shared.userDefaults.set("First", forKey: UserDefaultsStringKeys.firstSession.rawValue)
         } else {
@@ -41,6 +58,7 @@ class GreatingViewController: UIViewController {
             self.mainTitle.text = LocalizationManager.share.translate?.result.list.welcome_screen.welcome_screen_titel_night
             
         }
+        
         
         
     }
@@ -86,24 +104,24 @@ class GreatingViewController: UIViewController {
         if UserDefaultsManager.shared.userDefaults.string(forKey: UserDefaultsStringKeys.walletExist.rawValue) == "Exist" {
             
             
-//            DispatchQueue.global().async {
-//                ChiaBlockchainManager.share.logIn(Int(CoreDataManager.share.fetchChiaWalletPrivateKey().fingerprint))
-//                ChiaBlockchainManager.share.getWallets { wallets in
-//                    ChiaWalletsManager.share.wallets = wallets
-//                    print(wallets)
-//                    ChiaBlockchainManager.share.getWalletBalance(1) { balance in
-//                        print(balance.wallet_balance.max_send_amount)
-//                        ChiaWalletsManager.share.balance = balance
-//                    }
-//                    
-//                }
-                
+            //            DispatchQueue.global().async {
+            //                ChiaBlockchainManager.share.logIn(Int(CoreDataManager.share.fetchChiaWalletPrivateKey().fingerprint))
+            //                ChiaBlockchainManager.share.getWallets { wallets in
+            //                    ChiaWalletsManager.share.wallets = wallets
+            //                    print(wallets)
+            //                    ChiaBlockchainManager.share.getWalletBalance(1) { balance in
+            //                        print(balance.wallet_balance.max_send_amount)
+            //                        ChiaWalletsManager.share.balance = balance
+            //                    }
+            //
+            //                }
+            
             WalletManager.share.favoritesWallets = CoreDataManager.share.fetchChiaWalletPrivateKey()
             WalletManager.share.vallets = CoreDataManager.share.fetchChiaWalletPrivateKey()
-                DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-                    NotificationCenter.default.post(name: NSNotification.Name("setupRootVC"), object: nil)
-                }
-//            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                NotificationCenter.default.post(name: NSNotification.Name("setupRootVC"), object: nil)
+            }
+            //            }
             
         } else {
             WalletManager.share.favoritesWallets = CoreDataManager.share.fetchChiaWalletPrivateKey()

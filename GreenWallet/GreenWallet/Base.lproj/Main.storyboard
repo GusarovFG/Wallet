@@ -1940,22 +1940,21 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="9" translatesAutoresizingMaskIntoConstraints="NO" id="pNy-sL-HT5">
-                                        <rect key="frame" x="15" y="93" width="159" height="15"/>
+                                        <rect key="frame" x="15" y="93" width="136" height="15"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="XCС price: 0.005 $" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aKl-mN-fcL">
-                                                <rect key="frame" x="0.0" y="0.0" width="115" height="15"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="108" height="15"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                 <color key="textColor" red="0.45882352939999999" green="0.45882352939999999" blue="0.45882352939999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q8X-eN-3k7">
-                                                <rect key="frame" x="124" y="0.0" width="35" height="15"/>
+                                                <rect key="frame" x="117" y="0.0" width="19" height="15"/>
                                                 <color key="backgroundColor" red="0.2274509804" green="0.67450980390000004" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="15" id="B0v-au-aaq"/>
-                                                    <constraint firstAttribute="width" constant="35" id="V4j-0Z-juP"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                                 <userDefinedRuntimeAttributes>
@@ -1976,7 +1975,6 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                                     <constraint firstAttribute="trailing" secondItem="2Vr-bL-6TF" secondAttribute="trailing" constant="15" id="fkd-7d-Fvd"/>
                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="fGo-lH-5NH" secondAttribute="trailing" constant="20" symbolic="YES" id="hlf-Ih-PkD"/>
                                     <constraint firstAttribute="bottom" secondItem="pNy-sL-HT5" secondAttribute="bottom" constant="12" id="npy-FY-Jt2"/>
-                                    <constraint firstAttribute="trailing" secondItem="pNy-sL-HT5" secondAttribute="trailing" constant="140" id="rd4-fC-70w"/>
                                     <constraint firstAttribute="height" constant="120" id="vmN-nG-Qhk"/>
                                     <constraint firstItem="fGo-lH-5NH" firstAttribute="leading" secondItem="D3F-W3-Jpm" secondAttribute="leading" constant="15" id="wAE-BP-SYU"/>
                                     <constraint firstItem="pNy-sL-HT5" firstAttribute="leading" secondItem="D3F-W3-Jpm" secondAttribute="leading" constant="15" id="wd6-z7-Jjz"/>

@@ -61,11 +61,37 @@ class NetworkManager {
             }
         }.resume()
     }
+    
+    func getExchangeRates(complition: @escaping (ExchangeRates) -> Void) {
+        guard let url = URL(string: MainURLS.ExchangeRates.rawValue) else { return }
+        
+        let session = URLSession.shared
+        session.dataTask(with: url) { data, response, error in
+            if let response = response {
+                print(response)
+            }
+            
+            guard let data = data else { return }
+
+            do {
+                
+                let json = try JSONDecoder().decode(ExchangeRates.self, from: data)
+                
+                DispatchQueue.main.async {
+                    complition(json)
+                }
+            } catch {
+                print(error.localizedDescription)
+                
+            }
+        }.resume()
+    }
 }
 
 enum MainURLS: String {
     case API = "https://greenapp.siterepository.ru/api/v1.0"
     case language = "https://greenapp.siterepository.ru/api/v1.0/localization/languages"
+    case ExchangeRates = "https://api.huobi.pro/market/tickers"
 }
 
 

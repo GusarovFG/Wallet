@@ -19,6 +19,8 @@
 		FB0FCA7428197A4000BB0527 /* ImportTokensTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB0FCA7228197A4000BB0527 /* ImportTokensTableViewCell.xib */; };
 		FB0FCA7628197B4800BB0527 /* ImportTokensViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0FCA7528197B4800BB0527 /* ImportTokensViewController.swift */; };
 		FB16685E283E21D000155670 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB16685D283E21D000155670 /* NetworkManager.swift */; };
+		FB2B8235286091E2005AF534 /* ExchangeRates.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB2B8234286091E1005AF534 /* ExchangeRates.swift */; };
+		FB2B82372860999C005AF534 /* ExchangeRatesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB2B82362860999C005AF534 /* ExchangeRatesManager.swift */; };
 		FB2F369028206ACB007576FE /* NewWalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB2F368F28206ACB007576FE /* NewWalletViewController.swift */; };
 		FB2F369228207BC0007576FE /* CreatingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB2F369128207BC0007576FE /* CreatingViewController.swift */; };
 		FB2F369428208286007576FE /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB2F369328208286007576FE /* MainTabBarController.swift */; };
@@ -125,6 +127,8 @@
 		FB0FCA7228197A4000BB0527 /* ImportTokensTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImportTokensTableViewCell.xib; sourceTree = "<group>"; };
 		FB0FCA7528197B4800BB0527 /* ImportTokensViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportTokensViewController.swift; sourceTree = "<group>"; };
 		FB16685D283E21D000155670 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		FB2B8234286091E1005AF534 /* ExchangeRates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRates.swift; sourceTree = "<group>"; };
+		FB2B82362860999C005AF534 /* ExchangeRatesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRatesManager.swift; sourceTree = "<group>"; };
 		FB2F368F28206ACB007576FE /* NewWalletViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewWalletViewController.swift; sourceTree = "<group>"; };
 		FB2F369128207BC0007576FE /* CreatingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatingViewController.swift; sourceTree = "<group>"; };
 		FB2F369328208286007576FE /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
@@ -320,10 +324,10 @@
 			children = (
 				FB5940382816856700037DFA /* SelectLanguageViewController.swift */,
 				FB59404B281694DD00037DFA /* TermsOfUseViewController.swift */,
+				FB85BA3F283CCC470068E9DE /* GreatingViewController.swift */,
 				FB3208082818286E00F1ADCA /* MainViewController.swift */,
 				FB0FCA6528194D4300BB0527 /* SelectSystemViewController.swift */,
 				FB0FCA7528197B4800BB0527 /* ImportTokensViewController.swift */,
-				FBFE5772281AAB040016E74A /* SettingsViewController.swift */,
 				FBFE579D281B28880016E74A /* LanguageViewController.swift */,
 				FBFE57A3281B4AFE0016E74A /* InfoViewController.swift */,
 				FB2F368F28206ACB007576FE /* NewWalletViewController.swift */,
@@ -336,11 +340,11 @@
 				FB90380E282D52EE004023F5 /* PushTokensViewController.swift */,
 				FB8EAC1E282FC8B4007244C1 /* PasswordViewController.swift */,
 				FB8BF8DA282FFDF70067CD0B /* QRScanViewController.swift */,
+				FBFE5772281AAB040016E74A /* SettingsViewController.swift */,
 				FBFE5794281AF4F90016E74A /* AllSettingsViewController.swift */,
 				FB6D93E22834F53100B11E80 /* AllWalletsViewController.swift */,
 				FBB9CF6028365EA70094742E /* MyWalletsViewController.swift */,
 				FBC4AB742836A5AA00566683 /* TransactionHistoryViewController.swift */,
-				FB85BA3F283CCC470068E9DE /* GreatingViewController.swift */,
 				FB79E9492847672F0093C180 /* ContactsViewController.swift */,
 				FB79E94B284767400093C180 /* AddContactViewController.swift */,
 				FB42B6E62833E91C0022A8FB /* SupportViewController.swift */,
@@ -397,6 +401,7 @@
 				FB16685D283E21D000155670 /* NetworkManager.swift */,
 				FBD72B732850782900987484 /* ChiaBlockchainConnectingManager.swift */,
 				FB58F56B28521486006235BD /* ChiaWalletsManager.swift */,
+				FB2B82362860999C005AF534 /* ExchangeRatesManager.swift */,
 				FB3208072818285100F1ADCA /* ViewControllers */,
 				FB3208062818279E00F1ADCA /* CustomViews */,
 				FB5940512816AC7800037DFA /* Extensions */,
@@ -424,6 +429,7 @@
 			children = (
 				FB0FCA6F2819629D00BB0527 /* Models.swift */,
 				FB58F5692851D98C006235BD /* ChiaModels.swift */,
+				FB2B8234286091E1005AF534 /* ExchangeRates.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -665,6 +671,7 @@
 				FB59404C281694DD00037DFA /* TermsOfUseViewController.swift in Sources */,
 				FB2F369428208286007576FE /* MainTabBarController.swift in Sources */,
 				FB8EAC1F282FC8B4007244C1 /* PasswordViewController.swift in Sources */,
+				FB2B82372860999C005AF534 /* ExchangeRatesManager.swift in Sources */,
 				FBB9CF642836604D0094742E /* MyWalletCollectionViewCell.swift in Sources */,
 				FB6D93E02834F40500B11E80 /* AddWalletTableViewCell.swift in Sources */,
 				FBFE579E281B28880016E74A /* LanguageViewController.swift in Sources */,
@@ -687,6 +694,7 @@
 				FB6A2A3128226E36008DD449 /* AllertWalletViewController.swift in Sources */,
 				FB5940532816AC8800037DFA /* Extensions.swift in Sources */,
 				FBB9CF6128365EA70094742E /* MyWalletsViewController.swift in Sources */,
+				FB2B8235286091E2005AF534 /* ExchangeRates.swift in Sources */,
 				FB5940552816AEF400037DFA /* CustomClasses.swift in Sources */,
 				FB85BA3E283CCB210068E9DE /* TimeManager.swift in Sources */,
 				FB0FCA6628194D4300BB0527 /* SelectSystemViewController.swift in Sources */,

@@ -145,13 +145,37 @@ class CoreDataManager {
         saveContext()
     }
     
+    func saveExchangedRates(ratePerDollar: Double) {
+        let rate = ExchangeRatesCD(context: self.persistentContainer.viewContext)
+        
+        rate.exchangeRates = ratePerDollar
+        
+        saveContext()
+    }
+    
+    func fetchExchangeRates() -> Double {
+        let fetchRequest: NSFetchRequest<ExchangeRatesCD> = ExchangeRatesCD.fetchRequest()
+        let exchangeRates = (try? self.persistentContainer.viewContext.fetch(fetchRequest))
+        
+        return exchangeRates?.first?.exchangeRates ?? 0
+    }
+    
+    func editExchangeRates(newExchangeRates: Double) {
+        let fetchRequest: NSFetchRequest<ExchangeRatesCD> = ExchangeRatesCD.fetchRequest()
+        let exchangeRates = (try? self.persistentContainer.viewContext.fetch(fetchRequest))
+        
+        exchangeRates?.first?.exchangeRates = newExchangeRates
+        
+        saveContext()
+    }
+    
     func saveContext () {
         let context = persistentContainer.viewContext
         if context.hasChanges {
             do {
                 try context.save()
             } catch {
-
+                
                 let nserror = error as NSError
                 fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
             }

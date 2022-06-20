@@ -37,7 +37,6 @@ class MainViewController: UIViewController {
         self.pageControl.numberOfPages = WalletManager.share.favoritesWallets.count
         self.cellectionView.register(UINib(nibName: "mCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "mCollectionViewCell")
         
-        
         if UserDefaultsManager.shared.userDefaults.bool(forKey: UserDefaultsStringKeys.hideWalletsBalance.rawValue) {
             self.balanceLabel.text = "***** USD"
         } else {
@@ -58,8 +57,10 @@ class MainViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(localization), name: NSNotification.Name("localized"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(reloadcellectionView), name: NSNotification.Name("reload"), object: nil)
     
+        self.riseLabel.text = "XCС price: \(ExchangeRatesManager.share.newRatePerDollar) $"
+        self.percentLabel.text = " \(String(ExchangeRatesManager.share.difference).prefix(5)) %"
+        ExchangeRatesManager.share.changeColorOfView(label: self.percentLabel)
         
-    
         localization()
         
         self.cellectionView.reloadData()
@@ -70,7 +71,6 @@ class MainViewController: UIViewController {
         super.viewWillAppear(animated)
         self.wallets = CoreDataManager.share.fetchChiaWalletPrivateKey()
 
-        localization()
         
         self.pageControl.numberOfPages = self.wallets.count
         self.cellectionView.reloadData()
@@ -78,6 +78,8 @@ class MainViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        localization()
+        self.cellectionView.reloadData()
     }
     
     override func viewDidLayoutSubviews() {
