@@ -58,7 +58,7 @@ class MainViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(reloadcellectionView), name: NSNotification.Name("reload"), object: nil)
     
         self.riseLabel.text = "XCС price: \(ExchangeRatesManager.share.newRatePerDollar) $"
-        self.percentLabel.text = " \(String(ExchangeRatesManager.share.difference).prefix(5)) %"
+        self.percentLabel.text = "  \(String(ExchangeRatesManager.share.difference).prefix(5)) % "
         ExchangeRatesManager.share.changeColorOfView(label: self.percentLabel)
         
         localization()

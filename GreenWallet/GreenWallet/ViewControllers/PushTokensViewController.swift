@@ -162,7 +162,7 @@ class PushTokensViewController: UIViewController {
             }
         }
         
-        let buttonText: NSString = numberOfWallet + "\n\(self.wallet?.name ?? "")" as NSString
+        let buttonText: NSString = numberOfWallet + "\n\(self.wallet?.name?.split(separator: " ").first ?? "")" as NSString
 
             //getting the range to separate the button title strings
             let newlineRange: NSRange = buttonText.range(of: "\n")
@@ -497,7 +497,7 @@ class PushTokensViewController: UIViewController {
             self.adressTextField.textColor = #colorLiteral(red: 1, green: 0.2360929251, blue: 0.1714096665, alpha: 0.8980392157)
             self.walletErrorLabel.textColor = #colorLiteral(red: 1, green: 0.2360929251, blue: 0.1714096665, alpha: 0.8980392157)
         }
-        if (Double(self.transferTextField.text ?? "") ?? 0) < NSString(string: self.balanceButton.currentTitle ?? "").doubleValue && self.adressTextField.text == self.link {
+        if (Double(self.transferTextField.text ?? "") ?? 0) < Double(self.balanceButton.currentTitle?.split(separator: " ").first ?? "0") ?? 0 && self.adressTextField.text == self.link {
             
             self.transitionView.isHidden = false
             UIView.animate(withDuration: 0.5) {
