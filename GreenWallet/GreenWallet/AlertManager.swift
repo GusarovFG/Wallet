@@ -21,6 +21,13 @@ class AlertManager {
         controller.present(alertVC, animated: true, completion: nil)
     }
     
+    func seccessImportWallet(_ controller: UIViewController) {
+        let storyboard = UIStoryboard(name: "Alert", bundle: .main)
+        let alertVC = storyboard.instantiateViewController(withIdentifier: "AllertImportViewController") as! AllertWalletViewController
+        
+        controller.present(alertVC, animated: true, completion: nil)
+    }
+    
     func errorNewWallet(_ controller: UIViewController) {
         let storyboard = UIStoryboard(name: "Alert", bundle: .main)
         let alertVC = storyboard.instantiateViewController(withIdentifier: "DeleteContact") as! AllertWalletViewController

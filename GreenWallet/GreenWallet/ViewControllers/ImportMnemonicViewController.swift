@@ -249,7 +249,7 @@ class ImportMnemonicViewController: UIViewController {
                         NotificationCenter.default.post(name: NSNotification.Name("reload"), object: nil)
                         print(CoreDataManager.share.fetchChiaWalletPrivateKey())
                         spinnerVC.dismiss(animated: true, completion: nil)
-                        AlertManager.share.seccessNewWallet(self)
+                        AlertManager.share.seccessImportWallet(self)
                     }
                 }
             }

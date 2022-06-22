@@ -18,6 +18,7 @@ class AllertWalletViewController: UIViewController {
     var isSendError = false
     var isImportMnemonicError = false
     var isAskAQuestion = false
+    var isImport = false
     
     @IBOutlet weak var mainLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
@@ -123,7 +124,6 @@ class AllertWalletViewController: UIViewController {
   
     @IBAction func mainButtonPressed(_ sender: Any) {
         NotificationCenter.default.post(name: NSNotification.Name("setupRootVC"), object: nil)
-        self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func confirmDeleteContact(_ sender: Any) {
