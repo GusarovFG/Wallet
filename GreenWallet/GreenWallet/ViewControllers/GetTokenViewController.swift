@@ -34,7 +34,7 @@ class GetTokenViewController: UIViewController {
         localization()
         self.qrCollectionView.register(UINib(nibName: "qrCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "qrCell")
         
-        self.wallets = WalletManager.share.vallets
+        self.wallets = CoreDataManager.share.fetchChiaWalletPrivateKey()
         self.menuView.alpha = 0
         self.menuView.isHidden = true
         self.titleLabel.text = "Chia Network"

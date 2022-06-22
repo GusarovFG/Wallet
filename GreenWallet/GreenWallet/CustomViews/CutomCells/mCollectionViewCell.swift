@@ -145,11 +145,13 @@ extension mCollectionViewCell: UITableViewDelegate, UITableViewDataSource {
         default:
             self.height += walletCell.frame.height
            
-            
-            walletCell.cellImage.image = UIImage(named: "LogoChia")!
-            walletCell.balanceLabel.text = "\((self.wallet?.balances as? [NSNumber])?[indexPath.row] as! Double / 1000000000000.0 ) XCH"
-            walletCell.convertLabel.text = "⁓ 504.99 USD"
-            walletCell.tokenLabel.text = self.wallet?.name ?? ""
+            if !CoreDataManager.share.fetchChiaWalletPrivateKey().isEmpty {
+                
+                walletCell.cellImage.image = UIImage(named: "LogoChia")!
+                walletCell.balanceLabel.text = "\((self.wallet?.balances as? [NSNumber])?[indexPath.row] as! Double / 1000000000000.0 ) XCH"
+                walletCell.convertLabel.text = "⁓ 504.99 USD"
+                walletCell.tokenLabel.text = self.wallet?.name ?? ""
+            }
             
             return walletCell
         }

@@ -4,7 +4,6 @@
 //
 //  Created by Фаддей Гусаров on 25.04.2022.
 //
-import Bech32
 import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
