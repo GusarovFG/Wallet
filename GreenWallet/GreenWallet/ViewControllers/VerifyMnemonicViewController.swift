@@ -86,7 +86,6 @@ class VerifyMnemonicViewController: UIViewController {
 
           
             let dispatchGroup = DispatchGroup()
-            let dispatchQueue = DispatchQueue(label: "AddWalletQueue")
             
             
             DispatchQueue.global().sync {
@@ -181,6 +180,7 @@ class VerifyMnemonicViewController: UIViewController {
                             self.selectCollectionView.reloadData()
                         }
                     }
+                    self.selectIndex = 6
                 }
             }
         }

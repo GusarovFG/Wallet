@@ -142,7 +142,7 @@ extension AskAQuestionViewController: UITextViewDelegate, UITextFieldDelegate {
 
     
     func textViewDidChange(_ textView: UITextView) {
-        if textView.text != "" && textView.text != LocalizationManager.share.translate?.result.list.ask_a_question.ask_a_question_question {
+        if !textView.text.isEmpty && textView.text != LocalizationManager.share.translate?.result.list.ask_a_question.ask_a_question_question {
             self.questionLabel.alpha = 1
         } else {
             self.questionLabel.alpha = 0
@@ -158,10 +158,20 @@ extension AskAQuestionViewController: UITextViewDelegate, UITextFieldDelegate {
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {
+        self.questionLabel.alpha = 1
         if textView.textColor == .gray {
             textView.text = nil
             textView.textColor = .white
         }
+    }
+    
+    func textViewShouldEndEditing(_ textView: UITextView) -> Bool {
+        if textView.text != "" && textView.text != LocalizationManager.share.translate?.result.list.ask_a_question.ask_a_question_question {
+            self.questionLabel.alpha = 1
+        } else {
+            self.questionLabel.alpha = 0
+        }
+        return true
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
@@ -198,4 +208,13 @@ extension AskAQuestionViewController: UITextViewDelegate, UITextFieldDelegate {
         
         return numberOfLines <= 2
     }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if textField == self.nameTextField {
+            self.nameLabel.alpha = 1
+        } else {
+            self.emailLabel.alpha = 1
+        }
+    }
+   
 }

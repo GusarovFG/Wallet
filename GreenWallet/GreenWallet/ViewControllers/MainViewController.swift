@@ -12,6 +12,7 @@ class MainViewController: UIViewController {
     
     private var balance = 0
     private var wallets: [ChiaWalletPrivateKey] = []
+    private var wallet: ChiaWalletPrivateKey?
     
     private var footerButtonTitle = "Все кошельки"
     
@@ -32,7 +33,7 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
         
         self.navigationController?.navigationBar.isHidden = true
-        
+        self.wallets = CoreDataManager.share.fetchChiaWalletPrivateKey()
 
         self.pageControl.numberOfPages = WalletManager.share.favoritesWallets.count
         self.cellectionView.register(UINib(nibName: "mCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "mCollectionViewCell")
@@ -63,15 +64,18 @@ class MainViewController: UIViewController {
         
         localization()
         
+        
+        
         self.cellectionView.reloadData()
         self.cellectionView.layoutIfNeeded()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.wallets = CoreDataManager.share.fetchChiaWalletPrivateKey()
-
         
+        self.wallet = self.wallets[0]
+        let summ: Double = (((self.wallet?.balances as? [Double])?.reduce(0, +) ?? 0) / 1000000000000) * ExchangeRatesManager.share.newRatePerDollar
+        self.balanceLabel.text = "⁓ \(String(summ).prefix(5)) USD"
         self.pageControl.numberOfPages = self.wallets.count
         self.cellectionView.reloadData()
     }
@@ -178,11 +182,12 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
         } else {
             print(CoreDataManager.share.fetchChiaWalletPrivateKey())
             if cell.stackView.arrangedSubviews.contains(where: {$0 == cell.tableView}) {
-                let wallet = CoreDataManager.share.fetchChiaWalletPrivateKey()[indexPath.row]
+                let wallet = self.wallets[indexPath.row]
                 cell.wallet = wallet
                 cell.numberOFWallet.text = "\(wallet.name ?? "") ****\(String(wallet.fingerprint).suffix(4))"
                 cell.controller = self.tabBarController ?? self
                 self.collectionViewHeightConstraint.constant = cell.frame.height
+                cell.tableView.reloadData()
                 print(self.collectionViewHeightConstraint.constant)
             } else {
                 cell.stackView.addArrangedSubview(cell.tableView)
@@ -210,7 +215,11 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
         let visiblePoint = CGPoint(x: visibleRect.midX, y: visibleRect.midY)
         if let visibleIndexPath = self.cellectionView.indexPathForItem(at: visiblePoint) {
             self.pageControl.currentPage = visibleIndexPath.row
-
+            self.wallet = self.wallets[visibleIndexPath.row]
+            
+            let summ: Double = (((self.wallet?.balances as? [Double])?.reduce(0, +) ?? 0) / 1000000000000) * ExchangeRatesManager.share.newRatePerDollar
+           
+            self.balanceLabel.text = "⁓ \(String(summ).prefix(5)) USD"
         }
     }
     

@@ -7,5 +7,6 @@ target 'GreenWallet' do
 
   pod 'Locksmith'
   pod "MnemonicSwift"
+  pod 'Bech32.swift'
 
 end

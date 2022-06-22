@@ -76,7 +76,7 @@ class PushTokensViewController: UIViewController {
         localization()
         self.wallets = WalletManager.share.vallets
         self.wallet = self.wallets.first
-//        self.balanceButton.setTitle("\(self.wallet?.tokens[0].balance ?? 0) \(self.wallet?.tokens[0].token ?? "")", for: .normal)
+        self.balanceButton.setTitle("\((String((self.wallet?.balances as? [NSNumber])?[0] as! Double / 1000000000000.0)).prefix(8)) XCH", for: .normal)
         self.tokenButton.setTitle(self.wallet?.name, for: .normal)
         self.walletsView.isHidden = true
         
@@ -297,9 +297,8 @@ class PushTokensViewController: UIViewController {
             for i in 0..<((self.wallet?.wallets as! [NSNumber]).count) {
                 if self.balanceStackView.arrangedSubviews.count == ((self.wallet?.wallets as! [NSNumber]).count) {
                 } else {
-                    let token = (self.wallet?.wallets as! [NSNumber])[i]
                     let button = UIButton(frame: CGRect(x: 0, y: 0, width: self.balanceStackView.frame.width, height: 40))
-                    button.setTitle("\(token)", for: .normal)
+                    button.setTitle("\((String((self.wallet?.balances as? [NSNumber])?[i] as! Double / 1000000000000.0)).prefix(8)) XCH", for: .normal)
                     self.balanceStackView.addArrangedSubview(button)
                     self.balanceViewConstraint.constant += button.frame.height
                     self.balaceStackViewConstraint.constant += button.frame.height
@@ -324,6 +323,7 @@ class PushTokensViewController: UIViewController {
                 self.tokenImage.image = UIImage(named: "LogoChia")!
                 setupWalletButton()
                 sender.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
+                self.balanceButton.setTitle("\((String((self.wallet?.balances as? [NSNumber])?[0] as! Double / 1000000000000.0)).prefix(8)) XCH", for: .normal)
                 self.balanceView.isHidden = true
                 self.walletsView.isHidden = true
                 self.balanceStackView.removeAllSubviews()
@@ -337,7 +337,7 @@ class PushTokensViewController: UIViewController {
         for i in 0..<self.balanceStackView.arrangedSubviews.count {
             self.balanceStackView.arrangedSubviews[i].backgroundColor = .systemBackground
             if sender == self.balanceStackView.arrangedSubviews[i] {
-                self.balanceButton.setTitle("\((self.wallet?.balances as! [NSNumber])[i]) \((self.wallet?.wallets as! [NSNumber])[i])", for: .normal)
+                self.balanceButton.setTitle("\((String((self.wallet?.balances as? [NSNumber])?[i] as! Double / 1000000000000.0)).prefix(8)) XCH", for: .normal)
                 sender.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
                 self.balanceView.isHidden = true
                 self.walletsView.isHidden = true

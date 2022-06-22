@@ -67,8 +67,8 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
             return secureAndPushCell
         case [0,2]:
             secureAndPushCell.eyeImageView?.image = UIImage(named: "Notification")!
-            secureAndPushCell.detailLabel?.text = LocalizationManager.share.translate?.result.list.menu.menu_push_notifications_title
-            secureAndPushCell.mainLabel?.text = LocalizationManager.share.translate?.result.list.menu.menu_push_notifications_description
+            secureAndPushCell.detailLabel?.text = LocalizationManager.share.translate?.result.list.menu.menu_push_notifications_description
+            secureAndPushCell.mainLabel?.text = LocalizationManager.share.translate?.result.list.menu.menu_push_notifications_title
             secureAndPushCell.cellSwitch?.isOn = true
             return secureAndPushCell
         case [0,3]:

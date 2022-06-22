@@ -151,3 +151,44 @@ struct ChiaAdres: Codable {
     }
 }
 
+struct CoinRecords: Codable {
+    let coin_records: [CoinRecord]
+    let success: Bool
+
+    enum CodingKeys: String, CodingKey {
+        case coin_records
+        case success
+    }
+}
+
+// MARK: - CoinRecord
+struct CoinRecord: Codable {
+    let coin: Coin
+    let coinbase: Bool
+    let confirmed_block_index: Int
+    let spent: Bool
+    let spent_block_index: Int
+    let timestamp: Int
+
+    enum CodingKeys: String, CodingKey {
+        case coin
+        case coinbase
+        case confirmed_block_index
+        case spent
+        case spent_block_index
+        case timestamp
+    }
+}
+
+// MARK: - Coin
+struct Coin: Codable {
+    let amount: Int
+    let parent_coin_info: String
+    let puzzle_hash: String
+
+    enum CodingKeys: String, CodingKey {
+        case amount
+        case parent_coin_info
+        case puzzle_hash
+    }
+}

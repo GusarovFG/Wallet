@@ -122,6 +122,7 @@ class AllertWalletViewController: UIViewController {
     }
   
     @IBAction func mainButtonPressed(_ sender: Any) {
+        NotificationCenter.default.post(name: NSNotification.Name("setupRootVC"), object: nil)
         self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
     }
     

@@ -1,20 +1,24 @@
 PODS:
+  - Bech32.swift (1.1.0)
   - Locksmith (4.0.0)
   - MnemonicSwift (2.2.4)
 
 DEPENDENCIES:
+  - Bech32.swift
   - Locksmith
   - MnemonicSwift
 
 SPEC REPOS:
   trunk:
+    - Bech32.swift
     - Locksmith
     - MnemonicSwift
 
 SPEC CHECKSUMS:
+  Bech32.swift: 919962714ba1cdeb2fbf746d471df49e17d6b99f
   Locksmith: e9bebbaaa4cee3c511bc358a44f843c3fe00e21f
   MnemonicSwift: 40ba76b951b75b32e2719df989b4d6da5798fe26
 
-PODFILE CHECKSUM: f9e48482c0cd8a43e2ed1e35debebdd34df6f643
+PODFILE CHECKSUM: d1bad9068efb7b7ed4f1576ca2f1c3712c1e4498
 
 COCOAPODS: 1.11.2

@@ -317,6 +317,35 @@ class ChiaBlockchainManager {
         }.resume()
     }
     
+    func getCoinRecordsByPuzzleHash(adress: String, with complition: @escaping(CoinRecords) -> Void) {
+        let method = "get_coin_records_by_puzzle_hash"
+        let puzzleHash = adress.hashValue
+        guard let url = URL(string: self.url + "/full-node/" + method) else { return }
+        let parameters = ["puzzle_hash":"\(puzzleHash)", "include_spend_coins": false] as [String : Any]
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: []) else { return }
+        request.httpBody = httpBody
+        
+        let session = URLSession.shared
+        session.dataTask(with: request) { data, response, error in
+            if let response = response {
+                print(response)
+            }
+            if let data = data {
+                do {
+                    let json = try JSONDecoder().decode(CoinRecords.self, from: data)
+                    DispatchQueue.global().async {
+                        complition(json)
+                    }
+                } catch {
+                    print(error.localizedDescription)
+                }
+            }
+        }.resume()
+    }
+    
+    
 }
 
 

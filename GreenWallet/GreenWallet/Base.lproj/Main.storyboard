@@ -2517,7 +2517,7 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                                         </connections>
                                     </collectionView>
                                     <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="3XB-58-nVn">
-                                        <rect key="frame" x="149" y="254" width="116" height="26"/>
+                                        <rect key="frame" x="50" y="254" width="314" height="26"/>
                                         <color key="currentPageIndicatorTintColor" red="0.2274509804" green="0.67450980390000004" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </pageControl>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qAT-XB-rfd">
@@ -2616,9 +2616,9 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                                     <constraint firstItem="qAT-XB-rfd" firstAttribute="top" secondItem="mFC-QA-eeL" secondAttribute="bottom" constant="18" id="Qwl-Cn-UDD"/>
                                     <constraint firstAttribute="trailing" secondItem="qAT-XB-rfd" secondAttribute="trailing" constant="32" id="Uf4-wd-70W"/>
                                     <constraint firstItem="mFC-QA-eeL" firstAttribute="top" secondItem="3XB-58-nVn" secondAttribute="bottom" constant="10" id="WzH-eI-cZX"/>
-                                    <constraint firstAttribute="trailing" secondItem="3XB-58-nVn" secondAttribute="trailing" constant="149" id="XSw-Bz-lt3"/>
+                                    <constraint firstAttribute="trailing" secondItem="3XB-58-nVn" secondAttribute="trailing" constant="50" id="XSw-Bz-lt3"/>
                                     <constraint firstAttribute="trailing" secondItem="J88-aG-dCr" secondAttribute="trailing" constant="32" id="Yxp-g6-8Mb"/>
-                                    <constraint firstItem="3XB-58-nVn" firstAttribute="leading" secondItem="anU-6Y-xe5" secondAttribute="leading" constant="149" id="Zke-Sa-Pr6"/>
+                                    <constraint firstItem="3XB-58-nVn" firstAttribute="leading" secondItem="anU-6Y-xe5" secondAttribute="leading" constant="50" id="Zke-Sa-Pr6"/>
                                     <constraint firstItem="mFC-QA-eeL" firstAttribute="top" secondItem="3y7-Rt-6iQ" secondAttribute="bottom" constant="3" id="bVq-Eh-qhB"/>
                                     <constraint firstAttribute="trailing" secondItem="vYe-Ph-0gj" secondAttribute="trailing" constant="24" id="k0P-bN-bgJ"/>
                                     <constraint firstItem="J88-aG-dCr" firstAttribute="leading" secondItem="anU-6Y-xe5" secondAttribute="leading" constant="32" id="qgQ-mU-OUe"/>
@@ -3585,7 +3585,7 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <textInputTraits key="textInputTraits"/>
                                         <connections>
-                                            <action selector="nameTextFieldCheck:" destination="fcd-71-DpU" eventType="editingChanged" id="YMC-ne-zvX"/>
+                                            <action selector="nameTextFieldCheck:" destination="fcd-71-DpU" eventType="editingChanged" id="JId-NJ-jS7"/>
                                             <outlet property="delegate" destination="fcd-71-DpU" id="XQL-c4-jZw"/>
                                         </connections>
                                     </textField>

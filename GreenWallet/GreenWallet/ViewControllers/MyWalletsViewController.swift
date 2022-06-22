@@ -54,7 +54,7 @@ class MyWalletsViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(showDetail), name: NSNotification.Name("showDetail"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(deleteWalletAtIntex), name: NSNotification.Name("deleteWalletAtIntex"), object: nil)
         localization()
-
+        self.pageControl.numberOfPages = CoreDataManager.share.fetchChiaWalletPrivateKey().count
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -76,8 +76,9 @@ class MyWalletsViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.pageControl.numberOfPages = CoreDataManager.share.fetchChiaWalletPrivateKey().count
+        
         self.scrollToNextCell(index: self.index)
+        print(self.index)
         
         
     }
@@ -95,7 +96,6 @@ class MyWalletsViewController: UIViewController {
         let alertVC = storyBoard.instantiateViewController(withIdentifier: "DeletingAlert") as! AllertWalletViewController
         alertVC.isInMyWallet = true
         self.present(alertVC, animated: true)
-//        CoreDataManager.share.deleteChiaWalletPrivateKey(index: self.index)
         self.wallets = CoreDataManager.share.fetchChiaWalletPrivateKey()
 
         self.walletCollectionView.reloadData()
@@ -173,7 +173,7 @@ extension MyWalletsViewController: UICollectionViewDelegate, UICollectionViewDat
                 let wallet = self.wallets[indexPath.row]
                 
                 mainCell.walletImage.image = UIImage(named: "LogoChia")!
-                mainCell.balanceLabel.text = "\((wallet.balances as! [NSNumber]).first ?? 0) XCH"
+                mainCell.balanceLabel.text = "\((((wallet.balances as? [Double])?.reduce(0, +) ?? 0) / 1000000000000)) XCH"
                 mainCell.publicKeyLabel.text = "\(LocalizationManager.share.translate?.result.list.wallet.wallet_data_public_key ?? "") \(wallets[indexPath.row].fingerprint )"
                 mainCell.usdLabel.text = "⁓762,14 USDT"
                 mainCell.walletSystemLabel.text = (wallet.name?.split(separator: " ").first ?? "") + " Network"
@@ -260,7 +260,7 @@ extension MyWalletsViewController: UICollectionViewDelegate, UICollectionViewDat
                 self.present(getTokenViewController, animated: true)
                 
             case [0,1]:
-                let shareController = UIActivityViewController(activityItems: [self.wallets[index].fingerprint], applicationActivities: nil)
+                let shareController = UIActivityViewController(activityItems: [self.wallets[index].adres], applicationActivities: nil)
                 self.present(shareController, animated: true, completion: nil)
            
             default:
