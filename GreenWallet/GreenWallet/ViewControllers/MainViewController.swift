@@ -72,12 +72,17 @@ class MainViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        self.wallet = self.wallets[0]
-        let summ: Double = (((self.wallet?.balances as? [Double])?.reduce(0, +) ?? 0) / 1000000000000) * ExchangeRatesManager.share.newRatePerDollar
-        self.balanceLabel.text = "⁓ \(String(summ).prefix(5)) USD"
-        self.pageControl.numberOfPages = self.wallets.count
-        self.cellectionView.reloadData()
+        if !self.wallets.isEmpty {
+            self.cellectionView.isScrollEnabled = true
+            self.wallet = self.wallets[0]
+            let summ: Double = (((self.wallet?.balances as? [Double])?.reduce(0, +) ?? 0) / 1000000000000) * ExchangeRatesManager.share.newRatePerDollar
+            self.balanceLabel.text = "⁓ \(String(summ).prefix(5)) USD"
+            self.pageControl.numberOfPages = self.wallets.count
+            self.cellectionView.reloadData()
+        } else {
+            self.cellectionView.isScrollEnabled = false
+            return
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
