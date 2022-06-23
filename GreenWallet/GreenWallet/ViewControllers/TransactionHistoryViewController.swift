@@ -11,17 +11,10 @@ class TransactionHistoryViewController: UIViewController {
     
     var isHistoryWallet = false
     var wallet: ChiaWalletPrivateKey?
+    var dates: [String] = []
     
-    private var walletsTransactions: [Transaction] = [Transaction(type: LocalizationManager.share.translate?.result.list.transactions.transactions_incoming ?? "", height: "1098726", summ: "4,555", token: "XCH", date: "today"),
-                                                      Transaction(type: LocalizationManager.share.translate?.result.list.transactions.transactions_incoming ?? "", height: "1098726", summ: "4,555", token: "XCH", date: "yesterday"),
-                                                      Transaction(type: LocalizationManager.share.translate?.result.list.transactions.incoming_outgoing ?? "", height: "456782", summ: "4,555", token: "XCC", date: "yesterday"),
-                                                      Transaction(type: LocalizationManager.share.translate?.result.list.transactions.transactions_pendind ?? "", height: "323234", summ: "4,555", token: "XCH", date: "lastMonth"),
-                                                      Transaction(type: LocalizationManager.share.translate?.result.list.transactions.transactions_pendind ?? "", height: "32098726", summ: "4,555", token: "XCC", date: "today"),
-                                                      Transaction(type: LocalizationManager.share.translate?.result.list.transactions.incoming_outgoing ?? "", height: "8998726", summ: "4,555", token: "XCC", date: "lastWeek"),
-                                                      Transaction(type: LocalizationManager.share.translate?.result.list.transactions.transactions_pendind ?? "", height: "77098726", summ: "4,555", token: "XCC", date: "yesterday"),
-                                                      Transaction(type: LocalizationManager.share.translate?.result.list.transactions.transactions_pendind ?? "", height: "6698766", summ: "4,555", token: "XCH", date: "lastMonth"),
-                                                      Transaction(type: LocalizationManager.share.translate?.result.list.transactions.incoming_outgoing ?? "", height: "5598726", summ: "4,555", token: "XCH", date: "lastMonth")]
-    private var filterWalletsTransactions: [Transaction] = []
+    private var walletsTransactions: [[ChiaTransaction]] = []
+    private var filterWalletsTransactions: [ChiaTransaction] = []
     private var isAllFilter = true
     private var isInFilter = false
     private var isOutFilter = false
@@ -30,7 +23,7 @@ class TransactionHistoryViewController: UIViewController {
     
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
-
+    
     @IBOutlet weak var filterTimeButton: UIButton!
     @IBOutlet weak var filterSystemButton: UIButton!
     @IBOutlet weak var statusLabel: UILabel!
@@ -56,6 +49,11 @@ class TransactionHistoryViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        
+        
+        
         
         if self.isHistoryWallet {
             self.backButton.alpha = 1
@@ -97,23 +95,72 @@ class TransactionHistoryViewController: UIViewController {
         
         localization()
         
-        self.filterWalletsTransactions = self.walletsTransactions
         self.tableView.register(UINib(nibName: "TransitionsTableViewCell", bundle: nil), forCellReuseIdentifier: "TransitionsTableViewCell")
         self.filterCollectionView.register(UINib(nibName: "TransictionFilterCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "TransictionFilterCollectionViewCell")
         
         let tapGastureRecognizer = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
         self.tableView.addGestureRecognizer(tapGastureRecognizer)
         NotificationCenter.default.addObserver(self, selector: #selector(localization), name: NSNotification.Name("localized"), object: nil)
-
+        
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        let group = DispatchGroup()
+        let queue = DispatchQueue.global(qos: .userInteractive)
+        
+        queue.sync {
+            group.enter()
+            for i in CoreDataManager.share.fetchChiaWalletPrivateKey() {
+                group.leave()
+                group.enter()
+                ChiaBlockchainManager.share.logIn(Int(i.fingerprint)) { log in
+                    group.leave()
+                    group.enter()
+                    if log.success {
+                        group.leave()
+                        group.enter()
+                        ChiaBlockchainManager.share.getWallets { wallet in
+                            group.leave()
+                            group.enter()
+                            for iwallet in wallet.wallets {
+                                group.leave()
+                                group.enter()
+                                ChiaBlockchainManager.share.getTransactions(iwallet.id) { transact in
+                                    group.leave()
+                                    group.enter()
+                                    self.walletsTransactions.append(transact.transactions)
+                                    group.leave()
+                                    group.enter()
+                                    
+                                }
+                                group.leave()
+                                group.enter()
+                            }
+                            group.leave()
+                            group.enter()
+                            DispatchQueue.main.async {
+                                group.leave()
+                                group.enter()
+                                self.filterWalletsTransactions = self.walletsTransactions.reduce([], +)
+                                self.tableView.reloadData()
+                                group.leave()
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.searchBar.searchTextField.attributedPlaceholder = NSAttributedString(string: LocalizationManager.share.translate?.result.list.all.search ?? "", attributes: [:])
+        
     }
     
     override func viewDidLayoutSubviews() {
@@ -142,20 +189,20 @@ class TransactionHistoryViewController: UIViewController {
         self.statusLabel.text = LocalizationManager.share.translate?.result.list.transactions.transactions_status
         self.summLabel.text = LocalizationManager.share.translate?.result.list.transactions.transactions_amount
         self.allDateButton.setTitle(LocalizationManager.share.translate?.result.list.transactions.transactions_all, for: .normal)
-
+        
         self.backButton.setTitle(LocalizationManager.share.translate?.result.list.all.back_btn, for: .normal)
         self.filterSystemButton.setTitle(LocalizationManager.share.translate?.result.list.transactions.transactions_all, for: .normal)
         self.allSystemButton.setTitle(LocalizationManager.share.translate?.result.list.transactions.transactions_all, for: .normal)
         
         
-            
+        
     }
     
     @IBAction func backButtonPressed(_ sender: Any) {
         self.dismiss(animated: true)
     }
-
-
+    
+    
     @IBAction func filetrDateMenuOpen(_ sender: UIButton) {
         if self.filterDateView.isHidden {
             self.filterTimeButton.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
@@ -172,71 +219,75 @@ class TransactionHistoryViewController: UIViewController {
     
     @IBAction func allDateButtonPressed(_ sender: UIButton) {
         sender.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
-
-
+        
+    
         
         self.todayDateButton.backgroundColor = .systemBackground
         self.yesterdayDayeButton.backgroundColor = .systemBackground
         self.lastWeekDateButton.backgroundColor = .systemBackground
         self.lastMonthButton.backgroundColor = .systemBackground
         
-        self.filterWalletsTransactions = self.walletsTransactions
+        self.filterWalletsTransactions = self.walletsTransactions.reduce([], +)
         self.filterDateView.isHidden = true
         self.tableView.reloadData()
     }
     
     @IBAction func todayDateButtonPressed(_ sender: UIButton) {
         sender.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
-  
-
+        
+        
+        
         self.allDateButton.backgroundColor = .systemBackground
         self.yesterdayDayeButton.backgroundColor = .systemBackground
         self.lastWeekDateButton.backgroundColor = .systemBackground
         self.lastMonthButton.backgroundColor = .systemBackground
         
-        self.filterWalletsTransactions = self.walletsTransactions.filter({$0.date == "today"})
+        self.filterWalletsTransactions = self.walletsTransactions.reduce([], +).filter({TimeManager.share.convertUnixTime(unix: $0.created_at_time, format: "dd.MM.yy") == Date().string( format: "dd.MM.yy")})
+
         self.filterDateView.isHidden = true
         self.tableView.reloadData()
     }
     
     @IBAction func yesterdayDayeButtonPressed(_ sender: UIButton) {
         sender.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
-
-
+        
+        
         self.todayDateButton.backgroundColor = .systemBackground
         self.allDateButton.backgroundColor = .systemBackground
         self.lastWeekDateButton.backgroundColor = .systemBackground
         self.lastMonthButton.backgroundColor = .systemBackground
         
-        self.filterWalletsTransactions = self.walletsTransactions.filter({$0.date == "yesterday"})
+
+        
+//        self.filterWalletsTransactions = self.walletsTransactions.reduce([], +).filter({Int(TimeManager.share.convertUnixTime(unix: $0.created_at_time, format: "dd.MM.yy").split(separator: ".")[0]) - Int(Date().string(format: "dd.MM.yy").split(separator: ".")[0]) == 1})
         self.filterDateView.isHidden = true
         self.tableView.reloadData()
     }
     
     @IBAction func lastWeekDateButtonPressed(_ sender: UIButton) {
         sender.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
-
-
+        
+        
         self.todayDateButton.backgroundColor = .systemBackground
         self.yesterdayDayeButton.backgroundColor = .systemBackground
         self.allDateButton.backgroundColor = .systemBackground
         self.lastMonthButton.backgroundColor = .systemBackground
         
-        self.filterWalletsTransactions = self.walletsTransactions.filter({$0.date == "lastWeek"})
+        //        self.filterWalletsTransactions = self.walletsTransactions.filter({$0.date == "lastWeek"})
         self.filterDateView.isHidden = true
         self.tableView.reloadData()
     }
     
     @IBAction func lastMonthButtonPressed(_ sender: UIButton) {
         sender.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
-
-
+        
+        
         self.todayDateButton.backgroundColor = .systemBackground
         self.yesterdayDayeButton.backgroundColor = .systemBackground
         self.lastWeekDateButton.backgroundColor = .systemBackground
         self.allDateButton.backgroundColor = .systemBackground
         
-        self.filterWalletsTransactions = self.walletsTransactions.filter({$0.date == "lastMonth"})
+        self.filterWalletsTransactions = self.walletsTransactions.reduce([], +).filter({TimeManager.share.convertUnixTime(unix: $0.created_at_time, format: "dd.MM.yy").split(separator: ".")[1] == Date().string(format: "dd.MM.yy").split(separator: ".")[1] && TimeManager.share.convertUnixTime(unix: $0.created_at_time, format: "dd.MM.yy").split(separator: ".")[2] == Date().string(format: "dd.MM.yy").split(separator: ".")[2]})
         self.filterDateView.isHidden = true
         self.tableView.reloadData()
         
@@ -256,13 +307,13 @@ class TransactionHistoryViewController: UIViewController {
         sender.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
         self.chivesSystemButton.backgroundColor = .systemBackground
         self.allSystemButton.backgroundColor = .systemBackground
-        self.filterWalletsTransactions = self.walletsTransactions.filter({$0.token == "XCH"})
+        //        self.filterWalletsTransactions = self.walletsTransactions.filter({$0.token == "XCH"})
         self.tableView.reloadData()
     }
     @IBAction func chivesButtonPressed(_ sender: UIButton) {
         sender.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
         
-        self.filterWalletsTransactions = self.walletsTransactions.filter({$0.token == "XCC"})
+        //        self.filterWalletsTransactions = self.walletsTransactions.filter({$0.token == "XCC"})
         self.chiaSystemButton.backgroundColor = .systemBackground
         self.allSystemButton.backgroundColor = .systemBackground
         self.tableView.reloadData()
@@ -271,12 +322,12 @@ class TransactionHistoryViewController: UIViewController {
     @IBAction func allSystemButtonPresed(_ sender: UIButton) {
         self.allSystemButton.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
         
-        self.filterWalletsTransactions = self.walletsTransactions
+        self.filterWalletsTransactions = self.walletsTransactions.reduce([], +)
         self.chivesSystemButton.backgroundColor = .systemBackground
         self.chiaSystemButton.backgroundColor = .systemBackground
         self.tableView.reloadData()
     }
-
+    
     @objc func hideKeyboard(_ sender: Any) {
         self.searchBar.resignFirstResponder()
     }
@@ -293,18 +344,23 @@ extension TransactionHistoryViewController: UITableViewDelegate, UITableViewData
         let transiction = self.filterWalletsTransactions[indexPath.row]
         switch transiction.type {
             
-        case LocalizationManager.share.translate?.result.list.transactions.transactions_incoming :
+        case 0:
             cell.typeOfTransitionLabel.textColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
-        case LocalizationManager.share.translate?.result.list.transactions.incoming_outgoing :
+            cell.typeOfTransitionLabel.text = LocalizationManager.share.translate?.result.list.transactions.transactions_incoming
+        case 1:
             cell.typeOfTransitionLabel.textColor = #colorLiteral(red: 1, green: 0.1333333333, blue: 0.1333333333, alpha: 1)
-        case LocalizationManager.share.translate?.result.list.transactions.transactions_pendind :
-            cell.typeOfTransitionLabel.textColor = #colorLiteral(red: 0.1176470588, green: 0.5764705882, blue: 1, alpha: 1)
+            cell.typeOfTransitionLabel.text = LocalizationManager.share.translate?.result.list.transactions.incoming_outgoing
         default:
             break
         }
-        cell.heightLabel.text = "\(transiction.height)"
-        cell.typeOfTransitionLabel.text = transiction.type
-        cell.summLabel.text = transiction.summ + " " + transiction.token
+        if !(transiction.confirmed ) {
+            cell.typeOfTransitionLabel.textColor = #colorLiteral(red: 0.1176470588, green: 0.5764705882, blue: 1, alpha: 1)
+            cell.typeOfTransitionLabel.text = LocalizationManager.share.translate?.result.list.transactions.transactions_pendind
+        }
+        
+        cell.heightLabel.text = "\(transiction.confirmed_at_height )"
+        
+        cell.summLabel.text = "\((Double(transiction.amount) / 1000000000000).avoidNotation) XCH"
         return cell
     }
 }
@@ -374,7 +430,7 @@ extension TransactionHistoryViewController: UICollectionViewDelegate, UICollecti
         
         switch indexPath {
         case [0,0]:
-
+            
             self.filterCollectionView.visibleCells.forEach { cell in
                 if cell is TransictionFilterCollectionViewCell {
                     (cell.viewWithTag(1) as! UILabel).textColor = #colorLiteral(red: 0.5803921569, green: 0.5803921569, blue: 0.5803921569, alpha: 1)
@@ -383,7 +439,7 @@ extension TransactionHistoryViewController: UICollectionViewDelegate, UICollecti
             }
             cell.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
             cell.cellLabel.textColor = .white
-            self.filterWalletsTransactions = self.walletsTransactions
+            self.filterWalletsTransactions = self.walletsTransactions.reduce([], +)
             self.isAllFilter = true
             self.isInFilter = false
             self.isOutFilter = false
@@ -398,7 +454,7 @@ extension TransactionHistoryViewController: UICollectionViewDelegate, UICollecti
             }
             cell.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
             cell.cellLabel.textColor = .white
-            self.filterWalletsTransactions = self.walletsTransactions.filter({$0.type == LocalizationManager.share.translate?.result.list.transactions.transactions_incoming})
+            self.filterWalletsTransactions = self.walletsTransactions.reduce([], +).filter({$0.type == 0})
             self.isAllFilter = false
             self.isInFilter = true
             self.isOutFilter = false
@@ -413,7 +469,7 @@ extension TransactionHistoryViewController: UICollectionViewDelegate, UICollecti
             }
             cell.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
             cell.cellLabel.textColor = .white
-            self.filterWalletsTransactions = self.walletsTransactions.filter({$0.type == LocalizationManager.share.translate?.result.list.transactions.incoming_outgoing})
+            self.filterWalletsTransactions = self.walletsTransactions.reduce([], +).filter({$0.type == 1})
             self.isAllFilter = false
             self.isInFilter = false
             self.isOutFilter = true
@@ -428,7 +484,7 @@ extension TransactionHistoryViewController: UICollectionViewDelegate, UICollecti
             }
             cell.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
             cell.cellLabel.textColor = .white
-            self.filterWalletsTransactions = self.walletsTransactions.filter({$0.type == LocalizationManager.share.translate?.result.list.transactions.transactions_pendind})
+            self.filterWalletsTransactions = self.walletsTransactions.reduce([], +).filter({$0.confirmed == false})
             self.isAllFilter = false
             self.isInFilter = false
             self.isOutFilter = false
@@ -442,12 +498,12 @@ extension TransactionHistoryViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText.isEmpty {
-            self.filterWalletsTransactions = self.walletsTransactions
+            self.filterWalletsTransactions = self.walletsTransactions.reduce([], +)
             self.tableView.reloadData()
             return
         } else {
-            self.filterWalletsTransactions = self.walletsTransactions.filter{$0.height.contains(searchText) || $0.summ.contains(searchText)}
-          
+            self.filterWalletsTransactions = self.walletsTransactions.reduce([], +).filter{(String($0.confirmed_at_height ).contains(searchText)) || (String($0.amount ).contains(searchText))}
+            
             self.tableView.reloadData()
             
         }

@@ -23,4 +23,18 @@ class TimeManager {
         print("\(hour): \(minutes)")
         return hour
     }
+    
+    func convertUnixTime(unix: Double, format: String) -> String {
+
+        let date = Date(timeIntervalSince1970: unix)
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = format
+        dateFormatter.timeZone = .current
+        return dateFormatter.string(from: date)
+    }
+    
+    func getCurrentDate() {
+        
+    }
+
 }

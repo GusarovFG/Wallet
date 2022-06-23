@@ -78,3 +78,26 @@ extension Array {
         return [Array(leftSplit), Array(rightSplit)]
     }
 }
+
+extension Formatter {
+    static let avoidNotation: NumberFormatter = {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.maximumFractionDigits = 8
+        numberFormatter.numberStyle = .decimal
+        return numberFormatter
+    }()
+}
+
+extension FloatingPoint {
+    var avoidNotation: String {
+        return Formatter.avoidNotation.string(for: self) ?? ""
+    }
+}
+
+extension Date {
+    func string(format: String) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = format
+        return formatter.string(from: self)
+    }
+}

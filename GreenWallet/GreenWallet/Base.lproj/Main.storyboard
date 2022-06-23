@@ -2769,7 +2769,7 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Nog-ra-Sc2">
-                                <rect key="frame" x="0.0" y="298" width="414" height="598"/>
+                                <rect key="frame" x="0.0" y="298" width="414" height="515"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TransitionsTableViewCell" id="olu-tR-mTq" customClass="TransitionsTableViewCell" customModule="GreenWallet" customModuleProvider="target">
@@ -3036,12 +3036,13 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                             <constraint firstItem="c9t-89-7Dd" firstAttribute="top" secondItem="MtN-Zf-ahr" secondAttribute="bottom" constant="15.5" id="mNl-Z4-mOb"/>
                             <constraint firstItem="1UX-KO-0ql" firstAttribute="top" secondItem="rrf-dC-4X1" secondAttribute="bottom" constant="13" id="mjj-PR-2fu"/>
                             <constraint firstItem="rdw-Bd-OTg" firstAttribute="trailing" secondItem="A6T-nj-v6K" secondAttribute="trailing" constant="11" id="mwF-pK-FhW"/>
-                            <constraint firstAttribute="bottom" secondItem="Nog-ra-Sc2" secondAttribute="bottom" id="s4I-5C-EpN"/>
+                            <constraint firstAttribute="bottom" secondItem="Nog-ra-Sc2" secondAttribute="bottom" constant="83" id="s4I-5C-EpN"/>
                             <constraint firstItem="DpX-34-PBJ" firstAttribute="top" secondItem="c9t-89-7Dd" secondAttribute="bottom" constant="10" id="uhS-s5-7hL"/>
                             <constraint firstItem="0Gk-7f-Ba2" firstAttribute="top" secondItem="rdw-Bd-OTg" secondAttribute="top" id="us4-go-HCs"/>
                             <constraint firstItem="Nog-ra-Sc2" firstAttribute="trailing" secondItem="rdw-Bd-OTg" secondAttribute="trailing" id="w69-C8-X6O"/>
                         </constraints>
                     </view>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="allDateButton" destination="e7I-Zn-xbX" id="dW5-Pb-BoM"/>
                         <outlet property="allSystemButton" destination="7ho-ot-z8N" id="zzq-yw-nUp"/>

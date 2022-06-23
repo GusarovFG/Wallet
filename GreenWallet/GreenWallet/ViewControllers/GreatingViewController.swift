@@ -30,6 +30,9 @@ class GreatingViewController: UIViewController {
                 ExchangeRatesManager.share.differenceСalculation()
                 CoreDataManager.share.editExchangeRates(newExchangeRates: rate?.bid ?? 0)
             }
+            
+            if !CoreDataManager.share.fetchChiaWalletPrivateKey().isEmpty {
+            }
         }
         
         

@@ -28,9 +28,9 @@ class ImportTokensViewController: UIViewController {
         self.filteredTokens = self.tokens
         localization()
         NotificationCenter.default.addObserver(self, selector: #selector(localization), name: NSNotification.Name("localized"), object: nil)
-
+        
     }
-
+    
     
     @objc private func localization() {
         self.titleLabel.text = LocalizationManager.share.translate?.result.list.import_tokens.import_tokens_title

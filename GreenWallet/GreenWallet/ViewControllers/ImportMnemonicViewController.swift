@@ -204,8 +204,11 @@ class ImportMnemonicViewController: UIViewController {
                     CoreDataManager.share.saveChiaWaletFingerpring(fingerpring.fingerprint)
                     dispatchGroup.leave()
                     dispatchGroup.enter()
-                    ChiaBlockchainManager.share.logIn(fingerpring.fingerprint)
-                    dispatchGroup.leave()
+                    ChiaBlockchainManager.share.logIn(fingerpring.fingerprint) { log in
+                        if log.success {
+                            dispatchGroup.leave()
+                        }
+                    }
                     dispatchGroup.enter()
                     ChiaBlockchainManager.share.getNextAddress(walletID: Int64(1)) { adres in
                         adreses = adres.address

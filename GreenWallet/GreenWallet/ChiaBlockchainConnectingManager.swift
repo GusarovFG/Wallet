@@ -16,7 +16,7 @@ class ChiaBlockchainManager {
     
     private init(){}
     
-    func logIn(_ fingerprint: Int) {
+    func logIn(_ fingerprint: Int, with complition: @escaping(LogIn) -> Void) {
         let method = "log_in"
         guard let url = URL(string: self.url + "/wallet/" + method) else { return }
         let parameters = ["fingerprint":fingerprint]
@@ -33,8 +33,8 @@ class ChiaBlockchainManager {
             if let data = data {
                 do {
                     let json = try JSONDecoder().decode(LogIn.self, from: data)
-                    print(json.fingerprint)
-                    print(json.success)
+ 
+                    complition(json)
                 } catch {
                     print(error.localizedDescription)
                 }
@@ -268,7 +268,7 @@ class ChiaBlockchainManager {
     func getWalletBalance(_ walletID: Int, with complition: @escaping (ChiaWalletBalance) -> Void) {
         let method = "get_wallet_balance"
         guard let url = URL(string: self.url + "/wallet/" + method) else { return }
-        let parameters = ["wallet_id":"\(walletID)"]
+        let parameters = ["wallet_id":walletID]
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: []) else { return }
@@ -292,10 +292,10 @@ class ChiaBlockchainManager {
         }.resume()
     }
     
-    func getTransactions(_ walletID: Int) {
+    func getTransactions(_ walletID: Int, with complition: @escaping(ChiaTransactions) -> Void) {
         let method = "get_transactions"
         guard let url = URL(string: self.url + "/wallet/" + method) else { return }
-        let parameters = ["wallet_id":"\(walletID)"]
+        let parameters = ["wallet_id":walletID]
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: []) else { return }
@@ -308,8 +308,10 @@ class ChiaBlockchainManager {
             }
             if let data = data {
                 do {
-                    let json = try JSONSerialization.jsonObject(with: data)
-                    print(json)
+                    let decored = JSONDecoder()
+
+                    let json = try decored.decode(ChiaTransactions.self, from: data)
+                    complition(json)
                 } catch {
                     print(error.localizedDescription)
                 }

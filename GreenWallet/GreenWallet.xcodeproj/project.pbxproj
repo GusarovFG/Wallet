@@ -91,6 +91,7 @@
 		FBBB3DD5284CD75F00349EF0 /* ExpandableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBBB3DD4284CD75F00349EF0 /* ExpandableHeaderView.swift */; };
 		FBBECA8B2832CF250042D1B8 /* mCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBBECA892832CF250042D1B8 /* mCollectionViewCell.swift */; };
 		FBBECA8C2832CF250042D1B8 /* mCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBBECA8A2832CF250042D1B8 /* mCollectionViewCell.xib */; };
+		FBC26BB7286464E4005EE8BC /* TransactionsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC26BB6286464E4005EE8BC /* TransactionsManager.swift */; };
 		FBC4AB752836A5AA00566683 /* TransactionHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC4AB742836A5AA00566683 /* TransactionHistoryViewController.swift */; };
 		FBD1CCAA283B90570081AF3E /* KeyChainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD1CCA9283B90570081AF3E /* KeyChainManager.swift */; };
 		FBD63A44283B7460006CE0A8 /* PasswordStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FBD63A43283B745F006CE0A8 /* PasswordStoryboard.storyboard */; };
@@ -201,6 +202,7 @@
 		FBBB3DD4284CD75F00349EF0 /* ExpandableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableHeaderView.swift; sourceTree = "<group>"; };
 		FBBECA892832CF250042D1B8 /* mCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mCollectionViewCell.swift; sourceTree = "<group>"; };
 		FBBECA8A2832CF250042D1B8 /* mCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = mCollectionViewCell.xib; sourceTree = "<group>"; };
+		FBC26BB6286464E4005EE8BC /* TransactionsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsManager.swift; sourceTree = "<group>"; };
 		FBC4AB742836A5AA00566683 /* TransactionHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionHistoryViewController.swift; sourceTree = "<group>"; };
 		FBD1CCA9283B90570081AF3E /* KeyChainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainManager.swift; sourceTree = "<group>"; };
 		FBD63A43283B745F006CE0A8 /* PasswordStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PasswordStoryboard.storyboard; sourceTree = "<group>"; };
@@ -402,6 +404,7 @@
 				FBD72B732850782900987484 /* ChiaBlockchainConnectingManager.swift */,
 				FB58F56B28521486006235BD /* ChiaWalletsManager.swift */,
 				FB2B82362860999C005AF534 /* ExchangeRatesManager.swift */,
+				FBC26BB6286464E4005EE8BC /* TransactionsManager.swift */,
 				FB3208072818285100F1ADCA /* ViewControllers */,
 				FB3208062818279E00F1ADCA /* CustomViews */,
 				FB5940512816AC7800037DFA /* Extensions */,
@@ -721,6 +724,7 @@
 				FB0FCA6D2819600400BB0527 /* SelectSystemTableViewCell.swift in Sources */,
 				FBB682E2283E4A3E00CC5959 /* CoreDataManager.swift in Sources */,
 				FB85BA40283CCC470068E9DE /* GreatingViewController.swift in Sources */,
+				FBC26BB7286464E4005EE8BC /* TransactionsManager.swift in Sources */,
 				FBFE578F281AC4050016E74A /* PushAndAllSettingsTableViewCell.swift in Sources */,
 				FB87F341284A057D009F896C /* AlertManager.swift in Sources */,
 				FBD72B742850782900987484 /* ChiaBlockchainConnectingManager.swift in Sources */,
