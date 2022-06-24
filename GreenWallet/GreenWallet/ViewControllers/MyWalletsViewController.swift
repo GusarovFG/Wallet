@@ -43,7 +43,7 @@ class MyWalletsViewController: UIViewController {
         super.viewDidLoad()
         
         
-        
+        self.index = 0
         self.copyLabel.alpha = 0
         self.copyLabel.text = "   Скопировано"
         
@@ -133,6 +133,7 @@ class MyWalletsViewController: UIViewController {
         guard let transactionHistoryVC = storyboard?.instantiateViewController(withIdentifier: "TransactionHistoryVC") as? TransactionHistoryViewController  else { return }
         transactionHistoryVC.modalPresentationStyle = .fullScreen
         transactionHistoryVC.isHistoryWallet = true
+        transactionHistoryVC.wallet = self.wallets[self.index]
         self.present(transactionHistoryVC, animated: true)
     }
     

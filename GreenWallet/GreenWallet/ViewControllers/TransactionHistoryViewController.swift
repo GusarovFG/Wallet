@@ -110,37 +110,61 @@ class TransactionHistoryViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        let group = DispatchGroup()
+        let storyoard = UIStoryboard(name: "spinner", bundle: .main)
+        let spinnerVC = storyoard.instantiateViewController(withIdentifier: "spinner") as! SprinnerViewController
+        self.present(spinnerVC, animated: true)
         let queue = DispatchQueue.global(qos: .userInteractive)
         
-        queue.sync {
-            for i in CoreDataManager.share.fetchChiaWalletPrivateKey() {
-
-                ChiaBlockchainManager.share.logIn(Int(i.fingerprint)) { log in
-
-                    if log.success {
-                        ChiaBlockchainManager.share.getWallets { wallet in
-
-                            for iwallet in wallet.wallets {
-            
-                                ChiaBlockchainManager.share.getTransactions(iwallet.id) { transact in
-  
-                                    self.walletsTransactions.append(transact.transactions)
-
+        if self.walletsTransactions.isEmpty && !self.isHistoryWallet {
+            queue.sync {
+                for i in CoreDataManager.share.fetchChiaWalletPrivateKey() {
+                    
+                    ChiaBlockchainManager.share.logIn(Int(i.fingerprint)) { log in
+                        
+                        if log.success {
+                            ChiaBlockchainManager.share.getWallets { wallet in
+                                
+                                for iwallet in wallet.wallets {
+                                    
+                                    ChiaBlockchainManager.share.getTransactions(iwallet.id) { transact in
+                                        
+                                        self.walletsTransactions.append(transact.transactions)
+                                        
+                                        DispatchQueue.main.async {
+                                            
+                                            self.filterWalletsTransactions = self.walletsTransactions.reduce([], +)
+                                            self.tableView.reloadData()
+                                            spinnerVC.dismiss(animated: true)
+                                        }
+                                    }
                                     
                                 }
-              
                             }
-            
-                            
                         }
+                        
                     }
                 }
             }
-            DispatchQueue.main.async {
+        } else if self.isHistoryWallet {
+            
+            queue.sync {
                 
-                self.filterWalletsTransactions = self.walletsTransactions.reduce([], +)
-                self.tableView.reloadData()
+                ChiaBlockchainManager.share.logIn(Int(self.wallet!.fingerprint)) { log in
+                    print(log.success)
+                    ChiaBlockchainManager.share.getWallets { wallets in
+                        for i in wallets.wallets {
+                            ChiaBlockchainManager.share.getTransactions(i.id) { trans in
+                                self.walletsTransactions.append(trans.transactions)
+                                
+                                DispatchQueue.main.async {
+                                    self.filterWalletsTransactions = self.walletsTransactions.reduce([], +)
+                                    self.tableView.reloadData()
+                                    spinnerVC.dismiss(animated: true)
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
     }
@@ -208,7 +232,7 @@ class TransactionHistoryViewController: UIViewController {
     @IBAction func allDateButtonPressed(_ sender: UIButton) {
         sender.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
         
-    
+        
         
         self.todayDateButton.backgroundColor = .systemBackground
         self.yesterdayDayeButton.backgroundColor = .systemBackground
@@ -231,7 +255,7 @@ class TransactionHistoryViewController: UIViewController {
         self.lastMonthButton.backgroundColor = .systemBackground
         
         self.filterWalletsTransactions = self.walletsTransactions.reduce([], +).filter({TimeManager.share.convertUnixTime(unix: $0.created_at_time, format: "dd.MM.yy") == Date().string( format: "dd.MM.yy")})
-
+        
         self.filterDateView.isHidden = true
         self.tableView.reloadData()
     }
@@ -245,9 +269,9 @@ class TransactionHistoryViewController: UIViewController {
         self.lastWeekDateButton.backgroundColor = .systemBackground
         self.lastMonthButton.backgroundColor = .systemBackground
         
-
         
-//        self.filterWalletsTransactions = self.walletsTransactions.reduce([], +).filter({Int(TimeManager.share.convertUnixTime(unix: $0.created_at_time, format: "dd.MM.yy").split(separator: ".")[0]) - Int(Date().string(format: "dd.MM.yy").split(separator: ".")[0]) == 1})
+        
+        //        self.filterWalletsTransactions = self.walletsTransactions.reduce([], +).filter({Int(TimeManager.share.convertUnixTime(unix: $0.created_at_time, format: "dd.MM.yy").split(separator: ".")[0]) - Int(Date().string(format: "dd.MM.yy").split(separator: ".")[0]) == 1})
         self.filterDateView.isHidden = true
         self.tableView.reloadData()
     }

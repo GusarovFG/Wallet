@@ -35,8 +35,23 @@ class ChiaBlockchainManager {
                     let json = try JSONDecoder().decode(LogIn.self, from: data)
  
                     complition(json)
+                } catch let DecodingError.dataCorrupted(context) {
+                    print(context)
+                } catch let DecodingError.keyNotFound(key, context) {
+                    print("Key '\(key)' not found:", context.debugDescription)
+                    print("codingPath:", context.codingPath)
+                    DispatchQueue.main.async {
+                        
+                        NotificationCenter.default.post(name: NSNotification.Name("setupRootVC"), object: nil)
+                    }
+                } catch let DecodingError.valueNotFound(value, context) {
+                    print("Value '\(value)' not found:", context.debugDescription)
+                    print("codingPath:", context.codingPath)
+                } catch let DecodingError.typeMismatch(type, context)  {
+                    print("Type '\(type)' mismatch:", context.debugDescription)
+                    print("codingPath:", context.codingPath)
                 } catch {
-                    print(error.localizedDescription)
+                    print("error: ", error)
                 }
             }
         }.resume()
@@ -60,8 +75,19 @@ class ChiaBlockchainManager {
                 do {
                     let json = try JSONSerialization.jsonObject(with: data)
                     print(json)
+                } catch let DecodingError.dataCorrupted(context) {
+                    print(context)
+                } catch let DecodingError.keyNotFound(key, context) {
+                    print("Key '\(key)' not found:", context.debugDescription)
+                    print("codingPath:", context.codingPath)
+                } catch let DecodingError.valueNotFound(value, context) {
+                    print("Value '\(value)' not found:", context.debugDescription)
+                    print("codingPath:", context.codingPath)
+                } catch let DecodingError.typeMismatch(type, context)  {
+                    print("Type '\(type)' mismatch:", context.debugDescription)
+                    print("codingPath:", context.codingPath)
                 } catch {
-                    print(error.localizedDescription)
+                    print("error: ", error)
                 }
             }
         }.resume()
@@ -87,8 +113,19 @@ class ChiaBlockchainManager {
                     DispatchQueue.main.async {
                         complition(json)
                     }
+                } catch let DecodingError.dataCorrupted(context) {
+                    print(context)
+                } catch let DecodingError.keyNotFound(key, context) {
+                    print("Key '\(key)' not found:", context.debugDescription)
+                    print("codingPath:", context.codingPath)
+                } catch let DecodingError.valueNotFound(value, context) {
+                    print("Value '\(value)' not found:", context.debugDescription)
+                    print("codingPath:", context.codingPath)
+                } catch let DecodingError.typeMismatch(type, context)  {
+                    print("Type '\(type)' mismatch:", context.debugDescription)
+                    print("codingPath:", context.codingPath)
                 } catch {
-                    print(error.localizedDescription)
+                    print("error: ", error)
                 }
             }
         }.resume()
@@ -116,12 +153,19 @@ class ChiaBlockchainManager {
                     DispatchQueue.main.async {
                         complition(json)
                     }
+                } catch let DecodingError.dataCorrupted(context) {
+                    print(context)
+                } catch let DecodingError.keyNotFound(key, context) {
+                    print("Key '\(key)' not found:", context.debugDescription)
+                    print("codingPath:", context.codingPath)
+                } catch let DecodingError.valueNotFound(value, context) {
+                    print("Value '\(value)' not found:", context.debugDescription)
+                    print("codingPath:", context.codingPath)
+                } catch let DecodingError.typeMismatch(type, context)  {
+                    print("Type '\(type)' mismatch:", context.debugDescription)
+                    print("codingPath:", context.codingPath)
                 } catch {
-                    DispatchQueue.main.async {
-                        
-                        AlertManager.share.seccessNewWallet(controller)
-                        print(error.localizedDescription)
-                    }
+                    print("error: ", error)
                 }
             }
         }.resume()
@@ -146,8 +190,19 @@ class ChiaBlockchainManager {
                     let json = try JSONDecoder().decode(LogIn.self, from: data)
                     print(json.fingerprint)
                     print(json.success)
+                } catch let DecodingError.dataCorrupted(context) {
+                    print(context)
+                } catch let DecodingError.keyNotFound(key, context) {
+                    print("Key '\(key)' not found:", context.debugDescription)
+                    print("codingPath:", context.codingPath)
+                } catch let DecodingError.valueNotFound(value, context) {
+                    print("Value '\(value)' not found:", context.debugDescription)
+                    print("codingPath:", context.codingPath)
+                } catch let DecodingError.typeMismatch(type, context)  {
+                    print("Type '\(type)' mismatch:", context.debugDescription)
+                    print("codingPath:", context.codingPath)
                 } catch {
-                    print(error.localizedDescription)
+                    print("error: ", error)
                 }
             }
         }.resume()
@@ -174,8 +229,19 @@ class ChiaBlockchainManager {
                     DispatchQueue.main.async {
                         complition(json)
                     }
+                } catch let DecodingError.dataCorrupted(context) {
+                    print(context)
+                } catch let DecodingError.keyNotFound(key, context) {
+                    print("Key '\(key)' not found:", context.debugDescription)
+                    print("codingPath:", context.codingPath)
+                } catch let DecodingError.valueNotFound(value, context) {
+                    print("Value '\(value)' not found:", context.debugDescription)
+                    print("codingPath:", context.codingPath)
+                } catch let DecodingError.typeMismatch(type, context)  {
+                    print("Type '\(type)' mismatch:", context.debugDescription)
+                    print("codingPath:", context.codingPath)
                 } catch {
-                    print(error.localizedDescription)
+                    print("error: ", error)
                 }
             }
         }.resume()
@@ -201,8 +267,19 @@ class ChiaBlockchainManager {
                     DispatchQueue.main.async {
                         complition(json)
                     }
+                } catch let DecodingError.dataCorrupted(context) {
+                    print(context)
+                } catch let DecodingError.keyNotFound(key, context) {
+                    print("Key '\(key)' not found:", context.debugDescription)
+                    print("codingPath:", context.codingPath)
+                } catch let DecodingError.valueNotFound(value, context) {
+                    print("Value '\(value)' not found:", context.debugDescription)
+                    print("codingPath:", context.codingPath)
+                } catch let DecodingError.typeMismatch(type, context)  {
+                    print("Type '\(type)' mismatch:", context.debugDescription)
+                    print("codingPath:", context.codingPath)
                 } catch {
-                    print(error.localizedDescription)
+                    print("error: ", error)
                 }
             }
         }.resume()
@@ -230,8 +307,19 @@ class ChiaBlockchainManager {
                         print(json.wallets)
                         complition(json)
                     }
+                } catch let DecodingError.dataCorrupted(context) {
+                    print(context)
+                } catch let DecodingError.keyNotFound(key, context) {
+                    print("Key '\(key)' not found:", context.debugDescription)
+                    print("codingPath:", context.codingPath)
+                } catch let DecodingError.valueNotFound(value, context) {
+                    print("Value '\(value)' not found:", context.debugDescription)
+                    print("codingPath:", context.codingPath)
+                } catch let DecodingError.typeMismatch(type, context)  {
+                    print("Type '\(type)' mismatch:", context.debugDescription)
+                    print("codingPath:", context.codingPath)
                 } catch {
-                    print(error.localizedDescription)
+                    print("error: ", error)
                 }
             }
         }.resume()
@@ -256,8 +344,19 @@ class ChiaBlockchainManager {
                     let json = try JSONDecoder().decode(ChiaAdres.self, from: data)
                         complition(json)
                     
+                } catch let DecodingError.dataCorrupted(context) {
+                    print(context)
+                } catch let DecodingError.keyNotFound(key, context) {
+                    print("Key '\(key)' not found:", context.debugDescription)
+                    print("codingPath:", context.codingPath)
+                } catch let DecodingError.valueNotFound(value, context) {
+                    print("Value '\(value)' not found:", context.debugDescription)
+                    print("codingPath:", context.codingPath)
+                } catch let DecodingError.typeMismatch(type, context)  {
+                    print("Type '\(type)' mismatch:", context.debugDescription)
+                    print("codingPath:", context.codingPath)
                 } catch {
-                    print(error.localizedDescription)
+                    print("error: ", error)
                 }
             }
         }.resume()
@@ -285,8 +384,19 @@ class ChiaBlockchainManager {
                     DispatchQueue.global().async {
                         complition(json)
                     }
+                } catch let DecodingError.dataCorrupted(context) {
+                    print(context)
+                } catch let DecodingError.keyNotFound(key, context) {
+                    print("Key '\(key)' not found:", context.debugDescription)
+                    print("codingPath:", context.codingPath)
+                } catch let DecodingError.valueNotFound(value, context) {
+                    print("Value '\(value)' not found:", context.debugDescription)
+                    print("codingPath:", context.codingPath)
+                } catch let DecodingError.typeMismatch(type, context)  {
+                    print("Type '\(type)' mismatch:", context.debugDescription)
+                    print("codingPath:", context.codingPath)
                 } catch {
-                    print(error.localizedDescription)
+                    print("error: ", error)
                 }
             }
         }.resume()
@@ -312,8 +422,21 @@ class ChiaBlockchainManager {
 
                     let json = try decored.decode(ChiaTransactions.self, from: data)
                     complition(json)
+                } catch let DecodingError.dataCorrupted(context) {
+                    print(context)
+                } catch let DecodingError.keyNotFound(key, context) {
+                    print("Key '\(key)' not found:", context.debugDescription)
+                    print("codingPath:", context.codingPath)
+                    
+
+                } catch let DecodingError.valueNotFound(value, context) {
+                    print("Value '\(value)' not found:", context.debugDescription)
+                    print("codingPath:", context.codingPath)
+                } catch let DecodingError.typeMismatch(type, context)  {
+                    print("Type '\(type)' mismatch:", context.debugDescription)
+                    print("codingPath:", context.codingPath)
                 } catch {
-                    print(error.localizedDescription)
+                    print("error: ", error)
                 }
             }
         }.resume()
@@ -340,8 +463,19 @@ class ChiaBlockchainManager {
                     DispatchQueue.global().async {
                         complition(json)
                     }
+                } catch let DecodingError.dataCorrupted(context) {
+                    print(context)
+                } catch let DecodingError.keyNotFound(key, context) {
+                    print("Key '\(key)' not found:", context.debugDescription)
+                    print("codingPath:", context.codingPath)
+                } catch let DecodingError.valueNotFound(value, context) {
+                    print("Value '\(value)' not found:", context.debugDescription)
+                    print("codingPath:", context.codingPath)
+                } catch let DecodingError.typeMismatch(type, context)  {
+                    print("Type '\(type)' mismatch:", context.debugDescription)
+                    print("codingPath:", context.codingPath)
                 } catch {
-                    print(error.localizedDescription)
+                    print("error: ", error)
                 }
             }
         }.resume()
