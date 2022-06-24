@@ -114,45 +114,33 @@ class TransactionHistoryViewController: UIViewController {
         let queue = DispatchQueue.global(qos: .userInteractive)
         
         queue.sync {
-            group.enter()
             for i in CoreDataManager.share.fetchChiaWalletPrivateKey() {
-                group.leave()
-                group.enter()
+
                 ChiaBlockchainManager.share.logIn(Int(i.fingerprint)) { log in
-                    group.leave()
-                    group.enter()
+
                     if log.success {
-                        group.leave()
-                        group.enter()
                         ChiaBlockchainManager.share.getWallets { wallet in
-                            group.leave()
-                            group.enter()
+
                             for iwallet in wallet.wallets {
-                                group.leave()
-                                group.enter()
+            
                                 ChiaBlockchainManager.share.getTransactions(iwallet.id) { transact in
-                                    group.leave()
-                                    group.enter()
+  
                                     self.walletsTransactions.append(transact.transactions)
-                                    group.leave()
-                                    group.enter()
+
                                     
                                 }
-                                group.leave()
-                                group.enter()
+              
                             }
-                            group.leave()
-                            group.enter()
-                            DispatchQueue.main.async {
-                                group.leave()
-                                group.enter()
-                                self.filterWalletsTransactions = self.walletsTransactions.reduce([], +)
-                                self.tableView.reloadData()
-                                group.leave()
-                            }
+            
+                            
                         }
                     }
                 }
+            }
+            DispatchQueue.main.async {
+                
+                self.filterWalletsTransactions = self.walletsTransactions.reduce([], +)
+                self.tableView.reloadData()
             }
         }
     }
