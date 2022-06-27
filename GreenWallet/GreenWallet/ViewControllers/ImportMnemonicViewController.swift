@@ -26,6 +26,7 @@ class ImportMnemonicViewController: UIViewController {
     @IBOutlet weak var termsLabel: UILabel!
     @IBOutlet weak var alertView: UIView!
     @IBOutlet weak var alertLabel: UILabel!
+    @IBOutlet weak var backButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,7 +37,7 @@ class ImportMnemonicViewController: UIViewController {
         
         self.collectionView.register(UINib(nibName: "ImportMnemonicCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "ImportMnemonicCollectionViewCell")
         
-        setuptermsLabel()
+//        setuptermsLabel()
         registerFromKeyBoardNotifications()
         self.scrollView.isScrollEnabled = false
         self.continueButton.backgroundColor = #colorLiteral(red: 0.2666666667, green: 0.2666666667, blue: 0.2666666667, alpha: 1)
@@ -59,6 +60,9 @@ class ImportMnemonicViewController: UIViewController {
         self.continueButton.setTitle(LocalizationManager.share.translate?.result.list.all.next_btn, for: .normal)
         self.errorLabel.text = LocalizationManager.share.translate?.result.list.import_mnemonics.import_mnemonics_same_words_error
         self.termsLabel.text = LocalizationManager.share.translate?.result.list.all.agreement_with_terms_of_use_chekbox
+        self.segmentedControl.setTitle("12 \(LocalizationManager.share.translate?.result.list.import_mnemonics.import_mnemonics_twelve_words_btn ?? "")", forSegmentAt: 0)
+        self.segmentedControl.setTitle("24 \(LocalizationManager.share.translate?.result.list.import_mnemonics.import_mnemonics_twelve_words_btn ?? "")", forSegmentAt: 1)
+        self.backButton.setTitle(LocalizationManager.share.translate?.result.list.all.back_btn, for: .normal)
         
     }
     
@@ -104,6 +108,16 @@ class ImportMnemonicViewController: UIViewController {
     
     @IBAction func segmentedControlIsChanged(_ sender: UISegmentedControl) {
         if sender.selectedSegmentIndex == 0 {
+            self.errorLabel.isHidden = true
+            self.checkBoxPress = false
+            self.checkBoxButton.setImage(UIImage(systemName: "squareshape.fill"), for: .normal)
+            self.checkBoxButton.imageView?.layer.cornerRadius = 5
+            self.checkBoxButton.tintColor = .white
+            
+            
+            self.continueButton.backgroundColor = #colorLiteral(red: 0.2666666667, green: 0.2666666667, blue: 0.2666666667, alpha: 1)
+            self.continueButton.isEnabled = false
+            
             self.countOfItems = 12
             
             for _ in 0...11 {
@@ -116,6 +130,15 @@ class ImportMnemonicViewController: UIViewController {
             self.collectionView.reloadData()
             self.bottomConstraint.constant = self.bottomConstraint.constant - (55 * 6)
         } else {
+            self.errorLabel.isHidden = true
+            self.checkBoxPress = false
+            self.checkBoxButton.setImage(UIImage(systemName: "squareshape.fill"), for: .normal)
+            self.checkBoxButton.imageView?.layer.cornerRadius = 5
+            self.checkBoxButton.tintColor = .white
+            
+            
+            self.continueButton.backgroundColor = #colorLiteral(red: 0.2666666667, green: 0.2666666667, blue: 0.2666666667, alpha: 1)
+            self.continueButton.isEnabled = false
             self.countOfItems = 24
             
             for _ in 0...11 {
@@ -138,7 +161,6 @@ class ImportMnemonicViewController: UIViewController {
             sender.imageView?.layer.cornerRadius = 5
             
             self.checkBoxPress = true
-            self.collectionView.reloadData()
             
             if self.mnemonicPhrase.filter({$0 == ""}).count == 0 {
                 self.continueButton.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
@@ -166,28 +188,41 @@ class ImportMnemonicViewController: UIViewController {
         
         let storyboardSpin = UIStoryboard(name: "spinner", bundle: .main)
         let spinnerVC = storyboardSpin.instantiateViewController(withIdentifier: "spinner")
-        self.present(spinnerVC, animated: true)
         
+        var duplicateWords: [String] = []
+        var duplicateCount = 0
         var adreses = ""
         var balances: [Double] = []
         var walletsDict: [Int] = []
         var privateKey = ChiaPrivate(private_key: ChiaPrivateKey(farmer_pk: "", fingerprint: 0, pk: "", pool_pk: "", seed: "", sk: ""), success: true)
         var name = ""
         
-        for i in 0..<self.mnemonicPhrase.count{
-            if self.mnemonicPhrase.filter({$0 == self.mnemonicPhrase[i]}).count > 2 {
-                self.alertView.backgroundColor = #colorLiteral(red: 1, green: 0.2360929251, blue: 0.1714096665, alpha: 1)
-                self.alertLabel.text = LocalizationManager.share.translate?.result.list.import_mnemonics.import_mnemonics_wrong_words_error
-                self.collectionView.visibleCells.forEach { cell in
-                    cell.layer.borderColor = #colorLiteral(red: 1, green: 0.2360929251, blue: 0.1714096665, alpha: 0.8980392157)
-                    
-                }
-            } else {
-                self.mnemonicIsOK = true
+        for i in 0..<self.mnemonicPhrase.count {
+            if self.mnemonicPhrase.filter({$0 == self.mnemonicPhrase[i]}).count >= 2 && !duplicateWords.contains(self.mnemonicPhrase[i]){
+                duplicateWords.append(self.mnemonicPhrase[i])
+                print(duplicateWords)
             }
         }
         
-        if self.mnemonicIsOK {
+        for i in 0..<self.collectionView.visibleCells.count {
+            for duplicate in duplicateWords {
+                if (self.collectionView.visibleCells[i] as! ImportMnemonicCollectionViewCell).cellTextLabel.text == duplicate {
+                    (self.collectionView.visibleCells[i] as! ImportMnemonicCollectionViewCell).cellTextLabel.textColor = #colorLiteral(red: 1, green: 0.2360929251, blue: 0.1714096665, alpha: 0.8980392157)
+                    (self.collectionView.visibleCells[i] as! ImportMnemonicCollectionViewCell).layer.borderColor = #colorLiteral(red: 1, green: 0.2360929251, blue: 0.1714096665, alpha: 0.8980392157)
+                    self.errorLabel.isHidden = false
+                }
+            }
+        }
+        
+        for word in self.mnemonicPhrase {
+            if self.mnemonicPhrase.filter({$0 == word}).count >= 2 {
+                duplicateCount += 1
+                print(duplicateCount)
+            }
+        }
+        
+        if duplicateCount == 0 {
+            self.present(spinnerVC, animated: true)
             let dispatchGroup = DispatchGroup()
             
             
@@ -277,6 +312,7 @@ extension ImportMnemonicViewController: UICollectionViewDelegate, UICollectionVi
         cell.cellTextLabel.tag = indexPath.row
         cell.cellTextLabel.delegate = self
         cell.controller = self
+        cell.cellTextLabel.textColor = .white
         
         let mnemonicWord = self.mnemonicPhrase[indexPath.row]
         if mnemonicWord == "" {
@@ -301,22 +337,13 @@ extension ImportMnemonicViewController: UICollectionViewDelegate, UICollectionVi
             }
         }
         
+        
         cell.appendInPhrase = { [unowned self] in
             
             if cell.cellTextLabel.text != "" {
                 self.errorLabel.isHidden = true
                 
-                for i in 0..<self.mnemonicPhrase.count  {
-                    if self.mnemonicPhrase[i] == cell.cellTextLabel.text   {
-                        self.collectionView.cellForItem(at: [0,i])?.layer.borderColor = #colorLiteral(red: 1, green: 0.2360929251, blue: 0.1714096665, alpha: 0.8980392157)
-                        cell.layer.borderColor = #colorLiteral(red: 1, green: 0.2360929251, blue: 0.1714096665, alpha: 0.8980392157)
-                        self.errorLabel.isHidden = false
-                    } else {
-                        cell.layer.borderColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
-                        self.continueButton.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
-                        self.continueButton.isEnabled = true
-                    }
-                }
+
                 if self.countOfItems == 12 || self.countOfItems == 24 {
                     if self.mnemonicPhrase.filter({$0 == ""}).count == 0 && self.checkBoxPress {
                         self.continueButton.isEnabled = true

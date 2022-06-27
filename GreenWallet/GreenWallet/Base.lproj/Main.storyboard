@@ -1846,6 +1846,7 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                         <outlet property="contactTextField" destination="5bp-F0-POt" id="xi8-gZ-m18"/>
                         <outlet property="continueButton" destination="LGy-uT-4y7" id="0dK-Th-jYB"/>
                         <outlet property="gadLabel" destination="VfE-rm-jzL" id="M3E-Iv-HnM"/>
+                        <outlet property="qrBackButton" destination="Iyx-0z-A85" id="YPV-UT-2hi"/>
                         <outlet property="recomendedComissionLabel" destination="i9s-S0-U7y" id="XIH-3N-BSZ"/>
                         <outlet property="secondTransferErrorLabel" destination="bE3-Hw-2NN" id="Jh1-71-3dE"/>
                         <outlet property="summTitle" destination="fTf-Bp-7PI" id="mJH-bY-485"/>
@@ -4570,6 +4571,7 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                     <connections>
                         <outlet property="alertLabel" destination="RPX-zz-Uyh" id="1sx-f4-B3D"/>
                         <outlet property="alertView" destination="tN3-Zu-aLm" id="bkT-99-b8N"/>
+                        <outlet property="backButton" destination="a17-ZD-paY" id="uaF-Ce-DGV"/>
                         <outlet property="bottomConstraint" destination="1r7-ll-hzs" id="ZAK-d1-pKg"/>
                         <outlet property="checkBoxButton" destination="0pw-Jr-w0k" id="68H-r0-42E"/>
                         <outlet property="collectionView" destination="hAH-V3-p1h" id="qTs-GN-b4i"/>

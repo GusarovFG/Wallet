@@ -66,6 +66,7 @@ class GetTokenViewController: UIViewController {
         self.copyLabel.text = LocalizationManager.share.translate?.result.list.all.lable_copied
         self.copyButton.setTitle(LocalizationManager.share.translate?.result.list.receive_a_token.receive_a_token_copy, for: .normal)
         self.shareBatton.setTitle(LocalizationManager.share.translate?.result.list.all.share_btn, for: .normal)
+        self.backButton.setTitle(LocalizationManager.share.translate?.result.list.all.back_btn, for: .normal)
     }
     
     private func setupLabel(index: Int) {

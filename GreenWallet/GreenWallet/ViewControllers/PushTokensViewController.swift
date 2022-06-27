@@ -71,6 +71,7 @@ class PushTokensViewController: UIViewController {
     @IBOutlet weak var confirmButton: UIButton!
     @IBOutlet weak var confirmTitle: UILabel!
     @IBOutlet weak var confitmBackButton: UIButton!
+    @IBOutlet weak var qrBackButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -148,6 +149,8 @@ class PushTokensViewController: UIViewController {
         self.confirmButton.setTitle(LocalizationManager.share.translate?.result.list.all.confirm_btn, for: .normal)
         self.confirmTitle.text = LocalizationManager.share.translate?.result.list.send_token.send_token_pop_up_confirmation
         self.confitmBackButton.setTitle(LocalizationManager.share.translate?.result.list.all.back_btn, for: .normal)
+        
+        self.qrBackButton.setTitle(LocalizationManager.share.translate?.result.list.all.back_btn, for: .normal)
     }
     
     private func setupWalletButton() {

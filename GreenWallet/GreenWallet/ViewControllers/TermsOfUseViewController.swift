@@ -39,7 +39,7 @@ class TermsOfUseViewController: UIViewController {
     private func localization() {
         self.continueButton.setTitle(LocalizationManager.share.translate?.result.list.all.next_btn, for: .normal)
         self.agreeLabel.text = LocalizationManager.share.translate?.result.list.all.agreement_with_terms_of_use_chekbox
-        self.agreeLabel.text = LocalizationManager.share.translate?.result.list.all.agreement_with_terms_of_use_chekbox
+        
         self.termOfUseTextView.text = LocalizationManager.share.translate?.result.list.terms_of_use.terms_of_use_text
         self.mainTitile.text = LocalizationManager.share.translate?.result.list.terms_of_use.trms_of_use_title
         self.backButton.setTitle(LocalizationManager.share.translate?.result.list.all.back_btn, for: .normal)
