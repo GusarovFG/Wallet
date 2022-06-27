@@ -519,7 +519,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Кошелек успешно удален" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xnd-rB-v6c">
-                                        <rect key="frame" x="26" y="266" width="293" height="55.5"/>
+                                        <rect key="frame" x="26" y="266" width="293" height="80.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.58039215690000001" green="0.58039215690000001" blue="0.58039215690000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -534,7 +534,7 @@
                                     <constraint firstAttribute="bottom" secondItem="Ehe-Qz-HKv" secondAttribute="bottom" constant="32" id="IPA-Jl-Iyf"/>
                                     <constraint firstItem="omb-Cf-9la" firstAttribute="leading" secondItem="nEC-o4-89n" secondAttribute="leading" constant="62" id="KMw-iM-2Y4"/>
                                     <constraint firstItem="GNe-u9-mTn" firstAttribute="leading" secondItem="nEC-o4-89n" secondAttribute="leading" constant="16" id="RoU-tY-U5Y"/>
-                                    <constraint firstItem="Ehe-Qz-HKv" firstAttribute="top" secondItem="xnd-rB-v6c" secondAttribute="bottom" constant="55" id="T6d-EF-YzJ"/>
+                                    <constraint firstItem="Ehe-Qz-HKv" firstAttribute="top" secondItem="xnd-rB-v6c" secondAttribute="bottom" constant="30" id="T6d-EF-YzJ"/>
                                     <constraint firstItem="xnd-rB-v6c" firstAttribute="leading" secondItem="nEC-o4-89n" secondAttribute="leading" constant="26" id="V9j-Lb-CC2"/>
                                     <constraint firstItem="GNe-u9-mTn" firstAttribute="top" secondItem="omb-Cf-9la" secondAttribute="bottom" constant="15" id="WE9-bq-6zB"/>
                                     <constraint firstItem="xnd-rB-v6c" firstAttribute="top" secondItem="GNe-u9-mTn" secondAttribute="bottom" constant="8" symbolic="YES" id="pFm-1U-vdP"/>
