@@ -279,8 +279,6 @@ extension ImportMnemonicViewController: UICollectionViewDelegate, UICollectionVi
         cell.cellTextLabel.delegate = self
         cell.controller = self
         
-        
-        
         let mnemonicWord = self.mnemonicPhrase[indexPath.row]
         if mnemonicWord == "" {
             cell.cellTextLabel.placeholder = "\(indexPath.row + 1)."
@@ -290,13 +288,13 @@ extension ImportMnemonicViewController: UICollectionViewDelegate, UICollectionVi
             cell.cellTextLabel.text = mnemonicWord
         }
         
-        if cell.cellTextLabel.text == "" && self.checkBoxPress {
+        if cell.cellTextLabel.text == "" && self.checkBoxPress  {
             cell.layer.borderColor = #colorLiteral(red: 1, green: 0.2360929251, blue: 0.1714096665, alpha: 0.8980392157)
         } else {
             cell.layer.borderColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
         }
         
-        if self.mnemonicPhrase.count == 24 && self.mnemonicPhrase.filter({$0 == ""}).count == 12 {
+        if self.mnemonicPhrase.count == 24 && self.mnemonicPhrase.filter({$0 != ""}).count == 12 {
             if indexPath >= [0,6], indexPath <= [0,11] {
                 cell.layer.borderColor = #colorLiteral(red: 1, green: 0.2360929251, blue: 0.1714096665, alpha: 0.8980392157)
             } else if indexPath >= [0,18], indexPath <= [0,23] {
@@ -353,8 +351,8 @@ extension ImportMnemonicViewController: UICollectionViewDelegate, UICollectionVi
             }
         }
         
-        if self.countOfItems == 24 {
-            if cell.cellTextLabel.text == "" {
+        if self.countOfItems == 24  {
+            if cell.cellTextLabel.text!.isEmpty && self.mnemonicPhrase.filter({$0.isEmpty}).count != 24 {
                 cell.layer.borderColor = #colorLiteral(red: 1, green: 0.2360929251, blue: 0.1714096665, alpha: 0.8980392157)
             } else {
                 
