@@ -15,6 +15,8 @@ class PasswordViewController: UIViewController {
     var index = 0
     var isShowDetail = false
     var isMyWallet = false
+    var isDeleteWallet = false
+    var isAllWallets = false
     
     private var isFirstSession = false
     private var enteringPassword = ""
@@ -113,11 +115,20 @@ class PasswordViewController: UIViewController {
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: "Seccess"), object: nil, userInfo: self.userInfo)
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: "closeAlert"), object: nil)
             }
+
             if self.isShowDetail && !self.isMyWallet {
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: "showDetail"), object: nil)
             }
             if self.isMyWallet && !self.isShowDetail {
+                CoreDataManager.share.deleteChiaWalletPrivateKey(index: self.index)
+
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "deleteWallet"), object: nil)
+            }
+            
+            if self.isAllWallets {
+                CoreDataManager.share.deleteChiaWalletPrivateKey(index: self.index)
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: "deleteWalletAtIntex"), object: nil)
+
             }
         } else if self.enteringPassword.count == 6 && self.enteringPassword != KeyChainManager.share.loadPassword() {
             self.stackView.arrangedSubviews.forEach { view in
@@ -180,6 +191,17 @@ class PasswordViewController: UIViewController {
                                 
                                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: "Seccess"), object: nil, userInfo: self?.userInfo)
                                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: "closeAlert"), object: nil)
+                                if self!.isAllWallets {
+                                    CoreDataManager.share.deleteChiaWalletPrivateKey(index: self!.index)
+
+                                    NotificationCenter.default.post(name: NSNotification.Name("deleteWalletAtIntex"), object: nil)
+                                }
+                                
+                                if self!.isMyWallet {
+                                    CoreDataManager.share.deleteChiaWalletPrivateKey(index: self!.index)
+
+                                    NotificationCenter.default.post(name: NSNotification.Name("deleteWallet"), object: nil)
+                                }
                             }
                         }
                     } else {

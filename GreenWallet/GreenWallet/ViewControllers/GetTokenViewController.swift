@@ -80,7 +80,7 @@ class GetTokenViewController: UIViewController {
                 numberOfWallet.append(numb)
             }
         }
-        self.walletLabel.text = "\(self.wallets[index].name )" + numberOfWallet
+        self.walletLabel.text = "\(self.wallets[index].name ?? "")" + numberOfWallet
     }
     
     private func generateQRImage(stringQR: NSString) -> UIImage

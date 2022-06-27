@@ -189,7 +189,6 @@ class ImportMnemonicViewController: UIViewController {
         
         if self.mnemonicIsOK {
             let dispatchGroup = DispatchGroup()
-            let dispatchQueue = DispatchQueue(label: "importWalletQueue")
             
             
             DispatchQueue.global().sync {

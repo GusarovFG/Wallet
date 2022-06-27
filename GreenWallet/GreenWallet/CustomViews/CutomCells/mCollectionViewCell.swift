@@ -148,10 +148,10 @@ extension mCollectionViewCell: UITableViewDelegate, UITableViewDataSource {
             if !CoreDataManager.share.fetchChiaWalletPrivateKey().isEmpty {
                 
                 walletCell.cellImage.image = UIImage(named: "LogoChia")!
-                walletCell.balanceLabel.text = "\((self.wallet?.balances as? [NSNumber])?[indexPath.row] as! Double / 1000000000000.0 ) XCH"
+                walletCell.balanceLabel.text = "\(((self.wallet?.balances as? [NSNumber])?[indexPath.row] ?? 0) as! Double / 1000000000000.0 ) XCH"
                 let summ: Double = (((self.wallet?.balances as? [Double])?[indexPath.row] ?? 0) / 1000000000000) * ExchangeRatesManager.share.newRatePerDollar
                
-                walletCell.convertLabel.text = "⁓ \(String(summ).prefix(5)) USD"
+                walletCell.convertLabel.text = "⁓ \(NSString(format:"%.2f", summ)) USD"
                 walletCell.tokenLabel.text = self.wallet?.name ?? ""
             }
             

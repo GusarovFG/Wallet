@@ -51,10 +51,13 @@ class AddContactViewController: UIViewController {
             self.addContactButton.backgroundColor = #colorLiteral(red: 0.2274509804, green: 0.6745098039, blue: 0.3490196078, alpha: 1)
             self.mainTitle.text = LocalizationManager.share.translate?.result.list.address_book.address_book_edit_contact_title
             
+            
         }
-        
-        self.descriptionTextField.textContainer.maximumNumberOfLines = 3
-        self.descriptionTextField.textContainer.lineBreakMode = .byTruncatingTail
+        self.descriptionTextField.isScrollEnabled = false
+        self.descriptionTextField.sizeToFit()
+//        
+//        self.descriptionTextField.textContainer.maximumNumberOfLines = 3
+//        self.descriptionTextField.textContainer.lineBreakMode = .byTruncatingTail
         NotificationCenter.default.addObserver(self, selector: #selector(backButtonPressed), name: NSNotification.Name("dismissAddContactVC"), object: nil)
     }
     

@@ -8,6 +8,8 @@
 import UIKit
 
 class NewWalletViewController: UIViewController {
+    
+    var isChia = false
 
     @IBOutlet weak var creatingNewWalletView: UIView!
     @IBOutlet weak var agreeLabel: UILabel!
@@ -25,6 +27,7 @@ class NewWalletViewController: UIViewController {
     @IBOutlet weak var supportTokensLabel: UILabel!
     @IBOutlet weak var newWalletLAbel: UILabel!
     @IBOutlet weak var creatingNewWalletLabel: UILabel!
+    @IBOutlet weak var systemImage: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,6 +40,14 @@ class NewWalletViewController: UIViewController {
         self.createNewWalletButton.contentMode = .center
         
 //        setupAgreeLabel()
+        
+        if self.isChia {
+            self.systemImage.image = UIImage(named: "LogoChia")!
+            self.titleLabel.text = "Chia Network"
+        } else {
+            self.systemImage.image = UIImage(named: "ChivesLogo")!
+            self.titleLabel.text = "Chives Network"
+        }
         
         self.agreeLabel.addRangeGesture(stringRange: "условиями пользования") {
             let url = URL(string: "https://devushka.ru/upload/posts/a1797083197722a6b1ab8e2f4beb2b08.jpg")

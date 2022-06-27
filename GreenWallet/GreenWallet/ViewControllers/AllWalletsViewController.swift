@@ -28,8 +28,11 @@ class AllWalletsViewController: UIViewController {
         self.walletsTableView.register(UINib(nibName: "AllWalletsTableViewCell", bundle: nil), forCellReuseIdentifier: "AllWalletsTableViewCell")
 
         NotificationCenter.default.addObserver(self, selector: #selector(openAlert), name: NSNotification.Name("closeAlert"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(openAlert), name: NSNotification.Name("deleteWalletAtIntex"), object: nil)
+
     }
     
+
     
     
     override func viewWillAppear(_ animated: Bool) {
@@ -40,12 +43,12 @@ class AllWalletsViewController: UIViewController {
     }
     
     @objc func openAlert(notification: Notification)  {
+        self.wallets = CoreDataManager.share.fetchChiaWalletPrivateKey()
         let storyBoard = UIStoryboard(name: "Alert", bundle: .main)
         let alertVC = storyBoard.instantiateViewController(withIdentifier: "DeletingAlert") as! AllertWalletViewController
         alertVC.isInMyWallet = true
         self.present(alertVC, animated: true)
         print(self.index)
-        CoreDataManager.share.deleteChiaWalletPrivateKey(index: self.index)
         self.walletsTableView.reloadData()
     }
     
@@ -135,6 +138,7 @@ extension AllWalletsViewController: UITableViewDelegate, UITableViewDataSource {
             let alertVC = storyBoard.instantiateViewController(withIdentifier: "DeleteWallet") as! AllertWalletViewController
             alertVC.controller = self
             alertVC.index = indexPath.row
+            alertVC.isAllWallets = true
             self.index = indexPath.row
             self.present(alertVC, animated: true)
             completionHandler(true)

@@ -41,7 +41,7 @@ class MainViewController: UIViewController {
         if UserDefaultsManager.shared.userDefaults.bool(forKey: UserDefaultsStringKeys.hideWalletsBalance.rawValue) {
             self.balanceLabel.text = "***** USD"
         } else {
-            self.balanceLabel.text = "\(self.balance) USD"
+            self.balanceLabel.text = "\(NSString(format:"%.2f", self.balance)) USD"
         }
         
         self.navigationController?.navigationBar.isHidden = false
@@ -57,8 +57,10 @@ class MainViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(showPushSystem), name: NSNotification.Name(rawValue: "showPushVC"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(localization), name: NSNotification.Name("localized"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(reloadcellectionView), name: NSNotification.Name("reload"), object: nil)
-    
-        self.riseLabel.text = "XCС price: \(ExchangeRatesManager.share.newRatePerDollar) $"
+        if ((self.wallet?.name?.contains("Chia")) != nil) {
+            self.riseLabel.text = "XCС price: \(ExchangeRatesManager.share.newRatePerDollar) $"
+            
+        }
         self.percentLabel.text = "  \(String(ExchangeRatesManager.share.difference).prefix(5)) % "
         ExchangeRatesManager.share.changeColorOfView(label: self.percentLabel)
         
@@ -72,11 +74,12 @@ class MainViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.wallets = CoreDataManager.share.fetchChiaWalletPrivateKey()
         if !self.wallets.isEmpty {
             self.cellectionView.isScrollEnabled = true
             self.wallet = self.wallets[0]
             let summ: Double = (((self.wallet?.balances as? [Double])?.reduce(0, +) ?? 0) / 1000000000000) * ExchangeRatesManager.share.newRatePerDollar
-            self.balanceLabel.text = "⁓ \(String(summ).prefix(5)) USD"
+            self.balanceLabel.text = "⁓ \(NSString(format:"%.2f", summ)) USD"
             self.pageControl.numberOfPages = self.wallets.count
             self.cellectionView.reloadData()
         } else {
@@ -135,7 +138,8 @@ class MainViewController: UIViewController {
     }
     
     @objc private func showWallet(notification: Notification) {
-        self.balanceLabel.text = "\(self.balance) USD"
+        let summ: Double = (((self.wallet?.balances as? [Double])?.reduce(0, +) ?? 0) / 1000000000000) * ExchangeRatesManager.share.newRatePerDollar
+        self.balanceLabel.text = "⁓ \(NSString(format:"%.2f", summ)) USD"
         
         
     }
@@ -152,6 +156,14 @@ class MainViewController: UIViewController {
         selectSystemVC.isPushToken = true
         selectSystemVC.modalPresentationStyle = .overFullScreen
         self.present(selectSystemVC, animated: true)
+    }
+    
+    @IBAction func sendButtonPressed(_ sender: Any) {
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "showPushVC"), object: nil)
+    
+    }
+    @IBAction func qrButtonPressed(_ sender: Any) {
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "showGetVC"), object: nil)
     }
     
 }
@@ -223,11 +235,10 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
             self.wallet = self.wallets[visibleIndexPath.row]
             
             let summ: Double = (((self.wallet?.balances as? [Double])?.reduce(0, +) ?? 0) / 1000000000000) * ExchangeRatesManager.share.newRatePerDollar
-           
-            self.balanceLabel.text = "⁓ \(String(summ).prefix(5)) USD"
+            
+            self.balanceLabel.text = "⁓ \(NSString(format:"%.2f", summ)) USD"
         }
     }
-    
     
 }
 

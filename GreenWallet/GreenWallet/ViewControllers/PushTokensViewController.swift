@@ -14,6 +14,7 @@ class PushTokensViewController: UIViewController {
     private let session = AVCaptureSession()
     private var wallet: ChiaWalletPrivateKey?
     private var wallets: [ChiaWalletPrivateKey] = []
+    private var walletId = 1
     
     
     private let link = "qwertyuiopasdfghjkl"
@@ -74,7 +75,7 @@ class PushTokensViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         localization()
-        self.wallets = WalletManager.share.vallets
+        self.wallets = CoreDataManager.share.fetchChiaWalletPrivateKey()
         self.wallet = self.wallets.first
         self.balanceButton.setTitle("\((String((self.wallet?.balances as? [NSNumber])?[0] as! Double / 1000000000000.0)).prefix(8)) XCH", for: .normal)
         self.tokenButton.setTitle(self.wallet?.name, for: .normal)
@@ -89,7 +90,7 @@ class PushTokensViewController: UIViewController {
         self.transitionView.alpha = 0
         self.continueButton.isEnabled = false
         self.continueButton.backgroundColor = #colorLiteral(red: 0.2666666667, green: 0.2666666667, blue: 0.2666666667, alpha: 1)
-
+        
         self.contactTextField.bottomCorner()
         self.transferTextField.bottomCorner()
         self.comissionTextField.bottomCorner()
@@ -108,7 +109,7 @@ class PushTokensViewController: UIViewController {
         self.systemView.alpha = 0
         
         NotificationCenter.default.addObserver(self, selector: #selector(showSeccessAlert), name: NSNotification.Name(rawValue: "Seccess"), object: nil)
-
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -117,7 +118,7 @@ class PushTokensViewController: UIViewController {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
-
+        
         self.view.endEditing(true)
     }
     
@@ -163,30 +164,30 @@ class PushTokensViewController: UIViewController {
         }
         
         let buttonText: NSString = numberOfWallet + "\n\(self.wallet?.name?.split(separator: " ").first ?? "")" as NSString
-
-            //getting the range to separate the button title strings
-            let newlineRange: NSRange = buttonText.range(of: "\n")
-
-            //getting both substrings
-            var substring1 = ""
-            var substring2 = ""
-
-            if(newlineRange.location != NSNotFound) {
-                substring1 = buttonText.substring(to: newlineRange.location)
-                substring2 = buttonText.substring(from: newlineRange.location)
-            }
-
-            //assigning diffrent fonts to both substrings
-            let font1: UIFont = UIFont(name: "Arial", size: 12.0)!
-            let attributes1 = [NSMutableAttributedString.Key.font: font1]
-            let attrString1 = NSMutableAttributedString(string: substring1, attributes: attributes1)
-
-            let font2: UIFont = UIFont(name: "Arial", size: 18.0)!
-            let attributes2 = [NSMutableAttributedString.Key.font: font2]
-            let attrString2 = NSMutableAttributedString(string: substring2, attributes: attributes2)
-
-            attrString1.append(attrString2)
-
+        
+        //getting the range to separate the button title strings
+        let newlineRange: NSRange = buttonText.range(of: "\n")
+        
+        //getting both substrings
+        var substring1 = ""
+        var substring2 = ""
+        
+        if(newlineRange.location != NSNotFound) {
+            substring1 = buttonText.substring(to: newlineRange.location)
+            substring2 = buttonText.substring(from: newlineRange.location)
+        }
+        
+        //assigning diffrent fonts to both substrings
+        let font1: UIFont = UIFont(name: "Arial", size: 12.0)!
+        let attributes1 = [NSMutableAttributedString.Key.font: font1]
+        let attrString1 = NSMutableAttributedString(string: substring1, attributes: attributes1)
+        
+        let font2: UIFont = UIFont(name: "Arial", size: 18.0)!
+        let attributes2 = [NSMutableAttributedString.Key.font: font2]
+        let attrString2 = NSMutableAttributedString(string: substring2, attributes: attributes2)
+        
+        attrString1.append(attrString2)
+        
         self.tokenButton.setAttributedTitle(attrString1, for: [])
     }
     
@@ -220,7 +221,7 @@ class PushTokensViewController: UIViewController {
             self.systemChiaButton.backgroundColor = .systemBackground
             self.systemChiaButton.titleLabel?.textColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
         }
-    
+        
     }
     
     @IBAction func systemButtonsPressed(_ sender: UIButton) {
@@ -341,7 +342,7 @@ class PushTokensViewController: UIViewController {
                 sender.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
                 self.balanceView.isHidden = true
                 self.walletsView.isHidden = true
-                
+                self.walletId = (i + 1)
             }
         }
     }
@@ -362,12 +363,12 @@ class PushTokensViewController: UIViewController {
             sender.textColor = .white
         }
         
- 
+        
     }
     
     @IBAction func linkCheck(_ sender: UITextField) {
         if sender.text != self.link && sender.text != "" {
-   
+            
         } else {
             
         }
@@ -379,10 +380,10 @@ class PushTokensViewController: UIViewController {
             self.walletLinkError.textColor = #colorLiteral(red: 0.1176470588, green: 0.5764705882, blue: 1, alpha: 1)
             self.walletLinkError.alpha = 1
         } else if self.adressTextField.text != self.link {
-                self.walletLinkError.textColor = #colorLiteral(red: 1, green: 0.2360929251, blue: 0.1714096665, alpha: 0.8980392157)
-                self.walletLinkError.text = LocalizationManager.share.translate?.result.list.all.non_existent_adress_error
-            } else if self.adressTextField.text == "" {
-                self.walletLinkError.alpha = 0
+            self.walletLinkError.textColor = #colorLiteral(red: 1, green: 0.2360929251, blue: 0.1714096665, alpha: 0.8980392157)
+            self.walletLinkError.text = LocalizationManager.share.translate?.result.list.all.non_existent_adress_error
+        } else if self.adressTextField.text == "" {
+            self.walletLinkError.alpha = 0
             
         }
     }
@@ -390,7 +391,7 @@ class PushTokensViewController: UIViewController {
     @IBAction func transferSummCheck(_ sender: UITextField) {
         self.comissionTextField.text = sender.text
         self.transferTokenLabel.text = self.balanceButton.currentTitle?.filter{!$0.isNumber && !$0.isPunctuation}
-
+        
     }
     
     @IBAction func checkBoxButtonPressed(_ sender: UIButton) {
@@ -421,7 +422,7 @@ class PushTokensViewController: UIViewController {
         
     }
     @IBAction func transferSuccsessCheck(_ sender: UITextField) {
-      
+        
         if sender.text != "" && self.adressTextField.text != "" {
             
             self.continueButton.isEnabled = true
@@ -471,7 +472,7 @@ class PushTokensViewController: UIViewController {
     
     @IBAction func continueButtonPressed(_ sender: Any) {
         
-        if (Double(self.transferTextField.text ?? "") ?? 0) < NSString(string: self.balanceButton.currentTitle ?? "").doubleValue {
+        if (Double(self.transferTextField.text ?? "") ?? 0) <= NSString(string: self.balanceButton.currentTitle ?? "").doubleValue {
             self.secondTransferErrorLabel.alpha = 0
             self.transferErrorLabel.textColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
         } else {
@@ -482,12 +483,12 @@ class PushTokensViewController: UIViewController {
         }
         
         if self.adressTextField.text == self.link  {
-
+            
             self.walletLinkError.alpha = 0
             self.adressTextField.textColor = .white
             self.walletErrorLabel.textColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
             
-
+            
             self.transitionTokenLabel.text = "XCH"
             self.transitionBlockchainLabel.text = self.wallet?.name
             self.transitinSumLabel.text = self.transferTextField.text
@@ -497,22 +498,49 @@ class PushTokensViewController: UIViewController {
             self.adressTextField.textColor = #colorLiteral(red: 1, green: 0.2360929251, blue: 0.1714096665, alpha: 0.8980392157)
             self.walletErrorLabel.textColor = #colorLiteral(red: 1, green: 0.2360929251, blue: 0.1714096665, alpha: 0.8980392157)
         }
-        if (Double(self.transferTextField.text ?? "") ?? 0) < Double(self.balanceButton.currentTitle?.split(separator: " ").first ?? "0") ?? 0 && self.adressTextField.text == self.link {
+        if (Double(self.transferTextField.text ?? "") ?? 0) < Double(self.balanceButton.currentTitle?.split(separator: " ").first ?? "0") ?? 0 {
+            let storyoard = UIStoryboard(name: "spinner", bundle: .main)
+            let spinnerVC = storyoard.instantiateViewController(withIdentifier: "spinner") as! SprinnerViewController
             
-            self.transitionView.isHidden = false
-            UIView.animate(withDuration: 0.5) {
-                self.transitionView.alpha = 1
+            self.present(spinnerVC, animated: true)
+            DispatchQueue.global().sync {
+                
+                ChiaBlockchainManager.share.logIn(Int(self.wallet?.fingerprint ?? 0)) { log in
+                    if log.success {
+                        ChiaBlockchainManager.share.getSyncStatus(self.walletId) { status in
+                            if status.synced {
+                                DispatchQueue.main.sync {
+                                    
+                                    ChiaBlockchainManager.share.sendTransactions(self.walletId, amount: Double(self.transferTextField.text!)!, fee: Double(self.comissionTextField.text!)!, address: self.adressTextField.text!) { 
+                                        
+                                        
+                                        DispatchQueue.main.async {
+                                            self.transitionView.isHidden = false
+                                            self.transitionView.alpha = 1
+                                            spinnerVC.dismiss(animated: true)
+                                        }
+                                    }
+                                }
+                            } else {
+                                DispatchQueue.main.async {
+                                    spinnerVC.dismiss(animated: true)
+                                    print("хуй там")
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
-        
     }
+    
     @IBAction func transitionBackButtomPressed(_ sender: Any) {
         self.transitionView.isHidden = true
     }
 }
 extension PushTokensViewController: AVCaptureMetadataOutputObjectsDelegate {
     
-
+    
     func setupVideo() {
         guard let captureDevice = AVCaptureDevice.default(for: AVMediaType.video) else { return }
         do {
@@ -536,9 +564,9 @@ extension PushTokensViewController: AVCaptureMetadataOutputObjectsDelegate {
         self.session.startRunning()
     }
     
-
-        
-
+    
+    
+    
     
     func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
         guard metadataObjects.count > 0 else { return }
@@ -550,7 +578,7 @@ extension PushTokensViewController: AVCaptureMetadataOutputObjectsDelegate {
         }
     }
     
-
+    
 }
 
 

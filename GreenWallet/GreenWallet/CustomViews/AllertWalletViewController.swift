@@ -8,7 +8,7 @@
 import UIKit
 
 class AllertWalletViewController: UIViewController {
-
+    
     var controller = UIViewController()
     var index = 0
     var isInMyWallet = false
@@ -19,6 +19,7 @@ class AllertWalletViewController: UIViewController {
     var isImportMnemonicError = false
     var isAskAQuestion = false
     var isImport = false
+    var isAllWallets = false
     
     @IBOutlet weak var mainLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
@@ -40,7 +41,7 @@ class AllertWalletViewController: UIViewController {
         super.viewDidLoad()
         localization()
         NotificationCenter.default.addObserver(self, selector: #selector(closeAlert), name: NSNotification.Name("Seccess"), object: nil)
-
+        
         
     }
     
@@ -71,8 +72,8 @@ class AllertWalletViewController: UIViewController {
                 self.transactionDescription.text = LocalizationManager.share.translate?.result.list.send_token.send_token_pop_up_succsess_description
                 self.mainButton.setTitle(LocalizationManager.share.translate?.result.list.all.ready_btn, for: .normal)
             } else {
-                    self.transactionLabel.text = LocalizationManager.share.translate?.result.list.all.pop_up_sent_title
-                    self.transactionDescription.text = LocalizationManager.share.translate?.result.list.ask_a_question.pop_up_sent_a_question_description
+                self.transactionLabel.text = LocalizationManager.share.translate?.result.list.all.pop_up_sent_title
+                self.transactionDescription.text = LocalizationManager.share.translate?.result.list.ask_a_question.pop_up_sent_a_question_description
                 
             }
         } else if self.restorationIdentifier == "AddContactAlert" {
@@ -107,7 +108,7 @@ class AllertWalletViewController: UIViewController {
             }
         }
     }
-
+    
     @IBAction func dismissTap(_ sender: Any) {
         self.dismiss(animated: true)
     }
@@ -121,7 +122,7 @@ class AllertWalletViewController: UIViewController {
         self.dismiss(animated: false)
         
     }
-  
+    
     @IBAction func mainButtonPressed(_ sender: Any) {
         NotificationCenter.default.post(name: NSNotification.Name("setupRootVC"), object: nil)
     }
@@ -137,14 +138,26 @@ class AllertWalletViewController: UIViewController {
         
     }
     @IBAction func confirmButtonPressed(_ sender: Any) {
-        let passwordStoryboard = UIStoryboard(name: "PasswordStoryboard", bundle: .main)
-        let passwordVC = passwordStoryboard.instantiateViewController(withIdentifier: "PasswordViewController") as! PasswordViewController
-        passwordVC.modalPresentationStyle = .fullScreen
-        passwordVC.index = self.index
-        self.dismiss(animated: true)
-        self.controller.present(passwordVC, animated: true)
         if self.isInMyWallet {
+            let passwordStoryboard = UIStoryboard(name: "PasswordStoryboard", bundle: .main)
+            let passwordVC = passwordStoryboard.instantiateViewController(withIdentifier: "PasswordViewController") as! PasswordViewController
+            passwordVC.modalPresentationStyle = .fullScreen
+            passwordVC.index = self.index
+            self.dismiss(animated: true)
+            self.controller.present(passwordVC, animated: true)
+            
             NotificationCenter.default.post(name: NSNotification.Name("deleteInMyWallet"), object: nil)
+        }
+        
+        if self.isAllWallets {
+            let passwordStoryboard = UIStoryboard(name: "PasswordStoryboard", bundle: .main)
+            let passwordVC = passwordStoryboard.instantiateViewController(withIdentifier: "PasswordViewController") as! PasswordViewController
+            passwordVC.modalPresentationStyle = .fullScreen
+            passwordVC.index = self.index
+            passwordVC.isAllWallets = true
+            self.dismiss(animated: true)
+            self.controller.present(passwordVC, animated: true)
+            
         }
     }
     @IBAction func dismissButtonPressed(_ sender: Any) {

@@ -52,7 +52,7 @@ class MyWalletsViewController: UIViewController {
         self.actionCollectionView.register(UINib(nibName: "MyWalletsButtonsCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "MyWalletsButtonsCollectionViewCell")
                 
         NotificationCenter.default.addObserver(self, selector: #selector(showDetail), name: NSNotification.Name("showDetail"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(deleteWalletAtIntex), name: NSNotification.Name("deleteWalletAtIntex"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(deleteWalletAtIntex), name: NSNotification.Name("deleteWallet"), object: nil)
         localization()
         self.pageControl.numberOfPages = CoreDataManager.share.fetchChiaWalletPrivateKey().count
     }
@@ -92,11 +92,12 @@ class MyWalletsViewController: UIViewController {
     }
     
     @objc func deleteWalletAtIntex() {
+        self.wallets = CoreDataManager.share.fetchChiaWalletPrivateKey()
         let storyBoard = UIStoryboard(name: "Alert", bundle: .main)
         let alertVC = storyBoard.instantiateViewController(withIdentifier: "DeletingAlert") as! AllertWalletViewController
         alertVC.isInMyWallet = true
+        alertVC.index = self.index
         self.present(alertVC, animated: true)
-        self.wallets = CoreDataManager.share.fetchChiaWalletPrivateKey()
 
         self.walletCollectionView.reloadData()
     }

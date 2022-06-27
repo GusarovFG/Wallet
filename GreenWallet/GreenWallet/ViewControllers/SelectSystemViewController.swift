@@ -15,6 +15,7 @@ class SelectSystemViewController: UIViewController {
     var isGetToken = false
     var isPushToken = false
     var isNewWallet = false
+    var isChia = false
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var titleLabel: UILabel!
@@ -104,7 +105,8 @@ extension SelectSystemViewController: UITableViewDelegate, UITableViewDataSource
         if self.isSelectedSystem && !self.isGetToken && !self.isPushToken {
             switch indexPath {
             case [0,0]:
-                guard let newWalletVC = storyboard?.instantiateViewController(withIdentifier: "NewWalletViewController") else { return }
+                let newWalletVC = storyboard?.instantiateViewController(withIdentifier: "NewWalletViewController") as! NewWalletViewController
+                newWalletVC.isChia = self.isChia
                 self.present(newWalletVC, animated: true, completion: nil)
             case [0,1]:
                 guard let newWalletVC = storyboard?.instantiateViewController(withIdentifier: "qwes") else { return }
@@ -138,9 +140,19 @@ extension SelectSystemViewController: UITableViewDelegate, UITableViewDataSource
             default:
                 break
             }
-        } else {
-            self.isSelectedSystem = true
-            self.tableView.reloadData()
+        } else if !self.isSelectedSystem && !self.isGetToken && !self.isPushToken  {
+            switch indexPath  {
+            case [0,0]:
+                self.isChia = true
+                self.isSelectedSystem = true
+                self.tableView.reloadData()
+            case [0,1]:
+                self.isChia = false
+                self.isSelectedSystem = true
+                self.tableView.reloadData()
+            default:
+                break
+            }
         }
         
         

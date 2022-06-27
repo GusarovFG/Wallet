@@ -481,6 +481,85 @@ class ChiaBlockchainManager {
         }.resume()
     }
     
+    func sendTransactions(_ walletID: Int, amount: Double, fee: Double, address: String, with complition: @escaping() -> Void) {
+        let method = "send_transaction"
+        guard let url = URL(string: self.url + "/wallet/" + method) else { return }
+        let parameters = ["wallet_id": walletID, "amount": amount, "fee": fee, "adress": address] as [String : Any]
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: []) else { return }
+        request.httpBody = httpBody
+        
+        let session = URLSession.shared
+        session.dataTask(with: request) { data, response, error in
+            if let response = response {
+                print(response)
+            }
+            if let data = data {
+                do {
+                    let decored = JSONDecoder()
+
+                    let json = try JSONSerialization.jsonObject(with: data)
+                    print(json)
+                } catch let DecodingError.dataCorrupted(context) {
+                    print(context)
+                } catch let DecodingError.keyNotFound(key, context) {
+                    print("Key '\(key)' not found:", context.debugDescription)
+                    print("codingPath:", context.codingPath)
+                    
+
+                } catch let DecodingError.valueNotFound(value, context) {
+                    print("Value '\(value)' not found:", context.debugDescription)
+                    print("codingPath:", context.codingPath)
+                } catch let DecodingError.typeMismatch(type, context)  {
+                    print("Type '\(type)' mismatch:", context.debugDescription)
+                    print("codingPath:", context.codingPath)
+                } catch {
+                    print("error: ", error)
+                }
+            }
+        }.resume()
+    }
+    
+    func getSyncStatus(_ walletID: Int, with complition: @escaping(ChiaSyncStatus) -> Void) {
+        let method = "get_sync_status"
+        guard let url = URL(string: self.url + "/wallet/" + method) else { return }
+        let parameters = ["wallet_id": walletID] as [String : Any]
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: []) else { return }
+        request.httpBody = httpBody
+        
+        let session = URLSession.shared
+        session.dataTask(with: request) { data, response, error in
+            if let response = response {
+                print(response)
+            }
+            if let data = data {
+                do {
+                    let decored = JSONDecoder()
+
+                    let json = try decored.decode(ChiaSyncStatus.self, from: data)
+                    complition(json)
+                } catch let DecodingError.dataCorrupted(context) {
+                    print(context)
+                } catch let DecodingError.keyNotFound(key, context) {
+                    print("Key '\(key)' not found:", context.debugDescription)
+                    print("codingPath:", context.codingPath)
+                    
+
+                } catch let DecodingError.valueNotFound(value, context) {
+                    print("Value '\(value)' not found:", context.debugDescription)
+                    print("codingPath:", context.codingPath)
+                } catch let DecodingError.typeMismatch(type, context)  {
+                    print("Type '\(type)' mismatch:", context.debugDescription)
+                    print("codingPath:", context.codingPath)
+                } catch {
+                    print("error: ", error)
+                }
+            }
+        }.resume()
+    }
     
 }
 

@@ -26,6 +26,8 @@ class AskAQuestionViewController: UIViewController {
     @IBOutlet weak var textViewTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var viewConstraint: NSLayoutConstraint!
     @IBOutlet weak var errorLabel: UILabel!
+    @IBOutlet weak var textViewHeighConstrain: NSLayoutConstraint!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,6 +41,12 @@ class AskAQuestionViewController: UIViewController {
         self.emailLabel.alpha = 0
         self.questionLabel.alpha = 0
         self.errorLabel.alpha = 0
+        self.questionTextView.isScrollEnabled = false
+        self.questionTextView.sizeToFit()
+
+        
+        
+        
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -140,6 +148,8 @@ class AskAQuestionViewController: UIViewController {
 
 extension AskAQuestionViewController: UITextViewDelegate, UITextFieldDelegate {
 
+   
+
     
     func textViewDidChange(_ textView: UITextView) {
         if !textView.text.isEmpty && textView.text != LocalizationManager.share.translate?.result.list.ask_a_question.ask_a_question_question {
@@ -205,6 +215,8 @@ extension AskAQuestionViewController: UITextViewDelegate, UITextFieldDelegate {
         
         let boundingRect = sizeOfString(string: newText, constrainedToWidth: Double(textWidth), font: textView.font!)
         let numberOfLines = boundingRect.height / textView.font!.lineHeight
+
+        
         
         return numberOfLines <= 2
     }
