@@ -14,6 +14,8 @@ class FAQController: UIViewController {
                         FAQs(header: "Как редактировать адрес кошелька", inCells: ["Нужно удерживать контакт в течении 1 секунды и провести пальцем в лево, после этого вы можете удалить, отредактировать, отправить адрес"], expanded: false),
                         FAQs(header: "Как редактировать адрес кошелька", inCells: ["Нужно удерживать контакт в течении 1 секунды и провести пальцем в лево, после этого вы можете удалить, отредактировать, отправить адрес"], expanded: false),
                         FAQs(header: "Как редактировать адрес кошелька", inCells: ["Нужно удерживать контакт в течении 1 секунды и провести пальцем в лево, после этого вы можете удалить, отредактировать, отправить адрес"], expanded: false)]
+    var button = UIButton()
+    
     @IBOutlet weak var faqsTableView: UITableView!
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var mainTitle: UILabel!
@@ -21,12 +23,23 @@ class FAQController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.button.addTarget(self, action: #selector(handleTap), for: .touchUpInside)
         self.backButton.setTitle(LocalizationManager.share.translate?.result.list.all.back_btn, for: .normal)
         self.mainTitle.text = LocalizationManager.share.translate?.result.list.faq.faq_title
     }
     
     @IBAction func backBButtonPressed(_ sender: Any) {
         self.dismiss(animated: true)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        for i in 0..<self.faqsTableView.numberOfSections {
+            self.button = UIButton(frame: CGRect(x: self.faqsTableView.headerView(forSection: i)!.frame.width - 30, y: self.faqsTableView.headerView(forSection: i)!.frame.height - 50, width:30, height:30))
+            self.button.setImage(UIImage(named: "plus")!, for: .normal)
+            self.button.addTarget(self.faqsTableView.visibleCells, action: #selector(handleTap), for: .touchUpInside)
+            self.faqsTableView.headerView(forSection: i)?.addSubview(self.button)
+        }
     }
     
 }
@@ -47,6 +60,7 @@ extension FAQController: UITableViewDelegate, UITableViewDataSource, ExpandableH
         cell.textLabel?.text = faqs[indexPath.section].inCells[indexPath.row]
         cell.textLabel?.numberOfLines = 0
         cell.textLabel?.font.withSize(16)
+        
         return cell
     }
     
@@ -66,11 +80,20 @@ extension FAQController: UITableViewDelegate, UITableViewDataSource, ExpandableH
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = ExpandableHeaderView()
-        header.button.setImage(UIImage(named: "plus")!, for: .normal)
         header.setup(withTitle: faqs[section].header, section: section, delegate: self)
         header.textLabel?.font.withSize(18)
+        
         return header
     }
+    
+    @objc func handleTap(){
+        if self.button.imageView?.image == UIImage(named: "plus")! {
+            self.button.setImage(UIImage(named: "cross")!, for: .normal)
+        } else {
+            self.button.setImage(UIImage(named: "plus")!, for: .normal)
+        }
+    }
+    
     
     func toggleSection(header: ExpandableHeaderView, section: Int) {
         faqs[section].expanded = !faqs[section].expanded
@@ -78,9 +101,12 @@ extension FAQController: UITableViewDelegate, UITableViewDataSource, ExpandableH
         self.faqsTableView.beginUpdates()
         for row in 0..<faqs[section].inCells.count {
             self.faqsTableView.reloadRows(at: [IndexPath(row: row, section: section)], with: .automatic)
+            
         }
         self.faqsTableView.endUpdates()
+        
     }
+    
     
 }
 

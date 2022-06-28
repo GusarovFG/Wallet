@@ -27,12 +27,6 @@ class ExpandableHeaderView: UITableViewHeaderFooterView {
         self.delegate = delegate
         self.section = section
         self.textLabel?.text = title
-        
-
-        
-
-        
-        
     }
     
     override func layoutSubviews() {
@@ -40,13 +34,16 @@ class ExpandableHeaderView: UITableViewHeaderFooterView {
         textLabel?.textColor = .white
         contentView.backgroundColor = .systemBackground
         self.button = UIButton(frame: CGRect(x: self.frame.width - 30, y: self.frame.height - 50, width:30, height:30))
-        
-//        if self.button.imageView?.image == UIImage(named: "plus")! {
+        self.button.imageView?.image == UIImage(named: "plus")! 
 //            self.button.setImage(UIImage(named: "cross")!, for: .normal)
 //        } else {
 //            self.button.setImage(UIImage(named: "plus")!, for: .normal)
 //        }
         self.addSubview(self.button)
+    }
+    
+    override func layoutIfNeeded() {
+
     }
     
     
@@ -62,10 +59,6 @@ class ExpandableHeaderView: UITableViewHeaderFooterView {
     @objc func selectHeaderAction(gesterRecognizer: UITapGestureRecognizer) {
         let cell = gesterRecognizer.view as! ExpandableHeaderView
         delegate?.toggleSection(header: self, section: cell.section!)
-        if self.button.imageView?.image == UIImage(named: "plus")! {
-            self.button.setImage(UIImage(named: "cross")!, for: .normal)
-        } else {
-            self.button.setImage(UIImage(named: "plus")!, for: .normal)
-        }
+        
     }
 }
