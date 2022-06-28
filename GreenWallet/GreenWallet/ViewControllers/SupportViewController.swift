@@ -59,6 +59,10 @@ extension SupportViewController: UITableViewDelegate, UITableViewDataSource {
             let listingVC = storyboard?.instantiateViewController(withIdentifier: "ListingViewController") as! ListingViewController
             listingVC.modalPresentationStyle = .fullScreen
             self.present(listingVC, animated: true)
+        case [0,3]:
+            let infoVC = storyboard?.instantiateViewController(withIdentifier: "InfoViewController") as! InfoViewController
+            infoVC.modalPresentationStyle = .fullScreen
+            self.present(infoVC, animated: true)
         default:
             break
         }
