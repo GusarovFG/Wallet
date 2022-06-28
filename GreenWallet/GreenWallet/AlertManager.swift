@@ -53,6 +53,7 @@ class AlertManager {
     func seccessAddContect(_ controller: UIViewController) {
         let storyboard = UIStoryboard(name: "Alert", bundle: .main)
         let alertVC = storyboard.instantiateViewController(withIdentifier: "AddContactAlert") as! AllertWalletViewController
+        alertVC.isContact = true
         controller.present(alertVC, animated: true)
     }
     
@@ -70,6 +71,7 @@ class AlertManager {
         let alertVC = storyBoard.instantiateViewController(withIdentifier: "DeleteContact") as! AllertWalletViewController
         alertVC.index = indexPath.row
         alertVC.controller = controller
+        
         
         controller.present(alertVC, animated: true)
     }
@@ -107,5 +109,14 @@ class AlertManager {
         
         controller.present(alert, animated: true)
     
+    }
+    
+    func seccessListing(controller: UIViewController) {
+        let storyboard = UIStoryboard(name: "Alert", bundle: .main)
+        let alert = storyboard.instantiateViewController(withIdentifier: "AddContactAlert") as! AllertWalletViewController
+        alert.islisting = true
+        alert.isContact = true
+        
+        controller.present(alert, animated: true)
     }
 }

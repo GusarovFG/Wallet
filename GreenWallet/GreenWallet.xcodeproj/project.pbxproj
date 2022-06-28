@@ -32,6 +32,7 @@
 		FB3754B02821511900882338 /* MnemonicCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB3754AE2821511900882338 /* MnemonicCollectionViewCell.xib */; };
 		FB3754B22821BE8F00882338 /* VerifyMnemonicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB3754B12821BE8F00882338 /* VerifyMnemonicViewController.swift */; };
 		FB383FE7281BE1C700939B6D /* CustomSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB383FE6281BE1C700939B6D /* CustomSwitch.swift */; };
+		FB3874B8286AE59700479D00 /* ListingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB3874B7286AE59700479D00 /* ListingViewController.swift */; };
 		FB3BC16E282C0BD2001B539E /* GetTokenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB3BC16D282C0BD2001B539E /* GetTokenViewController.swift */; };
 		FB42B6E72833E91C0022A8FB /* SupportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB42B6E62833E91C0022A8FB /* SupportViewController.swift */; };
 		FB58F56A2851D98C006235BD /* ChiaModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB58F5692851D98C006235BD /* ChiaModels.swift */; };
@@ -141,6 +142,7 @@
 		FB3754AE2821511900882338 /* MnemonicCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MnemonicCollectionViewCell.xib; sourceTree = "<group>"; };
 		FB3754B12821BE8F00882338 /* VerifyMnemonicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyMnemonicViewController.swift; sourceTree = "<group>"; };
 		FB383FE6281BE1C700939B6D /* CustomSwitch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSwitch.swift; sourceTree = "<group>"; };
+		FB3874B7286AE59700479D00 /* ListingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListingViewController.swift; sourceTree = "<group>"; };
 		FB3BC16D282C0BD2001B539E /* GetTokenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetTokenViewController.swift; sourceTree = "<group>"; };
 		FB42B6E62833E91C0022A8FB /* SupportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportViewController.swift; sourceTree = "<group>"; };
 		FB58F5692851D98C006235BD /* ChiaModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChiaModels.swift; sourceTree = "<group>"; };
@@ -352,6 +354,7 @@
 				FB42B6E62833E91C0022A8FB /* SupportViewController.swift */,
 				FBBB3DD2284CD32300349EF0 /* FAQController.swift */,
 				FBEA97BC2850CF1F00D2F720 /* AskAQuestionViewController.swift */,
+				FB3874B7286AE59700479D00 /* ListingViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -713,6 +716,7 @@
 				FBC4AB752836A5AA00566683 /* TransactionHistoryViewController.swift in Sources */,
 				FBFE5773281AAB040016E74A /* SettingsViewController.swift in Sources */,
 				FB8BF8DB282FFDF70067CD0B /* QRScanViewController.swift in Sources */,
+				FB3874B8286AE59700479D00 /* ListingViewController.swift in Sources */,
 				FB79E94F2847676E0093C180 /* ContactTableViewCell.swift in Sources */,
 				FB3754AF2821511900882338 /* MnemonicCollectionViewCell.swift in Sources */,
 				FB98D0CE283F850500885E73 /* LocalizationManager.swift in Sources */,

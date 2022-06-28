@@ -20,6 +20,7 @@ class AllertWalletViewController: UIViewController {
     var isAskAQuestion = false
     var isImport = false
     var isAllWallets = false
+    var islisting = false
     
     @IBOutlet weak var mainLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
@@ -78,7 +79,10 @@ class AllertWalletViewController: UIViewController {
             }
         } else if self.restorationIdentifier == "AddContactAlert" {
             self.wasDeletedTitle.text = LocalizationManager.share.translate?.result.list.address_book.address_book_pop_up_added_title
-            if !self.isContact {
+            if self.islisting {
+                self.wasDeletedTitle.text = LocalizationManager.share.translate?.result.list.listing_request.listing_request_title
+                self.wasDeletedDescription.text = LocalizationManager.share.translate?.result.list.listing_request.pop_up_listing_request_description
+            } else if !self.isContact {
                 self.wasDeletedDescription.text = LocalizationManager.share.translate?.result.list.address_book.address_book_pop_up_added_description
             } else if self.isContact {
                 self.wasDeletedTitle.text = LocalizationManager.share.translate?.result.list.address_book.adress_book_pop_up_removed_title
@@ -86,7 +90,7 @@ class AllertWalletViewController: UIViewController {
             } else if isEditingContact {
                 self.wasDeletedTitle.text = LocalizationManager.share.translate?.result.list.address_book.adress_book_edit_contact_pop_up_changed_title
                 self.wasDeletedDescription.text = LocalizationManager.share.translate?.result.list.address_book.adress_book_edit_contact_pop_up_changed_description
-            }
+            } 
             self.mainButton.setTitle(LocalizationManager.share.translate?.result.list.all.ready_btn, for: .normal)
         } else if self.restorationIdentifier == "DeleteContact" {
             if !self.isNewWalletError && !self.isSendError {
@@ -162,7 +166,11 @@ class AllertWalletViewController: UIViewController {
     }
     @IBAction func dismissButtonPressed(_ sender: Any) {
         self.dismiss(animated: true)
-        NotificationCenter.default.post(name: NSNotification.Name("dismissAddContactVC"), object: nil)
+        if self.isContact {
+            NotificationCenter.default.post(name: NSNotification.Name("dismissAddContactVC"), object: nil)
+        } else if self.islisting {
+            NotificationCenter.default.post(name: NSNotification.Name("dismissVC"), object: nil)
+        }
     }
     
     
