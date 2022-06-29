@@ -50,6 +50,10 @@ class ImportMnemonicViewController: UIViewController {
                 UIApplication.shared.open(url!, options: [:])
             }
         }
+        
+        if UIDevice.modelName.contains("iPhone 8") || UIDevice.modelName.contains("iPhone 12") || UIDevice.modelName.contains("iPhone 13") {
+            self.scrollView.isScrollEnabled = true
+        }
     }
     
     
@@ -87,7 +91,12 @@ class ImportMnemonicViewController: UIViewController {
     @objc private func keyboardWillHide() {
         self.scrollView.contentOffset = CGPoint.zero
         if self.countOfItems == 12 {
-            self.scrollView.isScrollEnabled = false
+            if UIDevice.modelName.contains("iPhone 8") || UIDevice.modelName.contains("iPhone 12") || UIDevice.modelName.contains("iPhone 13") {
+                self.scrollView.isScrollEnabled = true
+            } else {
+                self.scrollView.isScrollEnabled = false
+
+            }
         }
     }
     
@@ -399,7 +408,7 @@ extension ImportMnemonicViewController: UICollectionViewDelegate, UICollectionVi
     
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        CGSize(width: 178, height: 50)
+        CGSize(width: 160, height: 50)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {

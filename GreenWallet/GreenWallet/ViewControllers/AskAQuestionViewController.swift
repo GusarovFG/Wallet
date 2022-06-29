@@ -27,13 +27,13 @@ class AskAQuestionViewController: UIViewController {
     @IBOutlet weak var viewConstraint: NSLayoutConstraint!
     @IBOutlet weak var errorLabel: UILabel!
     @IBOutlet weak var textViewHeighConstrain: NSLayoutConstraint!
+    @IBOutlet weak var bottomCorner: UIView!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         localization()
-        self.nameTextField.buttonStroke(#colorLiteral(red: 0.3578948975, green: 0.3578948975, blue: 0.3578948975, alpha: 1))
-        self.emailTextField.buttonStroke(#colorLiteral(red: 0.3578948975, green: 0.3578948975, blue: 0.3578948975, alpha: 1))
+
         self.sendButton.backgroundColor = #colorLiteral(red: 0.3364975452, green: 0.3364975452, blue: 0.3364975452, alpha: 1)
         self.sendButton.isEnabled = false
         self.nameLabel.alpha = 0
@@ -79,7 +79,7 @@ class AskAQuestionViewController: UIViewController {
             self.errorLabel.alpha = 1
             self.emailLabel.textColor = #colorLiteral(red: 1, green: 0.2360929251, blue: 0.1714096665, alpha: 1)
             self.emailTextField.textColor = #colorLiteral(red: 1, green: 0.2360929251, blue: 0.1714096665, alpha: 1)
-            self.emailTextField.buttonStroke(#colorLiteral(red: 1, green: 0.2360929251, blue: 0.1714096665, alpha: 1))
+            self.bottomCorner.backgroundColor = #colorLiteral(red: 1, green: 0.2360929251, blue: 0.1714096665, alpha: 1)
         } else {
             AlertManager.share.seccessAskAQuestion(self)
         }

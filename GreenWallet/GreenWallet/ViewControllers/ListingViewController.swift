@@ -36,6 +36,8 @@ class ListingViewController: UIViewController {
     @IBOutlet weak var emailErrorLabel: UILabel!
     @IBOutlet weak var mainViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var emailTextfieldBottonConstraint: NSLayoutConstraint!
+    @IBOutlet weak var bottomStroke: UIView!
+    @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,13 +58,10 @@ class ListingViewController: UIViewController {
         self.descriptionOfProjectTextView.textColor = .systemGray
         self.emailErrorLabel.isHidden = true
         
-        self.nameTextField.bottomCorner()
-        self.emailTextField.bottomCorner()
-        self.projectTextField.bottomCorner()
-        self.blockChainTextField.bottomCorner()
-        self.twitterTextField.bottomCorner()
-        self.chiaButton.buttonStroke(#colorLiteral(red: 0.3578948975, green: 0.3578948975, blue: 0.3578948975, alpha: 1))
-        self.blockChainMenuButton.buttonStroke(#colorLiteral(red: 0.3578948975, green: 0.3578948975, blue: 0.3578948975, alpha: 1))
+        if UIDevice.modelName.contains("iPhone 8") || UIDevice.modelName.contains("iPhone 12") || UIDevice.modelName.contains("iPhone 13") {
+            self.bottomConstraint.constant = 20
+        }
+       
         
         localization()
         
@@ -71,7 +70,7 @@ class ListingViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.descriptionOfProjectTextView.buttonStroke(#colorLiteral(red: 0.3578948975, green: 0.3578948975, blue: 0.3578948975, alpha: 1))
+//        self.descriptionOfProjectTextView.buttonStroke(#colorLiteral(red: 0.3578948975, green: 0.3578948975, blue: 0.3578948975, alpha: 1))
 
     }
     
@@ -128,7 +127,7 @@ class ListingViewController: UIViewController {
             } else {
                 sender.textColor = .white
             }
-            sender.buttonStroke(#colorLiteral(red: 0.3578948975, green: 0.3578948975, blue: 0.3578948975, alpha: 1))
+            self.bottomStroke.backgroundColor = #colorLiteral(red: 0.3578948975, green: 0.3578948975, blue: 0.3578948975, alpha: 1)
             if !self.emailErrorLabel.isHidden {
                 self.mainViewHeightConstraint.constant -= 20
                 self.emailTextfieldBottonConstraint.constant -= 20
@@ -191,7 +190,7 @@ class ListingViewController: UIViewController {
         if !self.isValidEmail(testStr: self.emailTextField.text ?? "") {
             self.emailTextField.textColor = #colorLiteral(red: 1, green: 0.1333333333, blue: 0.1333333333, alpha: 1)
             self.emailErrorLabel.isHidden = false
-            self.emailTextField.buttonStroke(#colorLiteral(red: 1, green: 0.1333333333, blue: 0.1333333333, alpha: 1))
+            self.bottomStroke.backgroundColor = #colorLiteral(red: 1, green: 0.1333333333, blue: 0.1333333333, alpha: 1)
             self.emailLabel.textColor = #colorLiteral(red: 1, green: 0.1333333333, blue: 0.1333333333, alpha: 1)
             self.mainViewHeightConstraint.constant += 20
             self.emailTextfieldBottonConstraint.constant += 20

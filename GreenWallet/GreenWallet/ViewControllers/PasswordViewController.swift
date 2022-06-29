@@ -49,6 +49,10 @@ class PasswordViewController: UIViewController {
     @IBOutlet weak var enterTitleLabel: UILabel!
     @IBOutlet weak var enterErrorLabel: UILabel!
     @IBOutlet weak var resetButton: UIButton!
+    @IBOutlet weak var firstDigitsStackView: UIStackView!
+    @IBOutlet weak var secondDigitsStackView: UIStackView!
+    @IBOutlet weak var thirdDigitsStackView: UIStackView!
+    @IBOutlet weak var mainStackView: UIStackView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,7 +71,13 @@ class PasswordViewController: UIViewController {
                 view.layer.borderColor = #colorLiteral(red: 0.7882352941, green: 0.7882352941, blue: 0.7882352941, alpha: 1)
             }
         }
-    
+        
+        if UIDevice.modelName.contains("iPhone 8") || UIDevice.modelName.contains("iPhone 12") || UIDevice.modelName.contains("iPhone 13") {
+            self.firstDigitsStackView.spacing = 15
+            self.secondDigitsStackView.spacing = 15
+            self.thirdDigitsStackView.spacing = 15
+            self.stackView.spacing = 20
+        }
     }
     
     private func localization() {
@@ -91,11 +101,9 @@ class PasswordViewController: UIViewController {
             self.errorLabel.text = LocalizationManager.share.translate?.result.list.passcode_entry_screen.passcode_entry_screen_error
             self.mainButton.setTitle(LocalizationManager.share.translate?.result.list.all.return_btn, for: .normal)
         }
-        
-       
-
     }
     
+
     @objc func deleteInMyWallet() {
         self.isMyWallet = true
     }

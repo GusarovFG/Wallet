@@ -63,6 +63,7 @@ public class CustomSwitch: UIControl {
     @IBInspectable public var thumbTintColor: UIColor = UIColor.white {
         didSet {
             self.thumbView.backgroundColor = self.thumbTintColor
+            
         }
     }
     
@@ -183,7 +184,11 @@ extension CustomSwitch {
         self.clipsToBounds = false
         
         // configure thumb view
-        self.thumbView.backgroundColor = self.thumbTintColor
+        if UserDefaultsManager.shared.userDefaults.string(forKey: "Theme") == "light" {
+            self.thumbView.backgroundColor = #colorLiteral(red: 0.2274509804, green: 0.6745098039, blue: 0.3490196078, alpha: 1)
+        } else {
+            self.thumbView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        }
         self.thumbView.isUserInteractionEnabled = false
         
         // dodati kasnije
@@ -245,6 +250,19 @@ extension CustomSwitch {
     private func setupViewsOnAction() {
         self.thumbView.frame.origin.x = self.isOn ? (self.onPoint.x) : (self.offPoint.x)
         self.backgroundColor = self.isOn ? self.onTintColor : self.offTintColor
+        if self.isOn {
+            if UserDefaultsManager.shared.userDefaults.string(forKey: "Theme") == "light" {
+                self.thumbView.backgroundColor = #colorLiteral(red: 0.2274509804, green: 0.6745098039, blue: 0.3490196078, alpha: 1)
+            } else {
+                self.thumbView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+            }
+        } else {
+            if UserDefaultsManager.shared.userDefaults.string(forKey: "Theme") == "light" {
+                self.thumbView.backgroundColor = #colorLiteral(red: 0.9490196078, green: 0.9490196078, blue: 0.9490196078, alpha: 1)
+            } else {
+                self.thumbView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+            }
+        }
         self.setOnOffImageFrame()
     }
 

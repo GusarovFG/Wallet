@@ -52,6 +52,9 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         
         switch indexPath {
         case [0,0]:
+            themeCell.reload = {
+                self.tableView.reloadData()
+            }
             return themeCell
         case [0,1]:
             secureAndPushCell.eyeImageView?.image = UIImage(named: "Eye")!

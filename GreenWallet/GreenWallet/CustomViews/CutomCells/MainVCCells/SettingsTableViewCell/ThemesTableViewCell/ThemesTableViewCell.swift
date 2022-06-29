@@ -8,6 +8,8 @@
 import UIKit
 
 class ThemesTableViewCell: UITableViewCell {
+    
+    var reload: (() -> ())?
 
     @IBOutlet weak var lightThemeButton: UIButton!
     @IBOutlet weak var darkThemeButton: UIButton!
@@ -35,6 +37,7 @@ class ThemesTableViewCell: UITableViewCell {
             window.overrideUserInterfaceStyle = .dark
         }
         UserDefaultsManager.shared.userDefaults.set("dark", forKey: UserDefaultsStringKeys.theme.rawValue)
+        self.reload?()
     }
     
     @IBAction func lightThemeButtonPressed(_ sender: Any) {
@@ -42,6 +45,7 @@ class ThemesTableViewCell: UITableViewCell {
             window.overrideUserInterfaceStyle = .light
         }
         UserDefaultsManager.shared.userDefaults.set("light", forKey: UserDefaultsStringKeys.theme.rawValue)
+        self.reload?()
     }
     
 }

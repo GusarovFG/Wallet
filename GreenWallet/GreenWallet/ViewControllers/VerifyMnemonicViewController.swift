@@ -225,6 +225,13 @@ extension VerifyMnemonicViewController: UICollectionViewDelegate, UICollectionVi
             } else {
                 cell.mnemonicWord.textColor = .white
             }
+            
+            if UserDefaultsManager.shared.userDefaults.string(forKey: "Theme") == "light" {
+                cell.mnemonicWord.textColor = .black
+            } else {
+                cell.mnemonicWord.textColor = .white
+            }
+            
             if indexPath > [0,5] && cell.mnemonicWord.text != "\(self.indexes[indexPath.row]). " {
                 
                 cell.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
@@ -236,11 +243,17 @@ extension VerifyMnemonicViewController: UICollectionViewDelegate, UICollectionVi
                 cell.backgroundColor = .systemBackground
             }
             
+            
+            
             return cell
         case self.selectCollectionView:
             cell.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
             cell.mnemonicWord.text = "\(self.selectPhrase[indexPath.row])"
-            cell.mnemonicWord.tintColor = .white
+            if UserDefaultsManager.shared.userDefaults.string(forKey: "Theme") == "light" {
+                cell.mnemonicWord.textColor = .black
+            } else {
+                cell.mnemonicWord.textColor = .white
+            }
             
             return cell
         default:
@@ -302,16 +315,24 @@ extension VerifyMnemonicViewController: UICollectionViewDelegate, UICollectionVi
         
     }
     
-    //    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-    //        switch collectionView {
-    //        case self.veryfyCollectionView:
-    //            return CGSize(width: 178, height: 50)
-    //        case self.selectCollectionView:
-    //            return CGSize(width: 178, height: 50)
-    //        default:
-    //            return CGSize(width: 178, height: 50)
-    //        }
-    //    }
+        func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+            switch collectionView {
+            case self.veryfyCollectionView:
+                if UIDevice.modelName.contains("iPhone 8") || UIDevice.modelName.contains("iPhone 12") || UIDevice.modelName.contains("iPhone 13") {
+                    return CGSize(width: 100, height: 40)
+                } else {
+                    return CGSize(width: 178, height: 50)
+                }
+            case self.selectCollectionView:
+                if UIDevice.modelName.contains("iPhone 8") || UIDevice.modelName.contains("iPhone 12") || UIDevice.modelName.contains("iPhone 13") {
+                    return CGSize(width: 100, height: 40)
+                } else {
+                    return CGSize(width: 178, height: 50)
+                }
+            default:
+                return CGSize(width: 178, height: 50)
+            }
+        }
     
     //    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
     //        10

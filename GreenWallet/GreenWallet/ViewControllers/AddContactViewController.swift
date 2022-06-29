@@ -27,6 +27,7 @@ class AddContactViewController: UIViewController {
     @IBOutlet weak var textViewheight: NSLayoutConstraint!
     @IBOutlet weak var mainTitle: UILabel!
     @IBOutlet weak var backutton: UIButton!
+    @IBOutlet weak var bottomCorner: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,8 +37,6 @@ class AddContactViewController: UIViewController {
         self.errorLabel.alpha = 0
         self.addContactButton.isEnabled = false
         self.addContactButton.backgroundColor = #colorLiteral(red: 0.2666666667, green: 0.2666666667, blue: 0.2666666667, alpha: 1)
-        self.contactNameTextField.buttonStroke(#colorLiteral(red: 0.3578948975, green: 0.3578948975, blue: 0.3578948975, alpha: 1))
-        self.contactAdresTextField.buttonStroke(#colorLiteral(red: 0.3578948975, green: 0.3578948975, blue: 0.3578948975, alpha: 1))
         
         if self.isEditingContact {
             self.contactAdresTextField.isEnabled = false
@@ -110,7 +109,7 @@ class AddContactViewController: UIViewController {
             } else {
                 self.contactAdresTextField.textColor = .white
             }
-            self.contactAdresTextField.buttonStroke(#colorLiteral(red: 0.3578948975, green: 0.3578948975, blue: 0.3578948975, alpha: 1))
+            self.bottomCorner.backgroundColor = #colorLiteral(red: 0.3578948975, green: 0.3578948975, blue: 0.3578948975, alpha: 1)
             self.viewHeightConstraint.constant -= 20
         }
     }
@@ -125,7 +124,7 @@ class AddContactViewController: UIViewController {
             if self.contactAdresTextField.text != self.adres {
                 self.errorLabel.alpha = 1
                 self.contactAdresTextField.textColor = #colorLiteral(red: 1, green: 0.2360929251, blue: 0.1714096665, alpha: 1)
-                self.contactAdresTextField.buttonStroke(#colorLiteral(red: 1, green: 0.2360929251, blue: 0.1714096665, alpha: 1))
+                self.bottomCorner.backgroundColor = #colorLiteral(red: 1, green: 0.2360929251, blue: 0.1714096665, alpha: 1)
                 self.viewHeightConstraint.constant += 20
             } else {
                 CoreDataManager.share.saveContact(self.contactNameTextField.text ?? "", adres: self.contactAdresTextField.text ?? "", description: self.descriptionTextField.text ?? "")
