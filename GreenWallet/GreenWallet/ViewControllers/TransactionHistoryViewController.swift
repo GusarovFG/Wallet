@@ -112,10 +112,10 @@ class TransactionHistoryViewController: UIViewController {
         super.viewWillAppear(animated)
         let storyoard = UIStoryboard(name: "spinner", bundle: .main)
         let spinnerVC = storyoard.instantiateViewController(withIdentifier: "spinner") as! SprinnerViewController
-        self.present(spinnerVC, animated: true)
         let queue = DispatchQueue.global(qos: .userInteractive)
         
-        if self.walletsTransactions.isEmpty && !self.isHistoryWallet {
+        if self.filterWalletsTransactions.isEmpty && !self.isHistoryWallet {
+            self.present(spinnerVC, animated: true)
             queue.sync {
                 for i in CoreDataManager.share.fetchChiaWalletPrivateKey() {
                     
@@ -145,8 +145,8 @@ class TransactionHistoryViewController: UIViewController {
                     }
                 }
             }
-        } else if self.isHistoryWallet {
-            
+        } else if self.filterWalletsTransactions.isEmpty && self.isHistoryWallet {
+            self.present(spinnerVC, animated: true)
             queue.sync {
                 
                 ChiaBlockchainManager.share.logIn(Int(self.wallet!.fingerprint)) { log in
@@ -223,7 +223,11 @@ class TransactionHistoryViewController: UIViewController {
             self.filterDateView.isHidden = false
             self.filterDateView.alpha = 1
         } else {
-            self.filterTimeButton.backgroundColor = #colorLiteral(red: 0.1882352941, green: 0.1882352941, blue: 0.1882352941, alpha: 1)
+            if UserDefaultsManager.shared.userDefaults.string(forKey: "Theme") == "light" {
+                self.filterTimeButton.backgroundColor = #colorLiteral(red: 0.9058823529, green: 0.9058823529, blue: 0.9058823529, alpha: 1)
+            } else {
+                self.filterTimeButton.backgroundColor = #colorLiteral(red: 0.1882352941, green: 0.1882352941, blue: 0.1882352941, alpha: 1)
+            }
             self.filterTimeButton.setImage(UIImage(named: "filter")!, for: .normal)
             self.filterDateView.alpha = 0
             self.filterDateView.isHidden = true
@@ -394,9 +398,14 @@ extension TransactionHistoryViewController: UICollectionViewDelegate, UICollecti
             } else {
                 
                 cell.cellLabel.text = LocalizationManager.share.translate?.result.list.transactions.transactions_all
-                cell.backgroundColor = #colorLiteral(red: 0.1882352941, green: 0.1882352941, blue: 0.1882352941, alpha: 1)
+                if UserDefaultsManager.shared.userDefaults.string(forKey: "Theme") == "light" {
+                    cell.backgroundColor = #colorLiteral(red: 0.8705882353, green: 0.8705882353, blue: 0.8705882353, alpha: 1)
+                } else {
+                    cell.backgroundColor = #colorLiteral(red: 0.1882352941, green: 0.1882352941, blue: 0.1882352941, alpha: 1)
+                }
                 cell.cellLabel.textColor = #colorLiteral(red: 0.5803921569, green: 0.5803921569, blue: 0.5803921569, alpha: 1)
             }
+            
             return cell
         case [0,1]:
             if self.isInFilter {
@@ -406,7 +415,11 @@ extension TransactionHistoryViewController: UICollectionViewDelegate, UICollecti
             } else {
                 
                 cell.cellLabel.text = LocalizationManager.share.translate?.result.list.transactions.transactions_incoming
-                cell.backgroundColor = #colorLiteral(red: 0.1882352941, green: 0.1882352941, blue: 0.1882352941, alpha: 1)
+                if UserDefaultsManager.shared.userDefaults.string(forKey: "Theme") == "light" {
+                    cell.backgroundColor = #colorLiteral(red: 0.8705882353, green: 0.8705882353, blue: 0.8705882353, alpha: 1)
+                } else {
+                    cell.backgroundColor = #colorLiteral(red: 0.1882352941, green: 0.1882352941, blue: 0.1882352941, alpha: 1)
+                }
                 cell.cellLabel.textColor = #colorLiteral(red: 0.5803921569, green: 0.5803921569, blue: 0.5803921569, alpha: 1)
             }
             return cell
@@ -418,7 +431,11 @@ extension TransactionHistoryViewController: UICollectionViewDelegate, UICollecti
             } else {
                 
                 cell.cellLabel.text = LocalizationManager.share.translate?.result.list.transactions.incoming_outgoing
-                cell.backgroundColor = #colorLiteral(red: 0.1882352941, green: 0.1882352941, blue: 0.1882352941, alpha: 1)
+                if UserDefaultsManager.shared.userDefaults.string(forKey: "Theme") == "light" {
+                    cell.backgroundColor = #colorLiteral(red: 0.8705882353, green: 0.8705882353, blue: 0.8705882353, alpha: 1)
+                } else {
+                    cell.backgroundColor = #colorLiteral(red: 0.1882352941, green: 0.1882352941, blue: 0.1882352941, alpha: 1)
+                }
                 cell.cellLabel.textColor = #colorLiteral(red: 0.5803921569, green: 0.5803921569, blue: 0.5803921569, alpha: 1)
             }
             return cell
@@ -429,7 +446,11 @@ extension TransactionHistoryViewController: UICollectionViewDelegate, UICollecti
                 cell.cellLabel.textColor = .white
             } else {
                 cell.cellLabel.text = LocalizationManager.share.translate?.result.list.transactions.transactions_pendind
-                cell.backgroundColor = #colorLiteral(red: 0.1882352941, green: 0.1882352941, blue: 0.1882352941, alpha: 1)
+                if UserDefaultsManager.shared.userDefaults.string(forKey: "Theme") == "light" {
+                    cell.backgroundColor = #colorLiteral(red: 0.8705882353, green: 0.8705882353, blue: 0.8705882353, alpha: 1)
+                } else {
+                    cell.backgroundColor = #colorLiteral(red: 0.1882352941, green: 0.1882352941, blue: 0.1882352941, alpha: 1)
+                }
                 cell.cellLabel.textColor = #colorLiteral(red: 0.5803921569, green: 0.5803921569, blue: 0.5803921569, alpha: 1)
                 
             }
@@ -447,8 +468,11 @@ extension TransactionHistoryViewController: UICollectionViewDelegate, UICollecti
             self.filterCollectionView.visibleCells.forEach { cell in
                 if cell is TransictionFilterCollectionViewCell {
                     (cell.viewWithTag(1) as! UILabel).textColor = #colorLiteral(red: 0.5803921569, green: 0.5803921569, blue: 0.5803921569, alpha: 1)
-                    cell.backgroundColor = #colorLiteral(red: 0.1882352941, green: 0.1882352941, blue: 0.1882352941, alpha: 1)
-                }
+                    if UserDefaultsManager.shared.userDefaults.string(forKey: "Theme") == "light" {
+                        cell.backgroundColor = #colorLiteral(red: 0.8705882353, green: 0.8705882353, blue: 0.8705882353, alpha: 1)
+                    } else {
+                        cell.backgroundColor = #colorLiteral(red: 0.1882352941, green: 0.1882352941, blue: 0.1882352941, alpha: 1)
+                    }                }
             }
             cell.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
             cell.cellLabel.textColor = .white
@@ -462,8 +486,11 @@ extension TransactionHistoryViewController: UICollectionViewDelegate, UICollecti
             self.filterCollectionView.visibleCells.forEach { cell in
                 if cell is TransictionFilterCollectionViewCell {
                     (cell.viewWithTag(1) as! UILabel).textColor = #colorLiteral(red: 0.5803921569, green: 0.5803921569, blue: 0.5803921569, alpha: 1)
-                    cell.backgroundColor = #colorLiteral(red: 0.1882352941, green: 0.1882352941, blue: 0.1882352941, alpha: 1)
-                }
+                    if UserDefaultsManager.shared.userDefaults.string(forKey: "Theme") == "light" {
+                        cell.backgroundColor = #colorLiteral(red: 0.8705882353, green: 0.8705882353, blue: 0.8705882353, alpha: 1)
+                    } else {
+                        cell.backgroundColor = #colorLiteral(red: 0.1882352941, green: 0.1882352941, blue: 0.1882352941, alpha: 1)
+                    }                }
             }
             cell.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
             cell.cellLabel.textColor = .white
@@ -477,8 +504,11 @@ extension TransactionHistoryViewController: UICollectionViewDelegate, UICollecti
             self.filterCollectionView.visibleCells.forEach { cell in
                 if cell is TransictionFilterCollectionViewCell {
                     (cell.viewWithTag(1) as! UILabel).textColor = #colorLiteral(red: 0.5803921569, green: 0.5803921569, blue: 0.5803921569, alpha: 1)
-                    cell.backgroundColor = #colorLiteral(red: 0.1882352941, green: 0.1882352941, blue: 0.1882352941, alpha: 1)
-                }
+                    if UserDefaultsManager.shared.userDefaults.string(forKey: "Theme") == "light" {
+                        cell.backgroundColor = #colorLiteral(red: 0.8705882353, green: 0.8705882353, blue: 0.8705882353, alpha: 1)
+                    } else {
+                        cell.backgroundColor = #colorLiteral(red: 0.1882352941, green: 0.1882352941, blue: 0.1882352941, alpha: 1)
+                    }                }
             }
             cell.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
             cell.cellLabel.textColor = .white
@@ -492,8 +522,11 @@ extension TransactionHistoryViewController: UICollectionViewDelegate, UICollecti
             self.filterCollectionView.visibleCells.forEach { cell in
                 if cell is TransictionFilterCollectionViewCell {
                     (cell.viewWithTag(1) as! UILabel).textColor = #colorLiteral(red: 0.5803921569, green: 0.5803921569, blue: 0.5803921569, alpha: 1)
-                    cell.backgroundColor = #colorLiteral(red: 0.1882352941, green: 0.1882352941, blue: 0.1882352941, alpha: 1)
-                }
+                    if UserDefaultsManager.shared.userDefaults.string(forKey: "Theme") == "light" {
+                        cell.backgroundColor = #colorLiteral(red: 0.8705882353, green: 0.8705882353, blue: 0.8705882353, alpha: 1)
+                    } else {
+                        cell.backgroundColor = #colorLiteral(red: 0.1882352941, green: 0.1882352941, blue: 0.1882352941, alpha: 1)
+                    }                }
             }
             cell.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
             cell.cellLabel.textColor = .white

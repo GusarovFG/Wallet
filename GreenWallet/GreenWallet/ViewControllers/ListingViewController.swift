@@ -123,7 +123,11 @@ class ListingViewController: UIViewController {
         } else {
             self.emailLabel.alpha = 1
             self.emailLabel.textColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
-            sender.textColor = .white
+            if UserDefaultsManager.shared.userDefaults.string(forKey: "Theme") == "light" {
+                sender.textColor = .black
+            } else {
+                sender.textColor = .white
+            }
             sender.buttonStroke(#colorLiteral(red: 0.3578948975, green: 0.3578948975, blue: 0.3578948975, alpha: 1))
             if !self.emailErrorLabel.isHidden {
                 self.mainViewHeightConstraint.constant -= 20
@@ -217,7 +221,12 @@ class ListingViewController: UIViewController {
         self.blockChainMenuView.isHidden = true
         self.blockChainMenuButton.setImage(UIImage(systemName: "chevron.down")!, for: .normal)
         self.blockChianLabel.alpha = 1
-        self.chivesButton.backgroundColor = self.blockChainMenuView.backgroundColor
+        
+        if UserDefaultsManager.shared.userDefaults.string(forKey: "Theme") == "light" {
+            chivesButton.backgroundColor = .white
+        } else {
+            chivesButton.backgroundColor = .black
+        }
     }
     
     @IBAction func selectChives(_ sender: UIButton) {
@@ -226,10 +235,14 @@ class ListingViewController: UIViewController {
         self.blockChainMenuView.isHidden = true
         self.blockChainMenuButton.setImage(UIImage(systemName: "chevron.down")!, for: .normal)
         self.blockChianLabel.alpha = 1
-        self.chiaButton.backgroundColor = self.blockChainMenuView.backgroundColor
+        if UserDefaultsManager.shared.userDefaults.string(forKey: "Theme") == "light" {
+            chiaButton.backgroundColor = .white
+        } else {
+            chiaButton.backgroundColor = .black
+        }
     }
 }
-
+     
 extension ListingViewController: UITextViewDelegate, UITextFieldDelegate {
     
     func sizeOfString (string: String, constrainedToWidth width: Double, font: UIFont) -> CGSize {
@@ -258,7 +271,11 @@ extension ListingViewController: UITextViewDelegate, UITextFieldDelegate {
         self.descriptionOfProjectLabel.alpha = 1
         if textView.textColor == .systemGray {
             textView.text = nil
-            textView.textColor = .white
+            if UserDefaultsManager.shared.userDefaults.string(forKey: "Theme") == "light" {
+                textView.textColor = .black
+            } else {
+                textView.textColor = .white
+            }
         }
     }
     

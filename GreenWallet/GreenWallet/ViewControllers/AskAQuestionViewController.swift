@@ -31,7 +31,6 @@ class AskAQuestionViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.questionTextView.backgroundColor = #colorLiteral(red: 0.246493727, green: 0.246493727, blue: 0.246493727, alpha: 1)
         localization()
         self.nameTextField.buttonStroke(#colorLiteral(red: 0.3578948975, green: 0.3578948975, blue: 0.3578948975, alpha: 1))
         self.emailTextField.buttonStroke(#colorLiteral(red: 0.3578948975, green: 0.3578948975, blue: 0.3578948975, alpha: 1))
@@ -171,7 +170,11 @@ extension AskAQuestionViewController: UITextViewDelegate, UITextFieldDelegate {
         self.questionLabel.alpha = 1
         if textView.textColor == .gray {
             textView.text = nil
-            textView.textColor = .white
+            if UserDefaultsManager.shared.userDefaults.string(forKey: "Theme") == "light" {
+                textView.textColor = .black
+            } else {
+                textView.textColor = .white
+            }
         }
     }
     

@@ -48,7 +48,10 @@ class ContactsViewController: UIViewController {
         self.contactsTableView.reloadData()
     }
     
-    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+    }
 
     @objc private func localization() {
         self.backButton.setTitle(LocalizationManager.share.translate?.result.list.all.back_btn, for: .normal)
@@ -59,6 +62,9 @@ class ContactsViewController: UIViewController {
     
     @objc private func showSpinner() {
         AlertManager.share.showSpinner(self, true)
+        self.contacts = CoreDataManager.share.fetchContacts()
+        self.filterContacts = self.contacts
+        self.contactsTableView.reloadData()
     }
     
     @objc func showPopUp() {

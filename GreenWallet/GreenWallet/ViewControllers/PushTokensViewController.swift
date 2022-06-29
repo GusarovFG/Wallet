@@ -358,12 +358,17 @@ class PushTokensViewController: UIViewController {
         
         if sender.text != "" {
             self.walletErrorLabel.alpha = 1
-            sender.textColor = .white
             self.walletErrorLabel.textColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
             self.walletLinkError.alpha = 0
+            
         } else {
             self.walletErrorLabel.alpha = 0
-            sender.textColor = .white
+            if UserDefaultsManager.shared.userDefaults.string(forKey: "Theme") == "light" {
+                sender.textColor = .black
+            } else {
+                sender.textColor = .white
+            }
+            
         }
         
         
@@ -432,7 +437,11 @@ class PushTokensViewController: UIViewController {
             self.continueButton.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
             self.transferErrorLabel.alpha = 1
             self.transferErrorLabel.textColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
-            sender.textColor = .white
+            if UserDefaultsManager.shared.userDefaults.string(forKey: "Theme") == "light" {
+                sender.textColor = .black
+            } else {
+                sender.textColor = .white
+            }
             self.secondTransferErrorLabel.alpha = 0
         } else {
             self.continueButton.isEnabled = false

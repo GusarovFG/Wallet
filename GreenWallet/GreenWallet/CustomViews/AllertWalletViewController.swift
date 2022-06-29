@@ -166,7 +166,7 @@ class AllertWalletViewController: UIViewController {
     }
     @IBAction func dismissButtonPressed(_ sender: Any) {
         self.dismiss(animated: true)
-        if self.isContact {
+        if !self.isContact {
             NotificationCenter.default.post(name: NSNotification.Name("dismissAddContactVC"), object: nil)
         } else if self.islisting {
             NotificationCenter.default.post(name: NSNotification.Name("dismissVC"), object: nil)

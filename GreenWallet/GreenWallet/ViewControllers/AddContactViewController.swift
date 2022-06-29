@@ -105,7 +105,11 @@ class AddContactViewController: UIViewController {
     @IBAction func hidingErrorLabel(_ sender: Any) {
         if self.errorLabel.alpha == 1 {
             self.errorLabel.alpha = 0
-            self.contactAdresTextField.textColor = .white
+            if UserDefaultsManager.shared.userDefaults.string(forKey: "Theme") == "light" {
+                self.contactAdresTextField.textColor = .black
+            } else {
+                self.contactAdresTextField.textColor = .white
+            }
             self.contactAdresTextField.buttonStroke(#colorLiteral(red: 0.3578948975, green: 0.3578948975, blue: 0.3578948975, alpha: 1))
             self.viewHeightConstraint.constant -= 20
         }

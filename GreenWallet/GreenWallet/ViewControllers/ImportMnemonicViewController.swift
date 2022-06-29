@@ -312,7 +312,13 @@ extension ImportMnemonicViewController: UICollectionViewDelegate, UICollectionVi
         cell.cellTextLabel.tag = indexPath.row
         cell.cellTextLabel.delegate = self
         cell.controller = self
-        cell.cellTextLabel.textColor = .white
+        
+        
+        if UserDefaultsManager.shared.userDefaults.string(forKey: "Theme") == "light" {
+            cell.cellTextLabel.textColor = .black
+        } else {
+            cell.cellTextLabel.textColor = .white
+        }
         
         let mnemonicWord = self.mnemonicPhrase[indexPath.row]
         if mnemonicWord == "" {

@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -37,6 +38,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
+                <color key="backgroundColor" name="ViewColor"/>
                 <constraints>
                     <constraint firstItem="6JA-iv-nYh" firstAttribute="top" secondItem="ZI7-cT-S7b" secondAttribute="bottom" constant="-1" id="2AN-CX-9K2"/>
                     <constraint firstItem="6JA-iv-nYh" firstAttribute="leading" secondItem="HH7-fA-XDk" secondAttribute="trailing" constant="15" id="48a-Qk-1gx"/>
@@ -49,6 +51,7 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="BfL-i8-P35"/>
+            <color key="backgroundColor" name="ViewColor"/>
             <color key="tintColor" red="0.2274509804" green="0.67450980390000004" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
             <connections>
                 <outlet property="cellImage" destination="HH7-fA-XDk" id="nsN-ct-Nk0"/>
@@ -58,4 +61,9 @@
             <point key="canvasLocation" x="171.73913043478262" y="104.46428571428571"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <namedColor name="ViewColor">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
 </document>

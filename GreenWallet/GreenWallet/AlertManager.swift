@@ -53,7 +53,7 @@ class AlertManager {
     func seccessAddContect(_ controller: UIViewController) {
         let storyboard = UIStoryboard(name: "Alert", bundle: .main)
         let alertVC = storyboard.instantiateViewController(withIdentifier: "AddContactAlert") as! AllertWalletViewController
-        alertVC.isContact = true
+        alertVC.isContact = false
         controller.present(alertVC, animated: true)
     }
     

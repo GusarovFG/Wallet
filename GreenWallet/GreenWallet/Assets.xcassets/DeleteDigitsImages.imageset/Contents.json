@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "qrLight.png",
+      "filename" : "deleteButtonLight.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
@@ -12,7 +12,7 @@
           "value" : "dark"
         }
       ],
-      "filename" : "ButtonQR.png",
+      "filename" : "deleteDigit.png",
       "idiom" : "universal",
       "scale" : "1x"
     },

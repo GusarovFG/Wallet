@@ -20,7 +20,6 @@ class FAQController: UIViewController {
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var mainTitle: UILabel!
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -41,7 +40,6 @@ class FAQController: UIViewController {
             self.faqsTableView.headerView(forSection: i)?.addSubview(self.button)
         }
     }
-    
 }
 
 extension FAQController: UITableViewDelegate, UITableViewDataSource, ExpandableHeaderViewDelegate {
@@ -52,7 +50,6 @@ extension FAQController: UITableViewDelegate, UITableViewDataSource, ExpandableH
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return faqs[section].inCells.count
     }
-    
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "faqCell", for: indexPath)
@@ -76,13 +73,15 @@ extension FAQController: UITableViewDelegate, UITableViewDataSource, ExpandableH
         return 0
     }
     
-
-    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = ExpandableHeaderView()
         header.setup(withTitle: faqs[section].header, section: section, delegate: self)
         header.textLabel?.font.withSize(18)
-        
+        if UserDefaultsManager.shared.userDefaults.string(forKey: "Theme") == "light" {
+            header.textLabel?.textColor = .black
+        } else {
+            header.textLabel?.textColor = .white
+        }
         return header
     }
     
@@ -94,20 +93,16 @@ extension FAQController: UITableViewDelegate, UITableViewDataSource, ExpandableH
         }
     }
     
-    
     func toggleSection(header: ExpandableHeaderView, section: Int) {
         faqs[section].expanded = !faqs[section].expanded
         
         self.faqsTableView.beginUpdates()
         for row in 0..<faqs[section].inCells.count {
             self.faqsTableView.reloadRows(at: [IndexPath(row: row, section: section)], with: .automatic)
-            
         }
         self.faqsTableView.endUpdates()
         
     }
-    
-    
 }
 
 struct FAQs {

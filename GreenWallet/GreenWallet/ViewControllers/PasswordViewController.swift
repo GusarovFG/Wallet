@@ -61,8 +61,13 @@ class PasswordViewController: UIViewController {
             view.layer.cornerRadius = view.frame.height / 2
             view.backgroundColor = UIColor(red: 255, green: 255, blue: 255, alpha: 0)
             view.layer.borderWidth = 2
-            view.layer.borderColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+            if UserDefaultsManager.shared.userDefaults.string(forKey: "Theme") == "dark" {
+                view.layer.borderColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+            } else {
+                view.layer.borderColor = #colorLiteral(red: 0.7882352941, green: 0.7882352941, blue: 0.7882352941, alpha: 1)
+            }
         }
+    
     }
     
     private func localization() {
@@ -142,7 +147,11 @@ class PasswordViewController: UIViewController {
                         view.layer.cornerRadius = view.frame.height / 2
                         view.backgroundColor = UIColor(red: 255, green: 255, blue: 255, alpha: 0)
                         view.layer.borderWidth = 2
-                        view.layer.borderColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+                        if UserDefaultsManager.shared.userDefaults.string(forKey: "Theme") == "dark" {
+                            view.layer.borderColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+                        } else {
+                            view.layer.borderColor = #colorLiteral(red: 0.7882352941, green: 0.7882352941, blue: 0.7882352941, alpha: 1)
+                        }
                         self.enteringPassword = ""
                         self.errorLabel.alpha = 0
                     }
@@ -157,7 +166,13 @@ class PasswordViewController: UIViewController {
         if self.enteringPassword.count > 0 {
             self.stackView.arrangedSubviews[self.enteringPassword.count - 1].backgroundColor = UIColor(red: 255, green: 255, blue: 255, alpha: 0)
             self.stackView.arrangedSubviews[self.enteringPassword.count - 1].layer.borderWidth = 2
-            self.stackView.arrangedSubviews[self.enteringPassword.count - 1].layer.borderColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+            
+            
+            if UserDefaultsManager.shared.userDefaults.string(forKey: "Theme") == "dark" {
+                self.stackView.arrangedSubviews[self.enteringPassword.count - 1].layer.borderColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+            } else {
+                self.stackView.arrangedSubviews[self.enteringPassword.count - 1].layer.borderColor = #colorLiteral(red: 0.7882352941, green: 0.7882352941, blue: 0.7882352941, alpha: 1)
+            }
             self.enteringPassword.removeLast()
         
         }
@@ -256,7 +271,11 @@ class PasswordViewController: UIViewController {
                 view.layer.cornerRadius = view.frame.height / 2
                 view.backgroundColor = UIColor(red: 255, green: 255, blue: 255, alpha: 0)
                 view.layer.borderWidth = 2
-                view.layer.borderColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+                if UserDefaultsManager.shared.userDefaults.string(forKey: "Theme") == "dark" {
+                    view.layer.borderColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+                } else {
+                    view.layer.borderColor = #colorLiteral(red: 0.7882352941, green: 0.7882352941, blue: 0.7882352941, alpha: 1)
+                }
                 self.repeatErrorLabel.alpha = 0
             }
             self.enteringPassword = ""
@@ -294,7 +313,11 @@ class PasswordViewController: UIViewController {
                         view.layer.cornerRadius = view.frame.height / 2
                         view.backgroundColor = UIColor(red: 255, green: 255, blue: 255, alpha: 0)
                         view.layer.borderWidth = 2
-                        view.layer.borderColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+                        if UserDefaultsManager.shared.userDefaults.string(forKey: "Theme") == "dark" {
+                            view.layer.borderColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+                        } else {
+                            view.layer.borderColor = #colorLiteral(red: 0.7882352941, green: 0.7882352941, blue: 0.7882352941, alpha: 1)
+                        }
                         self.repeatErrorLabel.alpha = 0
                     }
                     self.enteringPassword = ""
@@ -315,7 +338,11 @@ class PasswordViewController: UIViewController {
                 view.layer.cornerRadius = view.frame.height / 2
                 view.backgroundColor = UIColor(red: 255, green: 255, blue: 255, alpha: 0)
                 view.layer.borderWidth = 2
-                view.layer.borderColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+                if UserDefaultsManager.shared.userDefaults.string(forKey: "Theme") == "dark" {
+                    view.layer.borderColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+                } else {
+                    view.layer.borderColor = #colorLiteral(red: 0.7882352941, green: 0.7882352941, blue: 0.7882352941, alpha: 1)
+                }
                 self.enterErrorLabel.alpha = 0
             }
             self.enteringPassword = ""
@@ -347,7 +374,11 @@ class PasswordViewController: UIViewController {
                         view.layer.cornerRadius = view.frame.height / 2
                         view.backgroundColor = UIColor(red: 255, green: 255, blue: 255, alpha: 0)
                         view.layer.borderWidth = 2
-                        view.layer.borderColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+                        if UserDefaultsManager.shared.userDefaults.string(forKey: "Theme") == "dark" {
+                            view.layer.borderColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+                        } else {
+                            view.layer.borderColor = #colorLiteral(red: 0.7882352941, green: 0.7882352941, blue: 0.7882352941, alpha: 1)
+                        }
                         self.enterErrorLabel.alpha = 0
                     }
                     self.enteringPassword = ""

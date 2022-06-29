@@ -19,7 +19,11 @@ class ExpandableHeaderView: UITableViewHeaderFooterView {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+        if UserDefaultsManager.shared.userDefaults.string(forKey: "Theme") == "light" {
+            self.textLabel?.textColor = .black
+        } else {
+            self.textLabel?.textColor = .white
+        }
     }
     
     func setup(withTitle title: String, section: Int, delegate: ExpandableHeaderViewDelegate) {
@@ -27,6 +31,8 @@ class ExpandableHeaderView: UITableViewHeaderFooterView {
         self.delegate = delegate
         self.section = section
         self.textLabel?.text = title
+        
+        
     }
     
     override func layoutSubviews() {
@@ -34,11 +40,16 @@ class ExpandableHeaderView: UITableViewHeaderFooterView {
         textLabel?.textColor = .white
         contentView.backgroundColor = .systemBackground
         self.button = UIButton(frame: CGRect(x: self.frame.width - 30, y: self.frame.height - 50, width:30, height:30))
-        self.button.imageView?.image == UIImage(named: "plus")! 
+        self.button.imageView?.image = UIImage(named: "plus")!
 //            self.button.setImage(UIImage(named: "cross")!, for: .normal)
 //        } else {
 //            self.button.setImage(UIImage(named: "plus")!, for: .normal)
 //        }
+        if UserDefaultsManager.shared.userDefaults.string(forKey: "Theme") == "light" {
+            self.textLabel?.textColor = .black
+        } else {
+            self.textLabel?.textColor = .white
+        }
         self.addSubview(self.button)
     }
     
