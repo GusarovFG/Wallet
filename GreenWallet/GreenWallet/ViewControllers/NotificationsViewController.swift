@@ -1,17 +1,20 @@
 //
-//  TransactionHistoryViewController.swift
+//  NotificationsViewController.swift
 //  GreenWallet
 //
-//  Created by Фаддей Гусаров on 19.05.2022.
+//  Created by Фаддей Гусаров on 30.06.2022.
 //
 
 import UIKit
 
-class TransactionHistoryViewController: UIViewController {
-    
-    var isHistoryWallet = false
+class NotificationsViewController: UIViewController {
+
     var wallet: ChiaWalletPrivateKey?
     var dates: [String] = []
+    
+    var notifications: [Notificationsss] = [Notificationsss(type: "in", height: "123123", summ: "500.000011000", token: "XCH", date: "27.06.22 21:00"), Notificationsss(type: "out", height: "123123", summ: "100.000011000", token: "XCH", date: "20.06.22 21:00"),Notificationsss(type: "in", height: "123123", summ: "100.000011000", token: "XCH", date: "25.06.22 21:00"),Notificationsss(type: "in", height: "123123", summ: "100.000011000", token: "XCH", date: "20.06.22 21:00"),Notificationsss(type: "in", height: "123123", summ: "110.000011000", token: "XCH", date: "20.06.22 21:00"),Notificationsss(type: "out", height: "123123", summ: "50.000011000", token: "XCH", date: "20.06.22 21:00"),Notificationsss(type: "in", height: "123123", summ: "20.000011000", token: "XCH", date: "20.06.22 21:00"),Notificationsss(type: "in", height: "123123", summ: "100.000011000", token: "XCH", date: "21.06.22 21:00"),Notificationsss(type: "in", height: "123123", summ: "100.000011000", token: "XCH", date: "20.06.22 21:00"),Notificationsss(type: "out", height: "123123", summ: "0.000011000", token: "XCH", date: "21.06.22 21:00"),Notificationsss(type: "out", height: "123123", summ: "100.000011000", token: "XCH", date: "20.06.22 21:00"),Notificationsss(type: "out", height: "123123", summ: "100.000011000", token: "XCH", date: "25.06.22 21:00"),Notificationsss(type: "in", height: "123123", summ: "100.000011000", token: "XCH", date: "20.06.22 21:00"),Notificationsss(type: "out", height: "123123", summ: "100.000011000", token: "XCH", date: "25.06.22 21:00")]
+    var filterNotifications: [Notificationsss] = []
+    
     
     private var walletsTransactions: [[ChiaTransaction]] = []
     private var filterWalletsTransactions: [ChiaTransaction] = []
@@ -26,9 +29,7 @@ class TransactionHistoryViewController: UIViewController {
     
     @IBOutlet weak var filterTimeButton: UIButton!
     @IBOutlet weak var filterSystemButton: UIButton!
-    @IBOutlet weak var statusLabel: UILabel!
-    @IBOutlet weak var heightLabel: UILabel!
-    @IBOutlet weak var summLabel: UILabel!
+
     @IBOutlet weak var searchBar: UISearchBar!
     
     @IBOutlet weak var filterDateView: UIView!
@@ -50,22 +51,7 @@ class TransactionHistoryViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        
-        
-        
-        
-        if self.isHistoryWallet {
-            self.backButton.alpha = 1
-            self.backButton.isEnabled = true
-        } else {
-            self.backButton.alpha = 0
-            self.backButton.isEnabled = false
-        }
-        
-        self.statusLabel.text = "Статус"
-        self.heightLabel.text = "Высота"
-        self.summLabel.text = "Сумма"
+        self.filterNotifications = self.notifications
         
         self.filterDateView.isHidden = true
         self.filterDateView.alpha = 0
@@ -95,12 +81,12 @@ class TransactionHistoryViewController: UIViewController {
         
         localization()
         
-        self.tableView.register(UINib(nibName: "TransitionsTableViewCell", bundle: nil), forCellReuseIdentifier: "TransitionsTableViewCell")
+        self.tableView.register(UINib(nibName: "NotificationTableViewCell", bundle: nil), forCellReuseIdentifier: "NotificationTableViewCell")
         self.filterCollectionView.register(UINib(nibName: "TransictionFilterCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "TransictionFilterCollectionViewCell")
         
         let tapGastureRecognizer = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
         self.tableView.addGestureRecognizer(tapGastureRecognizer)
-        NotificationCenter.default.addObserver(self, selector: #selector(localization), name: NSNotification.Name("localized"), object: nil)
+
         
     }
     
@@ -114,59 +100,59 @@ class TransactionHistoryViewController: UIViewController {
         let spinnerVC = storyoard.instantiateViewController(withIdentifier: "spinner") as! SprinnerViewController
         let queue = DispatchQueue.global(qos: .userInteractive)
         
-        if self.filterWalletsTransactions.isEmpty && !self.isHistoryWallet {
-            self.present(spinnerVC, animated: true)
-            queue.sync {
-                for i in CoreDataManager.share.fetchChiaWalletPrivateKey() {
-                    
-                    ChiaBlockchainManager.share.logIn(Int(i.fingerprint)) { log in
-                        
-                        if log.success {
-                            ChiaBlockchainManager.share.getWallets { wallet in
-                                
-                                for iwallet in wallet.wallets {
-                                    
-                                    ChiaBlockchainManager.share.getTransactions(iwallet.id) { transact in
-                                        
-                                        self.walletsTransactions.append(transact.transactions)
-                                        
-                                        DispatchQueue.main.async {
-                                            
-                                            self.filterWalletsTransactions = self.walletsTransactions.reduce([], +)
-                                            self.tableView.reloadData()
-                                            spinnerVC.dismiss(animated: true)
-                                        }
-                                    }
-                                    
-                                }
-                            }
-                        }
-                        
-                    }
-                }
-            }
-        } else if self.filterWalletsTransactions.isEmpty && self.isHistoryWallet {
-            self.present(spinnerVC, animated: true)
-            queue.sync {
-                
-                ChiaBlockchainManager.share.logIn(Int(self.wallet!.fingerprint)) { log in
-                    print(log.success)
-                    ChiaBlockchainManager.share.getWallets { wallets in
-                        for i in wallets.wallets {
-                            ChiaBlockchainManager.share.getTransactions(i.id) { trans in
-                                self.walletsTransactions.append(trans.transactions)
-                                
-                                DispatchQueue.main.async {
-                                    self.filterWalletsTransactions = self.walletsTransactions.reduce([], +)
-                                    self.tableView.reloadData()
-                                    spinnerVC.dismiss(animated: true)
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
+//        if self.filterWalletsTransactions.isEmpty  {
+//            self.present(spinnerVC, animated: true)
+//            queue.sync {
+//                for i in CoreDataManager.share.fetchChiaWalletPrivateKey() {
+//
+//                    ChiaBlockchainManager.share.logIn(Int(i.fingerprint)) { log in
+//
+//                        if log.success {
+//                            ChiaBlockchainManager.share.getWallets { wallet in
+//
+//                                for iwallet in wallet.wallets {
+//
+//                                    ChiaBlockchainManager.share.getTransactions(iwallet.id) { transact in
+//
+//                                        self.walletsTransactions.append(transact.transactions)
+//
+//                                        DispatchQueue.main.async {
+//
+//                                            self.filterWalletsTransactions = self.walletsTransactions.reduce([], +)
+//                                            self.tableView.reloadData()
+//                                            spinnerVC.dismiss(animated: true)
+//                                        }
+//                                    }
+//
+//                                }
+//                            }
+//                        }
+//
+//                    }
+//                }
+//            }
+//        } else if self.filterWalletsTransactions.isEmpty  {
+//            self.present(spinnerVC, animated: true)
+//            queue.sync {
+//
+//                ChiaBlockchainManager.share.logIn(Int(self.wallet!.fingerprint)) { log in
+//                    print(log.success)
+//                    ChiaBlockchainManager.share.getWallets { wallets in
+//                        for i in wallets.wallets {
+//                            ChiaBlockchainManager.share.getTransactions(i.id) { trans in
+//                                self.walletsTransactions.append(trans.transactions)
+//
+//                                DispatchQueue.main.async {
+//                                    self.filterWalletsTransactions = self.walletsTransactions.reduce([], +)
+//                                    self.tableView.reloadData()
+//                                    spinnerVC.dismiss(animated: true)
+//                                }
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -197,9 +183,7 @@ class TransactionHistoryViewController: UIViewController {
         self.yesterdayDayeButton.setTitle(LocalizationManager.share.translate?.result.list.transactions.transactions_yesterday, for: .normal)
         self.backButton.setTitle(LocalizationManager.share.translate?.result.list.all.back_btn, for: .normal)
         self.allDateButton.setTitle(LocalizationManager.share.translate?.result.list.transactions.transactions_all, for: .normal)
-        self.heightLabel.text = LocalizationManager.share.translate?.result.list.transactions.transactions_height
-        self.statusLabel.text = LocalizationManager.share.translate?.result.list.transactions.transactions_status
-        self.summLabel.text = LocalizationManager.share.translate?.result.list.transactions.transactions_amount
+       
         self.allDateButton.setTitle(LocalizationManager.share.translate?.result.list.transactions.transactions_all, for: .normal)
         
         self.backButton.setTitle(LocalizationManager.share.translate?.result.list.all.back_btn, for: .normal)
@@ -324,7 +308,7 @@ class TransactionHistoryViewController: UIViewController {
         sender.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
         self.chivesSystemButton.backgroundColor = .systemBackground
         self.allSystemButton.backgroundColor = .systemBackground
-//        self.filterWalletsTransactions = self.walletsTransactions.reduce([], +).filter({$0.})
+        //        self.filterWalletsTransactions = self.walletsTransactions.filter({$0.token == "XCH"})
         self.tableView.reloadData()
     }
     @IBAction func chivesButtonPressed(_ sender: UIButton) {
@@ -351,38 +335,49 @@ class TransactionHistoryViewController: UIViewController {
     
 }
 
-extension TransactionHistoryViewController: UITableViewDelegate, UITableViewDataSource {
+extension NotificationsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        self.filterWalletsTransactions.count
+        self.filterNotifications.filter({$0.date == self.filterNotifications.map{$0.date}[section]}).count
     }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        Set(self.filterNotifications.map{$0.date}).count
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "TransitionsTableViewCell", for: indexPath) as! TransitionsTableViewCell
-        let transiction = self.filterWalletsTransactions[indexPath.row]
-        switch transiction.type {
-            
-        case 0:
-            cell.typeOfTransitionLabel.textColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
-            cell.typeOfTransitionLabel.text = LocalizationManager.share.translate?.result.list.transactions.transactions_incoming
-        case 1:
-            cell.typeOfTransitionLabel.textColor = #colorLiteral(red: 1, green: 0.1333333333, blue: 0.1333333333, alpha: 1)
-            cell.typeOfTransitionLabel.text = LocalizationManager.share.translate?.result.list.transactions.incoming_outgoing
-        default:
-            break
+        let cell = tableView.dequeueReusableCell(withIdentifier: "NotificationTableViewCell", for: indexPath) as! NotificationTableViewCell
+        let transiction = self.filterNotifications[indexPath.row]
+        if transiction.type == "out" {
+            cell.amountLabel.textColor = .red
+            cell.amountLabel.text = "- \(transiction.summ)"
+            cell.descriptionLabel.text = LocalizationManager.share.translate?.result.list.notifications.notifications_withdrawn_from_chia_wallet
+        } else {
+            cell.amountLabel.text = transiction.summ
+            cell.descriptionLabel.text = LocalizationManager.share.translate?.result.list.notifications.notifications_credited_to_chia_wallet
+            cell.amountLabel.textColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
         }
-        if !(transiction.confirmed ) {
-            cell.typeOfTransitionLabel.textColor = #colorLiteral(red: 0.1176470588, green: 0.5764705882, blue: 1, alpha: 1)
-            cell.typeOfTransitionLabel.text = LocalizationManager.share.translate?.result.list.transactions.transactions_pendind
-        }
+        cell.cellImage.image = UIImage(named: "LogoChia")!
+        cell.ratesLabel.text = "\(ExchangeRatesManager.share.newRatePerDollar * (Double(transiction.summ) ?? 0)) \(transiction.token)"
+        cell.timeLabel.text = String(transiction.date.suffix(5))
+       
         
-        cell.heightLabel.text = "\(transiction.confirmed_at_height )"
-        
-        cell.summLabel.text = "\((Double(transiction.amount) / 1000000000000).avoidNotation) XCH"
+//        cell.heightLabel.text = "\(transiction.confirmed_at_height )"
+//
+//        cell.summLabel.text = "\((Double(transiction.amount) / 1000000000000).avoidNotation) XCH"
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        110
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        self.filterNotifications.map{$0.date}[section]
     }
 }
 
-extension TransactionHistoryViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension NotificationsViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         4
     }
@@ -540,7 +535,7 @@ extension TransactionHistoryViewController: UICollectionViewDelegate, UICollecti
     }
 }
 
-extension TransactionHistoryViewController: UISearchBarDelegate {
+extension NotificationsViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText.isEmpty {
@@ -558,6 +553,10 @@ extension TransactionHistoryViewController: UISearchBarDelegate {
     
 }
 
-
-
-
+struct Notificationsss {
+    var type: String
+    var height: String
+    var summ: String
+    var token: String
+    var date: String
+}

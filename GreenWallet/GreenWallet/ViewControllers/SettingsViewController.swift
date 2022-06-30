@@ -43,6 +43,8 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         6
     }
     
+    
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let themeCell = tableView.dequeueReusableCell(withIdentifier: "themeCell", for: indexPath) as! ThemesTableViewCell
@@ -104,6 +106,12 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
             
             self.present(supportVC, animated: true, completion: nil)
             self.navigationController?.navigationBar.isHidden = false
+        }
+        if indexPath == [0,2] {
+            let notificationsVC = storyboard?.instantiateViewController(withIdentifier: "NotificationsViewController") as! NotificationsViewController
+            notificationsVC.modalPresentationStyle = .fullScreen
+            
+            self.present(notificationsVC, animated: true)
         }
         tableView.deselectRow(at: indexPath, animated: true)
     }

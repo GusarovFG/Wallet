@@ -94,6 +94,9 @@
 		FBBECA8C2832CF250042D1B8 /* mCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBBECA8A2832CF250042D1B8 /* mCollectionViewCell.xib */; };
 		FBC26BB7286464E4005EE8BC /* TransactionsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC26BB6286464E4005EE8BC /* TransactionsManager.swift */; };
 		FBC4AB752836A5AA00566683 /* TransactionHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC4AB742836A5AA00566683 /* TransactionHistoryViewController.swift */; };
+		FBCC0CE0286DBECD008DE63C /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCC0CDF286DBECD008DE63C /* NotificationsViewController.swift */; };
+		FBCC0CE3286DC0C4008DE63C /* NotificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCC0CE1286DC0C4008DE63C /* NotificationTableViewCell.swift */; };
+		FBCC0CE4286DC0C4008DE63C /* NotificationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBCC0CE2286DC0C4008DE63C /* NotificationTableViewCell.xib */; };
 		FBD1CCAA283B90570081AF3E /* KeyChainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD1CCA9283B90570081AF3E /* KeyChainManager.swift */; };
 		FBD63A44283B7460006CE0A8 /* PasswordStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FBD63A43283B745F006CE0A8 /* PasswordStoryboard.storyboard */; };
 		FBD72B742850782900987484 /* ChiaBlockchainConnectingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD72B732850782900987484 /* ChiaBlockchainConnectingManager.swift */; };
@@ -206,6 +209,9 @@
 		FBBECA8A2832CF250042D1B8 /* mCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = mCollectionViewCell.xib; sourceTree = "<group>"; };
 		FBC26BB6286464E4005EE8BC /* TransactionsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsManager.swift; sourceTree = "<group>"; };
 		FBC4AB742836A5AA00566683 /* TransactionHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionHistoryViewController.swift; sourceTree = "<group>"; };
+		FBCC0CDF286DBECD008DE63C /* NotificationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
+		FBCC0CE1286DC0C4008DE63C /* NotificationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTableViewCell.swift; sourceTree = "<group>"; };
+		FBCC0CE2286DC0C4008DE63C /* NotificationTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotificationTableViewCell.xib; sourceTree = "<group>"; };
 		FBD1CCA9283B90570081AF3E /* KeyChainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainManager.swift; sourceTree = "<group>"; };
 		FBD63A43283B745F006CE0A8 /* PasswordStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PasswordStoryboard.storyboard; sourceTree = "<group>"; };
 		FBD72B732850782900987484 /* ChiaBlockchainConnectingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChiaBlockchainConnectingManager.swift; sourceTree = "<group>"; };
@@ -301,6 +307,8 @@
 				FB96DB6D2844D0850018EC2A /* TransictionFilterCollectionViewCell.xib */,
 				FB79E94D2847676E0093C180 /* ContactTableViewCell.swift */,
 				FB79E94E2847676E0093C180 /* ContactTableViewCell.xib */,
+				FBCC0CE1286DC0C4008DE63C /* NotificationTableViewCell.swift */,
+				FBCC0CE2286DC0C4008DE63C /* NotificationTableViewCell.xib */,
 			);
 			path = CutomCells;
 			sourceTree = "<group>";
@@ -355,6 +363,7 @@
 				FBBB3DD2284CD32300349EF0 /* FAQController.swift */,
 				FBEA97BC2850CF1F00D2F720 /* AskAQuestionViewController.swift */,
 				FB3874B7286AE59700479D00 /* ListingViewController.swift */,
+				FBCC0CDF286DBECD008DE63C /* NotificationsViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -604,6 +613,7 @@
 				FB0FCA7428197A4000BB0527 /* ImportTokensTableViewCell.xib in Resources */,
 				FBB49A4B2824DEA700250553 /* spinner.storyboard in Resources */,
 				FBD63A44283B7460006CE0A8 /* PasswordStoryboard.storyboard in Resources */,
+				FBCC0CE4286DC0C4008DE63C /* NotificationTableViewCell.xib in Resources */,
 				FB6D93DD2834F1E200B11E80 /* AllWalletsTableViewCell.xib in Resources */,
 				FBB9CF652836604D0094742E /* MyWalletCollectionViewCell.xib in Resources */,
 				FB96DB6F2844D0850018EC2A /* TransictionFilterCollectionViewCell.xib in Resources */,
@@ -686,6 +696,7 @@
 				FB59474C2823FCAF00C74E73 /* ImportMnemonicCollectionViewCell.swift in Sources */,
 				FB16685E283E21D000155670 /* NetworkManager.swift in Sources */,
 				FB3754B22821BE8F00882338 /* VerifyMnemonicViewController.swift in Sources */,
+				FBCC0CE0286DBECD008DE63C /* NotificationsViewController.swift in Sources */,
 				FB79E94A2847672F0093C180 /* ContactsViewController.swift in Sources */,
 				FBFE57A4281B4AFE0016E74A /* InfoViewController.swift in Sources */,
 				FB0FCA702819629D00BB0527 /* Models.swift in Sources */,
@@ -706,6 +717,7 @@
 				FB0FCA6628194D4300BB0527 /* SelectSystemViewController.swift in Sources */,
 				FB58F56C28521486006235BD /* ChiaWalletsManager.swift in Sources */,
 				FB94C6FA2840C21500FF4686 /* CustomMainCollectionView.swift in Sources */,
+				FBCC0CE3286DC0C4008DE63C /* NotificationTableViewCell.swift in Sources */,
 				FB0FCA7628197B4800BB0527 /* ImportTokensViewController.swift in Sources */,
 				FB96DB6E2844D0850018EC2A /* TransictionFilterCollectionViewCell.swift in Sources */,
 				FB5940392816856700037DFA /* SelectLanguageViewController.swift in Sources */,
