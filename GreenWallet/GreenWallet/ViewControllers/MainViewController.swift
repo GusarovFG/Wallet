@@ -57,12 +57,7 @@ class MainViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(showPushSystem), name: NSNotification.Name(rawValue: "showPushVC"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(localization), name: NSNotification.Name("localized"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(reloadcellectionView), name: NSNotification.Name("reload"), object: nil)
-        if ((self.wallet?.name?.contains("Chia")) != nil) {
-            self.riseLabel.text = "XCС price: \(ExchangeRatesManager.share.newRatePerDollar) $"
-            
-        }
-        self.percentLabel.text = "  \(String(ExchangeRatesManager.share.difference).prefix(5)) % "
-        ExchangeRatesManager.share.changeColorOfView(label: self.percentLabel)
+        
         
         localization()
         
@@ -86,6 +81,13 @@ class MainViewController: UIViewController {
             self.cellectionView.isScrollEnabled = false
             return
         }
+        
+        if ((self.wallet?.name?.contains("Chia")) != nil) {
+            self.riseLabel.text = "XCС price: \(ExchangeRatesManager.share.newRatePerDollar) $"
+            
+        }
+        self.percentLabel.text = "  \(String(ExchangeRatesManager.share.difference).prefix(5)) % "
+        ExchangeRatesManager.share.changeColorOfView(label: self.percentLabel)
     }
     
     override func viewDidAppear(_ animated: Bool) {

@@ -327,7 +327,7 @@ extension VerifyMnemonicViewController: UICollectionViewDelegate, UICollectionVi
                 if UIDevice.modelName.contains("iPhone 8") || UIDevice.modelName.contains("iPhone 12") || UIDevice.modelName.contains("iPhone 13") {
                     return CGSize(width: 100, height: 40)
                 } else {
-                    return CGSize(width: 178, height: 50)
+                    return CGSize(width: 178, height: 45)
                 }
             default:
                 return CGSize(width: 178, height: 50)

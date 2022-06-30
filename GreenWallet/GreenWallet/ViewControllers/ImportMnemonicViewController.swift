@@ -37,7 +37,7 @@ class ImportMnemonicViewController: UIViewController {
         
         self.collectionView.register(UINib(nibName: "ImportMnemonicCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "ImportMnemonicCollectionViewCell")
         
-//        setuptermsLabel()
+        //        setuptermsLabel()
         registerFromKeyBoardNotifications()
         self.scrollView.isScrollEnabled = false
         self.continueButton.backgroundColor = #colorLiteral(red: 0.2666666667, green: 0.2666666667, blue: 0.2666666667, alpha: 1)
@@ -95,7 +95,7 @@ class ImportMnemonicViewController: UIViewController {
                 self.scrollView.isScrollEnabled = true
             } else {
                 self.scrollView.isScrollEnabled = false
-
+                
             }
         }
     }
@@ -239,71 +239,53 @@ class ImportMnemonicViewController: UIViewController {
                 
                 
                 
-                dispatchGroup.enter()
                 ChiaBlockchainManager.share.importMnemonic(self.mnemonicPhrase) { fingerpring in
                     print(fingerpring.fingerprint)
-                    dispatchGroup.leave()
-                    dispatchGroup.enter()
+                    
                     CoreDataManager.share.saveChiaWaletFingerpring(fingerpring.fingerprint)
-                    dispatchGroup.leave()
-                    dispatchGroup.enter()
+                    
                     ChiaBlockchainManager.share.logIn(fingerpring.fingerprint) { log in
                         if log.success {
-                            dispatchGroup.leave()
-                        }
-                    }
-                    dispatchGroup.enter()
-                    ChiaBlockchainManager.share.getNextAddress(walletID: Int64(1)) { adres in
-                        adreses = adres.address
-                        print(adreses)
-                        dispatchGroup.leave()
-                    }
-                    
-                    ChiaBlockchainManager.share.getWallets { wallets in
-                        dispatchGroup.enter()
-                        for wallet in wallets.wallets {
-                            dispatchGroup.enter()
-                            walletsDict.append(wallet.id)
-                            name = wallet.name
-                            dispatchGroup.leave()
-                            dispatchGroup.enter()
-                            dispatchGroup.leave()
-                            dispatchGroup.enter()
-                            ChiaBlockchainManager.share.getWalletBalance(wallet.id) { balance in
-                                balances.append(balance.wallet_balance.max_send_amount)
-                                print(balances)
+                            ChiaBlockchainManager.share.getWallets { wallets in
+                                for wallet in wallets.wallets {
+                                    walletsDict.append(wallet.id)
+                                    name = wallet.name
+                                    
+                                    ChiaBlockchainManager.share.getNextAddress(walletID: Int64(wallet.id)) { adres in
+                                        adreses = adres.address
+                                        print(adreses)
+                                        
+                                    }
+                                    ChiaBlockchainManager.share.getWalletBalance(wallet.id) { balance in
+                                        balances.append(balance.wallet_balance.max_send_amount)
+                                        print(balances)
+                                        
+                                    }
+                                    
+                                }
+                                ChiaBlockchainManager.share.getPrivateKey(fingerpring.fingerprint) { privateKeys in
+                                    privateKey = privateKeys
+                                    print(privateKey)
+                                    
+                                    UserDefaultsManager.shared.userDefaults.set("Exist", forKey: UserDefaultsStringKeys.walletExist.rawValue )
+                                    CoreDataManager.share.saveChiaWalletPrivateKey(name: name, fingerprint: privateKey.private_key.fingerprint, pk: privateKey.private_key.pk, seed: privateKey.private_key.seed, sk: privateKey.private_key.seed, adress: adreses, wallets: walletsDict as [NSNumber], balances: balances as [NSNumber])
+                                    
+                                    DispatchQueue.main.async {
+                                        NotificationCenter.default.post(name: NSNotification.Name("reload"), object: nil)
+                                        print(CoreDataManager.share.fetchChiaWalletPrivateKey())
+                                        spinnerVC.dismiss(animated: true, completion: nil)
+                                        AlertManager.share.seccessImportWallet(self)
+                                    }
+                                }
+                                
                             }
-                            dispatchGroup.leave()
-                            
                         }
-                        dispatchGroup.enter()
-                        ChiaBlockchainManager.share.getPrivateKey(fingerpring.fingerprint) { privateKeys in
-                            privateKey = privateKeys
-                            print(privateKey)
-                            dispatchGroup.leave()
-                            dispatchGroup.enter()
-                            UserDefaultsManager.shared.userDefaults.set("Exist", forKey: UserDefaultsStringKeys.walletExist.rawValue )
-                            CoreDataManager.share.saveChiaWalletPrivateKey(name: name, fingerprint: privateKey.private_key.fingerprint, pk: privateKey.private_key.pk, seed: privateKey.private_key.seed, sk: privateKey.private_key.seed, adress: adreses, wallets: walletsDict as [NSNumber], balances: balances as [NSNumber])
-                            dispatchGroup.leave()
-                        }
-                        dispatchGroup.notify(queue: .main) {
-                            print("Downloading complition")
-                        }
-
-                    }
-                    DispatchQueue.main.async {
-                        NotificationCenter.default.post(name: NSNotification.Name("reload"), object: nil)
-                        print(CoreDataManager.share.fetchChiaWalletPrivateKey())
-                        spinnerVC.dismiss(animated: true, completion: nil)
-                        AlertManager.share.seccessImportWallet(self)
                     }
                 }
             }
         }
-        
-        
-        
     }
+    
     @IBAction func tapHideKeyBoard(_ sender: Any) {
         NotificationCenter.default.post(name: NSNotification.Name("HideCellKeyboard"), object: nil)
         self.view.frame.origin.y = 0
@@ -358,7 +340,7 @@ extension ImportMnemonicViewController: UICollectionViewDelegate, UICollectionVi
             if cell.cellTextLabel.text != "" {
                 self.errorLabel.isHidden = true
                 
-
+                
                 if self.countOfItems == 12 || self.countOfItems == 24 {
                     if self.mnemonicPhrase.filter({$0 == ""}).count == 0 && self.checkBoxPress {
                         self.continueButton.isEnabled = true
@@ -408,7 +390,12 @@ extension ImportMnemonicViewController: UICollectionViewDelegate, UICollectionVi
     
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        CGSize(width: 160, height: 50)
+        
+        if UIDevice.modelName.contains("iPhone 8") || UIDevice.modelName.contains("iPhone 12") || UIDevice.modelName.contains("iPhone 13") {
+            return CGSize(width: 160, height: 50)
+        } else {
+            return CGSize(width: 178, height: 50)
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
