@@ -27,6 +27,7 @@
 		FB3207F92818018F00F1ADCA /* BalanceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB3207F72818018F00F1ADCA /* BalanceTableViewCell.swift */; };
 		FB3207FA2818018F00F1ADCA /* BalanceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB3207F82818018F00F1ADCA /* BalanceTableViewCell.xib */; };
 		FB3208092818286E00F1ADCA /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB3208082818286E00F1ADCA /* MainViewController.swift */; };
+		FB365D1D287196AF0069849A /* ChivesBlockchainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB365D1C287196AF0069849A /* ChivesBlockchainManager.swift */; };
 		FB3754AB28214F2000882338 /* MnemonicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB3754AA28214F2000882338 /* MnemonicViewController.swift */; };
 		FB3754AF2821511900882338 /* MnemonicCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB3754AD2821511900882338 /* MnemonicCollectionViewCell.swift */; };
 		FB3754B02821511900882338 /* MnemonicCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB3754AE2821511900882338 /* MnemonicCollectionViewCell.xib */; };
@@ -140,6 +141,7 @@
 		FB3207F72818018F00F1ADCA /* BalanceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceTableViewCell.swift; sourceTree = "<group>"; };
 		FB3207F82818018F00F1ADCA /* BalanceTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BalanceTableViewCell.xib; sourceTree = "<group>"; };
 		FB3208082818286E00F1ADCA /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		FB365D1C287196AF0069849A /* ChivesBlockchainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChivesBlockchainManager.swift; sourceTree = "<group>"; };
 		FB3754AA28214F2000882338 /* MnemonicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MnemonicViewController.swift; sourceTree = "<group>"; };
 		FB3754AD2821511900882338 /* MnemonicCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MnemonicCollectionViewCell.swift; sourceTree = "<group>"; };
 		FB3754AE2821511900882338 /* MnemonicCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MnemonicCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -412,6 +414,7 @@
 				FBB682E1283E4A3E00CC5959 /* CoreDataManager.swift */,
 				FB98D0CD283F850500885E73 /* LocalizationManager.swift */,
 				FB87F340284A057D009F896C /* AlertManager.swift */,
+				FB365D1C287196AF0069849A /* ChivesBlockchainManager.swift */,
 				FB16685D283E21D000155670 /* NetworkManager.swift */,
 				FBD72B732850782900987484 /* ChiaBlockchainConnectingManager.swift */,
 				FB58F56B28521486006235BD /* ChiaWalletsManager.swift */,
@@ -716,6 +719,7 @@
 				FB85BA3E283CCB210068E9DE /* TimeManager.swift in Sources */,
 				FB0FCA6628194D4300BB0527 /* SelectSystemViewController.swift in Sources */,
 				FB58F56C28521486006235BD /* ChiaWalletsManager.swift in Sources */,
+				FB365D1D287196AF0069849A /* ChivesBlockchainManager.swift in Sources */,
 				FB94C6FA2840C21500FF4686 /* CustomMainCollectionView.swift in Sources */,
 				FBCC0CE3286DC0C4008DE63C /* NotificationTableViewCell.swift in Sources */,
 				FB0FCA7628197B4800BB0527 /* ImportTokensViewController.swift in Sources */,

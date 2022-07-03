@@ -9,13 +9,14 @@ import UIKit
 
 class SelectSystemViewController: UIViewController {
     
-    private let systems: [System] = [System(name: "Chia", token: "XCH", image: UIImage(named: "LogoChia")!, balance: 0), System(name: "Chives", token: "XCC", image: UIImage(named: "ChivesLogo")!, balance: 0)]
+    private var systems: [System] = [System(name: "Chia", token: "XCH", image: UIImage(named: "LogoChia")!, balance: 0), System(name: "Chives", token: "XCC", image: UIImage(named: "ChivesLogo")!, balance: 0)]
     private var typseOfNewWallet: [String] = []
     var isSelectedSystem = false
     var isGetToken = false
     var isPushToken = false
     var isNewWallet = false
     var isChia = false
+    var isMainScreen = false
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var titleLabel: UILabel!
@@ -75,7 +76,17 @@ extension SelectSystemViewController: UITableViewDelegate, UITableViewDataSource
         if self.isSelectedSystem {
             return self.typseOfNewWallet.count
         } else {
-            return self.systems.count
+            if self.isChia && self.isPushToken && !self.isMainScreen {
+                self.systems = self.systems.filter({$0.name.contains("Chia")})
+                return self.systems.count
+            } else if !self.isChia && self.isPushToken && !self.isMainScreen {
+                self.systems = self.systems.filter({$0.name.contains("Chives")})
+                return self.systems.count
+            } else if self.isChia && self.isPushToken && self.isMainScreen {
+                return self.systems.count
+            } else {
+                return self.systems.count
+            }
         }
     }
     
@@ -106,10 +117,11 @@ extension SelectSystemViewController: UITableViewDelegate, UITableViewDataSource
             switch indexPath {
             case [0,0]:
                 let newWalletVC = storyboard?.instantiateViewController(withIdentifier: "NewWalletViewController") as! NewWalletViewController
-                newWalletVC.isChia = self.isChia
+                newWalletVC.isChia = true
                 self.present(newWalletVC, animated: true, completion: nil)
             case [0,1]:
-                guard let newWalletVC = storyboard?.instantiateViewController(withIdentifier: "qwes") else { return }
+                let newWalletVC = storyboard?.instantiateViewController(withIdentifier: "qwes") as! NewWalletViewController
+                newWalletVC.isChia = false
                 self.present(newWalletVC, animated: true, completion: nil)
             default:
                 break
@@ -119,10 +131,12 @@ extension SelectSystemViewController: UITableViewDelegate, UITableViewDataSource
             case [0,0]:
                 let gettVC = storyboard?.instantiateViewController(withIdentifier: "GetTokenViewController") as! GetTokenViewController
                 gettVC.modalPresentationStyle = .fullScreen
+                gettVC.isChia = true
                 self.present(gettVC, animated: true, completion: nil)
             case [0,1]:
                 let gettVC = storyboard?.instantiateViewController(withIdentifier: "GetTokenViewController") as! GetTokenViewController
                 gettVC.modalPresentationStyle = .fullScreen
+                gettVC.isChia = false
                 self.present(gettVC, animated: true, completion: nil)
             default:
                 break
@@ -132,10 +146,12 @@ extension SelectSystemViewController: UITableViewDelegate, UITableViewDataSource
             case [0,0]:
                 let gettVC = storyboard?.instantiateViewController(withIdentifier: "PushTokensViewController") as! PushTokensViewController
                 gettVC.modalPresentationStyle = .fullScreen
+                gettVC.isChia = true
                 self.present(gettVC, animated: true, completion: nil)
             case [0,1]:
                 let gettVC = storyboard?.instantiateViewController(withIdentifier: "PushTokensViewController") as! PushTokensViewController
                 gettVC.modalPresentationStyle = .fullScreen
+                gettVC.isChia = false
                 self.present(gettVC, animated: true, completion: nil)
             default:
                 break

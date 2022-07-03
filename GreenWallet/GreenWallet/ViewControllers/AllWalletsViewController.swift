@@ -154,8 +154,8 @@ extension AllWalletsViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let myWalletsVC = storyboard?.instantiateViewController(withIdentifier: "MyWalletsViewController") as! MyWalletsViewController
-        myWalletsVC.index = indexPath.row
         myWalletsVC.wallets = self.wallets
+        myWalletsVC.index = indexPath.row
         self.present(myWalletsVC, animated: true)
     }
 }

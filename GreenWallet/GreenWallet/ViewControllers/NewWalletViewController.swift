@@ -92,17 +92,7 @@ class NewWalletViewController: UIViewController {
         
         self.agreeLabel.attributedText = attributedString
     }
-    
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
     @IBAction func checkBoxButtonPressed(_ sender: UIButton) {
         
         if sender.imageView?.image != UIImage(systemName: "checkmark.square.fill") {
@@ -130,9 +120,8 @@ class NewWalletViewController: UIViewController {
             self.creatingNewWalletView.alpha = 1
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            
-
-            guard let creatingVC = self.storyboard?.instantiateViewController(withIdentifier: "MnemonicViewController") else { return }
+            let creatingVC = self.storyboard?.instantiateViewController(withIdentifier: "MnemonicViewController") as! MnemonicViewController
+            creatingVC.isChia = self.isChia
             self.present(creatingVC, animated: true, completion: nil)
         }
         

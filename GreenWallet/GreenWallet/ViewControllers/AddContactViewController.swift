@@ -14,6 +14,7 @@ class AddContactViewController: UIViewController {
     var index = 0
     
     private var adres = "qwertyuiopasdfghjkl"
+    private var isError = false
     
     @IBOutlet weak var contactNameLabel: UILabel!
     @IBOutlet weak var contactNameTextField: UITextField!
@@ -121,16 +122,18 @@ class AddContactViewController: UIViewController {
     
     @IBAction func addContactButtonPressed(_ sender: Any) {
         if !self.isEditingContact {
-            if self.contactAdresTextField.text != self.adres {
-                self.errorLabel.alpha = 1
-                self.contactAdresTextField.textColor = #colorLiteral(red: 1, green: 0.2360929251, blue: 0.1714096665, alpha: 1)
-                self.bottomCorner.backgroundColor = #colorLiteral(red: 1, green: 0.2360929251, blue: 0.1714096665, alpha: 1)
-                self.viewHeightConstraint.constant += 20
-            } else {
+//            if self.contactAdresTextField.text != self.adres && !self.isError {
+//                self.errorLabel.alpha = 1
+//                self.contactAdresTextField.textColor = #colorLiteral(red: 1, green: 0.2360929251, blue: 0.1714096665, alpha: 1)
+//                self.bottomCorner.backgroundColor = #colorLiteral(red: 1, green: 0.2360929251, blue: 0.1714096665, alpha: 1)
+//                self.viewHeightConstraint.constant += 20
+//                self.isError = true
+//            } else {
+                
                 CoreDataManager.share.saveContact(self.contactNameTextField.text ?? "", adres: self.contactAdresTextField.text ?? "", description: self.descriptionTextField.text ?? "")
                 AlertManager.share.seccessAddContect(self)
                 
-            }
+            
         } else {
             if self.contactNameTextField.text != "" {
                 CoreDataManager.share.editContact(index: self.index, name: self.contactNameTextField.text ?? "", adres: self.contactAdresTextField.text ?? "", description: self.descriptionTextField.text ?? "")

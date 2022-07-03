@@ -43,7 +43,6 @@ class MyWalletsViewController: UIViewController {
         super.viewDidLoad()
         
         
-        self.index = 0
         self.copyLabel.alpha = 0
         self.copyLabel.text = "   Скопировано"
         
@@ -55,6 +54,7 @@ class MyWalletsViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(deleteWalletAtIntex), name: NSNotification.Name("deleteWallet"), object: nil)
         localization()
         self.pageControl.numberOfPages = CoreDataManager.share.fetchChiaWalletPrivateKey().count
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -71,13 +71,15 @@ class MyWalletsViewController: UIViewController {
     }
     
     override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
         self.scrollView.contentSize = self.view.bounds.size
+        self.scrollToNextCell()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        self.scrollToNextCell(index: self.index)
+        
         print(self.index)
         
         
@@ -118,10 +120,10 @@ class MyWalletsViewController: UIViewController {
     
 
     
-    private func scrollToNextCell(index: Int){
+    private func scrollToNextCell(){
         if !self.isShowDetail && self.isScrolling {
             
-            self.walletCollectionView.scrollToItem(at: [0,index], at: .right, animated: true)
+            self.walletCollectionView.scrollToItem(at: [0,self.index], at: .right, animated: true)
         }
         
     }
@@ -135,6 +137,7 @@ class MyWalletsViewController: UIViewController {
         transactionHistoryVC.modalPresentationStyle = .fullScreen
         transactionHistoryVC.isHistoryWallet = true
         transactionHistoryVC.wallet = self.wallets[self.index]
+        transactionHistoryVC.isChia = (self.wallets[self.index].name == "Chia Wallet")
         self.present(transactionHistoryVC, animated: true)
     }
     
@@ -246,6 +249,7 @@ extension MyWalletsViewController: UICollectionViewDelegate, UICollectionViewDat
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let selectedWallet = self.wallet
         switch collectionView {
         case self.walletCollectionView:
             return
@@ -254,10 +258,12 @@ extension MyWalletsViewController: UICollectionViewDelegate, UICollectionViewDat
             case [0,0]:
                 let selectSystemVC = storyboard?.instantiateViewController(withIdentifier: "SelectSystemViewController") as! SelectSystemViewController
                 selectSystemVC.isPushToken = true
+                selectSystemVC.isChia = (selectedWallet?.name == "Chia Wallet")
                 selectSystemVC.modalPresentationStyle = .overFullScreen
                 self.present(selectSystemVC, animated: true)
             case [0,2]:
                 let getTokenViewController = storyboard?.instantiateViewController(withIdentifier: "GetTokenViewController") as! GetTokenViewController
+                getTokenViewController.isChia = (selectedWallet?.name == "Chia Wallet")
                 getTokenViewController.modalPresentationStyle = .fullScreen
                 self.present(getTokenViewController, animated: true)
                 

@@ -1,18 +1,20 @@
 //
-//  ChiaBlockchainManager.swift
+//  ChivesBlockchainManager.swift
 //  GreenWallet
 //
-//  Created by Фаддей Гусаров on 08.06.2022.
+//  Created by Фаддей Гусаров on 03.07.2022.
 //
+
+import Foundation
 
 import Foundation
 import UIKit
 
-class ChiaBlockchainManager {
+class ChivesBlockchainManager {
     
-    static let share = ChiaBlockchainManager()
+    static let share = ChivesBlockchainManager()
  
-    fileprivate let url = "https://chia.blockchain-list.store"
+    fileprivate let url = "https://chives.blockchain-list.store"
     
     private init(){}
     
@@ -564,8 +566,3 @@ class ChiaBlockchainManager {
     }
     
 }
-
-
-
-
-

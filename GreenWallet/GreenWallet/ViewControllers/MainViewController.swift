@@ -156,6 +156,7 @@ class MainViewController: UIViewController {
     @objc private func showPushSystem(notification: Notification) {
         let selectSystemVC = storyboard?.instantiateViewController(withIdentifier: "SelectSystemViewController") as! SelectSystemViewController
         selectSystemVC.isPushToken = true
+        selectSystemVC.isMainScreen = true
         selectSystemVC.modalPresentationStyle = .overFullScreen
         self.present(selectSystemVC, animated: true)
     }

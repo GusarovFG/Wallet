@@ -235,16 +235,87 @@ struct Addition: Codable {
 }
 
 struct ChiaSyncStatus: Codable {
-    let genesis_initialized: Bool
     let success: Bool
     let synced: Bool
     let syncing: Bool
 
     enum CodingKeys: String, CodingKey {
-        case genesis_initialized
         case success
         case synced
         case syncing
     }
 }
 
+struct PushTransaction: Codable {
+    let success: Bool
+    let transaction: Transaction
+    let transactionid: String
+
+    enum CodingKeys: String, CodingKey {
+        case success
+        case transaction
+        case transactionid
+    }
+}
+
+// MARK: - Transaction
+struct Transaction: Codable {
+    let additions: [Addition]
+    let amount: Int
+    let confirmed: Bool
+    let confirmedAtHeight: Int
+    let createdAtTime: Int
+    let feeAmount: Int
+    let name: String
+    let removals: [Addition]
+    let sent: Int
+    let spendBundle: SpendBundle
+    let toAddress: String
+    let toPuzzleHash: String
+    let type: Int
+    let walletid: Int
+
+    enum CodingKeys: String, CodingKey {
+        case additions
+        case amount
+        case confirmed
+        case confirmedAtHeight
+        case createdAtTime
+        case feeAmount
+        case name
+        case removals
+        case sent
+        case spendBundle
+        case toAddress
+        case toPuzzleHash
+        case type
+        case walletid
+    }
+}
+
+// MARK: - Addition
+
+
+// MARK: - SpendBundle
+struct SpendBundle: Codable {
+    let aggregatedSignature: String
+    let coinSpends: [CoinSpend]
+
+    enum CodingKeys: String, CodingKey {
+        case aggregatedSignature
+        case coinSpends
+    }
+}
+
+// MARK: - CoinSpend
+struct CoinSpend: Codable {
+    let coin: Addition
+    let puzzleReveal: String
+    let solution: String
+
+    enum CodingKeys: String, CodingKey {
+        case coin
+        case puzzleReveal
+        case solution
+    }
+}

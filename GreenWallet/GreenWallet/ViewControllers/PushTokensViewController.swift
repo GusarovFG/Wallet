@@ -10,13 +10,16 @@ import AVFoundation
 
 class PushTokensViewController: UIViewController {
     
+    var amount: Double = 0
+    var fee: Double = 0
+    var address: String = ""
+    var isChia = true
+    
     private var video = AVCaptureVideoPreviewLayer()
     private let session = AVCaptureSession()
     private var wallet: ChiaWalletPrivateKey?
     private var wallets: [ChiaWalletPrivateKey] = []
     private var walletId = 1
-    
-    
     private let link = "qwertyuiopasdfghjkl"
     private let contact = "Faddey"
     
@@ -76,7 +79,18 @@ class PushTokensViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         localization()
-        self.wallets = CoreDataManager.share.fetchChiaWalletPrivateKey()
+        if self.isChia {
+            self.wallets = CoreDataManager.share.fetchChiaWalletPrivateKey().filter({$0.name! == "Chia Wallet"})
+            self.systemButton.setTitle("Chia Network", for: .normal)
+            self.systemChiaButton.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
+            self.tokenImage.image = UIImage(named: "LogoChia")!
+        } else {
+            self.wallets = CoreDataManager.share.fetchChiaWalletPrivateKey().filter({$0.name! == "Chives Wallet"})
+            self.systemButton.setTitle("Chives Network", for: .normal)
+            self.systemChivesButton.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
+            self.tokenImage.image = UIImage(named: "ChivesLogo")!
+            
+        }
         self.wallet = self.wallets.first
         self.balanceButton.setTitle("\((String((self.wallet?.balances as? [NSNumber])?[0] as! Double / 1000000000000.0)).prefix(8)) XCH", for: .normal)
         self.tokenButton.setTitle(self.wallet?.name, for: .normal)
@@ -108,6 +122,9 @@ class PushTokensViewController: UIViewController {
         self.systemView.layer.borderColor = #colorLiteral(red: 0.2901960784, green: 0.2901960784, blue: 0.2901960784, alpha: 1)
         self.systemView.isHidden = true
         self.systemView.alpha = 0
+        
+        
+        
         
         NotificationCenter.default.addObserver(self, selector: #selector(showSeccessAlert), name: NSNotification.Name(rawValue: "Seccess"), object: nil)
         
@@ -228,29 +245,51 @@ class PushTokensViewController: UIViewController {
     }
     
     @IBAction func systemButtonsPressed(_ sender: UIButton) {
+        
+        self.wallets = CoreDataManager.share.fetchChiaWalletPrivateKey().filter({$0.name! == "Chia Wallet"})
+        self.wallet = self.wallets.first
+        self.balanceButton.setTitle("\((String((self.wallet?.balances as? [NSNumber])?[0] as! Double / 1000000000000.0)).prefix(8)) XCH", for: .normal)
+        self.tokenButton.setTitle(self.wallet?.name, for: .normal)
+        self.setupWalletButton()
         self.systemButton.setTitle("Chia Network", for: .normal)
         self.systemChiaButton.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
         self.systemChiaButton.titleLabel?.textColor = .white
         self.systemChivesButton.backgroundColor = .systemBackground
         self.systemChivesButton.titleLabel?.textColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
         self.systemView.isHidden = true
+        
+        self.isChia = true
     }
     
     @IBAction func systemChivesButtonPressed(_ sender: Any) {
+        
+        self.wallets = CoreDataManager.share.fetchChiaWalletPrivateKey().filter({$0.name! == "Chives Wallet"})
+        self.wallet = self.wallets.first
+        self.balanceButton.setTitle("\((String((self.wallet?.balances as? [NSNumber])?[0] as! Double / 1000000000000.0)).prefix(8)) XCH", for: .normal)
+        self.tokenButton.setTitle(self.wallet?.name, for: .normal)
         self.systemButton.setTitle("Chives Network", for: .normal)
+        self.tokenImage.image = UIImage(named: "ChivesLogo")!
+        self.setupWalletButton()
+        
         self.systemChivesButton.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
         self.systemChivesButton.titleLabel?.textColor = .white
         self.systemChiaButton.backgroundColor = .systemBackground
         self.systemChiaButton.titleLabel?.textColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
         self.systemView.isHidden = true
+        
+        self.isChia = false
     }
     
     
     @IBAction func walletMenuOpen(_ sender: Any) {
         if self.walletsView.isHidden == true {
             self.walletsView.isHidden = false
+            self.walletStackView.removeAllSubviews()
+            self.walletStackViewConstraint.constant = 40
+            
         } else {
             self.walletsView.isHidden = true
+            
             return
         }
         
@@ -375,8 +414,8 @@ class PushTokensViewController: UIViewController {
     }
     
     @IBAction func linkCheck(_ sender: UITextField) {
-        if sender.text != self.link && sender.text != "" {
-            
+        if sender.text != "" {
+            self.address = sender.text ?? ""
         } else {
             
         }
@@ -397,9 +436,9 @@ class PushTokensViewController: UIViewController {
     }
     
     @IBAction func transferSummCheck(_ sender: UITextField) {
-        self.comissionTextField.text = sender.text
+        //        self.comissionTextField.text = sender.text
         self.transferTokenLabel.text = self.balanceButton.currentTitle?.filter{!$0.isNumber && !$0.isPunctuation}
-        
+        self.amount = Double(sender.text ?? "0 ") ?? 0
     }
     
     @IBAction func checkBoxButtonPressed(_ sender: UIButton) {
@@ -515,28 +554,69 @@ class PushTokensViewController: UIViewController {
             let spinnerVC = storyoard.instantiateViewController(withIdentifier: "spinner") as! SprinnerViewController
             
             self.present(spinnerVC, animated: true)
-            DispatchQueue.global().sync {
+            
+            if self.isChia {
                 
-                ChiaBlockchainManager.share.logIn(Int(self.wallet?.fingerprint ?? 0)) { log in
-                    if log.success {
-                        ChiaBlockchainManager.share.getSyncStatus(self.walletId) { status in
-                            if status.synced {
-                                DispatchQueue.main.sync {
+                DispatchQueue.global().sync {
+                    
+                    ChiaBlockchainManager.share.logIn(Int(self.wallet?.fingerprint ?? 0)) { log in
+                        if log.success {
+                            ChiaBlockchainManager.share.getSyncStatus(self.walletId) { status in
+                                
+                                
+                                if status.synced {
                                     
-                                    ChiaBlockchainManager.share.sendTransactions(self.walletId, amount: Double(self.transferTextField.text!)!, fee: Double(self.comissionTextField.text!)!, address: self.adressTextField.text!) { 
+                                    
+                                    ChiaBlockchainManager.share.sendTransactions(self.walletId, amount: self.amount * 1000000000000, fee: self.fee * 1000000000000, address: self.address) {  send in
                                         
-                                        
-                                        DispatchQueue.main.async {
-                                            self.transitionView.isHidden = false
-                                            self.transitionView.alpha = 1
-                                            spinnerVC.dismiss(animated: true)
+                                        if send.success {
+                                            DispatchQueue.main.async {
+                                                self.transitionView.isHidden = false
+                                                self.transitionView.alpha = 1
+                                                spinnerVC.dismiss(animated: true)
+                                            }
+                                            
                                         }
                                     }
+                                    
+                                } else {
+                                    DispatchQueue.main.async {
+                                        spinnerVC.dismiss(animated: true)
+                                        print("хуй там")
+                                    }
                                 }
-                            } else {
-                                DispatchQueue.main.async {
-                                    spinnerVC.dismiss(animated: true)
-                                    print("хуй там")
+                            }
+                        }
+                    }
+                }
+            } else {
+                DispatchQueue.global().sync {
+                    
+                    ChivesBlockchainManager.share.logIn(Int(self.wallet?.fingerprint ?? 0)) { log in
+                        if log.success {
+                            ChivesBlockchainManager.share.getSyncStatus(self.walletId) { status in
+                                
+                                
+                                if status.synced {
+                                    
+                                    
+                                    ChivesBlockchainManager.share.sendTransactions(self.walletId, amount: self.amount * 1000000000000, fee: self.fee * 1000000000000, address: self.address) {  send in
+                                        
+                                        if send.success {
+                                            DispatchQueue.main.async {
+                                                self.transitionView.isHidden = false
+                                                self.transitionView.alpha = 1
+                                                spinnerVC.dismiss(animated: true)
+                                            }
+                                            
+                                        }
+                                    }
+                                    
+                                } else {
+                                    DispatchQueue.main.async {
+                                        spinnerVC.dismiss(animated: true)
+                                        print("хуй там")
+                                    }
                                 }
                             }
                         }

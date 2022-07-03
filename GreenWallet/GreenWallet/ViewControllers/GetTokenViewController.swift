@@ -9,9 +9,10 @@ import UIKit
 
 class GetTokenViewController: UIViewController {
     
-    private var qrs = [UIImage(named: "qrwallet")!,UIImage(named: "qrwallet")!,UIImage(named: "qrwallet")!]
     var wallets: [ChiaWalletPrivateKey] = []
+    var isChia = true
 
+    private var qrs = [UIImage(named: "qrwallet")!,UIImage(named: "qrwallet")!,UIImage(named: "qrwallet")!]
     @IBOutlet weak var qrCollectionView: UICollectionView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var walletLabel: UILabel!
@@ -34,17 +35,26 @@ class GetTokenViewController: UIViewController {
         localization()
         self.qrCollectionView.register(UINib(nibName: "qrCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "qrCell")
         
-        self.wallets = CoreDataManager.share.fetchChiaWalletPrivateKey()
+        if self.isChia {
+            self.wallets = CoreDataManager.share.fetchChiaWalletPrivateKey().filter({$0.name! == "Chia Wallet"})
+            self.titleLabel.text = "Chia Network"
+            self.menuButton.setTitle("• Chia Network", for: .normal)
+
+        } else {
+            self.wallets = CoreDataManager.share.fetchChiaWalletPrivateKey().filter({$0.name! == "Chives Wallet"})
+            self.titleLabel.text = "Chives Network"
+            self.menuButton.setTitle("• Chives Network", for: .normal)
+        }
         self.menuView.alpha = 0
         self.menuView.isHidden = true
-        self.titleLabel.text = "Chia Network"
+
         
         setupLabel(index: self.pageControl.currentPage)
         self.pageControl.numberOfPages = self.wallets.count
         self.chiaMenuButton.setTitle("Chia Network", for: .normal)
         self.chivesMenuButton.setTitle("Chives Network", for: .normal)
         
-        self.menuButton.setTitle("• Chia Network", for: .normal)
+        
         self.menuButton.titleLabel?.textColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
         self.menuButton.titleLabel?.numberOfLines = 1
         self.menuButton.titleLabel?.font.withSize(14)
@@ -150,6 +160,8 @@ class GetTokenViewController: UIViewController {
 
     
     @IBAction func chiaButtonPressed(_ sender: UIButton) {
+        
+        
         sender.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
         self.chiaMenuButton.titleLabel?.textColor = .white
         self.menuButton.setTitle("• Chia Network", for: .normal)
@@ -157,9 +169,17 @@ class GetTokenViewController: UIViewController {
         self.chivesMenuButton.backgroundColor = .systemBackground
         self.chivesMenuButton.titleLabel?.textColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
         self.menuView.alpha = 0
+        
+        self.wallets = CoreDataManager.share.fetchChiaWalletPrivateKey().filter({$0.name! == "Chia Wallet"})
+        self.isChia = true
+        self.qrCollectionView.reloadData()
+        self.setupLabel(index: 0)
+        self.pageControl.numberOfPages = self.wallets.count
     }
     
     @IBAction func chivesButtonPressed(_ sender: UIButton) {
+        
+        
         sender.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
         self.menuButton.setTitle("• Chives Network", for: .normal)
         self.chivesMenuButton.titleLabel?.textColor = .white
@@ -168,6 +188,12 @@ class GetTokenViewController: UIViewController {
         self.chiaMenuButton.backgroundColor = .systemBackground
         self.chiaMenuButton.titleLabel?.textColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
         self.menuView.alpha = 0
+        
+        self.wallets = CoreDataManager.share.fetchChiaWalletPrivateKey().filter({$0.name! == "Chives Wallet"})
+        self.isChia = false
+        self.qrCollectionView.reloadData()
+        self.setupLabel(index: 0)
+        self.pageControl.numberOfPages = self.wallets.count
     }
     
     @IBAction func copyButtonPressed(_ sender: Any) {
