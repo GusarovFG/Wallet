@@ -86,12 +86,42 @@ class NetworkManager {
             }
         }.resume()
     }
+    
+    func getFAQ() {
+        
+    }
+    
+    func getSystems(complition: @escaping (Systems) -> Void) {
+        guard let url = URL(string: MainURLS.systems.rawValue) else { return }
+        
+        let session = URLSession.shared
+        session.dataTask(with: url) { data, response, error in
+            if let response = response {
+                print(response)
+            }
+            
+            guard let data = data else { return }
+
+            do {
+                
+                let json = try JSONDecoder().decode(Systems.self, from: data)
+                
+                DispatchQueue.main.async {
+                    complition(json)
+                }
+            } catch {
+                print(error.localizedDescription)
+                
+            }
+        }.resume()
+    }
 }
 
 enum MainURLS: String {
     case API = "https://greenapp.siterepository.ru/api/v1.0"
     case language = "https://greenapp.siterepository.ru/api/v1.0/localization/languages"
     case ExchangeRates = "https://api.huobi.pro/market/tickers"
+    case systems = "https://greenapp.siterepository.ru/api/v1.0/blockchains"
 }
 
 

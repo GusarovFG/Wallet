@@ -9,7 +9,11 @@ import UIKit
 
 class MnemonicViewController: UIViewController {
     
-    var isChia = true
+    var isChia = false
+    var isChives = false
+    var isChiaTest = false
+    var isChivesTest = false
+    var isMainScreen = false
     
     private var mnemonicPhrase: [String] = ["", "", "", "", "", "", "", "", "", "", "", ""]
     private var secureMnemonicPhrase: [String] = []
@@ -138,6 +142,9 @@ class MnemonicViewController: UIViewController {
             let vc = segue.destination as! VerifyMnemonicViewController
             vc.mnemonicPhrase = self.mnemonicPhrase
             vc.isChia = self.isChia
+            vc.isChiaTest = self.isChiaTest
+            vc.isChives = self.isChives
+            vc.isChivesTest = self.isChivesTest
         }
     }
     

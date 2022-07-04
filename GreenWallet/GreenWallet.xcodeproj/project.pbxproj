@@ -78,6 +78,7 @@
 		FB98D0CE283F850500885E73 /* LocalizationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB98D0CD283F850500885E73 /* LocalizationManager.swift */; };
 		FB9A982C283776B20018BBFA /* TransitionsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9A982A283776B20018BBFA /* TransitionsTableViewCell.swift */; };
 		FB9A982D283776B20018BBFA /* TransitionsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB9A982B283776B20018BBFA /* TransitionsTableViewCell.xib */; };
+		FBABB6DE287318B00075E16A /* SystemsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBABB6DD287318B00075E16A /* SystemsManager.swift */; };
 		FBB49A492824DE3800250553 /* SpinnerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB49A482824DE3800250553 /* SpinnerView.swift */; };
 		FBB49A4B2824DEA700250553 /* spinner.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FBB49A4A2824DEA700250553 /* spinner.storyboard */; };
 		FBB49A4D2824E1A600250553 /* SprinnerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB49A4C2824E1A600250553 /* SprinnerViewController.swift */; };
@@ -194,6 +195,7 @@
 		FB98D0CD283F850500885E73 /* LocalizationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizationManager.swift; sourceTree = "<group>"; };
 		FB9A982A283776B20018BBFA /* TransitionsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionsTableViewCell.swift; sourceTree = "<group>"; };
 		FB9A982B283776B20018BBFA /* TransitionsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TransitionsTableViewCell.xib; sourceTree = "<group>"; };
+		FBABB6DD287318B00075E16A /* SystemsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemsManager.swift; sourceTree = "<group>"; };
 		FBB49A482824DE3800250553 /* SpinnerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinnerView.swift; sourceTree = "<group>"; };
 		FBB49A4A2824DEA700250553 /* spinner.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = spinner.storyboard; sourceTree = "<group>"; };
 		FBB49A4C2824E1A600250553 /* SprinnerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SprinnerViewController.swift; sourceTree = "<group>"; };
@@ -418,6 +420,7 @@
 				FB16685D283E21D000155670 /* NetworkManager.swift */,
 				FBD72B732850782900987484 /* ChiaBlockchainConnectingManager.swift */,
 				FB58F56B28521486006235BD /* ChiaWalletsManager.swift */,
+				FBABB6DD287318B00075E16A /* SystemsManager.swift */,
 				FB2B82362860999C005AF534 /* ExchangeRatesManager.swift */,
 				FBC26BB6286464E4005EE8BC /* TransactionsManager.swift */,
 				FB3208072818285100F1ADCA /* ViewControllers */,
@@ -726,6 +729,7 @@
 				FB96DB6E2844D0850018EC2A /* TransictionFilterCollectionViewCell.swift in Sources */,
 				FB5940392816856700037DFA /* SelectLanguageViewController.swift in Sources */,
 				FB383FE7281BE1C700939B6D /* CustomSwitch.swift in Sources */,
+				FBABB6DE287318B00075E16A /* SystemsManager.swift in Sources */,
 				FBEA97BD2850CF1F00D2F720 /* AskAQuestionViewController.swift in Sources */,
 				FBB49A4D2824E1A600250553 /* SprinnerViewController.swift in Sources */,
 				FB6D93E32834F53100B11E80 /* AllWalletsViewController.swift in Sources */,

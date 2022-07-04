@@ -13,7 +13,12 @@ class PushTokensViewController: UIViewController {
     var amount: Double = 0
     var fee: Double = 0
     var address: String = ""
-    var isChia = true
+    var isChia = false
+    var isChives = false
+    var isChiaTest = false
+    var isChivesTest = false
+    var isMainScreen = false
+    
     
     private var video = AVCaptureVideoPreviewLayer()
     private let session = AVCaptureSession()
@@ -31,7 +36,6 @@ class PushTokensViewController: UIViewController {
     @IBOutlet weak var balaceStackViewConstraint: NSLayoutConstraint!
     @IBOutlet weak var balanceView: UIView!
     @IBOutlet weak var systemButton: UIButton!
-    @IBOutlet weak var linkOfWalletTextField: UITextField!
     @IBOutlet weak var transferTextField: UITextField!
     @IBOutlet weak var addContactLabel: UILabel!
     @IBOutlet weak var usdLabel: UILabel!
@@ -44,7 +48,6 @@ class PushTokensViewController: UIViewController {
     @IBOutlet weak var walletsView: UIView!
     @IBOutlet weak var walletErrorLabel: UILabel!
     @IBOutlet weak var transferErrorLabel: UILabel!
-    @IBOutlet weak var transferViewConstraint: NSLayoutConstraint!
     @IBOutlet weak var secondTransferErrorLabel: UILabel!
     @IBOutlet weak var transferView: UIView!
     @IBOutlet weak var walletAdressViewConstraint: NSLayoutConstraint!
@@ -84,13 +87,25 @@ class PushTokensViewController: UIViewController {
             self.systemButton.setTitle("Chia Network", for: .normal)
             self.systemChiaButton.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
             self.tokenImage.image = UIImage(named: "LogoChia")!
-        } else {
+        } else if self.isChives {
             self.wallets = CoreDataManager.share.fetchChiaWalletPrivateKey().filter({$0.name! == "Chives Wallet"})
             self.systemButton.setTitle("Chives Network", for: .normal)
             self.systemChivesButton.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
             self.tokenImage.image = UIImage(named: "ChivesLogo")!
             
+        } else if self.isChiaTest {
+            self.wallets = CoreDataManager.share.fetchChiaWalletPrivateKey().filter({$0.name! == "TestNet Chia Wallet"})
+            self.systemButton.setTitle("Chives TestNet", for: .normal)
+            self.systemChiaButton.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
+            self.tokenImage.image = UIImage(named: "LogoChia")!
+        } else if self.isChivesTest {
+            self.wallets = CoreDataManager.share.fetchChiaWalletPrivateKey().filter({$0.name! == "TestNet Chives Wallet"})
+            self.systemButton.setTitle("Chives TestNet", for: .normal)
+            self.systemChivesButton.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
+            self.tokenImage.image = UIImage(named: "ChivesLogo")!
         }
+        
+      
         self.wallet = self.wallets.first
         self.balanceButton.setTitle("\((String((self.wallet?.balances as? [NSNumber])?[0] as! Double / 1000000000000.0)).prefix(8)) XCH", for: .normal)
         self.tokenButton.setTitle(self.wallet?.name, for: .normal)

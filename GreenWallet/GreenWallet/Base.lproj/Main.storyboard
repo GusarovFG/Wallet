@@ -4300,7 +4300,7 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
         <!--Import Mnemonic View Controller-->
         <scene sceneID="JU0-kF-hqH">
             <objects>
-                <viewController storyboardIdentifier="qwes" modalPresentationStyle="fullScreen" id="Ljn-W9-MGr" customClass="ImportMnemonicViewController" customModule="GreenWallet" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ImportMnemonicViewController" modalPresentationStyle="fullScreen" id="Ljn-W9-MGr" customClass="ImportMnemonicViewController" customModule="GreenWallet" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="xds-xb-PTz">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="1240"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

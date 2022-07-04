@@ -10,6 +10,11 @@ import UIKit
 class NewWalletViewController: UIViewController {
     
     var isChia = false
+    var isChives = false
+    var isChiaTest = false
+    var isChivesTest = false
+    var isMainScreen = false
+    
 
     @IBOutlet weak var creatingNewWalletView: UIView!
     @IBOutlet weak var agreeLabel: UILabel!
@@ -122,6 +127,9 @@ class NewWalletViewController: UIViewController {
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             let creatingVC = self.storyboard?.instantiateViewController(withIdentifier: "MnemonicViewController") as! MnemonicViewController
             creatingVC.isChia = self.isChia
+            creatingVC.isChiaTest = self.isChiaTest
+            creatingVC.isChives = self.isChives
+            creatingVC.isChivesTest = self.isChivesTest
             self.present(creatingVC, animated: true, completion: nil)
         }
         

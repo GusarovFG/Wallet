@@ -754,3 +754,42 @@ struct WelcomeScreen: Codable {
     }
 }
 
+struct Systems: Codable {
+    let success: Bool
+    let result: ResultSystems
+
+    enum CodingKeys: String, CodingKey {
+        case success
+        case result
+    }
+}
+
+// MARK: - Result
+struct ResultSystems: Codable {
+    let version: String
+    let list: [ListSystems]
+
+    enum CodingKeys: String, CodingKey {
+        case version
+        case list
+    }
+}
+
+// MARK: - List
+struct ListSystems: Codable {
+    let name: String
+    let full_node: String
+    let wallet: String
+    let daemon: String
+    let farmer: String
+    let harvester: String
+
+    enum CodingKeys: String, CodingKey {
+        case name
+        case full_node
+        case wallet
+        case daemon
+        case farmer
+        case harvester
+    }
+}

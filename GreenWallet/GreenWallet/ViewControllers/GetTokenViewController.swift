@@ -10,7 +10,10 @@ import UIKit
 class GetTokenViewController: UIViewController {
     
     var wallets: [ChiaWalletPrivateKey] = []
-    var isChia = true
+    var isChia = false
+    var isChives = false
+    var isChiaTest = false
+    var isChivesTest = false
 
     private var qrs = [UIImage(named: "qrwallet")!,UIImage(named: "qrwallet")!,UIImage(named: "qrwallet")!]
     @IBOutlet weak var qrCollectionView: UICollectionView!
@@ -40,8 +43,16 @@ class GetTokenViewController: UIViewController {
             self.titleLabel.text = "Chia Network"
             self.menuButton.setTitle("• Chia Network", for: .normal)
 
-        } else {
+        } else if self.isChives {
             self.wallets = CoreDataManager.share.fetchChiaWalletPrivateKey().filter({$0.name! == "Chives Wallet"})
+            self.titleLabel.text = "Chives Network"
+            self.menuButton.setTitle("• Chives Network", for: .normal)
+        } else if self.isChiaTest {
+            self.wallets = CoreDataManager.share.fetchChiaWalletPrivateKey().filter({$0.name! == "TestNet Chia Wallet"})
+            self.titleLabel.text = "Chives Network"
+            self.menuButton.setTitle("• Chives Network", for: .normal)
+        } else if self.isChivesTest {
+            self.wallets = CoreDataManager.share.fetchChiaWalletPrivateKey().filter({$0.name! == "TestNet Chives Wallet"})
             self.titleLabel.text = "Chives Network"
             self.menuButton.setTitle("• Chives Network", for: .normal)
         }

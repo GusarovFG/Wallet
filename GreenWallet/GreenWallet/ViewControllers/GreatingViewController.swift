@@ -16,6 +16,8 @@ class GreatingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        SystemsManager.share.getSystems()
+        
         if UserDefaultsManager.shared.userDefaults.string(forKey: UserDefaultsStringKeys.firstSession.rawValue) != "First" {
             NetworkManager.share.getExchangeRates { rates in
                 let rate = rates.data.filter({$0.symbol == "xchusdt"}).first
