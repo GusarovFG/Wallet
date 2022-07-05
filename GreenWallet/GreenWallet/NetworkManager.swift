@@ -115,13 +115,68 @@ class NetworkManager {
             }
         }.resume()
     }
+    
+    func postListing(name: String, email: String, nameOfProject: String, descriptionOfProject: String, blockChain: String, twitter: String) {
+        guard let url = URL(string: MainURLS.listing.rawValue) else { return }
+       
+        
+        let parameters = ["name": name, "email": email, "project_name": nameOfProject, "description": descriptionOfProject, "blockchain": blockChain.lowercased(), "twitter": twitter]
+       
+        func postBody(params: [String: String]) -> Data? { // (K.3)
+                var paramsArr: [String] = []
+                for (key, value) in params {
+                    paramsArr.append("\(key)=\(value)")
+                }
+                let postBodyString: String = paramsArr.joined(separator: "&")
+                let postBodyData: Data? = postBodyString.data(using: .utf8)
+                return postBodyData
+            }
+
+            var request: URLRequest = URLRequest(url: url) // (K.4)
+            request.httpMethod = "POST"
+            request.httpBody = postBody(params: parameters)
+
+           
+        let task: URLSessionDownloadTask = URLSession.shared.downloadTask(with: request)
+            task.resume()
+    }
+    
+    func postQuestion(name: String, email: String, question: String) {
+        guard let url = URL(string: MainURLS.question.rawValue) else { return }
+       
+        
+        let parameters = ["name": name, "email": email, "question": question]
+       
+        func postBody(params: [String: String]) -> Data? { // (K.3)
+                var paramsArr: [String] = []
+                for (key, value) in params {
+                    paramsArr.append("\(key)=\(value)")
+                }
+                let postBodyString: String = paramsArr.joined(separator: "&")
+                let postBodyData: Data? = postBodyString.data(using: .utf8)
+                return postBodyData
+            }
+
+            var request: URLRequest = URLRequest(url: url) // (K.4)
+            request.httpMethod = "POST"
+            request.httpBody = postBody(params: parameters)
+
+           
+        let task: URLSessionDownloadTask = URLSession.shared.downloadTask(with: request)
+            task.resume()
+    }
 }
+
+
+
 
 enum MainURLS: String {
     case API = "https://greenapp.siterepository.ru/api/v1.0"
     case language = "https://greenapp.siterepository.ru/api/v1.0/localization/languages"
     case ExchangeRates = "https://api.huobi.pro/market/tickers"
     case systems = "https://greenapp.siterepository.ru/api/v1.0/blockchains"
+    case listing = "https://greenapp.siterepository.ru/api/v1.0/listing"
+    case question = "https://greenapp.siterepository.ru/api/v1.0/support"
 }
 
 

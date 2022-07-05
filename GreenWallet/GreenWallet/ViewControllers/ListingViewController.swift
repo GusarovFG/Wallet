@@ -195,9 +195,25 @@ class ListingViewController: UIViewController {
             self.mainViewHeightConstraint.constant += 20
             self.emailTextfieldBottonConstraint.constant += 20
         } else {
-            AlertManager.share.seccessListing(controller: self)
+            let name = self.nameTextField.text ?? ""
+            let email = self.emailTextField.text ?? ""
+            let project = self.projectTextField.text ?? ""
+            let description = self.descriptionOfProjectTextView.text ?? ""
+            let blockchain = self.blockChainTextField.text ?? ""
+            let twitter = self.twitterTextField.text ?? ""
+            
+            DispatchQueue.global().async {
+                NetworkManager.share.postListing(name: name, email: email, nameOfProject: project, descriptionOfProject: description, blockChain: blockchain, twitter: twitter)
+                DispatchQueue.main.async {
+                    AlertManager.share.seccessListing(controller: self)
+                    
+                }
+            }
+
+                
+            }
         }
-    }
+    
     
     @IBAction func backButtonPressed(_ sender: Any) {
         self.dismiss(animated: true)

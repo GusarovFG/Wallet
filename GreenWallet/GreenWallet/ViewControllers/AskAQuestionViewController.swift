@@ -67,12 +67,20 @@ class AskAQuestionViewController: UIViewController {
         self.errorLabel.text = LocalizationManager.share.translate?.result.list.all.non_existent_adress_error
     }
     
+    private func isValidEmail(testStr: String) -> Bool {
+        print("validate emilId: \(testStr)")
+        let emailRegEx = "^(?:(?:(?:(?: )*(?:(?:(?:\\t| )*\\r\\n)?(?:\\t| )+))+(?: )*)|(?: )+)?(?:(?:(?:[-A-Za-z0-9!#$%&*+/=?^_'{|}~]+(?:\\.[-A-Za-z0-9!#$%&*+/=?^_'{|}~]+)*)|(?:\"(?:(?:(?:(?: )*(?:(?:[!#-Z^-~]|\\[|\\])|(?:\\\\(?:\\t|[ -~]))))+(?: )*)|(?: )+)\"))(?:@)(?:(?:(?:[A-Za-z0-9](?:[-A-Za-z0-9]{0,61}[A-Za-z0-9])?)(?:\\.[A-Za-z0-9](?:[-A-Za-z0-9]{0,61}[A-Za-z0-9])?)*)|(?:\\[(?:(?:(?:(?:(?:[0-9]|(?:[1-9][0-9])|(?:1[0-9][0-9])|(?:2[0-4][0-9])|(?:25[0-5]))\\.){3}(?:[0-9]|(?:[1-9][0-9])|(?:1[0-9][0-9])|(?:2[0-4][0-9])|(?:25[0-5]))))|(?:(?:(?: )*[!-Z^-~])*(?: )*)|(?:[Vv][0-9A-Fa-f]+\\.[-A-Za-z0-9._~!$&'()*+,;=:]+))\\])))(?:(?:(?:(?: )*(?:(?:(?:\\t| )*\\r\\n)?(?:\\t| )+))+(?: )*)|(?: )+)?$"
+        let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+        let result = emailTest.evaluate(with: testStr)
+        return result
+    }
+    
     @IBAction func backButtonPressed(_ sender: Any) {
         self.dismiss(animated: true)
     }
     
     @IBAction func sendBbuttonPressed(_ sender: UIButton) {
-        if emailTextField.text != self.email {
+        if !self.isValidEmail(testStr: self.emailTextField.text ?? "") {
             self.textViewTopConstraint.constant += 30
             self.viewConstraint.constant += 30
             self.errorLabel.textColor = #colorLiteral(red: 1, green: 0.2360929251, blue: 0.1714096665, alpha: 1)
@@ -81,7 +89,16 @@ class AskAQuestionViewController: UIViewController {
             self.emailTextField.textColor = #colorLiteral(red: 1, green: 0.2360929251, blue: 0.1714096665, alpha: 1)
             self.bottomCorner.backgroundColor = #colorLiteral(red: 1, green: 0.2360929251, blue: 0.1714096665, alpha: 1)
         } else {
-            AlertManager.share.seccessAskAQuestion(self)
+            let name = self.nameTextField.text ?? ""
+            let email = self.emailTextField.text ?? ""
+            let question = self.questionTextView.text ?? ""
+            DispatchQueue.global().async {
+                NetworkManager.share.postQuestion(name: name, email: email, question: question)
+                DispatchQueue.main.async {
+                    AlertManager.share.seccessAskAQuestion(self)
+                    
+                }
+            }
         }
     }
     
