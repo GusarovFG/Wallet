@@ -88,7 +88,38 @@ class NetworkManager {
     }
     
     func getFAQ() {
+        guard let url = URL(string: "https://greenapp.siterepository.ru/api/v1.0/faq?code=\(CoreDataManager.share.fetchLanguage()[0].languageCode ?? "")") else { return }
+        let session = URLSession.shared
         
+        func decode(data: Data) throws -> String {
+                guard let text = String(data: data, encoding: .utf8) else {
+                    return ""
+                }
+
+                let transform = StringTransform(rawValue: "Any-Hex/Java")
+                return text.applyingTransform(transform, reverse: true) ?? text
+            }
+        
+        session.dataTask(with: url) { data, response, error in
+            if let response = response {
+                print(response)
+            }
+            
+            if let data = data {
+                do {
+                    
+                    let json = try JSONSerialization.jsonObject(with: data) as! [String:AnyObject]
+                    for (i,o) in json {
+                        if i == "result" {
+                            print(o)
+                        }
+                    }
+                } catch {
+                    print(error)
+                }
+            }
+        }.resume()
+                
     }
     
     func getSystems(complition: @escaping (Systems) -> Void) {
@@ -165,6 +196,8 @@ class NetworkManager {
         let task: URLSessionDownloadTask = URLSession.shared.downloadTask(with: request)
             task.resume()
     }
+    
+
 }
 
 
@@ -177,6 +210,7 @@ enum MainURLS: String {
     case systems = "https://greenapp.siterepository.ru/api/v1.0/blockchains"
     case listing = "https://greenapp.siterepository.ru/api/v1.0/listing"
     case question = "https://greenapp.siterepository.ru/api/v1.0/support"
+    case faq = "https://greenapp.siterepository.ru/api/v1.0/faq"
 }
 
 

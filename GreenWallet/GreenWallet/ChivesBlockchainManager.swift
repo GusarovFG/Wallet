@@ -486,7 +486,7 @@ class ChivesBlockchainManager {
     func sendTransactions(_ walletID: Int, amount: Double, fee: Double, address: String, with complition: @escaping(PushTransaction) -> Void) {
         let method = "send_transaction"
         guard let url = URL(string: self.url + "/wallet/" + method) else { return }
-        let parameters = ["wallet_id": walletID, "amount": amount, "fee": fee, "adress": address] as [String : Any]
+        let parameters = ["wallet_id": walletID, "amount": amount, "fee": fee, "address": address] as [String : Any]
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: []) else { return }
@@ -1043,7 +1043,7 @@ class ChivesTestBlockchainManager {
     func sendTransactions(_ walletID: Int, amount: Double, fee: Double, address: String, with complition: @escaping(PushTransaction) -> Void) {
         let method = "send_transaction"
         guard let url = URL(string: self.url + "/wallet/" + method) else { return }
-        let parameters = ["wallet_id": walletID, "amount": amount, "fee": fee, "adress": address] as [String : Any]
+        let parameters = ["wallet_id": walletID, "amount": amount, "fee": fee, "address": address] as [String : Any]
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: []) else { return }

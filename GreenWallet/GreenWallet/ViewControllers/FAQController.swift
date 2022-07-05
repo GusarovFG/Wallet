@@ -22,7 +22,7 @@ class FAQController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        NetworkManager.share.getFAQ()
         self.button.addTarget(self, action: #selector(handleTap), for: .touchUpInside)
         self.backButton.setTitle(LocalizationManager.share.translate?.result.list.all.back_btn, for: .normal)
         self.mainTitle.text = LocalizationManager.share.translate?.result.list.faq.faq_title
