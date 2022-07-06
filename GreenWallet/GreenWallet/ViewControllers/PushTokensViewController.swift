@@ -25,6 +25,7 @@ class PushTokensViewController: UIViewController {
     private var walletId = 1
     private let link = "qwertyuiopasdfghjkl"
     private let contact = "Faddey"
+    private var systems: [ListSystems] = []
     
     @IBOutlet weak var tokenImage: UIImageView!
     @IBOutlet weak var tokenButton: UIButton!
@@ -57,8 +58,8 @@ class PushTokensViewController: UIViewController {
     @IBOutlet weak var transferTokenLabel: UILabel!
     @IBOutlet weak var walletLinkError: UILabel!
     @IBOutlet weak var systemView: UIView!
-    @IBOutlet weak var systemChiaButton: UIButton!
-    @IBOutlet weak var systemChivesButton: UIButton!
+    @IBOutlet weak var systemViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var systemStackView: UIStackView!
     
     @IBOutlet weak var transitionView: UIView!
     @IBOutlet weak var transitionTokenLabel: UILabel!
@@ -80,26 +81,26 @@ class PushTokensViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         localization()
+        
+        SystemsManager.share.filterSystems()
+        self.systems = Array(Set(SystemsManager.share.listOfSystems))
+        
         if self.isChia {
             self.wallets = CoreDataManager.share.fetchChiaWalletPrivateKey().filter({$0.name! == "Chia Wallet"})
-            self.systemButton.setTitle("Chia Network", for: .normal)
-            self.systemChiaButton.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
+            self.systemButton.setTitle("• Chia Network", for: .normal)
             self.tokenImage.image = UIImage(named: "LogoChia")!
         } else if self.isChives {
             self.wallets = CoreDataManager.share.fetchChiaWalletPrivateKey().filter({$0.name! == "Chives Wallet"})
-            self.systemButton.setTitle("Chives Network", for: .normal)
-            self.systemChivesButton.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
+            self.systemButton.setTitle("• Chives Network", for: .normal)
             self.tokenImage.image = UIImage(named: "ChivesLogo")!
             
         } else if self.isChiaTest {
             self.wallets = CoreDataManager.share.fetchChiaWalletPrivateKey().filter({$0.name! == "TestNet Chia Wallet"})
-            self.systemButton.setTitle("Chives TestNet", for: .normal)
-            self.systemChiaButton.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
+            self.systemButton.setTitle("• Chives TestNet", for: .normal)
             self.tokenImage.image = UIImage(named: "LogoChia")!
         } else if self.isChivesTest {
             self.wallets = CoreDataManager.share.fetchChiaWalletPrivateKey().filter({$0.name! == "TestNet Chives Wallet"})
-            self.systemButton.setTitle("Chives TestNet", for: .normal)
-            self.systemChivesButton.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
+            self.systemButton.setTitle("• Chives TestNet", for: .normal)
             self.tokenImage.image = UIImage(named: "ChivesLogo")!
         }
         
@@ -234,6 +235,21 @@ class PushTokensViewController: UIViewController {
     
     
     @IBAction func systemButton(_ sender: UIButton) {
+        
+        for i in 0..<self.systems.count {
+            if self.systemStackView.arrangedSubviews.count == self.systems.count {
+                break
+            } else {
+                let button = UIButton(frame: CGRect(x: 0, y: 0, width: self.systemStackView.frame.width, height: 40))
+                button.setTitle(self.systems[i].name, for: .normal)
+                self.systemStackView.addArrangedSubview(button)
+                self.systemViewHeightConstraint.constant += button.frame.height
+                
+                button.addTarget(self, action: #selector(setupSystemMenuButtons), for: .touchUpInside)
+                
+            }
+        }
+        
         if self.systemView.isHidden {
             UIView.animate(withDuration: 0.5) {
                 self.systemView.isHidden = false
@@ -246,57 +262,53 @@ class PushTokensViewController: UIViewController {
             }
         }
         
-        if sender.titleLabel?.text == "Chia Network" {
-            self.systemChiaButton.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
-            self.systemChiaButton.titleLabel?.textColor = .white
-            self.systemChivesButton.backgroundColor = .systemBackground
-            self.systemChivesButton.titleLabel?.textColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
-        } else {
-            self.systemChivesButton.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
-            self.systemChivesButton.titleLabel?.textColor = .white
-            self.systemChiaButton.backgroundColor = .systemBackground
-            self.systemChiaButton.titleLabel?.textColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
+    }
+    
+    @objc private func setupSystemMenuButtons(sender: UIButton) {
+        for i in 0..<self.systemStackView.arrangedSubviews.count {
+            self.systemStackView.arrangedSubviews[i].backgroundColor = .systemBackground
+            if sender == self.systemStackView.arrangedSubviews[i] {
+                self.systemButton.setTitle("• \(self.systems[i].name)", for: .normal)
+                sender.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
+                
+                if self.systems[i].name == "Chia Network" {
+                    self.wallets = CoreDataManager.share.fetchChiaWalletPrivateKey().filter({$0.name == "Chia Wallet"})
+                    self.wallet = self.wallets.first
+                    self.balanceButton.setTitle("\((String((self.wallet?.balances as? [NSNumber])?[0] as! Double / 1000000000000.0)).prefix(8)) XCH", for: .normal)
+                    
+                    self.setupWalletButton()
+                } else if self.systems[i].name == "Chives Network" {
+                    self.wallets = CoreDataManager.share.fetchChiaWalletPrivateKey().filter({$0.name == "Chives Wallet"})
+                    self.wallet = self.wallets.first
+                    self.balanceButton.setTitle("\((String((self.wallet?.balances as? [NSNumber])?[0] as! Double / 1000000000000.0)).prefix(8)) XCH", for: .normal)
+                    self.setupWalletButton()
+                } else if self.systems[i].name == "Chia TestNet" {
+                    self.wallets = CoreDataManager.share.fetchChiaWalletPrivateKey().filter({$0.name == "Chia TestNet"})
+                    self.wallet = self.wallets.first
+                    self.balanceButton.setTitle("\((String((self.wallet?.balances as? [NSNumber])?[0] as! Double / 1000000000000.0)).prefix(8)) XCH", for: .normal)
+                    self.setupWalletButton()
+                } else if self.systems[i].name == "Chives TestNet" {
+                    self.wallets = CoreDataManager.share.fetchChiaWalletPrivateKey().filter({$0.name == "Chives TestNet"})
+                    self.wallet = self.wallets.first
+                    self.balanceButton.setTitle("\((String((self.wallet?.balances as? [NSNumber])?[0] as! Double / 1000000000000.0)).prefix(8)) XCH", for: .normal)
+                    self.setupWalletButton()
+                    
+                }
+            }
         }
-        
+        if self.systemView.alpha == 0 {
+            UIView.animate(withDuration: 0.5) {
+                self.systemView.isHidden = false
+                self.systemView.alpha = 1
+            }
+        } else {
+            UIView.animate(withDuration: 0.5) {
+                self.systemView.alpha = 0
+                self.systemView.isHidden = true
+            }
+        }
     }
-    
-    @IBAction func systemButtonsPressed(_ sender: UIButton) {
-        
-        self.wallets = CoreDataManager.share.fetchChiaWalletPrivateKey().filter({$0.name! == "Chia Wallet"})
-        self.wallet = self.wallets.first
-        self.balanceButton.setTitle("\((String((self.wallet?.balances as? [NSNumber])?[0] as! Double / 1000000000000.0)).prefix(8)) XCH", for: .normal)
-        self.tokenButton.setTitle(self.wallet?.name, for: .normal)
-        self.setupWalletButton()
-        self.systemButton.setTitle("Chia Network", for: .normal)
-        self.systemChiaButton.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
-        self.systemChiaButton.titleLabel?.textColor = .white
-        self.systemChivesButton.backgroundColor = .systemBackground
-        self.systemChivesButton.titleLabel?.textColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
-        self.systemView.isHidden = true
-        
-        self.isChia = true
-    }
-    
-    @IBAction func systemChivesButtonPressed(_ sender: Any) {
-        
-        self.wallets = CoreDataManager.share.fetchChiaWalletPrivateKey().filter({$0.name! == "Chives Wallet"})
-        self.wallet = self.wallets.first
-        self.balanceButton.setTitle("\((String((self.wallet?.balances as? [NSNumber])?[0] as! Double / 1000000000000.0)).prefix(8)) XCH", for: .normal)
-        self.tokenButton.setTitle(self.wallet?.name, for: .normal)
-        self.systemButton.setTitle("Chives Network", for: .normal)
-        self.tokenImage.image = UIImage(named: "ChivesLogo")!
-        self.setupWalletButton()
-        
-        self.systemChivesButton.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
-        self.systemChivesButton.titleLabel?.textColor = .white
-        self.systemChiaButton.backgroundColor = .systemBackground
-        self.systemChiaButton.titleLabel?.textColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
-        self.systemView.isHidden = true
-        
-        self.isChia = false
-    }
-    
-    
+
     @IBAction func walletMenuOpen(_ sender: Any) {
         if self.walletsView.isHidden == true {
             self.walletsView.isHidden = false

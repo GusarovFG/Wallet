@@ -170,7 +170,6 @@ class NotificationsViewController: UIViewController {
         let imageView:UIImageView = UIImageView.init(image: image)
         imageView.tintColor = #colorLiteral(red: 0.5803921569, green: 0.5803921569, blue: 0.5803921569, alpha: 1)
         self.searchBar.searchTextField.leftView = nil
-        self.searchBar.searchTextField.placeholder = "Поиск"
         self.searchBar.searchTextField.rightView = imageView
         self.searchBar.searchTextField.rightViewMode = .always
         self.searchBar.searchTextField.backgroundColor = #colorLiteral(red: 0.1882352941, green: 0.1882352941, blue: 0.1882352941, alpha: 0)
@@ -387,12 +386,12 @@ extension NotificationsViewController: UICollectionViewDelegate, UICollectionVie
         switch indexPath {
         case [0,0]:
             if self.isAllFilter {
-                cell.cellLabel.text = LocalizationManager.share.translate?.result.list.transactions.transactions_all
+                cell.cellLabel.text = LocalizationManager.share.translate?.result.list.notifications.notifications_all
                 cell.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
                 cell.cellLabel.textColor = .white
             } else {
                 
-                cell.cellLabel.text = LocalizationManager.share.translate?.result.list.transactions.transactions_all
+                cell.cellLabel.text = LocalizationManager.share.translate?.result.list.notifications.notifications_all
                 if UserDefaultsManager.shared.userDefaults.string(forKey: "Theme") == "light" {
                     cell.backgroundColor = #colorLiteral(red: 0.8705882353, green: 0.8705882353, blue: 0.8705882353, alpha: 1)
                 } else {
@@ -404,12 +403,12 @@ extension NotificationsViewController: UICollectionViewDelegate, UICollectionVie
             return cell
         case [0,1]:
             if self.isInFilter {
-                cell.cellLabel.text = LocalizationManager.share.translate?.result.list.transactions.transactions_incoming
+                cell.cellLabel.text = LocalizationManager.share.translate?.result.list.notifications.notifications_enrollments
                 cell.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
                 cell.cellLabel.textColor = .white
             } else {
                 
-                cell.cellLabel.text = LocalizationManager.share.translate?.result.list.transactions.transactions_incoming
+                cell.cellLabel.text = LocalizationManager.share.translate?.result.list.notifications.notifications_enrollments
                 if UserDefaultsManager.shared.userDefaults.string(forKey: "Theme") == "light" {
                     cell.backgroundColor = #colorLiteral(red: 0.8705882353, green: 0.8705882353, blue: 0.8705882353, alpha: 1)
                 } else {
@@ -420,12 +419,12 @@ extension NotificationsViewController: UICollectionViewDelegate, UICollectionVie
             return cell
         case [0,2]:
             if self.isOutFilter {
-                cell.cellLabel.text = LocalizationManager.share.translate?.result.list.transactions.incoming_outgoing
+                cell.cellLabel.text = LocalizationManager.share.translate?.result.list.notifications.notifications_write_off
                 cell.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
                 cell.cellLabel.textColor = .white
             } else {
                 
-                cell.cellLabel.text = LocalizationManager.share.translate?.result.list.transactions.incoming_outgoing
+                cell.cellLabel.text = LocalizationManager.share.translate?.result.list.notifications.notifications_write_off
                 if UserDefaultsManager.shared.userDefaults.string(forKey: "Theme") == "light" {
                     cell.backgroundColor = #colorLiteral(red: 0.8705882353, green: 0.8705882353, blue: 0.8705882353, alpha: 1)
                 } else {
@@ -436,11 +435,11 @@ extension NotificationsViewController: UICollectionViewDelegate, UICollectionVie
             return cell
         default:
             if self.isPendindFilter {
-                cell.cellLabel.text = LocalizationManager.share.translate?.result.list.transactions.transactions_pendind
+                cell.cellLabel.text = LocalizationManager.share.translate?.result.list.notifications.notifications_other
                 cell.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
                 cell.cellLabel.textColor = .white
             } else {
-                cell.cellLabel.text = LocalizationManager.share.translate?.result.list.transactions.transactions_pendind
+                cell.cellLabel.text = LocalizationManager.share.translate?.result.list.notifications.notifications_other
                 if UserDefaultsManager.shared.userDefaults.string(forKey: "Theme") == "light" {
                     cell.backgroundColor = #colorLiteral(red: 0.8705882353, green: 0.8705882353, blue: 0.8705882353, alpha: 1)
                 } else {
@@ -471,7 +470,7 @@ extension NotificationsViewController: UICollectionViewDelegate, UICollectionVie
             }
             cell.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
             cell.cellLabel.textColor = .white
-            self.filterWalletsTransactions = self.walletsTransactions.reduce([], +)
+            self.filterNotifications = self.notifications
             self.isAllFilter = true
             self.isInFilter = false
             self.isOutFilter = false
@@ -489,7 +488,7 @@ extension NotificationsViewController: UICollectionViewDelegate, UICollectionVie
             }
             cell.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
             cell.cellLabel.textColor = .white
-            self.filterWalletsTransactions = self.walletsTransactions.reduce([], +).filter({$0.type == 0})
+            self.filterNotifications = self.notifications.filter({$0.type == "in"})
             self.isAllFilter = false
             self.isInFilter = true
             self.isOutFilter = false
@@ -507,7 +506,7 @@ extension NotificationsViewController: UICollectionViewDelegate, UICollectionVie
             }
             cell.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
             cell.cellLabel.textColor = .white
-            self.filterWalletsTransactions = self.walletsTransactions.reduce([], +).filter({$0.type == 1})
+            self.filterNotifications = self.notifications.filter({$0.type == "out"})
             self.isAllFilter = false
             self.isInFilter = false
             self.isOutFilter = true
@@ -525,7 +524,7 @@ extension NotificationsViewController: UICollectionViewDelegate, UICollectionVie
             }
             cell.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
             cell.cellLabel.textColor = .white
-            self.filterWalletsTransactions = self.walletsTransactions.reduce([], +).filter({$0.confirmed == false})
+            self.filterNotifications = self.notifications.filter({$0.type == "other"})
             self.isAllFilter = false
             self.isInFilter = false
             self.isOutFilter = false
@@ -539,11 +538,11 @@ extension NotificationsViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText.isEmpty {
-            self.filterWalletsTransactions = self.walletsTransactions.reduce([], +)
+            self.filterNotifications = self.notifications
             self.tableView.reloadData()
             return
         } else {
-            self.filterWalletsTransactions = self.walletsTransactions.reduce([], +).filter{(String($0.confirmed_at_height ).contains(searchText)) || (String($0.amount ).contains(searchText))}
+            self.filterNotifications = self.notifications.filter({$0.summ.contains(searchText)})
             
             self.tableView.reloadData()
             

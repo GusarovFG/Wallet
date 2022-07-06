@@ -70,7 +70,7 @@ class AddContactViewController: UIViewController {
         self.contactNameLabel.text = LocalizationManager.share.translate?.result.list.address_book.address_book_add_contact_name
         self.contactNameTextField.placeholder = LocalizationManager.share.translate?.result.list.address_book.address_book_add_contact_name
         self.contactAdresTextField.placeholder = LocalizationManager.share.translate?.result.list.address_book.address_book_add_adress
-        self.contactAdresLabel.text = LocalizationManager.share.translate?.result.list.address_book.address_book_add_adress
+        self.contactAdresLabel.text = LocalizationManager.share.translate?.result.list.address_book.address_book_add_contact_adress
         self.descriptinLabel.text = LocalizationManager.share.translate?.result.list.address_book.address_book_add_contact_description
         
         self.addContactButton.setTitle(LocalizationManager.share.translate?.result.list.address_book.address_book_add_contact_add_btn, for: .normal)

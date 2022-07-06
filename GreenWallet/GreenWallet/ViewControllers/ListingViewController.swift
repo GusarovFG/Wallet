@@ -109,6 +109,15 @@ class ListingViewController: UIViewController {
     }
     
     @IBAction func nameTextFieldChange(_ sender: UITextField) {
+        if self.nameTextField.text != "" && self.emailTextField.text != "" && self.descriptionOfProjectTextView.text != "" && self.projectTextField.text != "" && self.blockChainTextField.text != "" && self.isCheckBoxPressed  {
+            self.mainButton.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
+            self.mainButton.isEnabled = true
+            
+        } else {
+            self.mainButton.backgroundColor = #colorLiteral(red: 0.3364975452, green: 0.3364975452, blue: 0.3364975452, alpha: 1)
+            self.mainButton.isEnabled = false
+        }
+        
         if sender.text!.isEmpty {
             self.nameLabel.alpha = 0
         } else {
@@ -117,6 +126,16 @@ class ListingViewController: UIViewController {
     }
     
     @IBAction func emailTextFieldChanged(_ sender: UITextField) {
+        
+        if self.nameTextField.text != "" && self.emailTextField.text != "" && self.descriptionOfProjectTextView.text != "" && self.projectTextField.text != "" && self.blockChainTextField.text != "" && self.isCheckBoxPressed  {
+            self.mainButton.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
+            self.mainButton.isEnabled = true
+            
+        } else {
+            self.mainButton.backgroundColor = #colorLiteral(red: 0.3364975452, green: 0.3364975452, blue: 0.3364975452, alpha: 1)
+            self.mainButton.isEnabled = false
+        }
+        
         if sender.text!.isEmpty {
             self.emailLabel.alpha = 0
         } else {
@@ -137,6 +156,15 @@ class ListingViewController: UIViewController {
     }
     
     @IBAction func projectNameTextFieldChanged(_ sender: UITextField) {
+        if self.nameTextField.text != "" && self.emailTextField.text != "" && self.descriptionOfProjectTextView.text != "" && self.projectTextField.text != "" && self.blockChainTextField.text != "" && self.isCheckBoxPressed  {
+            self.mainButton.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
+            self.mainButton.isEnabled = true
+            
+        } else {
+            self.mainButton.backgroundColor = #colorLiteral(red: 0.3364975452, green: 0.3364975452, blue: 0.3364975452, alpha: 1)
+            self.mainButton.isEnabled = false
+        }
+        
         if sender.text!.isEmpty {
             self.projectLabel.alpha = 0
         } else {
@@ -145,6 +173,15 @@ class ListingViewController: UIViewController {
     }
     
     @IBAction func blockChainTextFieldTapped(_ sender: UITextField) {
+        if self.nameTextField.text != "" && self.emailTextField.text != "" && self.descriptionOfProjectTextView.text != "" && self.projectTextField.text != "" && self.blockChainTextField.text != "" && self.isCheckBoxPressed {
+            self.mainButton.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
+            self.mainButton.isEnabled = true
+            
+        } else {
+            self.mainButton.backgroundColor = #colorLiteral(red: 0.3364975452, green: 0.3364975452, blue: 0.3364975452, alpha: 1)
+            self.mainButton.isEnabled = false
+        }
+        
         if sender.text!.isEmpty {
             self.blockChianLabel.alpha = 0
         } else {
@@ -167,7 +204,7 @@ class ListingViewController: UIViewController {
             sender.backgroundColor = .white
             sender.imageView?.layer.cornerRadius = 5
             self.isCheckBoxPressed = true
-            if self.nameTextField.text != "" && self.emailTextField.text != "" && self.descriptionOfProjectTextView.text != "" && self.projectTextField.text != "" && self.blockChainTextField.text != "" {
+            if self.nameTextField.text != "" && self.emailTextField.text != "" && self.descriptionOfProjectTextView.text != "" && self.projectTextField.text != "" && self.blockChainTextField.text != ""  {
                 self.mainButton.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
                 self.mainButton.isEnabled = true
                 
@@ -223,6 +260,7 @@ class ListingViewController: UIViewController {
         if self.blockChainMenuView.isHidden {
             self.blockChainMenuView.isHidden = false
             
+            
             self.blockChainMenuButton.setImage(UIImage(systemName: "chevron.up")!, for: .normal)
         } else {
             self.blockChainMenuView.isHidden = true
@@ -237,6 +275,15 @@ class ListingViewController: UIViewController {
         self.blockChainMenuButton.setImage(UIImage(systemName: "chevron.down")!, for: .normal)
         self.blockChianLabel.alpha = 1
         
+        if self.nameTextField.text != "" && self.emailTextField.text != "" && self.descriptionOfProjectTextView.text != "" && self.projectTextField.text != "" && self.blockChainTextField.text != "" && self.isCheckBoxPressed {
+            self.mainButton.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
+            self.mainButton.isEnabled = true
+            
+        } else {
+            self.mainButton.backgroundColor = #colorLiteral(red: 0.3364975452, green: 0.3364975452, blue: 0.3364975452, alpha: 1)
+            self.mainButton.isEnabled = false
+        }
+        
         if UserDefaultsManager.shared.userDefaults.string(forKey: "Theme") == "light" {
             chivesButton.backgroundColor = .white
         } else {
@@ -250,6 +297,16 @@ class ListingViewController: UIViewController {
         self.blockChainMenuView.isHidden = true
         self.blockChainMenuButton.setImage(UIImage(systemName: "chevron.down")!, for: .normal)
         self.blockChianLabel.alpha = 1
+        
+        if self.nameTextField.text != "" && self.emailTextField.text != "" && self.descriptionOfProjectTextView.text != "" && self.projectTextField.text != "" && self.blockChainTextField.text != "" && self.isCheckBoxPressed {
+            self.mainButton.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
+            self.mainButton.isEnabled = true
+            
+        } else {
+            self.mainButton.backgroundColor = #colorLiteral(red: 0.3364975452, green: 0.3364975452, blue: 0.3364975452, alpha: 1)
+            self.mainButton.isEnabled = false
+        }
+        
         if UserDefaultsManager.shared.userDefaults.string(forKey: "Theme") == "light" {
             chiaButton.backgroundColor = .white
         } else {
@@ -283,6 +340,15 @@ extension ListingViewController: UITextViewDelegate, UITextFieldDelegate {
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {
+        if self.nameTextField.text != "" && self.emailTextField.text != "" && self.descriptionOfProjectTextView.text != "" && self.projectTextField.text != "" && self.blockChainTextField.text != "" && self.isCheckBoxPressed {
+            self.mainButton.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
+            self.mainButton.isEnabled = true
+            
+        } else {
+            self.mainButton.backgroundColor = #colorLiteral(red: 0.3364975452, green: 0.3364975452, blue: 0.3364975452, alpha: 1)
+            self.mainButton.isEnabled = false
+        }
+        
         self.descriptionOfProjectLabel.alpha = 1
         if textView.textColor == .systemGray {
             textView.text = nil

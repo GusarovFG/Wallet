@@ -137,23 +137,7 @@ class GetTokenViewController: UIViewController {
     }
     
     @IBAction func menuButtonPressed(_ sender: UIButton) {
-        
-//        if self.titleLabel.text == "Chia Network" {
-//            self.chiaMenuButton.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
-//            self.chiaMenuButton.titleLabel?.textColor = .white
-//            self.menuButton.setTitle("• Chia Network", for: .normal)
-//            self.titleLabel.text = "Chia Network"
-//            self.chivesMenuButton.backgroundColor = .systemBackground
-//            self.chivesMenuButton.titleLabel?.textColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
-//        } else {
-//            self.chivesMenuButton.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
-//            self.menuButton.setTitle("• Chives Network", for: .normal)
-//            self.chivesMenuButton.titleLabel?.textColor = .white
-//            self.menuButton.titleLabel?.text = "Chives Network"
-//            self.titleLabel.text = "Chives Network"
-//            self.chiaMenuButton.backgroundColor = .systemBackground
-//            self.chiaMenuButton.titleLabel?.textColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
-//        }
+
         print(self.systems.count)
         for i in 0..<self.systems.count {
             if self.systemStackView.arrangedSubviews.count == self.systems.count {
