@@ -7,5 +7,5 @@ target 'GreenWallet' do
 
   pod 'Locksmith'
   pod "MnemonicSwift"
-
+  pod 'SwiftyJSON'
 end

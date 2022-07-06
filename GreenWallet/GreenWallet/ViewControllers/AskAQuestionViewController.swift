@@ -238,7 +238,7 @@ extension AskAQuestionViewController: UITextViewDelegate, UITextFieldDelegate {
 
         
         
-        return numberOfLines <= 2
+        return numberOfLines <= 3
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {

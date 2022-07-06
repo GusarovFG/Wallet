@@ -210,11 +210,9 @@ public extension UIDevice {
 
 }
 
-extension String {
-    var unescapingUnicodeCharacters: String {
-        let mutableString = NSMutableString(string: self)
-        CFStringTransform(mutableString, nil, "Any-Hex/Java" as NSString, true)
-
-        return mutableString as String
+extension Sequence where Element: Hashable {
+    func uniqued() -> [Element] {
+        var set = Set<Element>()
+        return filter { set.insert($0).inserted }
     }
 }

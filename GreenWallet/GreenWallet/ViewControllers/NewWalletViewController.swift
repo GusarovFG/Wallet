@@ -46,7 +46,7 @@ class NewWalletViewController: UIViewController {
         
 //        setupAgreeLabel()
         
-        if self.isChia {
+        if self.isChia || self.isChiaTest {
             self.systemImage.image = UIImage(named: "LogoChia")!
             self.titleLabel.text = "Chia Network"
         } else {

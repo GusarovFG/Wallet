@@ -72,7 +72,7 @@ class ImportMnemonicViewController: UIViewController {
         self.errorLabel.text = LocalizationManager.share.translate?.result.list.import_mnemonics.import_mnemonics_same_words_error
         self.termsLabel.text = LocalizationManager.share.translate?.result.list.all.agreement_with_terms_of_use_chekbox
         self.segmentedControl.setTitle("12 \(LocalizationManager.share.translate?.result.list.import_mnemonics.import_mnemonics_twelve_words_btn ?? "")", forSegmentAt: 0)
-        self.segmentedControl.setTitle("24 \(LocalizationManager.share.translate?.result.list.import_mnemonics.import_mnemonics_twelve_words_btn ?? "")", forSegmentAt: 1)
+        self.segmentedControl.setTitle("24 \(LocalizationManager.share.translate?.result.list.import_mnemonics.import_mnemonics_twenty_four_words_btn ?? "")", forSegmentAt: 1)
         self.backButton.setTitle(LocalizationManager.share.translate?.result.list.all.back_btn, for: .normal)
         
     }
@@ -354,7 +354,7 @@ class ImportMnemonicViewController: UIViewController {
                                 ChiaTestBlockchainManager.share.getWallets { wallets in
                                     for wallet in wallets.wallets {
                                         walletsDict.append(wallet.id)
-                                        name = "TestNet \(wallet.name)"
+                                        name = "Chia TestNet"
                                         
                                         ChiaTestBlockchainManager.share.getNextAddress(walletID: Int64(wallet.id)) { adres in
                                             adreses = adres.address
@@ -403,7 +403,7 @@ class ImportMnemonicViewController: UIViewController {
                                 ChivesTestBlockchainManager.share.getWallets { wallets in
                                     for wallet in wallets.wallets {
                                         walletsDict.append(wallet.id)
-                                        name = "TestNet \(wallet.name)"
+                                        name = "Chives TestNet"
                                         
                                         ChivesTestBlockchainManager.share.getNextAddress(walletID: Int64(wallet.id)) { adres in
                                             adreses = adres.address

@@ -255,7 +255,7 @@ class VerifyMnemonicViewController: UIViewController {
                             for wallet in wallets.wallets {
                                 dispatchGroup.enter()
                                 walletsDict.append(wallet.id)
-                                name = "TestNet \(wallet.name)"
+                                name = "Chia TestNet"
                                 dispatchGroup.leave()
                                 dispatchGroup.enter()
                                 dispatchGroup.leave()
@@ -320,7 +320,7 @@ class VerifyMnemonicViewController: UIViewController {
                             for wallet in wallets.wallets {
                                 dispatchGroup.enter()
                                 walletsDict.append(wallet.id)
-                                name = "TestNet \(wallet.name)"
+                                name = "Chives TestNet"
                                 dispatchGroup.leave()
                                 dispatchGroup.enter()
                                 dispatchGroup.leave()

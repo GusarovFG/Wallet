@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftyJSON
 
 class NetworkManager {
     
@@ -50,7 +51,7 @@ class NetworkManager {
             guard let data = data else { return }
             print(data)
             do {
-               
+                
                 let json = try JSONDecoder().decode(ListOfTranslate.self, from: data)
                 
                 DispatchQueue.main.async {
@@ -72,7 +73,7 @@ class NetworkManager {
             }
             
             guard let data = data else { return }
-
+            
             do {
                 
                 let json = try JSONDecoder().decode(ExchangeRates.self, from: data)
@@ -87,18 +88,13 @@ class NetworkManager {
         }.resume()
     }
     
-    func getFAQ() {
+    func getFAQ(complition: @escaping ([[String]]) -> Void) {
         guard let url = URL(string: "https://greenapp.siterepository.ru/api/v1.0/faq?code=\(CoreDataManager.share.fetchLanguage()[0].languageCode ?? "")") else { return }
         let session = URLSession.shared
+        var questions: [String] = []
+        var answers: [String] = []
+        var questionsDictionary: [[String]] = []
         
-        func decode(data: Data) throws -> String {
-                guard let text = String(data: data, encoding: .utf8) else {
-                    return ""
-                }
-
-                let transform = StringTransform(rawValue: "Any-Hex/Java")
-                return text.applyingTransform(transform, reverse: true) ?? text
-            }
         
         session.dataTask(with: url) { data, response, error in
             if let response = response {
@@ -107,19 +103,28 @@ class NetworkManager {
             
             if let data = data {
                 do {
+                    let json = try JSON(data: data)
+                    let jsonQuestions = json["result"]["list"]
                     
-                    let json = try JSONSerialization.jsonObject(with: data) as! [String:AnyObject]
-                    for (i,o) in json {
-                        if i == "result" {
-                            print(o)
+                    for i in jsonQuestions {
+                        jsonQuestions[i.0].forEach { (s, j) in
+                            questions.append(j["question"].rawValue as! String)
+                            answers.append(j["answer"].rawValue as! String)
                         }
                     }
+                    
+                    questionsDictionary.append(questions)
+                    questionsDictionary.append(answers)
+                    complition(questionsDictionary)
+                    
                 } catch {
-                    print(error)
+                    print("Can't parse responce.")
                 }
             }
+            
         }.resume()
-                
+        
+       
     }
     
     func getSystems(complition: @escaping (Systems) -> Void) {
@@ -132,7 +137,7 @@ class NetworkManager {
             }
             
             guard let data = data else { return }
-
+            
             do {
                 
                 let json = try JSONDecoder().decode(Systems.self, from: data)
@@ -149,55 +154,55 @@ class NetworkManager {
     
     func postListing(name: String, email: String, nameOfProject: String, descriptionOfProject: String, blockChain: String, twitter: String) {
         guard let url = URL(string: MainURLS.listing.rawValue) else { return }
-       
+        
         
         let parameters = ["name": name, "email": email, "project_name": nameOfProject, "description": descriptionOfProject, "blockchain": blockChain.lowercased(), "twitter": twitter]
-       
+        
         func postBody(params: [String: String]) -> Data? { // (K.3)
-                var paramsArr: [String] = []
-                for (key, value) in params {
-                    paramsArr.append("\(key)=\(value)")
-                }
-                let postBodyString: String = paramsArr.joined(separator: "&")
-                let postBodyData: Data? = postBodyString.data(using: .utf8)
-                return postBodyData
+            var paramsArr: [String] = []
+            for (key, value) in params {
+                paramsArr.append("\(key)=\(value)")
             }
-
-            var request: URLRequest = URLRequest(url: url) // (K.4)
-            request.httpMethod = "POST"
-            request.httpBody = postBody(params: parameters)
-
-           
+            let postBodyString: String = paramsArr.joined(separator: "&")
+            let postBodyData: Data? = postBodyString.data(using: .utf8)
+            return postBodyData
+        }
+        
+        var request: URLRequest = URLRequest(url: url) // (K.4)
+        request.httpMethod = "POST"
+        request.httpBody = postBody(params: parameters)
+        
+        
         let task: URLSessionDownloadTask = URLSession.shared.downloadTask(with: request)
-            task.resume()
+        task.resume()
     }
     
     func postQuestion(name: String, email: String, question: String) {
         guard let url = URL(string: MainURLS.question.rawValue) else { return }
-       
+        
         
         let parameters = ["name": name, "email": email, "question": question]
-       
+        
         func postBody(params: [String: String]) -> Data? { // (K.3)
-                var paramsArr: [String] = []
-                for (key, value) in params {
-                    paramsArr.append("\(key)=\(value)")
-                }
-                let postBodyString: String = paramsArr.joined(separator: "&")
-                let postBodyData: Data? = postBodyString.data(using: .utf8)
-                return postBodyData
+            var paramsArr: [String] = []
+            for (key, value) in params {
+                paramsArr.append("\(key)=\(value)")
             }
-
-            var request: URLRequest = URLRequest(url: url) // (K.4)
-            request.httpMethod = "POST"
-            request.httpBody = postBody(params: parameters)
-
-           
+            let postBodyString: String = paramsArr.joined(separator: "&")
+            let postBodyData: Data? = postBodyString.data(using: .utf8)
+            return postBodyData
+        }
+        
+        var request: URLRequest = URLRequest(url: url) // (K.4)
+        request.httpMethod = "POST"
+        request.httpBody = postBody(params: parameters)
+        
+        
         let task: URLSessionDownloadTask = URLSession.shared.downloadTask(with: request)
-            task.resume()
+        task.resume()
     }
     
-
+    
 }
 
 

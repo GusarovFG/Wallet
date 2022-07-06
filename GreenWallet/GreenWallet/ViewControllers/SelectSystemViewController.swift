@@ -9,11 +9,9 @@ import UIKit
 
 class SelectSystemViewController: UIViewController {
     
-    private var systems: [System] = [System(name: "Chia", token: "XCH", image: UIImage(named: "LogoChia")!, balance: 0), System(name: "Chives", token: "XCC", image: UIImage(named: "ChivesLogo")!, balance: 0)]
+ 
     private var allSystems = Systems(success: false, result: ResultSystems(version: "", list: [ListSystems(name: "", full_node: "", wallet: "", daemon: "", farmer: "", harvester: "")]))
     private var filterSystems: [ListSystems] = []
-    private let tokens: [String] = ["XCH", "XCH", "XCC", "XCC"]
-    private let imageOfTokens: [UIImage] = [UIImage(named: "LogoChia")!, UIImage(named: "LogoChia")!, UIImage(named: "ChivesLogo")!, UIImage(named: "ChivesLogo")! ]
     
     private var typseOfNewWallet: [String] = [LocalizationManager.share.translate?.result.list.all.add_wallet_new ?? "", LocalizationManager.share.translate?.result.list.all.add_wallet_import ?? ""]
     var isSelectedSystem = false
@@ -34,7 +32,15 @@ class SelectSystemViewController: UIViewController {
         super.viewDidLoad()
         
         self.allSystems = SystemsManager.share.systems
-        self.filterSystems = self.allSystems.result.list
+        if self.isNewWallet {
+            self.filterSystems = self.allSystems.result.list
+        } else if self.isPushToken || self.isGetToken{
+            SystemsManager.share.filterSystems()
+            self.filterSystems = SystemsManager.share.listOfSystems
+            self.filterSystems = Array(Set(SystemsManager.share.listOfSystems))
+            
+        }
+        
         self.view.window?.frame.size = CGSize(width: 414, height: 238)
         self.tableView.register(UINib(nibName: "SelectSystemTableViewCell", bundle: nil), forCellReuseIdentifier: "systemCell")
         self.navigationController?.navigationBar.isHidden = true
@@ -59,7 +65,7 @@ class SelectSystemViewController: UIViewController {
         UIView.animate(withDuration: 0.1, delay: 0) {
             self.view.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.3481637311)
         }
-        
+        print(self.filterSystems)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -86,17 +92,17 @@ extension SelectSystemViewController: UITableViewDelegate, UITableViewDataSource
         if self.isSelectedSystem {
             return 2
         } else {
-            if self.isChia && self.isPushToken && !self.isMainScreen {
-                self.filterSystems = self.allSystems.result.list.filter({$0.name.contains("Chia")})
+//            if self.isChia && self.isPushToken && !self.isMainScreen {
+//                self.filterSystems = self.allSystems.result.list.filter({$0.name.contains("Chia")})
+//                return self.filterSystems.count
+//            } else if !self.isChia && self.isPushToken && !self.isMainScreen {
+//                self.filterSystems = self.allSystems.result.list.filter({$0.name.contains("Chives")})
+//                return self.filterSystems.count
+//            } else if self.isChia && self.isPushToken && self.isMainScreen {
+//                return self.filterSystems.count
+//            } else {
                 return self.filterSystems.count
-            } else if !self.isChia && self.isPushToken && !self.isMainScreen {
-                self.filterSystems = self.allSystems.result.list.filter({$0.name.contains("Chives")})
-                return self.filterSystems.count
-            } else if self.isChia && self.isPushToken && self.isMainScreen {
-                return self.filterSystems.count
-            } else {
-                return self.filterSystems.count
-            }
+            
             
         }
     }
@@ -107,9 +113,16 @@ extension SelectSystemViewController: UITableViewDelegate, UITableViewDataSource
   
         switch self.isSelectedSystem {
         case false:
-            selectedSystemCell.nameOfSystemLabel.text = self.allSystems.result.list[indexPath.row].name
-            selectedSystemCell.tokensLabel.text = self.tokens[indexPath.row]
-            selectedSystemCell.systemImage.image = self.imageOfTokens[indexPath.row]
+            selectedSystemCell.nameOfSystemLabel.text = self.filterSystems[indexPath.row].name
+            if selectedSystemCell.nameOfSystemLabel.text == "Chia Network" || selectedSystemCell.nameOfSystemLabel.text == "Chia TestNet" {
+                selectedSystemCell.tokensLabel.text = "XCH"
+                selectedSystemCell.systemImage.image = UIImage(named: "LogoChia")!
+            } else {
+                selectedSystemCell.tokensLabel.text = "XCC"
+                selectedSystemCell.systemImage.image = UIImage(named: "ChivesLogo")!
+            }
+            
+            
             return selectedSystemCell
         case true:
             selectTypeOfWalletCell.accessoryType = .disclosureIndicator
@@ -121,43 +134,46 @@ extension SelectSystemViewController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = self.tableView.cellForRow(at: indexPath) as! SelectSystemTableViewCell
         if self.isSelectedSystem && !self.isGetToken && !self.isPushToken {
-            switch indexPath {
-            case [0,0]:
+            switch cell.nameOfSystemLabel.text {
+            case "Chia Network":
                 let newWalletVC = storyboard?.instantiateViewController(withIdentifier: "NewWalletViewController") as! NewWalletViewController
-                newWalletVC.isChia = self.isChia
-                newWalletVC.isChiaTest = self.isChiaTest
-                newWalletVC.isChives = self.isChives
-                newWalletVC.isChivesTest = self.isChivesTest
+                newWalletVC.isChia = true
                 self.present(newWalletVC, animated: true, completion: nil)
-            case [0,1]:
+            case "Chia TestNet":
                 let newWalletVC = storyboard?.instantiateViewController(withIdentifier: "ImportMnemonicViewController") as! ImportMnemonicViewController
-                newWalletVC.isChia = self.isChia
-                newWalletVC.isChiaTest = self.isChiaTest
-                newWalletVC.isChives = self.isChives
-                newWalletVC.isChivesTest = self.isChivesTest
+                newWalletVC.isChiaTest = true
+                self.present(newWalletVC, animated: true, completion: nil)
+            case "Chives Network":
+                let newWalletVC = storyboard?.instantiateViewController(withIdentifier: "ImportMnemonicViewController") as! ImportMnemonicViewController
+                newWalletVC.isChives = true
+                self.present(newWalletVC, animated: true, completion: nil)
+            case "Chives TestNet":
+                let newWalletVC = storyboard?.instantiateViewController(withIdentifier: "ImportMnemonicViewController") as! ImportMnemonicViewController
+                newWalletVC.isChivesTest = true
                 self.present(newWalletVC, animated: true, completion: nil)
             default:
                 break
             }
         } else if !self.isSelectedSystem && self.isGetToken && !self.isPushToken  {
-            switch indexPath  {
-            case [0,0]:
+            switch cell.nameOfSystemLabel.text  {
+            case "Chia Network":
                 let gettVC = storyboard?.instantiateViewController(withIdentifier: "GetTokenViewController") as! GetTokenViewController
                 gettVC.modalPresentationStyle = .fullScreen
                 gettVC.isChia = true
                 self.present(gettVC, animated: true, completion: nil)
-            case [0,1]:
+            case "Chia TestNet":
                 let gettVC = storyboard?.instantiateViewController(withIdentifier: "GetTokenViewController") as! GetTokenViewController
                 gettVC.modalPresentationStyle = .fullScreen
                 gettVC.isChiaTest = true
                 self.present(gettVC, animated: true, completion: nil)
-            case [0,2]:
+            case "Chives Network":
                 let gettVC = storyboard?.instantiateViewController(withIdentifier: "GetTokenViewController") as! GetTokenViewController
                 gettVC.modalPresentationStyle = .fullScreen
                 gettVC.isChives = true
                 self.present(gettVC, animated: true, completion: nil)
-            case [0,3]:
+            case "Chives TestNet":
                 let gettVC = storyboard?.instantiateViewController(withIdentifier: "GetTokenViewController") as! GetTokenViewController
                 gettVC.modalPresentationStyle = .fullScreen
                 gettVC.isChivesTest = true
@@ -166,23 +182,23 @@ extension SelectSystemViewController: UITableViewDelegate, UITableViewDataSource
                 break
             }
         } else if !self.isSelectedSystem && !self.isGetToken && self.isPushToken  {
-            switch indexPath  {
-            case [0,0]:
+            switch cell.nameOfSystemLabel.text  {
+            case "Chia Network":
                 let gettVC = storyboard?.instantiateViewController(withIdentifier: "PushTokensViewController") as! PushTokensViewController
                 gettVC.modalPresentationStyle = .fullScreen
                 gettVC.isChia = true
                 self.present(gettVC, animated: true, completion: nil)
-            case [0,1]:
+            case "Chia TestNet":
                 let gettVC = storyboard?.instantiateViewController(withIdentifier: "PushTokensViewController") as! PushTokensViewController
                 gettVC.modalPresentationStyle = .fullScreen
                 gettVC.isChiaTest = true
                 self.present(gettVC, animated: true, completion: nil)
-            case [0,2]:
+            case "Chives Network":
                 let gettVC = storyboard?.instantiateViewController(withIdentifier: "PushTokensViewController") as! PushTokensViewController
                 gettVC.modalPresentationStyle = .fullScreen
                 gettVC.isChives = true
                 self.present(gettVC, animated: true, completion: nil)
-            case [0,3]:
+            case "Chives TestNet":
                 let gettVC = storyboard?.instantiateViewController(withIdentifier: "PushTokensViewController") as! PushTokensViewController
                 gettVC.modalPresentationStyle = .fullScreen
                 gettVC.isChivesTest = true

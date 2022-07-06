@@ -31,8 +31,6 @@ class GetTokenViewController: UIViewController {
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var adresOfWalletLabel: UILabel!
 
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         localization()
@@ -49,12 +47,12 @@ class GetTokenViewController: UIViewController {
             self.menuButton.setTitle("• Chives Network", for: .normal)
         } else if self.isChiaTest {
             self.wallets = CoreDataManager.share.fetchChiaWalletPrivateKey().filter({$0.name! == "TestNet Chia Wallet"})
-            self.titleLabel.text = "Chives Network"
-            self.menuButton.setTitle("• Chives Network", for: .normal)
+            self.titleLabel.text = "Chia TestNet"
+            self.menuButton.setTitle("• Chia TestNet", for: .normal)
         } else if self.isChivesTest {
             self.wallets = CoreDataManager.share.fetchChiaWalletPrivateKey().filter({$0.name! == "TestNet Chives Wallet"})
-            self.titleLabel.text = "Chives Network"
-            self.menuButton.setTitle("• Chives Network", for: .normal)
+            self.titleLabel.text = "Chives TestNet"
+            self.menuButton.setTitle("• Chives TestNet", for: .normal)
         }
         self.menuView.alpha = 0
         self.menuView.isHidden = true
@@ -92,7 +90,7 @@ class GetTokenViewController: UIViewController {
     
     private func setupLabel(index: Int) {
         
-        let numbers = "\(self.wallets[index].fingerprint)"
+         let numbers = "\(self.wallets[index].fingerprint)"
         var numberOfWallet = ""
         for numb in numbers {
             
@@ -105,8 +103,7 @@ class GetTokenViewController: UIViewController {
         self.walletLabel.text = "\(self.wallets[index].name ?? "")" + numberOfWallet
     }
     
-    private func generateQRImage(stringQR: NSString) -> UIImage
-    {
+    private func generateQRImage(stringQR: NSString) -> UIImage {
         let filter:CIFilter = CIFilter(name:"CIQRCodeGenerator")!
         filter.setDefaults()
 

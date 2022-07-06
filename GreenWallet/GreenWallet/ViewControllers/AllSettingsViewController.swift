@@ -24,11 +24,13 @@ class AllSettingsViewController: UIViewController {
         self.tableView.register(UINib(nibName: "SupportTableViewCell", bundle: nil), forCellReuseIdentifier: "supportCell")
         self.tableView.register(UINib(nibName: "PushAndAllSettingsTableViewCell", bundle: nil), forCellReuseIdentifier: "pushAndAllSettingsCell")
         NotificationCenter.default.addObserver(self, selector: #selector(localization), name: NSNotification.Name("localized"), object: nil)
+        localization()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.tableView.reloadData()
+        localization()
     }
 
     override func viewWillDisappear(_ animated: Bool) {

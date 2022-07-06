@@ -1,20 +1,24 @@
 PODS:
   - Locksmith (4.0.0)
   - MnemonicSwift (2.2.4)
+  - SwiftyJSON (5.0.1)
 
 DEPENDENCIES:
   - Locksmith
   - MnemonicSwift
+  - SwiftyJSON
 
 SPEC REPOS:
   trunk:
     - Locksmith
     - MnemonicSwift
+    - SwiftyJSON
 
 SPEC CHECKSUMS:
   Locksmith: e9bebbaaa4cee3c511bc358a44f843c3fe00e21f
   MnemonicSwift: 40ba76b951b75b32e2719df989b4d6da5798fe26
+  SwiftyJSON: 2f33a42c6fbc52764d96f13368585094bfd8aa5e
 
-PODFILE CHECKSUM: f9e48482c0cd8a43e2ed1e35debebdd34df6f643
+PODFILE CHECKSUM: 5519064f3540e835f119b400d14422b917d09272
 
 COCOAPODS: 1.11.2

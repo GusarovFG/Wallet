@@ -28,9 +28,8 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sxN-W4-iqg">
-                                <rect key="frame" x="15" y="87" width="150" height="58"/>
+                                <rect key="frame" x="15" y="87" width="150" height="16"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="58" id="7bd-r9-Y8h"/>
                                     <constraint firstAttribute="width" constant="150" id="NQq-vx-cj9"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
@@ -54,7 +53,6 @@
                             <constraint firstItem="ntG-VO-HJv" firstAttribute="top" secondItem="eLo-os-O7S" secondAttribute="bottom" constant="7" id="K1m-x9-0Qe"/>
                             <constraint firstAttribute="height" constant="180" id="Ok5-Xh-v64"/>
                             <constraint firstItem="eLo-os-O7S" firstAttribute="leading" secondItem="SWN-aw-YPH" secondAttribute="leading" constant="15" id="S2A-AH-xWV"/>
-                            <constraint firstAttribute="bottom" secondItem="sxN-W4-iqg" secondAttribute="bottom" constant="35" id="T7W-xy-l86"/>
                             <constraint firstItem="sxN-W4-iqg" firstAttribute="top" secondItem="ntG-VO-HJv" secondAttribute="bottom" constant="5" id="UPL-pX-Hia"/>
                             <constraint firstItem="ntG-VO-HJv" firstAttribute="leading" secondItem="SWN-aw-YPH" secondAttribute="leading" constant="15" id="fOh-Wb-bRU"/>
                             <constraint firstItem="eLo-os-O7S" firstAttribute="top" secondItem="SWN-aw-YPH" secondAttribute="top" constant="15" id="szY-Us-U3v"/>

@@ -29,8 +29,7 @@ class mCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        self.
-        self.tableView.dataSource = self
+                self.tableView.dataSource = self
         self.tableView.delegate = self
         
         self.tableView.register(UINib(nibName: "BalanceTableViewCell", bundle: nil), forCellReuseIdentifier: "BalanceTableViewCell")

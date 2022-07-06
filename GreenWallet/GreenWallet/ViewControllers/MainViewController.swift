@@ -74,7 +74,7 @@ class MainViewController: UIViewController {
             self.cellectionView.isScrollEnabled = true
             self.wallet = self.wallets[0]
             let summ: Double = (((self.wallet?.balances as? [Double])?.reduce(0, +) ?? 0) / 1000000000000) * ExchangeRatesManager.share.newRatePerDollar
-            self.balanceLabel.text = "⁓ \(NSString(format:"%.2f", summ)) USD"
+            self.balanceLabel.text = "⁓\(NSString(format:"%.2f", summ)) USD"
             self.pageControl.numberOfPages = self.wallets.count
             self.cellectionView.reloadData()
         } else {
@@ -83,7 +83,7 @@ class MainViewController: UIViewController {
         }
         
         if ((self.wallet?.name?.contains("Chia")) != nil) {
-            self.riseLabel.text = "XCС price: \(ExchangeRatesManager.share.newRatePerDollar) $"
+            self.riseLabel.text = "XCH price: \(ExchangeRatesManager.share.newRatePerDollar) $"
             
         }
         self.percentLabel.text = "  \(String(ExchangeRatesManager.share.difference).prefix(5)) % "

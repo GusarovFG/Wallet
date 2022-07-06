@@ -776,7 +776,7 @@ struct ResultSystems: Codable {
 }
 
 // MARK: - List
-struct ListSystems: Codable {
+struct ListSystems: Codable, Hashable {
     let name: String
     let full_node: String
     let wallet: String
