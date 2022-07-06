@@ -29,7 +29,7 @@ class mCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        
+        self.
         self.tableView.dataSource = self
         self.tableView.delegate = self
         
@@ -71,7 +71,7 @@ class mCollectionViewCell: UICollectionViewCell {
             }
         }
         if self.wallet?.wallets != nil {
-            if (self.wallet?.wallets as! [NSNumber]).count > 5 {
+            if (self.wallet?.wallets as! [NSNumber]).count >= 5 {
                 self.tableView.isScrollEnabled = true
             } else {
                 self.tableView.isScrollEnabled = false

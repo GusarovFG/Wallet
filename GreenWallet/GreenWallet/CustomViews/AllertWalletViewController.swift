@@ -136,6 +136,9 @@ class AllertWalletViewController: UIViewController {
             CoreDataManager.share.deleteContact(self.index)
             self.dismiss(animated: true)
             NotificationCenter.default.post(name: NSNotification.Name("showSpinner"), object: nil)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                NotificationCenter.default.post(name: NSNotification.Name("deleteComplite"), object: nil)
+            }
         } else {
             self.dismiss(animated: true)
         }

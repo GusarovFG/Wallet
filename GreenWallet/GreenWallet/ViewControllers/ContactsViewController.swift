@@ -34,6 +34,7 @@ class ContactsViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(localization), name: NSNotification.Name("localized"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(showPopUp), name: NSNotification.Name("showPopUp"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(showSpinner), name: NSNotification.Name("showSpinner"), object: nil)
+        
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -59,6 +60,8 @@ class ContactsViewController: UIViewController {
         self.addContactButton.setTitle(LocalizationManager.share.translate?.result.list.address_book.address_book_add_adress, for: .normal)
         self.searchBar.searchTextField.attributedPlaceholder = NSAttributedString(string: LocalizationManager.share.translate?.result.list.all.search ?? "", attributes: [:])
     }
+    
+
     
     @objc private func showSpinner() {
         AlertManager.share.showSpinner(self, true)
