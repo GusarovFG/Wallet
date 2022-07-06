@@ -16,6 +16,8 @@ class GetTokenViewController: UIViewController {
     var isChivesTest = false
 
     private var qrs = [UIImage(named: "qrwallet")!,UIImage(named: "qrwallet")!,UIImage(named: "qrwallet")!]
+    private var systems: [ListSystems] = []
+    
     @IBOutlet weak var qrCollectionView: UICollectionView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var walletLabel: UILabel!
@@ -25,8 +27,9 @@ class GetTokenViewController: UIViewController {
     @IBOutlet weak var shareBatton: UIButton!
     @IBOutlet weak var menuButton: UIButton!
     @IBOutlet weak var menuView: UIView!
-    @IBOutlet weak var chiaMenuButton: UIButton!
-    @IBOutlet weak var chivesMenuButton: UIButton!
+    @IBOutlet weak var systemViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var systemStackView: UIStackView!
+    
     @IBOutlet weak var copyLabel: UILabel!
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var adresOfWalletLabel: UILabel!
@@ -34,6 +37,9 @@ class GetTokenViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         localization()
+        
+        SystemsManager.share.filterSystems()
+        self.systems = Array(Set(SystemsManager.share.listOfSystems))
         self.qrCollectionView.register(UINib(nibName: "qrCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "qrCell")
         
         if self.isChia {
@@ -60,10 +66,7 @@ class GetTokenViewController: UIViewController {
         
         setupLabel(index: self.pageControl.currentPage)
         self.pageControl.numberOfPages = self.wallets.count
-        self.chiaMenuButton.setTitle("Chia Network", for: .normal)
-        self.chivesMenuButton.setTitle("Chives Network", for: .normal)
-        
-        
+
         self.menuButton.titleLabel?.textColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
         self.menuButton.titleLabel?.numberOfLines = 1
         self.menuButton.titleLabel?.font.withSize(14)
@@ -135,21 +138,35 @@ class GetTokenViewController: UIViewController {
     
     @IBAction func menuButtonPressed(_ sender: UIButton) {
         
-        if self.titleLabel.text == "Chia Network" {
-            self.chiaMenuButton.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
-            self.chiaMenuButton.titleLabel?.textColor = .white
-            self.menuButton.setTitle("• Chia Network", for: .normal)
-            self.titleLabel.text = "Chia Network"
-            self.chivesMenuButton.backgroundColor = .systemBackground
-            self.chivesMenuButton.titleLabel?.textColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
-        } else {
-            self.chivesMenuButton.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
-            self.menuButton.setTitle("• Chives Network", for: .normal)
-            self.chivesMenuButton.titleLabel?.textColor = .white
-            self.menuButton.titleLabel?.text = "Chives Network"
-            self.titleLabel.text = "Chives Network"
-            self.chiaMenuButton.backgroundColor = .systemBackground
-            self.chiaMenuButton.titleLabel?.textColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
+//        if self.titleLabel.text == "Chia Network" {
+//            self.chiaMenuButton.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
+//            self.chiaMenuButton.titleLabel?.textColor = .white
+//            self.menuButton.setTitle("• Chia Network", for: .normal)
+//            self.titleLabel.text = "Chia Network"
+//            self.chivesMenuButton.backgroundColor = .systemBackground
+//            self.chivesMenuButton.titleLabel?.textColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
+//        } else {
+//            self.chivesMenuButton.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
+//            self.menuButton.setTitle("• Chives Network", for: .normal)
+//            self.chivesMenuButton.titleLabel?.textColor = .white
+//            self.menuButton.titleLabel?.text = "Chives Network"
+//            self.titleLabel.text = "Chives Network"
+//            self.chiaMenuButton.backgroundColor = .systemBackground
+//            self.chiaMenuButton.titleLabel?.textColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
+//        }
+        print(self.systems.count)
+        for i in 0..<self.systems.count {
+            if self.systemStackView.arrangedSubviews.count == self.systems.count {
+                break
+            } else {
+                let button = UIButton(frame: CGRect(x: 0, y: 0, width: self.systemStackView.frame.width, height: 40))
+                button.setTitle(self.systems[i].name, for: .normal)
+                self.systemStackView.addArrangedSubview(button)
+                self.systemViewHeightConstraint.constant += button.frame.height
+                
+                button.addTarget(self, action: #selector(setupSystemMenuButtons), for: .touchUpInside)
+                
+            }
         }
        
         
@@ -165,44 +182,53 @@ class GetTokenViewController: UIViewController {
             }
         }
     }
+    
+    @objc private func setupSystemMenuButtons(_ sender: UIButton) {
+        
+        for i in 0..<self.systemStackView.arrangedSubviews.count {
+            self.systemStackView.arrangedSubviews[i].backgroundColor = .systemBackground
+            if sender == self.systemStackView.arrangedSubviews[i] {
+                self.menuButton.setTitle("• \(self.systems[i].name)", for: .normal)
+                sender.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
+                self.titleLabel.text = self.systems[i].name
+                
+                if self.systems[i].name == "Chia Network" {
+                    self.wallets = CoreDataManager.share.fetchChiaWalletPrivateKey().filter({$0.name == "Chia Wallet"})
+                    
+                    self.qrCollectionView.reloadData()
+                    self.pageControl.numberOfPages = self.wallets.count
+                } else if self.systems[i].name == "Chives Network" {
+                    self.wallets = CoreDataManager.share.fetchChiaWalletPrivateKey().filter({$0.name == "Chives Wallet"})
+                    self.qrCollectionView.reloadData()
+                    self.pageControl.numberOfPages = self.wallets.count
+                } else if self.systems[i].name == "Chia TestNet" {
+                    self.wallets = CoreDataManager.share.fetchChiaWalletPrivateKey().filter({$0.name == "Chia TestNet"})
+                    self.qrCollectionView.reloadData()
+                    self.pageControl.numberOfPages = self.wallets.count
+                } else if self.systems[i].name == "Chives TestNet" {
+                    self.wallets = CoreDataManager.share.fetchChiaWalletPrivateKey().filter({$0.name == "Chives TestNet"})
+                    self.qrCollectionView.reloadData()
+                    self.pageControl.numberOfPages = self.wallets.count
+                }
+            }
+        }
+        if self.menuView.alpha == 0 {
+            UIView.animate(withDuration: 0.5) {
+                self.menuView.isHidden = false
+                self.menuView.alpha = 1
+            }
+        } else {
+            UIView.animate(withDuration: 0.5) {
+                self.menuView.alpha = 0
+                self.menuView.isHidden = true
+            }
+        }
+    }
 
     
-    @IBAction func chiaButtonPressed(_ sender: UIButton) {
-        
-        
-        sender.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
-        self.chiaMenuButton.titleLabel?.textColor = .white
-        self.menuButton.setTitle("• Chia Network", for: .normal)
-        self.titleLabel.text = "Chia Network"
-        self.chivesMenuButton.backgroundColor = .systemBackground
-        self.chivesMenuButton.titleLabel?.textColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
-        self.menuView.alpha = 0
-        
-        self.wallets = CoreDataManager.share.fetchChiaWalletPrivateKey().filter({$0.name! == "Chia Wallet"})
-        self.isChia = true
-        self.qrCollectionView.reloadData()
-        self.setupLabel(index: 0)
-        self.pageControl.numberOfPages = self.wallets.count
-    }
+
     
-    @IBAction func chivesButtonPressed(_ sender: UIButton) {
-        
-        
-        sender.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
-        self.menuButton.setTitle("• Chives Network", for: .normal)
-        self.chivesMenuButton.titleLabel?.textColor = .white
-        self.menuButton.titleLabel?.text = "Chives Network"
-        self.titleLabel.text = "Chives Network"
-        self.chiaMenuButton.backgroundColor = .systemBackground
-        self.chiaMenuButton.titleLabel?.textColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
-        self.menuView.alpha = 0
-        
-        self.wallets = CoreDataManager.share.fetchChiaWalletPrivateKey().filter({$0.name! == "Chives Wallet"})
-        self.isChia = false
-        self.qrCollectionView.reloadData()
-        self.setupLabel(index: 0)
-        self.pageControl.numberOfPages = self.wallets.count
-    }
+
     
     @IBAction func copyButtonPressed(_ sender: Any) {
         UIView.animate(withDuration: 1) {
