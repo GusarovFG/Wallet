@@ -53,7 +53,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             
             NetworkManager.share.getLocalization(from: MainURLS.language.rawValue) { language in
                 LanguageManager.share.language = language
-                self.window?.rootViewController = startVC
+                DispatchQueue.main.async {
+                    self.window?.rootViewController = startVC
+                }
                 
             }
             

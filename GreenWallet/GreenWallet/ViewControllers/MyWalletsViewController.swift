@@ -73,12 +73,12 @@ class MyWalletsViewController: UIViewController {
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         self.scrollView.contentSize = self.view.bounds.size
-        self.scrollToNextCell()
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
+        self.scrollToNextCell()
         
         print(self.index)
         
@@ -122,8 +122,9 @@ class MyWalletsViewController: UIViewController {
     
     private func scrollToNextCell(){
         if !self.isShowDetail && self.isScrolling {
-            
+            self.walletCollectionView.isPagingEnabled = false
             self.walletCollectionView.scrollToItem(at: [0,self.index], at: .right, animated: true)
+            self.walletCollectionView.isPagingEnabled = true
         }
         
     }
@@ -265,6 +266,8 @@ extension MyWalletsViewController: UICollectionViewDelegate, UICollectionViewDat
                 selectSystemVC.isPushToken = true
                 selectSystemVC.isChia = (selectedWallet?.name == "Chia Wallet")
                 selectSystemVC.modalPresentationStyle = .overFullScreen
+                selectSystemVC.wallet = self.wallet
+                selectSystemVC.isInMyWallet = true
                 self.present(selectSystemVC, animated: true)
             case [0,2]:
                 let getTokenViewController = storyboard?.instantiateViewController(withIdentifier: "GetTokenViewController") as! GetTokenViewController

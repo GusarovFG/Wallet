@@ -102,6 +102,13 @@ extension Date {
     }
 }
 
+extension Double {
+    /// Rounds the double to decimal places value
+    func rounded(toPlaces places:Int) -> Double {
+        let divisor = pow(10.0, Double(places))
+        return (self * divisor).rounded() / divisor
+    }
+}
 
 enum UIUserInterfaceIdiom : Int
 {
@@ -215,4 +222,19 @@ extension Sequence where Element: Hashable {
         var set = Set<Element>()
         return filter { set.insert($0).inserted }
     }
+}
+
+extension UIView {
+
+    func rotate(_ toValue: CGFloat, duration: CFTimeInterval = 0.2) {
+        let animation = CABasicAnimation(keyPath: "transform.rotation")
+        
+        animation.toValue = toValue
+        animation.duration = duration
+        animation.isRemovedOnCompletion = false
+        animation.fillMode = CAMediaTimingFillMode.forwards
+        
+        self.layer.add(animation, forKey: nil)
+    }
+
 }

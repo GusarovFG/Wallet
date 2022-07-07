@@ -14,6 +14,8 @@ class MainTabBarController: UITabBarController, UINavigationBarDelegate {
         addTabs()
         self.tabBar.tintColor = #colorLiteral(red: 0.2274509804, green: 0.6745098039, blue: 0.3490196078, alpha: 1)
         
+        
+        
 //        NotificationCenter.default.addObserver(self, selector: #selector(changeIndex), name: NSNotification.Name("ChangeIndex"), object: nil)
     }
     

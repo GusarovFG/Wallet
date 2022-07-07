@@ -23,14 +23,9 @@ class TermsOfUseViewController: UIViewController {
         self.continueButton.backgroundColor = #colorLiteral(red: 0.2666666667, green: 0.2666666667, blue: 0.2666666667, alpha: 1)
         self.checkBoxButton.contentMode = .center
         localization()
-//        setupAgreeLabel()
+        setupAgreeLabel()
         
-        self.agreeLabel.addRangeGesture(stringRange: "условиями пользования") {
-            let url = URL(string: "https://devushka.ru/upload/posts/a1797083197722a6b1ab8e2f4beb2b08.jpg")
-            if UIApplication.shared.canOpenURL(url!) {
-                UIApplication.shared.open(url!, options: [:])
-            }
-        }
+        
         
 
         
@@ -46,9 +41,21 @@ class TermsOfUseViewController: UIViewController {
     }
     
     private func setupAgreeLabel() {
-        let prefixString = "Я соглашаюсь с  "
+        let split = self.agreeLabel.text?.split(separator: " ")
+        var first = ""
+        var second = ""
+        
+        for i in 0..<(split?.count ?? 0){
+            if i + 1 == split?.count || i + 2 == split?.count || i + 3 == split?.count {
+                second += " \(split?[i] ?? "")"
+            } else {
+                first += "\(split?[i] ?? "") "
+            }
+            
+        }
+        let prefixString = first
         let infixAttributedString = NSAttributedString(
-            string: "условиями пользования",
+            string: second,
             attributes: [NSAttributedString.Key.foregroundColor: #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)]
         )
         
@@ -56,6 +63,13 @@ class TermsOfUseViewController: UIViewController {
         attributedString.append(infixAttributedString)
         
         self.agreeLabel.attributedText = attributedString
+        
+        self.agreeLabel.addRangeGesture(stringRange: second) {
+            let url = URL(string: "https://devushka.ru/upload/posts/a1797083197722a6b1ab8e2f4beb2b08.jpg")
+            if UIApplication.shared.canOpenURL(url!) {
+                UIApplication.shared.open(url!, options: [:])
+            }
+        }
     }
 
     

@@ -37,7 +37,7 @@ class AllWalletsViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.wallets = CoreDataManager.share.fetchChiaWalletPrivateKey()
+        self.wallets = WalletManager.share.vallets
         self.walletsTableView.reloadData()
 
     }

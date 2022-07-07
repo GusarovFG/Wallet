@@ -17,6 +17,7 @@ class LanguageViewController: UIViewController {
         super.viewDidLoad()
         self.titleLabel.text = LocalizationManager.share.translate?.result.list.select_language.select_language_title
         self.tableView.register(UINib(nibName: "LanguageTableViewCell", bundle: nil), forCellReuseIdentifier: "LanguageTableViewCell")
+        self.backButtonItem.setTitle(LocalizationManager.share.translate?.result.list.all.back_btn, for: .normal)
     }
     
 

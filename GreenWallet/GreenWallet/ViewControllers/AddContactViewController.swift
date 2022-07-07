@@ -38,6 +38,7 @@ class AddContactViewController: UIViewController {
         self.errorLabel.alpha = 0
         self.addContactButton.isEnabled = false
         self.addContactButton.backgroundColor = #colorLiteral(red: 0.2666666667, green: 0.2666666667, blue: 0.2666666667, alpha: 1)
+        self.descriptionTextField.textColor = .gray
         
         if self.isEditingContact {
             self.contactAdresTextField.isEnabled = false
@@ -50,7 +51,9 @@ class AddContactViewController: UIViewController {
             self.addContactButton.isEnabled = true
             self.addContactButton.backgroundColor = #colorLiteral(red: 0.2274509804, green: 0.6745098039, blue: 0.3490196078, alpha: 1)
             self.mainTitle.text = LocalizationManager.share.translate?.result.list.address_book.address_book_edit_contact_title
-            
+            self.contactNameLabel.alpha = 0
+            self.contactAdresLabel.alpha = 0
+            self.descriptinLabel.alpha = 0
             
         }
         self.descriptionTextField.isScrollEnabled = false
@@ -59,6 +62,7 @@ class AddContactViewController: UIViewController {
 //        self.descriptionTextField.textContainer.maximumNumberOfLines = 3
 //        self.descriptionTextField.textContainer.lineBreakMode = .byTruncatingTail
         NotificationCenter.default.addObserver(self, selector: #selector(backButtonPressed), name: NSNotification.Name("dismissAddContactVC"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(pasteAddress), name: NSNotification.Name("sendAddress"), object: nil)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -72,6 +76,8 @@ class AddContactViewController: UIViewController {
         self.contactAdresTextField.placeholder = LocalizationManager.share.translate?.result.list.address_book.address_book_add_adress
         self.contactAdresLabel.text = LocalizationManager.share.translate?.result.list.address_book.address_book_add_contact_adress
         self.descriptinLabel.text = LocalizationManager.share.translate?.result.list.address_book.address_book_add_contact_description
+        self.descriptionTextField.text = LocalizationManager.share.translate?.result.list.address_book.address_book_add_contact_description
+        
         
         self.addContactButton.setTitle(LocalizationManager.share.translate?.result.list.address_book.address_book_add_contact_add_btn, for: .normal)
         self.mainTitle.text = LocalizationManager.share.translate?.result.list.address_book.address_book_add_contact_title
@@ -88,11 +94,18 @@ class AddContactViewController: UIViewController {
         
     }
     
+    @objc func pasteAddress(_ notification: Notification) {
+        guard let text = notification.userInfo?["text"] as? String else { return }
+        self.contactAdresTextField.text = text
+    }
+    
     @objc func presentQRScan() {
         let qrScanVC = storyboard?.instantiateViewController(withIdentifier: "QRScanViewController") as! QRScanViewController
         self.present(qrScanVC, animated: true)
     }
     @IBAction func checkTextFields(_ sender: UITextField) {
+        
+        
         if self.contactNameTextField.text != "" && self.contactAdresTextField.text != "" {
             self.addContactButton.isEnabled = true
             self.addContactButton.backgroundColor = #colorLiteral(red: 0.2274509804, green: 0.6745098039, blue: 0.3490196078, alpha: 1)
@@ -101,8 +114,22 @@ class AddContactViewController: UIViewController {
             self.addContactButton.backgroundColor = #colorLiteral(red: 0.2666666667, green: 0.2666666667, blue: 0.2666666667, alpha: 1)
         }
     }
+    @IBAction func hidingNameLabel(_ sender: UITextField) {
+        
+        if sender.text != "" {
+            self.contactNameLabel.alpha = 1
+        } else {
+            self.contactNameLabel.alpha = 0
+        }
+    }
     
-    @IBAction func hidingErrorLabel(_ sender: Any) {
+    @IBAction func hidingErrorLabel(_ sender: UITextField) {
+        
+        if sender.text != "" {
+            self.contactAdresLabel.alpha = 1
+        } else {
+            self.contactAdresLabel.alpha = 0
+        }
         if self.errorLabel.alpha == 1 {
             self.errorLabel.alpha = 0
             if UserDefaultsManager.shared.userDefaults.string(forKey: "Theme") == "light" {
@@ -166,5 +193,39 @@ extension AddContactViewController: UITextViewDelegate {
         return numberOfLines <= 3
     }
     
+    func textViewDidChange(_ textView: UITextView) {
+        if !textView.text.isEmpty && textView.text != LocalizationManager.share.translate?.result.list.address_book.address_book_add_contact_description {
+            self.descriptinLabel.alpha = 1
+        } else {
+            self.descriptinLabel.alpha = 0
+        }
+    }
     
+    func textViewShouldEndEditing(_ textView: UITextView) -> Bool {
+        if textView.text != "" && textView.text != LocalizationManager.share.translate?.result.list.address_book.address_book_add_contact_description {
+            self.descriptinLabel.alpha = 1
+        } else {
+            self.descriptinLabel.alpha = 0
+        }
+        return true
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if textView.text.isEmpty {
+            textView.text = LocalizationManager.share.translate?.result.list.address_book.address_book_add_contact_description
+            textView.textColor = .gray
+        }
+    }
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.textColor == .gray {
+            textView.text = nil
+            self.descriptinLabel.alpha = 1
+            if UserDefaultsManager.shared.userDefaults.string(forKey: "Theme") == "light" {
+                textView.textColor = .black
+            } else {
+                textView.textColor = .white
+            }
+        }
+    }
 }

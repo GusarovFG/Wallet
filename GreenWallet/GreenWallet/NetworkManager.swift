@@ -30,9 +30,9 @@ class NetworkManager {
                 let json = try decoder.decode(Language.self, from: data)
                 
                 print(json.result.version)
-                DispatchQueue.main.async {
+               
                     complition(json)
-                }
+                
             } catch {
                 print(error)
             }

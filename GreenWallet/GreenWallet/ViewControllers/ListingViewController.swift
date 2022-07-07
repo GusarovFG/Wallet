@@ -104,6 +104,12 @@ class ListingViewController: UIViewController {
         return result
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        
+        self.view.endEditing(true)
+    }
+    
     @objc private func selfdismiss() {
         self.dismiss(animated: true)
     }
@@ -326,18 +332,21 @@ extension ListingViewController: UITextViewDelegate, UITextFieldDelegate {
     }
     
     
-    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        let newText = (textView.text as NSString).replacingCharacters(in: range, with: text)
-        var textWidth = textView.frame.inset(by: textView.textContainerInset).width
-        textWidth -= 2.0 * textView.textContainer.lineFragmentPadding
-        
-        let boundingRect = sizeOfString(string: newText, constrainedToWidth: Double(textWidth), font: textView.font!)
-        let numberOfLines = boundingRect.height / textView.font!.lineHeight
-        
-        
-        
-        return numberOfLines <= 2
-    }
+//    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+//        let newText = (textView.text as NSString).replacingCharacters(in: range, with: text)
+//        var textWidth = textView.frame.inset(by: textView.textContainerInset).width
+//        textWidth -= 2.0 * textView.textContainer.lineFragmentPadding
+//
+//        let boundingRect = sizeOfString(string: newText, constrainedToWidth: Double(textWidth), font: textView.font!)
+//        let numberOfLines = boundingRect.height / textView.font!.lineHeight
+//        self.mainViewHeightConstraint.constant += numberOfLines
+//
+//
+//       
+//        
+//
+//        return true
+//    }
     
     func textViewDidBeginEditing(_ textView: UITextView) {
         if self.nameTextField.text != "" && self.emailTextField.text != "" && self.descriptionOfProjectTextView.text != "" && self.projectTextField.text != "" && self.blockChainTextField.text != "" && self.isCheckBoxPressed {

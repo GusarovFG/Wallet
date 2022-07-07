@@ -145,6 +145,11 @@ class VerifyMnemonicViewController: UIViewController {
                                 dispatchGroup.enter()
                                 UserDefaultsManager.shared.userDefaults.set("Exist", forKey: UserDefaultsStringKeys.walletExist.rawValue )
                                 CoreDataManager.share.saveChiaWalletPrivateKey(name: name, fingerprint: privateKey.private_key.fingerprint, pk: privateKey.private_key.pk, seed: privateKey.private_key.seed, sk: privateKey.private_key.seed, adress: adreses, wallets: walletsDict as [NSNumber], balances: balances as [NSNumber])
+                                
+                                dispatchGroup.leave()
+                                dispatchGroup.enter()
+                                guard let newWallet = CoreDataManager.share.fetchChiaWalletPrivateKey().last else { return }
+                                WalletManager.share.favoritesWallets.append(newWallet)
                                 dispatchGroup.leave()
                             }
                             dispatchGroup.notify(queue: .main) {
@@ -211,6 +216,10 @@ class VerifyMnemonicViewController: UIViewController {
                                 UserDefaultsManager.shared.userDefaults.set("Exist", forKey: UserDefaultsStringKeys.walletExist.rawValue )
                                 CoreDataManager.share.saveChiaWalletPrivateKey(name: name, fingerprint: privateKey.private_key.fingerprint, pk: privateKey.private_key.pk, seed: privateKey.private_key.seed, sk: privateKey.private_key.seed, adress: adreses, wallets: walletsDict as [NSNumber], balances: balances as [NSNumber])
                                 dispatchGroup.leave()
+                                dispatchGroup.enter()
+                                guard let newWallet = CoreDataManager.share.fetchChiaWalletPrivateKey().last else { return }
+                                WalletManager.share.favoritesWallets.append(newWallet)
+                                dispatchGroup.leave()
                             }
                             dispatchGroup.notify(queue: .main) {
                                 print("Downloading complition")
@@ -276,6 +285,10 @@ class VerifyMnemonicViewController: UIViewController {
                                 UserDefaultsManager.shared.userDefaults.set("Exist", forKey: UserDefaultsStringKeys.walletExist.rawValue )
                                 CoreDataManager.share.saveChiaWalletPrivateKey(name: name, fingerprint: privateKey.private_key.fingerprint, pk: privateKey.private_key.pk, seed: privateKey.private_key.seed, sk: privateKey.private_key.seed, adress: adreses, wallets: walletsDict as [NSNumber], balances: balances as [NSNumber])
                                 dispatchGroup.leave()
+                                dispatchGroup.enter()
+                                guard let newWallet = CoreDataManager.share.fetchChiaWalletPrivateKey().last else { return }
+                                WalletManager.share.favoritesWallets.append(newWallet)
+                                dispatchGroup.leave()
                             }
                             dispatchGroup.notify(queue: .main) {
                                 print("Downloading complition")
@@ -340,6 +353,10 @@ class VerifyMnemonicViewController: UIViewController {
                                 dispatchGroup.enter()
                                 UserDefaultsManager.shared.userDefaults.set("Exist", forKey: UserDefaultsStringKeys.walletExist.rawValue )
                                 CoreDataManager.share.saveChiaWalletPrivateKey(name: name, fingerprint: privateKey.private_key.fingerprint, pk: privateKey.private_key.pk, seed: privateKey.private_key.seed, sk: privateKey.private_key.seed, adress: adreses, wallets: walletsDict as [NSNumber], balances: balances as [NSNumber])
+                                dispatchGroup.leave()
+                                dispatchGroup.enter()
+                                guard let newWallet = CoreDataManager.share.fetchChiaWalletPrivateKey().last else { return }
+                                WalletManager.share.favoritesWallets.append(newWallet)
                                 dispatchGroup.leave()
                             }
                             dispatchGroup.notify(queue: .main) {

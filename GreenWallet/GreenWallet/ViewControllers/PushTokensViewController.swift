@@ -16,11 +16,12 @@ class PushTokensViewController: UIViewController {
     var isChiaTest = false
     var isChivesTest = false
     var isMainScreen = false
+    var isInMyWallet = false
+    var wallet: ChiaWalletPrivateKey?
     
     
-    private var video = AVCaptureVideoPreviewLayer()
+    private var video = ScannerOverlayPreviewLayer()
     private let session = AVCaptureSession()
-    private var wallet: ChiaWalletPrivateKey?
     private var wallets: [ChiaWalletPrivateKey] = []
     private var walletId = 1
     private let link = "qwertyuiopasdfghjkl"
@@ -104,9 +105,10 @@ class PushTokensViewController: UIViewController {
             self.tokenImage.image = UIImage(named: "ChivesLogo")!
         }
         
-      
-        self.wallet = self.wallets.first
-        self.balanceButton.setTitle("\((String((self.wallet?.balances as? [NSNumber])?[0] as! Double / 1000000000000.0)).prefix(8)) XCH", for: .normal)
+        if !self.isInMyWallet {
+            self.wallet = self.wallets.first
+        }
+        self.balanceButton.setTitle("\((String(((self.wallet?.balances as? [NSNumber])?[0] as! Double / 1000000000000.0).rounded(toPlaces: 8)))) XCH", for: .normal)
         self.tokenButton.setTitle(self.wallet?.name, for: .normal)
         self.walletsView.isHidden = true
         
@@ -274,26 +276,26 @@ class PushTokensViewController: UIViewController {
                 if self.systems[i].name == "Chia Network" {
                     self.wallets = CoreDataManager.share.fetchChiaWalletPrivateKey().filter({$0.name == "Chia Wallet"})
                     self.wallet = self.wallets.first
-                    self.balanceButton.setTitle("\((String((self.wallet?.balances as? [NSNumber])?[0] as! Double / 1000000000000.0)).prefix(8)) XCH", for: .normal)
+                    self.balanceButton.setTitle("\((String(((self.wallet?.balances as? [NSNumber])?[0] as! Double / 1000000000000.0).rounded(toPlaces: 8)))) XCH", for: .normal)
                     self.tokenImage.image = UIImage(named: "LogoChia")!
                     
                     self.setupWalletButton()
                 } else if self.systems[i].name == "Chives Network" {
                     self.wallets = CoreDataManager.share.fetchChiaWalletPrivateKey().filter({$0.name == "Chives Wallet"})
                     self.wallet = self.wallets.first
-                    self.balanceButton.setTitle("\((String((self.wallet?.balances as? [NSNumber])?[0] as! Double / 1000000000000.0)).prefix(8)) XCH", for: .normal)
+                    self.balanceButton.setTitle("\((String(((self.wallet?.balances as? [NSNumber])?[0] as! Double / 1000000000000.0).rounded(toPlaces: 8)))) XCH", for: .normal)
                     self.tokenImage.image = UIImage(named: "ChivesLogo")!
                     self.setupWalletButton()
                 } else if self.systems[i].name == "Chia TestNet" {
                     self.wallets = CoreDataManager.share.fetchChiaWalletPrivateKey().filter({$0.name == "Chia TestNet"})
                     self.wallet = self.wallets.first
-                    self.balanceButton.setTitle("\((String((self.wallet?.balances as? [NSNumber])?[0] as! Double / 1000000000000.0)).prefix(8)) XCH", for: .normal)
+                    self.balanceButton.setTitle("\((String(((self.wallet?.balances as? [NSNumber])?[0] as! Double / 1000000000000.0).rounded(toPlaces: 8)))) XCH", for: .normal)
                     self.tokenImage.image = UIImage(named: "LogoChia")!
                     self.setupWalletButton()
                 } else if self.systems[i].name == "Chives TestNet" {
                     self.wallets = CoreDataManager.share.fetchChiaWalletPrivateKey().filter({$0.name == "Chives TestNet"})
                     self.wallet = self.wallets.first
-                    self.balanceButton.setTitle("\((String((self.wallet?.balances as? [NSNumber])?[0] as! Double / 1000000000000.0)).prefix(8)) XCH", for: .normal)
+                    self.balanceButton.setTitle("\((String(((self.wallet?.balances as? [NSNumber])?[0] as! Double / 1000000000000.0).rounded(toPlaces: 8)))) XCH", for: .normal)
                     self.tokenImage.image = UIImage(named: "ChivesLogo")!
                     self.setupWalletButton()
                     
@@ -373,7 +375,7 @@ class PushTokensViewController: UIViewController {
                 if self.balanceStackView.arrangedSubviews.count == ((self.wallet?.wallets as! [NSNumber]).count) {
                 } else {
                     let button = UIButton(frame: CGRect(x: 0, y: 0, width: self.balanceStackView.frame.width, height: 40))
-                    button.setTitle("\((String((self.wallet?.balances as? [NSNumber])?[i] as! Double / 1000000000000.0)).prefix(8)) XCH", for: .normal)
+                    button.setTitle("\((String(((self.wallet?.balances as? [NSNumber])?[0] as! Double / 1000000000000.0).rounded(toPlaces: 8)))) XCH", for: .normal)
                     self.balanceStackView.addArrangedSubview(button)
                     self.balanceViewConstraint.constant += button.frame.height
                     self.balaceStackViewConstraint.constant += button.frame.height
@@ -398,7 +400,7 @@ class PushTokensViewController: UIViewController {
                 self.tokenImage.image = UIImage(named: "LogoChia")!
                 setupWalletButton()
                 sender.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
-                self.balanceButton.setTitle("\((String((self.wallet?.balances as? [NSNumber])?[0] as! Double / 1000000000000.0)).prefix(8)) XCH", for: .normal)
+                self.balanceButton.setTitle("\((String(((self.wallet?.balances as? [NSNumber])?[0] as! Double / 1000000000000.0).rounded(toPlaces: 8)))) XCH", for: .normal)
                 self.balanceView.isHidden = true
                 self.walletsView.isHidden = true
                 self.balanceStackView.removeAllSubviews()
@@ -412,7 +414,7 @@ class PushTokensViewController: UIViewController {
         for i in 0..<self.balanceStackView.arrangedSubviews.count {
             self.balanceStackView.arrangedSubviews[i].backgroundColor = .systemBackground
             if sender == self.balanceStackView.arrangedSubviews[i] {
-                self.balanceButton.setTitle("\((String((self.wallet?.balances as? [NSNumber])?[i] as! Double / 1000000000000.0)).prefix(8)) XCH", for: .normal)
+                self.balanceButton.setTitle("\((String(((self.wallet?.balances as? [NSNumber])?[0] as! Double / 1000000000000.0).rounded(toPlaces: 8)))) XCH", for: .normal)
                 sender.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
                 self.balanceView.isHidden = true
                 self.walletsView.isHidden = true
@@ -604,12 +606,12 @@ class PushTokensViewController: UIViewController {
                                         print(send.transactionid)
                                         
                                         if send.success {
-//                                            DispatchQueue.main.async {
-//
-//                                                self.transitionView.isHidden = false
-//                                                self.transitionView.alpha = 1
-//                                                spinnerVC.dismiss(animated: true)
-//                                            }
+                                            DispatchQueue.main.async {
+
+                                                self.transitionView.isHidden = false
+                                                self.transitionView.alpha = 1
+                                                spinnerVC.dismiss(animated: true)
+                                            }
                                             
                                         }
                                     }
@@ -638,11 +640,11 @@ class PushTokensViewController: UIViewController {
                                     ChivesBlockchainManager.share.sendTransactions(self.walletId, amount: amount * 1000000000000, fee: fee * 1000000000000, address: address) {  send in
                                         
                                         if send.success {
-//                                            DispatchQueue.main.async {
-//                                                self.transitionView.isHidden = false
-//                                                self.transitionView.alpha = 1
-//                                                spinnerVC.dismiss(animated: true)
-//                                            }
+                                            DispatchQueue.main.async {
+                                                self.transitionView.isHidden = false
+                                                self.transitionView.alpha = 1
+                                                spinnerVC.dismiss(animated: true)
+                                            }
                                             
                                         }
                                     }
@@ -671,11 +673,11 @@ class PushTokensViewController: UIViewController {
                                     ChivesTestBlockchainManager.share.sendTransactions(self.walletId, amount: amount * 1000000000000, fee: fee * 1000000000000, address: address) {  send in
                                         
                                         if send.success {
-//                                            DispatchQueue.main.async {
-//                                                self.transitionView.isHidden = false
-//                                                self.transitionView.alpha = 1
-//                                                spinnerVC.dismiss(animated: true)
-//                                            }
+                                            DispatchQueue.main.async {
+                                                self.transitionView.isHidden = false
+                                                self.transitionView.alpha = 1
+                                                spinnerVC.dismiss(animated: true)
+                                            }
                                             
                                         }
                                     }
@@ -704,11 +706,11 @@ class PushTokensViewController: UIViewController {
                                     ChiaTestBlockchainManager.share.sendTransactions(self.walletId, amount: amount * 1000000000000, fee: fee * 1000000000000, address: address) {  send in
                                         
                                         if send.success {
-//                                            DispatchQueue.main.async {
-//                                                self.transitionView.isHidden = false
-//                                                self.transitionView.alpha = 1
-//                                                spinnerVC.dismiss(animated: true)
-//                                            }
+                                            DispatchQueue.main.async {
+                                                self.transitionView.isHidden = false
+                                                self.transitionView.alpha = 1
+                                                spinnerVC.dismiss(animated: true)
+                                            }
                                             
                                         }
                                     }
@@ -748,7 +750,7 @@ extension PushTokensViewController: AVCaptureMetadataOutputObjectsDelegate {
         output.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
         output.metadataObjectTypes = [AVMetadataObject.ObjectType.qr]
         
-        video = AVCaptureVideoPreviewLayer(session: session)
+        video = ScannerOverlayPreviewLayer(session: session)
         video.frame = self.cameraView.layer.bounds
     }
     

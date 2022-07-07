@@ -44,7 +44,7 @@ class ImportMnemonicViewController: UIViewController {
         
         self.collectionView.register(UINib(nibName: "ImportMnemonicCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "ImportMnemonicCollectionViewCell")
         
-        //        setuptermsLabel()
+        setuptermsLabel()
         registerFromKeyBoardNotifications()
         self.scrollView.isScrollEnabled = false
         self.continueButton.backgroundColor = #colorLiteral(red: 0.2666666667, green: 0.2666666667, blue: 0.2666666667, alpha: 1)
@@ -110,9 +110,21 @@ class ImportMnemonicViewController: UIViewController {
     
     
     private func setuptermsLabel() {
-        let prefixString = "Я соглашаюсь с  "
+        let split = self.termsLabel.text?.split(separator: " ")
+        var first = ""
+        var second = ""
+        
+        for i in 0..<(split?.count ?? 0){
+            if i + 1 == split?.count || i + 2 == split?.count || i + 3 == split?.count {
+                second += " \(split?[i] ?? "")"
+            } else {
+                first += "\(split?[i] ?? "") "
+            }
+            
+        }
+        let prefixString = first
         let infixAttributedString = NSAttributedString(
-            string: "условиями пользования",
+            string: second,
             attributes: [NSAttributedString.Key.foregroundColor: #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)]
         )
         
@@ -120,6 +132,13 @@ class ImportMnemonicViewController: UIViewController {
         attributedString.append(infixAttributedString)
         
         self.termsLabel.attributedText = attributedString
+        
+        self.termsLabel.addRangeGesture(stringRange: second) {
+            let url = URL(string: "https://devushka.ru/upload/posts/a1797083197722a6b1ab8e2f4beb2b08.jpg")
+            if UIApplication.shared.canOpenURL(url!) {
+                UIApplication.shared.open(url!, options: [:])
+            }
+        }
     }
     
     @IBAction func segmentedControlIsChanged(_ sender: UISegmentedControl) {
@@ -141,7 +160,7 @@ class ImportMnemonicViewController: UIViewController {
             }
             
             
-            self.scrollView.isScrollEnabled = false
+            self.scrollView.isScrollEnabled = true
             self.scrollView.setContentOffset(.zero, animated: true)
             self.collectionView.reloadData()
             self.bottomConstraint.constant = self.bottomConstraint.constant - (55 * 6)
@@ -276,7 +295,8 @@ class ImportMnemonicViewController: UIViewController {
                                         
                                         UserDefaultsManager.shared.userDefaults.set("Exist", forKey: UserDefaultsStringKeys.walletExist.rawValue )
                                         CoreDataManager.share.saveChiaWalletPrivateKey(name: name, fingerprint: privateKey.private_key.fingerprint, pk: privateKey.private_key.pk, seed: privateKey.private_key.seed, sk: privateKey.private_key.seed, adress: adreses, wallets: walletsDict as [NSNumber], balances: balances as [NSNumber])
-                                        
+                                        guard let newWallet = CoreDataManager.share.fetchChiaWalletPrivateKey().last else { return }
+                                        WalletManager.share.favoritesWallets.append(newWallet)
                                         DispatchQueue.main.async {
                                             NotificationCenter.default.post(name: NSNotification.Name("reload"), object: nil)
                                             print(CoreDataManager.share.fetchChiaWalletPrivateKey())
@@ -325,7 +345,8 @@ class ImportMnemonicViewController: UIViewController {
                                         
                                         UserDefaultsManager.shared.userDefaults.set("Exist", forKey: UserDefaultsStringKeys.walletExist.rawValue )
                                         CoreDataManager.share.saveChiaWalletPrivateKey(name: name, fingerprint: privateKey.private_key.fingerprint, pk: privateKey.private_key.pk, seed: privateKey.private_key.seed, sk: privateKey.private_key.seed, adress: adreses, wallets: walletsDict as [NSNumber], balances: balances as [NSNumber])
-                                        
+                                        guard let newWallet = CoreDataManager.share.fetchChiaWalletPrivateKey().last else { return }
+                                        WalletManager.share.favoritesWallets.append(newWallet)
                                         DispatchQueue.main.async {
                                             NotificationCenter.default.post(name: NSNotification.Name("reload"), object: nil)
                                             print(CoreDataManager.share.fetchChiaWalletPrivateKey())
@@ -374,7 +395,8 @@ class ImportMnemonicViewController: UIViewController {
                                         
                                         UserDefaultsManager.shared.userDefaults.set("Exist", forKey: UserDefaultsStringKeys.walletExist.rawValue )
                                         CoreDataManager.share.saveChiaWalletPrivateKey(name: name, fingerprint: privateKey.private_key.fingerprint, pk: privateKey.private_key.pk, seed: privateKey.private_key.seed, sk: privateKey.private_key.seed, adress: adreses, wallets: walletsDict as [NSNumber], balances: balances as [NSNumber])
-                                        
+                                        guard let newWallet = CoreDataManager.share.fetchChiaWalletPrivateKey().last else { return }
+                                        WalletManager.share.favoritesWallets.append(newWallet)
                                         DispatchQueue.main.async {
                                             NotificationCenter.default.post(name: NSNotification.Name("reload"), object: nil)
                                             print(CoreDataManager.share.fetchChiaWalletPrivateKey())
@@ -423,7 +445,8 @@ class ImportMnemonicViewController: UIViewController {
                                         
                                         UserDefaultsManager.shared.userDefaults.set("Exist", forKey: UserDefaultsStringKeys.walletExist.rawValue )
                                         CoreDataManager.share.saveChiaWalletPrivateKey(name: name, fingerprint: privateKey.private_key.fingerprint, pk: privateKey.private_key.pk, seed: privateKey.private_key.seed, sk: privateKey.private_key.seed, adress: adreses, wallets: walletsDict as [NSNumber], balances: balances as [NSNumber])
-                                        
+                                        guard let newWallet = CoreDataManager.share.fetchChiaWalletPrivateKey().last else { return }
+                                        WalletManager.share.favoritesWallets.append(newWallet)
                                         DispatchQueue.main.async {
                                             NotificationCenter.default.post(name: NSNotification.Name("reload"), object: nil)
                                             print(CoreDataManager.share.fetchChiaWalletPrivateKey())

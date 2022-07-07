@@ -81,7 +81,7 @@ class PasswordViewController: UIViewController {
     }
     
     private func localization() {
-        
+        self.backButton.setTitle(LocalizationManager.share.translate?.result.list.all.back_btn, for: .normal)
         if self.restorationIdentifier == "CreatingPasswordViewController" {
             self.createTitleLabel.text = LocalizationManager.share.translate?.result.list.create_a_passcode.creating_a_password_titel
             self.createDiscriptionTitle.text = LocalizationManager.share.translate?.result.list.create_a_passcode.creating_a_password_description

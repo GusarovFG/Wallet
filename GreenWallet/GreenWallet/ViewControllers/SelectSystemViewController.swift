@@ -23,6 +23,8 @@ class SelectSystemViewController: UIViewController {
     var isChiaTest = false
     var isChivesTest = false
     var isMainScreen = false
+    var isInMyWallet = false
+    var wallet: ChiaWalletPrivateKey?
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var titleLabel: UILabel!
@@ -189,21 +191,37 @@ extension SelectSystemViewController: UITableViewDelegate, UITableViewDataSource
                 let gettVC = storyboard?.instantiateViewController(withIdentifier: "PushTokensViewController") as! PushTokensViewController
                 gettVC.modalPresentationStyle = .fullScreen
                 gettVC.isChia = true
+                if self.isInMyWallet {
+                    gettVC.wallet = self.wallet
+                    gettVC.isInMyWallet = true
+                }
                 self.present(gettVC, animated: true, completion: nil)
             case "Chia TestNet":
                 let gettVC = storyboard?.instantiateViewController(withIdentifier: "PushTokensViewController") as! PushTokensViewController
                 gettVC.modalPresentationStyle = .fullScreen
                 gettVC.isChiaTest = true
+                if self.isInMyWallet {
+                    gettVC.wallet = self.wallet
+                    gettVC.isInMyWallet = true
+                }
                 self.present(gettVC, animated: true, completion: nil)
             case "Chives Network":
                 let gettVC = storyboard?.instantiateViewController(withIdentifier: "PushTokensViewController") as! PushTokensViewController
                 gettVC.modalPresentationStyle = .fullScreen
                 gettVC.isChives = true
+                if self.isInMyWallet {
+                    gettVC.wallet = self.wallet
+                    gettVC.isInMyWallet = true
+                }
                 self.present(gettVC, animated: true, completion: nil)
             case "Chives TestNet":
                 let gettVC = storyboard?.instantiateViewController(withIdentifier: "PushTokensViewController") as! PushTokensViewController
                 gettVC.modalPresentationStyle = .fullScreen
                 gettVC.isChivesTest = true
+                if self.isInMyWallet {
+                    gettVC.wallet = self.wallet
+                    gettVC.isInMyWallet = true
+                }
                 self.present(gettVC, animated: true, completion: nil)
             default:
                 break
