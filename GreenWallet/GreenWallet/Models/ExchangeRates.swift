@@ -47,3 +47,47 @@ struct Datum: Codable {
         case askSize
     }
 }
+
+struct ChivesRates: Codable {
+    let result: String
+    let data: [ChivesDatum]
+    let errorCode: Int
+
+    enum CodingKeys: String, CodingKey {
+        case result
+        case data
+        case errorCode
+    }
+}
+
+// MARK: - Datum
+struct ChivesDatum: Codable {
+    let symbol: String
+    let ticker: Ticker
+    let timestamp: Int
+
+    enum CodingKeys: String, CodingKey {
+        case symbol
+        case ticker
+        case timestamp
+    }
+}
+
+// MARK: - Ticker
+struct Ticker: Codable {
+    let height: Double
+    let vol: Double
+    let low: Double
+    let change: Double
+    let turnover: Double
+    let latest: Double
+
+    enum CodingKeys: String, CodingKey {
+        case height
+        case vol
+        case low
+        case change
+        case turnover
+        case latest
+    }
+}

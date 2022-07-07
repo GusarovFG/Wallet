@@ -169,6 +169,30 @@ class CoreDataManager {
         saveContext()
     }
     
+    func saveChivesExchangedRates(ratePerDollar: Double) {
+        let rate = ExchangeChivesRatesCD(context: self.persistentContainer.viewContext)
+        
+        rate.exchangeRates = ratePerDollar
+        
+        saveContext()
+    }
+    
+    func fetchChivesExchangeRates() -> Double {
+        let fetchRequest: NSFetchRequest<ExchangeChivesRatesCD> = ExchangeChivesRatesCD.fetchRequest()
+        let exchangeRates = (try? self.persistentContainer.viewContext.fetch(fetchRequest))
+        
+        return exchangeRates?.first?.exchangeRates ?? 0
+    }
+    
+    func editChivesExchangeRates(newExchangeRates: Double) {
+        let fetchRequest: NSFetchRequest<ExchangeChivesRatesCD> = ExchangeChivesRatesCD.fetchRequest()
+        let exchangeRates = (try? self.persistentContainer.viewContext.fetch(fetchRequest))
+        
+        exchangeRates?.first?.exchangeRates = newExchangeRates
+        
+        saveContext()
+    }
+    
     func saveContext () {
         let context = persistentContainer.viewContext
         if context.hasChanges {

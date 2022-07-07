@@ -180,7 +180,12 @@ extension MyWalletsViewController: UICollectionViewDelegate, UICollectionViewDat
                 mainCell.walletImage.image = UIImage(named: "LogoChia")!
                 mainCell.balanceLabel.text = "\((((wallet.balances as? [Double])?.reduce(0, +) ?? 0) / 1000000000000)) XCH"
                 mainCell.publicKeyLabel.text = "\(LocalizationManager.share.translate?.result.list.wallet.wallet_data_public_key ?? "") \(wallets[indexPath.row].fingerprint )"
-                mainCell.usdLabel.text = "⁓762,14 USDT"
+                if ((wallet.name?.contains("Chia")) != nil) {
+                    mainCell.usdLabel.text = "XCH price: \(ExchangeRatesManager.share.newRatePerDollar) $"
+                    
+                } else {
+                    mainCell.usdLabel.text = "XCC price: \(ExchangeRatesManager.share.newChivesRatePerDollar) $"
+                }
                 mainCell.walletSystemLabel.text = (wallet.name?.split(separator: " ").first ?? "") + " Network"
                 mainCell.complitionHandler = { [unowned self] in
                     let passwordStoryboard = UIStoryboard(name: "PasswordStoryboard", bundle: .main)

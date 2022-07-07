@@ -34,7 +34,7 @@ class MainViewController: UIViewController {
         
         self.navigationController?.navigationBar.isHidden = true
         self.wallets = CoreDataManager.share.fetchChiaWalletPrivateKey()
-
+        
         self.pageControl.numberOfPages = WalletManager.share.favoritesWallets.count
         self.cellectionView.register(UINib(nibName: "mCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "mCollectionViewCell")
         
@@ -53,7 +53,7 @@ class MainViewController: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(hideWallet), name: NSNotification.Name(rawValue: "hideWallet"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(showWallet), name: NSNotification.Name(rawValue: "showWallet"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(showGetSystem), name: NSNotification.Name(rawValue: "showGetVC"), object: nil)
+        //        NotificationCenter.default.addObserver(self, selector: #selector(showGetSystem), name: NSNotification.Name(rawValue: "showGetVC"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(showPushSystem), name: NSNotification.Name(rawValue: "showPushVC"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(localization), name: NSNotification.Name("localized"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(reloadcellectionView), name: NSNotification.Name("reload"), object: nil)
@@ -69,6 +69,7 @@ class MainViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.cellectionView.scrollToItem(at: [0,0], at: .left, animated: true)
         self.wallets = CoreDataManager.share.fetchChiaWalletPrivateKey()
         if !self.wallets.isEmpty {
             self.cellectionView.isScrollEnabled = true
@@ -84,10 +85,14 @@ class MainViewController: UIViewController {
         
         if ((self.wallet?.name?.contains("Chia")) != nil) {
             self.riseLabel.text = "XCH price: \(ExchangeRatesManager.share.newRatePerDollar) $"
-            
+            self.percentLabel.text = "  \(String(ExchangeRatesManager.share.difference).prefix(5)) % "
+            ExchangeRatesManager.share.changeColorOfView(label: self.percentLabel)
+        } else {
+            self.riseLabel.text = "XCC price: \(ExchangeRatesManager.share.newChivesRatePerDollar) $"
+            self.percentLabel.text = "  \(String(ExchangeRatesManager.share.differenceChives).prefix(5)) % "
+            ExchangeRatesManager.share.changeColorOfView(label: self.percentLabel)
         }
-        self.percentLabel.text = "  \(String(ExchangeRatesManager.share.difference).prefix(5)) % "
-        ExchangeRatesManager.share.changeColorOfView(label: self.percentLabel)
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -146,12 +151,12 @@ class MainViewController: UIViewController {
         
     }
     
-    @objc private func showGetSystem(notification: Notification) {
-        let selectSystemVC = storyboard?.instantiateViewController(withIdentifier: "SelectSystemViewController") as! SelectSystemViewController
-        selectSystemVC.isGetToken = true
-        selectSystemVC.modalPresentationStyle = .overFullScreen
-        self.present(selectSystemVC, animated: true)
-    }
+    //    @objc private func showGetSystem(notification: Notification) {
+    //        let selectSystemVC = storyboard?.instantiateViewController(withIdentifier: "SelectSystemViewController") as! SelectSystemViewController
+    //        selectSystemVC.isGetToken = true
+    //        selectSystemVC.modalPresentationStyle = .overFullScreen
+    //        self.present(selectSystemVC, animated: true)
+    //    }
     
     @objc private func showPushSystem(notification: Notification) {
         let selectSystemVC = storyboard?.instantiateViewController(withIdentifier: "SelectSystemViewController") as! SelectSystemViewController
@@ -163,7 +168,7 @@ class MainViewController: UIViewController {
     
     @IBAction func sendButtonPressed(_ sender: Any) {
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "showPushVC"), object: nil)
-    
+        
     }
     @IBAction func qrButtonPressed(_ sender: Any) {
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "showGetVC"), object: nil)
@@ -237,9 +242,22 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
             self.pageControl.currentPage = visibleIndexPath.row
             self.wallet = self.wallets[visibleIndexPath.row]
             
-            let summ: Double = (((self.wallet?.balances as? [Double])?.reduce(0, +) ?? 0) / 1000000000000) * ExchangeRatesManager.share.newRatePerDollar
+            if self.wallet?.name == "Chia Wallet" || self.wallet?.name == "Chia TestNet" {
+                let summ: Double = (((self.wallet?.balances as? [Double])?.reduce(0, +) ?? 0) / 1000000000000) * ExchangeRatesManager.share.newRatePerDollar
+                self.riseLabel.text = "XCH price: \(ExchangeRatesManager.share.newRatePerDollar) $"
+                self.balanceLabel.text = "⁓\(NSString(format:"%.2f", summ)) USD"
+                self.percentLabel.text = "  \(String(ExchangeRatesManager.share.difference).prefix(5)) % "
+                ExchangeRatesManager.share.changeColorOfView(label: self.percentLabel)
+            } else {
+                let summ: Double = (((self.wallet?.balances as? [Double])?.reduce(0, +) ?? 0) / 1000000000000) * ExchangeRatesManager.share.newChivesRatePerDollar
+                self.riseLabel.text = "XCC price: \(ExchangeRatesManager.share.newChivesRatePerDollar) $"
+                self.balanceLabel.text = "⁓\(NSString(format:"%.2f", summ)) USD"
+                self.percentLabel.text = "  \(String(ExchangeRatesManager.share.differenceChives).prefix(5)) % "
+                ExchangeRatesManager.share.changeChivesColorOfView(label: self.percentLabel)
+            }
             
-            self.balanceLabel.text = "⁓ \(NSString(format:"%.2f", summ)) USD"
+           
+            
         }
     }
     

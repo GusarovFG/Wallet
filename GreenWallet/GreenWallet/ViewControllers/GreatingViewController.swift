@@ -25,6 +25,12 @@ class GreatingViewController: UIViewController {
                 ExchangeRatesManager.share.newRatePerDollar = rate?.bid ?? 0
                 CoreDataManager.share.saveExchangedRates(ratePerDollar: rate?.bid ?? 0)
             }
+            
+            NetworkManager.share.getExchngeRatesOfChives { rates in
+                ExchangeRatesManager.share.oldChivesRatePerDollar = CoreDataManager.share.fetchChivesExchangeRates()
+                ExchangeRatesManager.share.newChivesRatePerDollar = rates.data.first?.ticker.latest ?? 0
+                CoreDataManager.share.saveChivesExchangedRates(ratePerDollar: rates.data.first?.ticker.latest ?? 0)
+            }
         } else {
             NetworkManager.share.getExchangeRates { rates in
                 let rate = rates.data.filter({$0.symbol == "xchusdt"}).first
@@ -32,6 +38,13 @@ class GreatingViewController: UIViewController {
                 ExchangeRatesManager.share.newRatePerDollar = rate?.bid ?? 0
                 ExchangeRatesManager.share.differenceСalculation()
                 CoreDataManager.share.editExchangeRates(newExchangeRates: rate?.bid ?? 0)
+            }
+            
+            NetworkManager.share.getExchngeRatesOfChives { rates in
+                ExchangeRatesManager.share.oldChivesRatePerDollar = CoreDataManager.share.fetchChivesExchangeRates()
+                ExchangeRatesManager.share.newChivesRatePerDollar = rates.data.first?.ticker.latest ?? 0
+                ExchangeRatesManager.share.differenceChivesСalculation()
+                CoreDataManager.share.editChivesExchangeRates(newExchangeRates: rates.data.first?.ticker.latest ?? 0)
             }
             
             if !CoreDataManager.share.fetchChiaWalletPrivateKey().isEmpty {

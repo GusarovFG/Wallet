@@ -14,7 +14,7 @@ class MainTabBarController: UITabBarController, UINavigationBarDelegate {
         addTabs()
         self.tabBar.tintColor = #colorLiteral(red: 0.2274509804, green: 0.6745098039, blue: 0.3490196078, alpha: 1)
         
-        NotificationCenter.default.addObserver(self, selector: #selector(changeIndex), name: NSNotification.Name("ChangeIndex"), object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(changeIndex), name: NSNotification.Name("ChangeIndex"), object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -55,8 +55,11 @@ class MainTabBarController: UITabBarController, UINavigationBarDelegate {
     
     override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
         if tabBar.selectedItem?.title == LocalizationManager.share.translate?.result.list.main_screen.main_screen_recive_btn {
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "showGetVC"), object: nil)
-
+                    let selectSystemVC = storyboard?.instantiateViewController(withIdentifier: "SelectSystemViewController") as! SelectSystemViewController
+                    selectSystemVC.isGetToken = true
+                    selectSystemVC.modalPresentationStyle = .overFullScreen
+                    self.present(selectSystemVC, animated: true)
+                
             
         }
         

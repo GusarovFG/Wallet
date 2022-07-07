@@ -88,6 +88,31 @@ class NetworkManager {
         }.resume()
     }
     
+    func getExchngeRatesOfChives(complition: @escaping (ChivesRates) -> Void) {
+        guard let url = URL(string: MainURLS.ExchangeRatesChives.rawValue) else { return }
+        
+        let session = URLSession.shared
+        session.dataTask(with: url) { data, response, error in
+            if let response = response {
+                print(response)
+            }
+            
+            guard let data = data else { return }
+            
+            do {
+                
+                let json = try JSONDecoder().decode(ChivesRates.self, from: data)
+                
+                DispatchQueue.main.async {
+                    complition(json)
+                }
+            } catch {
+                print(error.localizedDescription)
+                
+            }
+        }.resume()
+    }
+    
     func getFAQ(complition: @escaping ([[String]]) -> Void) {
         guard let url = URL(string: "https://greenapp.siterepository.ru/api/v1.0/faq?code=\(CoreDataManager.share.fetchLanguage()[0].languageCode ?? "")") else { return }
         let session = URLSession.shared
@@ -216,6 +241,7 @@ enum MainURLS: String {
     case listing = "https://greenapp.siterepository.ru/api/v1.0/listing"
     case question = "https://greenapp.siterepository.ru/api/v1.0/support"
     case faq = "https://greenapp.siterepository.ru/api/v1.0/faq"
+    case ExchangeRatesChives = "https://api.lbkex.com/v2/ticker.do?symbol=xcc_usdt"
 }
 
 
