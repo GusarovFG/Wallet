@@ -107,7 +107,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
             self.present(supportVC, animated: true, completion: nil)
             self.navigationController?.navigationBar.isHidden = false
         }
-        if indexPath == [0,2] {
+        if indexPath == [0,4] {
             let notificationsVC = storyboard?.instantiateViewController(withIdentifier: "NotificationsViewController") as! NotificationsViewController
             notificationsVC.modalPresentationStyle = .fullScreen
             

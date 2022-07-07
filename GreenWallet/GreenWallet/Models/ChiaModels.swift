@@ -210,7 +210,7 @@ struct ChiaTransaction: Codable {
     let confirmed_at_height: Int
     let created_at_time: Double
     let type: Int
-    
+    let to_address: String
 
     enum CodingKeys: String, CodingKey {
         case amount
@@ -218,6 +218,7 @@ struct ChiaTransaction: Codable {
         case confirmed_at_height = "confirmed_at_height"
         case created_at_time = "created_at_time"
         case type
+        case to_address
     }
 }
 

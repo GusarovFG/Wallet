@@ -520,6 +520,11 @@ struct Notifications: Codable {
     let notifications_write_off: String
     let notifications_year: String
     let notifications_yesterday: String
+    let notifications_transaction_info_block_height: String
+    let notifications_transaction_info_commission: String
+    let notifications_transaction_info_data: String
+    let notifications_transaction_info_number_of_coins: String
+    let notifications_transaction_info_title: String
 
     enum CodingKeys: String, CodingKey {
         case notifications_all
@@ -536,6 +541,11 @@ struct Notifications: Codable {
         case notifications_write_off
         case notifications_year
         case notifications_yesterday
+        case notifications_transaction_info_block_height
+        case notifications_transaction_info_commission
+        case notifications_transaction_info_data
+        case notifications_transaction_info_number_of_coins
+        case notifications_transaction_info_title
     }
 }
 

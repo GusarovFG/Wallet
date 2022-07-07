@@ -12,20 +12,31 @@ class NotificationsViewController: UIViewController {
     var wallet: ChiaWalletPrivateKey?
     var dates: [String] = []
     
-    var notifications: [Notificationsss] = [Notificationsss(type: "in", height: "123123", summ: "500.000011000", token: "XCH", date: "27.06.22 21:00"), Notificationsss(type: "out", height: "123123", summ: "100.000011000", token: "XCH", date: "20.06.22 21:00"),Notificationsss(type: "in", height: "123123", summ: "100.000011000", token: "XCH", date: "25.06.22 21:00"),Notificationsss(type: "in", height: "123123", summ: "100.000011000", token: "XCH", date: "20.06.22 21:00"),Notificationsss(type: "in", height: "123123", summ: "110.000011000", token: "XCH", date: "20.06.22 21:00"),Notificationsss(type: "out", height: "123123", summ: "50.000011000", token: "XCH", date: "20.06.22 21:00"),Notificationsss(type: "in", height: "123123", summ: "20.000011000", token: "XCH", date: "20.06.22 21:00"),Notificationsss(type: "in", height: "123123", summ: "100.000011000", token: "XCH", date: "21.06.22 21:00"),Notificationsss(type: "in", height: "123123", summ: "100.000011000", token: "XCH", date: "20.06.22 21:00"),Notificationsss(type: "out", height: "123123", summ: "0.000011000", token: "XCH", date: "21.06.22 21:00"),Notificationsss(type: "out", height: "123123", summ: "100.000011000", token: "XCH", date: "20.06.22 21:00"),Notificationsss(type: "out", height: "123123", summ: "100.000011000", token: "XCH", date: "25.06.22 21:00"),Notificationsss(type: "in", height: "123123", summ: "100.000011000", token: "XCH", date: "20.06.22 21:00"),Notificationsss(type: "out", height: "123123", summ: "100.000011000", token: "XCH", date: "25.06.22 21:00")]
+    var notifications: [Notificationsss] = [Notificationsss(type: "in", height: "123123", summ: "500.000011000", token: "XCH", date: "27.06.22 21:00"), Notificationsss(type: "out", height: "123123", summ: "100.000011000", token: "XCH", date: "20.06.22 21:00"),Notificationsss(type: "in", height: "123123", summ: "100.000011000", token: "XCH", date: "25.06.22 21:00"),Notificationsss(type: "in", height: "123123", summ: "100.000011000", token: "XCH", date: "20.06.22 21:00"),Notificationsss(type: "in", height: "123123", summ: "110.000011000", token: "XCH", date: "20.06.22 21:00"),Notificationsss(type: "out", height: "123123", summ: "50.000011000", token: "XCH", date: "20.06.22 21:00"),Notificationsss(type: "in", height: "123123", summ: "20.000011000", token: "XCH", date: "20.06.22 21:00"),Notificationsss(type: "in", height: "123123", summ: "100.000011000", token: "XCH", date: "21.06.22 21:00"),Notificationsss(type: "in", height: "123123", summ: "100.000011000", token: "XCC", date: "20.06.22 21:00"),Notificationsss(type: "out", height: "123123", summ: "0.000011000", token: "XCH", date: "21.06.22 21:00"),Notificationsss(type: "out", height: "123123", summ: "100.000011000", token: "XCH", date: "20.06.22 21:00"),Notificationsss(type: "out", height: "123123", summ: "100.000011000", token: "XCH", date: "25.06.22 21:00"),Notificationsss(type: "in", height: "123123", summ: "100.000011000", token: "XCC", date: "20.06.22 21:00"),Notificationsss(type: "out", height: "123123", summ: "100.000011000", token: "XCH", date: "25.06.22 21:00")]
     var filterNotifications: [Notificationsss] = []
     
     
-    private var walletsTransactions: [[ChiaTransaction]] = []
-    private var filterWalletsTransactions: [ChiaTransaction] = []
+
+    private var systems: [ListSystems] = []
     private var isAllFilter = true
     private var isInFilter = false
     private var isOutFilter = false
     private var isPendindFilter = false
     
     
+    @IBOutlet weak var detailView: UIView!
     @IBOutlet weak var backButton: UIButton!
+    @IBOutlet weak var detailBackButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var detailTitle: UILabel!
+    @IBOutlet weak var detailDate: UILabel!
+    @IBOutlet weak var detailDateLabel: UILabel!
+    @IBOutlet weak var detailAmount: UILabel!
+    @IBOutlet weak var detailAmountLabel: UILabel!
+    @IBOutlet weak var detailComission: UILabel!
+    @IBOutlet weak var detailComissionLabel: UILabel!
+    @IBOutlet weak var detailHeightLabel: UILabel!
+    @IBOutlet weak var detailHeight: UILabel!
     
     @IBOutlet weak var filterTimeButton: UIButton!
     @IBOutlet weak var filterSystemButton: UIButton!
@@ -40,8 +51,9 @@ class NotificationsViewController: UIViewController {
     @IBOutlet weak var lastMonthButton: UIButton!
     
     @IBOutlet weak var systemMenuView: UIView!
-    @IBOutlet weak var chiaSystemButton: UIButton!
-    @IBOutlet weak var chivesSystemButton: UIButton!
+    @IBOutlet weak var systemsViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var systemsStackView: UIStackView!
+    
     @IBOutlet weak var allSystemButton: UIButton!
     
     @IBOutlet weak var titleLabel: UILabel!
@@ -52,7 +64,8 @@ class NotificationsViewController: UIViewController {
         super.viewDidLoad()
         
         self.filterNotifications = self.notifications
-        
+        SystemsManager.share.filterSystems()
+        self.systems = Array(Set(SystemsManager.share.listOfSystems))
         self.filterDateView.isHidden = true
         self.filterDateView.alpha = 0
         self.allDateButton.setTitle("Все", for: .normal)
@@ -60,6 +73,7 @@ class NotificationsViewController: UIViewController {
         self.yesterdayDayeButton.setTitle("Вчера", for: .normal)
         self.lastWeekDateButton.setTitle("Последняя неделя", for: .normal)
         self.lastMonthButton.setTitle("Последний месяц", for: .normal)
+        self.detailView.isHidden = true
         
         self.allDateButton.buttonStroke(#colorLiteral(red: 0.3578948975, green: 0.3578948975, blue: 0.3578948975, alpha: 1))
         self.todayDateButton.buttonStroke(#colorLiteral(red: 0.3578948975, green: 0.3578948975, blue: 0.3578948975, alpha: 1))
@@ -70,12 +84,6 @@ class NotificationsViewController: UIViewController {
         self.systemMenuView.isHidden = true
         self.systemMenuView.alpha = 0
         
-        self.chivesSystemButton.buttonStroke(#colorLiteral(red: 0.3578948975, green: 0.3578948975, blue: 0.3578948975, alpha: 1))
-        self.chiaSystemButton.buttonStroke(#colorLiteral(red: 0.3578948975, green: 0.3578948975, blue: 0.3578948975, alpha: 1))
-        
-        self.chiaSystemButton.setTitle("Chia Network", for: .normal)
-        self.chivesSystemButton.setTitle("Chives Network", for: .normal)
-        
         self.allDateButton.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
         self.allDateButton.tintColor = .white
         
@@ -83,9 +91,9 @@ class NotificationsViewController: UIViewController {
         
         self.tableView.register(UINib(nibName: "NotificationTableViewCell", bundle: nil), forCellReuseIdentifier: "NotificationTableViewCell")
         self.filterCollectionView.register(UINib(nibName: "TransictionFilterCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "TransictionFilterCollectionViewCell")
-        
-        let tapGastureRecognizer = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
-        self.tableView.addGestureRecognizer(tapGastureRecognizer)
+//
+//        let tapGastureRecognizer = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+//        self.tableView.addGestureRecognizer(tapGastureRecognizer)
 
         
     }
@@ -96,63 +104,6 @@ class NotificationsViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        let storyoard = UIStoryboard(name: "spinner", bundle: .main)
-        let spinnerVC = storyoard.instantiateViewController(withIdentifier: "spinner") as! SprinnerViewController
-        let queue = DispatchQueue.global(qos: .userInteractive)
-        
-//        if self.filterWalletsTransactions.isEmpty  {
-//            self.present(spinnerVC, animated: true)
-//            queue.sync {
-//                for i in CoreDataManager.share.fetchChiaWalletPrivateKey() {
-//
-//                    ChiaBlockchainManager.share.logIn(Int(i.fingerprint)) { log in
-//
-//                        if log.success {
-//                            ChiaBlockchainManager.share.getWallets { wallet in
-//
-//                                for iwallet in wallet.wallets {
-//
-//                                    ChiaBlockchainManager.share.getTransactions(iwallet.id) { transact in
-//
-//                                        self.walletsTransactions.append(transact.transactions)
-//
-//                                        DispatchQueue.main.async {
-//
-//                                            self.filterWalletsTransactions = self.walletsTransactions.reduce([], +)
-//                                            self.tableView.reloadData()
-//                                            spinnerVC.dismiss(animated: true)
-//                                        }
-//                                    }
-//
-//                                }
-//                            }
-//                        }
-//
-//                    }
-//                }
-//            }
-//        } else if self.filterWalletsTransactions.isEmpty  {
-//            self.present(spinnerVC, animated: true)
-//            queue.sync {
-//
-//                ChiaBlockchainManager.share.logIn(Int(self.wallet!.fingerprint)) { log in
-//                    print(log.success)
-//                    ChiaBlockchainManager.share.getWallets { wallets in
-//                        for i in wallets.wallets {
-//                            ChiaBlockchainManager.share.getTransactions(i.id) { trans in
-//                                self.walletsTransactions.append(trans.transactions)
-//
-//                                DispatchQueue.main.async {
-//                                    self.filterWalletsTransactions = self.walletsTransactions.reduce([], +)
-//                                    self.tableView.reloadData()
-//                                    spinnerVC.dismiss(animated: true)
-//                                }
-//                            }
-//                        }
-//                    }
-//                }
-//            }
-//        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -176,7 +127,7 @@ class NotificationsViewController: UIViewController {
     }
     
     @objc private func localization() {
-        self.titleLabel.text = LocalizationManager.share.translate?.result.list.transactions.transactions_title
+        self.titleLabel.text = LocalizationManager.share.translate?.result.list.notifications.notifications_title
         self.searchBar.searchTextField.placeholder = LocalizationManager.share.translate?.result.list.all.search
         self.todayDateButton.setTitle(LocalizationManager.share.translate?.result.list.transactions.transactions_today, for: .normal)
         self.yesterdayDayeButton.setTitle(LocalizationManager.share.translate?.result.list.transactions.transactions_yesterday, for: .normal)
@@ -190,12 +141,85 @@ class NotificationsViewController: UIViewController {
         self.allSystemButton.setTitle(LocalizationManager.share.translate?.result.list.transactions.transactions_all, for: .normal)
         self.lastWeekDateButton.setTitle(LocalizationManager.share.translate?.result.list.transactions.transactions_last_week, for: .normal)
         self.lastMonthButton.setTitle(LocalizationManager.share.translate?.result.list.transactions.transactions_last_month, for: .normal)
-        
+        self.detailHeight.text = LocalizationManager.share.translate?.result.list.notifications.notifications_transaction_info_block_height
+        self.detailDate.text = LocalizationManager.share.translate?.result.list.notifications.notifications_transaction_info_data
+        self.detailAmount.text = LocalizationManager.share.translate?.result.list.notifications.notifications_transaction_info_number_of_coins
+        self.detailComission.text = LocalizationManager.share.translate?.result.list.notifications.notifications_transaction_info_commission
+        self.detailTitle.text = LocalizationManager.share.translate?.result.list.notifications.notifications_transaction_info_title
         
     }
     
     @IBAction func backButtonPressed(_ sender: Any) {
         self.dismiss(animated: true)
+    }
+    @IBAction func dissmissDetail(_ sender: Any) {
+        self.detailView.isHidden = true
+    }
+    
+    @IBAction func systemmenuOpen(_ sender: UIButton) {
+        
+        for i in 0..<self.systems.count {
+            if self.systemsStackView.arrangedSubviews.count == (self.systems.count + 1){
+                break
+            } else {
+                let button = UIButton(frame: CGRect(x: 0, y: 0, width: self.systemsStackView.frame.width, height: 40))
+                button.setTitle(self.systems[i].name, for: .normal)
+                self.systemsStackView.addArrangedSubview(button)
+                self.systemsViewHeightConstraint.constant += button.frame.height
+                
+                button.addTarget(self, action: #selector(setupSystemMenuButtons), for: .touchUpInside)
+                
+            }
+        }
+        
+        
+        if self.systemMenuView.isHidden {
+            self.systemMenuView.isHidden = false
+            self.systemMenuView.alpha = 1
+        } else {
+            self.systemMenuView.alpha = 0
+            self.systemMenuView.isHidden = true
+        }
+    }
+    
+    @objc private func setupSystemMenuButtons(_ sender: UIButton) {
+        
+        for i in 0..<systemsStackView.arrangedSubviews.count {
+            self.systemsStackView.arrangedSubviews[i].backgroundColor = .systemBackground
+            if sender == self.systemsStackView.arrangedSubviews[i] && sender != self.allSystemButton {
+                self.filterSystemButton.setTitle("\(sender.currentTitle?.split(separator: " ").first ?? "")", for: .normal)
+                sender.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
+                
+                if sender.currentTitle == "Chia Network" {
+                    self.filterNotifications = self.notifications.filter({$0.token.lowercased().contains("xch")})
+                    print("filter chia")
+                    self.tableView.reloadData()
+                } else if sender.currentTitle == "Chives Network" {
+                    self.filterNotifications = self.notifications.filter({$0.token.lowercased().contains("xcc")})
+                    print("filter Chives")
+                    self.tableView.reloadData()
+                } else if sender.currentTitle == "Chia TestNet" {
+                    self.filterNotifications = self.notifications.filter({$0.token.lowercased().contains("xch")})
+                    print("filter Chia TestNet")
+                    self.tableView.reloadData()
+                } else if sender.currentTitle == "Chives TestNet" {
+                    self.filterNotifications = self.notifications.filter({$0.token.lowercased().contains("xcc")})
+                    print("filter Chives TestNet")
+                    self.tableView.reloadData()
+                }
+            }
+        }
+        if self.systemMenuView.alpha == 0 {
+            UIView.animate(withDuration: 0.5) {
+                self.systemMenuView.isHidden = false
+                self.systemMenuView.alpha = 1
+            }
+        } else {
+            UIView.animate(withDuration: 0.5) {
+                self.systemMenuView.alpha = 0
+                self.systemMenuView.isHidden = true
+            }
+        }
     }
     
     
@@ -227,7 +251,7 @@ class NotificationsViewController: UIViewController {
         self.lastWeekDateButton.backgroundColor = .systemBackground
         self.lastMonthButton.backgroundColor = .systemBackground
         
-        self.filterWalletsTransactions = self.walletsTransactions.reduce([], +)
+        self.filterNotifications = self.notifications
         self.filterDateView.isHidden = true
         self.tableView.reloadData()
     }
@@ -242,7 +266,7 @@ class NotificationsViewController: UIViewController {
         self.lastWeekDateButton.backgroundColor = .systemBackground
         self.lastMonthButton.backgroundColor = .systemBackground
         
-        self.filterWalletsTransactions = self.walletsTransactions.reduce([], +).filter({TimeManager.share.convertUnixTime(unix: $0.created_at_time, format: "dd.MM.yy") == Date().string( format: "dd.MM.yy")})
+       
         
         self.filterDateView.isHidden = true
         self.tableView.reloadData()
@@ -287,44 +311,21 @@ class NotificationsViewController: UIViewController {
         self.lastWeekDateButton.backgroundColor = .systemBackground
         self.allDateButton.backgroundColor = .systemBackground
         
-        self.filterWalletsTransactions = self.walletsTransactions.reduce([], +).filter({TimeManager.share.convertUnixTime(unix: $0.created_at_time, format: "dd.MM.yy").split(separator: ".")[1] == Date().string(format: "dd.MM.yy").split(separator: ".")[1] && TimeManager.share.convertUnixTime(unix: $0.created_at_time, format: "dd.MM.yy").split(separator: ".")[2] == Date().string(format: "dd.MM.yy").split(separator: ".")[2]})
+//        self.filterWalletsTransactions = self.walletsTransactions.reduce([], +).filter({TimeManager.share.convertUnixTime(unix: $0.created_at_time, format: "dd.MM.yy").split(separator: ".")[1] == Date().string(format: "dd.MM.yy").split(separator: ".")[1] && TimeManager.share.convertUnixTime(unix: $0.created_at_time, format: "dd.MM.yy").split(separator: ".")[2] == Date().string(format: "dd.MM.yy").split(separator: ".")[2]})
         self.filterDateView.isHidden = true
         self.tableView.reloadData()
         
     }
     
-    @IBAction func systemmenuOpen(_ sender: UIButton) {
-        
-        if self.systemMenuView.isHidden {
-            self.systemMenuView.isHidden = false
-            self.systemMenuView.alpha = 1
-        } else {
-            self.systemMenuView.alpha = 0
-            self.systemMenuView.isHidden = true
-        }
-    }
-    @IBAction func chiaButtonPressed(_ sender: UIButton) {
-        sender.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
-        self.chivesSystemButton.backgroundColor = .systemBackground
-        self.allSystemButton.backgroundColor = .systemBackground
-        //        self.filterWalletsTransactions = self.walletsTransactions.filter({$0.token == "XCH"})
-        self.tableView.reloadData()
-    }
-    @IBAction func chivesButtonPressed(_ sender: UIButton) {
-        sender.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
-        
-        //        self.filterWalletsTransactions = self.walletsTransactions.filter({$0.token == "XCC"})
-        self.chiaSystemButton.backgroundColor = .systemBackground
-        self.allSystemButton.backgroundColor = .systemBackground
-        self.tableView.reloadData()
-    }
+  
     
     @IBAction func allSystemButtonPresed(_ sender: UIButton) {
         self.allSystemButton.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
-        
-        self.filterWalletsTransactions = self.walletsTransactions.reduce([], +)
-        self.chivesSystemButton.backgroundColor = .systemBackground
-        self.chiaSystemButton.backgroundColor = .systemBackground
+        UIView.animate(withDuration: 0.5) {
+            self.systemMenuView.alpha = 0
+            self.systemMenuView.isHidden = true
+        }
+        self.filterNotifications = self.notifications
         self.tableView.reloadData()
     }
     
@@ -373,6 +374,16 @@ extension NotificationsViewController: UITableViewDelegate, UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         self.filterNotifications.map{$0.date}[section]
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("dick")
+        self.detailView.isHidden = false
+        self.detailDateLabel.text = self.filterNotifications[indexPath.row].date
+        self.detailAmountLabel.text = self.filterNotifications[indexPath.row].summ
+        self.detailHeightLabel.text = self.filterNotifications[indexPath.row].height
+        self.detailComissionLabel.text = self.filterNotifications[indexPath.row].summ
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }
 
