@@ -275,22 +275,26 @@ class PushTokensViewController: UIViewController {
                     self.wallets = CoreDataManager.share.fetchChiaWalletPrivateKey().filter({$0.name == "Chia Wallet"})
                     self.wallet = self.wallets.first
                     self.balanceButton.setTitle("\((String((self.wallet?.balances as? [NSNumber])?[0] as! Double / 1000000000000.0)).prefix(8)) XCH", for: .normal)
+                    self.tokenImage.image = UIImage(named: "LogoChia")!
                     
                     self.setupWalletButton()
                 } else if self.systems[i].name == "Chives Network" {
                     self.wallets = CoreDataManager.share.fetchChiaWalletPrivateKey().filter({$0.name == "Chives Wallet"})
                     self.wallet = self.wallets.first
                     self.balanceButton.setTitle("\((String((self.wallet?.balances as? [NSNumber])?[0] as! Double / 1000000000000.0)).prefix(8)) XCH", for: .normal)
+                    self.tokenImage.image = UIImage(named: "ChivesLogo")!
                     self.setupWalletButton()
                 } else if self.systems[i].name == "Chia TestNet" {
                     self.wallets = CoreDataManager.share.fetchChiaWalletPrivateKey().filter({$0.name == "Chia TestNet"})
                     self.wallet = self.wallets.first
                     self.balanceButton.setTitle("\((String((self.wallet?.balances as? [NSNumber])?[0] as! Double / 1000000000000.0)).prefix(8)) XCH", for: .normal)
+                    self.tokenImage.image = UIImage(named: "LogoChia")!
                     self.setupWalletButton()
                 } else if self.systems[i].name == "Chives TestNet" {
                     self.wallets = CoreDataManager.share.fetchChiaWalletPrivateKey().filter({$0.name == "Chives TestNet"})
                     self.wallet = self.wallets.first
                     self.balanceButton.setTitle("\((String((self.wallet?.balances as? [NSNumber])?[0] as! Double / 1000000000000.0)).prefix(8)) XCH", for: .normal)
+                    self.tokenImage.image = UIImage(named: "ChivesLogo")!
                     self.setupWalletButton()
                     
                 }
