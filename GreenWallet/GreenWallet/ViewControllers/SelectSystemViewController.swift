@@ -134,29 +134,30 @@ extension SelectSystemViewController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let cell = self.tableView.cellForRow(at: indexPath) as! SelectSystemTableViewCell
+        
+        
         if self.isSelectedSystem && !self.isGetToken && !self.isPushToken {
-            switch cell.nameOfSystemLabel.text {
-            case "Chia Network":
+            switch indexPath {
+            case [0,0]:
                 let newWalletVC = storyboard?.instantiateViewController(withIdentifier: "NewWalletViewController") as! NewWalletViewController
-                newWalletVC.isChia = true
+                newWalletVC.isChia = self.isChia
+                newWalletVC.isChiaTest = self.isChiaTest
+                newWalletVC.isChives = self.isChives
+                newWalletVC.isChivesTest = self.isChivesTest
                 self.present(newWalletVC, animated: true, completion: nil)
-            case "Chia TestNet":
+            case [0,1]:
                 let newWalletVC = storyboard?.instantiateViewController(withIdentifier: "ImportMnemonicViewController") as! ImportMnemonicViewController
-                newWalletVC.isChiaTest = true
-                self.present(newWalletVC, animated: true, completion: nil)
-            case "Chives Network":
-                let newWalletVC = storyboard?.instantiateViewController(withIdentifier: "ImportMnemonicViewController") as! ImportMnemonicViewController
-                newWalletVC.isChives = true
-                self.present(newWalletVC, animated: true, completion: nil)
-            case "Chives TestNet":
-                let newWalletVC = storyboard?.instantiateViewController(withIdentifier: "ImportMnemonicViewController") as! ImportMnemonicViewController
-                newWalletVC.isChivesTest = true
+                newWalletVC.isChia = self.isChia
+                newWalletVC.isChiaTest = self.isChiaTest
+                newWalletVC.isChives = self.isChives
+                newWalletVC.isChivesTest = self.isChivesTest
+                
                 self.present(newWalletVC, animated: true, completion: nil)
             default:
                 break
             }
         } else if !self.isSelectedSystem && self.isGetToken && !self.isPushToken  {
+            let cell = self.tableView.cellForRow(at: indexPath) as! SelectSystemTableViewCell
             switch cell.nameOfSystemLabel.text  {
             case "Chia Network":
                 let gettVC = storyboard?.instantiateViewController(withIdentifier: "GetTokenViewController") as! GetTokenViewController
@@ -182,6 +183,7 @@ extension SelectSystemViewController: UITableViewDelegate, UITableViewDataSource
                 break
             }
         } else if !self.isSelectedSystem && !self.isGetToken && self.isPushToken  {
+            let cell = self.tableView.cellForRow(at: indexPath) as! SelectSystemTableViewCell
             switch cell.nameOfSystemLabel.text  {
             case "Chia Network":
                 let gettVC = storyboard?.instantiateViewController(withIdentifier: "PushTokensViewController") as! PushTokensViewController
