@@ -22,7 +22,7 @@ class AllWalletsViewController: UIViewController {
         super.viewDidLoad()
         localization()
         self.favoriteLabel.alpha = 0
-        
+        self.wallets = CoreDataManager.share.fetchChiaWalletPrivateKey()
         
         self.walletsTableView.register(UINib(nibName: "AddWalletTableViewCell", bundle: nil), forCellReuseIdentifier: "AddWalletTableViewCell")
         self.walletsTableView.register(UINib(nibName: "AllWalletsTableViewCell", bundle: nil), forCellReuseIdentifier: "AllWalletsTableViewCell")
@@ -37,7 +37,7 @@ class AllWalletsViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.wallets = WalletManager.share.vallets
+        self.wallets = CoreDataManager.share.fetchChiaWalletPrivateKey()
         self.walletsTableView.reloadData()
 
     }

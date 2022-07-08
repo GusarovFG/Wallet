@@ -81,25 +81,29 @@ class PasswordViewController: UIViewController {
     }
     
     private func localization() {
-        self.backButton.setTitle(LocalizationManager.share.translate?.result.list.all.back_btn, for: .normal)
+       
         if self.restorationIdentifier == "CreatingPasswordViewController" {
             self.createTitleLabel.text = LocalizationManager.share.translate?.result.list.create_a_passcode.creating_a_password_titel
             self.createDiscriptionTitle.text = LocalizationManager.share.translate?.result.list.create_a_passcode.creating_a_password_description
             self.createErrorLabel.text = LocalizationManager.share.translate?.result.list.create_a_passcode.creating_a_password_error_amount_of_characters
+            self.backButton.setTitle(LocalizationManager.share.translate?.result.list.all.back_btn, for: .normal)
         } else if self.restorationIdentifier == "RepeatingPasswordViewController" {
             self.repeatTitleLabel.text = LocalizationManager.share.translate?.result.list.create_a_passcode.repeat_passcode_title
             self.repeatDiscriptionTitle.text = LocalizationManager.share.translate?.result.list.create_a_passcode.repeat_passcode_description
             self.repeatErrorLabel.text = LocalizationManager.share.translate?.result.list.create_a_passcode.creating_a_password_error_difference
+            self.backButton.setTitle(LocalizationManager.share.translate?.result.list.all.back_btn, for: .normal)
         } else if self.restorationIdentifier == "EnteringPasswordViewController" {
             self.enterTitleLabel.text = LocalizationManager.share.translate?.result.list.all.passcode_confirmation_title
             self.enterErrorLabel.text = LocalizationManager.share.translate?.result.list.passcode_entry_screen.passcode_entry_screen_error
             self.resetButton.setTitle(LocalizationManager.share.translate?.result.list.passcode_entry_screen.passcode_entry_screen_reset, for: .normal)
+//            self.backButton.setTitle(LocalizationManager.share.translate?.result.list.all.back_btn, for: .normal)
             
         } else {
             self.mainTitle.text = LocalizationManager.share.translate?.result.list.all.passcode_confirmation_title
             self.discriptionTitle.text = LocalizationManager.share.translate?.result.list.all.passcode_confirmation_description
             self.errorLabel.text = LocalizationManager.share.translate?.result.list.passcode_entry_screen.passcode_entry_screen_error
             self.mainButton.setTitle(LocalizationManager.share.translate?.result.list.all.return_btn, for: .normal)
+            self.backButton.setTitle(LocalizationManager.share.translate?.result.list.all.back_btn, for: .normal)
         }
     }
     
