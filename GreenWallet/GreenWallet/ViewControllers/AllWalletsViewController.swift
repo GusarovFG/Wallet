@@ -110,15 +110,18 @@ extension AllWalletsViewController: UITableViewDelegate, UITableViewDataSource {
                     }
                 }
             } else {
-                WalletManager.share.favoritesWallets.removeAll(where: {$0 == wallet})
-                self.favoriteLabel.backgroundColor = #colorLiteral(red: 1, green: 0.2360929251, blue: 0.1714096665, alpha: 1)
-                self.favoriteLabel.text = LocalizationManager.share.translate?.result.list.my_wallets.my_wallets_label_removed
-                UIView.animate(withDuration: 1, delay: 0) {
-                    self.favoriteLabel.alpha = 1
-                }
-                DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                if WalletManager.share.favoritesWallets.count > 1 {
+                    WalletManager.share.favoritesWallets.removeAll(where: {$0 == wallet})
+                    
+                    self.favoriteLabel.backgroundColor = #colorLiteral(red: 1, green: 0.2360929251, blue: 0.1714096665, alpha: 1)
+                    self.favoriteLabel.text = LocalizationManager.share.translate?.result.list.my_wallets.my_wallets_label_removed
                     UIView.animate(withDuration: 1, delay: 0) {
-                        self.favoriteLabel.alpha = 0
+                        self.favoriteLabel.alpha = 1
+                    }
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                        UIView.animate(withDuration: 1, delay: 0) {
+                            self.favoriteLabel.alpha = 0
+                        }
                     }
                 }
             }
