@@ -111,7 +111,7 @@ extension FAQController: UITableViewDelegate, UITableViewDataSource {
         header.arrowLabel.textColor = #colorLiteral(red: 0.2269999981, green: 0.6750000119, blue: 0.3490000069, alpha: 1)
         header.section = section
         header.delegate = self
-        
+       
         return header
     }
     
@@ -157,7 +157,7 @@ class CollapsibleTableViewHeader: UITableViewHeaderFooterView {
         addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(CollapsibleTableViewHeader.tapHeader(_:))))
         contentView.addSubview(titleLabel)
         contentView.addSubview(arrowLabel)
-        
+        contentView.buttonStroke(#colorLiteral(red: 0.3578948975, green: 0.3578948975, blue: 0.3578948975, alpha: 1))
         
         
         let marginGuide = contentView.layoutMarginsGuide

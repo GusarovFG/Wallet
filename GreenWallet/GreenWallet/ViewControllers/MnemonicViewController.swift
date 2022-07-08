@@ -131,7 +131,7 @@ class MnemonicViewController: UIViewController {
             
         }
         
-        UIPasteboard.general.string = self.mnemonicPhrase.joined(separator: ", ")
+        UIPasteboard.general.string = self.mnemonicPhrase.joined(separator: " ")
     }
     @IBAction func backButtonPressed(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)

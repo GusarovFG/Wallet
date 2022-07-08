@@ -89,9 +89,14 @@ class MainViewController: UIViewController {
             self.percentLabel.text = "  \(String(ExchangeRatesManager.share.difference).prefix(5)) % "
             ExchangeRatesManager.share.changeColorOfView(label: self.percentLabel)
         } else {
-            self.riseLabel.text = "XCC price: \(ExchangeRatesManager.share.newChivesRatePerDollar) $"
-            self.percentLabel.text = "  \(String(ExchangeRatesManager.share.differenceChives).prefix(5)) % "
-            ExchangeRatesManager.share.changeColorOfView(label: self.percentLabel)
+            if ExchangeRatesManager.share.newChivesRatePerDollar == 0 {
+                self.percentLabel.text = "  \(String(ExchangeRatesManager.share.differenceChives).prefix(5)) % "
+                self.riseLabel.text = "XCC price: ~"
+            } else {
+                self.percentLabel.text = "  \(String(ExchangeRatesManager.share.differenceChives).prefix(5)) % "
+                self.riseLabel.text = "XCC price: \(ExchangeRatesManager.share.newChivesRatePerDollar) $"
+                ExchangeRatesManager.share.changeColorOfView(label: self.percentLabel)
+            }
         }
         
     }
@@ -171,6 +176,10 @@ class MainViewController: UIViewController {
         let pushVC = storyboard?.instantiateViewController(withIdentifier: "PushTokensViewController") as! PushTokensViewController
         pushVC.wallet = self.wallet
         pushVC.isInMyWallet = true
+        pushVC.isChia = self.wallet?.name == "Chia Wallet"
+        pushVC.isChiaTest = self.wallet?.name == "Chia TestNet"
+        pushVC.isChives = self.wallet?.name == "Chives Wallet"
+        pushVC.isChivesTest = self.wallet?.name == "Chives TestNet"
         pushVC.modalPresentationStyle = .overFullScreen
         self.present(pushVC, animated: true)
         
@@ -256,11 +265,18 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
                 self.percentLabel.text = "  \(String(ExchangeRatesManager.share.difference).prefix(5)) % "
                 ExchangeRatesManager.share.changeColorOfView(label: self.percentLabel)
             } else {
-                let summ: Double = ((((self.wallet?.balances as? [Double])?.reduce(0, +) ?? 0) / 1000000000000) * ExchangeRatesManager.share.newChivesRatePerDollar).rounded(toPlaces: 8      )
-                self.riseLabel.text = "XCC price: \(ExchangeRatesManager.share.newChivesRatePerDollar) $"
-                self.balanceLabel.text = "⁓\(NSString(format:"%.2f", summ)) USD"
-                self.percentLabel.text = "  \(String(ExchangeRatesManager.share.differenceChives).prefix(5)) % "
-                ExchangeRatesManager.share.changeChivesColorOfView(label: self.percentLabel)
+                let summ: Double = ((((self.wallet?.balances as? [Double])?.reduce(0, +) ?? 0) / 1000000000000) * ExchangeRatesManager.share.newChivesRatePerDollar).rounded(toPlaces: 8)
+                if ExchangeRatesManager.share.newChivesRatePerDollar == 0 {
+                    self.percentLabel.text = "  \(String(ExchangeRatesManager.share.differenceChives).prefix(5)) % "
+                    self.riseLabel.text = "XCC price: ~"
+                    self.balanceLabel.text = "⁓\(NSString(format:"%.2f", summ)) USD"
+                } else {
+                    self.riseLabel.text = "XCC price: \(ExchangeRatesManager.share.newChivesRatePerDollar) $"
+                    self.balanceLabel.text = "⁓\(NSString(format:"%.2f", summ)) USD"
+                    self.percentLabel.text = "  \(String(ExchangeRatesManager.share.differenceChives).prefix(5)) % "
+                    ExchangeRatesManager.share.changeChivesColorOfView(label: self.percentLabel)
+                }
+                
             }
             
            

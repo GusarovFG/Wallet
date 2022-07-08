@@ -22,7 +22,7 @@ class TransactionHistoryViewController: UIViewController {
     private var isInFilter = false
     private var isOutFilter = false
     private var isPendindFilter = false
-    
+    var spinnerVC = SprinnerViewController()
     
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
@@ -54,7 +54,8 @@ class TransactionHistoryViewController: UIViewController {
         super.viewDidLoad()
         
         
-        
+        let storyoard = UIStoryboard(name: "spinner", bundle: .main)
+        self.spinnerVC = storyoard.instantiateViewController(withIdentifier: "spinner") as! SprinnerViewController
         
         
         SystemsManager.share.filterSystems()
@@ -100,7 +101,7 @@ class TransactionHistoryViewController: UIViewController {
         let tapGastureRecognizer = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
         self.tableView.addGestureRecognizer(tapGastureRecognizer)
         NotificationCenter.default.addObserver(self, selector: #selector(localization), name: NSNotification.Name("localized"), object: nil)
-        
+        NotificationCenter.default.addObserver(self, selector: #selector(alertErrorGerCodingKeysPresent), name: NSNotification.Name("alertErrorGerCodingKeys"), object: nil)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -109,8 +110,7 @@ class TransactionHistoryViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        let storyoard = UIStoryboard(name: "spinner", bundle: .main)
-        let spinnerVC = storyoard.instantiateViewController(withIdentifier: "spinner") as! SprinnerViewController
+
         let queue = DispatchQueue.global(qos: .userInteractive)
         
         if self.filterWalletsTransactions.isEmpty && !self.isHistoryWallet {
@@ -133,7 +133,7 @@ class TransactionHistoryViewController: UIViewController {
                                                     
                                                     self.filterWalletsTransactions = self.walletsTransactions.reduce([], +)
                                                     self.tableView.reloadData()
-                                                    spinnerVC.dismiss(animated: true)
+                                                    self.spinnerVC.dismiss(animated: true)
                                                 }
                                             }
                                             
@@ -159,7 +159,7 @@ class TransactionHistoryViewController: UIViewController {
                                                     
                                                     self.filterWalletsTransactions = self.walletsTransactions.reduce([], +)
                                                     self.tableView.reloadData()
-                                                    spinnerVC.dismiss(animated: true)
+                                                    self.spinnerVC.dismiss(animated: true)
                                                 }
                                             }
                                             
@@ -184,7 +184,7 @@ class TransactionHistoryViewController: UIViewController {
                                     DispatchQueue.main.async {
                                         self.filterWalletsTransactions = self.walletsTransactions.reduce([], +)
                                         self.tableView.reloadData()
-                                        spinnerVC.dismiss(animated: true)
+                                        self.spinnerVC.dismiss(animated: true)
                                     }
                                 }
                             }
@@ -201,7 +201,7 @@ class TransactionHistoryViewController: UIViewController {
                                     DispatchQueue.main.async {
                                         self.filterWalletsTransactions = self.walletsTransactions.reduce([], +)
                                         self.tableView.reloadData()
-                                        spinnerVC.dismiss(animated: true)
+                                        self.spinnerVC.dismiss(animated: true)
                                     }
                                 }
                             }
@@ -233,7 +233,10 @@ class TransactionHistoryViewController: UIViewController {
         self.searchBar.searchTextField.backgroundColor = #colorLiteral(red: 0.1882352941, green: 0.1882352941, blue: 0.1882352941, alpha: 0)
     }
     
-    
+    @objc private func alertErrorGerCodingKeysPresent() {
+        self.spinnerVC.dismiss(animated: false)
+        AlertManager.share.serverError(self.spinnerVC)
+    }
     
     
     

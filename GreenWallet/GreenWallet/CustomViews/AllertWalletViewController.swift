@@ -21,6 +21,9 @@ class AllertWalletViewController: UIViewController {
     var isImport = false
     var isAllWallets = false
     var islisting = false
+    var isDuplicateWallet = false
+    var isServerError = false
+    var iserrorCountOfWalletError = false
     
     @IBOutlet weak var mainLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
@@ -93,7 +96,7 @@ class AllertWalletViewController: UIViewController {
             } 
             self.mainButton.setTitle(LocalizationManager.share.translate?.result.list.all.ready_btn, for: .normal)
         } else if self.restorationIdentifier == "DeleteContact" {
-            if !self.isNewWalletError && !self.isSendError {
+            if !self.isNewWalletError && !self.isSendError && !self.isServerError && !self.iserrorCountOfWalletError {
                 self.deleteTitle.text = LocalizationManager.share.translate?.result.list.address_book.address_book_pop_up_delete_title
                 self.deleteDescription.text = LocalizationManager.share.translate?.result.list.address_book.address_book_pop_up_delete_description
                 self.confirmutton.setTitle(LocalizationManager.share.translate?.result.list.all.confirm_btn, for: .normal)
@@ -109,6 +112,14 @@ class AllertWalletViewController: UIViewController {
                 self.deleteTitle.text = LocalizationManager.share.translate?.result.list.import_mnemonics.pop_up_failed_import_mnemonics_title
                 self.deleteDescription.text = LocalizationManager.share.translate?.result.list.all.pop_up_failed_error_description
                 self.confirmutton.setTitle(LocalizationManager.share.translate?.result.list.all.pop_up_failed_error_return_btn, for: .normal)
+            } else if self.isServerError && !self.isNewWalletError && !self.isSendError && !self.isImportMnemonicError {
+                self.deleteTitle.text = LocalizationManager.share.translate?.result.list.create_a_mnemonic_phrase.pop_up_failed_create_a_mnemonic_phrase_title
+                self.deleteDescription.text = LocalizationManager.share.translate?.result.list.all.pop_up_failed_error_description
+                self.confirmutton.setTitle(LocalizationManager.share.translate?.result.list.all.confirm_btn, for: .normal)
+            } else if self.iserrorCountOfWalletError && !self.isNewWalletError && !self.isSendError && !self.isImportMnemonicError && !self.isServerError {
+                self.deleteTitle.text = LocalizationManager.share.translate?.result.list.all.pop_up_failed_error_title
+                self.deleteDescription.text = "Приложение не поддерживает больше 10 кошельков"
+                self.confirmutton.setTitle(LocalizationManager.share.translate?.result.list.all.confirm_btn, for: .normal)
             }
         }
     }
@@ -132,13 +143,18 @@ class AllertWalletViewController: UIViewController {
     }
     
     @IBAction func confirmDeleteContact(_ sender: Any) {
-        if !self.isNewWalletError && !self.isSendError && !self.isImportMnemonicError {
+        if !self.isNewWalletError && !self.isSendError && !self.isImportMnemonicError && !self.isDuplicateWallet && !self.isServerError && !self.iserrorCountOfWalletError {
             CoreDataManager.share.deleteContact(self.index)
             self.dismiss(animated: true)
             NotificationCenter.default.post(name: NSNotification.Name("showSpinner"), object: nil)
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                 NotificationCenter.default.post(name: NSNotification.Name("deleteComplite"), object: nil)
             }
+        } else if self.isDuplicateWallet {
+            self.dismiss(animated: true)
+        } else if self.isServerError || self.iserrorCountOfWalletError {
+            self.controller.dismiss(animated: true)
+            print("dissmiss")
         } else {
             self.dismiss(animated: true)
         }

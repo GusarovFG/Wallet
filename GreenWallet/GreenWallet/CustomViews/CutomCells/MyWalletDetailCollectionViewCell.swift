@@ -10,7 +10,7 @@ import UIKit
 class MyWalletDetailCollectionViewCell: UICollectionViewCell {
     
     var complitionHandler: (() -> ())?
-
+    var wallet: ChiaWalletPrivateKey?
     @IBOutlet weak var linkTitleLabel: UILabel!
     @IBOutlet weak var linkLabel: UILabel!
     @IBOutlet weak var publicTitleLabel: UILabel!
@@ -41,7 +41,7 @@ class MyWalletDetailCollectionViewCell: UICollectionViewCell {
     }
     
     @IBAction func copyingMnemonic(_ sender: Any) {
-        UIPasteboard.general.string = self.mnemonicLabel.text
+        UIPasteboard.general.string = self.wallet?.seed
         self.complitionHandler?()
     }
 }

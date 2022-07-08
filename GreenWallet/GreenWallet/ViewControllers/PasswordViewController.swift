@@ -103,7 +103,7 @@ class PasswordViewController: UIViewController {
             self.discriptionTitle.text = LocalizationManager.share.translate?.result.list.all.passcode_confirmation_description
             self.errorLabel.text = LocalizationManager.share.translate?.result.list.passcode_entry_screen.passcode_entry_screen_error
             self.mainButton.setTitle(LocalizationManager.share.translate?.result.list.all.return_btn, for: .normal)
-            self.backButton.setTitle(LocalizationManager.share.translate?.result.list.all.back_btn, for: .normal)
+//            self.backButton.setTitle(LocalizationManager.share.translate?.result.list.all.back_btn, for: .normal)
         }
     }
     
@@ -143,6 +143,7 @@ class PasswordViewController: UIViewController {
             }
             
             if self.isAllWallets {
+                WalletManager.share.favoritesWallets.removeAll(where: {$0 == CoreDataManager.share.fetchChiaWalletPrivateKey()[self.index]})
                 CoreDataManager.share.deleteChiaWalletPrivateKey(index: self.index)
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: "deleteWalletAtIntex"), object: nil)
 

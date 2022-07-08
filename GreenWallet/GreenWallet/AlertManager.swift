@@ -76,6 +76,36 @@ class AlertManager {
         controller.present(alertVC, animated: true)
     }
     
+    func dulpicateWalletError(_ controller: UIViewController) {
+        let storyBoard = UIStoryboard(name: "Alert", bundle: .main)
+        let alertVC = storyBoard.instantiateViewController(withIdentifier: "DeleteContact") as! AllertWalletViewController
+        alertVC.isDuplicateWallet = true
+        alertVC.controller = controller
+        
+        
+        controller.present(alertVC, animated: true)
+    }
+    
+    func serverError(_ controller: UIViewController) {
+        let storyBoard = UIStoryboard(name: "Alert", bundle: .main)
+        let alertVC = storyBoard.instantiateViewController(withIdentifier: "DeleteContact") as! AllertWalletViewController
+        alertVC.isServerError = true
+        alertVC.controller = controller
+        
+        
+        controller.present(alertVC, animated: true)
+    }
+    
+    func errorCountOfWallet(_ controller: UIViewController) {
+        let storyBoard = UIStoryboard(name: "Alert", bundle: .main)
+        let alertVC = storyBoard.instantiateViewController(withIdentifier: "DeleteContact") as! AllertWalletViewController
+        alertVC.iserrorCountOfWalletError = true
+        alertVC.controller = controller
+        
+        
+        controller.present(alertVC, animated: true)
+    }
+    
     
     
     func showSpinner(_ controller: UIViewController,_ isDeleting: Bool?) {

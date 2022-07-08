@@ -198,11 +198,13 @@ extension MyWalletsViewController: UICollectionViewDelegate, UICollectionViewDat
                 }
                 return mainCell
             default:
+                detailCell.wallet = self.wallets[self.index]
                 detailCell.linkLabel.text = self.wallets[indexPath.row].adres
                 detailCell.publicKeyDetailLabel.text = self.wallets[indexPath.row].pk
                 print(self.wallet?.seed)
                 detailCell.mnemonicLabel.text = "************"
                 detailCell.complitionHandler = { [unowned self] in
+                    
                     UIView.animate(withDuration: 1, delay: 0) {
                         self.copyLabel.alpha = 1
                     }
@@ -262,16 +264,21 @@ extension MyWalletsViewController: UICollectionViewDelegate, UICollectionViewDat
         case self.actionCollectionView:
             switch indexPath {
             case [0,0]:
-                let selectSystemVC = storyboard?.instantiateViewController(withIdentifier: "SelectSystemViewController") as! SelectSystemViewController
-                selectSystemVC.isPushToken = true
-                selectSystemVC.isChia = (selectedWallet?.name == "Chia Wallet")
-                selectSystemVC.modalPresentationStyle = .overFullScreen
-                selectSystemVC.wallet = self.wallet
-                selectSystemVC.isInMyWallet = true
-                self.present(selectSystemVC, animated: true)
+                let pushVC = storyboard?.instantiateViewController(withIdentifier: "PushTokensViewController") as! PushTokensViewController
+                pushVC.wallet = self.wallets[self.index]
+                pushVC.isInMyWallet = true
+                pushVC.isChia = self.wallet?.name == "Chia Wallet"
+                pushVC.isChiaTest = self.wallet?.name == "Chia TestNet"
+                pushVC.isChives = self.wallet?.name == "Chives Wallet"
+                pushVC.isChivesTest = self.wallet?.name == "Chives TestNet"
+                pushVC.modalPresentationStyle = .overFullScreen
+                self.present(pushVC, animated: true)
             case [0,2]:
                 let getTokenViewController = storyboard?.instantiateViewController(withIdentifier: "GetTokenViewController") as! GetTokenViewController
-                getTokenViewController.isChia = (selectedWallet?.name == "Chia Wallet")
+                getTokenViewController.isChia = self.wallet?.name == "Chia Wallet"
+                getTokenViewController.isChiaTest = self.wallet?.name == "Chia TestNet"
+                getTokenViewController.isChives = self.wallet?.name == "Chives Wallet"
+                getTokenViewController.isChivesTest = self.wallet?.name == "Chives TestNet"
                 getTokenViewController.modalPresentationStyle = .fullScreen
                 self.present(getTokenViewController, animated: true)
                 

@@ -27,6 +27,8 @@ class PushTokensViewController: UIViewController {
     private let link = "qwertyuiopasdfghjkl"
     private let contact = "Faddey"
     private var systems: [ListSystems] = []
+//    let storyoard = UIStoryboard(name: "spinner", bundle: .main)
+    var spinnerVC = SprinnerViewController()
     
     @IBOutlet weak var tokenImage: UIImageView!
     @IBOutlet weak var tokenButton: UIButton!
@@ -86,6 +88,9 @@ class PushTokensViewController: UIViewController {
         SystemsManager.share.filterSystems()
         self.systems = Array(Set(SystemsManager.share.listOfSystems))
         
+        let storyoard = UIStoryboard(name: "spinner", bundle: .main)
+        self.spinnerVC = storyoard.instantiateViewController(withIdentifier: "spinner") as! SprinnerViewController
+        
         if self.isChia {
             self.wallets = CoreDataManager.share.fetchChiaWalletPrivateKey().filter({$0.name! == "Chia Wallet"})
             self.systemButton.setTitle("• Chia Network", for: .normal)
@@ -144,8 +149,8 @@ class PushTokensViewController: UIViewController {
         print(self.isChives)
         print(self.isChivesTest)
         
-        
         NotificationCenter.default.addObserver(self, selector: #selector(showSeccessAlert), name: NSNotification.Name(rawValue: "Seccess"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(alertErrorGerCodingKeysPresent), name: NSNotification.Name("alertErrorGerCodingKeys"), object: nil)
         
     }
     
@@ -157,6 +162,13 @@ class PushTokensViewController: UIViewController {
         super.touchesBegan(touches, with: event)
         
         self.view.endEditing(true)
+    }
+    
+    @objc private func alertErrorGerCodingKeysPresent() {
+        
+        self.spinnerVC.dismiss(animated: false)
+        AlertManager.share.serverError(self.spinnerVC)
+        
     }
     
     private func localization() {
@@ -204,10 +216,8 @@ class PushTokensViewController: UIViewController {
         
         let buttonText: NSString = numberOfWallet + "\n\(self.wallet?.name?.split(separator: " ").first ?? "")" as NSString
         
-        //getting the range to separate the button title strings
         let newlineRange: NSRange = buttonText.range(of: "\n")
         
-        //getting both substrings
         var substring1 = ""
         var substring2 = ""
         
@@ -216,7 +226,6 @@ class PushTokensViewController: UIViewController {
             substring2 = buttonText.substring(from: newlineRange.location)
         }
         
-        //assigning diffrent fonts to both substrings
         let font1: UIFont = UIFont(name: "Arial", size: 12.0)!
         let attributes1 = [NSMutableAttributedString.Key.font: font1]
         let attrString1 = NSMutableAttributedString(string: substring1, attributes: attributes1)
@@ -314,7 +323,7 @@ class PushTokensViewController: UIViewController {
             }
         }
     }
-
+    
     @IBAction func walletMenuOpen(_ sender: Any) {
         if self.walletsView.isHidden == true {
             self.walletsView.isHidden = false
@@ -326,9 +335,6 @@ class PushTokensViewController: UIViewController {
             
             return
         }
-        
-        
-        
         
         for i in 0...(self.wallets.count - 1) {
             if self.walletStackView.arrangedSubviews.count == self.wallets.count {
@@ -363,7 +369,6 @@ class PushTokensViewController: UIViewController {
                 self.walletStackView.addArrangedSubview(button)
                 self.walletStackViewConstraint.constant += button.frame.height
                 button.addTarget(self, action: #selector(setupWalletsMenuButtons), for: .touchUpInside)
-                
             }
         }
     }
@@ -441,10 +446,7 @@ class PushTokensViewController: UIViewController {
             } else {
                 sender.textColor = .white
             }
-            
         }
-        
-        
     }
     
     @IBAction func linkCheck(_ sender: UITextField) {
@@ -459,9 +461,9 @@ class PushTokensViewController: UIViewController {
             self.walletLinkError.text = LocalizationManager.share.translate?.result.list.send_token.send_token_address_is_already_exist
             self.walletLinkError.textColor = #colorLiteral(red: 0.1176470588, green: 0.5764705882, blue: 1, alpha: 1)
             self.walletLinkError.alpha = 1
-        } else if self.adressTextField.text != self.link {
-            self.walletLinkError.textColor = #colorLiteral(red: 1, green: 0.2360929251, blue: 0.1714096665, alpha: 0.8980392157)
-            self.walletLinkError.text = LocalizationManager.share.translate?.result.list.all.non_existent_adress_error
+//        } else if self.adressTextField.text != self.link {
+//            self.walletLinkError.textColor = #colorLiteral(red: 1, green: 0.2360929251, blue: 0.1714096665, alpha: 0.8980392157)
+//            self.walletLinkError.text = LocalizationManager.share.translate?.result.list.all.non_existent_adress_error
         } else if self.adressTextField.text == "" {
             self.walletLinkError.alpha = 0
             
@@ -582,12 +584,13 @@ class PushTokensViewController: UIViewController {
             self.walletErrorLabel.textColor = #colorLiteral(red: 1, green: 0.2360929251, blue: 0.1714096665, alpha: 0.8980392157)
         }
         if (Double(self.transferTextField.text ?? "") ?? 0) < Double(self.balanceButton.currentTitle?.split(separator: " ").first ?? "0") ?? 0 {
-            let storyoard = UIStoryboard(name: "spinner", bundle: .main)
-            let spinnerVC = storyoard.instantiateViewController(withIdentifier: "spinner") as! SprinnerViewController
+//            let storyoard = UIStoryboard(name: "spinner", bundle: .main)
+//            let spinnerVC = storyoard.instantiateViewController(withIdentifier: "spinner") as! SprinnerViewController
             let amount: Double = Double(self.transferTextField.text ?? "0") ?? 0
             let fee: Double = Double(self.comissionTextField.text ?? "0") ?? 0
             let address: String = self.adressTextField.text ?? ""
-            self.present(spinnerVC, animated: true)
+            
+            self.present(self.spinnerVC, animated: true)
             
             if self.isChia {
                 
@@ -595,31 +598,34 @@ class PushTokensViewController: UIViewController {
                     
                     ChiaBlockchainManager.share.logIn(Int(self.wallet?.fingerprint ?? 0)) { log in
                         if log.success {
-                            ChiaBlockchainManager.share.getSyncStatus(self.walletId) { status in
+                            DispatchQueue.global().asyncAfter(deadline: .now() + 10) {
                                 
-                                
-                                if status.synced {
+                                ChiaBlockchainManager.share.getSyncStatus(self.walletId) { status in
                                     
                                     
-                                    ChiaBlockchainManager.share.sendTransactions(self.walletId, amount: amount * 1000000000000, fee: fee * 1000000000000, address: address) {  send in
-                                        print(send.success)
-                                        print(send.transactionid)
+                                    if status.synced {
                                         
-                                        if send.success {
-                                            DispatchQueue.main.async {
-
-                                                self.transitionView.isHidden = false
-                                                self.transitionView.alpha = 1
-                                                spinnerVC.dismiss(animated: true)
-                                            }
+                                        
+                                        ChiaBlockchainManager.share.sendTransactions(self.walletId, amount: amount * 1000000000000, fee: fee * 1000000000000, address: address) {  send in
+                                            print(send.success)
+                                            print(send.transactionid)
                                             
+                                            if send.success {
+                                                DispatchQueue.main.async {
+                                                    
+                                                    self.transitionView.isHidden = false
+                                                    self.transitionView.alpha = 1
+                                                    self.spinnerVC.dismiss(animated: true)
+                                                }
+                                                
+                                            }
                                         }
-                                    }
-                                    
-                                } else {
-                                    DispatchQueue.main.async {
-                                        spinnerVC.dismiss(animated: true)
-                                        print("хуй там")
+                                        
+                                    } else {
+                                        DispatchQueue.main.async {
+                                            self.spinnerVC.dismiss(animated: true)
+                                            print("хуй там")
+                                        }
                                     }
                                 }
                             }
@@ -631,28 +637,31 @@ class PushTokensViewController: UIViewController {
                     
                     ChivesBlockchainManager.share.logIn(Int(self.wallet?.fingerprint ?? 0)) { log in
                         if log.success {
-                            ChivesBlockchainManager.share.getSyncStatus(self.walletId) { status in
-                                
-                                
-                                if status.synced {
+                            
+                            DispatchQueue.global().asyncAfter(deadline: .now() + 10) {
+                                ChivesBlockchainManager.share.getSyncStatus(self.walletId) { status in
                                     
                                     
-                                    ChivesBlockchainManager.share.sendTransactions(self.walletId, amount: amount * 1000000000000, fee: fee * 1000000000000, address: address) {  send in
+                                    if status.synced {
                                         
-                                        if send.success {
-                                            DispatchQueue.main.async {
-                                                self.transitionView.isHidden = false
-                                                self.transitionView.alpha = 1
-                                                spinnerVC.dismiss(animated: true)
-                                            }
+                                        
+                                        ChivesBlockchainManager.share.sendTransactions(self.walletId, amount: amount * 1000000000000, fee: fee * 1000000000000, address: address) {  send in
                                             
+                                            if send.success {
+                                                DispatchQueue.main.async {
+                                                    self.transitionView.isHidden = false
+                                                    self.transitionView.alpha = 1
+                                                    self.spinnerVC.dismiss(animated: true)
+                                                }
+                                                
+                                            }
                                         }
-                                    }
-                                    
-                                } else {
-                                    DispatchQueue.main.async {
-                                        spinnerVC.dismiss(animated: true)
-                                        print("хуй там")
+                                        
+                                    } else {
+                                        DispatchQueue.main.async {
+                                            self.dismiss(animated: true)
+                                            print("хуй там")
+                                        }
                                     }
                                 }
                             }
@@ -664,28 +673,30 @@ class PushTokensViewController: UIViewController {
                     
                     ChivesTestBlockchainManager.share.logIn(Int(self.wallet?.fingerprint ?? 0)) { log in
                         if log.success {
-                            ChivesTestBlockchainManager.share.getSyncStatus(self.walletId) { status in
-                                
-                                
-                                if status.synced {
+                            DispatchQueue.global().asyncAfter(deadline: .now() + 10) {
+                                ChivesTestBlockchainManager.share.getSyncStatus(self.walletId) { status in
                                     
                                     
-                                    ChivesTestBlockchainManager.share.sendTransactions(self.walletId, amount: amount * 1000000000000, fee: fee * 1000000000000, address: address) {  send in
+                                    if status.synced {
                                         
-                                        if send.success {
-                                            DispatchQueue.main.async {
-                                                self.transitionView.isHidden = false
-                                                self.transitionView.alpha = 1
-                                                spinnerVC.dismiss(animated: true)
-                                            }
+                                        
+                                        ChivesTestBlockchainManager.share.sendTransactions(self.walletId, amount: amount * 1000000000000, fee: fee * 1000000000000, address: address) {  send in
                                             
+                                            if send.success {
+                                                DispatchQueue.main.async {
+                                                    self.transitionView.isHidden = false
+                                                    self.transitionView.alpha = 1
+                                                    self.spinnerVC.dismiss(animated: true)
+                                                }
+                                                
+                                            }
                                         }
-                                    }
-                                    
-                                } else {
-                                    DispatchQueue.main.async {
-                                        spinnerVC.dismiss(animated: true)
-                                        print("хуй там")
+                                        
+                                    } else {
+                                        DispatchQueue.main.async {
+                                            self.spinnerVC.dismiss(animated: true)
+                                            print("хуй там")
+                                        }
                                     }
                                 }
                             }
@@ -697,28 +708,30 @@ class PushTokensViewController: UIViewController {
                     
                     ChiaTestBlockchainManager.share.logIn(Int(self.wallet?.fingerprint ?? 0)) { log in
                         if log.success {
-                            ChiaTestBlockchainManager.share.getSyncStatus(self.walletId) { status in
-                                
-                                
-                                if status.synced {
+                            DispatchQueue.global().asyncAfter(deadline: .now() + 10) {
+                                ChiaTestBlockchainManager.share.getSyncStatus(self.walletId) { status in
                                     
                                     
-                                    ChiaTestBlockchainManager.share.sendTransactions(self.walletId, amount: amount * 1000000000000, fee: fee * 1000000000000, address: address) {  send in
+                                    if status.synced {
                                         
-                                        if send.success {
-                                            DispatchQueue.main.async {
-                                                self.transitionView.isHidden = false
-                                                self.transitionView.alpha = 1
-                                                spinnerVC.dismiss(animated: true)
-                                            }
+                                        
+                                        ChiaTestBlockchainManager.share.sendTransactions(self.walletId, amount: amount * 1000000000000, fee: fee * 1000000000000, address: address) {  send in
                                             
+                                            if send.success {
+                                                DispatchQueue.main.async {
+                                                    self.transitionView.isHidden = false
+                                                    self.transitionView.alpha = 1
+                                                    self.spinnerVC.dismiss(animated: true)
+                                                }
+                                                
+                                            }
                                         }
-                                    }
-                                    
-                                } else {
-                                    DispatchQueue.main.async {
-                                        spinnerVC.dismiss(animated: true)
-                                        print("хуй там")
+                                        
+                                    } else {
+                                        DispatchQueue.main.async {
+                                            self.spinnerVC.dismiss(animated: true)
+                                            print("хуй там")
+                                        }
                                     }
                                 }
                             }
@@ -758,11 +771,7 @@ extension PushTokensViewController: AVCaptureMetadataOutputObjectsDelegate {
         self.cameraView.layer.addSublayer(video)
         self.session.startRunning()
     }
-    
-    
-    
-    
-    
+
     func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
         guard metadataObjects.count > 0 else { return }
         if let object = metadataObjects.first as? AVMetadataMachineReadableCodeObject {

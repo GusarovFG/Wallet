@@ -153,11 +153,22 @@ extension mCollectionViewCell: UITableViewDelegate, UITableViewDataSource {
                 if (self.wallet?.balances as! [NSNumber]).isEmpty {
                     walletCell.balanceLabel.text = "0 XCH"
                 } else {
-                    
-                    let summ: Double = (((self.wallet?.balances as? [Double])?[indexPath.row] ?? 0) / 1000000000000) * ExchangeRatesManager.share.newRatePerDollar
-                    walletCell.balanceLabel.text = "\(((self.wallet?.balances as? [NSNumber])?[indexPath.row] ?? 0) as! Double / 1000000000000.0 ) XCH"
-                    walletCell.convertLabel.text = "⁓ \(NSString(format:"%.2f", summ)) USD"
-                    walletCell.tokenLabel.text = self.wallet?.name ?? ""
+                    if self.wallet?.name == "Chia Wallet" || self.wallet?.name == "Chia TestNet" {
+                        let summ: Double = (((self.wallet?.balances as? [Double])?[indexPath.row] ?? 0) / 1000000000000) * ExchangeRatesManager.share.newRatePerDollar
+                        walletCell.balanceLabel.text = "\(((self.wallet?.balances as? [NSNumber])?[indexPath.row] ?? 0) as! Double / 1000000000000.0 ) XCH"
+                        walletCell.convertLabel.text = "⁓ \(NSString(format:"%.2f", summ)) USD"
+                        walletCell.tokenLabel.text = self.wallet?.name ?? ""
+                    } else {
+                        let summ: Double = (((self.wallet?.balances as? [Double])?[indexPath.row] ?? 0) / 1000000000000) * ExchangeRatesManager.share.newChivesRatePerDollar
+                        if ExchangeRatesManager.share.newChivesRatePerDollar == 0 {
+                            walletCell.convertLabel.text = "⁓ USD"
+                        } else {
+                            
+                            walletCell.convertLabel.text = "⁓ \(NSString(format:"%.2f", summ)) USD"
+                        }
+                        walletCell.balanceLabel.text = "\(((self.wallet?.balances as? [NSNumber])?[indexPath.row] ?? 0) as! Double / 1000000000000.0 ) XCC"
+                        walletCell.tokenLabel.text = self.wallet?.name ?? ""
+                    }
                 }
                
             }
