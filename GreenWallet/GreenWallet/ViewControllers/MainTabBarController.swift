@@ -8,7 +8,7 @@
 import UIKit
 
 class MainTabBarController: UITabBarController, UINavigationBarDelegate {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         addTabs()
@@ -16,7 +16,7 @@ class MainTabBarController: UITabBarController, UINavigationBarDelegate {
         
         
         
-//        NotificationCenter.default.addObserver(self, selector: #selector(changeIndex), name: NSNotification.Name("ChangeIndex"), object: nil)
+        //        NotificationCenter.default.addObserver(self, selector: #selector(changeIndex), name: NSNotification.Name("ChangeIndex"), object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -50,29 +50,37 @@ class MainTabBarController: UITabBarController, UINavigationBarDelegate {
         let fiveMainVC = storyboard?.instantiateViewController(withIdentifier: "ContactsViewController") as! ContactsViewController
         fiveMainVC.modalPresentationStyle = .fullScreen
         fiveMainVC.tabBarItem = UITabBarItem(title: LocalizationManager.share.translate?.result.list.main_screen.main_screen_addresses_btn, image: UIImage(named: "adress")!, selectedImage: UIImage(named: "adress")!)
-
+        
         self.setViewControllers([mainVC, secondMainVC, thirdMainVC, fourMainVC, fiveMainVC], animated: true)
         self.navigationController?.navigationBar.delegate = self
     }
     
     override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
         if tabBar.selectedItem?.title == LocalizationManager.share.translate?.result.list.main_screen.main_screen_recive_btn {
-                    let selectSystemVC = storyboard?.instantiateViewController(withIdentifier: "SelectSystemViewController") as! SelectSystemViewController
-                    selectSystemVC.isGetToken = true
-                    selectSystemVC.modalPresentationStyle = .overFullScreen
-                    self.present(selectSystemVC, animated: true)
+            if !CoreDataManager.share.fetchChiaWalletPrivateKey().isEmpty {
+                let selectSystemVC = storyboard?.instantiateViewController(withIdentifier: "SelectSystemViewController") as! SelectSystemViewController
+                selectSystemVC.isGetToken = true
+                selectSystemVC.modalPresentationStyle = .overFullScreen
+                self.present(selectSystemVC, animated: true)
                 
+            } else {
+                AlertManager.share.walletsIsNotFounded(self)
+            }
+            
             
         }
         
         if tabBar.selectedItem?.title == LocalizationManager.share.translate?.result.list.main_screen.main_screen_send_btn {
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "showPushVC"), object: nil)
+            if !CoreDataManager.share.fetchChiaWalletPrivateKey().isEmpty {
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "showPushVC"), object: nil)
+            } else {
+                AlertManager.share.walletsIsNotFounded(self)
+            }
+            
         }
+       
         
-
     }
-    
-    
 }
 
 extension MainTabBarController: UIPopoverPresentationControllerDelegate {

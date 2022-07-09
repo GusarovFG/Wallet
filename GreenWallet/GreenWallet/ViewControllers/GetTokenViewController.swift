@@ -10,10 +10,12 @@ import UIKit
 class GetTokenViewController: UIViewController {
     
     var wallets: [ChiaWalletPrivateKey] = []
+    var wallet: ChiaWalletPrivateKey?
     var isChia = false
     var isChives = false
     var isChiaTest = false
     var isChivesTest = false
+    var isMyWallet = false
 
     private var qrs = [UIImage(named: "qrwallet")!,UIImage(named: "qrwallet")!,UIImage(named: "qrwallet")!]
     private var systems: [ListSystems] = []
@@ -37,34 +39,60 @@ class GetTokenViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         localization()
-        
+        print(self.isChia)
+        print(self.isChiaTest)
+        print(self.isChives)
+        print(self.isChivesTest)
         SystemsManager.share.filterSystems()
         self.systems = Array(Set(SystemsManager.share.listOfSystems))
         self.qrCollectionView.register(UINib(nibName: "qrCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "qrCell")
         
-        if self.isChia {
-            self.wallets = CoreDataManager.share.fetchChiaWalletPrivateKey().filter({$0.name! == "Chia Wallet"})
-            self.titleLabel.text = "Chia Network"
-            self.menuButton.setTitle("• Chia Network", for: .normal)
-
-        } else if self.isChives {
-            self.wallets = CoreDataManager.share.fetchChiaWalletPrivateKey().filter({$0.name! == "Chives Wallet"})
-            self.titleLabel.text = "Chives Network"
-            self.menuButton.setTitle("• Chives Network", for: .normal)
-        } else if self.isChiaTest {
-            self.wallets = CoreDataManager.share.fetchChiaWalletPrivateKey().filter({$0.name! == "TestNet Chia Wallet"})
-            self.titleLabel.text = "Chia TestNet"
-            self.menuButton.setTitle("• Chia TestNet", for: .normal)
-        } else if self.isChivesTest {
-            self.wallets = CoreDataManager.share.fetchChiaWalletPrivateKey().filter({$0.name! == "TestNet Chives Wallet"})
-            self.titleLabel.text = "Chives TestNet"
-            self.menuButton.setTitle("• Chives TestNet", for: .normal)
+        if self.isMyWallet {
+            self.wallets = CoreDataManager.share.fetchChiaWalletPrivateKey().filter({$0 == self.wallet})
+//            setupLabel(index: 0)
+            if self.isChia  {
+                self.titleLabel.text = "Chia Network"
+                self.menuButton.setTitle("• Chia Network", for: .normal)
+            } else if self.isChives {
+                self.titleLabel.text = "Chives Network"
+                self.menuButton.setTitle("• Chives Network", for: .normal)
+            } else if self.isChiaTest {
+                self.titleLabel.text = "Chia TestNet"
+                self.menuButton.setTitle("• Chia TestNet", for: .normal)
+            } else if self.isChivesTest {
+                self.titleLabel.text = "Chives TestNet"
+                self.menuButton.setTitle("• Chives TestNet", for: .normal)
+            }
+        } else {
+            
+            if self.isChia  {
+                self.wallets = CoreDataManager.share.fetchChiaWalletPrivateKey().filter({$0.name! == "Chia Wallet"})
+                self.titleLabel.text = "Chia Network"
+                self.menuButton.setTitle("• Chia Network", for: .normal)
+//                setupLabel(index: 0)
+            } else if self.isChives {
+                self.wallets = CoreDataManager.share.fetchChiaWalletPrivateKey().filter({$0.name! == "Chives Wallet"})
+                self.titleLabel.text = "Chives Network"
+                self.menuButton.setTitle("• Chives Network", for: .normal)
+//                setupLabel(index: 0)
+            } else if self.isChiaTest {
+                self.wallets = CoreDataManager.share.fetchChiaWalletPrivateKey().filter({$0.name! == "TestNet Chia Wallet"})
+                self.titleLabel.text = "Chia TestNet"
+                self.menuButton.setTitle("• Chia TestNet", for: .normal)
+//                setupLabel(index: 0)
+            } else if self.isChivesTest {
+                self.wallets = CoreDataManager.share.fetchChiaWalletPrivateKey().filter({$0.name! == "TestNet Chives Wallet"})
+                self.titleLabel.text = "Chives TestNet"
+                self.menuButton.setTitle("• Chives TestNet", for: .normal)
+//                setupLabel(index: 0)
+            }
         }
+        
         self.menuView.alpha = 0
         self.menuView.isHidden = true
 
         
-        setupLabel(index: self.pageControl.currentPage)
+        
         self.pageControl.numberOfPages = self.wallets.count
 
         self.menuButton.titleLabel?.textColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
@@ -93,7 +121,7 @@ class GetTokenViewController: UIViewController {
     
     private func setupLabel(index: Int) {
         
-         let numbers = "\(self.wallets[index].fingerprint)"
+        let numbers = "\(self.wallets[index].fingerprint)"
         var numberOfWallet = ""
         for numb in numbers {
             

@@ -173,6 +173,7 @@ class MainViewController: UIViewController {
     }
     
     @IBAction func sendButtonPressed(_ sender: Any) {
+        if !CoreDataManager.share.fetchChiaWalletPrivateKey().isEmpty {
         let pushVC = storyboard?.instantiateViewController(withIdentifier: "PushTokensViewController") as! PushTokensViewController
         pushVC.wallet = self.wallet
         pushVC.isInMyWallet = true
@@ -182,6 +183,9 @@ class MainViewController: UIViewController {
         pushVC.isChivesTest = self.wallet?.name == "Chives TestNet"
         pushVC.modalPresentationStyle = .overFullScreen
         self.present(pushVC, animated: true)
+        } else {
+            AlertManager.share.walletsIsNotFounded(self)
+        }
         
     }
     @IBAction func qrButtonPressed(_ sender: Any) {

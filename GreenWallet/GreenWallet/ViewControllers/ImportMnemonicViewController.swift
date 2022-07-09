@@ -62,6 +62,20 @@ class ImportMnemonicViewController: UIViewController {
                 UIApplication.shared.open(url!, options: [:])
             }
         }
+        if UserDefaultsManager.shared.userDefaults.string(forKey: "Theme") == "light" {
+            let font = UIFont.systemFont(ofSize: 16)
+            self.segmentedControl.selectedSegmentTintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+            self.segmentedControl.setTitleTextAttributes([NSAttributedString.Key.font: font], for: .selected)
+            self.segmentedControl.setTitleTextAttributes([NSAttributedString.Key.font: font], for: .normal)
+        } else {
+            let font = UIFont.systemFont(ofSize: 16)
+            self.segmentedControl.selectedSegmentTintColor = #colorLiteral(red: 0.246493727, green: 0.246493727, blue: 0.246493727, alpha: 1)
+            self.segmentedControl.setTitleTextAttributes([NSAttributedString.Key.font: font, NSAttributedString.Key.foregroundColor: #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)], for: .selected)
+            self.segmentedControl.setTitleTextAttributes([NSAttributedString.Key.font: font, NSAttributedString.Key.foregroundColor: #colorLiteral(red: 0.2784313725, green: 0.2784313725, blue: 0.2784313725, alpha: 1)], for: .normal)
+        }
+        
+        
+        
         
         if UIDevice.modelName.contains("iPhone 8") || UIDevice.modelName.contains("iPhone 12") || UIDevice.modelName.contains("iPhone 13") {
             self.scrollView.isScrollEnabled = true

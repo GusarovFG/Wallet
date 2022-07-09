@@ -106,6 +106,17 @@ class AlertManager {
         controller.present(alertVC, animated: true)
     }
     
+    func walletsIsNotFounded(_ controller: UIViewController) {
+        let storyBoard = UIStoryboard(name: "Alert", bundle: .main)
+        let alertVC = storyBoard.instantiateViewController(withIdentifier: "DeleteContact") as! AllertWalletViewController
+        alertVC.iserrorCountOfWalletError = true
+        alertVC.isNowallets = true
+        alertVC.controller = controller
+        
+        
+        controller.present(alertVC, animated: true)
+    }
+    
     
     
     func showSpinner(_ controller: UIViewController,_ isDeleting: Bool?) {

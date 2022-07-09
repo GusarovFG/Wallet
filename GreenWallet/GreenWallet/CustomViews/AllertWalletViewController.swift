@@ -24,6 +24,7 @@ class AllertWalletViewController: UIViewController {
     var isDuplicateWallet = false
     var isServerError = false
     var iserrorCountOfWalletError = false
+    var isNowallets = false
     
     @IBOutlet weak var mainLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
@@ -116,9 +117,13 @@ class AllertWalletViewController: UIViewController {
                 self.deleteTitle.text = LocalizationManager.share.translate?.result.list.create_a_mnemonic_phrase.pop_up_failed_create_a_mnemonic_phrase_title
                 self.deleteDescription.text = LocalizationManager.share.translate?.result.list.all.pop_up_failed_error_description
                 self.confirmutton.setTitle(LocalizationManager.share.translate?.result.list.all.confirm_btn, for: .normal)
-            } else if self.iserrorCountOfWalletError && !self.isNewWalletError && !self.isSendError && !self.isImportMnemonicError && !self.isServerError {
+            } else if self.iserrorCountOfWalletError && !self.isNowallets && !self.isNewWalletError && !self.isSendError && !self.isImportMnemonicError && !self.isServerError {
                 self.deleteTitle.text = LocalizationManager.share.translate?.result.list.all.pop_up_failed_error_title
                 self.deleteDescription.text = "Приложение не поддерживает больше 10 кошельков"
+                self.confirmutton.setTitle(LocalizationManager.share.translate?.result.list.all.confirm_btn, for: .normal)
+            } else if self.iserrorCountOfWalletError && self.isNowallets && !self.isNewWalletError && !self.isSendError && !self.isImportMnemonicError && !self.isServerError {
+                self.deleteTitle.text = LocalizationManager.share.translate?.result.list.all.pop_up_failed_error_title
+                self.deleteDescription.text = "У вас еще нет кошельков"
                 self.confirmutton.setTitle(LocalizationManager.share.translate?.result.list.all.confirm_btn, for: .normal)
             }
         }

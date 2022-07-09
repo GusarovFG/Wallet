@@ -42,7 +42,7 @@ class MyWalletsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        self.wallet = self.wallets.first
         self.copyLabel.alpha = 0
         self.copyLabel.text = "   Скопировано"
         
@@ -275,10 +275,12 @@ extension MyWalletsViewController: UICollectionViewDelegate, UICollectionViewDat
                 self.present(pushVC, animated: true)
             case [0,2]:
                 let getTokenViewController = storyboard?.instantiateViewController(withIdentifier: "GetTokenViewController") as! GetTokenViewController
-                getTokenViewController.isChia = self.wallet?.name == "Chia Wallet"
-                getTokenViewController.isChiaTest = self.wallet?.name == "Chia TestNet"
-                getTokenViewController.isChives = self.wallet?.name == "Chives Wallet"
-                getTokenViewController.isChivesTest = self.wallet?.name == "Chives TestNet"
+                getTokenViewController.isChia = self.wallet!.name!.contains("Chia Wallet")
+                getTokenViewController.isChiaTest = self.wallet!.name!.contains("Chia TestNet")
+                getTokenViewController.isChives = self.wallet!.name!.contains("Chives Wallet")
+                getTokenViewController.isChivesTest = self.wallet!.name!.contains("Chives TestNet")
+                getTokenViewController.isMyWallet = true
+                getTokenViewController.wallet = self.wallet
                 getTokenViewController.modalPresentationStyle = .fullScreen
                 self.present(getTokenViewController, animated: true)
                 

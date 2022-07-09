@@ -79,7 +79,7 @@
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="lVt-eH-gB2">
                                 <rect key="frame" x="0.0" y="255" width="414" height="557"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="backgroundColor" name="mainBackGroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="LanguageTableViewCell" id="SPF-o5-8jL" customClass="LanguageTableViewCell" customModule="GreenWallet" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="44.5" width="414" height="43.5"/>
@@ -98,7 +98,7 @@
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Cps-B3-dNe"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" name="mainBackGroundColor"/>
                         <constraints>
                             <constraint firstItem="Cps-B3-dNe" firstAttribute="trailing" secondItem="lVt-eH-gB2" secondAttribute="trailing" id="3Lh-dE-wpm"/>
                             <constraint firstItem="Cps-B3-dNe" firstAttribute="bottom" relation="lessThanOrEqual" secondItem="lVt-eH-gB2" secondAttribute="bottom" constant="50" id="BJO-qI-NEm"/>
@@ -137,7 +137,7 @@
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="okl-XG-SSv">
                                 <rect key="frame" x="14" y="177" width="385" height="491"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="backgroundColor" name="mainBackGroundColor"/>
                                 <string key="text" base64-UTF8="YES">
 0JTQsNC90L3Ri9C5INC/0YDQvtGC0L7RgtC40L8g0Y/QstC70Y/QtdGC0YHRjyDQuNC90YLQtdC70LvQ
 tdC60YLRg9Cw0LvRjNC90L7QuSDRgdC+0LHRgdGC0LLQtdC90L3QvtGB0YLRjNGOINC60L7QvNC/0LDQ
@@ -235,7 +235,7 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="cdW-il-QJr"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" name="mainBackGroundColor"/>
                         <constraints>
                             <constraint firstItem="cdW-il-QJr" firstAttribute="trailing" secondItem="okl-XG-SSv" secondAttribute="trailing" constant="15" id="27C-U8-wcw"/>
                             <constraint firstItem="cdW-il-QJr" firstAttribute="trailing" secondItem="NKe-ZQ-9kH" secondAttribute="trailing" constant="60" id="6zp-Gc-les"/>
@@ -2743,7 +2743,7 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Nog-ra-Sc2">
                                 <rect key="frame" x="0.0" y="298" width="414" height="515"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="backgroundColor" name="mainBackGroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TransitionsTableViewCell" id="olu-tR-mTq" customClass="TransitionsTableViewCell" customModule="GreenWallet" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="44.5" width="414" height="43.5"/>
@@ -3171,7 +3171,7 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="6p0-BJ-oma">
                                 <rect key="frame" x="0.0" y="243" width="414" height="619"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="backgroundColor" name="mainBackGroundColor"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ContactTableViewCell" id="6Ds-PL-geN" customClass="ContactTableViewCell" customModule="GreenWallet" customModuleProvider="target">
@@ -4330,7 +4330,8 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                                                     <segment title="12 слов"/>
                                                     <segment title="24 слова"/>
                                                 </segments>
-                                                <color key="selectedSegmentTintColor" systemColor="systemBackgroundColor"/>
+                                                <color key="tintColor" name="safeAria"/>
+                                                <color key="selectedSegmentTintColor" name="ViewColor"/>
                                                 <connections>
                                                     <action selector="segmentedControlIsChanged:" destination="Ljn-W9-MGr" eventType="valueChanged" id="Qnj-PP-wbN"/>
                                                 </connections>
@@ -5564,6 +5565,9 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
         </namedColor>
         <namedColor name="qrCopyColor">
             <color red="0.87099999189376831" green="0.87099999189376831" blue="0.87099999189376831" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="safeAria">
+            <color red="0.22699999809265137" green="0.67500001192092896" blue="0.34900000691413879" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
