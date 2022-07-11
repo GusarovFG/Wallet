@@ -27,7 +27,6 @@
                         <rect key="frame" x="15" y="35" width="289" height="34"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="34" id="sDE-OV-2K0"/>
-                            <constraint firstAttribute="width" constant="289" id="uZN-Ju-Cq0"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" red="0.58039215690000001" green="0.58039215690000001" blue="0.58039215690000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -54,7 +53,6 @@
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mzB-Te-c9T">
                         <rect key="frame" x="15" y="100" width="289" height="51"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="289" id="O5c-7e-adZ"/>
                             <constraint firstAttribute="height" constant="51" id="XgW-Yv-E8N"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -82,7 +80,6 @@
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mCX-xe-7oW">
                         <rect key="frame" x="15" y="182" width="289" height="20"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="289" id="YbI-Pk-uyG"/>
                             <constraint firstAttribute="height" constant="20" id="b71-jn-jzI"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -126,7 +123,7 @@
                 <constraint firstAttribute="bottom" secondItem="Fgt-Th-4KW" secondAttribute="bottom" constant="42" id="k7m-8J-SSX"/>
                 <constraint firstItem="PoT-Sr-f58" firstAttribute="leading" secondItem="32p-fD-QOA" secondAttribute="leading" constant="15" id="mkV-WO-gmw"/>
                 <constraint firstItem="mCX-xe-7oW" firstAttribute="top" secondItem="PoT-Sr-f58" secondAttribute="bottom" id="ufE-7a-jrZ"/>
-                <constraint firstAttribute="bottom" secondItem="mCX-xe-7oW" secondAttribute="bottom" constant="42" id="xMu-Qb-YcG"/>
+                <constraint firstAttribute="bottom" relation="lessThanOrEqual" secondItem="mCX-xe-7oW" secondAttribute="bottom" constant="42" id="xMu-Qb-YcG"/>
                 <constraint firstItem="VvH-Za-ZOR" firstAttribute="leading" secondItem="rEB-5A-Scq" secondAttribute="trailing" constant="17" id="zpV-cr-Y7b"/>
             </constraints>
             <size key="customSize" width="360" height="244"/>

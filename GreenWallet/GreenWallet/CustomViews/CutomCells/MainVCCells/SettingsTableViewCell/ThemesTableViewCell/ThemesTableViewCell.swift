@@ -37,6 +37,7 @@ class ThemesTableViewCell: UITableViewCell {
             window.overrideUserInterfaceStyle = .dark
         }
         UserDefaultsManager.shared.userDefaults.set("dark", forKey: UserDefaultsStringKeys.theme.rawValue)
+        NotificationCenter.default.post(name: NSNotification.Name("localized"), object: nil)
         self.reload?()
     }
     
@@ -45,6 +46,7 @@ class ThemesTableViewCell: UITableViewCell {
             window.overrideUserInterfaceStyle = .light
         }
         UserDefaultsManager.shared.userDefaults.set("light", forKey: UserDefaultsStringKeys.theme.rawValue)
+        NotificationCenter.default.post(name: NSNotification.Name("localized"), object: nil)
         self.reload?()
     }
     

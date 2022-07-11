@@ -1,24 +1,28 @@
 PODS:
   - Locksmith (4.0.0)
+  - MaterialDesignWidgets (0.1.1)
   - MnemonicSwift (2.2.4)
   - SwiftyJSON (5.0.1)
 
 DEPENDENCIES:
   - Locksmith
+  - MaterialDesignWidgets
   - MnemonicSwift
   - SwiftyJSON
 
 SPEC REPOS:
   trunk:
     - Locksmith
+    - MaterialDesignWidgets
     - MnemonicSwift
     - SwiftyJSON
 
 SPEC CHECKSUMS:
   Locksmith: e9bebbaaa4cee3c511bc358a44f843c3fe00e21f
+  MaterialDesignWidgets: 6d02d3fbba2fa89f6e773983346ad2187d7ef8ff
   MnemonicSwift: 40ba76b951b75b32e2719df989b4d6da5798fe26
   SwiftyJSON: 2f33a42c6fbc52764d96f13368585094bfd8aa5e
 
-PODFILE CHECKSUM: 5519064f3540e835f119b400d14422b917d09272
+PODFILE CHECKSUM: f886cc949ab7e10902de4ff08f5991702400dee8
 
 COCOAPODS: 1.11.2

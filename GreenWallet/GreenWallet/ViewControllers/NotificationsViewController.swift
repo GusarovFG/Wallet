@@ -86,6 +86,8 @@ class NotificationsViewController: UIViewController {
         
         self.allDateButton.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
         self.allDateButton.tintColor = .white
+    
+        
         
         localization()
         
@@ -477,7 +479,9 @@ extension NotificationsViewController: UICollectionViewDelegate, UICollectionVie
                         cell.backgroundColor = #colorLiteral(red: 0.8705882353, green: 0.8705882353, blue: 0.8705882353, alpha: 1)
                     } else {
                         cell.backgroundColor = #colorLiteral(red: 0.1882352941, green: 0.1882352941, blue: 0.1882352941, alpha: 1)
-                    }                }
+                    }
+                    
+                }
             }
             cell.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
             cell.cellLabel.textColor = .white

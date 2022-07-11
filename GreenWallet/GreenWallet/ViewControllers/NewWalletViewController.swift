@@ -41,10 +41,15 @@ class NewWalletViewController: UIViewController {
         self.creatingNewWalletView.alpha = 0
         
         self.createNewWalletButton.isEnabled = false
-        self.createNewWalletButton.backgroundColor = #colorLiteral(red: 0.2666666667, green: 0.2666666667, blue: 0.2666666667, alpha: 1)
         self.createNewWalletButton.contentMode = .center
         localization()
         setupAgreeLabel()
+        
+        if UserDefaultsManager.shared.userDefaults.string(forKey: "Theme") == "light" {
+            self.createNewWalletButton.backgroundColor = #colorLiteral(red: 0.8549019608, green: 0.8549019608, blue: 0.8549019608, alpha: 1)
+        } else {
+            self.createNewWalletButton.backgroundColor = #colorLiteral(red: 0.2666666667, green: 0.2666666667, blue: 0.2666666667, alpha: 1)
+        }
         
         if self.isChia || self.isChiaTest {
             self.systemImage.image = UIImage(named: "LogoChia")!

@@ -28,13 +28,12 @@ class AskAQuestionViewController: UIViewController {
     @IBOutlet weak var errorLabel: UILabel!
     @IBOutlet weak var textViewHeighConstrain: NSLayoutConstraint!
     @IBOutlet weak var bottomCorner: UIView!
+    @IBOutlet weak var mainView: UIView!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         localization()
-
-        self.sendButton.backgroundColor = #colorLiteral(red: 0.3364975452, green: 0.3364975452, blue: 0.3364975452, alpha: 1)
         self.sendButton.isEnabled = false
         self.nameLabel.alpha = 0
         self.emailLabel.alpha = 0
@@ -43,7 +42,11 @@ class AskAQuestionViewController: UIViewController {
         self.questionTextView.isScrollEnabled = false
         self.questionTextView.sizeToFit()
 
-        
+        if UserDefaultsManager.shared.userDefaults.string(forKey: "Theme") == "light" {
+            self.sendButton.backgroundColor = #colorLiteral(red: 0.8549019608, green: 0.8549019608, blue: 0.8549019608, alpha: 1)
+        } else {
+            self.sendButton.backgroundColor = #colorLiteral(red: 0.2666666667, green: 0.2666666667, blue: 0.2666666667, alpha: 1)
+        }
         
         
     }

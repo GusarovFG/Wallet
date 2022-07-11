@@ -17,6 +17,7 @@ class PasswordViewController: UIViewController {
     var isMyWallet = false
     var isDeleteWallet = false
     var isAllWallets = false
+    var isPushToken = false
     
     private var isFirstSession = false
     private var enteringPassword = ""
@@ -70,6 +71,10 @@ class PasswordViewController: UIViewController {
             } else {
                 view.layer.borderColor = #colorLiteral(red: 0.7882352941, green: 0.7882352941, blue: 0.7882352941, alpha: 1)
             }
+        }
+        if self.isPushToken {
+            WalletManager.share.isUpdate = false
+
         }
         
         if UIDevice.modelName.contains("iPhone 8") || UIDevice.modelName.contains("iPhone 12") || UIDevice.modelName.contains("iPhone 13") {
@@ -128,8 +133,7 @@ class PasswordViewController: UIViewController {
 
         if self.enteringPassword == KeyChainManager.share.loadPassword()  {
             self.dismiss(animated: true)
-            if !self.isShowDetail && !self.isMyWallet {
-                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "Seccess"), object: nil, userInfo: self.userInfo)
+            if !self.isShowDetail && !self.isMyWallet && !self.isPushToken {
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: "closeAlert"), object: nil)
             }
 
@@ -140,6 +144,9 @@ class PasswordViewController: UIViewController {
                 CoreDataManager.share.deleteChiaWalletPrivateKey(index: self.index)
 
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: "deleteWallet"), object: nil)
+            }
+            if self.isPushToken {
+                NotificationCenter.default.post(name: NSNotification.Name("pushToken"), object: nil)
             }
             
             if self.isAllWallets {
@@ -229,6 +236,10 @@ class PasswordViewController: UIViewController {
                                     CoreDataManager.share.deleteChiaWalletPrivateKey(index: self!.index)
 
                                     NotificationCenter.default.post(name: NSNotification.Name("deleteWallet"), object: nil)
+                                }
+                                
+                                if self!.isPushToken {
+                                    NotificationCenter.default.post(name: NSNotification.Name("pushToken"), object: nil)
                                 }
                             }
                         }

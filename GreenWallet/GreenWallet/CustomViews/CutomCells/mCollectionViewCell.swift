@@ -29,7 +29,7 @@ class mCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-                self.tableView.dataSource = self
+        self.tableView.dataSource = self
         self.tableView.delegate = self
         
         self.tableView.register(UINib(nibName: "BalanceTableViewCell", bundle: nil), forCellReuseIdentifier: "BalanceTableViewCell")
@@ -44,6 +44,8 @@ class mCollectionViewCell: UICollectionViewCell {
         
         localization()
         NotificationCenter.default.addObserver(self, selector: #selector(reloadTableView), name: NSNotification.Name("reload"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(updateBalances), name: NSNotification.Name("updateBalances"), object: nil)
+        
 
     }
 
@@ -59,7 +61,6 @@ class mCollectionViewCell: UICollectionViewCell {
                 self.collectionVieww.constant = self.heightConstraint.constant
             } else {
                 if self.wallet?.wallets != nil {
-                    //                self.tableView.reloadData()
                     self.heightConstraint.constant = (self.frame.size.height) - (self.footerView.frame.height + self.headerView.frame.height + CGFloat((self.wallet?.wallets as! [NSNumber]).count * 76 + 46))
                     self.collectionVieww.constant = self.heightConstraint.constant
                     
@@ -77,6 +78,10 @@ class mCollectionViewCell: UICollectionViewCell {
             }
         }
 
+    }
+    
+    @objc func updateBalances() {
+        self.tableView.reloadData()
     }
     
     @objc func reloadTableView() {
@@ -155,8 +160,8 @@ extension mCollectionViewCell: UITableViewDelegate, UITableViewDataSource {
                 } else {
                     if self.wallet?.name == "Chia Wallet" || self.wallet?.name == "Chia TestNet" {
                         let summ: Double = (((self.wallet?.balances as? [Double])?[indexPath.row] ?? 0) / 1000000000000) * ExchangeRatesManager.share.newRatePerDollar
-                        walletCell.balanceLabel.text = "\(((self.wallet?.balances as? [NSNumber])?[indexPath.row] ?? 0) as! Double / 1000000000000.0 ) XCH"
                         walletCell.convertLabel.text = "⁓ \(NSString(format:"%.2f", summ)) USD"
+                        walletCell.balanceLabel.text = "\(((self.wallet?.balances as? [NSNumber])?[indexPath.row] ?? 0) as! Double / 1000000000000.0 ) XCH"
                         walletCell.tokenLabel.text = self.wallet?.name ?? ""
                     } else {
                         let summ: Double = (((self.wallet?.balances as? [Double])?[indexPath.row] ?? 0) / 1000000000000) * ExchangeRatesManager.share.newChivesRatePerDollar

@@ -30,8 +30,10 @@ class NetworkManager {
                 let json = try decoder.decode(Language.self, from: data)
                 
                 print(json.result.version)
-               
+                DispatchQueue.main.async {
                     complition(json)
+                }
+                    
                 
             } catch {
                 print(error)
@@ -241,6 +243,31 @@ class NetworkManager {
         task.resume()
     }
     
+    func getPushNotifications(complition: @escaping (PushNotifications) -> Void) {
+        guard let url = URL(string: "\(MainURLS.PushNotifications.rawValue)?code=\(CoreDataManager.share.fetchLanguage()[0].languageCode ?? "")") else { return }
+        
+        let session = URLSession.shared
+        session.dataTask(with: url) { data, response, error in
+            if let response = response {
+                print(response)
+            }
+            
+            guard let data = data else { return }
+            
+            do {
+                
+                let json = try JSONDecoder().decode(PushNotifications.self, from: data)
+                
+                DispatchQueue.main.async {
+                    complition(json)
+                }
+            } catch {
+                print(error.localizedDescription)
+                
+            }
+        }.resume()
+    }
+    
     
 }
 
@@ -256,6 +283,7 @@ enum MainURLS: String {
     case question = "https://greenapp.siterepository.ru/api/v1.0/support"
     case faq = "https://greenapp.siterepository.ru/api/v1.0/faq"
     case ExchangeRatesChives = "https://api.lbkex.com/v2/ticker.do?symbol=xcc_usdt"
+    case PushNotifications = "https://greenapp.siterepository.ru/api/v1.0/notifications"
 }
 
 

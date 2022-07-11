@@ -111,7 +111,12 @@ extension FAQController: UITableViewDelegate, UITableViewDataSource {
         header.arrowLabel.textColor = #colorLiteral(red: 0.2269999981, green: 0.6750000119, blue: 0.3490000069, alpha: 1)
         header.section = section
         header.delegate = self
-       
+        
+        if UserDefaultsManager.shared.userDefaults.string(forKey: "Theme") == "light" {
+            header.titleLabel.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        } else {
+            header.titleLabel.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        }
         return header
     }
     

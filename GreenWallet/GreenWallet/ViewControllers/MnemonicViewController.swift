@@ -37,8 +37,13 @@ class MnemonicViewController: UIViewController {
         self.secureMnemonicPhrase = self.mnemonicPhrase
         self.secureMnemonic()
         self.continueButton.isEnabled = false
-        self.continueButton.backgroundColor = #colorLiteral(red: 0.3364975452, green: 0.3364975452, blue: 0.3364975452, alpha: 1)
         self.copyLabel.alpha = 0
+        
+        if UserDefaultsManager.shared.userDefaults.string(forKey: "Theme") == "light" {
+            self.continueButton.backgroundColor = #colorLiteral(red: 0.8549019608, green: 0.8549019608, blue: 0.8549019608, alpha: 1)
+        } else {
+            self.continueButton.backgroundColor = #colorLiteral(red: 0.2666666667, green: 0.2666666667, blue: 0.2666666667, alpha: 1)
+        }
         
         self.copyLabel.layer.cornerRadius = 8
         

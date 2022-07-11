@@ -42,7 +42,7 @@ class ImportMnemonicViewController: UIViewController {
         for _ in 0..<countOfItems {
             self.mnemonicPhrase.append("")
         }
-        
+        WalletManager.share.isUpdate = false
         self.collectionView.register(UINib(nibName: "ImportMnemonicCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "ImportMnemonicCollectionViewCell")
         
         setuptermsLabel()
@@ -52,10 +52,16 @@ class ImportMnemonicViewController: UIViewController {
         self.spinnerVC = storyoard.instantiateViewController(withIdentifier: "spinner") as! SprinnerViewController
         
         self.scrollView.isScrollEnabled = false
-        self.continueButton.backgroundColor = #colorLiteral(red: 0.2666666667, green: 0.2666666667, blue: 0.2666666667, alpha: 1)
+       
         self.continueButton.isEnabled = false
         self.segmentedControl.setTitleTextAttributes([.foregroundColor: #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1), .font: UIFont(name: "Helvetica-Bold", size: 18.0) ], for: .selected)
         self.segmentedControl.setTitleTextAttributes([.foregroundColor: #colorLiteral(red: 0.2784313725, green: 0.2784313725, blue: 0.2784313725, alpha: 1) ], for: .normal)
+        
+        if UserDefaultsManager.shared.userDefaults.string(forKey: "Theme") == "light" {
+            self.continueButton.backgroundColor = #colorLiteral(red: 0.8549019608, green: 0.8549019608, blue: 0.8549019608, alpha: 1)
+        } else {
+            self.continueButton.backgroundColor = #colorLiteral(red: 0.2666666667, green: 0.2666666667, blue: 0.2666666667, alpha: 1)
+        }
         self.termsLabel.addRangeGesture(stringRange: "условиями пользования") {
             let url = URL(string: "https://devushka.ru/upload/posts/a1797083197722a6b1ab8e2f4beb2b08.jpg")
             if UIApplication.shared.canOpenURL(url!) {
@@ -87,6 +93,12 @@ class ImportMnemonicViewController: UIViewController {
     @objc private func alertErrorGerCodingKeysPresent() {
         self.spinnerVC.dismiss(animated: false)
         AlertManager.share.serverError(self.spinnerVC)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        WalletManager.share.isUpdate = true
+        WalletManager.share.updateBalances()
     }
     
     
@@ -176,7 +188,11 @@ class ImportMnemonicViewController: UIViewController {
             self.checkBoxButton.tintColor = .white
             
             
-            self.continueButton.backgroundColor = #colorLiteral(red: 0.2666666667, green: 0.2666666667, blue: 0.2666666667, alpha: 1)
+            if UserDefaultsManager.shared.userDefaults.string(forKey: "Theme") == "light" {
+                self.continueButton.backgroundColor = #colorLiteral(red: 0.8549019608, green: 0.8549019608, blue: 0.8549019608, alpha: 1)
+            } else {
+                self.continueButton.backgroundColor = #colorLiteral(red: 0.2666666667, green: 0.2666666667, blue: 0.2666666667, alpha: 1)
+            }
             self.continueButton.isEnabled = false
             
             self.countOfItems = 12
@@ -198,7 +214,11 @@ class ImportMnemonicViewController: UIViewController {
             self.checkBoxButton.tintColor = .white
             
             
-            self.continueButton.backgroundColor = #colorLiteral(red: 0.2666666667, green: 0.2666666667, blue: 0.2666666667, alpha: 1)
+            if UserDefaultsManager.shared.userDefaults.string(forKey: "Theme") == "light" {
+                self.continueButton.backgroundColor = #colorLiteral(red: 0.8549019608, green: 0.8549019608, blue: 0.8549019608, alpha: 1)
+            } else {
+                self.continueButton.backgroundColor = #colorLiteral(red: 0.2666666667, green: 0.2666666667, blue: 0.2666666667, alpha: 1)
+            }
             self.continueButton.isEnabled = false
             self.countOfItems = 24
             
@@ -235,7 +255,11 @@ class ImportMnemonicViewController: UIViewController {
             
             self.checkBoxPress = false
             
-            self.continueButton.backgroundColor = #colorLiteral(red: 0.2666666667, green: 0.2666666667, blue: 0.2666666667, alpha: 1)
+            if UserDefaultsManager.shared.userDefaults.string(forKey: "Theme") == "light" {
+                self.continueButton.backgroundColor = #colorLiteral(red: 0.8549019608, green: 0.8549019608, blue: 0.8549019608, alpha: 1)
+            } else {
+                self.continueButton.backgroundColor = #colorLiteral(red: 0.2666666667, green: 0.2666666667, blue: 0.2666666667, alpha: 1)
+            }
             self.continueButton.isEnabled = false
         }
     }
@@ -312,7 +336,7 @@ class ImportMnemonicViewController: UIViewController {
                                                     
                                                 }
                                                 ChiaBlockchainManager.share.getWalletBalance(wallet.id) { balance in
-                                                    balances.append(balance.wallet_balance.max_send_amount)
+                                                    balances.append(balance.wallet_balance.confirmed_wallet_balance)
                                                     print(balances)
                                                     
                                                 }
@@ -370,7 +394,7 @@ class ImportMnemonicViewController: UIViewController {
                                                 
                                             }
                                             ChivesBlockchainManager.share.getWalletBalance(wallet.id) { balance in
-                                                balances.append(balance.wallet_balance.max_send_amount)
+                                                balances.append(balance.wallet_balance.confirmed_wallet_balance)
                                                 print(balances)
                                                 
                                             }
@@ -420,7 +444,7 @@ class ImportMnemonicViewController: UIViewController {
                                                 
                                             }
                                             ChiaTestBlockchainManager.share.getWalletBalance(wallet.id) { balance in
-                                                balances.append(balance.wallet_balance.max_send_amount)
+                                                balances.append(balance.wallet_balance.confirmed_wallet_balance)
                                                 print(balances)
                                                 
                                             }
@@ -470,7 +494,7 @@ class ImportMnemonicViewController: UIViewController {
                                                 
                                             }
                                             ChivesTestBlockchainManager.share.getWalletBalance(wallet.id) { balance in
-                                                balances.append(balance.wallet_balance.max_send_amount)
+                                                balances.append(balance.wallet_balance.confirmed_wallet_balance)
                                                 print(balances)
                                                 
                                             }
@@ -564,7 +588,11 @@ extension ImportMnemonicViewController: UICollectionViewDelegate, UICollectionVi
                         self.continueButton.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
                     } else {
                         self.continueButton.isEnabled = false
-                        self.continueButton.backgroundColor = #colorLiteral(red: 0.2666666667, green: 0.2666666667, blue: 0.2666666667, alpha: 1)
+                        if UserDefaultsManager.shared.userDefaults.string(forKey: "Theme") == "light" {
+                            self.continueButton.backgroundColor = #colorLiteral(red: 0.8549019608, green: 0.8549019608, blue: 0.8549019608, alpha: 1)
+                        } else {
+                            self.continueButton.backgroundColor = #colorLiteral(red: 0.2666666667, green: 0.2666666667, blue: 0.2666666667, alpha: 1)
+                        }
                     }
                 }
                 
@@ -586,7 +614,11 @@ extension ImportMnemonicViewController: UICollectionViewDelegate, UICollectionVi
                     self.continueButton.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
                 } else {
                     self.continueButton.isEnabled = false
-                    self.continueButton.backgroundColor = #colorLiteral(red: 0.2666666667, green: 0.2666666667, blue: 0.2666666667, alpha: 1)
+                    if UserDefaultsManager.shared.userDefaults.string(forKey: "Theme") == "light" {
+                        self.continueButton.backgroundColor = #colorLiteral(red: 0.8549019608, green: 0.8549019608, blue: 0.8549019608, alpha: 1)
+                    } else {
+                        self.continueButton.backgroundColor = #colorLiteral(red: 0.2666666667, green: 0.2666666667, blue: 0.2666666667, alpha: 1)
+                    }
                 }
             }
         }
@@ -608,11 +640,9 @@ extension ImportMnemonicViewController: UICollectionViewDelegate, UICollectionVi
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        if UIDevice.modelName.contains("iPhone 8") || UIDevice.modelName.contains("iPhone 12") || UIDevice.modelName.contains("iPhone 13") {
-            return CGSize(width: 160, height: 50)
-        } else {
-            return CGSize(width: 178, height: 50)
-        }
+        
+        return CGSize(width: (collectionView.frame.width / 2) - 15, height: 50)
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {

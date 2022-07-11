@@ -14,7 +14,6 @@ class MainViewController: UIViewController {
     private var wallets: [ChiaWalletPrivateKey] = []
     private var wallet: ChiaWalletPrivateKey?
     
-    private var footerButtonTitle = "Все кошельки"
     
     let userDefaults = UserDefaults.standard
     
@@ -24,6 +23,7 @@ class MainViewController: UIViewController {
     @IBOutlet weak var percentLabel: UILabel!
     @IBOutlet weak var pageControl: UIPageControl!
     @IBOutlet weak var cellectionView: CustomMainCollectionView!
+    @IBOutlet weak var balanceView: UIView!
     
     @IBOutlet weak var collectionViewHeightConstraint: NSLayoutConstraint!
     
@@ -53,10 +53,10 @@ class MainViewController: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(hideWallet), name: NSNotification.Name(rawValue: "hideWallet"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(showWallet), name: NSNotification.Name(rawValue: "showWallet"), object: nil)
-        //        NotificationCenter.default.addObserver(self, selector: #selector(showGetSystem), name: NSNotification.Name(rawValue: "showGetVC"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(showPushSystem), name: NSNotification.Name(rawValue: "showPushVC"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(localization), name: NSNotification.Name("localized"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(reloadcellectionView), name: NSNotification.Name("reload"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(updateBalances), name: NSNotification.Name("updateBalances"), object: nil)
+
         
         
         localization()
@@ -105,6 +105,7 @@ class MainViewController: UIViewController {
         super.viewDidAppear(animated)
         localization()
         self.cellectionView.reloadData()
+        LocalNotificationsManager.share.checkUpdates()
     }
     
     override func viewDidLayoutSubviews() {
@@ -112,8 +113,14 @@ class MainViewController: UIViewController {
         
     }
     
+    @objc func updateBalances() {
+        let summ: Double = ((((self.wallet?.balances as? [Double])?.reduce(0, +) ?? 0) / 1000000000000) * ExchangeRatesManager.share.newRatePerDollar).rounded(toPlaces: 8)
+        self.balanceLabel.text = "⁓\(NSString(format:"%.2f", summ)) USD"
+    }
+    
     @objc private func localization() {
         self.balandeTitle.text = LocalizationManager.share.translate?.result.list.main_screen.main_screen_title_balance
+        self.cellectionView.reloadData()
     }
     
     @objc func reloadcellectionView() {
@@ -164,14 +171,7 @@ class MainViewController: UIViewController {
     //        self.present(selectSystemVC, animated: true)
     //    }
     
-    @objc private func showPushSystem(notification: Notification) {
-        let selectSystemVC = storyboard?.instantiateViewController(withIdentifier: "SelectSystemViewController") as! SelectSystemViewController
-        selectSystemVC.isPushToken = true
-        selectSystemVC.isMainScreen = true
-        selectSystemVC.modalPresentationStyle = .overFullScreen
-        self.present(selectSystemVC, animated: true)
-    }
-    
+
     @IBAction func sendButtonPressed(_ sender: Any) {
         if !CoreDataManager.share.fetchChiaWalletPrivateKey().isEmpty {
         let pushVC = storyboard?.instantiateViewController(withIdentifier: "PushTokensViewController") as! PushTokensViewController

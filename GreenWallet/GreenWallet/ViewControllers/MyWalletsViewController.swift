@@ -72,14 +72,13 @@ class MyWalletsViewController: UIViewController {
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        self.scrollView.contentSize = self.view.bounds.size
-        
+        self.scrollView.contentSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height + 200)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.scrollToNextCell()
         
+        self.scrollToNextCell()
         print(self.index)
         
         
@@ -126,6 +125,7 @@ class MyWalletsViewController: UIViewController {
             self.walletCollectionView.scrollToItem(at: [0,self.index], at: .right, animated: true)
             self.walletCollectionView.isPagingEnabled = true
         }
+        
         
     }
 
@@ -178,14 +178,17 @@ extension MyWalletsViewController: UICollectionViewDelegate, UICollectionViewDat
             case false:
                 let wallet = self.wallets[indexPath.row]
                 
+                
+                
                 mainCell.walletImage.image = UIImage(named: "LogoChia")!
                 mainCell.balanceLabel.text = "\((((wallet.balances as? [Double])?.reduce(0, +) ?? 0) / 1000000000000)) XCH"
                 mainCell.publicKeyLabel.text = "\(LocalizationManager.share.translate?.result.list.wallet.wallet_data_public_key ?? "") \(wallets[indexPath.row].fingerprint )"
                 if ((wallet.name?.contains("Chia")) != nil) {
-                    mainCell.usdLabel.text = "XCH price: \(ExchangeRatesManager.share.newRatePerDollar) $"
-                    
+                    let summChia: Double = (((wallet.balances as? [Double])?.reduce(0, +) ?? 0) / 1000000000000) * ExchangeRatesManager.share.newRatePerDollar
+                    mainCell.usdLabel.text = "⁓ \(NSString(format:"%.2f", summChia)) USD"
                 } else {
-                    mainCell.usdLabel.text = "XCC price: \(ExchangeRatesManager.share.newChivesRatePerDollar) $"
+                    let summChives: Double = (((wallet.balances as? [Double])?.reduce(0, +) ?? 0) / 1000000000000) * ExchangeRatesManager.share.newChivesRatePerDollar
+                    mainCell.usdLabel.text = "⁓ \(NSString(format:"%.2f", summChives)) USD"
                 }
                 mainCell.walletSystemLabel.text = (wallet.name?.split(separator: " ").first ?? "") + " Network"
                 mainCell.complitionHandler = { [unowned self] in
@@ -247,9 +250,9 @@ extension MyWalletsViewController: UICollectionViewDelegate, UICollectionViewDat
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         switch collectionView {
         case self.walletCollectionView:
-            return CGSize(width: 360, height: 220)
+            return CGSize(width: self.walletCollectionView.frame.width, height: collectionView.frame.height - 20)
         case self.actionCollectionView:
-            return CGSize(width: 190, height: 190)
+            return CGSize(width: (collectionView.frame.width / 2) - 15, height: (collectionView.frame.height / 2) - 10)
         default:
             return CGSize.zero
         }

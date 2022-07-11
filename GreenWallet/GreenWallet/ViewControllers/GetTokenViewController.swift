@@ -148,8 +148,8 @@ class GetTokenViewController: UIViewController {
 
         var img:UIImage = UIImage(cgImage: cgimg, scale: 1.0, orientation: UIImage.Orientation.up)
 
-        let width  = 190
-        let height = 190
+        let width  = self.qrCollectionView.frame.width
+        let height = self.qrCollectionView.frame.width
 
         UIGraphicsBeginImageContext(CGSize(width: width, height: height))
         let cgContxt:CGContext = UIGraphicsGetCurrentContext()!
@@ -157,6 +157,7 @@ class GetTokenViewController: UIViewController {
         img.draw(in: CGRect(x: 0, y: 0, width: width, height: height))
         img = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
+        
         return img
     }
 
@@ -286,11 +287,11 @@ extension GetTokenViewController: UICollectionViewDelegate, UICollectionViewData
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        CGSize(width: 190, height: 190)
+        CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        UIEdgeInsets(top: 0, left: 55, bottom: 0, right: 55)
+        UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0 )
     }
     
 }

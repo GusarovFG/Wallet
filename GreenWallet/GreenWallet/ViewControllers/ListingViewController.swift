@@ -48,18 +48,22 @@ class ListingViewController: UIViewController {
         self.descriptionOfProjectLabel.alpha = 0
         self.blockChianLabel.alpha = 0
         self.twitterLable.alpha = 0
-        
         self.descriptionOfProjectTextView.isScrollEnabled = false
         self.descriptionOfProjectTextView.sizeToFit()
         
         self.mainButton.isEnabled = false
-        self.mainButton.backgroundColor = #colorLiteral(red: 0.3364975452, green: 0.3364975452, blue: 0.3364975452, alpha: 1)
         self.descriptionOfProjectTextView.backgroundColor = self.mainView.backgroundColor
         self.descriptionOfProjectTextView.textColor = .systemGray
         self.emailErrorLabel.isHidden = true
         
         if UIDevice.modelName.contains("iPhone 8") || UIDevice.modelName.contains("iPhone 12") || UIDevice.modelName.contains("iPhone 13") {
             self.bottomConstraint.constant = 20
+        }
+        
+        if UserDefaultsManager.shared.userDefaults.string(forKey: "Theme") == "light" {
+            self.mainButton.backgroundColor = #colorLiteral(red: 0.8549019608, green: 0.8549019608, blue: 0.8549019608, alpha: 1)
+        } else {
+            self.mainButton.backgroundColor = #colorLiteral(red: 0.2666666667, green: 0.2666666667, blue: 0.2666666667, alpha: 1)
         }
        
         

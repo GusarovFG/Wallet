@@ -549,10 +549,10 @@ class ChiaBlockchainManager {
                 } catch let DecodingError.keyNotFound(key, context) {
                     print("Key '\(key)' not found:", context.debugDescription)
                     print("codingPath:", context.codingPath)
-                    DispatchQueue.main.async {
-                        
-                        NotificationCenter.default.post(name: NSNotification.Name("alertErrorGerCodingKeys"), object: nil)
-                    }
+//                    DispatchQueue.main.async {
+//
+//                        NotificationCenter.default.post(name: NSNotification.Name("alertErrorGerCodingKeys"), object: nil)
+//                    }
 
                 } catch let DecodingError.valueNotFound(value, context) {
                     print("Value '\(value)' not found:", context.debugDescription)
@@ -1153,7 +1153,7 @@ class ChiaTestBlockchainManager {
                     print("Key '\(key)' not found:", context.debugDescription)
                     print("codingPath:", context.codingPath)
                     DispatchQueue.main.async {
-                        
+
                         NotificationCenter.default.post(name: NSNotification.Name("alertErrorGerCodingKeys"), object: nil)
                     }
 

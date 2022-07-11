@@ -4,44 +4,113 @@
 //
 //  Created by Фаддей Гусаров on 03.05.2022.
 //
-
+import MaterialDesignWidgets
 import UIKit
 
 class MainTabBarController: UITabBarController, UINavigationBarDelegate {
+    
+    let pushButton = MaterialVerticalButton(icon: UIImage(named: "push")!, text: LocalizationManager.share.translate?.result.list.main_screen.main_screen_send_btn ?? "", font: .systemFont(ofSize: 10), useOriginalImg: true, cornerRadius: 0, buttonStyle: .fill)
+    let getButton = MaterialVerticalButton(icon: UIImage(named: "get")!, text: LocalizationManager.share.translate?.result.list.main_screen.main_screen_recive_btn ?? "", font: .systemFont(ofSize: 10), useOriginalImg: true, cornerRadius: 0, buttonStyle: .fill)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         addTabs()
         self.tabBar.tintColor = #colorLiteral(red: 0.2274509804, green: 0.6745098039, blue: 0.3490196078, alpha: 1)
+        self.tabBar.addSubview(pushButton)
+        self.pushButton.addTarget(self, action: #selector(showPostVC), for: .touchUpInside)
+        self.pushButton.backgroundColor = self.tabBar.backgroundColor
+        self.pushButton.label.textColor = #colorLiteral(red: 0.6274509804, green: 0.6274509804, blue: 0.6274509804, alpha: 1)
+        self.pushButton.rippleEnabled = false
+        self.pushButton.imageView.alpha = 0.5
+        
+        self.tabBar.addSubview(getButton)
+        self.getButton.addTarget(self, action: #selector(showGettVC), for: .touchUpInside)
+        self.getButton.backgroundColor = self.tabBar.backgroundColor
+        self.getButton.label.textColor = #colorLiteral(red: 0.6274509804, green: 0.6274509804, blue: 0.6274509804, alpha: 1)
+        self.getButton.imageView.alpha = 0.5
+        
+        self.getButton.rippleEnabled = false
         
         
         
-        //        NotificationCenter.default.addObserver(self, selector: #selector(changeIndex), name: NSNotification.Name("ChangeIndex"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(changeIndex), name: NSNotification.Name("localized"), object: nil)
+    }
+    
+    @objc func showPostVC() {
+        if !CoreDataManager.share.fetchChiaWalletPrivateKey().isEmpty {
+            let selectSystemVC = storyboard?.instantiateViewController(withIdentifier: "SelectSystemViewController") as! SelectSystemViewController
+            selectSystemVC.isPushToken = true
+            selectSystemVC.isMainScreen = true
+            selectSystemVC.modalPresentationStyle = .overFullScreen
+            self.present(selectSystemVC, animated: true)
+        } else {
+            AlertManager.share.walletsIsNotFounded(self)
+        }
+            
+    }
+    
+    @objc func showGettVC() {
+        if !CoreDataManager.share.fetchChiaWalletPrivateKey().isEmpty {
+            let selectSystemVC = storyboard?.instantiateViewController(withIdentifier: "SelectSystemViewController") as! SelectSystemViewController
+            selectSystemVC.isGetToken = true
+            selectSystemVC.modalPresentationStyle = .overFullScreen
+            self.present(selectSystemVC, animated: true)
+        } else {
+            AlertManager.share.walletsIsNotFounded(self)
+        }
+            
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.reloadInputViews()
+
+        
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        self.pushButton.frame.size = CGSize(width: self.tabBar.frame.width / 6, height: 50)
+        self.pushButton.frame.origin = CGPoint(x: self.tabBar.frame.midX - (self.pushButton.frame.width / 2), y: 1)
+        self.pushButton.label.frame.origin.y = self.pushButton.imageView.frame.maxY
+  
+        self.getButton.frame.size = CGSize(width: self.tabBar.frame.width / 6, height: 50)
+        self.getButton.frame.origin = CGPoint(x: (self.tabBar.frame.maxX / 5) + 5, y: 1)
+        self.getButton.label.frame.origin.y = self.getButton.imageView.frame.maxY
+        
+        self.pushButton.imageView.contentMode = .center
+        self.getButton.imageView.contentMode = .center
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
+
     }
     
     @objc private func changeIndex() {
-        self.selectedIndex = 0
+        self.addTabs()
+
+        self.pushButton.label.text = LocalizationManager.share.translate?.result.list.main_screen.main_screen_send_btn ?? ""
+        self.getButton.label.text = LocalizationManager.share.translate?.result.list.main_screen.main_screen_recive_btn ?? ""
     }
     
     private func addTabs() {
+        
+        
         let mainVC = storyboard?.instantiateViewController(withIdentifier: "navi") as! UINavigationController
-        mainVC.tabBarItem = UITabBarItem(title: LocalizationManager.share.translate?.result.list.main_screen.main_screen_title_purse, image: UIImage(named: "wallet")!, selectedImage: UIImage(named: "wallet")!)
+        mainVC.tabBarItem = UITabBarItem(title: LocalizationManager.share.translate?.result.list.main_screen.main_screen_title_purse, image: UIImage(named: "wallet")!, selectedImage: nil)
         
-        let secondMainVC = storyboard?.instantiateViewController(withIdentifier: "navi") as! UINavigationController
-        secondMainVC.tabBarItem = UITabBarItem(title: LocalizationManager.share.translate?.result.list.main_screen.main_screen_recive_btn, image: UIImage(named: "get")!, selectedImage: UIImage(named: "get")!)
+        let secondMainVC = UIViewController()
+        secondMainVC.tabBarItem = UITabBarItem(title: "", image: nil, selectedImage: nil)
+        secondMainVC.tabBarItem.isEnabled = false
         
-        let thirdMainVC = storyboard?.instantiateViewController(withIdentifier: "navi") as! UINavigationController
-        thirdMainVC.tabBarItem = UITabBarItem(title: LocalizationManager.share.translate?.result.list.main_screen.main_screen_send_btn, image: UIImage(named: "push")!, selectedImage: UIImage(named: "push")!)
+        let thirdMainVC = UIViewController()
+        thirdMainVC.tabBarItem = UITabBarItem(title: "", image: nil, selectedImage: nil)
+        thirdMainVC.tabBarItem.isEnabled = false
         
         let fourMainVC = storyboard?.instantiateViewController(withIdentifier: "TransactionHistoryVC") as! TransactionHistoryViewController
         fourMainVC.modalPresentationStyle = .fullScreen
@@ -55,32 +124,6 @@ class MainTabBarController: UITabBarController, UINavigationBarDelegate {
         self.navigationController?.navigationBar.delegate = self
     }
     
-    override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
-        if tabBar.selectedItem?.title == LocalizationManager.share.translate?.result.list.main_screen.main_screen_recive_btn {
-            if !CoreDataManager.share.fetchChiaWalletPrivateKey().isEmpty {
-                let selectSystemVC = storyboard?.instantiateViewController(withIdentifier: "SelectSystemViewController") as! SelectSystemViewController
-                selectSystemVC.isGetToken = true
-                selectSystemVC.modalPresentationStyle = .overFullScreen
-                self.present(selectSystemVC, animated: true)
-                
-            } else {
-                AlertManager.share.walletsIsNotFounded(self)
-            }
-            
-            
-        }
-        
-        if tabBar.selectedItem?.title == LocalizationManager.share.translate?.result.list.main_screen.main_screen_send_btn {
-            if !CoreDataManager.share.fetchChiaWalletPrivateKey().isEmpty {
-                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "showPushVC"), object: nil)
-            } else {
-                AlertManager.share.walletsIsNotFounded(self)
-            }
-            
-        }
-       
-        
-    }
 }
 
 extension MainTabBarController: UIPopoverPresentationControllerDelegate {

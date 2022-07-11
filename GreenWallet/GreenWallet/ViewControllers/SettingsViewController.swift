@@ -26,11 +26,13 @@ class SettingsViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        print("viewWillAppear")
+        self.tableView.reloadData()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.tableView.reloadData()
+        print("viewDidAppear")
     }
     
     @objc private func localization() {

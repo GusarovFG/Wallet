@@ -29,6 +29,8 @@ class AddContactViewController: UIViewController {
     @IBOutlet weak var mainTitle: UILabel!
     @IBOutlet weak var backutton: UIButton!
     @IBOutlet weak var bottomCorner: UIView!
+    @IBOutlet weak var topView: UIView!
+    @IBOutlet weak var bottomView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,8 +39,13 @@ class AddContactViewController: UIViewController {
         
         self.errorLabel.alpha = 0
         self.addContactButton.isEnabled = false
-        self.addContactButton.backgroundColor = #colorLiteral(red: 0.2666666667, green: 0.2666666667, blue: 0.2666666667, alpha: 1)
         self.descriptionTextField.textColor = .gray
+
+        if UserDefaultsManager.shared.userDefaults.string(forKey: "Theme") == "light" {
+            self.addContactButton.backgroundColor = #colorLiteral(red: 0.8549019608, green: 0.8549019608, blue: 0.8549019608, alpha: 1)
+        } else {
+            self.addContactButton.backgroundColor = #colorLiteral(red: 0.2666666667, green: 0.2666666667, blue: 0.2666666667, alpha: 1)
+        }
         
         if self.isEditingContact {
             self.contactAdresTextField.isEnabled = false

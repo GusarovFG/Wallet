@@ -28,18 +28,18 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sxN-W4-iqg">
-                                <rect key="frame" x="15" y="87" width="150" height="16"/>
+                                <rect key="frame" x="15" y="86.5" width="130" height="16"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="150" id="NQq-vx-cj9"/>
+                                    <constraint firstAttribute="width" constant="130" id="NQq-vx-cj9"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <color key="textColor" red="0.58039215686274503" green="0.58039215686274503" blue="0.58039215686274503" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ntG-VO-HJv">
-                                <rect key="frame" x="15" y="62" width="39.5" height="20"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ntG-VO-HJv">
+                                <rect key="frame" x="15" y="62" width="130" height="19.5"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="20" id="lnr-Ws-dBL"/>
+                                    <constraint firstAttribute="width" constant="130" id="Wpd-73-LBc"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <color key="textColor" red="0.2274509804" green="0.67450980390000004" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -49,9 +49,7 @@
                         <color key="backgroundColor" name="ViewColor"/>
                         <constraints>
                             <constraint firstItem="sxN-W4-iqg" firstAttribute="leading" secondItem="SWN-aw-YPH" secondAttribute="leading" constant="15" id="72W-It-bw1"/>
-                            <constraint firstAttribute="width" constant="180" id="7jd-4v-2K0"/>
                             <constraint firstItem="ntG-VO-HJv" firstAttribute="top" secondItem="eLo-os-O7S" secondAttribute="bottom" constant="7" id="K1m-x9-0Qe"/>
-                            <constraint firstAttribute="height" constant="180" id="Ok5-Xh-v64"/>
                             <constraint firstItem="eLo-os-O7S" firstAttribute="leading" secondItem="SWN-aw-YPH" secondAttribute="leading" constant="15" id="S2A-AH-xWV"/>
                             <constraint firstItem="sxN-W4-iqg" firstAttribute="top" secondItem="ntG-VO-HJv" secondAttribute="bottom" constant="5" id="UPL-pX-Hia"/>
                             <constraint firstItem="ntG-VO-HJv" firstAttribute="leading" secondItem="SWN-aw-YPH" secondAttribute="leading" constant="15" id="fOh-Wb-bRU"/>

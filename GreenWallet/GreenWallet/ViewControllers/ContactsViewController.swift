@@ -12,14 +12,15 @@ class ContactsViewController: UIViewController {
     var isNotTabbar = false
     private var contacts: [Contact] = []
     private var filterContacts: [Contact] = []
-
+    var isPush = false
+    
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var mainTitleLabel: UILabel!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var addContactButton: UIButton!
     @IBOutlet weak var contactsTableView: UITableView!
     
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         if !self.isNotTabbar {
@@ -53,7 +54,7 @@ class ContactsViewController: UIViewController {
         super.viewWillAppear(animated)
         
     }
-
+    
     @objc private func localization() {
         self.backButton.setTitle(LocalizationManager.share.translate?.result.list.all.back_btn, for: .normal)
         self.mainTitleLabel.text = LocalizationManager.share.translate?.result.list.address_book.address_book_title
@@ -61,7 +62,7 @@ class ContactsViewController: UIViewController {
         self.searchBar.searchTextField.attributedPlaceholder = NSAttributedString(string: LocalizationManager.share.translate?.result.list.all.search ?? "", attributes: [:])
     }
     
-
+    
     
     @objc private func showSpinner() {
         AlertManager.share.showSpinner(self, true)
@@ -71,13 +72,13 @@ class ContactsViewController: UIViewController {
     }
     
     @objc func showPopUp() {
-
+        
         self.contacts = CoreDataManager.share.fetchContacts()
         self.filterContacts = self.contacts
         self.contactsTableView.reloadData()
         AlertManager.share.successDeletingContact(self)
     }
-
+    
     @IBAction func addContactButtonPressed(_ sender: Any) {
         let addContactVC = storyboard?.instantiateViewController(withIdentifier: "AddContactViewController") as! AddContactViewController
         addContactVC.modalPresentationStyle = .fullScreen
@@ -110,7 +111,7 @@ extension ContactsViewController: UITableViewDataSource, UITableViewDelegate {
                    trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let contact = self.contacts[indexPath.row]
         let edit = UIContextualAction(style: .normal,
-                                         title: "") { [weak self] (action, view, completionHandler) in
+                                      title: "") { [weak self] (action, view, completionHandler) in
             let addContactVC = self?.storyboard?.instantiateViewController(withIdentifier: "AddContactViewController") as! AddContactViewController
             addContactVC.modalPresentationStyle = .fullScreen
             addContactVC.isEditingContact = true
@@ -122,9 +123,17 @@ extension ContactsViewController: UITableViewDataSource, UITableViewDelegate {
         }
         edit.backgroundColor = #colorLiteral(red: 0.1189827248, green: 0.6536024213, blue: 1, alpha: 1)
         edit.image = UIImage(named: "editContact")!
-
+        
         let send = UIContextualAction(style: .normal, title: "") { action, view, completionHandler in
-            
+            if !CoreDataManager.share.fetchChiaWalletPrivateKey().isEmpty {
+                let pushVC = self.storyboard?.instantiateViewController(withIdentifier: "PushTokensViewController") as! PushTokensViewController
+                pushVC.wallets = CoreDataManager.share.fetchChiaWalletPrivateKey()
+                pushVC.address = self.contacts[indexPath.row].adres ?? ""
+                pushVC.modalPresentationStyle = .overFullScreen
+                self.present(pushVC, animated: true)
+            } else {
+                AlertManager.share.walletsIsNotFounded(self)
+            }
             
             
             completionHandler(true)
@@ -144,6 +153,14 @@ extension ContactsViewController: UITableViewDataSource, UITableViewDelegate {
         let configuration = UISwipeActionsConfiguration(actions: [send, edit, trash])
         configuration.performsFirstActionWithFullSwipe = false
         return configuration
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if self.isPush {
+            let userInfo = ["contact": self.filterContacts[indexPath.row].adres]
+            NotificationCenter.default.post(name: NSNotification.Name("contact"), object: nil, userInfo: userInfo as [AnyHashable : Any])
+            self.dismiss(animated: true)
+        }
     }
     
 }
@@ -167,6 +184,6 @@ extension ContactsViewController: UISearchBarDelegate {
         searchBar.resignFirstResponder()
     }
     
-   
+    
     
 }

@@ -17,7 +17,7 @@ class AllWalletsTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -31,6 +31,7 @@ class AllWalletsTableViewCell: UITableViewCell {
         self.walletLabel.text = wallet.name
         self.tokenLabel.text = "XCH"
         self.keyLabel.text = "\(String(describing: LocalizationManager.share.translate?.result.list.wallet.wallet_data_public_key ?? "")) \(wallet.fingerprint)"
+        
     }
     
 }

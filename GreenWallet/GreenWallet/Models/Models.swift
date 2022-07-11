@@ -803,3 +803,37 @@ struct ListSystems: Codable, Hashable {
         case harvester
     }
 }
+
+struct PushNotifications: Codable {
+    let success: Bool
+    let result: PushNotificationsResult
+
+    enum CodingKeys: String, CodingKey {
+        case success
+        case result
+    }
+}
+
+// MARK: - Result
+struct PushNotificationsResult: Codable {
+    let version: String
+    let list: [PushNotificationsList]
+
+    enum CodingKeys: String, CodingKey {
+        case version
+        case list
+    }
+}
+
+// MARK: - List
+struct PushNotificationsList: Codable {
+    let guid: String
+    let created_at: String
+    let message: String
+
+    enum CodingKeys: String, CodingKey {
+        case guid
+        case created_at
+        case message
+    }
+}

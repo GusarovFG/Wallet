@@ -29,25 +29,34 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let passwordStoryboard = UIStoryboard(name: "PasswordStoryboard", bundle: .main)
         let enterPasswordVC = passwordStoryboard.instantiateViewController(withIdentifier: "EnteringPasswordViewController") as! PasswordViewController
-        enterPasswordVC.modalPresentationStyle = .fullScreen
         
-        self.window?.rootViewController = enterPasswordVC
-        enterPasswordVC.view.alpha = 0
+        
         if UserDefaultsManager.shared.userDefaults.string(forKey: UserDefaultsStringKeys.firstSession.rawValue) == "First" {
-            NetworkManager.share.getLocalization(from: MainURLS.language.rawValue) { language in
-                LanguageManager.share.language = language
-                print(language.result.version)
-                
-            }
+            self.window?.rootViewController = enterPasswordVC
+            enterPasswordVC.modalPresentationStyle = .fullScreen
+            enterPasswordVC.view.alpha = 0
+            WalletManager.share.isUpdate = true
+            WalletManager.share.updateBalances()
             
-            print("\(CoreDataManager.share.fetchLanguage().count) + ---------------------------------__-_-_--_-_-_----")
-            NetworkManager.share.getTranslate(from: MainURLS.API.rawValue, languageCode: CoreDataManager.share.fetchLanguage()[0].languageCode ?? "") { translate in
-                LocalizationManager.share.translate = translate
-                enterPasswordVC.viewDidLoad()
-                UIView.animate(withDuration: 1, delay: 0) {
-                    enterPasswordVC.view.alpha = 1
+            DispatchQueue.global().async {
+                
+                NetworkManager.share.getLocalization(from: MainURLS.language.rawValue) { language in
+                    LanguageManager.share.language = language
+                    print(language.result.version)
+                    
                 }
                 
+                NetworkManager.share.getTranslate(from: MainURLS.API.rawValue, languageCode: CoreDataManager.share.fetchLanguage()[0].languageCode ?? "") { translate in
+                    LocalizationManager.share.translate = translate
+                    DispatchQueue.main.async {
+                        
+                        enterPasswordVC.viewDidLoad()
+                        UIView.animate(withDuration: 1, delay: 0) {
+                            enterPasswordVC.view.alpha = 1
+                        }
+                        
+                    }
+                }
             }
         } else {
             
@@ -60,6 +69,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             }
             
         }
+        
+        
         
         UserDefaultsManager.shared.userDefaults.set(false, forKey: UserDefaultsStringKeys.hideWalletsBalance.rawValue)
         

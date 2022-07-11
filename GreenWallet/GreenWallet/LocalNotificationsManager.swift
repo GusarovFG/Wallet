@@ -1,0 +1,83 @@
+//
+//  LocalNotificationsManager.swift
+//  GreenWallet
+//
+//  Created by Фаддей Гусаров on 11.07.2022.
+//
+
+import Foundation
+import UserNotifications
+
+class LocalNotificationsManager: NSObject {
+    
+    static let share = LocalNotificationsManager()
+    let notificationCenter = UNUserNotificationCenter.current()
+    let content = UNMutableNotificationContent()
+    
+    
+    private override init(){
+        
+        
+    }
+    
+    func sendNotification() {
+        self.notificationCenter.delegate = self
+        
+        
+        content.sound = UNNotificationSound.default
+        
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
+        
+        
+        let request = UNNotificationRequest(identifier: "noticication", content: content, trigger: trigger)
+        
+        notificationCenter.add(request) { error in
+            print(error?.localizedDescription)
+        }
+    }
+    
+    func checkUpdates() {
+        
+        let oldNotifications = CoreDataManager.share.fetchPushNotifications()
+        var newNotifications: [PushNotificationsList] = []
+        
+        DispatchQueue.global().sync {
+            NetworkManager.share.getPushNotifications { notifications in
+                newNotifications = notifications.result.list
+                
+                if CoreDataManager.share.fetchPushNotifications().isEmpty && notifications.success {
+                    for i in newNotifications {
+                        CoreDataManager.share.savePushNotifications(guid: i.guid , created_at: i.created_at, message: i.message)
+                    }
+                } else {
+                    if newNotifications.map({$0.guid}).joined(separator: ",") != oldNotifications.map({$0.guid ?? ""}).joined(separator: ",") && notifications.success  {
+                        CoreDataManager.share.savePushNotifications(guid: newNotifications.last?.guid ?? "", created_at: newNotifications.last?.created_at ?? "", message: newNotifications.last?.message ?? "")
+                        self.content.title = "\(newNotifications.last?.guid ?? "")"
+                        self.content.body = "\(newNotifications.last?.message ?? "")"
+                        print(newNotifications.map({$0.guid}).joined(separator: ","))
+                        print(oldNotifications.map({$0.guid ?? ""}).joined(separator: ",") )
+                        self.sendNotification()
+                        
+                    } else {
+                        return
+                    }
+                    
+                    
+                }
+            }
+        }
+    }
+}
+
+extension LocalNotificationsManager: UNUserNotificationCenterDelegate {
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.banner, .sound])
+        print(#function)
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        print(#function)
+    }
+    
+}

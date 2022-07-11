@@ -126,6 +126,15 @@ class CoreDataManager {
         return privateKey
     }
     
+    func editChiaWalletPrivateKey(index: Int, balances: [Double]) {
+        let fetchReqest: NSFetchRequest<ChiaWalletPrivateKey> = ChiaWalletPrivateKey.fetchRequest()
+        let privateKey = (try? self.persistentContainer.viewContext.fetch(fetchReqest)) ?? []
+        
+        privateKey[index].balances = balances as NSObject
+        
+        saveContext()
+    }
+    
     func createWallet(data: String, id: Int, name: String, type: Int) -> ChiaWalletsCD {
         let wallet = ChiaWalletsCD(context: self.persistentContainer.viewContext)
         wallet.id = Int64(id)
@@ -192,6 +201,24 @@ class CoreDataManager {
         
         saveContext()
     }
+    func fetchPushNotifications() -> [PushNotificationsCD] {
+        let fetchReqest: NSFetchRequest<PushNotificationsCD> = PushNotificationsCD.fetchRequest()
+        let notifications = (try? self.persistentContainer.viewContext.fetch(fetchReqest)) ?? []
+        
+        return notifications
+    }
+    
+    func savePushNotifications(guid: String, created_at: String, message: String) {
+        let notifications = PushNotificationsCD(context: self.persistentContainer.viewContext)
+        
+        notifications.guid = guid
+        notifications.created_at = guid
+        notifications.message = guid
+        
+        saveContext()
+    }
+    
+    
     
     func saveContext () {
         let context = persistentContainer.viewContext

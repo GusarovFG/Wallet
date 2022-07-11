@@ -41,14 +41,19 @@ class VerifyMnemonicViewController: UIViewController {
         localization()
         self.errorLabel.alpha = 0
         self.errorLabel.isHidden = true
-        
+        WalletManager.share.isUpdate = false
         let storyoard = UIStoryboard(name: "spinner", bundle: .main)
         self.spinnerVC = storyoard.instantiateViewController(withIdentifier: "spinner") as! SprinnerViewController
         
         self.veryfyCollectionView.register(UINib(nibName: "MnemonicCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "mnemonicCell")
         self.selectCollectionView.register(UINib(nibName: "MnemonicCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "mnemonicCell")
         self.continueButton.isEnabled = false
-        self.continueButton.backgroundColor = #colorLiteral(red: 0.246493727, green: 0.246493727, blue: 0.246493727, alpha: 1)
+        
+        if UserDefaultsManager.shared.userDefaults.string(forKey: "Theme") == "light" {
+            self.continueButton.backgroundColor = #colorLiteral(red: 0.8549019608, green: 0.8549019608, blue: 0.8549019608, alpha: 1)
+        } else {
+            self.continueButton.backgroundColor = #colorLiteral(red: 0.2666666667, green: 0.2666666667, blue: 0.2666666667, alpha: 1)
+        }
         
         NotificationCenter.default.addObserver(self, selector: #selector(alertErrorGerCodingKeysPresent), name: NSNotification.Name("alertErrorGerCodingKeys"), object: nil)
     }
@@ -67,6 +72,12 @@ class VerifyMnemonicViewController: UIViewController {
         
         print(verifyedMnemonicPhrase)
         print(selectPhrase)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        WalletManager.share.isUpdate = true
+        WalletManager.share.updateBalances()
     }
     
     @objc private func alertErrorGerCodingKeysPresent() {
@@ -143,7 +154,7 @@ class VerifyMnemonicViewController: UIViewController {
                                     dispatchGroup.leave()
                                     dispatchGroup.enter()
                                     ChiaBlockchainManager.share.getWalletBalance(wallet.id) { balance in
-                                        balances.append(balance.wallet_balance.max_send_amount)
+                                        balances.append(balance.wallet_balance.confirmed_wallet_balance)
                                         print(balances)
                                     }
                                     dispatchGroup.leave()
@@ -213,7 +224,7 @@ class VerifyMnemonicViewController: UIViewController {
                                     dispatchGroup.leave()
                                     dispatchGroup.enter()
                                     ChivesBlockchainManager.share.getWalletBalance(wallet.id) { balance in
-                                        balances.append(balance.wallet_balance.max_send_amount)
+                                        balances.append(balance.wallet_balance.confirmed_wallet_balance)
                                         print(balances)
                                     }
                                     dispatchGroup.leave()
@@ -282,7 +293,7 @@ class VerifyMnemonicViewController: UIViewController {
                                     dispatchGroup.leave()
                                     dispatchGroup.enter()
                                     ChiaTestBlockchainManager.share.getWalletBalance(wallet.id) { balance in
-                                        balances.append(balance.wallet_balance.max_send_amount)
+                                        balances.append(balance.wallet_balance.confirmed_wallet_balance)
                                         print(balances)
                                     }
                                     dispatchGroup.leave()
@@ -351,7 +362,7 @@ class VerifyMnemonicViewController: UIViewController {
                                     dispatchGroup.leave()
                                     dispatchGroup.enter()
                                     ChivesTestBlockchainManager.share.getWalletBalance(wallet.id) { balance in
-                                        balances.append(balance.wallet_balance.max_send_amount)
+                                        balances.append(balance.wallet_balance.confirmed_wallet_balance)
                                         print(balances)
                                     }
                                     dispatchGroup.leave()

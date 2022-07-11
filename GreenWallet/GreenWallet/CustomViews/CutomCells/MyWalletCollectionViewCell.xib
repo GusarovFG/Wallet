@@ -71,9 +71,9 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="870-wD-vaR">
-                        <rect key="frame" x="15" y="203" width="250" height="17"/>
+                        <rect key="frame" x="15" y="203" width="150" height="17"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="250" id="1tg-IX-9eK"/>
+                            <constraint firstAttribute="width" constant="150" id="1tg-IX-9eK"/>
                             <constraint firstAttribute="height" constant="17" id="f3S-Rp-1Qq"/>
                         </constraints>
                         <state key="normal" title="Button"/>
@@ -98,7 +98,6 @@
             <color key="backgroundColor" name="ViewColor"/>
             <constraints>
                 <constraint firstItem="Rrm-aQ-va6" firstAttribute="top" secondItem="9k7-IV-daM" secondAttribute="bottom" constant="12" id="2jf-1p-46B"/>
-                <constraint firstAttribute="trailing" secondItem="sDT-1x-mdw" secondAttribute="trailing" constant="71" id="AbD-hj-4sd"/>
                 <constraint firstItem="9k7-IV-daM" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="15" id="E13-oL-khu"/>
                 <constraint firstItem="us1-5i-Qej" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="15" id="Lb5-jw-65A"/>
                 <constraint firstAttribute="trailing" secondItem="us1-5i-Qej" secondAttribute="trailing" constant="15" id="OQA-3l-AeW"/>
