@@ -76,8 +76,6 @@ class VerifyMnemonicViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        WalletManager.share.isUpdate = true
-        WalletManager.share.updateBalances()
     }
     
     @objc private func alertErrorGerCodingKeysPresent() {
@@ -116,7 +114,7 @@ class VerifyMnemonicViewController: UIViewController {
             if CoreDataManager.share.fetchChiaWalletPrivateKey().count == 10 {
                 AlertManager.share.errorCountOfWallet(self)
             } else {
-                
+                self.present(self.spinnerVC, animated: true)
                 if isChia {
                     
                     DispatchQueue.global().sync {

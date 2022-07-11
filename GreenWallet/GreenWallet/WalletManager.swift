@@ -23,10 +23,9 @@ class WalletManager {
         
         if self.isUpdate {
             DispatchQueue.global().sync {
-                let queue = DispatchQueue.global(qos: .background)
                 for wal in 0..<CoreDataManager.share.fetchChiaWalletPrivateKey().count {
                     let wallet = CoreDataManager.share.fetchChiaWalletPrivateKey()[wal]
-                    var newbalances: [Double] = []
+                    var newbalances: [NSNumber] = []
                     if !CoreDataManager.share.fetchChiaWalletPrivateKey().isEmpty {
                         if wallet.name == "Chia Wallet" {
                             ChiaBlockchainManager.share.logIn(Int(wallet.fingerprint)) { log in
@@ -35,11 +34,16 @@ class WalletManager {
                                         for wallet in wallets.wallets {
                                             print(wallet.id)
                                             ChiaBlockchainManager.share.getWalletBalance(wallet.id) { balance in
-                                                newbalances.append(balance.wallet_balance.confirmed_wallet_balance)
+                                                newbalances.append(balance.wallet_balance.confirmed_wallet_balance as NSNumber)
                                                 print(newbalances)
                                                 if balance.success {
-                                                    
-                                                    CoreDataManager.share.editChiaWalletPrivateKey(index: wal, balances: newbalances)
+                                                    if (CoreDataManager.share.fetchChiaWalletPrivateKey()[wal].balances as! [NSNumber]) != newbalances {
+                                                        CoreDataManager.share.editChiaWalletPrivateKey(index: wal, balances: newbalances)
+                                                        print("save")
+                                                    } else {
+                                                        print("dont save")
+                                                        return
+                                                    }
                                                 } else {
                                                     return
                                                 }
@@ -59,7 +63,7 @@ class WalletManager {
                                         for wallet in wallets.wallets {
                                             print(wallet.id)
                                             ChivesBlockchainManager.share.getWalletBalance(wallet.id) { balance in
-                                                newbalances.append(balance.wallet_balance.confirmed_wallet_balance)
+                                                newbalances.append(balance.wallet_balance.confirmed_wallet_balance as NSNumber)
                                                 print(newbalances)
                                                 CoreDataManager.share.editChiaWalletPrivateKey(index: wal, balances: newbalances)
                                             }
@@ -78,7 +82,7 @@ class WalletManager {
                                         for wallet in wallets.wallets {
                                             print(wallet.id)
                                             ChiaTestBlockchainManager.share.getWalletBalance(wallet.id) { balance in
-                                                newbalances.append(balance.wallet_balance.confirmed_wallet_balance)
+                                                newbalances.append(balance.wallet_balance.confirmed_wallet_balance as NSNumber)
                                                 print(newbalances)
                                                 CoreDataManager.share.editChiaWalletPrivateKey(index: wal, balances: newbalances)
                                             }
@@ -97,7 +101,7 @@ class WalletManager {
                                         for wallet in wallets.wallets {
                                             print(wallet.id)
                                             ChivesTestBlockchainManager.share.getWalletBalance(wallet.id) { balance in
-                                                newbalances.append(balance.wallet_balance.confirmed_wallet_balance)
+                                                newbalances.append(balance.wallet_balance.confirmed_wallet_balance as NSNumber)
                                                 print(newbalances)
                                                 CoreDataManager.share.editChiaWalletPrivateKey(index: wal, balances: newbalances)
                                             }

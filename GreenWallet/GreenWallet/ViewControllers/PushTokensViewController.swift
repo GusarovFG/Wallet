@@ -178,8 +178,6 @@ class PushTokensViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        WalletManager.share.isUpdate = true
-        WalletManager.share.updateBalances()
     }
     
     @objc func pasteAddress(_ notification: Notification) {
@@ -307,7 +305,7 @@ class PushTokensViewController: UIViewController {
                                 } else {
                                     DispatchQueue.main.async {
                                         self.spinnerVC.dismiss(animated: true)
-                                        print("хуй там")
+                                        AlertManager.share.serverError(self)
                                     }
                                 }
                             }
@@ -343,7 +341,7 @@ class PushTokensViewController: UIViewController {
                                 } else {
                                     DispatchQueue.main.async {
                                         self.dismiss(animated: true)
-                                        print("хуй там")
+                                        AlertManager.share.serverError(self)
                                     }
                                 }
                             }
@@ -378,7 +376,7 @@ class PushTokensViewController: UIViewController {
                                 } else {
                                     DispatchQueue.main.async {
                                         self.spinnerVC.dismiss(animated: true)
-                                        print("хуй там")
+                                        AlertManager.share.serverError(self)
                                     }
                                 }
                             }
@@ -413,7 +411,7 @@ class PushTokensViewController: UIViewController {
                                 } else {
                                     DispatchQueue.main.async {
                                         self.spinnerVC.dismiss(animated: true)
-                                        print("хуй там")
+                                        AlertManager.share.serverError(self)
                                     }
                                 }
                             }

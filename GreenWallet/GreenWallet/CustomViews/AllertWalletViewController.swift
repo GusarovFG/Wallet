@@ -46,7 +46,7 @@ class AllertWalletViewController: UIViewController {
         super.viewDidLoad()
         localization()
         NotificationCenter.default.addObserver(self, selector: #selector(closeAlert), name: NSNotification.Name("Seccess"), object: nil)
-        
+        WalletManager.share.isUpdate = false
         
     }
     

@@ -97,8 +97,6 @@ class ImportMnemonicViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        WalletManager.share.isUpdate = true
-        WalletManager.share.updateBalances()
     }
     
     

@@ -41,7 +41,7 @@ class LocalNotificationsManager: NSObject {
         let oldNotifications = CoreDataManager.share.fetchPushNotifications()
         var newNotifications: [PushNotificationsList] = []
         
-        DispatchQueue.global().sync {
+        DispatchQueue.global().async {
             NetworkManager.share.getPushNotifications { notifications in
                 newNotifications = notifications.result.list
                 
@@ -49,6 +49,7 @@ class LocalNotificationsManager: NSObject {
                     CoreDataManager.share.savePushNotificationsVersion(version: notifications.result.version)
                     for i in newNotifications {
                         CoreDataManager.share.savePushNotifications(guid: i.guid , created_at: i.created_at, message: i.message)
+                        print("First")
 
                     }
                 } else if notifications.result.version != CoreDataManager.share.fetchPushNotificationsVersion()  {
@@ -56,7 +57,7 @@ class LocalNotificationsManager: NSObject {
                     CoreDataManager.share.editPushNotificationsVersion(version: notifications.result.version )
                     self.content.title = "\(newNotifications.last?.guid ?? "")"
                     self.content.body = "\(newNotifications.last?.message ?? "")"
-
+                    print("no First")
                     self.sendNotification()
 
                 } else {

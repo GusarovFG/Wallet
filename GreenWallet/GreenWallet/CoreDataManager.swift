@@ -126,7 +126,7 @@ class CoreDataManager {
         return privateKey
     }
     
-    func editChiaWalletPrivateKey(index: Int, balances: [Double]) {
+    func editChiaWalletPrivateKey(index: Int, balances: [NSNumber]) {
         let fetchReqest: NSFetchRequest<ChiaWalletPrivateKey> = ChiaWalletPrivateKey.fetchRequest()
         let privateKey = (try? self.persistentContainer.viewContext.fetch(fetchReqest)) ?? []
         

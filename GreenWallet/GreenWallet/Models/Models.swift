@@ -837,3 +837,24 @@ struct PushNotificationsList: Codable {
         case message
     }
 }
+
+struct Agreement: Codable {
+    let success: Bool
+    let result: AgreementResult
+
+    enum CodingKeys: String, CodingKey {
+        case success
+        case result
+    }
+}
+
+// MARK: - Result
+struct AgreementResult: Codable {
+    let version: String
+    let agreement_text: String
+
+    enum CodingKeys: String, CodingKey {
+        case version
+        case agreement_text
+    }
+}

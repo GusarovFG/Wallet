@@ -69,6 +69,8 @@ class MainViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        WalletManager.share.isUpdate = true
+        WalletManager.share.updateBalances()
         self.wallets = WalletManager.share.favoritesWallets
         self.cellectionView.scrollToItem(at: [0,0], at: .left, animated: true)
 //        self.wallets = CoreDataManager.share.fetchChiaWalletPrivateKey()
