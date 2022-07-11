@@ -96,7 +96,11 @@ class TransactionHistoryViewController: UIViewController {
         
         
         self.allDateButton.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
-        self.allDateButton.tintColor = .white
+        if UserDefaultsManager.shared.userDefaults.string(forKey: "Theme") == "light" {
+            self.allDateButton.tintColor = .black
+        } else {
+            self.allDateButton.tintColor = .white
+        }
         
         localization()
         
@@ -492,10 +496,19 @@ class TransactionHistoryViewController: UIViewController {
             if self.systemsStackView.arrangedSubviews.count == (self.systems.count + 1){
                 break
             } else {
+                
                 let button = UIButton(frame: CGRect(x: 0, y: 0, width: self.systemsStackView.frame.width, height: 40))
                 button.setTitle(self.systems[i].name, for: .normal)
+                if UserDefaultsManager.shared.userDefaults.string(forKey: "Theme") == "light" {
+                    button.setTitleColor(.black, for: .normal)
+                } else {
+                    button.setTitleColor(.white, for: .normal)
+                }
                 self.systemsStackView.addArrangedSubview(button)
                 self.ststemViewHeightConstraint.constant += button.frame.height
+                
+                
+
                 
                 button.addTarget(self, action: #selector(setupSystemMenuButtons), for: .touchUpInside)
                 
@@ -516,9 +529,12 @@ class TransactionHistoryViewController: UIViewController {
         
         for i in 0..<systemsStackView.arrangedSubviews.count {
             self.systemsStackView.arrangedSubviews[i].backgroundColor = .systemBackground
+            
             if sender == self.systemsStackView.arrangedSubviews[i] && sender != self.allSystemButton {
                 self.filterSystemButton.setTitle("\(sender.currentTitle?.split(separator: " ").first ?? "")", for: .normal)
                 sender.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
+                
+                
                 
                 if sender.currentTitle == "Chia Network" {
                     self.filterWalletsTransactions = self.walletsTransactions.reduce([], +).filter({$0.to_address.contains("xch")})
@@ -559,6 +575,12 @@ class TransactionHistoryViewController: UIViewController {
     @IBAction func allSystemButtonPresed(_ sender: UIButton) {
         self.allSystemButton.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
         
+        
+        if UserDefaultsManager.shared.userDefaults.string(forKey: "Theme") == "light" {
+            self.systemsStackView.arrangedSubviews.forEach({$0.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)})
+        } else {
+            self.systemsStackView.arrangedSubviews.forEach({$0.backgroundColor = #colorLiteral(red: 0.1882352941, green: 0.1882352941, blue: 0.1882352941, alpha: 1)})
+        }
         self.filterWalletsTransactions = self.walletsTransactions.reduce([], +)
         UIView.animate(withDuration: 0.5) {
             self.systemMenuView.alpha = 0

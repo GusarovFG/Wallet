@@ -581,6 +581,14 @@ extension ImportMnemonicViewController: UICollectionViewDelegate, UICollectionVi
             if cell.cellTextLabel.text != "" {
                 self.errorLabel.isHidden = true
                 
+                if UserDefaultsManager.shared.userDefaults.string(forKey: "Theme") == "light" {
+                    cell.cellTextLabel.textColor = .black
+                    cell.layer.borderColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
+                } else {
+                    cell.cellTextLabel.textColor = .white
+                    cell.layer.borderColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
+                }
+                
                 
                 if self.countOfItems == 12 || self.countOfItems == 24 {
                     if self.mnemonicPhrase.filter({$0 == ""}).count == 0 && self.checkBoxPress {

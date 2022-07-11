@@ -13,11 +13,13 @@ class QRScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
     var video = ScannerOverlayPreviewLayer()
   
     let session = AVCaptureSession()
+    @IBOutlet weak var backButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupVideo()
         startRunning()
+        self.backButton.setTitle(LocalizationManager.share.translate?.result.list.all.back_btn, for: .normal)
     }
     
     func setupVideo() {

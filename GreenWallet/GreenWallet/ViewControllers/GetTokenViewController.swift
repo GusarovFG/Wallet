@@ -148,8 +148,8 @@ class GetTokenViewController: UIViewController {
 
         var img:UIImage = UIImage(cgImage: cgimg, scale: 1.0, orientation: UIImage.Orientation.up)
 
-        let width  = self.qrCollectionView.frame.width
-        let height = self.qrCollectionView.frame.width
+        let width  = self.qrCollectionView.frame.width - 10
+        let height = self.qrCollectionView.frame.width - 10
 
         UIGraphicsBeginImageContext(CGSize(width: width, height: height))
         let cgContxt:CGContext = UIGraphicsGetCurrentContext()!
