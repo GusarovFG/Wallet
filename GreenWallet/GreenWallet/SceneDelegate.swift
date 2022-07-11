@@ -27,17 +27,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let storyboard = UIStoryboard(name: "Main", bundle: .main)
         let startVC = storyboard.instantiateViewController(withIdentifier: "startVC")
         
-        let passwordStoryboard = UIStoryboard(name: "PasswordStoryboard", bundle: .main)
-        let enterPasswordVC = passwordStoryboard.instantiateViewController(withIdentifier: "EnteringPasswordViewController") as! PasswordViewController
         
         
         if UserDefaultsManager.shared.userDefaults.string(forKey: UserDefaultsStringKeys.firstSession.rawValue) == "First" {
-            self.window?.rootViewController = enterPasswordVC
-            enterPasswordVC.modalPresentationStyle = .fullScreen
-            enterPasswordVC.view.alpha = 0
+           
             WalletManager.share.isUpdate = true
             WalletManager.share.updateBalances()
-            
+            let passwordStoryboard = UIStoryboard(name: "PasswordStoryboard", bundle: .main)
+            let enterPasswordVC = passwordStoryboard.instantiateViewController(withIdentifier: "EnteringPasswordViewController") as! PasswordViewController
+            enterPasswordVC.view.alpha = 0
             DispatchQueue.global().async {
                 
                 NetworkManager.share.getLocalization(from: MainURLS.language.rawValue) { language in
@@ -49,6 +47,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 NetworkManager.share.getTranslate(from: MainURLS.API.rawValue, languageCode: CoreDataManager.share.fetchLanguage()[0].languageCode ?? "") { translate in
                     LocalizationManager.share.translate = translate
                     DispatchQueue.main.async {
+                        
+                        self.window?.rootViewController = enterPasswordVC
+                        enterPasswordVC.modalPresentationStyle = .fullScreen
                         
                         enterPasswordVC.viewDidLoad()
                         UIView.animate(withDuration: 1, delay: 0) {
@@ -64,6 +65,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 LanguageManager.share.language = language
                 DispatchQueue.main.async {
                     self.window?.rootViewController = startVC
+                    UIView.animate(withDuration: 1, delay: 0) {
+                        startVC.view.alpha = 1
+                    }
                 }
                 
             }

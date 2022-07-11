@@ -45,26 +45,27 @@ class LocalNotificationsManager: NSObject {
             NetworkManager.share.getPushNotifications { notifications in
                 newNotifications = notifications.result.list
                 
-                if CoreDataManager.share.fetchPushNotifications().isEmpty && notifications.success {
+                if CoreDataManager.share.fetchPushNotifications().isEmpty {
+                    CoreDataManager.share.savePushNotificationsVersion(version: notifications.result.version)
                     for i in newNotifications {
                         CoreDataManager.share.savePushNotifications(guid: i.guid , created_at: i.created_at, message: i.message)
+
                     }
+                } else if notifications.result.version != CoreDataManager.share.fetchPushNotificationsVersion()  {
+                    CoreDataManager.share.savePushNotifications(guid: newNotifications.last?.guid ?? "", created_at: newNotifications.last?.created_at ?? "", message: newNotifications.last?.message ?? "")
+                    CoreDataManager.share.editPushNotificationsVersion(version: notifications.result.version )
+                    self.content.title = "\(newNotifications.last?.guid ?? "")"
+                    self.content.body = "\(newNotifications.last?.message ?? "")"
+
+                    self.sendNotification()
+
                 } else {
-                    if newNotifications.map({$0.guid}).joined(separator: ",") != oldNotifications.map({$0.guid ?? ""}).joined(separator: ",") && notifications.success  {
-                        CoreDataManager.share.savePushNotifications(guid: newNotifications.last?.guid ?? "", created_at: newNotifications.last?.created_at ?? "", message: newNotifications.last?.message ?? "")
-                        self.content.title = "\(newNotifications.last?.guid ?? "")"
-                        self.content.body = "\(newNotifications.last?.message ?? "")"
-                        print(newNotifications.map({$0.guid}).joined(separator: ","))
-                        print(oldNotifications.map({$0.guid ?? ""}).joined(separator: ",") )
-                        self.sendNotification()
-                        
-                    } else {
-                        return
-                    }
-                    
-                    
+                    return
                 }
+                
+                
             }
+            
         }
     }
 }

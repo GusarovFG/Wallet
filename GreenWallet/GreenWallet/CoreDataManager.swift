@@ -218,6 +218,29 @@ class CoreDataManager {
         saveContext()
     }
     
+    func fetchPushNotificationsVersion() -> String {
+        let fetchReqest: NSFetchRequest<NotificationsVersionCD> = NotificationsVersionCD.fetchRequest()
+        let version = (try? self.persistentContainer.viewContext.fetch(fetchReqest))
+        
+        return version?.first?.version ?? "loh"
+    }
+    
+    func savePushNotificationsVersion(version: String) {
+        let notifications = NotificationsVersionCD(context: self.persistentContainer.viewContext)
+        
+        notifications.version = version
+        
+        saveContext()
+    }
+    
+    func editPushNotificationsVersion(version: String) {
+        let fetchReqest: NSFetchRequest<NotificationsVersionCD> = NotificationsVersionCD.fetchRequest()
+        let notifications = (try? self.persistentContainer.viewContext.fetch(fetchReqest))?.first
+        
+        notifications?.version = version
+        
+        saveContext()
+    }
     
     
     func saveContext () {

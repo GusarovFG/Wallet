@@ -31,6 +31,9 @@
         <attribute name="languageCode" optional="YES" attributeType="String"/>
         <attribute name="version" optional="YES" attributeType="String"/>
     </entity>
+    <entity name="NotificationsVersionCD" representedClassName="NotificationsVersionCD" syncable="YES" codeGenerationType="class">
+        <attribute name="version" optional="YES" attributeType="String"/>
+    </entity>
     <entity name="PushNotificationsCD" representedClassName="PushNotificationsCD" syncable="YES" codeGenerationType="class">
         <attribute name="created_at" optional="YES" attributeType="String"/>
         <attribute name="guid" optional="YES" attributeType="String"/>
@@ -47,8 +50,9 @@
         <element name="ExchangeChivesRatesCD" positionX="-45" positionY="72" width="128" height="44"/>
         <element name="ExchangeRatesCD" positionX="-45" positionY="72" width="128" height="44"/>
         <element name="LanguageCD" positionX="-63" positionY="-18" width="128" height="59"/>
+        <element name="PushNotificationsCD" positionX="-45" positionY="72" width="128" height="74"/>
         <element name="TransactionsCD" positionX="-45" positionY="72" width="128" height="29"/>
         <element name="WalletFingerprint" positionX="-54" positionY="27" width="128" height="44"/>
-        <element name="PushNotificationsCD" positionX="-45" positionY="72" width="128" height="74"/>
+        <element name="NotificationsVersionCD" positionX="-36" positionY="81" width="128" height="44"/>
     </elements>
 </model>
