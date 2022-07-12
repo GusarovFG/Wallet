@@ -119,6 +119,7 @@
 		FBFE579E281B28880016E74A /* LanguageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBFE579D281B28880016E74A /* LanguageViewController.swift */; };
 		FBFE57A2281B2EDD0016E74A /* LanguageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBFE57A1281B2EDD0016E74A /* LanguageTableViewCell.xib */; };
 		FBFE57A4281B4AFE0016E74A /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBFE57A3281B4AFE0016E74A /* InfoViewController.swift */; };
+		FBFEB3F4287C8A1500EA391D /* TailsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBFEB3F3287C8A1500EA391D /* TailsManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -237,6 +238,7 @@
 		FBFE579D281B28880016E74A /* LanguageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageViewController.swift; sourceTree = "<group>"; };
 		FBFE57A1281B2EDD0016E74A /* LanguageTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LanguageTableViewCell.xib; sourceTree = "<group>"; };
 		FBFE57A3281B4AFE0016E74A /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
+		FBFEB3F3287C8A1500EA391D /* TailsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TailsManager.swift; sourceTree = "<group>"; };
 		FEA55796C3E3CCFEE4C98AB4 /* Pods-GreenWallet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GreenWallet.release.xcconfig"; path = "Target Support Files/Pods-GreenWallet/Pods-GreenWallet.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -411,21 +413,7 @@
 				FB5940342816856700037DFA /* AppDelegate.swift */,
 				FB5940362816856700037DFA /* SceneDelegate.swift */,
 				FBC44E35284531EA00A0A56B /* Models */,
-				FBFE5796281B121A0016E74A /* UserDefaultsManager.swift */,
-				FB903810282D60DA004023F5 /* WalletManager.swift */,
-				FBD1CCA9283B90570081AF3E /* KeyChainManager.swift */,
-				FB85BA3D283CCB210068E9DE /* TimeManager.swift */,
-				FBB682E1283E4A3E00CC5959 /* CoreDataManager.swift */,
-				FB98D0CD283F850500885E73 /* LocalizationManager.swift */,
-				FB87F340284A057D009F896C /* AlertManager.swift */,
-				FB365D1C287196AF0069849A /* ChivesBlockchainManager.swift */,
-				FB16685D283E21D000155670 /* NetworkManager.swift */,
-				FBD72B732850782900987484 /* ChiaBlockchainConnectingManager.swift */,
-				FB58F56B28521486006235BD /* ChiaWalletsManager.swift */,
-				FBABB6DD287318B00075E16A /* SystemsManager.swift */,
-				FB2B82362860999C005AF534 /* ExchangeRatesManager.swift */,
-				FB6C8BF9287B7FA700A2B5FA /* LocalNotificationsManager.swift */,
-				FBC26BB6286464E4005EE8BC /* TransactionsManager.swift */,
+				FBFEB3F2287C872200EA391D /* Managers */,
 				FB3208072818285100F1ADCA /* ViewControllers */,
 				FB3208062818279E00F1ADCA /* CustomViews */,
 				FB5940512816AC7800037DFA /* Extensions */,
@@ -548,6 +536,29 @@
 				FBFE57A1281B2EDD0016E74A /* LanguageTableViewCell.xib */,
 			);
 			path = LanguageTableViewCell;
+			sourceTree = "<group>";
+		};
+		FBFEB3F2287C872200EA391D /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				FBFE5796281B121A0016E74A /* UserDefaultsManager.swift */,
+				FB903810282D60DA004023F5 /* WalletManager.swift */,
+				FBD1CCA9283B90570081AF3E /* KeyChainManager.swift */,
+				FB85BA3D283CCB210068E9DE /* TimeManager.swift */,
+				FBB682E1283E4A3E00CC5959 /* CoreDataManager.swift */,
+				FB98D0CD283F850500885E73 /* LocalizationManager.swift */,
+				FB87F340284A057D009F896C /* AlertManager.swift */,
+				FB365D1C287196AF0069849A /* ChivesBlockchainManager.swift */,
+				FB16685D283E21D000155670 /* NetworkManager.swift */,
+				FBD72B732850782900987484 /* ChiaBlockchainConnectingManager.swift */,
+				FB58F56B28521486006235BD /* ChiaWalletsManager.swift */,
+				FBABB6DD287318B00075E16A /* SystemsManager.swift */,
+				FBFEB3F3287C8A1500EA391D /* TailsManager.swift */,
+				FB2B82362860999C005AF534 /* ExchangeRatesManager.swift */,
+				FB6C8BF9287B7FA700A2B5FA /* LocalNotificationsManager.swift */,
+				FBC26BB6286464E4005EE8BC /* TransactionsManager.swift */,
+			);
+			path = Managers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -755,6 +766,7 @@
 				FBC26BB7286464E4005EE8BC /* TransactionsManager.swift in Sources */,
 				FBFE578F281AC4050016E74A /* PushAndAllSettingsTableViewCell.swift in Sources */,
 				FB87F341284A057D009F896C /* AlertManager.swift in Sources */,
+				FBFEB3F4287C8A1500EA391D /* TailsManager.swift in Sources */,
 				FBD72B742850782900987484 /* ChiaBlockchainConnectingManager.swift in Sources */,
 				FB2F369028206ACB007576FE /* NewWalletViewController.swift in Sources */,
 				FB5947492823D8DD00C74E73 /* ImportMnemonicViewController.swift in Sources */,

@@ -268,6 +268,80 @@ class NetworkManager {
         }.resume()
     }
     
+    func getAgreement(complition: @escaping (Agreement) -> Void) {
+        guard let url = URL(string: "\(MainURLS.Agreement.rawValue)?code=\(CoreDataManager.share.fetchLanguage()[0].languageCode ?? "en")") else { return }
+        
+        let session = URLSession.shared
+        session.dataTask(with: url) { data, response, error in
+            if let response = response {
+                print(response)
+            }
+            
+            guard let data = data else { return }
+            
+            do {
+                
+                let json = try JSONDecoder().decode(Agreement.self, from: data)
+                
+                DispatchQueue.main.async {
+                    complition(json)
+                }
+            } catch {
+                print(error.localizedDescription)
+                
+            }
+        }.resume()
+    }
+    
+    func getTails(complition: @escaping (Tails) -> Void) {
+        guard let url = URL(string: MainURLS.tails.rawValue) else { return }
+        
+        let session = URLSession.shared
+        session.dataTask(with: url) { data, response, error in
+            if let response = response {
+                print(response)
+            }
+            
+            guard let data = data else { return }
+            
+            do {
+                
+                let json = try JSONDecoder().decode(Tails.self, from: data)
+                
+                DispatchQueue.main.async {
+                    complition(json)
+                }
+            } catch {
+                print(error.localizedDescription)
+                
+            }
+        }.resume()
+    }
+    
+    func getTailsPrices(complition: @escaping (TailsPrices) -> Void) {
+        guard let url = URL(string: MainURLS.TailsPrices.rawValue) else { return }
+        
+        let session = URLSession.shared
+        session.dataTask(with: url) { data, response, error in
+            if let response = response {
+                print(response)
+            }
+            
+            guard let data = data else { return }
+            
+            do {
+                
+                let json = try JSONDecoder().decode(TailsPrices.self, from: data)
+                
+                DispatchQueue.main.async {
+                    complition(json)
+                }
+            } catch {
+                print(error.localizedDescription)
+                
+            }
+        }.resume()
+    }
     
 }
 
@@ -284,6 +358,9 @@ enum MainURLS: String {
     case faq = "https://greenapp.siterepository.ru/api/v1.0/faq"
     case ExchangeRatesChives = "https://api.lbkex.com/v2/ticker.do?symbol=xcc_usdt"
     case PushNotifications = "https://greenapp.siterepository.ru/api/v1.0/notifications"
+    case Agreement = "https://greenapp.siterepository.ru/api/v1.0/agreements"
+    case tails = "https://greenapp.siterepository.ru/api/v1.0/tails"
+    case TailsPrices = "https://greenapp.siterepository.ru/api/v1.0/tails/price"
 }
 
 

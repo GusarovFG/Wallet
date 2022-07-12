@@ -13,7 +13,7 @@ class MainViewController: UIViewController {
     private var balance = 0
     private var wallets: [ChiaWalletPrivateKey] = []
     private var wallet: ChiaWalletPrivateKey?
-    
+    private var index = 0
     
     let userDefaults = UserDefaults.standard
     
@@ -69,8 +69,8 @@ class MainViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        WalletManager.share.isUpdate = true
-        WalletManager.share.updateBalances()
+//        WalletManager.share.isUpdate = true
+//        WalletManager.share.updateBalances()
         self.wallets = WalletManager.share.favoritesWallets
         self.cellectionView.scrollToItem(at: [0,0], at: .left, animated: true)
 //        self.wallets = CoreDataManager.share.fetchChiaWalletPrivateKey()
@@ -106,7 +106,7 @@ class MainViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         localization()
-        self.cellectionView.reloadData()
+//        self.cellectionView.reloadData()
         LocalNotificationsManager.share.checkUpdates()
     }
     
@@ -118,6 +118,7 @@ class MainViewController: UIViewController {
     @objc func updateBalances() {
         let summ: Double = ((((self.wallet?.balances as? [Double])?.reduce(0, +) ?? 0) / 1000000000000) * ExchangeRatesManager.share.newRatePerDollar).rounded(toPlaces: 8)
         self.balanceLabel.text = "⁓\(NSString(format:"%.2f", summ)) USD"
+        self.cellectionView.reloadData()
     }
     
     @objc private func localization() {
@@ -216,6 +217,7 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
             cell.footerButton.setTitle("+ \(LocalizationManager.share.translate?.result.list.main_screen.main_screen_purse_add_wallet ?? "")" , for: .normal)
             cell.footerButton.addTarget(self, action: #selector(presentSelectSystemVC), for: .touchUpInside)
             cell.tableView.backgroundColor = #colorLiteral(red: 0.1882352941, green: 0.1882352941, blue: 0.1882352941, alpha: 1)
+            cell.numberOFWallet.text = ""
             cell.headerButton.isHidden = true
             cell.footerButtonConstraint.constant = 0
             cell.tableView.reloadData()
@@ -231,6 +233,7 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
             if cell.stackView.arrangedSubviews.contains(where: {$0 == cell.tableView}) {
                 let wallet = self.wallets[indexPath.row]
                 cell.wallet = wallet
+                cell.index = self.index
                 cell.numberOFWallet.text = "\(wallet.name ?? "") ****\(String(wallet.fingerprint).suffix(4))"
                 cell.controller = self.tabBarController ?? self
                 self.collectionViewHeightConstraint.constant = cell.frame.height
@@ -263,7 +266,7 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
         if let visibleIndexPath = self.cellectionView.indexPathForItem(at: visiblePoint) {
             self.pageControl.currentPage = visibleIndexPath.row
             self.wallet = self.wallets[visibleIndexPath.row]
-            
+            self.index = visibleIndexPath.row
             if self.wallet?.name == "Chia Wallet" || self.wallet?.name == "Chia TestNet" {
                 let summ: Double = ((((self.wallet?.balances as? [Double])?.reduce(0, +) ?? 0) / 1000000000000) * ExchangeRatesManager.share.newRatePerDollar).rounded(toPlaces: 8)
                 self.riseLabel.text = "XCH price: \(ExchangeRatesManager.share.newRatePerDollar) $"

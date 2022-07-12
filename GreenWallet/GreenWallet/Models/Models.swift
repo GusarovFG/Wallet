@@ -858,3 +858,64 @@ struct AgreementResult: Codable {
         case agreement_text
     }
 }
+
+struct Tails: Codable {
+    let success: Bool
+    let result: TailsResult
+
+    enum CodingKeys: String, CodingKey {
+        case success
+        case result
+    }
+}
+
+// MARK: - Result
+struct TailsResult: Codable {
+    let version: String
+    let list: [TailsList]
+
+    enum CodingKeys: String, CodingKey {
+        case version
+        case list
+    }
+}
+
+// MARK: - List
+struct TailsList: Codable {
+    let name: String
+    let code: String
+    let hash: String
+    let clvm: String
+    let logo_url: String
+
+    enum CodingKeys: String, CodingKey {
+        case name
+        case code
+        case hash
+        case clvm
+        case logo_url
+    }
+}
+
+struct TailsPrices: Codable {
+    let success: Bool
+    let result: [TailsPricesResult]
+
+    enum CodingKeys: String, CodingKey {
+        case success
+        case result
+    }
+}
+
+// MARK: - Result
+struct TailsPricesResult: Codable {
+    let code: String
+    let hash: String
+    let price: String
+
+    enum CodingKeys: String, CodingKey {
+        case code
+        case hash
+        case price
+    }
+}

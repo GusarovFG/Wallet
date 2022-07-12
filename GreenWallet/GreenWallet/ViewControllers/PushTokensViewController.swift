@@ -558,7 +558,7 @@ class PushTokensViewController: UIViewController {
                 if self.balanceStackView.arrangedSubviews.count == ((self.wallet?.wallets as! [NSNumber]).count) {
                 } else {
                     let button = UIButton(frame: CGRect(x: 0, y: 0, width: self.balanceStackView.frame.width, height: 40))
-                    button.setTitle("\((String(((self.wallet?.balances as? [NSNumber])?[0] as! Double / 1000000000000.0).rounded(toPlaces: 8)))) XCH", for: .normal)
+                    button.setTitle("\((String(((self.wallet?.balances as? [NSNumber])?[i] as! Double / 1000000000000.0).rounded(toPlaces: 8)))) XCH", for: .normal)
                     self.balanceStackView.addArrangedSubview(button)
                     self.balanceViewConstraint.constant += button.frame.height
                     self.balaceStackViewConstraint.constant += button.frame.height

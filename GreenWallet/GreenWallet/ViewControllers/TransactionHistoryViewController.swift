@@ -70,8 +70,8 @@ class TransactionHistoryViewController: UIViewController {
             self.backButton.isEnabled = false
         }
         
-   
-    
+        
+        self.systemsStackView.alignment = .fill
         
         self.statusLabel.text = "Статус"
         self.heightLabel.text = "Высота"
@@ -236,106 +236,106 @@ class TransactionHistoryViewController: UIViewController {
             queue.sync {
                 if self.wallet?.name == "Chia Wallet" {
                     ChiaBlockchainManager.share.logIn(Int(self.wallet?.fingerprint ?? 0)) { log in
-                            
-                            if log.success {
-                                ChiaBlockchainManager.share.getWallets { wallet in
+                        
+                        if log.success {
+                            ChiaBlockchainManager.share.getWallets { wallet in
+                                
+                                for iwallet in wallet.wallets {
                                     
-                                    for iwallet in wallet.wallets {
+                                    ChiaBlockchainManager.share.getTransactions(iwallet.id) { transact in
                                         
-                                        ChiaBlockchainManager.share.getTransactions(iwallet.id) { transact in
+                                        self.walletsTransactions.append(transact.transactions)
+                                        
+                                        DispatchQueue.main.async {
                                             
-                                            self.walletsTransactions.append(transact.transactions)
-                                            
-                                            DispatchQueue.main.async {
-                                                
-                                                self.filterWalletsTransactions = self.walletsTransactions.reduce([], +)
-                                                self.tableView.reloadData()
-                                                self.spinnerVC.dismiss(animated: true)
-                                            }
+                                            self.filterWalletsTransactions = self.walletsTransactions.reduce([], +)
+                                            self.tableView.reloadData()
+                                            self.spinnerVC.dismiss(animated: true)
                                         }
-                                        
                                     }
+                                    
                                 }
                             }
-                            
                         }
                         
+                    }
+                    
                 } else if self.wallet?.name == "Chives Wallet"{
-                        ChivesBlockchainManager.share.logIn(Int(self.wallet?.fingerprint ?? 0)) { log in
-                            
-                            if log.success {
-                                ChivesBlockchainManager.share.getWallets { wallet in
+                    ChivesBlockchainManager.share.logIn(Int(self.wallet?.fingerprint ?? 0)) { log in
+                        
+                        if log.success {
+                            ChivesBlockchainManager.share.getWallets { wallet in
+                                
+                                for iwallet in wallet.wallets {
                                     
-                                    for iwallet in wallet.wallets {
+                                    ChivesBlockchainManager.share.getTransactions(iwallet.id) { transact in
                                         
-                                        ChivesBlockchainManager.share.getTransactions(iwallet.id) { transact in
+                                        self.walletsTransactions.append(transact.transactions)
+                                        
+                                        DispatchQueue.main.async {
                                             
-                                            self.walletsTransactions.append(transact.transactions)
-                                            
-                                            DispatchQueue.main.async {
-                                                
-                                                self.filterWalletsTransactions = self.walletsTransactions.reduce([], +)
-                                                self.tableView.reloadData()
-                                                self.spinnerVC.dismiss(animated: true)
-                                            }
+                                            self.filterWalletsTransactions = self.walletsTransactions.reduce([], +)
+                                            self.tableView.reloadData()
+                                            self.spinnerVC.dismiss(animated: true)
                                         }
-                                        
                                     }
-                                }
-                            }
-                        }
-                } else if self.wallet?.name == "Chives TestNet"{
-                        ChivesTestBlockchainManager.share.logIn(Int(self.wallet?.fingerprint ?? 0)) { log in
-                            
-                            if log.success {
-                                ChivesTestBlockchainManager.share.getWallets { wallet in
                                     
-                                    for iwallet in wallet.wallets {
-                                        
-                                        ChivesTestBlockchainManager.share.getTransactions(iwallet.id) { transact in
-                                            
-                                            self.walletsTransactions.append(transact.transactions)
-                                            
-                                            DispatchQueue.main.async {
-                                                
-                                                self.filterWalletsTransactions = self.walletsTransactions.reduce([], +)
-                                                self.tableView.reloadData()
-                                                self.spinnerVC.dismiss(animated: true)
-                                            }
-                                        }
-                                        
-                                    }
-                                }
-                            }
-                        }
-                } else if self.wallet?.name == "Chia TestNet"{
-                        ChiaTestBlockchainManager.share.logIn(Int(self.wallet?.fingerprint ?? 0)) { log in
-                            
-                            if log.success {
-                                ChiaTestBlockchainManager.share.getWallets { wallet in
-                                    
-                                    for iwallet in wallet.wallets {
-                                        
-                                        ChiaTestBlockchainManager.share.getTransactions(iwallet.id) { transact in
-                                            
-                                            self.walletsTransactions.append(transact.transactions)
-                                            
-                                            DispatchQueue.main.async {
-                                                
-                                                self.filterWalletsTransactions = self.walletsTransactions.reduce([], +)
-                                                self.tableView.reloadData()
-                                                self.spinnerVC.dismiss(animated: true)
-                                            }
-                                        }
-                                        
-                                    }
                                 }
                             }
                         }
                     }
+                } else if self.wallet?.name == "Chives TestNet"{
+                    ChivesTestBlockchainManager.share.logIn(Int(self.wallet?.fingerprint ?? 0)) { log in
+                        
+                        if log.success {
+                            ChivesTestBlockchainManager.share.getWallets { wallet in
+                                
+                                for iwallet in wallet.wallets {
+                                    
+                                    ChivesTestBlockchainManager.share.getTransactions(iwallet.id) { transact in
+                                        
+                                        self.walletsTransactions.append(transact.transactions)
+                                        
+                                        DispatchQueue.main.async {
+                                            
+                                            self.filterWalletsTransactions = self.walletsTransactions.reduce([], +)
+                                            self.tableView.reloadData()
+                                            self.spinnerVC.dismiss(animated: true)
+                                        }
+                                    }
+                                    
+                                }
+                            }
+                        }
+                    }
+                } else if self.wallet?.name == "Chia TestNet"{
+                    ChiaTestBlockchainManager.share.logIn(Int(self.wallet?.fingerprint ?? 0)) { log in
+                        
+                        if log.success {
+                            ChiaTestBlockchainManager.share.getWallets { wallet in
+                                
+                                for iwallet in wallet.wallets {
+                                    
+                                    ChiaTestBlockchainManager.share.getTransactions(iwallet.id) { transact in
+                                        
+                                        self.walletsTransactions.append(transact.transactions)
+                                        
+                                        DispatchQueue.main.async {
+                                            
+                                            self.filterWalletsTransactions = self.walletsTransactions.reduce([], +)
+                                            self.tableView.reloadData()
+                                            self.spinnerVC.dismiss(animated: true)
+                                        }
+                                    }
+                                    
+                                }
+                            }
+                        }
+                    }
+                }
                 
             }
-        
+            
         }
     }
     
@@ -490,27 +490,31 @@ class TransactionHistoryViewController: UIViewController {
     
     @IBAction func systemmenuOpen(_ sender: UIButton) {
         
-        for i in 0..<self.systems.count {
-            if self.systemsStackView.arrangedSubviews.count == (self.systems.count + 1){
-                break
-            } else {
-                
-                let button = UIButton(frame: CGRect(x: 0, y: 0, width: self.systemsStackView.frame.width, height: 40))
-                button.setTitle(self.systems[i].name, for: .normal)
-                if UserDefaultsManager.shared.userDefaults.string(forKey: "Theme") == "light" {
-                    button.setTitleColor(.black, for: .normal)
+        if !CoreDataManager.share.fetchChiaWalletPrivateKey().isEmpty {
+            for i in 0..<self.systems.count {
+                if self.systemsStackView.arrangedSubviews.count == (self.systems.count + 1){
+                    break
                 } else {
-                    button.setTitleColor(.white, for: .normal)
+                    
+                    let button = UIButton(frame: CGRect(x: 0, y: 0, width: self.systemsStackView.frame.width, height: 40))
+                    button.setTitle(self.systems[i].name, for: .normal)
+                    if UserDefaultsManager.shared.userDefaults.string(forKey: "Theme") == "light" {
+                        button.setTitleColor(.black, for: .normal)
+                    } else {
+                        button.setTitleColor(.white, for: .normal)
+                    }
+                    self.systemsStackView.addArrangedSubview(button)
+                    self.ststemViewHeightConstraint.constant += button.frame.height
+                    
+                    
+                    
+                    
+                    button.addTarget(self, action: #selector(setupSystemMenuButtons), for: .touchUpInside)
+                    
                 }
-                self.systemsStackView.addArrangedSubview(button)
-                self.ststemViewHeightConstraint.constant += button.frame.height
-                
-                
-
-                
-                button.addTarget(self, action: #selector(setupSystemMenuButtons), for: .touchUpInside)
-                
             }
+        } else {
+            return
         }
         
         

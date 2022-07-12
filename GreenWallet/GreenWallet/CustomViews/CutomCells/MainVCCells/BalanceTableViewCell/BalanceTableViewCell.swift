@@ -8,7 +8,8 @@
 import UIKit
 
 class BalanceTableViewCell: UITableViewCell {
-
+    
+    
     @IBOutlet weak var cellImage: UIImageView!
     @IBOutlet weak var balanceLabel: UILabel!
     @IBOutlet weak var tokenLabel: UILabel!
@@ -16,7 +17,7 @@ class BalanceTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        self.cellImage.layer.cornerRadius = self.cellImage.frame.width / 2
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -25,4 +26,12 @@ class BalanceTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    func setupCell(wallet: ChiaWalletPrivateKey?, index: Int) {
+        guard let url = URL(string:TailsManager.share.tails?.result.list.filter({$0.name == wallet?.names?[index] ?? ""}).first?.logo_url ?? "") else { return }
+        
+        
+            self.cellImage.load(url: url )
+            
+        
+    }
 }

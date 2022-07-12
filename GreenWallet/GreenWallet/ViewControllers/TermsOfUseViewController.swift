@@ -25,7 +25,13 @@ class TermsOfUseViewController: UIViewController {
         localization()
         setupAgreeLabel()
         
-        
+        DispatchQueue.global().async {
+            NetworkManager.share.getAgreement { agree in
+                DispatchQueue.main.async {
+                    self.termOfUseTextView.text = agree.result.agreement_text
+                }
+            }
+        }
         
 
         

@@ -92,7 +92,7 @@ extension AllSettingsViewController: UITableViewDelegate, UITableViewDataSource 
             return secureAndPushCell
         case [0,3]:
             supportCell.mainLabel?.text = LocalizationManager.share.translate?.result.list.menu.menu_support_title
-            supportCell.detailLabel?.text = LocalizationManager.share.translate?.result.list.menu.menu_push_notifications_description
+            supportCell.detailLabel?.text = LocalizationManager.share.translate?.result.list.menu.menu_support_description
             supportCell.cellImage?.image = UIImage(named: "support")!
             return supportCell
         case [0,4]:

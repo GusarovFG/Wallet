@@ -11,6 +11,7 @@ class AskAQuestionViewController: UIViewController {
     
     private var isCheckBoxPressed = false
     private let email = "gusarovfg@gmail.com"
+    private var tag = 2
     
     @IBOutlet weak var mainTitle: UILabel!
     @IBOutlet weak var nameTextField: UITextField!
@@ -106,6 +107,7 @@ class AskAQuestionViewController: UIViewController {
     }
     
     @IBAction func nameTextFieldCheck(_ sender: UITextField) {
+        self.tag = 2
         if sender.text != "" {
             self.nameLabel.alpha = 1
         } else {
@@ -167,7 +169,13 @@ class AskAQuestionViewController: UIViewController {
 
 extension AskAQuestionViewController: UITextViewDelegate, UITextFieldDelegate {
 
-   
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if self.tag <= 3 {
+            self.view.viewWithTag(self.tag)?.becomeFirstResponder()
+            self.tag += 1
+        }
+        return true
+    }
 
     
     func textViewDidChange(_ textView: UITextView) {

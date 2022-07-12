@@ -18,6 +18,13 @@ class GreatingViewController: UIViewController {
         
         SystemsManager.share.getSystems()
         
+        NetworkManager.share.getTails { tails in
+            TailsManager.share.tails = tails
+        }
+        
+        NetworkManager.share.getTailsPrices { prices in
+            TailsManager.share.prices = prices.result
+        }
         
         if UserDefaultsManager.shared.userDefaults.string(forKey: UserDefaultsStringKeys.firstSession.rawValue) != "First" {
             NetworkManager.share.getExchangeRates { rates in

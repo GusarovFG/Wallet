@@ -15,7 +15,7 @@ class ImportMnemonicViewController: UIViewController {
     var isMainScreen = false
     var spinnerVC = SprinnerViewController()
     
-    
+    private var duplicates: [String] = []
     private var mnemonicPhrase: [String] = []
     private var countOfItems = 12
     private var checkBoxPress = false
@@ -275,6 +275,7 @@ class ImportMnemonicViewController: UIViewController {
         var adreses = ""
         var balances: [Double] = []
         var walletsDict: [Int] = []
+        var names: [String] = []
         var privateKey = ChiaPrivate(private_key: ChiaPrivateKey(farmer_pk: "", fingerprint: 0, pk: "", pool_pk: "", seed: "", sk: ""), success: true)
         var name = ""
         
@@ -302,6 +303,8 @@ class ImportMnemonicViewController: UIViewController {
             }
         }
         
+        self.duplicates = duplicateWords
+        
         if duplicateCount == 0 {
             if CoreDataManager.share.fetchChiaWalletPrivateKey().count == 10 {
                 AlertManager.share.errorCountOfWallet(self)
@@ -318,7 +321,7 @@ class ImportMnemonicViewController: UIViewController {
                         ChiaBlockchainManager.share.importMnemonic(self.mnemonicPhrase) { fingerpring in
                             print(fingerpring.fingerprint)
                             if CoreDataManager.share.fetchChiaWalletPrivateKey().filter({$0.fingerprint == fingerpring.fingerprint}).isEmpty {
-                                AlertManager.share.dulpicateWalletError(self)
+                                
                                 CoreDataManager.share.saveChiaWaletFingerpring(fingerpring.fingerprint)
                                 
                                 ChiaBlockchainManager.share.logIn(fingerpring.fingerprint) { log in
@@ -326,7 +329,7 @@ class ImportMnemonicViewController: UIViewController {
                                         ChiaBlockchainManager.share.getWallets { wallets in
                                             for wallet in wallets.wallets {
                                                 walletsDict.append(wallet.id)
-                                                name = wallet.name
+                                                names.append(wallet.name)
                                                 
                                                 ChiaBlockchainManager.share.getNextAddress(walletID: Int64(wallet.id)) { adres in
                                                     adreses = adres.address
@@ -347,7 +350,7 @@ class ImportMnemonicViewController: UIViewController {
                                                 
                                                 
                                                 UserDefaultsManager.shared.userDefaults.set("Exist", forKey: UserDefaultsStringKeys.walletExist.rawValue )
-                                                CoreDataManager.share.saveChiaWalletPrivateKey(name: name, fingerprint: privateKey.private_key.fingerprint, pk: privateKey.private_key.pk, seed: privateKey.private_key.seed, sk: privateKey.private_key.seed, adress: adreses, wallets: walletsDict as [NSNumber], balances: balances as [NSNumber])
+                                                CoreDataManager.share.saveChiaWalletPrivateKey(name: "Chia Wallet", fingerprint: privateKey.private_key.fingerprint, pk: privateKey.private_key.pk, seed: privateKey.private_key.seed, sk: privateKey.private_key.seed, adress: adreses, wallets: walletsDict, balances: balances, names: names)
                                                 guard let newWallet = CoreDataManager.share.fetchChiaWalletPrivateKey().last else { return }
                                                 WalletManager.share.favoritesWallets.append(newWallet)
                                                 DispatchQueue.main.async {
@@ -376,45 +379,54 @@ class ImportMnemonicViewController: UIViewController {
                         
                         ChivesBlockchainManager.share.importMnemonic(self.mnemonicPhrase) { fingerpring in
                             print(fingerpring.fingerprint)
-                            
-                            CoreDataManager.share.saveChiaWaletFingerpring(fingerpring.fingerprint)
-                            
-                            ChivesBlockchainManager.share.logIn(fingerpring.fingerprint) { log in
-                                if log.success {
-                                    ChivesBlockchainManager.share.getWallets { wallets in
-                                        for wallet in wallets.wallets {
-                                            walletsDict.append(wallet.id)
-                                            name = wallet.name
-                                            
-                                            ChivesBlockchainManager.share.getNextAddress(walletID: Int64(wallet.id)) { adres in
-                                                adreses = adres.address
-                                                print(adreses)
+                            if CoreDataManager.share.fetchChiaWalletPrivateKey().filter({$0.fingerprint == fingerpring.fingerprint}).isEmpty {
+                                
+                                CoreDataManager.share.saveChiaWaletFingerpring(fingerpring.fingerprint)
+                                
+                                ChivesBlockchainManager.share.logIn(fingerpring.fingerprint) { log in
+                                    if log.success {
+                                        ChivesBlockchainManager.share.getWallets { wallets in
+                                            for wallet in wallets.wallets {
+                                                walletsDict.append(wallet.id)
+                                                names.append(wallet.name)
+                                                
+                                                ChivesBlockchainManager.share.getNextAddress(walletID: Int64(wallet.id)) { adres in
+                                                    adreses = adres.address
+                                                    print(adreses)
+                                                    
+                                                }
+                                                ChivesBlockchainManager.share.getWalletBalance(wallet.id) { balance in
+                                                    balances.append(balance.wallet_balance.confirmed_wallet_balance)
+                                                    print(balances)
+                                                    
+                                                }
                                                 
                                             }
-                                            ChivesBlockchainManager.share.getWalletBalance(wallet.id) { balance in
-                                                balances.append(balance.wallet_balance.confirmed_wallet_balance)
-                                                print(balances)
+                                            ChivesBlockchainManager.share.getPrivateKey(fingerpring.fingerprint) { privateKeys in
+                                                privateKey = privateKeys
+                                                print(privateKey)
                                                 
+                                                
+                                                
+                                                UserDefaultsManager.shared.userDefaults.set("Exist", forKey: UserDefaultsStringKeys.walletExist.rawValue )
+                                                CoreDataManager.share.saveChiaWalletPrivateKey(name: "Chives Wallet", fingerprint: privateKey.private_key.fingerprint, pk: privateKey.private_key.pk, seed: privateKey.private_key.seed, sk: privateKey.private_key.seed, adress: adreses, wallets: walletsDict, balances: balances, names: names)
+                                                guard let newWallet = CoreDataManager.share.fetchChiaWalletPrivateKey().last else { return }
+                                                WalletManager.share.favoritesWallets.append(newWallet)
+                                                DispatchQueue.main.async {
+                                                    NotificationCenter.default.post(name: NSNotification.Name("reload"), object: nil)
+                                                    print(CoreDataManager.share.fetchChiaWalletPrivateKey())
+                                                    self.spinnerVC.dismiss(animated: true, completion: nil)
+                                                    AlertManager.share.seccessImportWallet(self)
+                                                }
                                             }
                                             
                                         }
-                                        ChivesBlockchainManager.share.getPrivateKey(fingerpring.fingerprint) { privateKeys in
-                                            privateKey = privateKeys
-                                            print(privateKey)
-                                            
-                                            UserDefaultsManager.shared.userDefaults.set("Exist", forKey: UserDefaultsStringKeys.walletExist.rawValue )
-                                            CoreDataManager.share.saveChiaWalletPrivateKey(name: name, fingerprint: privateKey.private_key.fingerprint, pk: privateKey.private_key.pk, seed: privateKey.private_key.seed, sk: privateKey.private_key.seed, adress: adreses, wallets: walletsDict as [NSNumber], balances: balances as [NSNumber])
-                                            guard let newWallet = CoreDataManager.share.fetchChiaWalletPrivateKey().last else { return }
-                                            WalletManager.share.favoritesWallets.append(newWallet)
-                                            DispatchQueue.main.async {
-                                                NotificationCenter.default.post(name: NSNotification.Name("reload"), object: nil)
-                                                print(CoreDataManager.share.fetchChiaWalletPrivateKey())
-                                                self.spinnerVC.dismiss(animated: true, completion: nil)
-                                                AlertManager.share.seccessImportWallet(self)
-                                            }
-                                        }
-                                        
                                     }
+                                }
+                            } else {
+                                DispatchQueue.main.async {
+                                    self.spinnerVC.dismiss(animated: true)
+                                    AlertManager.share.dulpicateWalletError(self)
                                 }
                             }
                         }
@@ -426,45 +438,54 @@ class ImportMnemonicViewController: UIViewController {
                         
                         ChiaTestBlockchainManager.share.importMnemonic(self.mnemonicPhrase) { fingerpring in
                             print(fingerpring.fingerprint)
-                            
-                            CoreDataManager.share.saveChiaWaletFingerpring(fingerpring.fingerprint)
-                            
-                            ChiaTestBlockchainManager.share.logIn(fingerpring.fingerprint) { log in
-                                if log.success {
-                                    ChiaTestBlockchainManager.share.getWallets { wallets in
-                                        for wallet in wallets.wallets {
-                                            walletsDict.append(wallet.id)
-                                            name = "Chia TestNet"
-                                            
-                                            ChiaTestBlockchainManager.share.getNextAddress(walletID: Int64(wallet.id)) { adres in
-                                                adreses = adres.address
-                                                print(adreses)
+                            if CoreDataManager.share.fetchChiaWalletPrivateKey().filter({$0.fingerprint == fingerpring.fingerprint}).isEmpty {
+                                
+                                CoreDataManager.share.saveChiaWaletFingerpring(fingerpring.fingerprint)
+                                
+                                ChiaTestBlockchainManager.share.logIn(fingerpring.fingerprint) { log in
+                                    if log.success {
+                                        ChiaTestBlockchainManager.share.getWallets { wallets in
+                                            for wallet in wallets.wallets {
+                                                walletsDict.append(wallet.id)
+                                                names.append(wallet.name)
+                                                
+                                                ChiaTestBlockchainManager.share.getNextAddress(walletID: Int64(wallet.id)) { adres in
+                                                    adreses = adres.address
+                                                    print(adreses)
+                                                    
+                                                }
+                                                ChiaTestBlockchainManager.share.getWalletBalance(wallet.id) { balance in
+                                                    balances.append(balance.wallet_balance.confirmed_wallet_balance)
+                                                    print(balances)
+                                                    
+                                                }
                                                 
                                             }
-                                            ChiaTestBlockchainManager.share.getWalletBalance(wallet.id) { balance in
-                                                balances.append(balance.wallet_balance.confirmed_wallet_balance)
-                                                print(balances)
+                                            ChiaTestBlockchainManager.share.getPrivateKey(fingerpring.fingerprint) { privateKeys in
+                                                privateKey = privateKeys
+                                                print(privateKey)
                                                 
+                                                
+                                                
+                                                UserDefaultsManager.shared.userDefaults.set("Exist", forKey: UserDefaultsStringKeys.walletExist.rawValue )
+                                                CoreDataManager.share.saveChiaWalletPrivateKey(name: "Chia TestNet", fingerprint: privateKey.private_key.fingerprint, pk: privateKey.private_key.pk, seed: privateKey.private_key.seed, sk: privateKey.private_key.seed, adress: adreses, wallets: walletsDict, balances: balances, names: names)
+                                                guard let newWallet = CoreDataManager.share.fetchChiaWalletPrivateKey().last else { return }
+                                                WalletManager.share.favoritesWallets.append(newWallet)
+                                                DispatchQueue.main.async {
+                                                    NotificationCenter.default.post(name: NSNotification.Name("reload"), object: nil)
+                                                    print(CoreDataManager.share.fetchChiaWalletPrivateKey())
+                                                    self.spinnerVC.dismiss(animated: true, completion: nil)
+                                                    AlertManager.share.seccessImportWallet(self)
+                                                }
                                             }
                                             
                                         }
-                                        ChiaTestBlockchainManager.share.getPrivateKey(fingerpring.fingerprint) { privateKeys in
-                                            privateKey = privateKeys
-                                            print(privateKey)
-                                            
-                                            UserDefaultsManager.shared.userDefaults.set("Exist", forKey: UserDefaultsStringKeys.walletExist.rawValue )
-                                            CoreDataManager.share.saveChiaWalletPrivateKey(name: name, fingerprint: privateKey.private_key.fingerprint, pk: privateKey.private_key.pk, seed: privateKey.private_key.seed, sk: privateKey.private_key.seed, adress: adreses, wallets: walletsDict as [NSNumber], balances: balances as [NSNumber])
-                                            guard let newWallet = CoreDataManager.share.fetchChiaWalletPrivateKey().last else { return }
-                                            WalletManager.share.favoritesWallets.append(newWallet)
-                                            DispatchQueue.main.async {
-                                                NotificationCenter.default.post(name: NSNotification.Name("reload"), object: nil)
-                                                print(CoreDataManager.share.fetchChiaWalletPrivateKey())
-                                                self.spinnerVC.dismiss(animated: true, completion: nil)
-                                                AlertManager.share.seccessImportWallet(self)
-                                            }
-                                        }
-                                        
                                     }
+                                }
+                            } else {
+                                DispatchQueue.main.async {
+                                    self.spinnerVC.dismiss(animated: true)
+                                    AlertManager.share.dulpicateWalletError(self)
                                 }
                             }
                         }
@@ -476,45 +497,54 @@ class ImportMnemonicViewController: UIViewController {
                         
                         ChivesTestBlockchainManager.share.importMnemonic(self.mnemonicPhrase) { fingerpring in
                             print(fingerpring.fingerprint)
-                            
-                            CoreDataManager.share.saveChiaWaletFingerpring(fingerpring.fingerprint)
-                            
-                            ChivesTestBlockchainManager.share.logIn(fingerpring.fingerprint) { log in
-                                if log.success {
-                                    ChivesTestBlockchainManager.share.getWallets { wallets in
-                                        for wallet in wallets.wallets {
-                                            walletsDict.append(wallet.id)
-                                            name = "Chives TestNet"
-                                            
-                                            ChivesTestBlockchainManager.share.getNextAddress(walletID: Int64(wallet.id)) { adres in
-                                                adreses = adres.address
-                                                print(adreses)
+                            if CoreDataManager.share.fetchChiaWalletPrivateKey().filter({$0.fingerprint == fingerpring.fingerprint}).isEmpty {
+                                
+                                CoreDataManager.share.saveChiaWaletFingerpring(fingerpring.fingerprint)
+                                
+                                ChivesTestBlockchainManager.share.logIn(fingerpring.fingerprint) { log in
+                                    if log.success {
+                                        ChivesTestBlockchainManager.share.getWallets { wallets in
+                                            for wallet in wallets.wallets {
+                                                walletsDict.append(wallet.id)
+                                                names.append(wallet.name)
+                                                
+                                                ChivesTestBlockchainManager.share.getNextAddress(walletID: Int64(wallet.id)) { adres in
+                                                    adreses = adres.address
+                                                    print(adreses)
+                                                    
+                                                }
+                                                ChivesTestBlockchainManager.share.getWalletBalance(wallet.id) { balance in
+                                                    balances.append(balance.wallet_balance.confirmed_wallet_balance)
+                                                    print(balances)
+                                                    
+                                                }
                                                 
                                             }
-                                            ChivesTestBlockchainManager.share.getWalletBalance(wallet.id) { balance in
-                                                balances.append(balance.wallet_balance.confirmed_wallet_balance)
-                                                print(balances)
+                                            ChivesTestBlockchainManager.share.getPrivateKey(fingerpring.fingerprint) { privateKeys in
+                                                privateKey = privateKeys
+                                                print(privateKey)
                                                 
+                                                
+                                                
+                                                UserDefaultsManager.shared.userDefaults.set("Exist", forKey: UserDefaultsStringKeys.walletExist.rawValue )
+                                                CoreDataManager.share.saveChiaWalletPrivateKey(name: "Chives TestNet", fingerprint: privateKey.private_key.fingerprint, pk: privateKey.private_key.pk, seed: privateKey.private_key.seed, sk: privateKey.private_key.seed, adress: adreses, wallets: walletsDict, balances: balances, names: names)
+                                                guard let newWallet = CoreDataManager.share.fetchChiaWalletPrivateKey().last else { return }
+                                                WalletManager.share.favoritesWallets.append(newWallet)
+                                                DispatchQueue.main.async {
+                                                    NotificationCenter.default.post(name: NSNotification.Name("reload"), object: nil)
+                                                    print(CoreDataManager.share.fetchChiaWalletPrivateKey())
+                                                    self.spinnerVC.dismiss(animated: true, completion: nil)
+                                                    AlertManager.share.seccessImportWallet(self)
+                                                }
                                             }
                                             
                                         }
-                                        ChivesTestBlockchainManager.share.getPrivateKey(fingerpring.fingerprint) { privateKeys in
-                                            privateKey = privateKeys
-                                            print(privateKey)
-                                            
-                                            UserDefaultsManager.shared.userDefaults.set("Exist", forKey: UserDefaultsStringKeys.walletExist.rawValue )
-                                            CoreDataManager.share.saveChiaWalletPrivateKey(name: name, fingerprint: privateKey.private_key.fingerprint, pk: privateKey.private_key.pk, seed: privateKey.private_key.seed, sk: privateKey.private_key.seed, adress: adreses, wallets: walletsDict as [NSNumber], balances: balances as [NSNumber])
-                                            guard let newWallet = CoreDataManager.share.fetchChiaWalletPrivateKey().last else { return }
-                                            WalletManager.share.favoritesWallets.append(newWallet)
-                                            DispatchQueue.main.async {
-                                                NotificationCenter.default.post(name: NSNotification.Name("reload"), object: nil)
-                                                print(CoreDataManager.share.fetchChiaWalletPrivateKey())
-                                                self.spinnerVC.dismiss(animated: true, completion: nil)
-                                                AlertManager.share.seccessImportWallet(self)
-                                            }
-                                        }
-                                        
                                     }
+                                }
+                            } else {
+                                DispatchQueue.main.async {
+                                    self.spinnerVC.dismiss(animated: true)
+                                    AlertManager.share.dulpicateWalletError(self)
                                 }
                             }
                         }
@@ -549,6 +579,8 @@ extension ImportMnemonicViewController: UICollectionViewDelegate, UICollectionVi
         } else {
             cell.cellTextLabel.textColor = .white
         }
+        
+        
         
         let mnemonicWord = self.mnemonicPhrase[indexPath.row]
         if mnemonicWord == "" {
@@ -585,6 +617,20 @@ extension ImportMnemonicViewController: UICollectionViewDelegate, UICollectionVi
                 } else {
                     cell.cellTextLabel.textColor = .white
                     cell.layer.borderColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
+                }
+                
+                for i in 0..<self.collectionView.visibleCells.count {
+                    for duplicate in self.duplicates {
+                        if (self.collectionView.visibleCells[i] as! ImportMnemonicCollectionViewCell).cellTextLabel.text == duplicate {
+                            if UserDefaultsManager.shared.userDefaults.string(forKey: "Theme") == "light" {
+                                (self.collectionView.visibleCells[i] as! ImportMnemonicCollectionViewCell).cellTextLabel.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+                            } else {
+                                (self.collectionView.visibleCells[i] as! ImportMnemonicCollectionViewCell).cellTextLabel.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+                            }
+                            (self.collectionView.visibleCells[i] as! ImportMnemonicCollectionViewCell).layer.borderColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
+                            
+                        }
+                    }
                 }
                 
                 

@@ -781,7 +781,7 @@ class ChiaTestBlockchainManager {
                     print("Type '\(type)' mismatch:", context.debugDescription)
                     print("codingPath:", context.codingPath)
                 } catch {
-                    print("error: ", error)
+                    NotificationCenter.default.post(name: NSNotification.Name("alertErrorGerCodingKeys"), object: nil)
                 }
             }
         }.resume()

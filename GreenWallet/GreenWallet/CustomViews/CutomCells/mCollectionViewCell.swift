@@ -14,6 +14,7 @@ class mCollectionViewCell: UICollectionViewCell {
     var controller = UIViewController()
     var height: CGFloat = 0
     var collectionVieww = NSLayoutConstraint()
+    var index = 0
     
     @IBOutlet weak var walletTitle: UILabel!
     @IBOutlet weak var footerButton: UIButton!
@@ -61,7 +62,7 @@ class mCollectionViewCell: UICollectionViewCell {
                 self.collectionVieww.constant = self.heightConstraint.constant
             } else {
                 if self.wallet?.wallets != nil {
-                    self.heightConstraint.constant = (self.frame.size.height) - (self.footerView.frame.height + self.headerView.frame.height + CGFloat((self.wallet?.wallets as! [NSNumber]).count * 76 + 46))
+                    self.heightConstraint.constant = (self.frame.size.height) - (self.footerView.frame.height + self.headerView.frame.height + CGFloat((self.wallet?.balances as [NSNumber]).count * 76 + 46))
                     self.collectionVieww.constant = self.heightConstraint.constant
                     
                 } else {
@@ -71,7 +72,7 @@ class mCollectionViewCell: UICollectionViewCell {
             }
         }
         if self.wallet?.wallets != nil {
-            if (self.wallet?.wallets as! [NSNumber]).count >= 5 {
+            if (self.wallet?.balances?.count ?? 0) >= 5 {
                 self.tableView.isScrollEnabled = true
             } else {
                 self.tableView.isScrollEnabled = false
@@ -129,7 +130,7 @@ extension mCollectionViewCell: UITableViewDelegate, UITableViewDataSource {
             return 0
         } else {
             if self.wallet?.wallets != nil {
-                return (self.wallet?.wallets as! [NSNumber]).count + 1
+                return (self.wallet?.balances as! [NSNumber]).count + 1
             } else {
                 return 0
             }
@@ -141,29 +142,32 @@ extension mCollectionViewCell: UITableViewDelegate, UITableViewDataSource {
         let importCell = tableView.dequeueReusableCell(withIdentifier: "ImportTableViewCell", for: indexPath) as! ImportTableViewCell
         
         switch indexPath {
-        case [0,(self.wallet?.wallets as! [NSNumber]).count]:
+        case [0,(self.wallet?.balances as [NSNumber]).count]:
             self.height += importCell.frame.height
           
             
             return importCell
         default:
             self.height += walletCell.frame.height
-           
+            
             if !CoreDataManager.share.fetchChiaWalletPrivateKey().isEmpty {
-                if self.wallet?.name == "Chia Wallet" {
+                if self.wallet?.names?[indexPath.row] == "Chia Wallet" || self.wallet?.names?[indexPath.row] == "Chia TestNet" {
                     walletCell.cellImage.image = UIImage(named: "LogoChia")!
-                } else {
+                } else if self.wallet?.names?[indexPath.row] == "Chives Wallet" || self.wallet?.names?[indexPath.row] == "Chives TestNet"{
                     walletCell.cellImage.image = UIImage(named: "ChivesLogo")!
+                } else {
+                    walletCell.setupCell(wallet: self.wallet, index: indexPath.row)
                 }
-                if (self.wallet?.balances as! [NSNumber]).isEmpty {
+                
+                if (self.wallet?.balances as [NSNumber]).isEmpty {
                     walletCell.balanceLabel.text = "0 XCH"
                 } else {
-                    if self.wallet?.name == "Chia Wallet" || self.wallet?.name == "Chia TestNet" {
+                    if self.wallet?.names?[indexPath.row] == "Chia Wallet" || self.wallet?.names?[indexPath.row] == "Chia TestNet" {
                         let summ: Double = (((self.wallet?.balances as? [Double])?[indexPath.row] ?? 0) / 1000000000000) * ExchangeRatesManager.share.newRatePerDollar
                         walletCell.convertLabel.text = "⁓ \(NSString(format:"%.2f", summ)) USD"
                         walletCell.balanceLabel.text = "\(((self.wallet?.balances as? [NSNumber])?[indexPath.row] ?? 0) as! Double / 1000000000000.0 ) XCH"
-                        walletCell.tokenLabel.text = self.wallet?.name ?? ""
-                    } else {
+                        walletCell.tokenLabel.text = (self.wallet?.names as? [String])?[indexPath.row] ?? ""
+                    } else if self.wallet?.names?[indexPath.row] == "Chives Wallet" || self.wallet?.name == "Chives TestNet" {
                         let summ: Double = (((self.wallet?.balances as? [Double])?[indexPath.row] ?? 0) / 1000000000000) * ExchangeRatesManager.share.newChivesRatePerDollar
                         if ExchangeRatesManager.share.newChivesRatePerDollar == 0 {
                             walletCell.convertLabel.text = "⁓ USD"
@@ -172,7 +176,12 @@ extension mCollectionViewCell: UITableViewDelegate, UITableViewDataSource {
                             walletCell.convertLabel.text = "⁓ \(NSString(format:"%.2f", summ)) USD"
                         }
                         walletCell.balanceLabel.text = "\(((self.wallet?.balances as? [NSNumber])?[indexPath.row] ?? 0) as! Double / 1000000000000.0 ) XCC"
-                        walletCell.tokenLabel.text = self.wallet?.name ?? ""
+                        walletCell.tokenLabel.text = (self.wallet?.names as? [String])?[indexPath.row] ?? ""
+                    } else {
+                        let summ: Double = (((self.wallet?.balances as? [Double])?[indexPath.row] ?? 0) / 1000000000000) * ExchangeRatesManager.share.newRatePerDollar
+                        walletCell.convertLabel.text = "⁓ \(NSString(format:"%.2f", summ)) USD"
+                        walletCell.balanceLabel.text = "\((self.wallet?.balances as? [NSNumber])?[indexPath.row] ?? 0) \(TailsManager.share.tails?.result.list.filter({$0.name == self.wallet?.names?[indexPath.row]}).first?.code ?? "")"
+                        walletCell.tokenLabel.text = TailsManager.share.tails?.result.list.filter({$0.name == self.wallet?.names?[indexPath.row]}).first?.name ?? ""
                     }
                 }
                
@@ -183,13 +192,15 @@ extension mCollectionViewCell: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath == [0,(self.wallet?.wallets as! [NSNumber]).count] {
+        if indexPath == [0,self.wallet?.balances?.count ?? 0] {
             let storyboard = UIStoryboard(name: "Main", bundle: .main)
             let importVC = storyboard.instantiateViewController(withIdentifier: "ImportTokensViewController") as! ImportTokensViewController
+            importVC.index = self.index
             importVC.modalPresentationStyle = .fullScreen
             self.controller.present(importVC, animated: true)
         }
     }
     
+ 
     
 }

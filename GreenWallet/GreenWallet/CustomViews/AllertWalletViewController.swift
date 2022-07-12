@@ -97,7 +97,7 @@ class AllertWalletViewController: UIViewController {
             } 
             self.mainButton.setTitle(LocalizationManager.share.translate?.result.list.all.ready_btn, for: .normal)
         } else if self.restorationIdentifier == "DeleteContact" {
-            if !self.isNewWalletError && !self.isSendError && !self.isServerError && !self.iserrorCountOfWalletError {
+            if !self.isNewWalletError && !self.isSendError && !self.isServerError && !self.iserrorCountOfWalletError && !self.isDuplicateWallet {
                 self.deleteTitle.text = LocalizationManager.share.translate?.result.list.address_book.address_book_pop_up_delete_title
                 self.deleteDescription.text = LocalizationManager.share.translate?.result.list.address_book.address_book_pop_up_delete_description
                 self.confirmutton.setTitle(LocalizationManager.share.translate?.result.list.all.confirm_btn, for: .normal)
@@ -124,6 +124,10 @@ class AllertWalletViewController: UIViewController {
             } else if self.iserrorCountOfWalletError && self.isNowallets && !self.isNewWalletError && !self.isSendError && !self.isImportMnemonicError && !self.isServerError {
                 self.deleteTitle.text = LocalizationManager.share.translate?.result.list.all.pop_up_failed_error_title
                 self.deleteDescription.text = "У вас еще нет кошельков"
+                self.confirmutton.setTitle(LocalizationManager.share.translate?.result.list.all.confirm_btn, for: .normal)
+            } else if self.isDuplicateWallet && !self.iserrorCountOfWalletError && !self.isNowallets && !self.isNewWalletError && !self.isSendError && !self.isImportMnemonicError && !self.isServerError {
+                self.deleteTitle.text = LocalizationManager.share.translate?.result.list.all.pop_up_failed_error_title
+                self.deleteDescription.text = "Данный кошелек уже добавлен"
                 self.confirmutton.setTitle(LocalizationManager.share.translate?.result.list.all.confirm_btn, for: .normal)
             }
         }

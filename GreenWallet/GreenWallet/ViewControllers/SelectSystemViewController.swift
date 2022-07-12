@@ -50,9 +50,9 @@ class SelectSystemViewController: UIViewController {
         self.headerView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         self.view.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
         localization()
-        if self.isNewWallet {
-            self.titleLabel.text = LocalizationManager.share.translate?.result.list.all.add_wallet_title
-        }
+//        if self.isNewWallet {
+//            self.titleLabel.text = LocalizationManager.share.translate?.result.list.all.add_wallet_title
+//        }
         let swipeGasture = UISwipeGestureRecognizer(target: self, action: #selector(dismissSwipe))
         swipeGasture.direction = .down
         self.view.addGestureRecognizer(swipeGasture)
@@ -231,18 +231,22 @@ extension SelectSystemViewController: UITableViewDelegate, UITableViewDataSource
             case [0,0]:
                 self.isChia = true
                 self.isSelectedSystem = true
+                self.titleLabel.text = LocalizationManager.share.translate?.result.list.all.add_wallet_title
                 self.tableView.reloadData()
             case [0,1]:
                 self.isChiaTest = true
                 self.isSelectedSystem = true
+                self.titleLabel.text = LocalizationManager.share.translate?.result.list.all.add_wallet_title
                 self.tableView.reloadData()
             case [0,2]:
                 self.isChives = true
                 self.isSelectedSystem = true
+                self.titleLabel.text = LocalizationManager.share.translate?.result.list.all.add_wallet_title
                 self.tableView.reloadData()
             case [0,3]:
                 self.isChivesTest = true
                 self.isSelectedSystem = true
+                self.titleLabel.text = LocalizationManager.share.translate?.result.list.all.add_wallet_title
                 self.tableView.reloadData()
             default:
                 break
