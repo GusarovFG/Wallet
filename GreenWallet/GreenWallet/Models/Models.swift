@@ -919,3 +919,6 @@ struct TailsPricesResult: Codable {
         case price
     }
 }
+
+
+

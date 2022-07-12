@@ -28,31 +28,33 @@ class GreatingViewController: UIViewController {
         
         if UserDefaultsManager.shared.userDefaults.string(forKey: UserDefaultsStringKeys.firstSession.rawValue) != "First" {
             NetworkManager.share.getExchangeRates { rates in
-                let rate = rates.data.filter({$0.symbol == "xchusdt"}).first
-                ExchangeRatesManager.share.newRatePerDollar = rate?.bid ?? 0
-                CoreDataManager.share.saveExchangedRates(ratePerDollar: rate?.bid ?? 0)
+                let rate = rates
+                ExchangeRatesManager.share.newRatePerDollar = rate.chia.usd
+                ExchangeRatesManager.share.newChivesRatePerDollar = rate.chives_сoin.usd
+                CoreDataManager.share.saveExchangedRates(ratePerDollar: rate.chia.usd)
+                CoreDataManager.share.saveChivesExchangedRates(ratePerDollar: rate.chives_сoin.usd )
+                print(ExchangeRatesManager.share.newRatePerDollar = rate.chia.usd)
+                print(ExchangeRatesManager.share.newChivesRatePerDollar = rate.chives_сoin.usd)
             }
             
-            NetworkManager.share.getExchngeRatesOfChives { rates in
-                ExchangeRatesManager.share.oldChivesRatePerDollar = CoreDataManager.share.fetchChivesExchangeRates()
-                ExchangeRatesManager.share.newChivesRatePerDollar = rates.data.first?.ticker.latest ?? 0
-                CoreDataManager.share.saveChivesExchangedRates(ratePerDollar: rates.data.first?.ticker.latest ?? 0)
-            }
+           
         } else {
             NetworkManager.share.getExchangeRates { rates in
-                let rate = rates.data.filter({$0.symbol == "xchusdt"}).first
+                let rate = rates
+                ExchangeRatesManager.share.newRatePerDollar = rate.chia.usd
+                ExchangeRatesManager.share.newChivesRatePerDollar = rate.chives_сoin.usd
                 ExchangeRatesManager.share.oldRatePerDollar = CoreDataManager.share.fetchExchangeRates()
-                ExchangeRatesManager.share.newRatePerDollar = rate?.bid ?? 0
+                ExchangeRatesManager.share.oldChivesRatePerDollar = CoreDataManager.share.fetchChivesExchangeRates()
                 ExchangeRatesManager.share.differenceСalculation()
-                CoreDataManager.share.editExchangeRates(newExchangeRates: rate?.bid ?? 0)
+                ExchangeRatesManager.share.differenceChivesСalculation()
+                
+                CoreDataManager.share.saveExchangedRates(ratePerDollar: rate.chia.usd)
+                CoreDataManager.share.saveChivesExchangedRates(ratePerDollar: rate.chives_сoin.usd )
+                
+
             }
             
-            NetworkManager.share.getExchngeRatesOfChives { rates in
-                ExchangeRatesManager.share.oldChivesRatePerDollar = CoreDataManager.share.fetchChivesExchangeRates()
-                ExchangeRatesManager.share.newChivesRatePerDollar = rates.data.first?.ticker.latest ?? 0
-                ExchangeRatesManager.share.differenceChivesСalculation()
-                CoreDataManager.share.editChivesExchangeRates(newExchangeRates: rates.data.first?.ticker.latest ?? 0)
-            }
+            
             
             if !CoreDataManager.share.fetchChiaWalletPrivateKey().isEmpty {
             }

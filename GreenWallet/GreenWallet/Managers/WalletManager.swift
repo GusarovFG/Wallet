@@ -25,8 +25,9 @@ class WalletManager {
             DispatchQueue.global().sync {
                 for wal in 0..<CoreDataManager.share.fetchChiaWalletPrivateKey().count {
                     let wallet = CoreDataManager.share.fetchChiaWalletPrivateKey()[wal]
-                    var newbalances: [NSNumber] = []
-                    var walletsss: [NSNumber] = []
+                    var newbalances: [Double] = []
+                    var walletsss: [Int] = []
+                    var names: [String] = []
                     if wallet.name == "Chia Wallet" {
 //                        ChiaBlockchainManager.share.logIn(Int(wallet.fingerprint)) { log in
 //                            if log.success {

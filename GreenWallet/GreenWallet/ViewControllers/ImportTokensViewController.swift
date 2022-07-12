@@ -76,7 +76,7 @@ extension ImportTokensViewController: UITableViewDelegate, UITableViewDataSource
             cell.choiceSwitch.onTintColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
         }
         
-        if CoreDataManager.share.fetchChiaWalletPrivateKey()[self.index].names!.contains(self.filteredTokens[indexPath.row].name) {
+        if CoreDataManager.share.fetchChiaWalletPrivateKey()[self.index].names?.filter({$0.contains((self.filteredTokens[indexPath.row].hash.dropLast(55)))}).isEmpty == false {
             
             cell.choiceSwitch.isOn = true
             
@@ -104,24 +104,38 @@ extension ImportTokensViewController: UITableViewDelegate, UITableViewDataSource
         }
         
         cell.switchPressed = { [unowned self] in
+            DispatchQueue.global().sync {
+                
+                ChiaBlockchainManager.share.logIn(Int(CoreDataManager.share.fetchChiaWalletPrivateKey()[self.index].fingerprint)) { log in
+                    print(log.success)
+                }
+                DispatchQueue.global().asyncAfter(deadline: .now() + 10) {
+                    
+                    ChiaBlockchainManager.share.addCat(tailHash: self.filteredTokens[indexPath.row].hash, self) { new in
+                        if new.success {
+                            DispatchQueue.main.async {
+                                
+                                UIView.animate(withDuration: 3) {
+                                    self.addedWalletLabel.alpha = 1
+                                }
+                                NotificationCenter.default.post(name: NSNotification.Name("updateBalances"), object: nil)
+                                UIView.animate(withDuration: 3) {
+                                    self.addedWalletLabel.alpha = 0
+                                }
+                            }
+                        }
+                    }
+                }
+            }
             
-            UIView.animate(withDuration: 3) {
-                self.addedWalletLabel.alpha = 1
-            }
-            CoreDataManager.share.addTokenChiaWalletPrivateKey(index: self.index, balance: Double(self.prices.filter({$0.code == self.filteredTokens[indexPath.row].code}).first?.price ?? "0") ?? 0, name: self.filteredTokens[indexPath.row].name)
-            NotificationCenter.default.post(name: NSNotification.Name("updateBalances"), object: nil)
-            UIView.animate(withDuration: 3) {
-                self.addedWalletLabel.alpha = 0
-            }
         }
         
         cell.switchoff = { [unowned self] in
             
-            CoreDataManager.share.deleteTokenChiaWalletPrivateKey(index: self.index, balance: Double(self.prices.filter({$0.code == self.filteredTokens[indexPath.row].code}).first?.price ?? "0") ?? 0, name: self.filteredTokens[indexPath.row].name)
+            CoreDataManager.share.showCatChiaWalletPrivateKey(index: self.index, name: self.filteredTokens[indexPath.row].hash, show: false)
             NotificationCenter.default.post(name: NSNotification.Name("updateBalances"), object: nil)
-
+            print(CoreDataManager.share.fetchChiaWalletPrivateKey().map({$0.names}))
         }
-        
         
         return cell
     }

@@ -321,3 +321,17 @@ struct CoinSpend: Codable {
         case solution
     }
 }
+
+struct NewCat: Codable {
+    let asset_id: String
+    let success: Bool
+    let type: Int
+    let wallet_id: Int
+
+    enum CodingKeys: String, CodingKey {
+        case asset_id
+        case success
+        case type
+        case wallet_id
+    }
+}

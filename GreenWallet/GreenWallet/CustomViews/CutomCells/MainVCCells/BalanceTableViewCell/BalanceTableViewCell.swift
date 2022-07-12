@@ -33,5 +33,7 @@ class BalanceTableViewCell: UITableViewCell {
             self.cellImage.load(url: url )
             
         
+            
+        
     }
 }

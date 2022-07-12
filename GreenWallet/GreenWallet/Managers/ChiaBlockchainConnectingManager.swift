@@ -610,6 +610,50 @@ class ChiaBlockchainManager {
         }.resume()
     }
     
+    func addCat(tailHash: String,_ controller: UIViewController, with complition: @escaping (NewCat) -> Void) {
+
+        let method = "create_new_wallet"
+        guard let url = URL(string: self.url + "/wallet/" + method) else { return }
+        let parameters = ["wallet_type": "cat_wallet", "mode": "existing", "asset_id": tailHash] as [String : Any]
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: []) else { return }
+        request.httpBody = httpBody
+        print(httpBody)
+        
+        let session = URLSession.shared
+        session.dataTask(with: request) { data, response, error in
+            if let response = response {
+                print(response)
+            }
+            if let data = data {
+                do {
+                    let json = try JSONDecoder().decode(NewCat.self, from: data)
+                    DispatchQueue.main.async {
+                        complition(json)
+                    }
+                } catch let DecodingError.dataCorrupted(context) {
+                    print(context)
+                } catch let DecodingError.keyNotFound(key, context) {
+                    print("Key '\(key)' not found:", context.debugDescription)
+                    print("codingPath:", context.codingPath)
+                    DispatchQueue.main.async {
+                        
+                        NotificationCenter.default.post(name: NSNotification.Name("alertErrorGerCodingKeys"), object: nil)
+                    }
+                } catch let DecodingError.valueNotFound(value, context) {
+                    print("Value '\(value)' not found:", context.debugDescription)
+                    print("codingPath:", context.codingPath)
+                } catch let DecodingError.typeMismatch(type, context)  {
+                    print("Type '\(type)' mismatch:", context.debugDescription)
+                    print("codingPath:", context.codingPath)
+                } catch {
+                    NotificationCenter.default.post(name: NSNotification.Name("alertErrorGerCodingKeys"), object: nil)
+                }
+            }
+        }.resume()
+    }
+    
 }
 
 class ChiaTestBlockchainManager {
@@ -786,6 +830,8 @@ class ChiaTestBlockchainManager {
             }
         }.resume()
     }
+    
+
     
     func deleteAllKeys(){
         let method = "delete_all_keys"

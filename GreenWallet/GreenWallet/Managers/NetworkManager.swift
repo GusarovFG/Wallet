@@ -65,7 +65,7 @@ class NetworkManager {
         }.resume()
     }
     
-    func getExchangeRates(complition: @escaping (ExchangeRates) -> Void) {
+    func getExchangeRates(complition: @escaping (NewRates) -> Void) {
         guard let url = URL(string: MainURLS.ExchangeRates.rawValue) else { return }
         
         let session = URLSession.shared
@@ -78,45 +78,18 @@ class NetworkManager {
             
             do {
                 
-                let json = try JSONDecoder().decode(ExchangeRates.self, from: data)
+                let json = try JSONDecoder().decode(NewRates.self, from: data)
                 
                 DispatchQueue.main.async {
                     complition(json)
-                }
-            } catch {
-                print(error.localizedDescription)
-                
-            }
-        }.resume()
-    }
-    
-    func getExchngeRatesOfChives(complition: @escaping (ChivesRates) -> Void) {
-        guard let url = URL(string: MainURLS.ExchangeRatesChives.rawValue) else { return }
-        
-        let session = URLSession.shared
-        session.dataTask(with: url) { data, response, error in
-            if let response = response {
-                print(response)
-            }
-            
-            guard let data = data else { return }
-            
-            do {
-                
-                let json = try JSONDecoder().decode(ChivesRates.self, from: data)
-                
-                DispatchQueue.main.async {
-                    complition(json)
+                    
                 }
             } catch let DecodingError.dataCorrupted(context) {
                 print(context)
             } catch let DecodingError.keyNotFound(key, context) {
                 print("Key '\(key)' not found:", context.debugDescription)
                 print("codingPath:", context.codingPath)
-                DispatchQueue.main.async {
-                    
-                    
-                }
+                
             } catch let DecodingError.valueNotFound(value, context) {
                 print("Value '\(value)' not found:", context.debugDescription)
                 print("codingPath:", context.codingPath)
@@ -128,6 +101,7 @@ class NetworkManager {
             }
         }.resume()
     }
+    
     
     func getFAQ(complition: @escaping ([[String]]) -> Void) {
         guard let url = URL(string: "https://greenapp.siterepository.ru/api/v1.0/faq?code=\(CoreDataManager.share.fetchLanguage()[0].languageCode ?? "")") else { return }
@@ -351,12 +325,11 @@ class NetworkManager {
 enum MainURLS: String {
     case API = "https://greenapp.siterepository.ru/api/v1.0"
     case language = "https://greenapp.siterepository.ru/api/v1.0/localization/languages"
-    case ExchangeRates = "https://api.huobi.pro/market/tickers"
+    case ExchangeRates = "https://api.coingecko.com/api/v3/simple/price?ids=chives-coin,chia&vs_currencies=usd&include_market_cap=true&include_24hr_vol=true&include_24hr_change=true"
     case systems = "https://greenapp.siterepository.ru/api/v1.0/blockchains"
     case listing = "https://greenapp.siterepository.ru/api/v1.0/listing"
     case question = "https://greenapp.siterepository.ru/api/v1.0/support"
     case faq = "https://greenapp.siterepository.ru/api/v1.0/faq"
-    case ExchangeRatesChives = "https://api.lbkex.com/v2/ticker.do?symbol=xcc_usdt"
     case PushNotifications = "https://greenapp.siterepository.ru/api/v1.0/notifications"
     case Agreement = "https://greenapp.siterepository.ru/api/v1.0/agreements"
     case tails = "https://greenapp.siterepository.ru/api/v1.0/tails"
