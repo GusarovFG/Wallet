@@ -905,18 +905,18 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                                 <rect key="frame" x="62" y="178" width="290" height="290"/>
                                 <color key="backgroundColor" name="mainBackGroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="290" id="b2s-gU-oW9"/>
+                                    <constraint firstAttribute="height" constant="290" id="b2s-gU-oW9"/>
                                     <constraint firstAttribute="width" constant="290" id="oM4-UB-LbW"/>
                                 </constraints>
-                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="imC-K3-Fe2">
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="15" minimumInteritemSpacing="15" id="imC-K3-Fe2">
                                     <size key="itemSize" width="128" height="128"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="50" maxY="0.0"/>
+                                    <inset key="sectionInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="qrCell" id="O8a-G8-eN3" customClass="qrCollectionViewCell" customModule="GreenWallet" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                        <rect key="frame" x="15" y="0.0" width="128" height="128"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="eeo-Dw-04t">
                                             <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
@@ -2187,6 +2187,7 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="headerView" destination="vmO-aU-tWR" id="NnX-W2-w05"/>
+                        <outlet property="heightConstraint" destination="gmA-ka-S5s" id="blT-sB-3p8"/>
                         <outlet property="tableView" destination="55V-h2-7G0" id="Lay-cl-0Gg"/>
                         <outlet property="titleLabel" destination="6j7-jE-JJK" id="Xub-zn-YpE"/>
                     </connections>

@@ -9,7 +9,7 @@ import UIKit
 
 class SelectSystemViewController: UIViewController {
     
- 
+    
     private var allSystems = Systems(success: false, result: ResultSystems(version: "", list: [ListSystems(name: "", full_node: "", wallet: "", daemon: "", farmer: "", harvester: "")]))
     private var filterSystems: [ListSystems] = []
     
@@ -29,7 +29,7 @@ class SelectSystemViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var headerView: UIView!
-    @IBOutlet weak var backgrorundView: UIView!
+    @IBOutlet weak var heightConstraint: NSLayoutConstraint!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,9 +51,9 @@ class SelectSystemViewController: UIViewController {
         self.headerView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         self.view.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
         localization()
-//        if self.isNewWallet {
-//            self.titleLabel.text = LocalizationManager.share.translate?.result.list.all.add_wallet_title
-//        }
+        //        if self.isNewWallet {
+        //            self.titleLabel.text = LocalizationManager.share.translate?.result.list.all.add_wallet_title
+        //        }
         let swipeGasture = UISwipeGestureRecognizer(target: self, action: #selector(dismissSwipe))
         swipeGasture.direction = .down
         
@@ -62,10 +62,24 @@ class SelectSystemViewController: UIViewController {
         self.view.addGestureRecognizer(tapGasture)
         self.view.addGestureRecognizer(swipeGasture)
         NotificationCenter.default.addObserver(self, selector: #selector(localization), name: NSNotification.Name("localized"), object: nil)
-
+        
     }
     
-
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        self.heightConstraint.constant = CGFloat((self.filterSystems.count * 74)) + 30
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+    }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -78,9 +92,10 @@ class SelectSystemViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         NotificationCenter.default.post(name: NSNotification.Name("ChangeIndex"), object: nil)
+        
     }
-
-
+    
+    
     @objc private func localization() {
         self.titleLabel.text = LocalizationManager.share.translate?.result.list.all.select_network
     }
@@ -99,25 +114,25 @@ extension SelectSystemViewController: UITableViewDelegate, UITableViewDataSource
         if self.isSelectedSystem {
             return 2
         } else {
-//            if self.isChia && self.isPushToken && !self.isMainScreen {
-//                self.filterSystems = self.allSystems.result.list.filter({$0.name.contains("Chia")})
-//                return self.filterSystems.count
-//            } else if !self.isChia && self.isPushToken && !self.isMainScreen {
-//                self.filterSystems = self.allSystems.result.list.filter({$0.name.contains("Chives")})
-//                return self.filterSystems.count
-//            } else if self.isChia && self.isPushToken && self.isMainScreen {
-//                return self.filterSystems.count
-//            } else {
+            if self.isChia && self.isPushToken && !self.isMainScreen {
+                self.filterSystems = self.allSystems.result.list.filter({$0.name.contains("Chia")})
                 return self.filterSystems.count
-            
-            
+            } else if !self.isChia && self.isPushToken && !self.isMainScreen {
+                self.filterSystems = self.allSystems.result.list.filter({$0.name.contains("Chives")})
+                return self.filterSystems.count
+            } else if self.isChia && self.isPushToken && self.isMainScreen {
+                return self.filterSystems.count
+            } else {
+                return self.filterSystems.count
+                
+                
+            }
         }
     }
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let selectedSystemCell = tableView.dequeueReusableCell(withIdentifier: "systemCell", for: indexPath) as! SelectSystemTableViewCell
         let selectTypeOfWalletCell = tableView.dequeueReusableCell(withIdentifier: "typeOfWalletCell", for: indexPath)
-  
+        
         switch self.isSelectedSystem {
         case false:
             selectedSystemCell.nameOfSystemLabel.text = self.filterSystems[indexPath.row].name

@@ -190,7 +190,7 @@ extension ImportTokensViewController: UISearchBarDelegate {
             self.tableView.reloadData()
             return
         }
-        self.filteredTokens = self.tokens.filter{$0.name.lowercased().contains(searchText.lowercased())}
+        self.filteredTokens = self.tokens.filter{$0.name.lowercased().contains(searchText.lowercased()) || $0.code.lowercased().contains(searchText.lowercased())}
         self.tableView.reloadData()
     }
     

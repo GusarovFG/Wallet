@@ -76,12 +76,12 @@ class GetTokenViewController: UIViewController {
                 self.menuButton.setTitle("• Chives Network", for: .normal)
 //                setupLabel(index: 0)
             } else if self.isChiaTest {
-                self.wallets = CoreDataManager.share.fetchChiaWalletPrivateKey().filter({$0.name! == "TestNet Chia Wallet"})
+                self.wallets = CoreDataManager.share.fetchChiaWalletPrivateKey().filter({$0.name! == "Chia TestNet"})
                 self.titleLabel.text = "Chia TestNet"
                 self.menuButton.setTitle("• Chia TestNet", for: .normal)
 //                setupLabel(index: 0)
             } else if self.isChivesTest {
-                self.wallets = CoreDataManager.share.fetchChiaWalletPrivateKey().filter({$0.name! == "TestNet Chives Wallet"})
+                self.wallets = CoreDataManager.share.fetchChiaWalletPrivateKey().filter({$0.name! == "Chives TestNet"})
                 self.titleLabel.text = "Chives TestNet"
                 self.menuButton.setTitle("• Chives TestNet", for: .normal)
 //                setupLabel(index: 0)
@@ -148,8 +148,8 @@ class GetTokenViewController: UIViewController {
 
         var img:UIImage = UIImage(cgImage: cgimg, scale: 1.0, orientation: UIImage.Orientation.up)
 
-        let width  = self.qrCollectionView.frame.width - 10
-        let height = self.qrCollectionView.frame.width - 10
+        let width  = self.qrCollectionView.frame.width - 20
+        let height = self.qrCollectionView.frame.width - 20
 
         UIGraphicsBeginImageContext(CGSize(width: width, height: height))
         let cgContxt:CGContext = UIGraphicsGetCurrentContext()!
@@ -287,11 +287,8 @@ extension GetTokenViewController: UICollectionViewDelegate, UICollectionViewData
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
+        CGSize(width: collectionView.frame.width - 30, height: collectionView.frame.height - 30)
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0 )
-    }
-    
+
 }

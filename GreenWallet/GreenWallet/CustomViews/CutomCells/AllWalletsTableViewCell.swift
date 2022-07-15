@@ -27,11 +27,11 @@ class AllWalletsTableViewCell: UITableViewCell {
     }
     
     func setupCell(wallet: ChiaWalletPrivateKey) {
-        if wallet.name == "Chia Wallet" || wallet.name == "Chives Wallet" {
+        if wallet.name == "Chia Wallet" || wallet.name == "Chia TestNet" {
             self.cellImage.image = UIImage(named: "LogoChia")!
             self.tokenLabel.text = "XCH"
             
-        } else {
+        } else if wallet.name == "Chives Wallet" || wallet.name == "Chives TestNet" {
             self.cellImage.image = UIImage(named: "ChivesLogo")!
             self.tokenLabel.text = "XCC"
         }
