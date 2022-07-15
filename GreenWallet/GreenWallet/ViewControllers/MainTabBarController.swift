@@ -19,15 +19,17 @@ class MainTabBarController: UITabBarController, UINavigationBarDelegate {
         self.tabBar.addSubview(pushButton)
         self.pushButton.addTarget(self, action: #selector(showPostVC), for: .touchUpInside)
         self.pushButton.backgroundColor = self.tabBar.backgroundColor
-        self.pushButton.label.textColor = #colorLiteral(red: 0.6274509804, green: 0.6274509804, blue: 0.6274509804, alpha: 1)
+        
+        
         self.pushButton.rippleEnabled = false
-        self.pushButton.imageView.alpha = 0.5
+       
         
         self.tabBar.addSubview(getButton)
         self.getButton.addTarget(self, action: #selector(showGettVC), for: .touchUpInside)
         self.getButton.backgroundColor = self.tabBar.backgroundColor
-        self.getButton.label.textColor = #colorLiteral(red: 0.6274509804, green: 0.6274509804, blue: 0.6274509804, alpha: 1)
-        self.getButton.imageView.alpha = 0.5
+      
+        
+        
         
         self.getButton.rippleEnabled = false
         
@@ -44,7 +46,11 @@ class MainTabBarController: UITabBarController, UINavigationBarDelegate {
             selectSystemVC.modalPresentationStyle = .overFullScreen
             self.present(selectSystemVC, animated: true)
         } else {
-            AlertManager.share.walletsIsNotFounded(self)
+            let storyboard = UIStoryboard(name: "Main", bundle: .main)
+            let selectSystemVC = storyboard.instantiateViewController(withIdentifier: "SelectSystemViewController") as! SelectSystemViewController
+            selectSystemVC.isNewWallet = true
+            self.present(selectSystemVC, animated: true)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "newWallet"), object: nil)
         }
             
     }
@@ -56,29 +62,48 @@ class MainTabBarController: UITabBarController, UINavigationBarDelegate {
             selectSystemVC.modalPresentationStyle = .overFullScreen
             self.present(selectSystemVC, animated: true)
         } else {
-            AlertManager.share.walletsIsNotFounded(self)
+            let storyboard = UIStoryboard(name: "Main", bundle: .main)
+            let selectSystemVC = storyboard.instantiateViewController(withIdentifier: "SelectSystemViewController") as! SelectSystemViewController
+            selectSystemVC.isNewWallet = true
+            self.present(selectSystemVC, animated: true)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "newWallet"), object: nil)
         }
             
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
+        
         
     }
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        self.pushButton.frame.size = CGSize(width: self.tabBar.frame.width / 6, height: 50)
+        
+        self.pushButton.frame.size = CGSize(width: (self.tabBar.frame.width / 6) + 5, height: 51)
         self.pushButton.frame.origin = CGPoint(x: self.tabBar.frame.midX - (self.pushButton.frame.width / 2), y: 1)
         self.pushButton.label.frame.origin.y = self.pushButton.imageView.frame.maxY
   
-        self.getButton.frame.size = CGSize(width: self.tabBar.frame.width / 6, height: 50)
+        self.getButton.frame.size = CGSize(width: (self.tabBar.frame.width / 6) + 5, height: 51)
         self.getButton.frame.origin = CGPoint(x: (self.tabBar.frame.maxX / 5) + 5, y: 1)
         self.getButton.label.frame.origin.y = self.getButton.imageView.frame.maxY
         
         self.pushButton.imageView.contentMode = .center
         self.getButton.imageView.contentMode = .center
+        
+        if UserDefaultsManager.shared.userDefaults.string(forKey: "Theme") == "light" {
+            self.pushButton.label.textColor = #colorLiteral(red: 0.6274509804, green: 0.6274509804, blue: 0.6274509804, alpha: 1)
+            self.getButton.label.textColor = #colorLiteral(red: 0.6274509804, green: 0.6274509804, blue: 0.6274509804, alpha: 1)
+            
+            self.pushButton.imageView.alpha = 0.5
+            self.getButton.imageView.alpha = 0.5
+        } else {
+            self.pushButton.label.textColor = #colorLiteral(red: 0.7058823529, green: 0.7058823529, blue: 0.7058823529, alpha: 1)
+            self.getButton.label.textColor = #colorLiteral(red: 0.7058823529, green: 0.7058823529, blue: 0.7058823529, alpha: 1)
+
+            self.pushButton.imageView.alpha = 1
+            self.getButton.imageView.alpha = 1
+        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -88,7 +113,7 @@ class MainTabBarController: UITabBarController, UINavigationBarDelegate {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-
+        self.addTabs()
     }
     
     @objc private func changeIndex() {

@@ -169,12 +169,10 @@ extension MnemonicViewController: UICollectionViewDelegate, UICollectionViewData
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        if UIDevice.modelName.contains("iPhone 8") || UIDevice.modelName.contains("iPhone 12") || UIDevice.modelName.contains("iPhone 13") {
-            return CGSize(width: 100, height: 35)
-        } else {
-            return CGSize(width: 178, height: 50)
-        }
-    }
+
+        return CGSize(width: (collectionView.frame.width / 2) - 15, height: (collectionView.frame.height / 6) - 10)
+    
+}
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         

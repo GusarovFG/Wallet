@@ -80,8 +80,8 @@ class AddContactViewController: UIViewController {
         self.errorLabel.text = LocalizationManager.share.translate?.result.list.address_book.address_book_wrong_adress_error
         self.contactNameLabel.text = LocalizationManager.share.translate?.result.list.address_book.address_book_add_contact_name
         self.contactNameTextField.placeholder = LocalizationManager.share.translate?.result.list.address_book.address_book_add_contact_name
-        self.contactAdresTextField.placeholder = LocalizationManager.share.translate?.result.list.address_book.address_book_add_adress
-        self.contactAdresLabel.text = LocalizationManager.share.translate?.result.list.address_book.address_book_add_contact_adress
+        self.contactAdresTextField.placeholder = LocalizationManager.share.translate?.result.list.receive_a_token.receive_a_token_adress
+        self.contactAdresLabel.text = LocalizationManager.share.translate?.result.list.receive_a_token.receive_a_token_adress
         self.descriptinLabel.text = LocalizationManager.share.translate?.result.list.address_book.address_book_add_contact_description
         self.descriptionTextField.text = LocalizationManager.share.translate?.result.list.address_book.address_book_add_contact_description
         

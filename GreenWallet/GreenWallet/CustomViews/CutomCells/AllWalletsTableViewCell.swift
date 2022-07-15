@@ -27,9 +27,15 @@ class AllWalletsTableViewCell: UITableViewCell {
     }
     
     func setupCell(wallet: ChiaWalletPrivateKey) {
-        self.cellImage.image = UIImage(named: "LogoChia")!
+        if wallet.name == "Chia Wallet" || wallet.name == "Chives Wallet" {
+            self.cellImage.image = UIImage(named: "LogoChia")!
+            self.tokenLabel.text = "XCH"
+            
+        } else {
+            self.cellImage.image = UIImage(named: "ChivesLogo")!
+            self.tokenLabel.text = "XCC"
+        }
         self.walletLabel.text = wallet.name
-        self.tokenLabel.text = "XCH"
         self.keyLabel.text = "\(String(describing: LocalizationManager.share.translate?.result.list.wallet.wallet_data_public_key ?? "")) \(wallet.fingerprint)"
         
     }

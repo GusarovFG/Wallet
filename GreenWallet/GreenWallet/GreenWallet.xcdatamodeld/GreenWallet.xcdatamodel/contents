@@ -2,15 +2,12 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="20086" systemVersion="21F79" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="ChiaWalletPrivateKey" representedClassName="ChiaWalletPrivateKey" syncable="YES" codeGenerationType="class">
         <attribute name="adres" optional="YES" attributeType="String"/>
-        <attribute name="balances" optional="YES" attributeType="Transformable" customClassName="[Double]"/>
         <attribute name="fingerprint" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="name" optional="YES" attributeType="String"/>
-        <attribute name="names" optional="YES" attributeType="Transformable" customClassName="[String]"/>
         <attribute name="pk" optional="YES" attributeType="String"/>
         <attribute name="seed" optional="YES" attributeType="String"/>
-        <attribute name="show" optional="YES" attributeType="Transformable" customClassName="[Bool]"/>
         <attribute name="sk" optional="YES" attributeType="String"/>
-        <attribute name="wallets" optional="YES" attributeType="Transformable" customClassName="[Int]"/>
+        <attribute name="token" optional="YES" attributeType="Transformable" customClassName="[[String]]"/>
     </entity>
     <entity name="ChiaWalletsCD" representedClassName="ChiaWalletsCD" syncable="YES" codeGenerationType="class">
         <attribute name="data" optional="YES" attributeType="String"/>
@@ -46,7 +43,7 @@
         <attribute name="fingerpring" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
     </entity>
     <elements>
-        <element name="ChiaWalletPrivateKey" positionX="-54" positionY="18" width="128" height="179"/>
+        <element name="ChiaWalletPrivateKey" positionX="-54" positionY="18" width="128" height="134"/>
         <element name="ChiaWalletsCD" positionX="-36" positionY="108" width="128" height="89"/>
         <element name="Contact" positionX="-63" positionY="0" width="128" height="74"/>
         <element name="ExchangeChivesRatesCD" positionX="-45" positionY="72" width="128" height="44"/>

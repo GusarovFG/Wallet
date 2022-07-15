@@ -118,7 +118,7 @@ class PushTokensViewController: UIViewController {
         if !self.isInMyWallet {
             self.wallet = self.wallets.first
         }
-        self.balanceButton.setTitle("\((String(((self.wallet?.balances as? [NSNumber])?.first as! Double / 1000000000000.0).rounded(toPlaces: 8)))) XCH", for: .normal)
+        self.balanceButton.setTitle("\(((self.wallet?.token?.first?[2].toDouble() ?? 0) / 1000000000000.0).rounded(toPlaces: 8)) XCH", for: .normal)
         self.tokenButton.setTitle(self.wallet?.name, for: .normal)
         self.walletsView.isHidden = true
         
@@ -279,13 +279,13 @@ class PushTokensViewController: UIViewController {
                 
                 ChiaBlockchainManager.share.logIn(Int(self.wallet?.fingerprint ?? 0)) { log in
                     if log.success {
-                        DispatchQueue.global().asyncAfter(deadline: .now() + 10) {
+                        DispatchQueue.global().asyncAfter(deadline: .now() + 15) {
                             
                             ChiaBlockchainManager.share.getSyncStatus(self.walletId) { status in
                                 
                                 
                                 if status.synced {
-                                    
+                                    print(status.synced)
                                     
                                     ChiaBlockchainManager.share.sendTransactions(self.walletId, amount: amount * 1000000000000, fee: fee * 1000000000000, address: address) {  send in
                                         print(send.success)
@@ -463,26 +463,26 @@ class PushTokensViewController: UIViewController {
                 if self.systems[i].name == "Chia Network" {
                     self.wallets = CoreDataManager.share.fetchChiaWalletPrivateKey().filter({$0.name == "Chia Wallet"})
                     self.wallet = self.wallets.first
-                    self.balanceButton.setTitle("\((String(((self.wallet?.balances as? [NSNumber])?[0] as! Double / 1000000000000.0).rounded(toPlaces: 8)))) XCH", for: .normal)
+                    self.balanceButton.setTitle("\(((self.wallet?.token?[i][2].toDouble() ?? 0) / 1000000000000.0).rounded(toPlaces: 8)) XCH", for: .normal)
                     self.tokenImage.image = UIImage(named: "LogoChia")!
                     
                     self.setupWalletButton()
                 } else if self.systems[i].name == "Chives Network" {
                     self.wallets = CoreDataManager.share.fetchChiaWalletPrivateKey().filter({$0.name == "Chives Wallet"})
                     self.wallet = self.wallets.first
-                    self.balanceButton.setTitle("\((String(((self.wallet?.balances as? [NSNumber])?[0] as! Double / 1000000000000.0).rounded(toPlaces: 8)))) XCH", for: .normal)
+                    self.balanceButton.setTitle("\(((self.wallet?.token?[i][2].toDouble() ?? 0) / 1000000000000.0).rounded(toPlaces: 8)) XCH", for: .normal)
                     self.tokenImage.image = UIImage(named: "ChivesLogo")!
                     self.setupWalletButton()
                 } else if self.systems[i].name == "Chia TestNet" {
                     self.wallets = CoreDataManager.share.fetchChiaWalletPrivateKey().filter({$0.name == "Chia TestNet"})
                     self.wallet = self.wallets.first
-                    self.balanceButton.setTitle("\((String(((self.wallet?.balances as? [NSNumber])?[0] as! Double / 1000000000000.0).rounded(toPlaces: 8)))) XCH", for: .normal)
+                    self.balanceButton.setTitle("\(((self.wallet?.token?[i][2].toDouble() ?? 0) / 1000000000000.0).rounded(toPlaces: 8)) XCH", for: .normal)
                     self.tokenImage.image = UIImage(named: "LogoChia")!
                     self.setupWalletButton()
                 } else if self.systems[i].name == "Chives TestNet" {
                     self.wallets = CoreDataManager.share.fetchChiaWalletPrivateKey().filter({$0.name == "Chives TestNet"})
                     self.wallet = self.wallets.first
-                    self.balanceButton.setTitle("\((String(((self.wallet?.balances as? [NSNumber])?[0] as! Double / 1000000000000.0).rounded(toPlaces: 8)))) XCH", for: .normal)
+                    self.balanceButton.setTitle("\(((self.wallet?.token?[i][2].toDouble() ?? 0) / 1000000000000.0).rounded(toPlaces: 8)) XCH", for: .normal)
                     self.tokenImage.image = UIImage(named: "ChivesLogo")!
                     self.setupWalletButton()
                     
@@ -554,11 +554,16 @@ class PushTokensViewController: UIViewController {
     @IBAction func balanceMenuOpen(_ sender: Any) {
         if self.balanceView.isHidden == true {
             self.balanceView.isHidden = false
-            for i in 0..<((self.wallet?.wallets as! [NSNumber]).count) {
-                if self.balanceStackView.arrangedSubviews.count == ((self.wallet?.wallets as! [NSNumber]).count) {
+            for i in 0..<(self.wallet?.token?.count ?? 0) {
+                if self.balanceStackView.arrangedSubviews.count == self.wallet?.token?.count ?? 0 {
                 } else {
                     let button = UIButton(frame: CGRect(x: 0, y: 0, width: self.balanceStackView.frame.width, height: 40))
-                    button.setTitle("\((String(((self.wallet?.balances as? [NSNumber])?[i] as! Double / 1000000000000.0).rounded(toPlaces: 8)))) XCH", for: .normal)
+                    if self.wallet?.token?[i][0] == "Chia Wallet" {
+                        button.setTitle("\(((self.wallet?.token?[i][2].toDouble() ?? 0) / 1000000000000.0).rounded(toPlaces: 8)) XCH", for: .normal)
+                    } else {
+                        
+                        button.setTitle("\(((self.wallet?.token?[i][2].toDouble() ?? 0) / 1000000000000.0).rounded(toPlaces: 8)) \(TailsManager.share.tails?.result.list.filter({$0.hash.contains(self.wallet?.token?[i][0].split(separator: " ").last?.prefix(15) ?? "") || $0.name.contains(self.wallet?.token?[i][0] ?? "")}).first?.code ?? "")", for: .normal)
+                    }
                     self.balanceStackView.addArrangedSubview(button)
                     self.balanceViewConstraint.constant += button.frame.height
                     self.balaceStackViewConstraint.constant += button.frame.height
@@ -583,7 +588,7 @@ class PushTokensViewController: UIViewController {
                 self.tokenImage.image = UIImage(named: "LogoChia")!
                 setupWalletButton()
                 sender.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
-                self.balanceButton.setTitle("\((String(((self.wallet?.balances as? [NSNumber])?[0] as! Double / 1000000000000.0).rounded(toPlaces: 8)))) XCH", for: .normal)
+                self.balanceButton.setTitle("\(((self.wallet?.token?[i][2].toDouble() ?? 0) / 1000000000000.0).rounded(toPlaces: 8)) XCH", for: .normal)
                 self.balanceView.isHidden = true
                 self.walletsView.isHidden = true
                 self.balanceStackView.removeAllSubviews()
@@ -597,11 +602,18 @@ class PushTokensViewController: UIViewController {
         for i in 0..<self.balanceStackView.arrangedSubviews.count {
             self.balanceStackView.arrangedSubviews[i].backgroundColor = .systemBackground
             if sender == self.balanceStackView.arrangedSubviews[i] {
-                self.balanceButton.setTitle("\((String(((self.wallet?.balances as? [NSNumber])?[0] as! Double / 1000000000000.0).rounded(toPlaces: 8)))) XCH", for: .normal)
+                if self.wallet?.token?[i][0] == "Chia Wallet" {
+                    self.balanceButton.setTitle("\(((self.wallet?.token?[i][2].toDouble() ?? 0) / 1000000000000.0).rounded(toPlaces: 8)) XCH", for: .normal)
+                } else {
+                    
+                    self.balanceButton.setTitle("\(((self.wallet?.token?[i][2].toDouble() ?? 0) / 1000000000000.0).rounded(toPlaces: 8)) \(TailsManager.share.tails?.result.list.filter({$0.hash.contains(self.wallet?.token?[i][0].split(separator: " ").last?.prefix(15) ?? "") || $0.name.contains(self.wallet?.token?[i][0] ?? "")}).first?.code ?? "")", for: .normal)
+                }
+                
                 sender.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
                 self.balanceView.isHidden = true
                 self.walletsView.isHidden = true
                 self.walletId = (i + 1)
+                print(self.walletId)
             }
         }
     }

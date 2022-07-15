@@ -25,14 +25,10 @@ class NewWalletViewController: UIViewController {
     @IBOutlet weak var disctriptionLabel: UILabel!
     @IBOutlet weak var disctiption: UILabel!
     @IBOutlet weak var characteristicsTitle: UILabel!
-    @IBOutlet weak var emissionLabel: UILabel!
-    @IBOutlet weak var praymanLabel: UILabel!
-    @IBOutlet weak var iCOLabel: UILabel!
-    @IBOutlet weak var stackingLAbel: UILabel!
-    @IBOutlet weak var supportTokensLabel: UILabel!
     @IBOutlet weak var newWalletLAbel: UILabel!
     @IBOutlet weak var creatingNewWalletLabel: UILabel!
     @IBOutlet weak var systemImage: UIImageView!
+    @IBOutlet weak var characteristicTextView: UITextView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,11 +47,13 @@ class NewWalletViewController: UIViewController {
             self.createNewWalletButton.backgroundColor = #colorLiteral(red: 0.2666666667, green: 0.2666666667, blue: 0.2666666667, alpha: 1)
         }
         
+        
+        
         if self.isChia || self.isChiaTest {
-            self.systemImage.image = UIImage(named: "LogoChia")!
+            self.systemImage.image = UIImage(named: "chia_logo")!
             self.titleLabel.text = "Chia Network"
         } else {
-            self.systemImage.image = UIImage(named: "ChivesLogo")!
+            self.systemImage.image = UIImage(named: "chives_logo")!
             self.titleLabel.text = "Chives Network"
         }
         
@@ -69,9 +67,27 @@ class NewWalletViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.systemImage.layer.cornerRadius = self.systemImage.frame.width / 2
+        self.systemImage.layer.borderColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
+        self.systemImage.layer.borderWidth = 2
         
-        
+        DispatchQueue.global().async {
+            NetworkManager.share.getCoinInfo { info in
+                DispatchQueue.main.async {
+                    if self.isChia || self.isChiaTest {
+                    let char = info.result.list.filter({$0.blockchain_name.contains("Chia")}).first?.specification.replacingOccurrences(of: "\n", with: "\n• ")
+                    self.disctiption.text = info.result.list.filter({$0.blockchain_name.contains("Chia")}).first?.description
+                    self.characteristicTextView.text = char
+                    } else if self.isChives || self.isChivesTest  {
+                        let char = info.result.list.filter({$0.blockchain_name.contains("Chives")}).first?.specification.replacingOccurrences(of: "\n", with: "\n• ")
+                        self.disctiption.text = info.result.list.filter({$0.blockchain_name.contains("Chives")}).first?.description
+                        self.characteristicTextView.text = char
+                    }
+                }
+            }
+        }
     }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
     }

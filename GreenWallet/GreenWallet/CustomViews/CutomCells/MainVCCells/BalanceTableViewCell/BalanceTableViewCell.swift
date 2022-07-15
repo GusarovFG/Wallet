@@ -27,10 +27,10 @@ class BalanceTableViewCell: UITableViewCell {
     }
     
     func setupCell(wallet: ChiaWalletPrivateKey?, index: Int) {
-        guard let url = URL(string:TailsManager.share.tails?.result.list.filter({$0.name == wallet?.names?[index] ?? ""}).first?.logo_url ?? "") else { return }
+//        guard let url = URL(string:TailsManager.share.tails?.result.list.filter({$0.name == wallet?.names?[index] ?? ""}).first?.logo_url ?? "") else { return }
         
         
-            self.cellImage.load(url: url )
+//            self.cellImage.load(url: url )
             
         
             

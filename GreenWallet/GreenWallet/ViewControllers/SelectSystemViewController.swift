@@ -29,6 +29,7 @@ class SelectSystemViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var headerView: UIView!
+    @IBOutlet weak var backgrorundView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,6 +56,10 @@ class SelectSystemViewController: UIViewController {
 //        }
         let swipeGasture = UISwipeGestureRecognizer(target: self, action: #selector(dismissSwipe))
         swipeGasture.direction = .down
+        
+        let tapGasture = UITapGestureRecognizer(target: self, action: #selector(dismissSwipe))
+        tapGasture.delegate = self
+        self.view.addGestureRecognizer(tapGasture)
         self.view.addGestureRecognizer(swipeGasture)
         NotificationCenter.default.addObserver(self, selector: #selector(localization), name: NSNotification.Name("localized"), object: nil)
 
@@ -257,4 +262,14 @@ extension SelectSystemViewController: UITableViewDelegate, UITableViewDataSource
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
+}
+
+extension SelectSystemViewController: UIGestureRecognizerDelegate {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        if touch.view?.isDescendant(of: self.tableView) == true || touch.view?.isDescendant(of: self.headerView) == true {
+            return false
+        } else {
+            return true
+        }
+    }
 }

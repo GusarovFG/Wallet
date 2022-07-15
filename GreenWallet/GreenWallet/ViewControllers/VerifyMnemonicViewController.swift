@@ -101,12 +101,12 @@ class VerifyMnemonicViewController: UIViewController {
         if self.verifyedMnemonicPhrase == self.mnemonicPhrase {
   
             print(self.mnemonicPhrase)
-       
+            var name = ""
+            var newbalance = ""
+            var id = ""
             var adreses = ""
-            var balances: [Double] = []
-            var walletsDict: [Int] = []
-            var names: [String] = []
-            var show: [Bool] = []
+            var token: [String] = []
+            var tokens: [[String]] = []
             var privateKey = ChiaPrivate(private_key: ChiaPrivateKey(farmer_pk: "", fingerprint: 0, pk: "", pool_pk: "", seed: "", sk: ""), success: true)
 
 
@@ -156,16 +156,20 @@ class VerifyMnemonicViewController: UIViewController {
                                 dispatchGroup.enter()
                                 for wallet in wallets.wallets {
                                     dispatchGroup.enter()
-                                    walletsDict.append(wallet.id)
-                                    names.append(wallet.name)
-                                    show.append(true)
+                                    name = wallet.name
+                                    id = "\(wallet.id)"
+                                    
                                     dispatchGroup.leave()
                                     dispatchGroup.enter()
                                     dispatchGroup.leave()
                                     dispatchGroup.enter()
                                     ChiaBlockchainManager.share.getWalletBalance(wallet.id) { balance in
-                                        balances.append(balance.wallet_balance.confirmed_wallet_balance)
-                                        print(balances)
+                                        newbalance = "\(balance.wallet_balance.confirmed_wallet_balance)"
+                                        token.insert(name, at: 0)
+                                        token.insert(id, at: 1)
+                                        token.insert(newbalance, at: 2)
+                                        token.insert("show", at: 3)
+                                        tokens.append(token)
                                     }
                                     dispatchGroup.leave()
                                     
@@ -176,8 +180,9 @@ class VerifyMnemonicViewController: UIViewController {
                                     print(privateKey)
                                     dispatchGroup.leave()
                                     dispatchGroup.enter()
+                                    
                                     UserDefaultsManager.shared.userDefaults.set("Exist", forKey: UserDefaultsStringKeys.walletExist.rawValue )
-                                    CoreDataManager.share.saveChiaWalletPrivateKey(name: "Chia Wallet", fingerprint: privateKey.private_key.fingerprint, pk: privateKey.private_key.pk, seed: privateKey.private_key.seed, sk: privateKey.private_key.seed, adress: adreses, wallets: walletsDict, balances: balances, names: names, show: show)
+                                    CoreDataManager.share.saveChiaWalletPrivateKey(name: "Chia Wallet", fingerprint: privateKey.private_key.fingerprint, pk: privateKey.private_key.pk, seed: privateKey.private_key.seed, sk: privateKey.private_key.seed, adress: adreses, tokens: tokens)
                                     
                                     dispatchGroup.leave()
                                     dispatchGroup.enter()
@@ -227,15 +232,19 @@ class VerifyMnemonicViewController: UIViewController {
                                 dispatchGroup.enter()
                                 for wallet in wallets.wallets {
                                     dispatchGroup.enter()
-                                    walletsDict.append(wallet.id)
-                                    names.append(wallet.name)
+                                    name = wallet.name
+                                    id = "\(wallet.id)"
                                     dispatchGroup.leave()
                                     dispatchGroup.enter()
                                     dispatchGroup.leave()
                                     dispatchGroup.enter()
                                     ChivesBlockchainManager.share.getWalletBalance(wallet.id) { balance in
-                                        balances.append(balance.wallet_balance.confirmed_wallet_balance)
-                                        print(balances)
+                                        newbalance = "\(balance.wallet_balance.confirmed_wallet_balance)"
+                                        token.insert(name, at: 0)
+                                        token.insert(id, at: 1)
+                                        token.insert(newbalance, at: 2)
+                                        token.insert("show", at: 3)
+                                        tokens.append(token)
                                     }
                                     dispatchGroup.leave()
                                     
@@ -246,8 +255,9 @@ class VerifyMnemonicViewController: UIViewController {
                                     print(privateKey)
                                     dispatchGroup.leave()
                                     dispatchGroup.enter()
+                                    
                                     UserDefaultsManager.shared.userDefaults.set("Exist", forKey: UserDefaultsStringKeys.walletExist.rawValue )
-                                    CoreDataManager.share.saveChiaWalletPrivateKey(name: "Chives Wallet", fingerprint: privateKey.private_key.fingerprint, pk: privateKey.private_key.pk, seed: privateKey.private_key.seed, sk: privateKey.private_key.seed, adress: adreses, wallets: walletsDict, balances: balances, names: names, show: show)
+                                    CoreDataManager.share.saveChiaWalletPrivateKey(name: "Chives Wallet", fingerprint: privateKey.private_key.fingerprint, pk: privateKey.private_key.pk, seed: privateKey.private_key.seed, sk: privateKey.private_key.seed, adress: adreses, tokens: tokens)
                                     dispatchGroup.leave()
                                     dispatchGroup.enter()
                                     guard let newWallet = CoreDataManager.share.fetchChiaWalletPrivateKey().last else { return }
@@ -288,6 +298,7 @@ class VerifyMnemonicViewController: UIViewController {
                             dispatchGroup.enter()
                             ChiaTestBlockchainManager.share.getNextAddress(walletID: Int64(1)) { adres in
                                 adreses = adres.address
+                                
                                 print(adreses)
                                 dispatchGroup.leave()
                             }
@@ -296,15 +307,19 @@ class VerifyMnemonicViewController: UIViewController {
                                 dispatchGroup.enter()
                                 for wallet in wallets.wallets {
                                     dispatchGroup.enter()
-                                    walletsDict.append(wallet.id)
-                                    names.append(wallet.name)
+                                    name = wallet.name
+                                    id = "\(wallet.id)"
                                     dispatchGroup.leave()
                                     dispatchGroup.enter()
                                     dispatchGroup.leave()
                                     dispatchGroup.enter()
                                     ChiaTestBlockchainManager.share.getWalletBalance(wallet.id) { balance in
-                                        balances.append(balance.wallet_balance.confirmed_wallet_balance)
-                                        print(balances)
+                                        newbalance = "\(balance.wallet_balance.confirmed_wallet_balance)"
+                                        token.insert(name, at: 0)
+                                        token.insert(id, at: 1)
+                                        token.insert(newbalance, at: 2)
+                                        token.insert("show", at: 3)
+                                        tokens.append(token)
                                     }
                                     dispatchGroup.leave()
                                     
@@ -316,7 +331,7 @@ class VerifyMnemonicViewController: UIViewController {
                                     dispatchGroup.leave()
                                     dispatchGroup.enter()
                                     UserDefaultsManager.shared.userDefaults.set("Exist", forKey: UserDefaultsStringKeys.walletExist.rawValue )
-                                    CoreDataManager.share.saveChiaWalletPrivateKey(name: "Chia TestNet", fingerprint: privateKey.private_key.fingerprint, pk: privateKey.private_key.pk, seed: privateKey.private_key.seed, sk: privateKey.private_key.seed, adress: adreses, wallets: walletsDict, balances: balances, names: names, show: show)
+                                    CoreDataManager.share.saveChiaWalletPrivateKey(name: "Chia TestNet", fingerprint: privateKey.private_key.fingerprint, pk: privateKey.private_key.pk, seed: privateKey.private_key.seed, sk: privateKey.private_key.seed, adress: adreses, tokens: tokens)
                                     dispatchGroup.leave()
                                     dispatchGroup.enter()
                                     guard let newWallet = CoreDataManager.share.fetchChiaWalletPrivateKey().last else { return }
@@ -366,15 +381,19 @@ class VerifyMnemonicViewController: UIViewController {
                                 dispatchGroup.enter()
                                 for wallet in wallets.wallets {
                                     dispatchGroup.enter()
-                                    walletsDict.append(wallet.id)
-                                    names.append(wallet.name)
+                                    name = wallet.name
+                                    id = "\(wallet.id)"
                                     dispatchGroup.leave()
                                     dispatchGroup.enter()
                                     dispatchGroup.leave()
                                     dispatchGroup.enter()
                                     ChivesTestBlockchainManager.share.getWalletBalance(wallet.id) { balance in
-                                        balances.append(balance.wallet_balance.confirmed_wallet_balance)
-                                        print(balances)
+                                        newbalance = "\(balance.wallet_balance.confirmed_wallet_balance)"
+                                        token.insert(name, at: 0)
+                                        token.insert(id, at: 1)
+                                        token.insert(newbalance, at: 2)
+                                        token.insert("show", at: 3)
+                                        tokens.append(token)
                                     }
                                     dispatchGroup.leave()
                                     
@@ -386,7 +405,7 @@ class VerifyMnemonicViewController: UIViewController {
                                     dispatchGroup.leave()
                                     dispatchGroup.enter()
                                     UserDefaultsManager.shared.userDefaults.set("Exist", forKey: UserDefaultsStringKeys.walletExist.rawValue )
-                                    CoreDataManager.share.saveChiaWalletPrivateKey(name: "Chives TestNet", fingerprint: privateKey.private_key.fingerprint, pk: privateKey.private_key.pk, seed: privateKey.private_key.seed, sk: privateKey.private_key.seed, adress: adreses, wallets: walletsDict, balances: balances, names: names, show: show)
+                                    CoreDataManager.share.saveChiaWalletPrivateKey(name: "Chives TestNet", fingerprint: privateKey.private_key.fingerprint, pk: privateKey.private_key.pk, seed: privateKey.private_key.seed, sk: privateKey.private_key.seed, adress: adreses, tokens: tokens)
                                     dispatchGroup.leave()
                                     dispatchGroup.enter()
                                     guard let newWallet = CoreDataManager.share.fetchChiaWalletPrivateKey().last else { return }
@@ -574,17 +593,10 @@ extension VerifyMnemonicViewController: UICollectionViewDelegate, UICollectionVi
         func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
             switch collectionView {
             case self.veryfyCollectionView:
-                if UIDevice.modelName.contains("iPhone 8") || UIDevice.modelName.contains("iPhone 12") || UIDevice.modelName.contains("iPhone 13") {
-                    return CGSize(width: 100, height: 40)
-                } else {
-                    return CGSize(width: 178, height: 50)
-                }
+                return CGSize(width: (collectionView.frame.width / 2) - 15, height: (collectionView.frame.height / 6) - 10)
+                
             case self.selectCollectionView:
-                if UIDevice.modelName.contains("iPhone 8") || UIDevice.modelName.contains("iPhone 12") || UIDevice.modelName.contains("iPhone 13") {
-                    return CGSize(width: 100, height: 40)
-                } else {
-                    return CGSize(width: 178, height: 45)
-                }
+                return CGSize(width: (collectionView.frame.width / 2) - 15, height: (collectionView.frame.height / 3) - 12)
             default:
                 return CGSize(width: 178, height: 50)
             }

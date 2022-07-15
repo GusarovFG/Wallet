@@ -885,14 +885,12 @@ struct TailsList: Codable {
     let name: String
     let code: String
     let hash: String
-    let clvm: String
     let logo_url: String
 
     enum CodingKeys: String, CodingKey {
         case name
         case code
         case hash
-        case clvm
         case logo_url
     }
 }
@@ -920,5 +918,43 @@ struct TailsPricesResult: Codable {
     }
 }
 
+struct CoinsInfo: Codable {
+    let success: Bool
+    let result: CoinsInfoResult
 
+    enum CodingKeys: String, CodingKey {
+        case success
+        case result
+    }
+}
+
+// MARK: - Result
+struct CoinsInfoResult: Codable {
+    let version: String
+    let list: [CoinsInfoResultList]
+
+    enum CodingKeys: String, CodingKey {
+        case version
+        case list
+    }
+}
+
+// MARK: - List
+struct CoinsInfoResultList: Codable {
+    let blockchain_name: String
+    let name: String
+    let code: String
+    let description: String
+    let specification: String
+    let fee_transaction: String
+
+    enum CodingKeys: String, CodingKey {
+        case blockchain_name
+        case name
+        case code
+        case description
+        case specification
+        case fee_transaction
+    }
+}
 

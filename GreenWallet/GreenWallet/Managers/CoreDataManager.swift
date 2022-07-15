@@ -104,7 +104,7 @@ class CoreDataManager {
         return fingerprints[0]
     }
     
-    func saveChiaWalletPrivateKey(name: String, fingerprint: Int, pk: String, seed: String, sk: String, adress: String, wallets: [Int], balances: [Double], names: [String], show: [Bool]) {
+    func saveChiaWalletPrivateKey(name: String, fingerprint: Int, pk: String, seed: String, sk: String, adress: String, tokens: [[String]]) {
         let privateKey = ChiaWalletPrivateKey(context: self.persistentContainer.viewContext)
         
         privateKey.fingerprint = Int64(fingerprint)
@@ -112,11 +112,8 @@ class CoreDataManager {
         privateKey.seed = seed
         privateKey.sk = sk
         privateKey.adres = adress
-        privateKey.wallets = wallets
-        privateKey.balances = balances
         privateKey.name = name
-        privateKey.names = names
-        privateKey.show = show
+        privateKey.token = tokens
         saveContext()
     }
     
@@ -127,7 +124,7 @@ class CoreDataManager {
         return privateKey
     }
     
-    func editChiaWalletPrivateKey(index: Int, name: String, fingerprint: Int, pk: String, seed: String, sk: String, adress: String, wallets: [Int], balances: [Double], names: [String]) {
+    func editChiaWalletPrivateKey(index: Int, name: String, fingerprint: Int, pk: String, seed: String, sk: String, adress: String, tokens: [[String]]) {
         let fetchReqest: NSFetchRequest<ChiaWalletPrivateKey> = ChiaWalletPrivateKey.fetchRequest()
         let privateKey = (try? self.persistentContainer.viewContext.fetch(fetchReqest)) ?? []
         
@@ -136,48 +133,23 @@ class CoreDataManager {
         privateKey[index].seed = seed
         privateKey[index].sk = sk
         privateKey[index].adres = adress
-        privateKey[index].wallets = wallets
-        privateKey[index].balances = balances
         privateKey[index].name = name
-        privateKey[index].names = names
-        
+        privateKey[index].token = tokens
         saveContext()
         
     }
     
     
-    func showCatChiaWalletPrivateKey(index: Int, name: String, show: Bool) {
+    func showCatChiaWalletPrivateKey(index: Int, hash: String, show: String) {
         let fetchReqest: NSFetchRequest<ChiaWalletPrivateKey> = ChiaWalletPrivateKey.fetchRequest()
         let privateKey = (try? self.persistentContainer.viewContext.fetch(fetchReqest)) ?? []
         
         
-        let qwe = "CAT \(name.dropLast(48))..."
-        print(qwe)
-        let indexCat = privateKey[index].names?.firstIndex(of: qwe)
-        print(privateKey[index].show)
-        privateKey[index].show?[indexCat ?? 0] = show
-        print(privateKey[index].show)
+        let name = "CAT \(hash.dropLast(48))..."
+        print(name)
+        let indexCat = privateKey[index].token?.firstIndex(where: {$0.contains(name)})
+        privateKey[index].token?[indexCat ?? 0][3] = show
         
-        saveContext()
-        
-    }
-    
-    func addTokenChiaWalletPrivateKey(index: Int, balance: Double, name: String) {
-        let fetchReqest: NSFetchRequest<ChiaWalletPrivateKey> = ChiaWalletPrivateKey.fetchRequest()
-        let privateKey = (try? self.persistentContainer.viewContext.fetch(fetchReqest)) ?? []
-        
-        privateKey[index].balances?.append(balance)
-        privateKey[index].names?.append(name)
-        saveContext()
-        
-    }
-    
-    func deleteTokenChiaWalletPrivateKey(index: Int, balance: Double, name: String) {
-        let fetchReqest: NSFetchRequest<ChiaWalletPrivateKey> = ChiaWalletPrivateKey.fetchRequest()
-        let privateKey = (try? self.persistentContainer.viewContext.fetch(fetchReqest)) ?? []
-        
-        privateKey[index].balances?.removeAll(where: {$0 == balance})
-        privateKey[index].names?.removeAll(where: {$0 == name})
         saveContext()
         
     }

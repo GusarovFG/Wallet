@@ -317,6 +317,46 @@ class NetworkManager {
         }.resume()
     }
     
+    func getCoinInfo(complition: @escaping (CoinsInfo) -> Void) {
+        guard let url = URL(string: "\(MainURLS.coinsInfo.rawValue)\(CoreDataManager.share.fetchLanguage()[0].languageCode ?? "en")") else { return }
+        
+        let session = URLSession.shared
+        session.dataTask(with: url) { data, response, error in
+            if let response = response {
+                print(response)
+            }
+            
+            guard let data = data else { return }
+            
+            do {
+                
+                let json = try JSONDecoder().decode(CoinsInfo.self, from: data)
+                
+                DispatchQueue.main.async {
+                    complition(json)
+                }
+            } catch let DecodingError.dataCorrupted(context) {
+                print(context)
+            } catch let DecodingError.keyNotFound(key, context) {
+                print("Key '\(key)' not found:", context.debugDescription)
+                print("codingPath:", context.codingPath)
+                DispatchQueue.main.async {
+                    
+                    NotificationCenter.default.post(name: NSNotification.Name("alertErrorGerCodingKeys"), object: nil)
+                }
+            } catch let DecodingError.valueNotFound(value, context) {
+                print("Value '\(value)' not found:", context.debugDescription)
+                print("codingPath:", context.codingPath)
+            } catch let DecodingError.typeMismatch(type, context)  {
+                print("Type '\(type)' mismatch:", context.debugDescription)
+                print("codingPath:", context.codingPath)
+            } catch {
+                print("error: ", error)
+            }
+        }.resume()
+    }
+    
+    
 }
 
 
@@ -334,6 +374,7 @@ enum MainURLS: String {
     case Agreement = "https://greenapp.siterepository.ru/api/v1.0/agreements"
     case tails = "https://greenapp.siterepository.ru/api/v1.0/tails"
     case TailsPrices = "https://greenapp.siterepository.ru/api/v1.0/tails/price"
+    case coinsInfo = "https://greenapp.siterepository.ru/api/v1.0/coins?code="
 }
 
 

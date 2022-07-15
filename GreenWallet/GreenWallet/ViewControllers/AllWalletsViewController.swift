@@ -100,7 +100,7 @@ extension AllWalletsViewController: UITableViewDelegate, UITableViewDataSource {
             if WalletManager.share.favoritesWallets.filter({$0 == wallet}).count == 0 {
                 WalletManager.share.favoritesWallets.append(wallet)
                 self.favoriteLabel.backgroundColor = #colorLiteral(red: 0.2274509804, green: 0.6745098039, blue: 0.3490196078, alpha: 1)
-                self.favoriteLabel.text = LocalizationManager.share.translate?.result.list.my_wallets.my_wallets_label_added
+                self.favoriteLabel.text = "     \(LocalizationManager.share.translate?.result.list.my_wallets.my_wallets_label_added ?? "")"
                 UIView.animate(withDuration: 1, delay: 0) {
                     self.favoriteLabel.alpha = 1
                 }
@@ -114,7 +114,7 @@ extension AllWalletsViewController: UITableViewDelegate, UITableViewDataSource {
                     WalletManager.share.favoritesWallets.removeAll(where: {$0 == wallet})
                     
                     self.favoriteLabel.backgroundColor = #colorLiteral(red: 1, green: 0.2360929251, blue: 0.1714096665, alpha: 1)
-                    self.favoriteLabel.text = LocalizationManager.share.translate?.result.list.my_wallets.my_wallets_label_removed
+                    self.favoriteLabel.text = "     \(LocalizationManager.share.translate?.result.list.my_wallets.my_wallets_label_removed ?? "")"
                     UIView.animate(withDuration: 1, delay: 0) {
                         self.favoriteLabel.alpha = 1
                     }
@@ -156,6 +156,7 @@ extension AllWalletsViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         let myWalletsVC = storyboard?.instantiateViewController(withIdentifier: "MyWalletsViewController") as! MyWalletsViewController
         myWalletsVC.wallets = self.wallets
         myWalletsVC.index = indexPath.row

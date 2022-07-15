@@ -36,7 +36,10 @@ class ChiaBlockchainManager {
  
                     complition(json)
                 } catch let DecodingError.dataCorrupted(context) {
-                    print(context)
+                    DispatchQueue.main.async {
+                        
+                        NotificationCenter.default.post(name: NSNotification.Name("alertErrorGerCodingKeys"), object: nil)
+                    }
                 } catch let DecodingError.keyNotFound(key, context) {
                     print("Key '\(key)' not found:", context.debugDescription)
                     print("codingPath:", context.codingPath)
@@ -47,9 +50,17 @@ class ChiaBlockchainManager {
                 } catch let DecodingError.valueNotFound(value, context) {
                     print("Value '\(value)' not found:", context.debugDescription)
                     print("codingPath:", context.codingPath)
+                    DispatchQueue.main.async {
+                        
+                        NotificationCenter.default.post(name: NSNotification.Name("alertErrorGerCodingKeys"), object: nil)
+                    }
                 } catch let DecodingError.typeMismatch(type, context)  {
                     print("Type '\(type)' mismatch:", context.debugDescription)
                     print("codingPath:", context.codingPath)
+                    DispatchQueue.main.async {
+                        
+                        NotificationCenter.default.post(name: NSNotification.Name("alertErrorGerCodingKeys"), object: nil)
+                    }
                 } catch {
                     print("error: ", error)
                 }
@@ -77,6 +88,10 @@ class ChiaBlockchainManager {
                     print(json)
                 } catch let DecodingError.dataCorrupted(context) {
                     print(context)
+                    DispatchQueue.main.async {
+                        
+                        NotificationCenter.default.post(name: NSNotification.Name("alertErrorGerCodingKeys"), object: nil)
+                    }
                 } catch let DecodingError.keyNotFound(key, context) {
                     print("Key '\(key)' not found:", context.debugDescription)
                     print("codingPath:", context.codingPath)
@@ -87,11 +102,23 @@ class ChiaBlockchainManager {
                 } catch let DecodingError.valueNotFound(value, context) {
                     print("Value '\(value)' not found:", context.debugDescription)
                     print("codingPath:", context.codingPath)
+                    DispatchQueue.main.async {
+                        
+                        NotificationCenter.default.post(name: NSNotification.Name("alertErrorGerCodingKeys"), object: nil)
+                    }
                 } catch let DecodingError.typeMismatch(type, context)  {
                     print("Type '\(type)' mismatch:", context.debugDescription)
                     print("codingPath:", context.codingPath)
+                    DispatchQueue.main.async {
+                        
+                        NotificationCenter.default.post(name: NSNotification.Name("alertErrorGerCodingKeys"), object: nil)
+                    }
                 } catch {
                     print("error: ", error)
+                    DispatchQueue.main.async {
+                        
+                        NotificationCenter.default.post(name: NSNotification.Name("alertErrorGerCodingKeys"), object: nil)
+                    }
                 }
             }
         }.resume()
@@ -119,6 +146,10 @@ class ChiaBlockchainManager {
                     }
                 } catch let DecodingError.dataCorrupted(context) {
                     print(context)
+                    DispatchQueue.main.async {
+                        
+                        NotificationCenter.default.post(name: NSNotification.Name("alertErrorGerCodingKeys"), object: nil)
+                    }
                 } catch let DecodingError.keyNotFound(key, context) {
                     print("Key '\(key)' not found:", context.debugDescription)
                     print("codingPath:", context.codingPath)
@@ -127,14 +158,25 @@ class ChiaBlockchainManager {
                         NotificationCenter.default.post(name: NSNotification.Name("alertErrorGerCodingKeys"), object: nil)
                     }
                 } catch let DecodingError.valueNotFound(value, context) {
-                    
+                    DispatchQueue.main.async {
+                        
+                        NotificationCenter.default.post(name: NSNotification.Name("alertErrorGerCodingKeys"), object: nil)
+                    }
                     print("Value '\(value)' not found:", context.debugDescription)
                     print("codingPath:", context.codingPath)
                 } catch let DecodingError.typeMismatch(type, context)  {
                     print("Type '\(type)' mismatch:", context.debugDescription)
                     print("codingPath:", context.codingPath)
+                    DispatchQueue.main.async {
+                        
+                        NotificationCenter.default.post(name: NSNotification.Name("alertErrorGerCodingKeys"), object: nil)
+                    }
                 } catch {
                     print("error: ", error)
+                    DispatchQueue.main.async {
+                        
+                        NotificationCenter.default.post(name: NSNotification.Name("alertErrorGerCodingKeys"), object: nil)
+                    }
                 }
             }
         }.resume()
@@ -164,6 +206,10 @@ class ChiaBlockchainManager {
                     }
                 } catch let DecodingError.dataCorrupted(context) {
                     print(context)
+                    DispatchQueue.main.async {
+                        
+                        NotificationCenter.default.post(name: NSNotification.Name("alertErrorGerCodingKeys"), object: nil)
+                    }
                 } catch let DecodingError.keyNotFound(key, context) {
                     print("Key '\(key)' not found:", context.debugDescription)
                     print("codingPath:", context.codingPath)
@@ -174,11 +220,23 @@ class ChiaBlockchainManager {
                 } catch let DecodingError.valueNotFound(value, context) {
                     print("Value '\(value)' not found:", context.debugDescription)
                     print("codingPath:", context.codingPath)
+                    DispatchQueue.main.async {
+                        
+                        NotificationCenter.default.post(name: NSNotification.Name("alertErrorGerCodingKeys"), object: nil)
+                    }
                 } catch let DecodingError.typeMismatch(type, context)  {
                     print("Type '\(type)' mismatch:", context.debugDescription)
                     print("codingPath:", context.codingPath)
+                    DispatchQueue.main.async {
+                        
+                        NotificationCenter.default.post(name: NSNotification.Name("alertErrorGerCodingKeys"), object: nil)
+                    }
                 } catch {
                     print("error: ", error)
+                    DispatchQueue.main.async {
+                        
+                        NotificationCenter.default.post(name: NSNotification.Name("alertErrorGerCodingKeys"), object: nil)
+                    }
                 }
             }
         }.resume()
@@ -205,6 +263,10 @@ class ChiaBlockchainManager {
                     print(json.success)
                 } catch let DecodingError.dataCorrupted(context) {
                     print(context)
+                    DispatchQueue.main.async {
+                        
+                        NotificationCenter.default.post(name: NSNotification.Name("alertErrorGerCodingKeys"), object: nil)
+                    }
                 } catch let DecodingError.keyNotFound(key, context) {
                     print("Key '\(key)' not found:", context.debugDescription)
                     print("codingPath:", context.codingPath)
@@ -215,11 +277,23 @@ class ChiaBlockchainManager {
                 } catch let DecodingError.valueNotFound(value, context) {
                     print("Value '\(value)' not found:", context.debugDescription)
                     print("codingPath:", context.codingPath)
+                    DispatchQueue.main.async {
+                        
+                        NotificationCenter.default.post(name: NSNotification.Name("alertErrorGerCodingKeys"), object: nil)
+                    }
                 } catch let DecodingError.typeMismatch(type, context)  {
                     print("Type '\(type)' mismatch:", context.debugDescription)
                     print("codingPath:", context.codingPath)
+                    DispatchQueue.main.async {
+                        
+                        NotificationCenter.default.post(name: NSNotification.Name("alertErrorGerCodingKeys"), object: nil)
+                    }
                 } catch {
                     print("error: ", error)
+                    DispatchQueue.main.async {
+                        
+                        NotificationCenter.default.post(name: NSNotification.Name("alertErrorGerCodingKeys"), object: nil)
+                    }
                 }
             }
         }.resume()
@@ -248,6 +322,10 @@ class ChiaBlockchainManager {
                     }
                 } catch let DecodingError.dataCorrupted(context) {
                     print(context)
+                    DispatchQueue.main.async {
+                        
+                        NotificationCenter.default.post(name: NSNotification.Name("alertErrorGerCodingKeys"), object: nil)
+                    }
                 } catch let DecodingError.keyNotFound(key, context) {
                     print("Key '\(key)' not found:", context.debugDescription)
                     print("codingPath:", context.codingPath)
@@ -255,12 +333,24 @@ class ChiaBlockchainManager {
                         
                         NotificationCenter.default.post(name: NSNotification.Name("alertErrorGerCodingKeys"), object: nil)
                     }
+                    DispatchQueue.main.async {
+                        
+                        NotificationCenter.default.post(name: NSNotification.Name("alertErrorGerCodingKeys"), object: nil)
+                    }
                 } catch let DecodingError.valueNotFound(value, context) {
                     print("Value '\(value)' not found:", context.debugDescription)
                     print("codingPath:", context.codingPath)
+                    DispatchQueue.main.async {
+                        
+                        NotificationCenter.default.post(name: NSNotification.Name("alertErrorGerCodingKeys"), object: nil)
+                    }
                 } catch let DecodingError.typeMismatch(type, context)  {
                     print("Type '\(type)' mismatch:", context.debugDescription)
                     print("codingPath:", context.codingPath)
+                    DispatchQueue.main.async {
+                        
+                        NotificationCenter.default.post(name: NSNotification.Name("alertErrorGerCodingKeys"), object: nil)
+                    }
                 } catch {
                     print("error: ", error)
                 }
@@ -290,6 +380,10 @@ class ChiaBlockchainManager {
                     }
                 } catch let DecodingError.dataCorrupted(context) {
                     print(context)
+                    DispatchQueue.main.async {
+                        
+                        NotificationCenter.default.post(name: NSNotification.Name("alertErrorGerCodingKeys"), object: nil)
+                    }
                 } catch let DecodingError.keyNotFound(key, context) {
                     print("Key '\(key)' not found:", context.debugDescription)
                     print("codingPath:", context.codingPath)
@@ -300,11 +394,23 @@ class ChiaBlockchainManager {
                 } catch let DecodingError.valueNotFound(value, context) {
                     print("Value '\(value)' not found:", context.debugDescription)
                     print("codingPath:", context.codingPath)
+                    DispatchQueue.main.async {
+                        
+                        NotificationCenter.default.post(name: NSNotification.Name("alertErrorGerCodingKeys"), object: nil)
+                    }
                 } catch let DecodingError.typeMismatch(type, context)  {
                     print("Type '\(type)' mismatch:", context.debugDescription)
                     print("codingPath:", context.codingPath)
+                    DispatchQueue.main.async {
+                        
+                        NotificationCenter.default.post(name: NSNotification.Name("alertErrorGerCodingKeys"), object: nil)
+                    }
                 } catch {
                     print("error: ", error)
+                    DispatchQueue.main.async {
+                        
+                        NotificationCenter.default.post(name: NSNotification.Name("alertErrorGerCodingKeys"), object: nil)
+                    }
                 }
             }
         }.resume()
@@ -327,13 +433,17 @@ class ChiaBlockchainManager {
             if let data = data {
                 do {
                     let json = try JSONDecoder().decode(ChiaWallets.self, from: data)
-                    DispatchQueue.main.async {
+               
                         print(json.success)
                         print(json.wallets)
                         complition(json)
-                    }
+                    
                 } catch let DecodingError.dataCorrupted(context) {
                     print(context)
+                    DispatchQueue.main.async {
+                        
+                        NotificationCenter.default.post(name: NSNotification.Name("alertErrorGerCodingKeys"), object: nil)
+                    }
                 } catch let DecodingError.keyNotFound(key, context) {
                     print("Key '\(key)' not found:", context.debugDescription)
                     print("codingPath:", context.codingPath)
@@ -344,11 +454,23 @@ class ChiaBlockchainManager {
                 } catch let DecodingError.valueNotFound(value, context) {
                     print("Value '\(value)' not found:", context.debugDescription)
                     print("codingPath:", context.codingPath)
+                    DispatchQueue.main.async {
+                        
+                        NotificationCenter.default.post(name: NSNotification.Name("alertErrorGerCodingKeys"), object: nil)
+                    }
                 } catch let DecodingError.typeMismatch(type, context)  {
                     print("Type '\(type)' mismatch:", context.debugDescription)
                     print("codingPath:", context.codingPath)
+                    DispatchQueue.main.async {
+                        
+                        NotificationCenter.default.post(name: NSNotification.Name("alertErrorGerCodingKeys"), object: nil)
+                    }
                 } catch {
                     print("error: ", error)
+                    DispatchQueue.main.async {
+                        
+                        NotificationCenter.default.post(name: NSNotification.Name("alertErrorGerCodingKeys"), object: nil)
+                    }
                 }
             }
         }.resume()
@@ -375,6 +497,10 @@ class ChiaBlockchainManager {
                     
                 } catch let DecodingError.dataCorrupted(context) {
                     print(context)
+                    DispatchQueue.main.async {
+                        
+                        NotificationCenter.default.post(name: NSNotification.Name("alertErrorGerCodingKeys"), object: nil)
+                    }
                 } catch let DecodingError.keyNotFound(key, context) {
                     print("Key '\(key)' not found:", context.debugDescription)
                     print("codingPath:", context.codingPath)
@@ -385,11 +511,23 @@ class ChiaBlockchainManager {
                 } catch let DecodingError.valueNotFound(value, context) {
                     print("Value '\(value)' not found:", context.debugDescription)
                     print("codingPath:", context.codingPath)
+                    DispatchQueue.main.async {
+                        
+                        NotificationCenter.default.post(name: NSNotification.Name("alertErrorGerCodingKeys"), object: nil)
+                    }
                 } catch let DecodingError.typeMismatch(type, context)  {
                     print("Type '\(type)' mismatch:", context.debugDescription)
                     print("codingPath:", context.codingPath)
+                    DispatchQueue.main.async {
+                        
+                        NotificationCenter.default.post(name: NSNotification.Name("alertErrorGerCodingKeys"), object: nil)
+                    }
                 } catch {
                     print("error: ", error)
+                    DispatchQueue.main.async {
+                        
+                        NotificationCenter.default.post(name: NSNotification.Name("alertErrorGerCodingKeys"), object: nil)
+                    }
                 }
             }
         }.resume()
@@ -414,11 +552,15 @@ class ChiaBlockchainManager {
             if let data = data {
                 do {
                     let json = try JSONDecoder().decode(ChiaWalletBalance.self, from: data)
-                    DispatchQueue.global().async {
+           
                         complition(json)
-                    }
+                    
                 } catch let DecodingError.dataCorrupted(context) {
                     print(context)
+                    DispatchQueue.main.async {
+                        
+                        NotificationCenter.default.post(name: NSNotification.Name("alertErrorGerCodingKeys"), object: nil)
+                    }
                 } catch let DecodingError.keyNotFound(key, context) {
                     print("Key '\(key)' not found:", context.debugDescription)
                     print("codingPath:", context.codingPath)
@@ -429,11 +571,23 @@ class ChiaBlockchainManager {
                 } catch let DecodingError.valueNotFound(value, context) {
                     print("Value '\(value)' not found:", context.debugDescription)
                     print("codingPath:", context.codingPath)
+                    DispatchQueue.main.async {
+                        
+                        NotificationCenter.default.post(name: NSNotification.Name("alertErrorGerCodingKeys"), object: nil)
+                    }
                 } catch let DecodingError.typeMismatch(type, context)  {
                     print("Type '\(type)' mismatch:", context.debugDescription)
                     print("codingPath:", context.codingPath)
+                    DispatchQueue.main.async {
+                        
+                        NotificationCenter.default.post(name: NSNotification.Name("alertErrorGerCodingKeys"), object: nil)
+                    }
                 } catch {
                     print("error: ", error)
+                    DispatchQueue.main.async {
+                        
+                        NotificationCenter.default.post(name: NSNotification.Name("alertErrorGerCodingKeys"), object: nil)
+                    }
                 }
             }
         }.resume()
@@ -461,6 +615,10 @@ class ChiaBlockchainManager {
                     complition(json)
                 } catch let DecodingError.dataCorrupted(context) {
                     print(context)
+                    DispatchQueue.main.async {
+                        
+                        NotificationCenter.default.post(name: NSNotification.Name("alertErrorGerCodingKeys"), object: nil)
+                    }
                 } catch let DecodingError.keyNotFound(key, context) {
                     print("Key '\(key)' not found:", context.debugDescription)
                     print("codingPath:", context.codingPath)
@@ -468,15 +626,26 @@ class ChiaBlockchainManager {
                         
                         NotificationCenter.default.post(name: NSNotification.Name("alertErrorGerCodingKeys"), object: nil)
                     }
-
                 } catch let DecodingError.valueNotFound(value, context) {
                     print("Value '\(value)' not found:", context.debugDescription)
                     print("codingPath:", context.codingPath)
+                    DispatchQueue.main.async {
+                        
+                        NotificationCenter.default.post(name: NSNotification.Name("alertErrorGerCodingKeys"), object: nil)
+                    }
                 } catch let DecodingError.typeMismatch(type, context)  {
                     print("Type '\(type)' mismatch:", context.debugDescription)
                     print("codingPath:", context.codingPath)
+                    DispatchQueue.main.async {
+                        
+                        NotificationCenter.default.post(name: NSNotification.Name("alertErrorGerCodingKeys"), object: nil)
+                    }
                 } catch {
                     print("error: ", error)
+                    DispatchQueue.main.async {
+                        
+                        NotificationCenter.default.post(name: NSNotification.Name("alertErrorGerCodingKeys"), object: nil)
+                    }
                 }
             }
         }.resume()
@@ -546,22 +715,37 @@ class ChiaBlockchainManager {
                     complition(json)
                 } catch let DecodingError.dataCorrupted(context) {
                     print(context)
+                    DispatchQueue.main.async {
+                        
+                        NotificationCenter.default.post(name: NSNotification.Name("alertErrorGerCodingKeys"), object: nil)
+                    }
                 } catch let DecodingError.keyNotFound(key, context) {
                     print("Key '\(key)' not found:", context.debugDescription)
                     print("codingPath:", context.codingPath)
-//                    DispatchQueue.main.async {
-//
-//                        NotificationCenter.default.post(name: NSNotification.Name("alertErrorGerCodingKeys"), object: nil)
-//                    }
-
+                    DispatchQueue.main.async {
+                        
+                        NotificationCenter.default.post(name: NSNotification.Name("alertErrorGerCodingKeys"), object: nil)
+                    }
                 } catch let DecodingError.valueNotFound(value, context) {
                     print("Value '\(value)' not found:", context.debugDescription)
                     print("codingPath:", context.codingPath)
+                    DispatchQueue.main.async {
+                        
+                        NotificationCenter.default.post(name: NSNotification.Name("alertErrorGerCodingKeys"), object: nil)
+                    }
                 } catch let DecodingError.typeMismatch(type, context)  {
                     print("Type '\(type)' mismatch:", context.debugDescription)
                     print("codingPath:", context.codingPath)
+                    DispatchQueue.main.async {
+                        
+                        NotificationCenter.default.post(name: NSNotification.Name("alertErrorGerCodingKeys"), object: nil)
+                    }
                 } catch {
                     print("error: ", error)
+                    DispatchQueue.main.async {
+                        
+                        NotificationCenter.default.post(name: NSNotification.Name("alertErrorGerCodingKeys"), object: nil)
+                    }
                 }
             }
         }.resume()
@@ -589,6 +773,10 @@ class ChiaBlockchainManager {
                     complition(json)
                 } catch let DecodingError.dataCorrupted(context) {
                     print(context)
+                    DispatchQueue.main.async {
+                        
+                        NotificationCenter.default.post(name: NSNotification.Name("alertErrorGerCodingKeys"), object: nil)
+                    }
                 } catch let DecodingError.keyNotFound(key, context) {
                     print("Key '\(key)' not found:", context.debugDescription)
                     print("codingPath:", context.codingPath)
@@ -596,15 +784,26 @@ class ChiaBlockchainManager {
                         
                         NotificationCenter.default.post(name: NSNotification.Name("alertErrorGerCodingKeys"), object: nil)
                     }
-
                 } catch let DecodingError.valueNotFound(value, context) {
                     print("Value '\(value)' not found:", context.debugDescription)
                     print("codingPath:", context.codingPath)
+                    DispatchQueue.main.async {
+                        
+                        NotificationCenter.default.post(name: NSNotification.Name("alertErrorGerCodingKeys"), object: nil)
+                    }
                 } catch let DecodingError.typeMismatch(type, context)  {
                     print("Type '\(type)' mismatch:", context.debugDescription)
                     print("codingPath:", context.codingPath)
+                    DispatchQueue.main.async {
+                        
+                        NotificationCenter.default.post(name: NSNotification.Name("alertErrorGerCodingKeys"), object: nil)
+                    }
                 } catch {
                     print("error: ", error)
+                    DispatchQueue.main.async {
+                        
+                        NotificationCenter.default.post(name: NSNotification.Name("alertErrorGerCodingKeys"), object: nil)
+                    }
                 }
             }
         }.resume()
@@ -634,6 +833,10 @@ class ChiaBlockchainManager {
                     }
                 } catch let DecodingError.dataCorrupted(context) {
                     print(context)
+                    DispatchQueue.main.async {
+                        
+                        NotificationCenter.default.post(name: NSNotification.Name("alertErrorGerCodingKeys"), object: nil)
+                    }
                 } catch let DecodingError.keyNotFound(key, context) {
                     print("Key '\(key)' not found:", context.debugDescription)
                     print("codingPath:", context.codingPath)
@@ -644,11 +847,23 @@ class ChiaBlockchainManager {
                 } catch let DecodingError.valueNotFound(value, context) {
                     print("Value '\(value)' not found:", context.debugDescription)
                     print("codingPath:", context.codingPath)
+                    DispatchQueue.main.async {
+                        
+                        NotificationCenter.default.post(name: NSNotification.Name("alertErrorGerCodingKeys"), object: nil)
+                    }
                 } catch let DecodingError.typeMismatch(type, context)  {
                     print("Type '\(type)' mismatch:", context.debugDescription)
                     print("codingPath:", context.codingPath)
+                    DispatchQueue.main.async {
+                        
+                        NotificationCenter.default.post(name: NSNotification.Name("alertErrorGerCodingKeys"), object: nil)
+                    }
                 } catch {
-                    NotificationCenter.default.post(name: NSNotification.Name("alertErrorGerCodingKeys"), object: nil)
+                    print("error: ", error)
+                    DispatchQueue.main.async {
+                        
+                        NotificationCenter.default.post(name: NSNotification.Name("alertErrorGerCodingKeys"), object: nil)
+                    }
                 }
             }
         }.resume()
