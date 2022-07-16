@@ -20,6 +20,7 @@ class GreatingViewController: UIViewController {
         print(CoreDataManager.share.fetchChiaWalletPrivateKey())
         NetworkManager.share.getTails { tails in
             TailsManager.share.tails = tails
+            print("-------------------   ---\(tails)")
         }
         
         NetworkManager.share.getTailsPrices { prices in
@@ -53,11 +54,7 @@ class GreatingViewController: UIViewController {
                 
 
             }
-            
-            
-            
-            if !CoreDataManager.share.fetchChiaWalletPrivateKey().isEmpty {
-            }
+
         }
         
         

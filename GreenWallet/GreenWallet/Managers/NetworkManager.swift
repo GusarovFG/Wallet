@@ -283,6 +283,7 @@ class NetworkManager {
                 let json = try JSONDecoder().decode(Tails.self, from: data)
                 
                 DispatchQueue.main.async {
+                    print("хвосты")
                     complition(json)
                 }
             } catch {
@@ -372,7 +373,7 @@ enum MainURLS: String {
     case faq = "https://greenapp.siterepository.ru/api/v1.0/faq"
     case PushNotifications = "https://greenapp.siterepository.ru/api/v1.0/notifications"
     case Agreement = "https://greenapp.siterepository.ru/api/v1.0/agreements"
-    case tails = "https://greenapp.siterepository.ru/api/v1.0/tails"
+    case tails = "https://greenapp.siterepository.ru/api/v1.0/tails?blockchain=Chia Network"
     case TailsPrices = "https://greenapp.siterepository.ru/api/v1.0/tails/price"
     case coinsInfo = "https://greenapp.siterepository.ru/api/v1.0/coins?code="
 }

@@ -44,6 +44,7 @@ class ImportTokensViewController: UIViewController {
                 print(log.success)
             }
         }
+        print(TailsManager.share.tails?.result.list)
     }
     
     @objc private func alertErrorGerCodingKeysPresent() {

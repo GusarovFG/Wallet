@@ -886,12 +886,14 @@ struct TailsList: Codable {
     let code: String
     let hash: String
     let logo_url: String
+    let default_tail: Int
 
     enum CodingKeys: String, CodingKey {
         case name
         case code
         case hash
         case logo_url
+        case default_tail
     }
 }
 
