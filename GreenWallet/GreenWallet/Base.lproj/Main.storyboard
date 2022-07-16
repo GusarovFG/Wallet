@@ -1320,7 +1320,7 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                                                 <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                                                 <connections>
                                                     <action selector="transferSuccsessCheck:" destination="cnF-1c-1r2" eventType="editingChanged" id="mTr-Zr-9pD"/>
-                                                    <action selector="transferSummCheck:" destination="cnF-1c-1r2" eventType="editingDidEnd" id="ZuI-uJ-VUG"/>
+                                                    <action selector="transferSummCheck:" destination="cnF-1c-1r2" eventType="editingChanged" id="Ee9-T1-Hqb"/>
                                                 </connections>
                                             </textField>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yFO-aj-gME">
@@ -1749,6 +1749,12 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                             <constraint firstItem="bmv-RL-rBj" firstAttribute="trailing" secondItem="n7w-Dy-b0g" secondAttribute="trailing" id="wpW-du-iwA"/>
                             <constraint firstItem="7AU-7a-QaI" firstAttribute="top" secondItem="r99-q5-ntG" secondAttribute="top" id="zA4-mQ-ST6"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="7AU-7a-QaI"/>
+                                <exclude reference="bmv-RL-rBj"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
                         <outlet property="addContactLabel" destination="hVU-57-gCy" id="C5r-RW-SbD"/>
@@ -2102,12 +2108,14 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="55V-h2-7G0">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="55V-h2-7G0">
                                 <rect key="frame" x="0.0" y="707" width="414" height="189"/>
                                 <color key="backgroundColor" name="ViewColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="189" id="gmA-ka-S5s"/>
                                 </constraints>
+                                <color key="separatorColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="systemCell" id="ute-45-KQo" customClass="SelectSystemTableViewCell" customModule="GreenWallet" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="44.5" width="414" height="43.5"/>

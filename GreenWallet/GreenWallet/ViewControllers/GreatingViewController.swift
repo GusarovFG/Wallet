@@ -24,7 +24,11 @@ class GreatingViewController: UIViewController {
         }
         
         NetworkManager.share.getTailsPrices { prices in
-            TailsManager.share.prices = prices.result
+            TailsManager.share.prices = prices.result ?? []
+        }
+        
+        NetworkManager.share.getCoinInfo { info in
+            AgreesManager.share.agrees = info.result.list
         }
         
         if UserDefaultsManager.shared.userDefaults.string(forKey: UserDefaultsStringKeys.firstSession.rawValue) != "First" {

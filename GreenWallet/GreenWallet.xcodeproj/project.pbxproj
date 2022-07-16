@@ -103,6 +103,7 @@
 		FBD1CCAA283B90570081AF3E /* KeyChainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD1CCA9283B90570081AF3E /* KeyChainManager.swift */; };
 		FBD63A44283B7460006CE0A8 /* PasswordStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FBD63A43283B745F006CE0A8 /* PasswordStoryboard.storyboard */; };
 		FBD72B742850782900987484 /* ChiaBlockchainConnectingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD72B732850782900987484 /* ChiaBlockchainConnectingManager.swift */; };
+		FBE022652882E65A00FC36F7 /* AgreesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE022642882E65A00FC36F7 /* AgreesManager.swift */; };
 		FBEA97BD2850CF1F00D2F720 /* AskAQuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBEA97BC2850CF1F00D2F720 /* AskAQuestionViewController.swift */; };
 		FBFE5773281AAB040016E74A /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBFE5772281AAB040016E74A /* SettingsViewController.swift */; };
 		FBFE577B281AB9250016E74A /* ThemesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBFE5779281AB9250016E74A /* ThemesTableViewCell.swift */; };
@@ -222,6 +223,7 @@
 		FBD1CCA9283B90570081AF3E /* KeyChainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainManager.swift; sourceTree = "<group>"; };
 		FBD63A43283B745F006CE0A8 /* PasswordStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PasswordStoryboard.storyboard; sourceTree = "<group>"; };
 		FBD72B732850782900987484 /* ChiaBlockchainConnectingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChiaBlockchainConnectingManager.swift; sourceTree = "<group>"; };
+		FBE022642882E65A00FC36F7 /* AgreesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgreesManager.swift; sourceTree = "<group>"; };
 		FBEA97BC2850CF1F00D2F720 /* AskAQuestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AskAQuestionViewController.swift; sourceTree = "<group>"; };
 		FBFE5772281AAB040016E74A /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		FBFE5779281AB9250016E74A /* ThemesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemesTableViewCell.swift; sourceTree = "<group>"; };
@@ -553,6 +555,7 @@
 				FBD72B732850782900987484 /* ChiaBlockchainConnectingManager.swift */,
 				FB58F56B28521486006235BD /* ChiaWalletsManager.swift */,
 				FBABB6DD287318B00075E16A /* SystemsManager.swift */,
+				FBE022642882E65A00FC36F7 /* AgreesManager.swift */,
 				FBFEB3F3287C8A1500EA391D /* TailsManager.swift */,
 				FB2B82362860999C005AF534 /* ExchangeRatesManager.swift */,
 				FB6C8BF9287B7FA700A2B5FA /* LocalNotificationsManager.swift */,
@@ -769,6 +772,7 @@
 				FBFEB3F4287C8A1500EA391D /* TailsManager.swift in Sources */,
 				FBD72B742850782900987484 /* ChiaBlockchainConnectingManager.swift in Sources */,
 				FB2F369028206ACB007576FE /* NewWalletViewController.swift in Sources */,
+				FBE022652882E65A00FC36F7 /* AgreesManager.swift in Sources */,
 				FB5947492823D8DD00C74E73 /* ImportMnemonicViewController.swift in Sources */,
 				FB0883DC281BE21F001D4317 /* CustomThumbView.swift in Sources */,
 				FBBB3DD5284CD75F00349EF0 /* ExpandableHeaderView.swift in Sources */,

@@ -666,9 +666,10 @@ class PushTokensViewController: UIViewController {
     
     @IBAction func transferSummCheck(_ sender: UITextField) {
         if self.wallet?.name == "Chia Wallet" || self.wallet?.name == "Chia TestNet" {
+            self.comissionTextField.text = AgreesManager.share.agrees.filter({$0.blockchain_name == "Chia Network"}).first?.fee_transaction ?? ""
             
         } else if self.wallet?.name == "Chives Wallet" || self.wallet?.name == "Chives TestNet" {
-            
+            self.comissionTextField.text = AgreesManager.share.agrees.filter({$0.blockchain_name == "Chives Network"}).first?.fee_transaction ?? ""
         }
         
         self.transferTokenLabel.text = self.balanceButton.currentTitle?.filter{!$0.isNumber && !$0.isPunctuation}
@@ -789,7 +790,7 @@ class PushTokensViewController: UIViewController {
 //            let storyoard = UIStoryboard(name: "spinner", bundle: .main)
 //            let spinnerVC = storyoard.instantiateViewController(withIdentifier: "spinner") as! SprinnerViewController'
             self.transitionTokenLabel.text = self.transferTokenLabel.text
-            self.transitionBlockchainLabel.text = self.systemButton.currentTitle
+            self.transitionBlockchainLabel.text = self.systemButton.titleLabel?.text?.filter({$0 != "•"})
             self.transitinSumLabel.text = self.transferTextField.text
             self.transitionLinkLabel.text = self.adressTextField.text
             self.transitionView.isHidden = false

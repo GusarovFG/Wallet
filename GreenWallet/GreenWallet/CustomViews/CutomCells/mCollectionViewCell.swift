@@ -17,6 +17,9 @@ class mCollectionViewCell: UICollectionViewCell {
     var index = 0
     var token: [[String]] = []
     
+    private var balance = ""
+    private var hideBalance = false
+    
     @IBOutlet weak var walletTitle: UILabel!
     @IBOutlet weak var footerButton: UIButton!
     @IBOutlet weak var footerView: UIView!
@@ -49,7 +52,8 @@ class mCollectionViewCell: UICollectionViewCell {
         NotificationCenter.default.addObserver(self, selector: #selector(reloadTableView), name: NSNotification.Name("reload"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(updateBalances), name: NSNotification.Name("updateBalances"), object: nil)
         
-        
+        NotificationCenter.default.addObserver(self, selector: #selector(hideWallet), name: NSNotification.Name(rawValue: "hideWallet"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(showWallet), name: NSNotification.Name(rawValue: "showWallet"), object: nil)
     }
     
     
@@ -88,6 +92,19 @@ class mCollectionViewCell: UICollectionViewCell {
         super.layoutIfNeeded()
         self.tableView.reloadData()
         self.token = self.wallet?.token?.filter({$0.filter({$0.contains("show")}).count == 1}) ?? []
+    }
+    
+    @objc private func hideWallet(notification: Notification) {
+        guard let userInfo = notification.userInfo else { return }
+        guard let text = userInfo[""] as? String else { return }
+        self.balance = text
+        self.hideBalance = true
+        self.tableView.reloadData()
+    }
+    
+    @objc private func showWallet(notification: Notification) {
+        self.hideBalance = false
+        self.tableView.reloadData()
     }
     
     @objc func updateBalances() {
@@ -154,6 +171,11 @@ extension mCollectionViewCell: UITableViewDelegate, UITableViewDataSource {
         switch indexPath {
         case [0,self.token.count ]:
             self.height += importCell.frame.height
+            if self.wallet?.name == "Chia Wallet" || self.wallet?.name == "Chia TestNet" {
+                importCell.titleLabel.text = "+ \(LocalizationManager.share.translate?.result.list.main_screen.main_screen_purse_import ?? "")"
+            } else {
+                importCell.titleLabel.text = "+ \(LocalizationManager.share.translate?.result.list.main_screen.main_screen_purse_import ?? "") (скоро)"
+            }
             
             print(token.count)
             return importCell
@@ -175,26 +197,52 @@ extension mCollectionViewCell: UITableViewDelegate, UITableViewDataSource {
                     if self.token[indexPath.row][0] == "Chia Wallet" || self.token[indexPath.row][0] == "Chia TestNet"  {
                         walletCell.cellImage.image = UIImage(named: "LogoChia")!
                         let summ: Double = ((Double(self.token[indexPath.row][2]) ?? 0) / 1000000000000) * ExchangeRatesManager.share.newRatePerDollar
-                        walletCell.convertLabel.text = "⁓ \(NSString(format:"%.2f", summ)) USD"
-                        walletCell.balanceLabel.text = "\((Double(self.token[indexPath.row][2]) ?? 0) / 1000000000000.0 ) XCH"
                         walletCell.tokenLabel.text = self.token[indexPath.row][0]
+                        
+                        if !self.hideBalance {
+                            walletCell.convertLabel.text = "⁓ \(NSString(format:"%.2f", summ)) USD"
+                            walletCell.balanceLabel.text = "\((Double(self.token[indexPath.row][2]) ?? 0) / 1000000000000.0 ) XCH"
+                           
+                        } else {
+                            walletCell.convertLabel.text = "***** UDS"
+                            walletCell.balanceLabel.text = "*****"
+                        }
+                        
                     } else if self.token[indexPath.row][0] == "Chives Wallet" || self.token[indexPath.row][0] == "Chives TestNet"  {
+                        
                         walletCell.cellImage.image = UIImage(named: "ChivesLogo")!
+                        
                         let summ: Double = ((Double(self.token[indexPath.row][2]) ?? 0) / 1000000000000) * ExchangeRatesManager.share.newChivesRatePerDollar
                         if ExchangeRatesManager.share.newChivesRatePerDollar == 0 {
                             walletCell.convertLabel.text = "⁓ USD"
                         } else {
-                            
-                            walletCell.convertLabel.text = "⁓ \(NSString(format:"%.2f", summ)) USD"
+                            if !self.hideBalance {
+                                walletCell.convertLabel.text = "⁓ \(NSString(format:"%.2f", summ)) USD"
+                                walletCell.balanceLabel.text = "\(((Double(self.token[indexPath.row][2]) ?? 0) / 1000000000000)) XCC"
+                               
+                            } else {
+                                walletCell.convertLabel.text = "***** UDS"
+                                walletCell.balanceLabel.text = "*****"
+                            }
                         }
-                        walletCell.balanceLabel.text = "\(((Double(self.token[indexPath.row][2]) ?? 0) / 1000000000000)) XCC"
+                        
                         walletCell.tokenLabel.text = self.token[indexPath.row][0]
+                        
                     } else {
                         let summ: Double = ((Double(self.token[indexPath.row][2]) ?? 0) / 1000000000000) * ExchangeRatesManager.share.newRatePerDollar
-                        walletCell.convertLabel.text = "⁓ \(NSString(format:"%.2f", summ)) USD"
-                        walletCell.balanceLabel.text = "\((Double(self.token[indexPath.row][2]) ?? 0) / 1000000000000.0 * ExchangeRatesManager.share.newRatePerDollar ) \(TailsManager.share.tails?.result.list.filter({$0.hash.contains(self.token[indexPath.row][0].split(separator: " ").last?.prefix(15) ?? "") || $0.name.contains(self.token[indexPath.row][0])}).first?.code ?? "")"
+                            
+                        if !self.hideBalance {
+                            walletCell.convertLabel.text = "⁓ \(NSString(format:"%.2f", summ)) USD"
+                            walletCell.balanceLabel.text = "\((Double(self.token[indexPath.row][2]) ?? 0) / 1000000000000.0 * ExchangeRatesManager.share.newRatePerDollar ) \(TailsManager.share.tails?.result.list.filter({$0.hash.contains(self.token[indexPath.row][0].split(separator: " ").last?.prefix(15) ?? "") || $0.name.contains(self.token[indexPath.row][0])}).first?.code ?? "")"
+                           
+                        } else {
+                            walletCell.convertLabel.text = "***** UDS"
+                            walletCell.balanceLabel.text = "*****"
+                        }
+                        
+                        
                         walletCell.tokenLabel.text = TailsManager.share.tails?.result.list.filter({$0.hash.contains(self.token[indexPath.row][0].split(separator: " ").last?.prefix(15) ?? "") || $0.name.contains(self.token[indexPath.row][0])}).first?.name
-                        print(self.token[indexPath.row][0].split(separator: " ").last?.prefix(15))
+                        
                         if indexPath != [0,0] {
                             guard let url = URL(string: TailsManager.share.tails?.result.list.filter({$0.hash.contains(self.token[indexPath.row][0].split(separator: " ").last?.prefix(15) ?? "") || $0.name.contains(self.token[indexPath.row][0])}).first?.logo_url ?? "") else { return  walletCell }
                             walletCell.cellImage.load(url: url)
@@ -211,15 +259,21 @@ extension mCollectionViewCell: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath == [0,self.token.count] {
-            let storyboard = UIStoryboard(name: "Main", bundle: .main)
-            let importVC = storyboard.instantiateViewController(withIdentifier: "ImportTokensViewController") as! ImportTokensViewController
-            importVC.index = self.index
-            importVC.modalPresentationStyle = .fullScreen
-            self.controller.present(importVC, animated: true)
+            if self.wallet?.name == "Chia Wallet" || self.wallet?.name == "Chia TestNet" {
+                
+                let storyboard = UIStoryboard(name: "Main", bundle: .main)
+                let importVC = storyboard.instantiateViewController(withIdentifier: "ImportTokensViewController") as! ImportTokensViewController
+                importVC.index = self.index
+                importVC.modalPresentationStyle = .fullScreen
+                self.controller.present(importVC, animated: true)
+            } else {
+                return
+            }
         }
     }
-    
-    
+
+
+
 }
 
 

@@ -15,7 +15,9 @@ class NewWalletViewController: UIViewController {
     var isChivesTest = false
     var isMainScreen = false
     
-
+    private var agrees: [CoinsInfoResultList] = []
+    
+    
     @IBOutlet weak var creatingNewWalletView: UIView!
     @IBOutlet weak var agreeLabel: UILabel!
     @IBOutlet weak var checkBoxButton: UIButton!
@@ -32,7 +34,7 @@ class NewWalletViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.agrees = AgreesManager.share.agrees
         self.creatingNewWalletView.isHidden = true
         self.creatingNewWalletView.alpha = 0
         
@@ -71,21 +73,17 @@ class NewWalletViewController: UIViewController {
         self.systemImage.layer.borderColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
         self.systemImage.layer.borderWidth = 2
         
-        DispatchQueue.global().async {
-            NetworkManager.share.getCoinInfo { info in
-                DispatchQueue.main.async {
-                    if self.isChia || self.isChiaTest {
-                    let char = info.result.list.filter({$0.blockchain_name.contains("Chia")}).first?.specification.replacingOccurrences(of: "\n", with: "\n• ")
-                    self.disctiption.text = info.result.list.filter({$0.blockchain_name.contains("Chia")}).first?.description
-                    self.characteristicTextView.text = char
-                    } else if self.isChives || self.isChivesTest  {
-                        let char = info.result.list.filter({$0.blockchain_name.contains("Chives")}).first?.specification.replacingOccurrences(of: "\n", with: "\n• ")
-                        self.disctiption.text = info.result.list.filter({$0.blockchain_name.contains("Chives")}).first?.description
-                        self.characteristicTextView.text = char
-                    }
-                }
-            }
+        
+        if self.isChia || self.isChiaTest {
+            let char = self.agrees.filter({$0.blockchain_name.contains("Chia")}).first?.specification.replacingOccurrences(of: "\n", with: "\n• ")
+            self.disctiption.text = self.agrees.filter({$0.blockchain_name.contains("Chia")}).first?.description
+            self.characteristicTextView.text = char
+        } else if self.isChives || self.isChivesTest  {
+            let char = self.agrees.filter({$0.blockchain_name.contains("Chives")}).first?.specification.replacingOccurrences(of: "\n", with: "\n• ")
+            self.disctiption.text = self.agrees.filter({$0.blockchain_name.contains("Chives")}).first?.description
+            self.characteristicTextView.text = char
         }
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -95,7 +93,7 @@ class NewWalletViewController: UIViewController {
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         self.creatingNewWalletView.isHidden = true
-
+        
     }
     
     private func localization() {
@@ -137,7 +135,7 @@ class NewWalletViewController: UIViewController {
             }
         }
     }
-
+    
     @IBAction func checkBoxButtonPressed(_ sender: UIButton) {
         
         if sender.imageView?.image != UIImage(systemName: "checkmark.square.fill") {
