@@ -59,8 +59,39 @@ class NetworkManager {
                 DispatchQueue.main.async {
                     complition(json)
                 }
+            } catch let DecodingError.dataCorrupted(context) {
+                print(context)
+                DispatchQueue.main.async {
+                    
+                    NotificationCenter.default.post(name: NSNotification.Name("alertErrorGerCodingKeys"), object: nil)
+                }
+            } catch let DecodingError.keyNotFound(key, context) {
+                print("Key '\(key)' not found:", context.debugDescription)
+                print("codingPath:", context.codingPath)
+                DispatchQueue.main.async {
+                    
+                    NotificationCenter.default.post(name: NSNotification.Name("alertErrorGerCodingKeys"), object: nil)
+                }
+            } catch let DecodingError.valueNotFound(value, context) {
+                print("Value '\(value)' not found:", context.debugDescription)
+                print("codingPath:", context.codingPath)
+                DispatchQueue.main.async {
+                    
+                    NotificationCenter.default.post(name: NSNotification.Name("alertErrorGerCodingKeys"), object: nil)
+                }
+            } catch let DecodingError.typeMismatch(type, context)  {
+                print("Type '\(type)' mismatch:", context.debugDescription)
+                print("codingPath:", context.codingPath)
+                DispatchQueue.main.async {
+                    
+                    NotificationCenter.default.post(name: NSNotification.Name("alertErrorGerCodingKeys"), object: nil)
+                }
             } catch {
-                print(error)
+                print("error: ", error)
+                DispatchQueue.main.async {
+                    
+                    NotificationCenter.default.post(name: NSNotification.Name("alertErrorGerCodingKeys"), object: nil)
+                }
             }
         }.resume()
     }

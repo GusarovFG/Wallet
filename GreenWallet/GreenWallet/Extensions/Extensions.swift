@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CryptoSwift
 
 extension UILabel {
     typealias MethodHandler = () -> Void
@@ -51,16 +52,16 @@ extension UIStackView {
 extension UIView {
     func buttonStroke(_ color: CGColor) {
         let bottomLine = CALayer()
-            
-            bottomLine.frame = CGRect(x: 0, y: self.frame.size.height - 2, width: self.frame.size.width, height: 1)
-            bottomLine.backgroundColor = color
-            self.layer.addSublayer(bottomLine)
-        }
+        
+        bottomLine.frame = CGRect(x: 0, y: self.frame.size.height - 2, width: self.frame.size.width, height: 1)
+        bottomLine.backgroundColor = color
+        self.layer.addSublayer(bottomLine)
+    }
     
 }
 
 extension UITextView {
-
+    
     func numberOfLines() -> Int{
         if let fontUnwrapped = self.font{
             return Int(self.contentSize.height / fontUnwrapped.lineHeight)
@@ -119,7 +120,7 @@ enum UIUserInterfaceIdiom : Int
 
 
 public extension UIDevice {
-
+    
     static let modelName: String = {
         var systemInfo = utsname()
         uname(&systemInfo)
@@ -128,9 +129,9 @@ public extension UIDevice {
             guard let value = element.value as? Int8, value != 0 else { return identifier }
             return identifier + String(UnicodeScalar(UInt8(value)))
         }
-
+        
         func mapToDevice(identifier: String) -> String { // swiftlint:disable:this cyclomatic_complexity
-            #if os(iOS)
+#if os(iOS)
             switch identifier {
             case "iPod5,1":                                       return "iPod touch (5th generation)"
             case "iPod7,1":                                       return "iPod touch (6th generation)"
@@ -202,19 +203,19 @@ public extension UIDevice {
             case "i386", "x86_64", "arm64":                       return "Simulator \(mapToDevice(identifier: ProcessInfo().environment["SIMULATOR_MODEL_IDENTIFIER"] ?? "iOS"))"
             default:                                              return identifier
             }
-            #elseif os(tvOS)
+#elseif os(tvOS)
             switch identifier {
             case "AppleTV5,3": return "Apple TV 4"
             case "AppleTV6,2": return "Apple TV 4K"
             case "i386", "x86_64": return "Simulator \(mapToDevice(identifier: ProcessInfo().environment["SIMULATOR_MODEL_IDENTIFIER"] ?? "tvOS"))"
             default: return identifier
             }
-            #endif
+#endif
         }
-
+        
         return mapToDevice(identifier: identifier)
     }()
-
+    
 }
 
 extension Sequence where Element: Hashable {
@@ -225,7 +226,7 @@ extension Sequence where Element: Hashable {
 }
 
 extension UIView {
-
+    
     func rotate(_ toValue: CGFloat, duration: CFTimeInterval = 0.2) {
         let animation = CABasicAnimation(keyPath: "transform.rotation")
         
@@ -236,24 +237,24 @@ extension UIView {
         
         self.layer.add(animation, forKey: nil)
     }
-
+    
 }
 
 
 extension UIView {
-
-  // OUTPUT 1
-  func dropShadow(scale: Bool = true) {
-    layer.masksToBounds = false
-      layer.shadowColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-    layer.shadowOpacity = 0.5
-    layer.shadowOffset = CGSize(width: 1, height: 1)
-    layer.shadowRadius = 1
-
-    layer.shadowPath = UIBezierPath(roundedRect: bounds, cornerRadius: 15).cgPath
-    layer.shouldRasterize = true
-    layer.rasterizationScale = scale ? UIScreen.main.scale : 1
-  }
+    
+    // OUTPUT 1
+    func dropShadow(scale: Bool = true) {
+        layer.masksToBounds = false
+        layer.shadowColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        layer.shadowOpacity = 0.5
+        layer.shadowOffset = CGSize(width: 1, height: 1)
+        layer.shadowRadius = 1
+        
+        layer.shadowPath = UIBezierPath(roundedRect: bounds, cornerRadius: 15).cgPath
+        layer.shouldRasterize = true
+        layer.rasterizationScale = scale ? UIScreen.main.scale : 1
+    }
 }
 
 extension UIImageView {
@@ -271,21 +272,87 @@ extension UIImageView {
 }
 
 extension String {
-
-  func toLengthOf(length:Int) -> String {
-            if length <= 0 {
-                return self
-            } else if let to = self.index(self.startIndex, offsetBy: length, limitedBy: self.endIndex) {
-                return self.substring(from: to)
-
-            } else {
-                return ""
-            }
+    
+    func toLengthOf(length:Int) -> String {
+        if length <= 0 {
+            return self
+        } else if let to = self.index(self.startIndex, offsetBy: length, limitedBy: self.endIndex) {
+            return self.substring(from: to)
+            
+        } else {
+            return ""
         }
+    }
 }
 
 extension String {
     func toDouble() -> Double? {
         return NumberFormatter().number(from: self)?.doubleValue
     }
+}
+
+extension Array where Element: Hashable {
+    func removingDuplicates() -> [Element] {
+        var addedDict = [Element: Bool]()
+        
+        return filter {
+            addedDict.updateValue(true, forKey: $0) == nil
+        }
+    }
+    
+    mutating func removeDuplicates() {
+        self = self.removingDuplicates()
+    }
+}
+
+
+extension String {
+    func aesEncrypt(key: String) throws -> String {
+        
+        var result = ""
+        
+        do {
+            
+            let key: [UInt8] = Array(key.utf8) as [UInt8]
+            
+            let aes = try! AES(key: key, blockMode: ECB() , padding:.pkcs5) // AES128 .ECB pkcs7
+            
+            let encrypted = try aes.encrypt(Array(self.utf8))
+            
+            result = encrypted.toBase64()
+            
+            
+            print("AES Encryption Result: \(result)")
+            
+        } catch {
+            
+            print("Error: \(error)")
+        }
+        
+        return result
+    }
+    
+    func aesDecrypt(key: String) throws -> String {
+        
+        var result = ""
+        
+        do {
+            
+            let encrypted = self
+            let key: [UInt8] = Array(key.utf8) as [UInt8]
+            let aes = try AES(key: key, blockMode: ECB(), padding: .pkcs5) // AES128 .ECB pkcs7
+            let decrypted = try aes.decrypt(Array(base64: encrypted))
+            
+            result = String(data: Data(decrypted), encoding: .utf8) ?? ""
+            
+            print("AES Decryption Result: \(result)")
+            
+        } catch {
+            
+            print("Error: \(error)")
+        }
+        
+        return result
+    }
+    
 }

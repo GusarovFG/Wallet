@@ -26,60 +26,60 @@ class WalletManager {
         var token : [String] = []
         var tokens: [[String]] = []
         
-//        if self.isUpdate {
-//                for wal in 0..<CoreDataManager.share.fetchChiaWalletPrivateKey().count {
-//                    DispatchQueue.global().async {
-//                    let wallet = CoreDataManager.share.fetchChiaWalletPrivateKey()[wal]
-//                    let walletTokens = CoreDataManager.share.fetchChiaWalletPrivateKey()[wal].token ?? []
-//                    if wallet.name == "Chia Wallet" {
-//                        ChiaBlockchainManager.share.logIn(Int(wallet.fingerprint)) { log in
-//                            if log.success {
-//                                ChiaBlockchainManager.share.getWallets { wallets in
-//                                    for walletONe in 0..<wallets.wallets.count {
-//
-//
-//
-//                                        ChiaBlockchainManager.share.getWalletBalance(wallets.wallets[walletONe].id) { balance in
-//                                            id = "\(wallets.wallets[walletONe].id)"
-//                                            name = wallets.wallets[walletONe].name
-//                                            token.append(name)
-//                                            token.append(id)
-//                                            token.append("\(balance.wallet_balance.confirmed_wallet_balance)")
-//                                            token.append("show")
-//                                            if walletTokens.count > tokens.count {
-//                                            tokens.append(token)
-//                                            }
-//                                            print(tokens)
-//                                            print(walletTokens)
-//                                            print(token)
-//                                            token.removeAll()
-//                                            if walletTokens != tokens && walletTokens.count <= tokens.count{
-//                                                print("Новье")
-//                                                CoreDataManager.share.editChiaWalletPrivateKey(index: wal, name: wallet.name ?? "", fingerprint: Int(wallet.fingerprint) , pk: wallet.pk ?? "", seed: wallet.seed ?? "", sk: wallet.sk ?? "", adress: wallet.adres ?? "", tokens: tokens)
-//                                                DispatchQueue.main.async {
-//
-//                                                    print(CoreDataManager.share.fetchChiaWalletPrivateKey())
-//
-//                                                    NotificationCenter.default.post(name: NSNotification.Name("updateBalances"), object: nil)
-//                                                }
-//
-//                                            } else {
-//                                                print("То же самое")
-//                                            }
-//                                            print("qweqweqwe \(tokens)")
-//                                        }
-//                                    }
-//                                }
-//                            }
-//                        }
-//                    }
-//
-//                }
-//            }
-//        } else {
-//            return
-//
-//        }
+        if self.isUpdate {
+                for wal in 0..<CoreDataManager.share.fetchChiaWalletPrivateKey().count {
+                    DispatchQueue.global().async {
+                    let wallet = CoreDataManager.share.fetchChiaWalletPrivateKey()[wal]
+                    let walletTokens = CoreDataManager.share.fetchChiaWalletPrivateKey()[wal].token ?? []
+                    if wallet.name == "Chia Wallet" {
+                        ChiaBlockchainManager.share.logIn(Int(wallet.fingerprint)) { log in
+                            if log.success {
+                                ChiaBlockchainManager.share.getWallets { wallets in
+                                    for walletONe in 0..<wallets.wallets.count {
+
+
+
+                                        ChiaBlockchainManager.share.getWalletBalance(wallets.wallets[walletONe].id) { balance in
+                                            id = "\(wallets.wallets[walletONe].id)"
+                                            name = wallets.wallets[walletONe].name
+                                            token.append(name)
+                                            token.append(id)
+                                            token.append("\(balance.wallet_balance.confirmed_wallet_balance)")
+                                            token.append("show")
+                                            if walletTokens.count > tokens.count {
+                                            tokens.append(token)
+                                            }
+                                            print(tokens)
+                                            print(walletTokens)
+                                            print(token)
+                                            token.removeAll()
+                                            if walletTokens != tokens && walletTokens.count <= tokens.count{
+                                                print("Новье")
+                                                CoreDataManager.share.editChiaWalletPrivateKey(index: wal, name: wallet.name ?? "", fingerprint: Int(wallet.fingerprint) , pk: wallet.pk ?? "", seed: wallet.seed ?? "", sk: wallet.sk ?? "", adress: wallet.adres ?? "", tokens: tokens)
+                                                DispatchQueue.main.async {
+
+                                                    print(CoreDataManager.share.fetchChiaWalletPrivateKey())
+
+                                                    NotificationCenter.default.post(name: NSNotification.Name("updateBalances"), object: nil)
+                                                }
+
+                                            } else {
+                                                print("То же самое")
+                                            }
+                                            print("qweqweqwe \(tokens)")
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        } else {
+            return
+
+        }
         
     }
 }

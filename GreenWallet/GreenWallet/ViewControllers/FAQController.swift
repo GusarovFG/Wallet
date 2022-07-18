@@ -84,7 +84,8 @@ extension FAQController: UITableViewDelegate, UITableViewDataSource {
         if !self.faqs.isEmpty {
             cell.textLabel?.text = self.sections[indexPath.section].answer
             cell.textLabel?.numberOfLines = 0
-            cell.textLabel?.font.withSize(16)
+            cell.textLabel?.font = UIFont.systemFont(ofSize: 15)
+            cell.textLabel?.textColor = .lightGray
         }
         return cell
         
@@ -108,6 +109,7 @@ extension FAQController: UITableViewDelegate, UITableViewDataSource {
         header.arrowLabel.text = "×"
         header.setCollapsed(self.sections[section].collapsed)
         header.arrowLabel.font = UIFont.systemFont(ofSize: 25)
+        header.titleLabel.font = UIFont.systemFont(ofSize: 17)
         header.arrowLabel.textColor = #colorLiteral(red: 0.2269999981, green: 0.6750000119, blue: 0.3490000069, alpha: 1)
         header.section = section
         header.delegate = self
@@ -179,6 +181,7 @@ class CollapsibleTableViewHeader: UITableViewHeaderFooterView {
         // Title label
         contentView.addSubview(titleLabel)
         titleLabel.textColor = UIColor.white
+        titleLabel.font = UIFont.systemFont(ofSize: 18)
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.topAnchor.constraint(equalTo: marginGuide.topAnchor).isActive = true
         titleLabel.trailingAnchor.constraint(equalTo: marginGuide.trailingAnchor).isActive = true

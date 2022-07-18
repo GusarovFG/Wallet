@@ -12,8 +12,9 @@ class NotificationsViewController: UIViewController {
     var wallet: ChiaWalletPrivateKey?
     var dates: [String] = []
     
-    var notifications: [Notificationsss] = [Notificationsss(type: "in", height: "123123", summ: "500.000011000", token: "XCH", date: "27.06.22 21:00"), Notificationsss(type: "out", height: "123123", summ: "100.000011000", token: "XCH", date: "20.06.22 21:00"),Notificationsss(type: "in", height: "123123", summ: "100.000011000", token: "XCH", date: "25.06.22 21:00"),Notificationsss(type: "in", height: "123123", summ: "100.000011000", token: "XCH", date: "20.06.22 21:00"),Notificationsss(type: "in", height: "123123", summ: "110.000011000", token: "XCH", date: "20.06.22 21:00"),Notificationsss(type: "out", height: "123123", summ: "50.000011000", token: "XCH", date: "20.06.22 21:00"),Notificationsss(type: "in", height: "123123", summ: "20.000011000", token: "XCH", date: "20.06.22 21:00"),Notificationsss(type: "in", height: "123123", summ: "100.000011000", token: "XCH", date: "21.06.22 21:00"),Notificationsss(type: "in", height: "123123", summ: "100.000011000", token: "XCC", date: "20.06.22 21:00"),Notificationsss(type: "out", height: "123123", summ: "0.000011000", token: "XCH", date: "21.06.22 21:00"),Notificationsss(type: "out", height: "123123", summ: "100.000011000", token: "XCH", date: "20.06.22 21:00"),Notificationsss(type: "out", height: "123123", summ: "100.000011000", token: "XCH", date: "25.06.22 21:00"),Notificationsss(type: "in", height: "123123", summ: "100.000011000", token: "XCC", date: "20.06.22 21:00"),Notificationsss(type: "out", height: "123123", summ: "100.000011000", token: "XCH", date: "25.06.22 21:00")]
-    var filterNotifications: [Notificationsss] = []
+    var notifications: [TransactionsCD] = []
+    var filterNotifications: [TransactionsCD] = []
+    var otherNotifications: [PushNotificationsCD] = []
     
     
 
@@ -22,12 +23,13 @@ class NotificationsViewController: UIViewController {
     private var isInFilter = false
     private var isOutFilter = false
     private var isPendindFilter = false
+    private var isOther = false
     
     
     @IBOutlet weak var detailView: UIView!
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var detailBackButton: UIButton!
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var notificationTableView: UITableView!
     @IBOutlet weak var detailTitle: UILabel!
     @IBOutlet weak var detailDate: UILabel!
     @IBOutlet weak var detailDateLabel: UILabel!
@@ -62,8 +64,13 @@ class NotificationsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if !CoreDataManager.share.fetchTransactions().isEmpty {
+            self.notifications = CoreDataManager.share.fetchTransactions()
+            self.filterNotifications = CoreDataManager.share.fetchTransactions().reversed()
+            self.otherNotifications = CoreDataManager.share.fetchPushNotifications().reversed()
+        }
         
-        self.filterNotifications = self.notifications
+        print(filterNotifications)
         SystemsManager.share.filterSystems()
         self.systems = Array(Set(SystemsManager.share.listOfSystems))
         self.filterDateView.isHidden = true
@@ -74,6 +81,7 @@ class NotificationsViewController: UIViewController {
         self.lastWeekDateButton.setTitle("Последняя неделя", for: .normal)
         self.lastMonthButton.setTitle("Последний месяц", for: .normal)
         self.detailView.isHidden = true
+        
         
         self.allDateButton.buttonStroke(#colorLiteral(red: 0.3578948975, green: 0.3578948975, blue: 0.3578948975, alpha: 1))
         self.todayDateButton.buttonStroke(#colorLiteral(red: 0.3578948975, green: 0.3578948975, blue: 0.3578948975, alpha: 1))
@@ -91,7 +99,9 @@ class NotificationsViewController: UIViewController {
         
         localization()
         
-        self.tableView.register(UINib(nibName: "NotificationTableViewCell", bundle: nil), forCellReuseIdentifier: "NotificationTableViewCell")
+        self.notificationTableView.register(UINib(nibName: "NotificationTableViewCell", bundle: nil), forCellReuseIdentifier: "NotificationTableViewCell")
+        self.notificationTableView.register(UINib(nibName: "OtherNotificationsTableViewCell", bundle: nil), forCellReuseIdentifier: "OtherNotificationsTableViewCell")
+        
         self.filterCollectionView.register(UINib(nibName: "TransictionFilterCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "TransictionFilterCollectionViewCell")
 //
 //        let tapGastureRecognizer = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
@@ -106,6 +116,7 @@ class NotificationsViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        print(self.otherNotifications.map({$0.message}))
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -193,21 +204,21 @@ class NotificationsViewController: UIViewController {
                 sender.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
                 
                 if sender.currentTitle == "Chia Network" {
-                    self.filterNotifications = self.notifications.filter({$0.token.lowercased().contains("xch")})
+                    self.filterNotifications = self.notifications.filter({$0.address!.lowercased().contains("xch")})
                     print("filter chia")
-                    self.tableView.reloadData()
+                    self.notificationTableView.reloadData()
                 } else if sender.currentTitle == "Chives Network" {
-                    self.filterNotifications = self.notifications.filter({$0.token.lowercased().contains("xcc")})
+                    self.filterNotifications = self.notifications.filter({$0.address!.lowercased().contains("xcc")})
                     print("filter Chives")
-                    self.tableView.reloadData()
+                    self.notificationTableView.reloadData()
                 } else if sender.currentTitle == "Chia TestNet" {
-                    self.filterNotifications = self.notifications.filter({$0.token.lowercased().contains("xch")})
+                    self.filterNotifications = self.notifications.filter({$0.address!.lowercased().contains("txch")})
                     print("filter Chia TestNet")
-                    self.tableView.reloadData()
+                    self.notificationTableView.reloadData()
                 } else if sender.currentTitle == "Chives TestNet" {
-                    self.filterNotifications = self.notifications.filter({$0.token.lowercased().contains("xcc")})
+                    self.filterNotifications = self.notifications.filter({$0.address!.lowercased().contains("txcc")})
                     print("filter Chives TestNet")
-                    self.tableView.reloadData()
+                    self.notificationTableView.reloadData()
                 }
             }
         }
@@ -255,7 +266,7 @@ class NotificationsViewController: UIViewController {
         
         self.filterNotifications = self.notifications
         self.filterDateView.isHidden = true
-        self.tableView.reloadData()
+        self.notificationTableView.reloadData()
     }
     
     @IBAction func todayDateButtonPressed(_ sender: UIButton) {
@@ -271,7 +282,7 @@ class NotificationsViewController: UIViewController {
        
         
         self.filterDateView.isHidden = true
-        self.tableView.reloadData()
+        self.notificationTableView.reloadData()
     }
     
     @IBAction func yesterdayDayeButtonPressed(_ sender: UIButton) {
@@ -287,7 +298,7 @@ class NotificationsViewController: UIViewController {
         
         //        self.filterWalletsTransactions = self.walletsTransactions.reduce([], +).filter({Int(TimeManager.share.convertUnixTime(unix: $0.created_at_time, format: "dd.MM.yy").split(separator: ".")[0]) - Int(Date().string(format: "dd.MM.yy").split(separator: ".")[0]) == 1})
         self.filterDateView.isHidden = true
-        self.tableView.reloadData()
+        self.notificationTableView.reloadData()
     }
     
     @IBAction func lastWeekDateButtonPressed(_ sender: UIButton) {
@@ -301,7 +312,7 @@ class NotificationsViewController: UIViewController {
         
         //        self.filterWalletsTransactions = self.walletsTransactions.filter({$0.date == "lastWeek"})
         self.filterDateView.isHidden = true
-        self.tableView.reloadData()
+        self.notificationTableView.reloadData()
     }
     
     @IBAction func lastMonthButtonPressed(_ sender: UIButton) {
@@ -315,20 +326,21 @@ class NotificationsViewController: UIViewController {
         
 //        self.filterWalletsTransactions = self.walletsTransactions.reduce([], +).filter({TimeManager.share.convertUnixTime(unix: $0.created_at_time, format: "dd.MM.yy").split(separator: ".")[1] == Date().string(format: "dd.MM.yy").split(separator: ".")[1] && TimeManager.share.convertUnixTime(unix: $0.created_at_time, format: "dd.MM.yy").split(separator: ".")[2] == Date().string(format: "dd.MM.yy").split(separator: ".")[2]})
         self.filterDateView.isHidden = true
-        self.tableView.reloadData()
+        self.notificationTableView.reloadData()
         
     }
     
   
     
     @IBAction func allSystemButtonPresed(_ sender: UIButton) {
+        self.systemsStackView.arrangedSubviews.map({$0.backgroundColor = self.systemMenuView.backgroundColor})
         self.allSystemButton.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
         UIView.animate(withDuration: 0.5) {
             self.systemMenuView.alpha = 0
             self.systemMenuView.isHidden = true
         }
         self.filterNotifications = self.notifications
-        self.tableView.reloadData()
+        self.notificationTableView.reloadData()
     }
     
     @objc func hideKeyboard(_ sender: Any) {
@@ -340,34 +352,55 @@ class NotificationsViewController: UIViewController {
 extension NotificationsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        self.filterNotifications.filter({$0.date == self.filterNotifications.map{$0.date}[section]}).count
+        if !self.isOther {
+            let qwe = self.filterNotifications.map({$0.create_at_time}).removingDuplicates()
+            return self.filterNotifications.filter({$0.create_at_time == qwe[section]}).count
+        } else {
+            let ewq = self.otherNotifications.map({$0.created_at}).removingDuplicates()
+            return self.otherNotifications.filter({$0.created_at == ewq[section]}).count
+        }
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        Set(self.filterNotifications.map{$0.date}).count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "NotificationTableViewCell", for: indexPath) as! NotificationTableViewCell
-        let transiction = self.filterNotifications[indexPath.row]
-        if transiction.type == "out" {
-            cell.amountLabel.textColor = .red
-            cell.amountLabel.text = "- \(transiction.summ)"
-            cell.descriptionLabel.text = LocalizationManager.share.translate?.result.list.notifications.notifications_withdrawn_from_chia_wallet
+        if !self.isOther {
+            return self.filterNotifications.map({$0.create_at_time}).removingDuplicates().count
         } else {
-            cell.amountLabel.text = transiction.summ
-            cell.descriptionLabel.text = LocalizationManager.share.translate?.result.list.notifications.notifications_credited_to_chia_wallet
-            cell.amountLabel.textColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
+            return self.otherNotifications.map({$0.created_at}).removingDuplicates().count
         }
-        cell.cellImage.image = UIImage(named: "LogoChia")!
-        cell.ratesLabel.text = "\(ExchangeRatesManager.share.newRatePerDollar * (Double(transiction.summ) ?? 0)) \(transiction.token)"
-        cell.timeLabel.text = String(transiction.date.suffix(5))
-       
+    }
+                       
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-//        cell.heightLabel.text = "\(transiction.confirmed_at_height )"
-//
-//        cell.summLabel.text = "\((Double(transiction.amount) / 1000000000000).avoidNotation) XCH"
-        return cell
+        
+        
+        if !self.isOther {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "NotificationTableViewCell", for: indexPath) as! NotificationTableViewCell
+            let qwwe = self.filterNotifications.map({$0.create_at_time}).removingDuplicates()
+            let transiction = self.filterNotifications.filter({$0.create_at_time == qwwe[indexPath.section]})[indexPath.row]
+            
+            if transiction.type == 1 {
+                cell.amountLabel.textColor = .red
+                cell.amountLabel.text = "- \((Double(transiction.amount) / 1000_000_000_000).avoidNotation) \(transiction.address?.prefix(3).uppercased() ?? "")"
+                cell.descriptionLabel.text = LocalizationManager.share.translate?.result.list.notifications.notifications_withdrawn_from_chia_wallet
+            } else {
+                cell.amountLabel.text = "\((Double(transiction.amount) / 1000_000_000_000).avoidNotation)  \(transiction.address?.prefix(3).uppercased() ?? "")"
+                cell.descriptionLabel.text = LocalizationManager.share.translate?.result.list.notifications.notifications_credited_to_chia_wallet
+                cell.amountLabel.textColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
+            }
+            cell.cellImage.image = UIImage(named: "LogoChia")!
+            cell.ratesLabel.text = "\(ExchangeRatesManager.share.newRatePerDollar * (Double(transiction.amount))) USD"
+            cell.timeLabel.text = transiction.create_at_time
+            
+            print(transiction)
+            return cell
+        } else {
+            let otherCell = tableView.dequeueReusableCell(withIdentifier: "OtherNotificationsTableViewCell", for: indexPath) as! OtherNotificationsTableViewCell
+            let ewq = self.otherNotifications.map({$0.created_at}).removingDuplicates()
+            let otherNotification = self.otherNotifications.filter({$0.created_at == ewq[indexPath.section]})[indexPath.row]
+            otherCell.cellsTitle.text = otherNotification.message
+            return otherCell
+        }
+        
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -375,17 +408,35 @@ extension NotificationsViewController: UITableViewDelegate, UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        self.filterNotifications.map{$0.date}[section]
+        if !self.isOther {
+            return self.filterNotifications.map({$0.create_at_time}).removingDuplicates()[section]
+        } else {
+            return self.otherNotifications.map({$0.created_at}).removingDuplicates()[section]
+        }
+        
+    }
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int){
+        let header:UITableViewHeaderFooterView = view as! UITableViewHeaderFooterView
+
+        header.textLabel?.font = UIFont.boldSystemFont(ofSize: 18)
+        header.textLabel?.frame = header.frame
+        header.textLabel?.textAlignment = NSTextAlignment.center
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("dick")
-        self.detailView.isHidden = false
-        self.detailDateLabel.text = self.filterNotifications[indexPath.row].date
-        self.detailAmountLabel.text = self.filterNotifications[indexPath.row].summ
-        self.detailHeightLabel.text = self.filterNotifications[indexPath.row].height
-        self.detailComissionLabel.text = self.filterNotifications[indexPath.row].summ
-        tableView.deselectRow(at: indexPath, animated: true)
+        if !self.isOther {
+            
+            let qwwe = self.filterNotifications.map({$0.create_at_time}).removingDuplicates()
+            let transiction = self.filterNotifications.filter({$0.create_at_time == qwwe[indexPath.section]})[indexPath.row]
+            self.detailView.isHidden = false
+            self.detailDateLabel.text = "\(transiction.create_at_time ?? "")"
+            self.detailAmountLabel.text = "\((Double(transiction.amount) / 1000_000_000_000).avoidNotation)  \(transiction.address?.prefix(3).uppercased() ?? "")"
+            self.detailHeightLabel.text = "\(transiction.confirm_height)"
+            self.detailComissionLabel.text = "\((Double(transiction.comission) / 1000_000_000_000).avoidNotation)  \(transiction.address?.prefix(3).uppercased() ?? "")"
+            tableView.deselectRow(at: indexPath, animated: true)
+        } else {
+            return
+        }
     }
 }
 
@@ -489,8 +540,8 @@ extension NotificationsViewController: UICollectionViewDelegate, UICollectionVie
             self.isAllFilter = true
             self.isInFilter = false
             self.isOutFilter = false
-            self.isPendindFilter = false
-            self.tableView.reloadData()
+            self.isOther = false
+            self.notificationTableView.reloadData()
         case [0,1]:
             self.filterCollectionView.visibleCells.forEach { cell in
                 if cell is TransictionFilterCollectionViewCell {
@@ -503,12 +554,12 @@ extension NotificationsViewController: UICollectionViewDelegate, UICollectionVie
             }
             cell.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
             cell.cellLabel.textColor = .white
-            self.filterNotifications = self.notifications.filter({$0.type == "in"})
+            self.filterNotifications = self.notifications.filter({$0.type == 0})
             self.isAllFilter = false
             self.isInFilter = true
             self.isOutFilter = false
-            self.isPendindFilter = false
-            self.tableView.reloadData()
+            self.isOther = false
+            self.notificationTableView.reloadData()
         case [0,2]:
             self.filterCollectionView.visibleCells.forEach { cell in
                 if cell is TransictionFilterCollectionViewCell {
@@ -521,12 +572,12 @@ extension NotificationsViewController: UICollectionViewDelegate, UICollectionVie
             }
             cell.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
             cell.cellLabel.textColor = .white
-            self.filterNotifications = self.notifications.filter({$0.type == "out"})
+            self.filterNotifications = self.notifications.filter({$0.type == 1})
             self.isAllFilter = false
             self.isInFilter = false
             self.isOutFilter = true
-            self.isPendindFilter = false
-            self.tableView.reloadData()
+            self.isOther = false
+            self.notificationTableView.reloadData()
         default:
             self.filterCollectionView.visibleCells.forEach { cell in
                 if cell is TransictionFilterCollectionViewCell {
@@ -539,12 +590,11 @@ extension NotificationsViewController: UICollectionViewDelegate, UICollectionVie
             }
             cell.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
             cell.cellLabel.textColor = .white
-            self.filterNotifications = self.notifications.filter({$0.type == "other"})
             self.isAllFilter = false
             self.isInFilter = false
             self.isOutFilter = false
-            self.isPendindFilter = true
-            self.tableView.reloadData()
+            self.isOther = true
+            self.notificationTableView.reloadData()
         }
     }
 }
@@ -554,12 +604,12 @@ extension NotificationsViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText.isEmpty {
             self.filterNotifications = self.notifications
-            self.tableView.reloadData()
+            self.notificationTableView.reloadData()
             return
         } else {
-            self.filterNotifications = self.notifications.filter({$0.summ.contains(searchText)})
+            self.filterNotifications = self.notifications.filter({String($0.amount).contains(searchText)})
             
-            self.tableView.reloadData()
+            self.notificationTableView.reloadData()
             
         }
     }

@@ -86,6 +86,8 @@ class AlertManager {
         controller.present(alertVC, animated: true)
     }
     
+   
+    
     func serverError(_ controller: UIViewController) {
         let storyBoard = UIStoryboard(name: "Alert", bundle: .main)
         let alertVC = storyBoard.instantiateViewController(withIdentifier: "DeleteContact") as! AllertWalletViewController

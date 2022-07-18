@@ -231,8 +231,8 @@ class CoreDataManager {
         let notifications = PushNotificationsCD(context: self.persistentContainer.viewContext)
         
         notifications.guid = guid
-        notifications.created_at = guid
-        notifications.message = guid
+        notifications.created_at = created_at
+        notifications.message = message
         
         saveContext()
     }
@@ -259,6 +259,87 @@ class CoreDataManager {
         notifications?.version = version
         
         saveContext()
+    }
+    
+    func fetchTransactions() -> [TransactionsCD] {
+        let fetchReqest: NSFetchRequest<TransactionsCD> = TransactionsCD.fetchRequest()
+        let transactions = (try? self.persistentContainer.viewContext.fetch(fetchReqest)) ?? []
+        
+        return transactions
+    }
+    
+    func editTransactions(newTransactions: [ChiaTransaction]) {
+        let fetchReqest: NSFetchRequest<TransactionsCD> = TransactionsCD.fetchRequest()
+        let transactions = (try? self.persistentContainer.viewContext.fetch(fetchReqest)) ?? []
+        for i in 0..<transactions.count {
+            transactions[i].amount = Int64(newTransactions[i].amount)
+            transactions[i].type = Int16(newTransactions[i].type)
+            transactions[i].address = newTransactions[i].to_address
+            transactions[i].confirm_height = Int64(newTransactions[i].confirmed_at_height)
+            transactions[i].comission = Int64(newTransactions[i].fee_amount)
+            transactions[i].create_at_time = TimeManager.share.convertUnixTime(unix: newTransactions[i].created_at_time, format: "dd.MM.yy") 
+            
+        }
+
+        saveContext()
+    }
+    
+    func saveTransactions(newTransactions: ChiaTransaction) {
+        let transactions = TransactionsCD(context: self.persistentContainer.viewContext)
+        
+        transactions.amount = Int64(newTransactions.amount)
+        transactions.type = Int16(newTransactions.type)
+        transactions.address = newTransactions.to_address
+        transactions.confirm_height = Int64(newTransactions.confirmed_at_height)
+        transactions.comission = Int64(newTransactions.fee_amount)
+        transactions.create_at_time = TimeManager.share.convertUnixTime(unix: newTransactions.created_at_time, format: "dd.MM.yy")
+        
+        saveContext()
+    }
+    
+    func deleteTransactions() {
+        let fetchReqest: NSFetchRequest<TransactionsCD> = TransactionsCD.fetchRequest()
+        let transactions = (try? self.persistentContainer.viewContext.fetch(fetchReqest)) ?? []
+                for managedObject in transactions
+                {
+                    let managedObjectData: NSManagedObject = managedObject as NSManagedObject
+                    self.persistentContainer.viewContext.delete(managedObjectData)
+                }
+    }
+    
+    func deletAll() {
+        let transactionsFetchReqest: NSFetchRequest<TransactionsCD> = TransactionsCD.fetchRequest()
+        let transactions = (try? self.persistentContainer.viewContext.fetch(transactionsFetchReqest)) ?? []
+                for managedObject in transactions
+                {
+                    let managedObjectData: NSManagedObject = managedObject as NSManagedObject
+                    self.persistentContainer.viewContext.delete(managedObjectData)
+                }
+        let walletsFetchReqest: NSFetchRequest<ChiaWalletPrivateKey> = ChiaWalletPrivateKey.fetchRequest()
+        let wallets = (try? self.persistentContainer.viewContext.fetch(walletsFetchReqest)) ?? []
+                for managedObject in wallets
+                {
+                    let managedObjectData: NSManagedObject = managedObject as NSManagedObject
+                    self.persistentContainer.viewContext.delete(managedObjectData)
+                }
+        let notificationsFetchReqest: NSFetchRequest<PushNotificationsCD> = PushNotificationsCD.fetchRequest()
+        let notifications = (try? self.persistentContainer.viewContext.fetch(notificationsFetchReqest)) ?? []
+                for managedObject in notifications
+                {
+                    let managedObjectData: NSManagedObject = managedObject as NSManagedObject
+                    self.persistentContainer.viewContext.delete(managedObjectData)
+                }
+        let contactsFetchReqest: NSFetchRequest<Contact> = Contact.fetchRequest()
+        let contacts = (try? self.persistentContainer.viewContext.fetch(contactsFetchReqest)) ?? []
+                for managedObject in contacts
+                {
+                    let managedObjectData: NSManagedObject = managedObject as NSManagedObject
+                    self.persistentContainer.viewContext.delete(managedObjectData)
+                }
+        KeyChainManager.share.deletePassword()
+        UserDefaultsManager.shared.userDefaults.set("Dont", forKey: UserDefaultsStringKeys.firstSession.rawValue)
+        NotificationCenter.default.post(name: NSNotification.Name("reloadConnect"), object: nil)
+        
     }
     
     

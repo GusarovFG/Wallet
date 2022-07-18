@@ -175,7 +175,11 @@ class MainViewController: UIViewController {
     
     @objc private func showWallet(notification: Notification) {
         let summ: Double = (((self.wallet?.token?.map({Double($0[2])!}).reduce(0, +) ?? 0) / 1000000000000) * ExchangeRatesManager.share.newRatePerDollar).rounded(toPlaces: 8)
-        self.balanceLabel.text = "⁓ \(NSString(format:"%.2f", summ)) USD"
+        if !CoreDataManager.share.fetchChiaWalletPrivateKey().isEmpty {
+            self.balanceLabel.text = "⁓ \(NSString(format:"%.2f", summ)) USD"
+        } else {
+            self.balanceLabel.text = "0 USD"
+        }
         
         
     }

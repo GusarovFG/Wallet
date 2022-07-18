@@ -128,7 +128,7 @@ class TransactionHistoryViewController: UIViewController {
         
         if self.filterWalletsTransactions.isEmpty && !self.isHistoryWallet && !CoreDataManager.share.fetchChiaWalletPrivateKey().isEmpty {
             self.present(spinnerVC, animated: true)
-            queue.sync {
+            queue.async {
                 for i in CoreDataManager.share.fetchChiaWalletPrivateKey() {
                     if i.name == "Chia Wallet" {
                         ChiaBlockchainManager.share.logIn(Int(i.fingerprint)) { log in
@@ -142,18 +142,24 @@ class TransactionHistoryViewController: UIViewController {
                                             
                                             self.walletsTransactions.append(transact.transactions)
                                             
+                                            
                                             DispatchQueue.main.async {
                                                 
                                                 self.filterWalletsTransactions = self.walletsTransactions.reduce([], +)
+                                                if CoreDataManager.share.fetchTransactions().isEmpty{
+                                                    self.filterWalletsTransactions.forEach({CoreDataManager.share.saveTransactions(newTransactions: $0)})
+                                                    print(CoreDataManager.share.fetchTransactions())
+                                                } else {
+                                                    CoreDataManager.share.deleteTransactions()
+                                                    self.filterWalletsTransactions.forEach({CoreDataManager.share.saveTransactions(newTransactions: $0)})
+                                                }
                                                 self.tableView.reloadData()
                                                 self.spinnerVC.dismiss(animated: true)
                                             }
                                         }
-                                        
                                     }
                                 }
                             }
-                            
                         }
                         
                     } else if i.name == "Chives Wallet"{
@@ -547,11 +553,11 @@ class TransactionHistoryViewController: UIViewController {
                     print("filter Chives")
                     self.tableView.reloadData()
                 } else if sender.currentTitle == "Chia TestNet" {
-                    self.filterWalletsTransactions = self.walletsTransactions.reduce([], +).filter({$0.to_address.contains("xch")})
+                    self.filterWalletsTransactions = self.walletsTransactions.reduce([], +).filter({$0.to_address.contains("txch")})
                     print("filter Chia TestNet")
                     self.tableView.reloadData()
                 } else if sender.currentTitle == "Chives TestNet" {
-                    self.filterWalletsTransactions = self.walletsTransactions.reduce([], +).filter({$0.to_address.contains("xcc")})
+                    self.filterWalletsTransactions = self.walletsTransactions.reduce([], +).filter({$0.to_address.contains("txcc")})
                     print("filter Chives TestNet")
                     self.tableView.reloadData()
                 }
@@ -623,7 +629,19 @@ extension TransactionHistoryViewController: UITableViewDelegate, UITableViewData
         
         cell.heightLabel.text = "\(transiction.confirmed_at_height )"
         
-        cell.summLabel.text = "\((Double(transiction.amount) / 1000000000000).avoidNotation) XCH"
+        if transiction.to_address.contains("xch") {
+            cell.summLabel.text = "\((Double(transiction.amount) / 1000000000000).avoidNotation) XCH"
+        } else if transiction.to_address.contains("xcc") {
+            cell.summLabel.text = "\((Double(transiction.amount) / 1000000000000).avoidNotation) XCC"
+        } else if transiction.to_address.contains("txch") {
+            cell.summLabel.text = "\((Double(transiction.amount) / 1000000000000).avoidNotation) TXCH"
+        } else if transiction.to_address.contains("txcc") {
+            cell.summLabel.text = "\((Double(transiction.amount) / 1000000000000).avoidNotation) TXCC"
+        }
+        
+        
+        
+        
         return cell
     }
 }

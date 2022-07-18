@@ -61,6 +61,10 @@ class PasswordViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(deleteInMyWallet), name: NSNotification.Name("deleteInMyWallet"), object: nil)
         
         print(self.isMyWallet)
+        if self.isShowDetail {
+            self.faceIDButton.isEnabled = false
+            self.faceIDButton.alpha = 0
+        }
         
         self.stackView.arrangedSubviews.forEach { view in
             view.layer.cornerRadius = view.frame.height / 2
@@ -83,6 +87,11 @@ class PasswordViewController: UIViewController {
             self.thirdDigitsStackView.spacing = 15
             self.stackView.spacing = 20
         }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
     }
     
     private func localization() {
@@ -257,6 +266,14 @@ class PasswordViewController: UIViewController {
         }
     }
     
+    @IBAction func reloadAppButtonPressed(_ sender: Any) {
+        let storyBoard = UIStoryboard(name: "Alert", bundle: .main)
+        let alertVC = storyBoard.instantiateViewController(withIdentifier: "DeleteWallet") as! AllertWalletViewController
+        alertVC.controller = self
+        alertVC.isReloadAll = true
+        
+        self.present(alertVC, animated: true)
+    }
     
     @IBAction func cancelButtonPressed(_ sender: Any) {
         self.dismiss(animated: true)

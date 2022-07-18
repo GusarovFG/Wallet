@@ -29,4 +29,15 @@ class KeyChainManager {
         
         return password?["Password"] as! String
     }
+    
+    func deletePassword() {
+        do {
+            
+            try Locksmith.deleteDataForUserAccount(userAccount: "GreenWallet")
+        } catch {
+            print("Unable to save data")
+        }
+        
+       
+    }
 }

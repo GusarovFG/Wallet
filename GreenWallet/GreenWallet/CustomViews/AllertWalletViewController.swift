@@ -25,6 +25,8 @@ class AllertWalletViewController: UIViewController {
     var isServerError = false
     var iserrorCountOfWalletError = false
     var isNowallets = false
+    var isNoConnection = false
+    var isReloadAll = false
     
     @IBOutlet weak var mainLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
@@ -39,6 +41,9 @@ class AllertWalletViewController: UIViewController {
     @IBOutlet weak var wasDeletedTitle: UILabel!
     @IBOutlet weak var wasDeletedDescription: UILabel!
     @IBOutlet weak var confirmutton: UIButton!
+    @IBOutlet weak var noConnectionTitle: UILabel!
+    @IBOutlet weak var noConnectionDescription: UILabel!
+    @IBOutlet weak var noConnectionReloadButton: UIButton!
     
     @IBOutlet weak var deleteButton: UIButton!
     
@@ -130,6 +135,10 @@ class AllertWalletViewController: UIViewController {
                 self.deleteDescription.text = "Данный кошелек уже добавлен"
                 self.confirmutton.setTitle(LocalizationManager.share.translate?.result.list.all.confirm_btn, for: .normal)
             }
+        } else if self.restorationIdentifier == "noConnection" {
+            self.noConnectionTitle.text = LocalizationManager.share.translate?.result.list.no_connection.no_connection_title
+            self.noConnectionDescription.text = LocalizationManager.share.translate?.result.list.no_connection.no_connection_description
+            self.noConnectionReloadButton.setTitle(LocalizationManager.share.translate?.result.list.all.reconnect_btn, for: .normal)
         }
     }
     
@@ -149,6 +158,9 @@ class AllertWalletViewController: UIViewController {
     
     @IBAction func mainButtonPressed(_ sender: Any) {
         NotificationCenter.default.post(name: NSNotification.Name("setupRootVC"), object: nil)
+    }
+    @IBAction func noConnectionButtonPressed(_ sender: Any) {
+        NotificationCenter.default.post(name: NSNotification.Name("reloadConnect"), object: nil)
     }
     
     @IBAction func confirmDeleteContact(_ sender: Any) {
@@ -190,6 +202,10 @@ class AllertWalletViewController: UIViewController {
             self.dismiss(animated: true)
             self.controller.present(passwordVC, animated: true)
             
+        }
+        
+        if self.isReloadAll {
+            CoreDataManager.share.deletAll()
         }
     }
     @IBAction func dismissButtonPressed(_ sender: Any) {

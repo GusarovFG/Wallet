@@ -9,4 +9,5 @@ target 'GreenWallet' do
   pod "MnemonicSwift"
   pod 'SwiftyJSON'
   pod 'MaterialDesignWidgets'
+  pod 'CryptoSwift'
 end

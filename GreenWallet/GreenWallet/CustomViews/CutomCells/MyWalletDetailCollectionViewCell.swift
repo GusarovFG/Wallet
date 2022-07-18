@@ -41,7 +41,11 @@ class MyWalletDetailCollectionViewCell: UICollectionViewCell {
     }
     
     @IBAction func copyingMnemonic(_ sender: Any) {
-        UIPasteboard.general.string = self.wallet?.seed
+        
+        let value = self.wallet?.seed
+        let encryptedValue = try! value?.aesDecrypt(key: KeyChainManager.share.loadPassword())
+        
+        UIPasteboard.general.string = encryptedValue
         self.complitionHandler?()
     }
 }

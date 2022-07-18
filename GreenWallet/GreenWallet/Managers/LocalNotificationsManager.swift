@@ -23,7 +23,6 @@ class LocalNotificationsManager: NSObject {
     func sendNotification() {
         self.notificationCenter.delegate = self
         
-        
         content.sound = UNNotificationSound.default
         
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
@@ -49,8 +48,7 @@ class LocalNotificationsManager: NSObject {
                     CoreDataManager.share.savePushNotificationsVersion(version: notifications.result.version)
                     for i in newNotifications {
                         CoreDataManager.share.savePushNotifications(guid: i.guid , created_at: i.created_at, message: i.message)
-                        print("First")
-
+                        
                     }
                 } else if notifications.result.version != CoreDataManager.share.fetchPushNotificationsVersion()  {
                     CoreDataManager.share.savePushNotifications(guid: newNotifications.last?.guid ?? "", created_at: newNotifications.last?.created_at ?? "", message: newNotifications.last?.message ?? "")

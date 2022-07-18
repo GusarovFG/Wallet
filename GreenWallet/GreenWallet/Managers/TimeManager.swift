@@ -36,5 +36,14 @@ class TimeManager {
     func getCurrentDate() {
         
     }
+    
+    func dateToUnix(string: String) -> Double {
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+        dateFormatter.dateFormat = "dd.MM.yy"
+        let date = dateFormatter.date(from: string)
+        let unixTime = date?.timeIntervalSince1970 ?? 0.0
+        return unixTime
+    }
 
 }

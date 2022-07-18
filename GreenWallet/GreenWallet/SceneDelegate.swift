@@ -16,72 +16,91 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     private var enterBackGroundMinutes = 0
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-
+        
+        guard let _ = (scene as? UIWindowScene) else { return }
+        self.setupApp()
         
         
+        NotificationCenter.default.addObserver(self, selector: #selector(setupRootVC), name: NSNotification.Name("setupRootVC"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadConnect), name: NSNotification.Name("reloadConnect"), object: nil)
+        
+    }
+    
+    @objc func reloadConnect() {
+        self.setupApp()
+    }
+    
+    @objc func setupApp() {
         if #available(iOS 12, *), UserDefaultsManager.shared.userDefaults.string(forKey: UserDefaultsStringKeys.theme.rawValue) == "dark" || UserDefaultsManager.shared.userDefaults.string(forKey: UserDefaultsStringKeys.theme.rawValue) == nil {
             self.window?.overrideUserInterfaceStyle = .dark
         } else if #available(iOS 12, *), UserDefaultsManager.shared.userDefaults.string(forKey: UserDefaultsStringKeys.theme.rawValue) == "light" {
             self.window?.overrideUserInterfaceStyle = .light
         }
-        guard let _ = (scene as? UIWindowScene) else { return }
+        
         
         let storyboard = UIStoryboard(name: "Main", bundle: .main)
         let startVC = storyboard.instantiateViewController(withIdentifier: "startVC")
+        let passwordStoryboard = UIStoryboard(name: "PasswordStoryboard", bundle: .main)
+        let enterPasswordVC = passwordStoryboard.instantiateViewController(withIdentifier: "EnteringPasswordViewController") as! PasswordViewController
+        let alertStoryBoard = UIStoryboard(name: "Alert", bundle: .main)
+        let alertVC = alertStoryBoard.instantiateViewController(withIdentifier: "noConnection") as! AllertWalletViewController
         
         
-        
-        if UserDefaultsManager.shared.userDefaults.string(forKey: UserDefaultsStringKeys.firstSession.rawValue) == "First" {
-           
-            WalletManager.share.isUpdate = true
-            WalletManager.share.updateBalances()
-            let passwordStoryboard = UIStoryboard(name: "PasswordStoryboard", bundle: .main)
-            let enterPasswordVC = passwordStoryboard.instantiateViewController(withIdentifier: "EnteringPasswordViewController") as! PasswordViewController
-            enterPasswordVC.view.alpha = 0
-            DispatchQueue.global().async {
+        if ReachabilityManager.connectedToNetwork() {
+            if UserDefaultsManager.shared.userDefaults.string(forKey: UserDefaultsStringKeys.firstSession.rawValue) == "First" {
+                
+                WalletManager.share.isUpdate = true
+                WalletManager.share.updateBalances()
+                
+                enterPasswordVC.view.alpha = 0
+                DispatchQueue.global().async {
+                    
+                    NetworkManager.share.getLocalization(from: MainURLS.language.rawValue) { language in
+                        LanguageManager.share.language = language
+                        print(language.result.version)
+                        
+                    }
+                    
+                    NetworkManager.share.getTranslate(from: MainURLS.API.rawValue, languageCode: CoreDataManager.share.fetchLanguage()[0].languageCode ?? "") { translate in
+                        LocalizationManager.share.translate = translate
+                        DispatchQueue.main.async {
+                            
+                            self.window?.rootViewController = enterPasswordVC
+                            enterPasswordVC.modalPresentationStyle = .fullScreen
+                            
+                            enterPasswordVC.viewDidLoad()
+                            UIView.animate(withDuration: 1, delay: 0) {
+                                enterPasswordVC.view.alpha = 1
+                            }
+                            
+                        }
+                    }
+                }
+            } else {
                 
                 NetworkManager.share.getLocalization(from: MainURLS.language.rawValue) { language in
                     LanguageManager.share.language = language
-                    print(language.result.version)
+                    DispatchQueue.main.async {
+                        self.window?.rootViewController = startVC
+                        UIView.animate(withDuration: 1, delay: 0) {
+                            startVC.view.alpha = 1
+                        }
+                    }
                     
                 }
                 
-                NetworkManager.share.getTranslate(from: MainURLS.API.rawValue, languageCode: CoreDataManager.share.fetchLanguage()[0].languageCode ?? "") { translate in
-                    LocalizationManager.share.translate = translate
-                    DispatchQueue.main.async {
-                        
-                        self.window?.rootViewController = enterPasswordVC
-                        enterPasswordVC.modalPresentationStyle = .fullScreen
-                        
-                        enterPasswordVC.viewDidLoad()
-                        UIView.animate(withDuration: 1, delay: 0) {
-                            enterPasswordVC.view.alpha = 1
-                        }
-                        
-                    }
-                }
             }
         } else {
-            
-            NetworkManager.share.getLocalization(from: MainURLS.language.rawValue) { language in
-                LanguageManager.share.language = language
-                DispatchQueue.main.async {
-                    self.window?.rootViewController = startVC
-                    UIView.animate(withDuration: 1, delay: 0) {
-                        startVC.view.alpha = 1
-                    }
-                }
-                
+            DispatchQueue.main.async {
+                alertVC.isNoConnection = true
+                alertVC.modalPresentationStyle = .fullScreen
+                self.window?.rootViewController?.present(alertVC, animated: true)
             }
-            
+    
         }
         
         
-        
         UserDefaultsManager.shared.userDefaults.set(false, forKey: UserDefaultsStringKeys.hideWalletsBalance.rawValue)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(setupRootVC), name: NSNotification.Name("setupRootVC"), object: nil)
-        
     }
     
     @objc func setupRootVC() {

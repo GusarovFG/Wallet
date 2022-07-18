@@ -5184,6 +5184,14 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="OtherNotificationsTableViewCell" id="d27-q6-gYm" customClass="NotificationTableViewCell" customModule="GreenWallet" customModuleProvider="target">
+                                        <rect key="frame" x="20" y="93.5" width="374" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="d27-q6-gYm" id="ueQ-Ea-ywe">
+                                            <rect key="frame" x="0.0" y="0.0" width="374" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                 </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="PFJ-ki-ncU" id="tWI-hb-Kze"/>
@@ -5224,6 +5232,9 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                                                 <color key="tintColor" name="PasswordButtonsColor"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                                <connections>
+                                                    <action selector="allSystemButtonPresed:" destination="PFJ-ki-ncU" eventType="touchUpInside" id="VwC-PD-WeU"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -5512,6 +5523,11 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                             <constraint firstAttribute="bottom" secondItem="0WH-O2-JJY" secondAttribute="bottom" id="x2Q-bI-xUU"/>
                             <constraint firstItem="0aK-wA-kWs" firstAttribute="leading" secondItem="etY-0p-POa" secondAttribute="leading" constant="15" id="yEv-Wz-IpP"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="0WH-O2-JJY"/>
+                            </mask>
+                        </variation>
                     </view>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
@@ -5535,11 +5551,11 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                         <outlet property="filterTimeButton" destination="AzI-g0-6O0" id="9eH-z3-ZcM"/>
                         <outlet property="lastMonthButton" destination="eW1-jR-9pc" id="nTW-Sl-zDS"/>
                         <outlet property="lastWeekDateButton" destination="YkO-av-0RW" id="60Z-MQ-Yjf"/>
+                        <outlet property="notificationTableView" destination="ckr-um-h68" id="sWa-k2-I5F"/>
                         <outlet property="searchBar" destination="0aK-wA-kWs" id="KVx-vH-sIB"/>
                         <outlet property="systemMenuView" destination="fcs-DJ-fzs" id="agc-F9-w8g"/>
                         <outlet property="systemsStackView" destination="sqk-ty-BY9" id="5GC-6T-cmz"/>
                         <outlet property="systemsViewHeightConstraint" destination="Cln-HO-G8t" id="IPa-Op-zMm"/>
-                        <outlet property="tableView" destination="ckr-um-h68" id="sWa-k2-I5F"/>
                         <outlet property="titleLabel" destination="MO6-2e-PP1" id="gO3-8D-UWX"/>
                         <outlet property="todayDateButton" destination="BVm-QQ-np6" id="fBL-2l-cjK"/>
                         <outlet property="yesterdayDayeButton" destination="mam-Jb-wc3" id="Ned-7K-Ga1"/>

@@ -6,6 +6,7 @@
 //
 import MnemonicSwift
 import UIKit
+import CryptoSwift
 
 class VerifyMnemonicViewController: UIViewController {
     
@@ -181,8 +182,11 @@ class VerifyMnemonicViewController: UIViewController {
                                     dispatchGroup.leave()
                                     dispatchGroup.enter()
                                     
+                                    let value = privateKey.private_key.seed
+                                    let encryptedValue = try! value.aesEncrypt(key: KeyChainManager.share.loadPassword())
+                                    
                                     UserDefaultsManager.shared.userDefaults.set("Exist", forKey: UserDefaultsStringKeys.walletExist.rawValue )
-                                    CoreDataManager.share.saveChiaWalletPrivateKey(name: "Chia Wallet", fingerprint: privateKey.private_key.fingerprint, pk: privateKey.private_key.pk, seed: privateKey.private_key.seed, sk: privateKey.private_key.seed, adress: adreses, tokens: tokens)
+                                    CoreDataManager.share.saveChiaWalletPrivateKey(name: "Chia Wallet", fingerprint: privateKey.private_key.fingerprint, pk: privateKey.private_key.pk, seed: encryptedValue, sk: encryptedValue, adress: adreses, tokens: tokens)
                                     
                                     dispatchGroup.leave()
                                     dispatchGroup.enter()
@@ -256,8 +260,11 @@ class VerifyMnemonicViewController: UIViewController {
                                     dispatchGroup.leave()
                                     dispatchGroup.enter()
                                     
+                                    let value = privateKey.private_key.seed
+                                    let encryptedValue = try! value.aesEncrypt(key: KeyChainManager.share.loadPassword())
+                                    
                                     UserDefaultsManager.shared.userDefaults.set("Exist", forKey: UserDefaultsStringKeys.walletExist.rawValue )
-                                    CoreDataManager.share.saveChiaWalletPrivateKey(name: "Chives Wallet", fingerprint: privateKey.private_key.fingerprint, pk: privateKey.private_key.pk, seed: privateKey.private_key.seed, sk: privateKey.private_key.seed, adress: adreses, tokens: tokens)
+                                    CoreDataManager.share.saveChiaWalletPrivateKey(name: "Chives Wallet", fingerprint: privateKey.private_key.fingerprint, pk: privateKey.private_key.pk, seed: encryptedValue, sk: encryptedValue, adress: adreses, tokens: tokens)
                                     dispatchGroup.leave()
                                     dispatchGroup.enter()
                                     guard let newWallet = CoreDataManager.share.fetchChiaWalletPrivateKey().last else { return }
@@ -330,8 +337,12 @@ class VerifyMnemonicViewController: UIViewController {
                                     print(privateKey)
                                     dispatchGroup.leave()
                                     dispatchGroup.enter()
+                                    
+                                    let value = privateKey.private_key.seed
+                                    let encryptedValue = try! value.aesEncrypt(key: KeyChainManager.share.loadPassword())
+                                    
                                     UserDefaultsManager.shared.userDefaults.set("Exist", forKey: UserDefaultsStringKeys.walletExist.rawValue )
-                                    CoreDataManager.share.saveChiaWalletPrivateKey(name: "Chia TestNet", fingerprint: privateKey.private_key.fingerprint, pk: privateKey.private_key.pk, seed: privateKey.private_key.seed, sk: privateKey.private_key.seed, adress: adreses, tokens: tokens)
+                                    CoreDataManager.share.saveChiaWalletPrivateKey(name: "Chia TestNet", fingerprint: privateKey.private_key.fingerprint, pk: privateKey.private_key.pk, seed: encryptedValue, sk: encryptedValue, adress: adreses, tokens: tokens)
                                     dispatchGroup.leave()
                                     dispatchGroup.enter()
                                     guard let newWallet = CoreDataManager.share.fetchChiaWalletPrivateKey().last else { return }
@@ -404,8 +415,12 @@ class VerifyMnemonicViewController: UIViewController {
                                     print(privateKey)
                                     dispatchGroup.leave()
                                     dispatchGroup.enter()
+                                    
+                                    let value = privateKey.private_key.seed
+                                    let encryptedValue = try! value.aesEncrypt(key: KeyChainManager.share.loadPassword())
+                                    
                                     UserDefaultsManager.shared.userDefaults.set("Exist", forKey: UserDefaultsStringKeys.walletExist.rawValue )
-                                    CoreDataManager.share.saveChiaWalletPrivateKey(name: "Chives TestNet", fingerprint: privateKey.private_key.fingerprint, pk: privateKey.private_key.pk, seed: privateKey.private_key.seed, sk: privateKey.private_key.seed, adress: adreses, tokens: tokens)
+                                    CoreDataManager.share.saveChiaWalletPrivateKey(name: "Chives TestNet", fingerprint: privateKey.private_key.fingerprint, pk: privateKey.private_key.pk, seed: encryptedValue, sk: encryptedValue, adress: adreses, tokens: tokens)
                                     dispatchGroup.leave()
                                     dispatchGroup.enter()
                                     guard let newWallet = CoreDataManager.share.fetchChiaWalletPrivateKey().last else { return }
