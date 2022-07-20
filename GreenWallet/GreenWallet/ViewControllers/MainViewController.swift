@@ -57,7 +57,7 @@ class MainViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(localization), name: NSNotification.Name("localized"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(reloadcellectionView), name: NSNotification.Name("reload"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(updateBalances), name: NSNotification.Name("updateBalances"), object: nil)
-
+        
         
         
         localization()
@@ -84,8 +84,11 @@ class MainViewController: UIViewController {
         self.wallets = WalletManager.share.favoritesWallets
         WalletManager.share.vallets = CoreDataManager.share.fetchChiaWalletPrivateKey()
         self.wallets = WalletManager.share.favoritesWallets
-        self.cellectionView.scrollToItem(at: [0,0], at: .left, animated: true)
-//        self.wallets = CoreDataManager.share.fetchChiaWalletPrivateKey()
+        if !CoreDataManager.share.fetchChiaWalletPrivateKey().isEmpty {
+            
+            self.cellectionView.scrollToItem(at: [0,0], at: .left, animated: true)
+        }
+        //        self.wallets = CoreDataManager.share.fetchChiaWalletPrivateKey()
         if !self.wallets.isEmpty {
             self.cellectionView.isScrollEnabled = true
             self.wallet = self.wallets[0]
@@ -118,7 +121,7 @@ class MainViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         localization()
-//        self.cellectionView.reloadData()
+        //        self.cellectionView.reloadData()
         LocalNotificationsManager.share.checkUpdates()
     }
     
@@ -183,21 +186,25 @@ class MainViewController: UIViewController {
         
     }
     
-
-
+    
+    
     @IBAction func sendButtonPressed(_ sender: Any) {
         if !CoreDataManager.share.fetchChiaWalletPrivateKey().isEmpty {
-        let pushVC = storyboard?.instantiateViewController(withIdentifier: "PushTokensViewController") as! PushTokensViewController
-        pushVC.wallet = self.wallet
-        pushVC.isInMyWallet = true
-        pushVC.isChia = self.wallet?.name == "Chia Wallet"
-        pushVC.isChiaTest = self.wallet?.name == "Chia TestNet"
-        pushVC.isChives = self.wallet?.name == "Chives Wallet"
-        pushVC.isChivesTest = self.wallet?.name == "Chives TestNet"
-        pushVC.modalPresentationStyle = .overFullScreen
-        self.present(pushVC, animated: true)
+            let pushVC = storyboard?.instantiateViewController(withIdentifier: "PushTokensViewController") as! PushTokensViewController
+            pushVC.wallet = self.wallet
+            pushVC.isInMyWallet = true
+            pushVC.isChia = self.wallet?.name == "Chia Wallet"
+            pushVC.isChiaTest = self.wallet?.name == "Chia TestNet"
+            pushVC.isChives = self.wallet?.name == "Chives Wallet"
+            pushVC.isChivesTest = self.wallet?.name == "Chives TestNet"
+            pushVC.modalPresentationStyle = .overFullScreen
+            self.tabBarController?.present(pushVC, animated: true)
         } else {
-            AlertManager.share.walletsIsNotFounded(self)
+            let storyboard = UIStoryboard(name: "Main", bundle: .main)
+            let selectSystemVC = storyboard.instantiateViewController(withIdentifier: "SelectSystemViewController") as! SelectSystemViewController
+            selectSystemVC.isNewWallet = true
+            self.tabBarController?.present(selectSystemVC, animated: true)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "newWallet"), object: nil)
         }
         
     }
@@ -234,7 +241,7 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
             self.collectionViewHeightConstraint.constant = cell.frame.height
             if cell.wallet?.token != nil {
                 self.balanceLabel.text = "\(cell.wallet?.token?.map({Double($0[2])!}).reduce(0, +) ?? 0) USD"
-
+                
             } else {
                 self.balanceLabel.text = "0 USD"
             }
@@ -299,7 +306,7 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
                 
             }
             
-           
+            
             
         }
     }

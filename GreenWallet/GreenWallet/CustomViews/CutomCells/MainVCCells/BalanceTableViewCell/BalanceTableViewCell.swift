@@ -6,9 +6,12 @@
 //
 
 import UIKit
+import SDWebImage
+
 
 class BalanceTableViewCell: UITableViewCell {
     
+    var token: [String] = []
     
     @IBOutlet weak var cellImage: UIImageView!
     @IBOutlet weak var balanceLabel: UILabel!
@@ -18,6 +21,7 @@ class BalanceTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.cellImage.layer.cornerRadius = self.cellImage.frame.width / 2
+       
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -27,13 +31,25 @@ class BalanceTableViewCell: UITableViewCell {
     }
     
     func setupCell(wallet: ChiaWalletPrivateKey?, index: Int) {
-//        guard let url = URL(string:TailsManager.share.tails?.result.list.filter({$0.name == wallet?.names?[index] ?? ""}).first?.logo_url ?? "") else { return }
         
+        guard let url = URL(string:TailsManager.share.tails?.result.list.filter({$0.hash.contains(wallet?.token?[index][0].dropFirst(4).dropLast(3) ?? "") }).first?.logo_url ?? "") else { return }
+        DispatchQueue.global().async {
+            
+            self.cellImage.sd_setImage(with: url) { image, error, cach, url in
+                DispatchQueue.main.async {
+                    self.cellImage.image = image
+                }
+            }
+        }
+
         
-//            self.cellImage.load(url: url )
             
         
-            
-        
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+           self.cellImage.image = nil
+        // self.userImage.image = nil // above line not working then try this
     }
 }

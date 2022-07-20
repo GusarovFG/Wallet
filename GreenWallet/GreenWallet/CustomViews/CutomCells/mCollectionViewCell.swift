@@ -184,74 +184,65 @@ extension mCollectionViewCell: UITableViewDelegate, UITableViewDataSource {
             
             if !CoreDataManager.share.fetchChiaWalletPrivateKey().isEmpty {
                 if self.token[indexPath.row][0] == "Chia Wallet" || self.token[indexPath.row][0] == "Chia TestNet" {
+                    walletCell.cellImage.image = UIImage(named: "LogoChia")!
+                    let summ: Double = ((Double(self.token[indexPath.row][2]) ?? 0) / 1000000000000) * ExchangeRatesManager.share.newRatePerDollar
+                    walletCell.tokenLabel.text = self.token[indexPath.row][0]
                     
-                } else if self.token[indexPath.row][0] == "Chives Wallet" || self.token[indexPath.row][0] == "Chives TestNet" {
-                    walletCell.cellImage.image = UIImage(named: "ChivesLogo")!
-                } else {
-                    walletCell.setupCell(wallet: self.wallet, index: indexPath.row)
-                }
-                
-                if CoreDataManager.share.fetchChiaWalletPrivateKey().isEmpty {
-                    walletCell.balanceLabel.text = "0 XCH"
-                } else {
-                    if self.token[indexPath.row][0] == "Chia Wallet" || self.token[indexPath.row][0] == "Chia TestNet"  {
-                        walletCell.cellImage.image = UIImage(named: "LogoChia")!
-                        let summ: Double = ((Double(self.token[indexPath.row][2]) ?? 0) / 1000000000000) * ExchangeRatesManager.share.newRatePerDollar
-                        walletCell.tokenLabel.text = self.token[indexPath.row][0]
-                        
-                        if !self.hideBalance {
-                            walletCell.convertLabel.text = "⁓ \(NSString(format:"%.2f", summ)) USD"
-                            walletCell.balanceLabel.text = "\((Double(self.token[indexPath.row][2]) ?? 0) / 1000000000000.0 ) XCH"
-                           
-                        } else {
-                            walletCell.convertLabel.text = "***** UDS"
-                            walletCell.balanceLabel.text = "*****"
-                        }
-                        
-                    } else if self.token[indexPath.row][0] == "Chives Wallet" || self.token[indexPath.row][0] == "Chives TestNet"  {
-                        
-                        walletCell.cellImage.image = UIImage(named: "ChivesLogo")!
-                        
-                        let summ: Double = ((Double(self.token[indexPath.row][2]) ?? 0) / 1000000000000) * ExchangeRatesManager.share.newChivesRatePerDollar
-                        if ExchangeRatesManager.share.newChivesRatePerDollar == 0 {
-                            walletCell.convertLabel.text = "⁓ USD"
-                        } else {
-                            if !self.hideBalance {
-                                walletCell.convertLabel.text = "⁓ \(NSString(format:"%.2f", summ)) USD"
-                                walletCell.balanceLabel.text = "\(((Double(self.token[indexPath.row][2]) ?? 0) / 1000000000000)) XCC"
-                               
-                            } else {
-                                walletCell.convertLabel.text = "***** UDS"
-                                walletCell.balanceLabel.text = "*****"
-                            }
-                        }
-                        
-                        walletCell.tokenLabel.text = self.token[indexPath.row][0]
+                    if !self.hideBalance {
+                        walletCell.convertLabel.text = "⁓ \(NSString(format:"%.2f", summ)) USD"
+                        walletCell.balanceLabel.text = "\((Double(self.token[indexPath.row][2]) ?? 0) / 1000000000000.0 ) XCH"
                         
                     } else {
-                        let summ: Double = ((Double(self.token[indexPath.row][2]) ?? 0) / 1000000000000) * ExchangeRatesManager.share.newRatePerDollar
-                            
+                        walletCell.convertLabel.text = "***** UDS"
+                        walletCell.balanceLabel.text = "*****"
+                    }
+                    
+                } else if self.token[indexPath.row][0] == "Chives Wallet" || self.token[indexPath.row][0] == "Chives TestNet"  {
+                    
+                    walletCell.cellImage.image = UIImage(named: "ChivesLogo")!
+                    
+                    let summ: Double = ((Double(self.token[indexPath.row][2]) ?? 0) / 1000000000000) * ExchangeRatesManager.share.newChivesRatePerDollar
+                    if ExchangeRatesManager.share.newChivesRatePerDollar == 0 {
+                        walletCell.convertLabel.text = "⁓ USD"
+                    } else {
                         if !self.hideBalance {
                             walletCell.convertLabel.text = "⁓ \(NSString(format:"%.2f", summ)) USD"
-                            walletCell.balanceLabel.text = "\((Double(self.token[indexPath.row][2]) ?? 0) / 1000000000000.0 * ExchangeRatesManager.share.newRatePerDollar ) \(TailsManager.share.tails?.result.list.filter({$0.hash.contains(self.token[indexPath.row][0].split(separator: " ").last?.prefix(15) ?? "") || $0.name.contains(self.token[indexPath.row][0])}).first?.code ?? "")"
-                           
+                            walletCell.balanceLabel.text = "\(((Double(self.token[indexPath.row][2]) ?? 0) / 1000000000000)) XCC"
+                            
                         } else {
                             walletCell.convertLabel.text = "***** UDS"
                             walletCell.balanceLabel.text = "*****"
                         }
-                        
-                        
-                        walletCell.tokenLabel.text = TailsManager.share.tails?.result.list.filter({$0.hash.contains(self.token[indexPath.row][0].split(separator: " ").last?.prefix(15) ?? "") || $0.name.contains(self.token[indexPath.row][0])}).first?.name
-                        
-                        if indexPath != [0,0] {
-                            guard let url = URL(string: TailsManager.share.tails?.result.list.filter({$0.hash.contains(self.token[indexPath.row][0].split(separator: " ").last?.prefix(15) ?? "") || $0.name.contains(self.token[indexPath.row][0])}).first?.logo_url ?? "") else { return  walletCell }
-                            walletCell.cellImage.load(url: url)
-                        }
                     }
+                    
+                    walletCell.tokenLabel.text = self.token[indexPath.row][0]
+                    
+                } else {
+                  
+                    walletCell.cellImage.downloadImage(from: TailsManager.share.tails?.result.list.filter({$0.hash.contains(self.wallet?.token?[indexPath.row][0].dropFirst(4).dropLast(3) ?? "") }).first?.logo_url ?? "")
+                    let summ: Double = ((Double(self.token[indexPath.row][2]) ?? 0) / 1000000000000) * ExchangeRatesManager.share.newRatePerDollar
+                    
+                    if !self.hideBalance {
+                        walletCell.convertLabel.text = "⁓ \(NSString(format:"%.2f", summ)) USD"
+                        walletCell.balanceLabel.text = "\((Double(self.token[indexPath.row][2]) ?? 0) / 1000000000000.0 * ExchangeRatesManager.share.newRatePerDollar ) \(TailsManager.share.tails?.result.list.filter({$0.hash.contains(self.token[indexPath.row][0].split(separator: " ").last?.prefix(15) ?? "") || $0.name.contains(self.token[indexPath.row][0])}).first?.code ?? "")"
+                        
+                    } else {
+                        walletCell.convertLabel.text = "***** UDS"
+                        walletCell.balanceLabel.text = "*****"
+                    }
+                    
+                    
+                    walletCell.tokenLabel.text = TailsManager.share.tails?.result.list.filter({$0.hash.contains(self.token[indexPath.row][0].split(separator: " ").last?.prefix(15) ?? "") || $0.name.contains(self.token[indexPath.row][0])}).first?.name
+                    
+                   
+                    
                 }
                 
+                 
+            } else {
+                walletCell.balanceLabel.text = "0 XCH"
             }
-            
+            print(indexPath)
             return walletCell
             
         }
@@ -272,9 +263,9 @@ extension mCollectionViewCell: UITableViewDelegate, UITableViewDataSource {
             }
         }
     }
-
-
-
+    
+    
+    
 }
 
 

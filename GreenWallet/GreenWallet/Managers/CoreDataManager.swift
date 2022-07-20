@@ -154,6 +154,31 @@ class CoreDataManager {
         
     }
     
+    func updateCatBalanceChiaWalletPrivateKey(index: Int, id: Int, balance: String) {
+        let fetchReqest: NSFetchRequest<ChiaWalletPrivateKey> = ChiaWalletPrivateKey.fetchRequest()
+        let privateKey = (try? self.persistentContainer.viewContext.fetch(fetchReqest)) ?? []
+        
+        
+        
+        let indexCat = privateKey[index].token?.firstIndex(where: {$0.contains("\(id)")})
+        privateKey[index].token?[indexCat ?? 0][2] = balance
+        
+        saveContext()
+        
+    }
+    
+    func addCatBalanceChiaWalletPrivateKey(index: Int, token: [String]) {
+        let fetchReqest: NSFetchRequest<ChiaWalletPrivateKey> = ChiaWalletPrivateKey.fetchRequest()
+        let privateKey = (try? self.persistentContainer.viewContext.fetch(fetchReqest)) ?? []
+        
+        
+        
+        privateKey[index].token?.append(token)
+        
+        saveContext()
+        
+    }
+    
     func createWallet(data: String, id: Int, name: String, type: Int) -> ChiaWalletsCD {
         let wallet = ChiaWalletsCD(context: self.persistentContainer.viewContext)
         wallet.id = Int64(id)

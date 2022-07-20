@@ -3,6 +3,9 @@ PODS:
   - Locksmith (4.0.0)
   - MaterialDesignWidgets (0.1.1)
   - MnemonicSwift (2.2.4)
+  - SDWebImage (5.13.1):
+    - SDWebImage/Core (= 5.13.1)
+  - SDWebImage/Core (5.13.1)
   - SwiftyJSON (5.0.1)
 
 DEPENDENCIES:
@@ -10,6 +13,7 @@ DEPENDENCIES:
   - Locksmith
   - MaterialDesignWidgets
   - MnemonicSwift
+  - SDWebImage
   - SwiftyJSON
 
 SPEC REPOS:
@@ -18,6 +22,7 @@ SPEC REPOS:
     - Locksmith
     - MaterialDesignWidgets
     - MnemonicSwift
+    - SDWebImage
     - SwiftyJSON
 
 SPEC CHECKSUMS:
@@ -25,8 +30,9 @@ SPEC CHECKSUMS:
   Locksmith: e9bebbaaa4cee3c511bc358a44f843c3fe00e21f
   MaterialDesignWidgets: 6d02d3fbba2fa89f6e773983346ad2187d7ef8ff
   MnemonicSwift: 40ba76b951b75b32e2719df989b4d6da5798fe26
+  SDWebImage: fb26a455eeda4c7a55e4dcb6172dbb258af7a4ca
   SwiftyJSON: 2f33a42c6fbc52764d96f13368585094bfd8aa5e
 
-PODFILE CHECKSUM: 23f787081895da85f9e010c0ecd9dae9ed860343
+PODFILE CHECKSUM: b6a1e611c6efd4886fbb51090be1e8f3ce4bc86e
 
 COCOAPODS: 1.11.2

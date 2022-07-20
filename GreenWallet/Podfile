@@ -10,4 +10,5 @@ target 'GreenWallet' do
   pod 'SwiftyJSON'
   pod 'MaterialDesignWidgets'
   pod 'CryptoSwift'
+  pod 'SDWebImage'
 end

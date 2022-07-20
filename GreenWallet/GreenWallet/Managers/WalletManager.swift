@@ -17,7 +17,7 @@ class WalletManager {
     var favoritesWallets: [ChiaWalletPrivateKey] = CoreDataManager.share.fetchChiaWalletPrivateKey()
     var index = 0
     private init(){
-        self.myTimer = Timer(timeInterval: 15.0, target: self, selector: #selector(updateBalances), userInfo: nil, repeats: true)
+        self.myTimer = Timer(timeInterval: 30.0, target: self, selector: #selector(updateBalances), userInfo: nil, repeats: true)
         RunLoop.main.add(self.myTimer, forMode: .default)
     }
 
@@ -49,8 +49,11 @@ class WalletManager {
                     let walletTokens = CoreDataManager.share.fetchChiaWalletPrivateKey()[self.index].token ?? []
                     if wallet.name == "Chia Wallet" {
                         ChiaBlockchainManager.share.logIn(Int(wallet.fingerprint)) { log in
+                            print("fingerprint \(wallet.fingerprint)")
+                            print(log.fingerprint)
                             if log.success {
                                 ChiaBlockchainManager.share.getWallets { wallets in
+                                    
                                     for walletONe in 0..<wallets.wallets.count {
 
                                         ChiaBlockchainManager.share.getWalletBalance(wallets.wallets[walletONe].id) { balance in
@@ -60,15 +63,14 @@ class WalletManager {
                                             token.append(id)
                                             token.append("\(balance.wallet_balance.confirmed_wallet_balance)")
                                             token.append("show")
-                                                tokens.append(token)
+                                            tokens.append(token)
                                             print(tokens)
                                             print(walletTokens)
                                             print(token)
-                                            token.removeAll()
-                                            if walletTokens != tokens && walletTokens.count <= tokens.count{
+                                            if !walletTokens.contains(token) {
                                                 print("Новье")
-                                                CoreDataManager.share.editChiaWalletPrivateKey(index: self.index, name: wallet.name ?? "", fingerprint: Int(wallet.fingerprint) , pk: wallet.pk ?? "", seed: wallet.seed ?? "", sk: wallet.sk ?? "", adress: wallet.adres ?? "", tokens: tokens)
-                                               
+                                                CoreDataManager.share.addCatBalanceChiaWalletPrivateKey(index: self.index, token: token)
+                                                tokens.removeAll()
                                                 DispatchQueue.main.async {
                                                     
                                                     print(CoreDataManager.share.fetchChiaWalletPrivateKey())
@@ -77,7 +79,14 @@ class WalletManager {
                                                 }
                                                 
                                             } else {
-                                  
+                                                CoreDataManager.share.updateCatBalanceChiaWalletPrivateKey(index: self.index, id: wallets.wallets[walletONe].id, balance: "\(balance.wallet_balance.confirmed_wallet_balance)")
+                                                DispatchQueue.main.async {
+                                                    
+                                                    print(CoreDataManager.share.fetchChiaWalletPrivateKey())
+                                                    
+                                                    NotificationCenter.default.post(name: NSNotification.Name("updateBalances"), object: nil)
+                                                }
+                                                token.removeAll()
                                                 print("То же самое")
                                             }
                                             print("qweqweqwe \(tokens)")

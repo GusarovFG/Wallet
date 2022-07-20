@@ -181,13 +181,13 @@ extension MyWalletsViewController: UICollectionViewDelegate, UICollectionViewDat
                 
                 
                 mainCell.walletImage.image = UIImage(named: "LogoChia")!
-                mainCell.balanceLabel.text = "\(((self.wallet?.token?.map({$0[2].toDouble() ?? 0}).reduce(0, +) ?? 0) / 1000000000000)) XCH"
+                mainCell.balanceLabel.text = "\(((wallet.token?.map({$0[2].toDouble() ?? 0}).reduce(0, +) ?? 0) / 1000000000000)) XCH"
                 mainCell.publicKeyLabel.text = "\(LocalizationManager.share.translate?.result.list.wallet.wallet_data_public_key ?? "") \(wallets[indexPath.row].fingerprint )"
                 if ((wallet.name?.contains("Chia")) != nil) {
-                    let summChia: Double = ((self.wallet?.token?.map({$0[2].toDouble() ?? 0}).reduce(0, +) ?? 0) / 1000000000000) * ExchangeRatesManager.share.newRatePerDollar
+                    let summChia: Double = ((wallet.token?.map({$0[2].toDouble() ?? 0}).reduce(0, +) ?? 0) / 1000000000000) * ExchangeRatesManager.share.newRatePerDollar
                     mainCell.usdLabel.text = "⁓ \(NSString(format:"%.2f", summChia)) USD"
                 } else {
-                    let summChives: Double = ((self.wallet?.token?.map({$0[2].toDouble() ?? 0}).reduce(0, +) ?? 0) / 1000000000000) * ExchangeRatesManager.share.newChivesRatePerDollar
+                    let summChives: Double = ((wallet.token?.map({$0[2].toDouble() ?? 0}).reduce(0, +) ?? 0) / 1000000000000) * ExchangeRatesManager.share.newChivesRatePerDollar
                     mainCell.usdLabel.text = "⁓ \(NSString(format:"%.2f", summChives)) USD"
                 }
                 mainCell.walletSystemLabel.text = (wallet.name?.split(separator: " ").first ?? "") + " Network"
@@ -250,7 +250,7 @@ extension MyWalletsViewController: UICollectionViewDelegate, UICollectionViewDat
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         switch collectionView {
         case self.walletCollectionView:
-            return CGSize(width: self.walletCollectionView.frame.width, height: collectionView.frame.height - 20)
+            return CGSize(width: self.walletCollectionView.frame.width, height: collectionView.frame.height - 10)
         case self.actionCollectionView:
             return CGSize(width: (collectionView.frame.width / 2) - 10, height: (collectionView.frame.height / 2) - 10)
         default:
