@@ -14,26 +14,29 @@ class WalletManager {
     var isUpdate = false
     var myTimer = Timer()
     var favoritesWallets: [ChiaWalletPrivateKey] = CoreDataManager.share.fetchChiaWalletPrivateKey()
+    var index = 0
     private init(){
         self.myTimer = Timer(timeInterval: 30.0, target: self, selector: #selector(updateBalances), userInfo: nil, repeats: true)
         RunLoop.main.add(self.myTimer, forMode: .default)
     }
     
     func qwe(index: Int) {
+        
+        
+    }
+    
+    @objc func updateBalances() {
         var name = ""
         var id = ""
         var token : [String] = []
         var tokens: [[String]] = []
-        let group = DispatchGroup()
         print("нычало")
-        let wallet = CoreDataManager.share.fetchChiaWalletPrivateKey()[index]
-        let walletTokens = CoreDataManager.share.fetchChiaWalletPrivateKey()[index].token ?? []
+        print(self.index)
         
         if self.isUpdate {
-                for wal in 0..<CoreDataManager.share.fetchChiaWalletPrivateKey().count {
                     DispatchQueue.global().async {
-                    let wallet = CoreDataManager.share.fetchChiaWalletPrivateKey()[wal]
-                    let walletTokens = CoreDataManager.share.fetchChiaWalletPrivateKey()[wal].token ?? []
+                    let wallet = CoreDataManager.share.fetchChiaWalletPrivateKey()[self.index]
+                    let walletTokens = CoreDataManager.share.fetchChiaWalletPrivateKey()[self.index].token ?? []
                     if wallet.name == "Chia Wallet" {
                         ChiaBlockchainManager.share.logIn(Int(wallet.fingerprint)) { log in
                             if log.success {
@@ -58,7 +61,12 @@ class WalletManager {
                                             token.removeAll()
                                             if walletTokens != tokens && walletTokens.count <= tokens.count{
                                                 print("Новье")
-                                                CoreDataManager.share.editChiaWalletPrivateKey(index: wal, name: wallet.name ?? "", fingerprint: Int(wallet.fingerprint) , pk: wallet.pk ?? "", seed: wallet.seed ?? "", sk: wallet.sk ?? "", adress: wallet.adres ?? "", tokens: tokens)
+                                                CoreDataManager.share.editChiaWalletPrivateKey(index: self.index, name: wallet.name ?? "", fingerprint: Int(wallet.fingerprint) , pk: wallet.pk ?? "", seed: wallet.seed ?? "", sk: wallet.sk ?? "", adress: wallet.adres ?? "", tokens: tokens)
+                                                if self.index == (CoreDataManager.share.fetchChiaWalletPrivateKey().count - 1) {
+                                                    self.index = 0
+                                                } else {
+                                                    self.index += 1
+                                                }
                                                 DispatchQueue.main.async {
 
                                                     print(CoreDataManager.share.fetchChiaWalletPrivateKey())
@@ -67,6 +75,11 @@ class WalletManager {
                                                 }
 
                                             } else {
+                                                if self.index == (CoreDataManager.share.fetchChiaWalletPrivateKey().count - 1) {
+                                                    self.index = 0
+                                                } else {
+                                                    self.index += 1
+                                                }
                                                 print("То же самое")
                                             }
                                             print("qweqweqwe \(tokens)")
@@ -77,28 +90,14 @@ class WalletManager {
                         }
                     }
 
-                }
+                
             }
         } else {
             return
 
         }
-        
     }
     
-    @objc func updateBalances() {
-        
-        let group = DispatchGroup()
-        var count = 0
-            for i in 0..<CoreDataManager.share.fetchChiaWalletPrivateKey().count {
-                self.qwe(index: i)
-                print("ЖОПА")
-                print(CoreDataManager.share.fetchChiaWalletPrivateKey().count)
-                count += 1
-                print(count)
-            }
-        }
-        
     
     
 }

@@ -651,7 +651,7 @@ class PushTokensViewController: UIViewController {
     }
     
     @IBAction func contactCheck(_ sender: UITextField) {
-        if sender.text == self.contact {
+        if CoreDataManager.share.fetchContacts().contains(where: {$0.name?.lowercased() == self.contactTextField.text?.lowercased() || $0.adres?.lowercased() == self.adressTextField.text?.lowercased()}) {
             self.walletLinkError.text = LocalizationManager.share.translate?.result.list.send_token.send_token_address_is_already_exist
             self.walletLinkError.textColor = #colorLiteral(red: 0.1176470588, green: 0.5764705882, blue: 1, alpha: 1)
             self.walletLinkError.alpha = 1
