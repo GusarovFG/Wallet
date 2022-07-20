@@ -156,10 +156,18 @@ extension AllWalletsViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch indexPath {
+        case [0,self.wallets.count]:
+            let systemViewController = self.storyboard?.instantiateViewController(withIdentifier: "SelectSystemViewController") as! SelectSystemViewController
+            systemViewController.isNewWallet = true
+            self.present(systemViewController, animated: true, completion: nil)
+        default:
+            let myWalletsVC = storyboard?.instantiateViewController(withIdentifier: "MyWalletsViewController") as! MyWalletsViewController
+            myWalletsVC.wallets = self.wallets
+            myWalletsVC.index = indexPath.row
+            self.present(myWalletsVC, animated: true)
+        }
         
-        let myWalletsVC = storyboard?.instantiateViewController(withIdentifier: "MyWalletsViewController") as! MyWalletsViewController
-        myWalletsVC.wallets = self.wallets
-        myWalletsVC.index = indexPath.row
-        self.present(myWalletsVC, animated: true)
+        
     }
 }

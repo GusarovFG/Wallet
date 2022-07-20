@@ -264,6 +264,7 @@ extension mCollectionViewCell: UITableViewDelegate, UITableViewDataSource {
                 let storyboard = UIStoryboard(name: "Main", bundle: .main)
                 let importVC = storyboard.instantiateViewController(withIdentifier: "ImportTokensViewController") as! ImportTokensViewController
                 importVC.index = self.index
+                print(self.index)
                 importVC.modalPresentationStyle = .fullScreen
                 self.controller.present(importVC, animated: true)
             } else {

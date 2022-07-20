@@ -21,6 +21,7 @@ class ChiaBlockchainManager {
         guard let url = URL(string: self.url + "/wallet/" + method) else { return }
         let parameters = ["fingerprint":fingerprint]
         var request = URLRequest(url: url)
+        request.timeoutInterval = 120
         request.httpMethod = "POST"
         guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: []) else { return }
         request.httpBody = httpBody
@@ -73,6 +74,7 @@ class ChiaBlockchainManager {
         guard let url = URL(string: self.url + "/wallet/" + method) else { return }
         let parameters = ["":""]
         var request = URLRequest(url: url)
+        request.timeoutInterval = 120
         request.httpMethod = "POST"
         guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: []) else { return }
         request.httpBody = httpBody
@@ -129,6 +131,7 @@ class ChiaBlockchainManager {
         guard let url = URL(string: self.url + "/wallet/" + method) else { return }
         let parameters = ["":""]
         var request = URLRequest(url: url)
+        request.timeoutInterval = 120
         request.httpMethod = "POST"
         guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: []) else { return }
         request.httpBody = httpBody
@@ -188,6 +191,7 @@ class ChiaBlockchainManager {
         guard let url = URL(string: self.url + "/wallet/" + method) else { return }
         let parameters = ["mnemonic":mnemonicPhrase, "type":"new_wallet"] as [String : Any]
         var request = URLRequest(url: url)
+        request.timeoutInterval = 120
         request.httpMethod = "POST"
         guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: []) else { return }
         request.httpBody = httpBody
@@ -247,6 +251,7 @@ class ChiaBlockchainManager {
         guard let url = URL(string: self.url + "/wallet/" + method) else { return }
         let parameters = ["":""]
         var request = URLRequest(url: url)
+        request.timeoutInterval = 120
         request.httpMethod = "POST"
         guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: []) else { return }
         request.httpBody = httpBody
@@ -305,6 +310,7 @@ class ChiaBlockchainManager {
         guard let url = URL(string: self.url + "/wallet/" + method) else { return }
         let parameters = ["mnemonic":mnemonicPhrase] as [String : Any]
         var request = URLRequest(url: url)
+        request.timeoutInterval = 120
         request.httpMethod = "POST"
         guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: []) else { return }
         request.httpBody = httpBody
@@ -363,6 +369,7 @@ class ChiaBlockchainManager {
         guard let url = URL(string: self.url + "/wallet/" + method) else { return }
         let parameters = ["fingerprint":fingerPring ] as [String : Any]
         var request = URLRequest(url: url)
+        request.timeoutInterval = 120
         request.httpMethod = "POST"
         guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: []) else { return }
         request.httpBody = httpBody
@@ -421,6 +428,7 @@ class ChiaBlockchainManager {
         guard let url = URL(string: self.url + "/wallet/" + method) else { return }
         let parameters = ["":""]
         var request = URLRequest(url: url)
+        request.timeoutInterval = 120
         request.httpMethod = "POST"
         guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: []) else { return }
         request.httpBody = httpBody
@@ -481,6 +489,7 @@ class ChiaBlockchainManager {
         guard let url = URL(string: self.url + "/wallet/" + method) else { return }
         let parameters = ["wallet_id": walletID, "new_address":false] as [String : Any]
         var request = URLRequest(url: url)
+        request.timeoutInterval = 120
         request.httpMethod = "POST"
         guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: []) else { return }
         request.httpBody = httpBody
@@ -541,6 +550,7 @@ class ChiaBlockchainManager {
         let parameters = ["wallet_id":walletID]
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
+        request.timeoutInterval = 120
         guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: []) else { return }
         request.httpBody = httpBody
         
@@ -588,6 +598,8 @@ class ChiaBlockchainManager {
                         
                         NotificationCenter.default.post(name: NSNotification.Name("alertErrorGerCodingKeys"), object: nil)
                     }
+                } catch {
+                    
                 }
             }
         }.resume()
@@ -598,6 +610,7 @@ class ChiaBlockchainManager {
         guard let url = URL(string: self.url + "/wallet/" + method) else { return }
         let parameters = ["wallet_id":walletID]
         var request = URLRequest(url: url)
+        request.timeoutInterval = 120
         request.httpMethod = "POST"
         guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: []) else { return }
         request.httpBody = httpBody
@@ -657,6 +670,7 @@ class ChiaBlockchainManager {
         guard let url = URL(string: self.url + "/full-node/" + method) else { return }
         let parameters = ["puzzle_hash":"\(puzzleHash)", "include_spend_coins": false] as [String : Any]
         var request = URLRequest(url: url)
+        request.timeoutInterval = 120
         request.httpMethod = "POST"
         guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: []) else { return }
         request.httpBody = httpBody
@@ -699,6 +713,7 @@ class ChiaBlockchainManager {
         guard let url = URL(string: self.url + "/wallet/" + method) else { return }
         let parameters = ["wallet_id": walletID, "amount": amount, "fee": fee, "address": address] as [String : Any]
         var request = URLRequest(url: url)
+        request.timeoutInterval = 120
         request.httpMethod = "POST"
         guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: []) else { return }
         request.httpBody = httpBody
@@ -756,6 +771,7 @@ class ChiaBlockchainManager {
         guard let url = URL(string: self.url + "/wallet/" + method) else { return }
         let parameters = ["wallet_id": walletID] as [String : Any]
         var request = URLRequest(url: url)
+        request.timeoutInterval = 120
         request.httpMethod = "POST"
         guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: []) else { return }
         request.httpBody = httpBody
@@ -815,6 +831,7 @@ class ChiaBlockchainManager {
         guard let url = URL(string: self.url + "/wallet/" + method) else { return }
         let parameters = ["wallet_type": "cat_wallet", "mode": "existing", "asset_id": tailHash] as [String : Any]
         var request = URLRequest(url: url)
+        request.timeoutInterval = 120
         request.httpMethod = "POST"
         guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: []) else { return }
         request.httpBody = httpBody

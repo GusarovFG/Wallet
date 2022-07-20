@@ -277,6 +277,7 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
             self.pageControl.currentPage = visibleIndexPath.row
             self.wallet = self.wallets[visibleIndexPath.row]
             self.index = visibleIndexPath.row
+            print(self.index)
             if self.wallet?.name == "Chia Wallet" || self.wallet?.name == "Chia TestNet" {
                 let summ: Double = (((self.wallet?.token?.map({Double($0[2]) ?? 0}).reduce(0, +) ?? 0) / 1000000000000) * ExchangeRatesManager.share.newRatePerDollar).rounded(toPlaces: 8)
                 self.riseLabel.text = "XCH price: \(ExchangeRatesManager.share.newRatePerDollar) $"

@@ -34,7 +34,7 @@ class ImportTokensViewController: UIViewController {
         self.filteredTokens = self.tokens
         localization()
         NotificationCenter.default.addObserver(self, selector: #selector(localization), name: NSNotification.Name("localized"), object: nil)
-        
+        self.numberOFWalletLabel.text = "\(CoreDataManager.share.fetchChiaWalletPrivateKey()[self.index].name ?? "") ****\(String(CoreDataManager.share.fetchChiaWalletPrivateKey()[self.index].fingerprint).suffix(4))"
         let storyoard = UIStoryboard(name: "spinner", bundle: .main)
         self.spinerVC = storyoard.instantiateViewController(withIdentifier: "spinner") as! SprinnerViewController
         NotificationCenter.default.addObserver(self, selector: #selector(alertErrorGerCodingKeysPresent), name: NSNotification.Name("alertErrorGerCodingKeys"), object: nil)
