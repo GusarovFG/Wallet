@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CryptoKit
 
 class WalletManager {
     
@@ -32,9 +33,10 @@ class WalletManager {
         var tokens: [[String]] = []
         print("нычало")
         print(self.index)
-        
-        if self.isUpdate {
-                    DispatchQueue.global().async {
+        if !CoreDataManager.share.fetchChiaWalletPrivateKey().isEmpty {
+            
+            if self.isUpdate {
+                DispatchQueue.global().async {
                     let wallet = CoreDataManager.share.fetchChiaWalletPrivateKey()[self.index]
                     let walletTokens = CoreDataManager.share.fetchChiaWalletPrivateKey()[self.index].token ?? []
                     if wallet.name == "Chia Wallet" {
@@ -42,9 +44,9 @@ class WalletManager {
                             if log.success {
                                 ChiaBlockchainManager.share.getWallets { wallets in
                                     for walletONe in 0..<wallets.wallets.count {
-
-
-
+                                        
+                                        
+                                        
                                         ChiaBlockchainManager.share.getWalletBalance(wallets.wallets[walletONe].id) { balance in
                                             id = "\(wallets.wallets[walletONe].id)"
                                             name = wallets.wallets[walletONe].name
@@ -53,7 +55,7 @@ class WalletManager {
                                             token.append("\(balance.wallet_balance.confirmed_wallet_balance)")
                                             token.append("show")
                                             if walletTokens.count > tokens.count {
-                                            tokens.append(token)
+                                                tokens.append(token)
                                             }
                                             print(tokens)
                                             print(walletTokens)
@@ -68,12 +70,12 @@ class WalletManager {
                                                     self.index += 1
                                                 }
                                                 DispatchQueue.main.async {
-
+                                                    
                                                     print(CoreDataManager.share.fetchChiaWalletPrivateKey())
-
+                                                    
                                                     NotificationCenter.default.post(name: NSNotification.Name("updateBalances"), object: nil)
                                                 }
-
+                                                
                                             } else {
                                                 if self.index == (CoreDataManager.share.fetchChiaWalletPrivateKey().count - 1) {
                                                     self.index = 0
@@ -89,18 +91,22 @@ class WalletManager {
                             }
                         }
                     }
-
+                    
+                    
+                }
+            } else {
+                return
                 
             }
         } else {
             return
-
         }
     }
-    
-    
-    
 }
+
+
+
+
 
 class Password {
     
