@@ -123,14 +123,26 @@ extension FAQController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func toggleSection(_ header: CollapsibleTableViewHeader, section: Int) {
-        let collapsed = !sections[section].collapsed
         
-        // Toggle collapse
-        sections[section].collapsed = collapsed
-        header.setCollapsed(collapsed)
+//        let collapsed = !sections[section].collapsed
+//        sections[section].collapsed = collapsed
+//        header.setCollapsed(collapsed)
+        
+        for i in 0..<self.sections.count {
+            if self.sections[i].question == self.sections[section].question {
+                let collapsed = !sections[section].collapsed
+                sections[section].collapsed = collapsed
+                header.setCollapsed(collapsed)
+                self.faqsTableView.reloadSections(NSIndexSet(index: section) as IndexSet, with: .none)
+            } else {
+                self.sections[i].collapsed = false
+                self.faqsTableView.reloadSections(NSIndexSet(index: i) as IndexSet, with: .none)
+            }
+        }
+        
         
         // Reload the whole section
-        self.faqsTableView.reloadSections(NSIndexSet(index: section) as IndexSet, with: .none)
+        
         
     }
     

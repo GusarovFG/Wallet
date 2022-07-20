@@ -5123,8 +5123,11 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                                 </connections>
                             </searchBar>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="gWM-uj-GHu">
-                                <rect key="frame" x="15" y="203" width="310" height="42"/>
+                                <rect key="frame" x="15" y="203" width="384" height="42"/>
                                 <color key="backgroundColor" name="mainBackGroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="42" id="u6p-lb-hpk"/>
+                                </constraints>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="3wS-Bu-Ppj">
                                     <size key="itemSize" width="128" height="40"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -5198,56 +5201,6 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                                     <outlet property="delegate" destination="PFJ-ki-ncU" id="BLv-Rj-IV7"/>
                                 </connections>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i6f-HZ-gBS">
-                                <rect key="frame" x="330" y="203" width="84" height="31"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="31" id="iSl-oG-NXf"/>
-                                    <constraint firstAttribute="width" constant="84" id="xkQ-5I-5kx"/>
-                                </constraints>
-                                <color key="tintColor" red="0.2274509804" green="0.67450980390000004" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="chevron.down" catalog="system" titleAlignment="leading">
-                                    <attributedString key="attributedTitle">
-                                        <fragment content="Все"/>
-                                    </attributedString>
-                                </buttonConfiguration>
-                                <connections>
-                                    <action selector="systemmenuOpen:" destination="PFJ-ki-ncU" eventType="touchUpInside" id="EbD-8M-rGg"/>
-                                </connections>
-                            </button>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fcs-DJ-fzs">
-                                <rect key="frame" x="225" y="247" width="178" height="40"/>
-                                <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="sqk-ty-BY9">
-                                        <rect key="frame" x="0.0" y="0.0" width="178" height="40"/>
-                                        <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fr9-8J-51M">
-                                                <rect key="frame" x="0.0" y="0.0" width="178" height="40"/>
-                                                <color key="backgroundColor" red="0.2274509804" green="0.67450980390000004" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="40" id="7fA-cX-LT8"/>
-                                                    <constraint firstAttribute="height" constant="40" id="Cln-HO-G8t"/>
-                                                </constraints>
-                                                <color key="tintColor" name="PasswordButtonsColor"/>
-                                                <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="plain" title="Button"/>
-                                                <connections>
-                                                    <action selector="allSystemButtonPresed:" destination="PFJ-ki-ncU" eventType="touchUpInside" id="VwC-PD-WeU"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
-                                    </stackView>
-                                </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <constraints>
-                                    <constraint firstItem="sqk-ty-BY9" firstAttribute="leading" secondItem="fcs-DJ-fzs" secondAttribute="leading" id="U5A-Fj-ssW"/>
-                                    <constraint firstAttribute="bottom" secondItem="sqk-ty-BY9" secondAttribute="bottom" id="UVL-jV-AaF"/>
-                                    <constraint firstAttribute="width" constant="178" id="XLc-5W-lTF"/>
-                                    <constraint firstAttribute="trailing" secondItem="sqk-ty-BY9" secondAttribute="trailing" id="hfC-SQ-qGy"/>
-                                    <constraint firstItem="sqk-ty-BY9" firstAttribute="top" secondItem="fcs-DJ-fzs" secondAttribute="top" id="nVW-RT-VNa"/>
-                                </constraints>
-                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HKO-SE-cfb">
                                 <rect key="frame" x="225" y="193" width="178" height="200"/>
                                 <subviews>
@@ -5498,27 +5451,22 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                             <constraint firstItem="etY-0p-POa" firstAttribute="trailing" secondItem="MO6-2e-PP1" secondAttribute="trailing" constant="89" id="83g-UV-J15"/>
                             <constraint firstItem="HKO-SE-cfb" firstAttribute="top" secondItem="AzI-g0-6O0" secondAttribute="bottom" id="A4C-e4-JlE"/>
                             <constraint firstItem="0WH-O2-JJY" firstAttribute="leading" secondItem="etY-0p-POa" secondAttribute="leading" id="CnR-Om-eeS"/>
-                            <constraint firstItem="fcs-DJ-fzs" firstAttribute="top" secondItem="i6f-HZ-gBS" secondAttribute="bottom" constant="13" id="ENr-1P-Lw5"/>
                             <constraint firstItem="gWM-uj-GHu" firstAttribute="leading" secondItem="etY-0p-POa" secondAttribute="leading" constant="15" id="EyE-HB-RtK"/>
                             <constraint firstItem="AzI-g0-6O0" firstAttribute="height" secondItem="0aK-wA-kWs" secondAttribute="height" id="HSy-k2-NeA"/>
                             <constraint firstItem="0WH-O2-JJY" firstAttribute="trailing" secondItem="etY-0p-POa" secondAttribute="trailing" id="Hu8-1j-qwp"/>
                             <constraint firstItem="MO6-2e-PP1" firstAttribute="leading" secondItem="etY-0p-POa" secondAttribute="leading" constant="89" id="JV4-LQ-HWi"/>
                             <constraint firstItem="AzI-g0-6O0" firstAttribute="top" secondItem="MO6-2e-PP1" secondAttribute="bottom" constant="15.5" id="L4Y-pO-xbC"/>
                             <constraint firstItem="gWM-uj-GHu" firstAttribute="top" secondItem="0aK-wA-kWs" secondAttribute="bottom" constant="10" id="MD9-05-f9D"/>
-                            <constraint firstItem="etY-0p-POa" firstAttribute="trailing" secondItem="fcs-DJ-fzs" secondAttribute="trailing" constant="11" id="Tre-ag-KOj"/>
-                            <constraint firstItem="i6f-HZ-gBS" firstAttribute="trailing" secondItem="etY-0p-POa" secondAttribute="trailing" id="YgY-fX-Zts"/>
-                            <constraint firstItem="fcs-DJ-fzs" firstAttribute="top" secondItem="gWM-uj-GHu" secondAttribute="bottom" constant="2" id="b5C-J7-PsY"/>
-                            <constraint firstItem="i6f-HZ-gBS" firstAttribute="leading" secondItem="gWM-uj-GHu" secondAttribute="trailing" constant="5" id="dA3-f0-2qc"/>
                             <constraint firstItem="0WH-O2-JJY" firstAttribute="top" secondItem="dEm-6M-TIh" secondAttribute="top" id="fLP-BB-SZg"/>
                             <constraint firstItem="0aK-wA-kWs" firstAttribute="top" secondItem="MO6-2e-PP1" secondAttribute="bottom" constant="15.5" id="gVp-bf-dAc"/>
                             <constraint firstItem="ckr-um-h68" firstAttribute="trailing" secondItem="etY-0p-POa" secondAttribute="trailing" id="jOG-0a-w7F"/>
-                            <constraint firstItem="i6f-HZ-gBS" firstAttribute="top" secondItem="0aK-wA-kWs" secondAttribute="bottom" constant="10" id="jP2-yg-IBh"/>
                             <constraint firstItem="etY-0p-POa" firstAttribute="trailing" secondItem="HKO-SE-cfb" secondAttribute="trailing" constant="11" id="jyR-X8-GbD"/>
                             <constraint firstItem="x9F-vp-HwG" firstAttribute="leading" secondItem="etY-0p-POa" secondAttribute="leading" id="kRQ-fK-qVY"/>
                             <constraint firstItem="ckr-um-h68" firstAttribute="top" secondItem="gWM-uj-GHu" secondAttribute="bottom" constant="8" symbolic="YES" id="nGy-XX-JEV"/>
                             <constraint firstItem="ckr-um-h68" firstAttribute="leading" secondItem="etY-0p-POa" secondAttribute="leading" id="oS9-Hj-ffm"/>
                             <constraint firstItem="etY-0p-POa" firstAttribute="trailing" secondItem="AzI-g0-6O0" secondAttribute="trailing" constant="11" id="pkK-bv-oZK"/>
                             <constraint firstAttribute="bottom" secondItem="ckr-um-h68" secondAttribute="bottom" id="rVs-2g-cbF"/>
+                            <constraint firstItem="etY-0p-POa" firstAttribute="trailing" secondItem="gWM-uj-GHu" secondAttribute="trailing" constant="15" id="tIh-Rx-W4b"/>
                             <constraint firstItem="MO6-2e-PP1" firstAttribute="top" secondItem="x9F-vp-HwG" secondAttribute="bottom" constant="21" id="tOX-Gv-fTJ"/>
                             <constraint firstAttribute="bottom" secondItem="0WH-O2-JJY" secondAttribute="bottom" id="x2Q-bI-xUU"/>
                             <constraint firstItem="0aK-wA-kWs" firstAttribute="leading" secondItem="etY-0p-POa" secondAttribute="leading" constant="15" id="yEv-Wz-IpP"/>
@@ -5532,7 +5480,6 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="allDateButton" destination="OcW-h3-skc" id="6Ne-zF-oBj"/>
-                        <outlet property="allSystemButton" destination="fr9-8J-51M" id="j9y-xs-0bu"/>
                         <outlet property="backButton" destination="x9F-vp-HwG" id="fPc-Qw-fov"/>
                         <outlet property="detailAmount" destination="zMQ-n9-WLs" id="PwZ-6K-3qk"/>
                         <outlet property="detailAmountLabel" destination="3Qz-Fq-0AQ" id="qvn-mT-n9x"/>
@@ -5547,15 +5494,11 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                         <outlet property="detailView" destination="0WH-O2-JJY" id="b4L-mB-p80"/>
                         <outlet property="filterCollectionView" destination="gWM-uj-GHu" id="kqg-Xx-GkE"/>
                         <outlet property="filterDateView" destination="HKO-SE-cfb" id="bEi-x5-KEL"/>
-                        <outlet property="filterSystemButton" destination="i6f-HZ-gBS" id="fH4-jk-S3P"/>
                         <outlet property="filterTimeButton" destination="AzI-g0-6O0" id="9eH-z3-ZcM"/>
                         <outlet property="lastMonthButton" destination="eW1-jR-9pc" id="nTW-Sl-zDS"/>
                         <outlet property="lastWeekDateButton" destination="YkO-av-0RW" id="60Z-MQ-Yjf"/>
                         <outlet property="notificationTableView" destination="ckr-um-h68" id="sWa-k2-I5F"/>
                         <outlet property="searchBar" destination="0aK-wA-kWs" id="KVx-vH-sIB"/>
-                        <outlet property="systemMenuView" destination="fcs-DJ-fzs" id="agc-F9-w8g"/>
-                        <outlet property="systemsStackView" destination="sqk-ty-BY9" id="5GC-6T-cmz"/>
-                        <outlet property="systemsViewHeightConstraint" destination="Cln-HO-G8t" id="IPa-Op-zMm"/>
                         <outlet property="titleLabel" destination="MO6-2e-PP1" id="gO3-8D-UWX"/>
                         <outlet property="todayDateButton" destination="BVm-QQ-np6" id="fBL-2l-cjK"/>
                         <outlet property="yesterdayDayeButton" destination="mam-Jb-wc3" id="Ned-7K-Ga1"/>

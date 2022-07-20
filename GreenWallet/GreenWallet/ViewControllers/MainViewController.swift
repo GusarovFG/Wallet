@@ -81,7 +81,6 @@ class MainViewController: UIViewController {
         }
         ExchangeRatesManager.share.changeColorOfView(label: self.percentLabel)
         WalletManager.share.isUpdate = true
-        WalletManager.share.updateBalances()
         self.wallets = WalletManager.share.favoritesWallets
         WalletManager.share.vallets = CoreDataManager.share.fetchChiaWalletPrivateKey()
         self.wallets = WalletManager.share.favoritesWallets

@@ -252,7 +252,7 @@ extension MyWalletsViewController: UICollectionViewDelegate, UICollectionViewDat
         case self.walletCollectionView:
             return CGSize(width: self.walletCollectionView.frame.width, height: collectionView.frame.height - 20)
         case self.actionCollectionView:
-            return CGSize(width: (collectionView.frame.width / 2) - 15, height: (collectionView.frame.height / 2) - 10)
+            return CGSize(width: (collectionView.frame.width / 2) - 10, height: (collectionView.frame.height / 2) - 10)
         default:
             return CGSize.zero
         }

@@ -299,7 +299,8 @@ class NetworkManager {
     }
     
     func getTails(complition: @escaping (Tails) -> Void) {
-        guard let url = URL(string: MainURLS.tails.rawValue) else { return }
+        let escapedUrl = MainURLS.tails.rawValue.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+        guard let url = URL(string: escapedUrl!) else { return }
         
         let session = URLSession.shared
         session.dataTask(with: url) { data, response, error in
@@ -325,7 +326,8 @@ class NetworkManager {
     }
     
     func getTailsPrices(complition: @escaping (TailsPrices) -> Void) {
-        guard let url = URL(string: MainURLS.TailsPrices.rawValue) else { return }
+        let escapedUrl = MainURLS.TailsPrices.rawValue.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+        guard let url = URL(string: escapedUrl!) else { return }
         print("цены")
         let session = URLSession.shared
         session.dataTask(with: url) { data, response, error in

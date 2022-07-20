@@ -24,8 +24,9 @@ class LocalNotificationsManager: NSObject {
         self.notificationCenter.delegate = self
         
         content.sound = UNNotificationSound.default
+        content.badge = 1
         
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 10, repeats: false)
         
         
         let request = UNNotificationRequest(identifier: "noticication", content: content, trigger: trigger)

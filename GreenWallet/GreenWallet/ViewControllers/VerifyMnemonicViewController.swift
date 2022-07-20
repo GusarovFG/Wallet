@@ -100,7 +100,7 @@ class VerifyMnemonicViewController: UIViewController {
     
     @IBAction func mainButtonPressed(_ sender: Any) {
         if self.verifyedMnemonicPhrase == self.mnemonicPhrase {
-  
+            
             print(self.mnemonicPhrase)
             var name = ""
             var newbalance = ""
@@ -109,9 +109,9 @@ class VerifyMnemonicViewController: UIViewController {
             var token: [String] = []
             var tokens: [[String]] = []
             var privateKey = ChiaPrivate(private_key: ChiaPrivateKey(farmer_pk: "", fingerprint: 0, pk: "", pool_pk: "", seed: "", sk: ""), success: true)
-
-
-          
+            
+            
+            
             let dispatchGroup = DispatchGroup()
             if CoreDataManager.share.fetchChiaWalletPrivateKey().count == 10 {
                 AlertManager.share.errorCountOfWallet(self)
@@ -137,13 +137,29 @@ class VerifyMnemonicViewController: UIViewController {
                                 }
                             }
                             dispatchGroup.enter()
-                            ChiaBlockchainManager.share.getSyncStatus(1) { status in
-                                DispatchQueue.global().asyncAfter(deadline: .now() + 10) {
-                                    ChiaBlockchainManager.share.addCat(tailHash: "1dd54162ec6423211556155fa455d4ed1a52ad305e6b5249eba50c91c8428dfb", self) { newCat in
-                                        print(newCat.success)
-                                        dispatchGroup.leave()
+                            DispatchQueue.global().asyncAfter(deadline: .now() + 15) {
+                                
+                                ChiaBlockchainManager.share.getSyncStatus(1) { status in
+                                    DispatchQueue.global().asyncAfter(deadline: .now() + 10) {
+                                        if status.synced {
+                                            ChiaBlockchainManager.share.addCat(tailHash: "1dd54162ec6423211556155fa455d4ed1a52ad305e6b5249eba50c91c8428dfb") { newCat in
+                                                print(newCat.success)
+                                                
+                                            }
+                                            ChiaBlockchainManager.share.addCat(tailHash: "6d95dae356e32a71db5ddcb42224754a02524c615c5fc35f568c2af04774e589") { newCat in
+                                                print(newCat.success)
+                                                dispatchGroup.leave()
+                                            }
+                                        } else {
+                                            AlertManager.share.errorNewWallet(self)
+                                        }
+                                        
+                                        
                                     }
+                                    
                                 }
+                                
+                                
                             }
                             
                             dispatchGroup.enter()
@@ -182,11 +198,9 @@ class VerifyMnemonicViewController: UIViewController {
                                     dispatchGroup.leave()
                                     dispatchGroup.enter()
                                     
-                                    let value = privateKey.private_key.seed
-                                    let encryptedValue = try! value.aesEncrypt(key: KeyChainManager.share.loadPassword())
                                     
                                     UserDefaultsManager.shared.userDefaults.set("Exist", forKey: UserDefaultsStringKeys.walletExist.rawValue )
-                                    CoreDataManager.share.saveChiaWalletPrivateKey(name: "Chia Wallet", fingerprint: privateKey.private_key.fingerprint, pk: privateKey.private_key.pk, seed: encryptedValue, sk: encryptedValue, adress: adreses, tokens: tokens)
+                                    CoreDataManager.share.saveChiaWalletPrivateKey(name: "Chia Wallet", fingerprint: privateKey.private_key.fingerprint, pk: privateKey.private_key.pk, seed: privateKey.private_key.seed, sk: privateKey.private_key.seed, adress: adreses, tokens: tokens)
                                     
                                     dispatchGroup.leave()
                                     dispatchGroup.enter()
@@ -442,8 +456,8 @@ class VerifyMnemonicViewController: UIViewController {
                     }
                 }
             }
-                
-                } else {
+            
+        } else {
             self.errorLabel.isHidden = false
             UIView.animate(withDuration: 1) {
                 self.errorLabel.alpha = 1
@@ -605,17 +619,17 @@ extension VerifyMnemonicViewController: UICollectionViewDelegate, UICollectionVi
         
     }
     
-        func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-            switch collectionView {
-            case self.veryfyCollectionView:
-                return CGSize(width: (collectionView.frame.width / 2) - 15, height: (collectionView.frame.height / 6) - 10)
-                
-            case self.selectCollectionView:
-                return CGSize(width: (collectionView.frame.width / 2) - 15, height: (collectionView.frame.height / 3) - 12)
-            default:
-                return CGSize(width: 178, height: 50)
-            }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        switch collectionView {
+        case self.veryfyCollectionView:
+            return CGSize(width: (collectionView.frame.width / 2) - 15, height: (collectionView.frame.height / 6) - 10)
+            
+        case self.selectCollectionView:
+            return CGSize(width: (collectionView.frame.width / 2) - 15, height: (collectionView.frame.height / 3) - 12)
+        default:
+            return CGSize(width: 178, height: 50)
         }
+    }
     
     //    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
     //        10

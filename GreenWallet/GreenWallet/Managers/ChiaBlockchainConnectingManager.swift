@@ -809,7 +809,7 @@ class ChiaBlockchainManager {
         }.resume()
     }
     
-    func addCat(tailHash: String,_ controller: UIViewController, with complition: @escaping (NewCat) -> Void) {
+    func addCat(tailHash: String, with complition: @escaping (NewCat) -> Void) {
 
         let method = "create_new_wallet"
         guard let url = URL(string: self.url + "/wallet/" + method) else { return }

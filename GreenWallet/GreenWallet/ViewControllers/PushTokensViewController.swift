@@ -655,9 +655,9 @@ class PushTokensViewController: UIViewController {
             self.walletLinkError.text = LocalizationManager.share.translate?.result.list.send_token.send_token_address_is_already_exist
             self.walletLinkError.textColor = #colorLiteral(red: 0.1176470588, green: 0.5764705882, blue: 1, alpha: 1)
             self.walletLinkError.alpha = 1
-//        } else if self.adressTextField.text != self.link {
-//            self.walletLinkError.textColor = #colorLiteral(red: 1, green: 0.2360929251, blue: 0.1714096665, alpha: 0.8980392157)
-//            self.walletLinkError.text = LocalizationManager.share.translate?.result.list.all.non_existent_adress_error
+        } else if CoreDataManager.share.fetchContacts().contains(where: {$0.name == self.adressTextField.text}) {
+            self.walletLinkError.textColor = #colorLiteral(red: 1, green: 0.2360929251, blue: 0.1714096665, alpha: 0.8980392157)
+            self.walletLinkError.text = LocalizationManager.share.translate?.result.list.all.non_existent_adress_error
         } else if self.adressTextField.text == "" {
             self.walletLinkError.alpha = 0
             
@@ -665,11 +665,20 @@ class PushTokensViewController: UIViewController {
     }
     
     @IBAction func transferSummCheck(_ sender: UITextField) {
+        guard let text = sender.text else { return }
+        let engCharacters = "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM"
+        let digits = "1234567890."
+        sender.text = text.filter { digits.contains($0) }
+        
         if self.wallet?.name == "Chia Wallet" || self.wallet?.name == "Chia TestNet" {
             self.comissionTextField.text = AgreesManager.share.agrees.filter({$0.blockchain_name == "Chia Network"}).first?.fee_transaction ?? ""
+            self.usdLabel.text = "~ \((Double(self.balanceButton.currentTitle ?? "0") ?? 0) * ExchangeRatesManager.share.newRatePerDollar)"
+//            self.gadLabel.text = "~ \((Double(self.balanceButton.currentTitle ?? "0") ?? 0) * ExchangeRatesManager.share.newRatePerDollar * (Double(TailsManager.share.prices.filter({$0.code == self.transferTokenLabel.text}).first?.price) ?? "0") ?? 0)"
             
         } else if self.wallet?.name == "Chives Wallet" || self.wallet?.name == "Chives TestNet" {
             self.comissionTextField.text = AgreesManager.share.agrees.filter({$0.blockchain_name == "Chives Network"}).first?.fee_transaction ?? ""
+            self.usdLabel.text = "~ \((Double(self.balanceButton.currentTitle ?? "0") ?? 0) * ExchangeRatesManager.share.newChivesRatePerDollar)"
+//            self.gadLabel.text = "~ \((Double(self.balanceButton.currentTitle ?? "0") ?? 0) * ExchangeRatesManager.share.newRatePerDollar * (Double(TailsManager.share.prices.filter({$0.code == self.transferTokenLabel.text}).first?.price) ?? "0") ?? 0)"
         }
         
         self.transferTokenLabel.text = self.balanceButton.currentTitle?.filter{!$0.isNumber && !$0.isPunctuation}

@@ -73,7 +73,12 @@ class SelectSystemViewController: UIViewController {
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        self.heightConstraint.constant = CGFloat((self.filterSystems.count * 74)) + 30
+        if !self.isSelectedSystem {
+            self.heightConstraint.constant = CGFloat((self.filterSystems.count * 74)) + 30
+            
+        } else {
+            self.heightConstraint.constant = (2 * 74) + 30
+        }
     }
     
     override func viewDidLayoutSubviews() {

@@ -52,11 +52,7 @@ class NotificationsViewController: UIViewController {
     @IBOutlet weak var lastWeekDateButton: UIButton!
     @IBOutlet weak var lastMonthButton: UIButton!
     
-    @IBOutlet weak var systemMenuView: UIView!
-    @IBOutlet weak var systemsViewHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var systemsStackView: UIStackView!
-    
-    @IBOutlet weak var allSystemButton: UIButton!
+
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var filterCollectionView: UICollectionView!
@@ -87,11 +83,8 @@ class NotificationsViewController: UIViewController {
         self.todayDateButton.buttonStroke(#colorLiteral(red: 0.3578948975, green: 0.3578948975, blue: 0.3578948975, alpha: 1))
         self.yesterdayDayeButton.buttonStroke(#colorLiteral(red: 0.3578948975, green: 0.3578948975, blue: 0.3578948975, alpha: 1))
         self.lastWeekDateButton.buttonStroke(#colorLiteral(red: 0.3578948975, green: 0.3578948975, blue: 0.3578948975, alpha: 1))
-        self.allSystemButton.buttonStroke(#colorLiteral(red: 0.3578948975, green: 0.3578948975, blue: 0.3578948975, alpha: 1))
         
-        self.systemMenuView.isHidden = true
-        self.systemMenuView.alpha = 0
-        
+
         self.allDateButton.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
         self.allDateButton.tintColor = .white
     
@@ -150,8 +143,6 @@ class NotificationsViewController: UIViewController {
         self.allDateButton.setTitle(LocalizationManager.share.translate?.result.list.transactions.transactions_all, for: .normal)
         
         self.backButton.setTitle(LocalizationManager.share.translate?.result.list.all.back_btn, for: .normal)
-        self.filterSystemButton.setTitle(LocalizationManager.share.translate?.result.list.transactions.transactions_all, for: .normal)
-        self.allSystemButton.setTitle(LocalizationManager.share.translate?.result.list.transactions.transactions_all, for: .normal)
         self.lastWeekDateButton.setTitle(LocalizationManager.share.translate?.result.list.transactions.transactions_last_week, for: .normal)
         self.lastMonthButton.setTitle(LocalizationManager.share.translate?.result.list.transactions.transactions_last_month, for: .normal)
         self.detailHeight.text = LocalizationManager.share.translate?.result.list.notifications.notifications_transaction_info_block_height
@@ -169,71 +160,7 @@ class NotificationsViewController: UIViewController {
         self.detailView.isHidden = true
     }
     
-    @IBAction func systemmenuOpen(_ sender: UIButton) {
-        
-        for i in 0..<self.systems.count {
-            if self.systemsStackView.arrangedSubviews.count == (self.systems.count + 1){
-                break
-            } else {
-                let button = UIButton(frame: CGRect(x: 0, y: 0, width: self.systemsStackView.frame.width, height: 40))
-                button.setTitle(self.systems[i].name, for: .normal)
-                self.systemsStackView.addArrangedSubview(button)
-                self.systemsViewHeightConstraint.constant += button.frame.height
-                
-                button.addTarget(self, action: #selector(setupSystemMenuButtons), for: .touchUpInside)
-                
-            }
-        }
-        
-        
-        if self.systemMenuView.isHidden {
-            self.systemMenuView.isHidden = false
-            self.systemMenuView.alpha = 1
-        } else {
-            self.systemMenuView.alpha = 0
-            self.systemMenuView.isHidden = true
-        }
-    }
     
-    @objc private func setupSystemMenuButtons(_ sender: UIButton) {
-        
-        for i in 0..<systemsStackView.arrangedSubviews.count {
-            self.systemsStackView.arrangedSubviews[i].backgroundColor = .systemBackground
-            if sender == self.systemsStackView.arrangedSubviews[i] && sender != self.allSystemButton {
-                self.filterSystemButton.setTitle("\(sender.currentTitle?.split(separator: " ").first ?? "")", for: .normal)
-                sender.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
-                
-                if sender.currentTitle == "Chia Network" {
-                    self.filterNotifications = self.notifications.filter({$0.address!.lowercased().contains("xch")})
-                    print("filter chia")
-                    self.notificationTableView.reloadData()
-                } else if sender.currentTitle == "Chives Network" {
-                    self.filterNotifications = self.notifications.filter({$0.address!.lowercased().contains("xcc")})
-                    print("filter Chives")
-                    self.notificationTableView.reloadData()
-                } else if sender.currentTitle == "Chia TestNet" {
-                    self.filterNotifications = self.notifications.filter({$0.address!.lowercased().contains("txch")})
-                    print("filter Chia TestNet")
-                    self.notificationTableView.reloadData()
-                } else if sender.currentTitle == "Chives TestNet" {
-                    self.filterNotifications = self.notifications.filter({$0.address!.lowercased().contains("txcc")})
-                    print("filter Chives TestNet")
-                    self.notificationTableView.reloadData()
-                }
-            }
-        }
-        if self.systemMenuView.alpha == 0 {
-            UIView.animate(withDuration: 0.5) {
-                self.systemMenuView.isHidden = false
-                self.systemMenuView.alpha = 1
-            }
-        } else {
-            UIView.animate(withDuration: 0.5) {
-                self.systemMenuView.alpha = 0
-                self.systemMenuView.isHidden = true
-            }
-        }
-    }
     
     
     @IBAction func filetrDateMenuOpen(_ sender: UIButton) {
@@ -332,16 +259,7 @@ class NotificationsViewController: UIViewController {
     
   
     
-    @IBAction func allSystemButtonPresed(_ sender: UIButton) {
-        self.systemsStackView.arrangedSubviews.map({$0.backgroundColor = self.systemMenuView.backgroundColor})
-        self.allSystemButton.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
-        UIView.animate(withDuration: 0.5) {
-            self.systemMenuView.alpha = 0
-            self.systemMenuView.isHidden = true
-        }
-        self.filterNotifications = self.notifications
-        self.notificationTableView.reloadData()
-    }
+
     
     @objc func hideKeyboard(_ sender: Any) {
         self.searchBar.resignFirstResponder()

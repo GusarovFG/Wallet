@@ -150,7 +150,7 @@ extension ImportTokensViewController: UITableViewDelegate, UITableViewDataSource
                             print("Еще нет")
                             DispatchQueue.global().asyncAfter(deadline: .now() + 10) {
                                 
-                                ChiaBlockchainManager.share.addCat(tailHash: self.filteredTokens[indexPath.row].hash, self) { new in
+                                ChiaBlockchainManager.share.addCat(tailHash: self.filteredTokens[indexPath.row].hash) { new in
                                     if new.success {
                                         DispatchQueue.main.async {
                                             self.spinerVC.dismiss(animated: true)

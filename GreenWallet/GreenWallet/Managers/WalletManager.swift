@@ -19,12 +19,15 @@ class WalletManager {
         RunLoop.main.add(self.myTimer, forMode: .default)
     }
     
-    @objc func updateBalances() {
-        
+    func qwe(index: Int) {
         var name = ""
         var id = ""
         var token : [String] = []
         var tokens: [[String]] = []
+        let group = DispatchGroup()
+        print("нычало")
+        let wallet = CoreDataManager.share.fetchChiaWalletPrivateKey()[index]
+        let walletTokens = CoreDataManager.share.fetchChiaWalletPrivateKey()[index].token ?? []
         
         if self.isUpdate {
                 for wal in 0..<CoreDataManager.share.fetchChiaWalletPrivateKey().count {
@@ -82,8 +85,23 @@ class WalletManager {
         }
         
     }
+    
+    @objc func updateBalances() {
+        
+        let group = DispatchGroup()
+        var count = 0
+            for i in 0..<CoreDataManager.share.fetchChiaWalletPrivateKey().count {
+                self.qwe(index: i)
+                print("ЖОПА")
+                print(CoreDataManager.share.fetchChiaWalletPrivateKey().count)
+                count += 1
+                print(count)
+            }
+        }
+        
+    
+    
 }
-
 
 class Password {
     
