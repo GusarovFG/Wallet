@@ -70,7 +70,7 @@ class MainViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        self.cellectionView.reloadData()
         if self.wallet?.name == "Chia Wallet" || self.wallet?.name == "Chia Wallet" {
             
             self.percentLabel.text = "  \(String(ExchangeRatesManager.share.difference).prefix(5)) % "
@@ -120,7 +120,7 @@ class MainViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         localization()
-        //        self.cellectionView.reloadData()
+        self.cellectionView.reloadData()
         LocalNotificationsManager.share.checkUpdates()
     }
     
@@ -277,36 +277,38 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
     
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let visibleRect = CGRect(origin: self.cellectionView.contentOffset, size: self.cellectionView.bounds.size)
-        let visiblePoint = CGPoint(x: visibleRect.midX, y: visibleRect.midY)
-        if let visibleIndexPath = self.cellectionView.indexPathForItem(at: visiblePoint) {
-            self.pageControl.currentPage = visibleIndexPath.row
-            self.wallet = self.wallets[visibleIndexPath.row]
-            self.index = visibleIndexPath.row
-            print(self.index)
-            if self.wallet?.name == "Chia Wallet" || self.wallet?.name == "Chia TestNet" {
-                let summ: Double = (((self.wallet?.token?.map({Double($0[2]) ?? 0}).reduce(0, +) ?? 0) / 1000000000000) * ExchangeRatesManager.share.newRatePerDollar).rounded(toPlaces: 8)
-                self.riseLabel.text = "XCH price: \(ExchangeRatesManager.share.newRatePerDollar) $"
-                self.balanceLabel.text = "⁓\(NSString(format:"%.2f", summ)) USD"
-                self.percentLabel.text = "  \(String(ExchangeRatesManager.share.difference).prefix(5)) % "
-                ExchangeRatesManager.share.changeColorOfView(label: self.percentLabel)
-            } else {
-                let summ: Double = (((self.wallet?.token?.map({Double($0[2])!}).reduce(0, +) ?? 0) / 1000000000000) * ExchangeRatesManager.share.newChivesRatePerDollar).rounded(toPlaces: 8)
-                if ExchangeRatesManager.share.newChivesRatePerDollar == 0 {
-                    self.percentLabel.text = "  \(String(ExchangeRatesManager.share.differenceChives).prefix(5)) % "
-                    self.riseLabel.text = "XCC price: ~"
+        if !CoreDataManager.share.fetchChiaWalletPrivateKey().isEmpty {
+            let visibleRect = CGRect(origin: self.cellectionView.contentOffset, size: self.cellectionView.bounds.size)
+            let visiblePoint = CGPoint(x: visibleRect.midX, y: visibleRect.midY)
+            if let visibleIndexPath = self.cellectionView.indexPathForItem(at: visiblePoint) {
+                self.pageControl.currentPage = visibleIndexPath.row
+                self.wallet = self.wallets[visibleIndexPath.row]
+                self.index = visibleIndexPath.row
+                print(self.index)
+                if self.wallet?.name == "Chia Wallet" || self.wallet?.name == "Chia TestNet" {
+                    let summ: Double = (((self.wallet?.token?.map({Double($0[2]) ?? 0}).reduce(0, +) ?? 0) / 1000000000000) * ExchangeRatesManager.share.newRatePerDollar).rounded(toPlaces: 8)
+                    self.riseLabel.text = "XCH price: \(ExchangeRatesManager.share.newRatePerDollar) $"
                     self.balanceLabel.text = "⁓\(NSString(format:"%.2f", summ)) USD"
+                    self.percentLabel.text = "  \(String(ExchangeRatesManager.share.difference).prefix(5)) % "
+                    ExchangeRatesManager.share.changeColorOfView(label: self.percentLabel)
                 } else {
-                    self.riseLabel.text = "XCC price: \(ExchangeRatesManager.share.newChivesRatePerDollar) $"
-                    self.balanceLabel.text = "⁓\(NSString(format:"%.2f", summ)) USD"
-                    self.percentLabel.text = "  \(String(ExchangeRatesManager.share.differenceChives).prefix(5)) % "
-                    ExchangeRatesManager.share.changeChivesColorOfView(label: self.percentLabel)
+                    let summ: Double = (((self.wallet?.token?.map({Double($0[2])!}).reduce(0, +) ?? 0) / 1000000000000) * ExchangeRatesManager.share.newChivesRatePerDollar).rounded(toPlaces: 8)
+                    if ExchangeRatesManager.share.newChivesRatePerDollar == 0 {
+                        self.percentLabel.text = "  \(String(ExchangeRatesManager.share.differenceChives).prefix(5)) % "
+                        self.riseLabel.text = "XCC price: ~"
+                        self.balanceLabel.text = "⁓\(NSString(format:"%.2f", summ)) USD"
+                    } else {
+                        self.riseLabel.text = "XCC price: \(ExchangeRatesManager.share.newChivesRatePerDollar) $"
+                        self.balanceLabel.text = "⁓\(NSString(format:"%.2f", summ)) USD"
+                        self.percentLabel.text = "  \(String(ExchangeRatesManager.share.differenceChives).prefix(5)) % "
+                        ExchangeRatesManager.share.changeChivesColorOfView(label: self.percentLabel)
+                    }
+                    
                 }
                 
+                
+                
             }
-            
-            
-            
         }
     }
     
