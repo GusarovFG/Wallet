@@ -2215,6 +2215,7 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                             <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="B3u-bv-gnj">
                                 <rect key="frame" x="15" y="158" width="384" height="51"/>
                                 <color key="backgroundColor" name="mainBackGroundColor"/>
+                                <color key="barTintColor" name="mainBackGroundColor"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
                                     <outlet property="delegate" destination="8Cj-md-0Ks" id="YA0-Uc-HfY"/>

@@ -95,7 +95,7 @@ extension ImportTokensViewController: UITableViewDelegate, UITableViewDataSource
             cell.choiceSwitch.onTintColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
         }
         
-        if      CoreDataManager.share.fetchChiaWalletPrivateKey()[self.index].token?.filter({$0.filter({$0.contains((self.filteredTokens[indexPath.row].hash.dropLast(55)))}).count == 1}).isEmpty == false {
+        if CoreDataManager.share.fetchChiaWalletPrivateKey()[self.index].token?.filter({$0.filter({$0.contains((self.filteredTokens[indexPath.row].hash.dropLast(55)))}).count == 1}).isEmpty == false && CoreDataManager.share.fetchChiaWalletPrivateKey()[self.index].token?.filter({$0.filter({$0.contains((self.filteredTokens[indexPath.row].hash.dropLast(55)))}).count == 1}).first?[3] == "show"  {
             
             cell.choiceSwitch.isOn = true
             

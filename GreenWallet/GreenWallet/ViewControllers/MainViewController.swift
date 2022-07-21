@@ -81,14 +81,13 @@ class MainViewController: UIViewController {
         }
         ExchangeRatesManager.share.changeColorOfView(label: self.percentLabel)
         WalletManager.share.isUpdate = true
-        self.wallets = WalletManager.share.favoritesWallets
         WalletManager.share.vallets = CoreDataManager.share.fetchChiaWalletPrivateKey()
+        self.wallets = WalletManager.share.favoritesWallets
         self.wallets = WalletManager.share.favoritesWallets
         if !CoreDataManager.share.fetchChiaWalletPrivateKey().isEmpty {
             
             self.cellectionView.scrollToItem(at: [0,0], at: .left, animated: true)
         }
-        //        self.wallets = CoreDataManager.share.fetchChiaWalletPrivateKey()
         if !self.wallets.isEmpty {
             self.cellectionView.isScrollEnabled = true
             self.wallet = self.wallets[0]

@@ -147,17 +147,23 @@ class VerifyMnemonicViewController: UIViewController {
                                     DispatchQueue.global().asyncAfter(deadline: .now() + 10) {
                                         if status.synced {
                                             ChiaBlockchainManager.share.addCat(tailHash: "1dd54162ec6423211556155fa455d4ed1a52ad305e6b5249eba50c91c8428dfb") { newCat in
-                                                print(newCat.success)
+                                                if newCat.success {
+                                                    ChiaBlockchainManager.share.addCat(tailHash: "6d95dae356e32a71db5ddcb42224754a02524c615c5fc35f568c2af04774e589") { newCat in
+                                                        print(newCat.success)
+                                                        dispatchGroup.leave()
+                                                    }
+                                                }
                                                 
                                             }
-                                            ChiaBlockchainManager.share.addCat(tailHash: "6d95dae356e32a71db5ddcb42224754a02524c615c5fc35f568c2af04774e589") { newCat in
-                                                print(newCat.success)
-                                                dispatchGroup.leave()
-                                            }
+                                            
                                         } else {
                                             DispatchQueue.main.async {
-                                                
-                                                AlertManager.share.errorNewWallet(self)
+                                                self.spinnerVC.dismiss(animated: true)
+                                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                                                    
+                                                    AlertManager.share.errorNewWallet(self)
+                                                    return
+                                                }
                                             }
                                         }
                                         

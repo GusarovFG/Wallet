@@ -42,6 +42,11 @@ class AllWalletsViewController: UIViewController {
 
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.post(name: NSNotification.Name("updateBalances"), object: nil)
+    }
+    
     @objc func openAlert(notification: Notification)  {
         self.wallets = CoreDataManager.share.fetchChiaWalletPrivateKey()
         let storyBoard = UIStoryboard(name: "Alert", bundle: .main)
