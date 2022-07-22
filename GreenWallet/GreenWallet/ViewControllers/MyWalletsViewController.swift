@@ -190,7 +190,16 @@ extension MyWalletsViewController: UICollectionViewDelegate, UICollectionViewDat
                     let summChives: Double = ((wallet.token?.map({$0[2].toDouble() ?? 0}).reduce(0, +) ?? 0) / 1000000000000) * ExchangeRatesManager.share.newChivesRatePerDollar
                     mainCell.usdLabel.text = "⁓ \(NSString(format:"%.2f", summChives)) USD"
                 }
-                mainCell.walletSystemLabel.text = SystemsManager.share.listOfSystems.filter({$0.name.contains(wallet.name?.split(separator: " ").first ?? "")}).first?.name ?? ""
+                if wallet.name == "Chia Wallet" {
+                    mainCell.walletSystemLabel.text = "Chia Network"
+                } else if wallet.name == "Chives Wallet" {
+                    mainCell.walletSystemLabel.text = "Chives Network"
+                } else if wallet.name == "Chia TestNet" {
+                    mainCell.walletSystemLabel.text = "Chia TestNet"
+                } else if wallet.name == "Chives TestNet" {
+                    mainCell.walletSystemLabel.text = "Chives TestNet"
+                }
+                
                 mainCell.complitionHandler = { [unowned self] in
                     let passwordStoryboard = UIStoryboard(name: "PasswordStoryboard", bundle: .main)
                     let passwordVC = passwordStoryboard.instantiateViewController(withIdentifier: "PasswordViewController") as! PasswordViewController

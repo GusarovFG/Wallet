@@ -24,7 +24,7 @@ class GreatingViewController: UIViewController {
         }
         
         NetworkManager.share.getTailsPrices { prices in
-            TailsManager.share.prices = prices.result ?? []
+            TailsManager.share.prices = prices.result.list
         }
         
         NetworkManager.share.getCoinInfo { info in

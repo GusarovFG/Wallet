@@ -909,7 +909,7 @@ struct TailsList: Codable {
 
 struct TailsPrices: Codable {
     let success: Bool
-    let result: [TailsPricesResult]
+    let result: TailsPricesResult
 
     enum CodingKeys: String, CodingKey {
         case success
@@ -917,8 +917,15 @@ struct TailsPrices: Codable {
     }
 }
 
-// MARK: - Result
 struct TailsPricesResult: Codable {
+    let list: [TailsPricesList]
+
+    enum CodingKeys: String, CodingKey {
+        case list
+    }
+}
+// MARK: - Result
+struct TailsPricesList: Codable {
     let code: String
     let hash: String
     let price: String

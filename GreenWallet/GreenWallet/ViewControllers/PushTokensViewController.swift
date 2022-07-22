@@ -105,7 +105,7 @@ class PushTokensViewController: UIViewController {
             self.wallets = CoreDataManager.share.fetchChiaWalletPrivateKey().filter({$0.name! == "Chives Wallet"})
             self.systemButton.setTitle("• Chives Network", for: .normal)
             self.tokenImage.image = UIImage(named: "ChivesLogo")!
-            self.balanceButton.setTitle("\(((self.wallet?.token?.first?[2].toDouble() ?? 0) / 1000000000000.0).rounded(toPlaces: 8)) XCC", for: .normal)
+            self.balanceButton.setTitle("\(((self.wallet?.token?.first?[2].toDouble() ?? 0) / 100000000.0).rounded(toPlaces: 8)) XCC", for: .normal)
         } else if self.isChiaTest {
             self.wallets = CoreDataManager.share.fetchChiaWalletPrivateKey().filter({$0.name! == "Chia TestNet"})
             self.systemButton.setTitle("• Chia TestNet", for: .normal)
@@ -115,7 +115,7 @@ class PushTokensViewController: UIViewController {
             self.wallets = CoreDataManager.share.fetchChiaWalletPrivateKey().filter({$0.name! == "Chives TestNet"})
             self.systemButton.setTitle("• Chives TestNet", for: .normal)
             self.tokenImage.image = UIImage(named: "ChivesLogo")!
-            self.balanceButton.setTitle("\(((self.wallet?.token?.first?[2].toDouble() ?? 0) / 1000000000000.0).rounded(toPlaces: 8)) XCC", for: .normal)
+            self.balanceButton.setTitle("\(((self.wallet?.token?.first?[2].toDouble() ?? 0) / 100000000.0).rounded(toPlaces: 8)) XCC", for: .normal)
         }
         
         if !self.isInMyWallet {
@@ -329,7 +329,7 @@ class PushTokensViewController: UIViewController {
                                 if status.synced {
                                     
                                     
-                                    ChivesBlockchainManager.share.sendTransactions(self.walletId, amount: amount * 1000000000000, fee: fee * 1000000000000, address: address) {  send in
+                                    ChivesBlockchainManager.share.sendTransactions(self.walletId, amount: amount * 100000000, fee: fee * 100000000, address: address) {  send in
                                         
                                         if send.success {
                                             DispatchQueue.main.async {
@@ -364,7 +364,7 @@ class PushTokensViewController: UIViewController {
                                 if status.synced {
                                     
                                     
-                                    ChivesTestBlockchainManager.share.sendTransactions(self.walletId, amount: amount * 1000000000000, fee: fee * 1000000000000, address: address) {  send in
+                                    ChivesTestBlockchainManager.share.sendTransactions(self.walletId, amount: amount * 100000000, fee: fee * 100000000, address: address) {  send in
                                         
                                         if send.success {
                                             DispatchQueue.main.async {
@@ -473,7 +473,7 @@ class PushTokensViewController: UIViewController {
                 } else if self.systems[i].name == "Chives Network" {
                     self.wallets = CoreDataManager.share.fetchChiaWalletPrivateKey().filter({$0.name == "Chives Wallet"})
                     self.wallet = self.wallets.first
-                    self.balanceButton.setTitle("\(((self.wallet?.token?.first?[2].toDouble() ?? 0) / 1000000000000.0).rounded(toPlaces: 8)) XCC", for: .normal)
+                    self.balanceButton.setTitle("\(((self.wallet?.token?.first?[2].toDouble() ?? 0) / 100000000.0).rounded(toPlaces: 8)) XCC", for: .normal)
                     self.tokenImage.image = UIImage(named: "ChivesLogo")!
                     self.setupWalletButton()
                 } else if self.systems[i].name == "Chia TestNet" {
@@ -485,7 +485,7 @@ class PushTokensViewController: UIViewController {
                 } else if self.systems[i].name == "Chives TestNet" {
                     self.wallets = CoreDataManager.share.fetchChiaWalletPrivateKey().filter({$0.name == "Chives TestNet"})
                     self.wallet = self.wallets.first
-                    self.balanceButton.setTitle("\(((self.wallet?.token?.first?[2].toDouble() ?? 0) / 1000000000000.0).rounded(toPlaces: 8)) XCC", for: .normal)
+                    self.balanceButton.setTitle("\(((self.wallet?.token?.first?[2].toDouble() ?? 0) / 100000000.0).rounded(toPlaces: 8)) XCC", for: .normal)
                     self.tokenImage.image = UIImage(named: "ChivesLogo")!
                     self.setupWalletButton()
                     

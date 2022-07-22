@@ -30,7 +30,6 @@ class ImportTokensViewController: UIViewController {
         WalletManager.share.isUpdate = false
         self.tableView.register(UINib(nibName: "ImportTokensTableViewCell", bundle: nil), forCellReuseIdentifier: "importTokenCell")
         self.tokens = TailsManager.share.tails?.result.list ?? []
-        self.prices = TailsManager.share.prices
         self.filteredTokens = self.tokens
         localization()
         NotificationCenter.default.addObserver(self, selector: #selector(localization), name: NSNotification.Name("localized"), object: nil)

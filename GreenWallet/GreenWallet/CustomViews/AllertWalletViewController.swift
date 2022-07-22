@@ -138,7 +138,7 @@ class AllertWalletViewController: UIViewController {
             } else if self.isBlockchianError && !self.isDuplicateWallet && !self.iserrorCountOfWalletError && !self.isNowallets && !self.isNewWalletError && !self.isSendError && !self.isImportMnemonicError && !self.isServerError {
                 self.deleteTitle.text = LocalizationManager.share.translate?.result.list.all.pop_up_failed_error_title
                 self.deleteDescription.text = LocalizationManager.share.translate?.result.list.all.pop_up_failed_error_description_blockchain_not_available
-                self.confirmutton.setTitle(LocalizationManager.share.translate?.result.list.all.confirm_btn, for: .normal)
+                self.confirmutton.setTitle(LocalizationManager.share.translate?.result.list.all.return_btn, for: .normal)
             }
                         
         } else if self.restorationIdentifier == "noConnection" {

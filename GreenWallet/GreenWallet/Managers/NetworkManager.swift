@@ -327,7 +327,7 @@ class NetworkManager {
     
     func getTailsPrices(complition: @escaping (TailsPrices) -> Void) {
         let escapedUrl = MainURLS.TailsPrices.rawValue.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
-        guard let url = URL(string: escapedUrl!) else { return }
+        guard let url = URL(string: MainURLS.TailsPrices.rawValue) else { return }
         let session = URLSession.shared
         session.dataTask(with: url) { data, response, error in
             if let response = response {

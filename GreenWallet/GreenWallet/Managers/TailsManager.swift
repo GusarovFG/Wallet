@@ -14,7 +14,7 @@ class TailsManager {
     
     var tails: Tails?
     
-    var prices: [TailsPricesResult] = []
+    var prices: [TailsPricesList] = []
     
     private init(){}
     

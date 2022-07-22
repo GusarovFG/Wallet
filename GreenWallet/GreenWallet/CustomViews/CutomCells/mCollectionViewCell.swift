@@ -200,13 +200,13 @@ extension mCollectionViewCell: UITableViewDelegate, UITableViewDataSource {
                     
                     walletCell.cellImage.image = UIImage(named: "ChivesLogo")!
                     
-                    let summ: Double = ((Double(token[2]) ?? 0) / 1000000000000) * ExchangeRatesManager.share.newChivesRatePerDollar
+                    let summ: Double = ((Double(token[2]) ?? 0) / 100000000) * ExchangeRatesManager.share.newChivesRatePerDollar
                     if ExchangeRatesManager.share.newChivesRatePerDollar == 0 {
                         walletCell.convertLabel.text = "⁓ USD"
                     } else {
                         if !self.hideBalance {
                             walletCell.convertLabel.text = "⁓ \(NSString(format:"%.2f", summ)) USD"
-                            walletCell.balanceLabel.text = "\(((Double(token[2]) ?? 0) / 1000000000000)) XCC"
+                            walletCell.balanceLabel.text = "\(((Double(token[2]) ?? 0) / 100000000)) XCC"
                             
                         } else {
                             walletCell.convertLabel.text = "***** UDS"
