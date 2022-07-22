@@ -102,7 +102,13 @@ class SelectSystemViewController: UIViewController {
     
     
     @objc private func localization() {
-        self.titleLabel.text = LocalizationManager.share.translate?.result.list.all.select_network
+        if !CoreDataManager.share.fetchChiaWalletPrivateKey().isEmpty {
+            self.titleLabel.text = LocalizationManager.share.translate?.result.list.all.select_network
+
+        } else {
+            
+            self.titleLabel.text = LocalizationManager.share.translate?.result.list.all.select_network_new_wallet
+        }
     }
     
     @objc func dismissSwipe() {

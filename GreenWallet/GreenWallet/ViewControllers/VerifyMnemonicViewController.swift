@@ -45,6 +45,7 @@ class VerifyMnemonicViewController: UIViewController {
         
         let storyoard = UIStoryboard(name: "spinner", bundle: .main)
         self.spinnerVC = storyoard.instantiateViewController(withIdentifier: "spinner") as! SprinnerViewController
+        self.spinnerVC.isNewWallet = true
         
         self.veryfyCollectionView.register(UINib(nibName: "MnemonicCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "mnemonicCell")
         self.selectCollectionView.register(UINib(nibName: "MnemonicCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "mnemonicCell")
@@ -62,6 +63,8 @@ class VerifyMnemonicViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         WalletManager.share.isUpdate = false
+        WalletManager.share.updateBalances()
+        
         for i in 0..<self.mnemonicPhrase.count {
             if i < 6  {
                 self.verifyedMnemonicPhrase.append(self.mnemonicPhrase[i])
@@ -84,7 +87,7 @@ class VerifyMnemonicViewController: UIViewController {
         self.spinnerVC.dismiss(animated: false)
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
             
-            AlertManager.share.serverError(self)
+            AlertManager.share.errorBlockchainConnect(self)
         }
     }
     
@@ -142,7 +145,7 @@ class VerifyMnemonicViewController: UIViewController {
                             }
                             dispatchGroup.enter()
                             DispatchQueue.global().asyncAfter(deadline: .now() + 15) {
-                                
+
                                 ChiaBlockchainManager.share.getSyncStatus(1) { status in
                                     DispatchQueue.global().asyncAfter(deadline: .now() + 10) {
                                         if status.synced {
@@ -153,25 +156,25 @@ class VerifyMnemonicViewController: UIViewController {
                                                         dispatchGroup.leave()
                                                     }
                                                 }
-                                                
+
                                             }
-                                            
+
                                         } else {
                                             DispatchQueue.main.async {
                                                 self.spinnerVC.dismiss(animated: true)
                                                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                                                    
+
                                                     AlertManager.share.errorNewWallet(self)
                                                     return
                                                 }
                                             }
                                         }
-                                        
-                                        
+
+
                                     }
-                                    
+
                                 }
-                                
+
                                 
                             }
                             
@@ -290,7 +293,7 @@ class VerifyMnemonicViewController: UIViewController {
                              
                                     
                                     UserDefaultsManager.shared.userDefaults.set("Exist", forKey: UserDefaultsStringKeys.walletExist.rawValue )
-                                    CoreDataManager.share.saveChiaWalletPrivateKey(name: "Chives Wallet", fingerprint: privateKey.private_key.fingerprint, pk: privateKey.private_key.pk, seed: privateKey.private_key.seed ?? "", sk: privateKey.private_key.seed ?? "", adress: adreses, tokens: tokens)
+                                    CoreDataManager.share.saveChiaWalletPrivateKey(name: "Chives Wallet", fingerprint: privateKey.private_key.fingerprint, pk: privateKey.private_key.pk, seed: privateKey.private_key.seed , sk: privateKey.private_key.seed ?? "", adress: adreses, tokens: tokens)
                                     dispatchGroup.leave()
                                     dispatchGroup.enter()
                                     guard let newWallet = CoreDataManager.share.fetchChiaWalletPrivateKey().last else { return }

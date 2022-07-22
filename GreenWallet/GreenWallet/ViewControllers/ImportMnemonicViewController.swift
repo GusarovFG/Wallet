@@ -95,7 +95,7 @@ class ImportMnemonicViewController: UIViewController {
         self.spinnerVC.dismiss(animated: false)
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
             
-            AlertManager.share.serverError(self)
+            AlertManager.share.errorBlockchainConnect(self)
         }
     }
     

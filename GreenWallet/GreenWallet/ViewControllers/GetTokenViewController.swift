@@ -47,9 +47,30 @@ class GetTokenViewController: UIViewController {
         self.systems = Array(Set(SystemsManager.share.listOfSystems))
         self.qrCollectionView.register(UINib(nibName: "qrCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "qrCell")
         
+        self.menuView.alpha = 0
+        self.menuView.isHidden = true
+
+        
+        
+        self.pageControl.numberOfPages = self.wallets.count
+
+        self.menuButton.titleLabel?.textColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
+        self.menuButton.titleLabel?.numberOfLines = 1
+        self.menuButton.titleLabel?.font.withSize(14)
+        self.menuButton.semanticContentAttribute = UIApplication.shared
+            .userInterfaceLayoutDirection == .rightToLeft ? .forceLeftToRight : .forceRightToLeft
+        
+        self.menuButton.layer.borderWidth = 1
+        self.menuButton.layer.borderColor = #colorLiteral(red: 0.2901960784, green: 0.2901960784, blue: 0.2901960784, alpha: 1)
+        
+        self.menuView.layer.borderWidth = 1
+        self.menuView.layer.borderColor = #colorLiteral(red: 0.2901960784, green: 0.2901960784, blue: 0.2901960784, alpha: 1)
+        
+        self.copyLabel.alpha = 0
+        
         if self.isMyWallet {
             self.wallets = CoreDataManager.share.fetchChiaWalletPrivateKey().filter({$0 == self.wallet})
-//            setupLabel(index: 0)
+            
             if self.isChia  {
                 self.titleLabel.text = "Chia Network"
                 self.menuButton.setTitle("• Chia Network", for: .normal)
@@ -88,26 +109,19 @@ class GetTokenViewController: UIViewController {
             }
         }
         
-        self.menuView.alpha = 0
-        self.menuView.isHidden = true
-
         
-        
-        self.pageControl.numberOfPages = self.wallets.count
-
-        self.menuButton.titleLabel?.textColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
-        self.menuButton.titleLabel?.numberOfLines = 1
-        self.menuButton.titleLabel?.font.withSize(14)
-        self.menuButton.semanticContentAttribute = UIApplication.shared
-            .userInterfaceLayoutDirection == .rightToLeft ? .forceLeftToRight : .forceRightToLeft
-        
-        self.menuButton.layer.borderWidth = 1
-        self.menuButton.layer.borderColor = #colorLiteral(red: 0.2901960784, green: 0.2901960784, blue: 0.2901960784, alpha: 1)
-        
-        self.menuView.layer.borderWidth = 1
-        self.menuView.layer.borderColor = #colorLiteral(red: 0.2901960784, green: 0.2901960784, blue: 0.2901960784, alpha: 1)
-        
-        self.copyLabel.alpha = 0
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if self.isMyWallet {
+            self.menuButton.isEnabled = false
+            self.menuButton.titleLabel?.textColor = #colorLiteral(red: 0.5803921569, green: 0.5803921569, blue: 0.5803921569, alpha: 1)
+            self.menuButton.setTitleColor(#colorLiteral(red: 0.5803921569, green: 0.5803921569, blue: 0.5803921569, alpha: 1), for: .normal)
+            self.menuButton.imageView?.alpha = 0
+        } else {
+            return
+        }
     }
     
     private func localization() {

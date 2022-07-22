@@ -30,30 +30,15 @@ class WalletManager {
         
         if self.index == (CoreDataManager.share.fetchChiaWalletPrivateKey().count - 1) {
             self.index = 0
-            print("индекс")
-            print(self.index)
- 
-                
-                print(CoreDataManager.share.fetchChiaWalletPrivateKey())
-                
-//                NotificationCenter.default.post(name: NSNotification.Name("updateBalances"), object: nil)
-            
         } else {
             self.index += 1
-            print("новый индекс")
-            print(self.index)
-
-                
-                print(CoreDataManager.share.fetchChiaWalletPrivateKey())
-                
-                
-
         }
         
         if !CoreDataManager.share.fetchChiaWalletPrivateKey().isEmpty {
             print("нычало")
             print(self.index)
             if self.isUpdate {
+                
                 DispatchQueue.global().async {
                     let wallet = CoreDataManager.share.fetchChiaWalletPrivateKey()[self.index]
                     print("индекс кошелька")
@@ -69,6 +54,135 @@ class WalletManager {
                                     for walletONe in 0..<wallets.wallets.count {
 
                                         ChiaBlockchainManager.share.getWalletBalance(wallets.wallets[walletONe].id) { balance in
+                                            id = "\(wallets.wallets[walletONe].id)"
+                                            name = wallets.wallets[walletONe].name
+                                            token.append(name)
+                                            token.append(id)
+                                            token.append("\(balance.wallet_balance.confirmed_wallet_balance)")
+                                            token.append("show")
+                                            print(tokens)
+                                            print(walletTokens)
+                                            print(token)
+                                            if !walletTokens.contains(where: {$0[0] == token[0]}) {
+                                                print("Новье")
+                                                CoreDataManager.share.addCatBalanceChiaWalletPrivateKey(index: self.index, token: token)
+                                                token.removeAll()
+                                                DispatchQueue.main.async {
+                                                    NotificationCenter.default.post(name: NSNotification.Name("updateBalances"), object: nil)
+
+                                                }
+                                                
+                                            } else {
+                                                CoreDataManager.share.updateCatBalanceChiaWalletPrivateKey(index: self.index, id: wallets.wallets[walletONe].id, balance: "\(balance.wallet_balance.confirmed_wallet_balance)")
+                                                DispatchQueue.main.async {
+                                                    NotificationCenter.default.post(name: NSNotification.Name("updateBalances"), object: nil)
+
+                                                }
+                                                token.removeAll()
+                                                print("То же самое")
+                                            }
+                                            print("qweqweqwe \(tokens)")
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    } else if wallet.name == "Chives Wallet" {
+                        ChivesBlockchainManager.share.logIn(Int(wallet.fingerprint)) { log in
+                            print("fingerprint \(wallet.fingerprint)")
+                            print(log.fingerprint)
+                            if log.success {
+                                ChivesBlockchainManager.share.getWallets { wallets in
+                                    
+                                    for walletONe in 0..<wallets.wallets.count {
+
+                                        ChivesBlockchainManager.share.getWalletBalance(wallets.wallets[walletONe].id) { balance in
+                                            id = "\(wallets.wallets[walletONe].id)"
+                                            name = wallets.wallets[walletONe].name
+                                            token.append(name)
+                                            token.append(id)
+                                            token.append("\(balance.wallet_balance.confirmed_wallet_balance)")
+                                            token.append("show")
+                                            print(tokens)
+                                            print(walletTokens)
+                                            print(token)
+                                            if !walletTokens.contains(where: {$0[0] == token[0]}) {
+                                                print("Новье")
+                                                CoreDataManager.share.addCatBalanceChiaWalletPrivateKey(index: self.index, token: token)
+                                                token.removeAll()
+                                                DispatchQueue.main.async {
+                                                    NotificationCenter.default.post(name: NSNotification.Name("updateBalances"), object: nil)
+
+                                                }
+                                                
+                                            } else {
+                                                CoreDataManager.share.updateCatBalanceChiaWalletPrivateKey(index: self.index, id: wallets.wallets[walletONe].id, balance: "\(balance.wallet_balance.confirmed_wallet_balance)")
+                                                DispatchQueue.main.async {
+                                                    NotificationCenter.default.post(name: NSNotification.Name("updateBalances"), object: nil)
+
+                                                }
+                                                token.removeAll()
+                                                print("То же самое")
+                                            }
+                                            print("qweqweqwe \(tokens)")
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    } else if wallet.name == "Chia TestNet" {
+                        ChiaTestBlockchainManager.share.logIn(Int(wallet.fingerprint)) { log in
+                            print("fingerprint \(wallet.fingerprint)")
+                            print(log.fingerprint)
+                            if log.success {
+                                ChiaTestBlockchainManager.share.getWallets { wallets in
+                                    
+                                    for walletONe in 0..<wallets.wallets.count {
+
+                                        ChiaTestBlockchainManager.share.getWalletBalance(wallets.wallets[walletONe].id) { balance in
+                                            id = "\(wallets.wallets[walletONe].id)"
+                                            name = wallets.wallets[walletONe].name
+                                            token.append(name)
+                                            token.append(id)
+                                            token.append("\(balance.wallet_balance.confirmed_wallet_balance)")
+                                            token.append("show")
+                                            print(tokens)
+                                            print(walletTokens)
+                                            print(token)
+                                            if !walletTokens.contains(where: {$0[0] == token[0]}) {
+                                                print("Новье")
+                                                CoreDataManager.share.addCatBalanceChiaWalletPrivateKey(index: self.index, token: token)
+                                                token.removeAll()
+                                                DispatchQueue.main.async {
+                                                    NotificationCenter.default.post(name: NSNotification.Name("updateBalances"), object: nil)
+
+                                                }
+                                                
+                                            } else {
+                                                CoreDataManager.share.updateCatBalanceChiaWalletPrivateKey(index: self.index, id: wallets.wallets[walletONe].id, balance: "\(balance.wallet_balance.confirmed_wallet_balance)")
+                                                DispatchQueue.main.async {
+                                                    NotificationCenter.default.post(name: NSNotification.Name("updateBalances"), object: nil)
+
+                                                }
+                                                token.removeAll()
+                                                print("То же самое")
+                                            }
+                                            print("qweqweqwe \(tokens)")
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    } else if wallet.name == "Chives TestNet" {
+                        ChivesTestBlockchainManager.share.logIn(Int(wallet.fingerprint)) { log in
+                            print("fingerprint \(wallet.fingerprint)")
+                            print(log.fingerprint)
+                            if log.success {
+                                ChivesTestBlockchainManager.share.getWallets { wallets in
+                                    
+                                    for walletONe in 0..<wallets.wallets.count {
+
+                                        ChivesTestBlockchainManager.share.getWalletBalance(wallets.wallets[walletONe].id) { balance in
                                             id = "\(wallets.wallets[walletONe].id)"
                                             name = wallets.wallets[walletONe].name
                                             token.append(name)

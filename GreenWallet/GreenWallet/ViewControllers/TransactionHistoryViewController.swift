@@ -131,36 +131,36 @@ class TransactionHistoryViewController: UIViewController {
             queue.async {
                 for i in CoreDataManager.share.fetchChiaWalletPrivateKey() {
                     if i.name == "Chia Wallet" {
-                        ChiaBlockchainManager.share.logIn(Int(i.fingerprint)) { log in
-                            
-                            if log.success {
-                                ChiaBlockchainManager.share.getWallets { wallet in
-                                    
-                                    for iwallet in wallet.wallets {
-                                        
-                                        ChiaBlockchainManager.share.getTransactions(iwallet.id) { transact in
-                                            
-                                            self.walletsTransactions.append(transact.transactions)
-                                            
-                                            
-                                            DispatchQueue.main.async {
-                                                
-                                                self.filterWalletsTransactions = self.walletsTransactions.reduce([], +)
-                                                if CoreDataManager.share.fetchTransactions().isEmpty{
-                                                    self.filterWalletsTransactions.forEach({CoreDataManager.share.saveTransactions(newTransactions: $0)})
-                                                    print(CoreDataManager.share.fetchTransactions())
-                                                } else {
-                                                    CoreDataManager.share.deleteTransactions()
-                                                    self.filterWalletsTransactions.forEach({CoreDataManager.share.saveTransactions(newTransactions: $0)})
-                                                }
-                                                self.tableView.reloadData()
-                                                self.spinnerVC.dismiss(animated: true)
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
+//                        ChiaBlockchainManager.share.logIn(Int(i.fingerprint)) { log in
+//
+//                            if log.success {
+//                                ChiaBlockchainManager.share.getWallets { wallet in
+//
+//                                    for iwallet in wallet.wallets {
+//
+//                                        ChiaBlockchainManager.share.getTransactions(iwallet.id) { transact in
+//
+//                                            self.walletsTransactions.append(transact.transactions)
+//
+//
+//                                            DispatchQueue.main.async {
+//
+//                                                self.filterWalletsTransactions = self.walletsTransactions.reduce([], +)
+//                                                if CoreDataManager.share.fetchTransactions().isEmpty{
+//                                                    self.filterWalletsTransactions.forEach({CoreDataManager.share.saveTransactions(newTransactions: $0)})
+//                                                    print(CoreDataManager.share.fetchTransactions())
+//                                                } else {
+//                                                    CoreDataManager.share.deleteTransactions()
+//                                                    self.filterWalletsTransactions.forEach({CoreDataManager.share.saveTransactions(newTransactions: $0)})
+//                                                }
+//                                                self.tableView.reloadData()
+//                                                self.spinnerVC.dismiss(animated: true)
+//                                            }
+//                                        }
+//                                    }
+//                                }
+//                            }
+//                        }
                         
                     } else if i.name == "Chives Wallet"{
                         ChivesBlockchainManager.share.logIn(Int(i.fingerprint)) { log in

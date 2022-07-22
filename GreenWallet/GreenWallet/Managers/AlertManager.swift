@@ -37,6 +37,16 @@ class AlertManager {
         controller.present(alertVC, animated: true, completion: nil)
     }
     
+    func errorBlockchainConnect(_ controller: UIViewController) {
+        let storyboard = UIStoryboard(name: "Alert", bundle: .main)
+        let alertVC = storyboard.instantiateViewController(withIdentifier: "DeleteContact") as! AllertWalletViewController
+        alertVC.isBlockchianError = true
+        
+        
+        
+        controller.present(alertVC, animated: true, completion: nil)
+    }
+    
     func seccessSendToken(_ controller: UIViewController) {
         let storyboard = UIStoryboard(name: "Alert", bundle: .main)
         let seccsessAlertVC = storyboard.instantiateViewController(withIdentifier: "seccsessTransitViewController") as! AllertWalletViewController

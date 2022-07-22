@@ -38,6 +38,7 @@ class MainViewController: UIViewController {
         
         self.pageControl.numberOfPages = WalletManager.share.favoritesWallets.count
         self.cellectionView.register(UINib(nibName: "mCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "mCollectionViewCell")
+    
         
         if UserDefaultsManager.shared.userDefaults.bool(forKey: UserDefaultsStringKeys.hideWalletsBalance.rawValue) {
             self.balanceLabel.text = "***** USD"
@@ -64,29 +65,11 @@ class MainViewController: UIViewController {
         
         
         
-        self.cellectionView.reloadData()
-        self.cellectionView.layoutIfNeeded()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.wallets = WalletManager.share.favoritesWallets
-        WalletManager.share.vallets = CoreDataManager.share.fetchChiaWalletPrivateKey()
-        self.cellectionView.reloadData()
-        if self.wallet?.name == "Chia Wallet" || self.wallet?.name == "Chia Wallet" {
-            
-            self.percentLabel.text = "  \(String(ExchangeRatesManager.share.difference).prefix(5)) % "
-            self.riseLabel.text = "XCH price: \(ExchangeRatesManager.share.newRatePerDollar) $"
-        } else {
-            self.percentLabel.text = "  \(String(ExchangeRatesManager.share.differenceChives).prefix(5)) % "
-            self.riseLabel.text = "XCC price: \(ExchangeRatesManager.share.newChivesRatePerDollar) $"
-        }
-        ExchangeRatesManager.share.changeColorOfView(label: self.percentLabel)
-        WalletManager.share.isUpdate = true
-        if !CoreDataManager.share.fetchChiaWalletPrivateKey().isEmpty {
-            
-            self.cellectionView.scrollToItem(at: [0,0], at: .left, animated: true)
-        }
         if !self.wallets.isEmpty {
             self.cellectionView.isScrollEnabled = true
             self.wallet = self.wallets[0]
@@ -96,6 +79,9 @@ class MainViewController: UIViewController {
             self.cellectionView.reloadData()
         } else {
             self.cellectionView.isScrollEnabled = false
+            self.riseLabel.text = "XCH price: \(ExchangeRatesManager.share.newRatePerDollar) $"
+            self.percentLabel.text = "  \(String(ExchangeRatesManager.share.difference).prefix(5)) % "
+            ExchangeRatesManager.share.changeColorOfView(label: self.percentLabel)
             return
         }
         
@@ -113,6 +99,22 @@ class MainViewController: UIViewController {
                 ExchangeRatesManager.share.changeColorOfView(label: self.percentLabel)
             }
         }
+        
+        if self.wallet?.name == "Chia Wallet" || self.wallet?.name == "Chia Wallet" {
+            
+            self.percentLabel.text = "  \(String(ExchangeRatesManager.share.difference).prefix(5)) % "
+            self.riseLabel.text = "XCH price: \(ExchangeRatesManager.share.newRatePerDollar) $"
+        } else {
+            self.percentLabel.text = "  \(String(ExchangeRatesManager.share.differenceChives).prefix(5)) % "
+            self.riseLabel.text = "XCC price: \(ExchangeRatesManager.share.newChivesRatePerDollar) $"
+        }
+        ExchangeRatesManager.share.changeColorOfView(label: self.percentLabel)
+        WalletManager.share.isUpdate = true
+        if !CoreDataManager.share.fetchChiaWalletPrivateKey().isEmpty {
+            
+            self.cellectionView.scrollToItem(at: [0,0], at: .left, animated: true)
+        }
+        
         
     }
     
@@ -184,9 +186,7 @@ class MainViewController: UIViewController {
         
         
     }
-    
-    
-    
+
     @IBAction func sendButtonPressed(_ sender: Any) {
         if !CoreDataManager.share.fetchChiaWalletPrivateKey().isEmpty {
             let pushVC = storyboard?.instantiateViewController(withIdentifier: "PushTokensViewController") as! PushTokensViewController
@@ -208,9 +208,23 @@ class MainViewController: UIViewController {
         
     }
     @IBAction func qrButtonPressed(_ sender: Any) {
-        let scanVC = storyboard?.instantiateViewController(withIdentifier: "QRScanViewController") as! QRScanViewController
-        scanVC.modalPresentationStyle = .overFullScreen
-        self.present(scanVC, animated: true)
+        if !CoreDataManager.share.fetchChiaWalletPrivateKey().isEmpty {
+            let getTokenViewController = storyboard?.instantiateViewController(withIdentifier: "GetTokenViewController") as! GetTokenViewController
+            getTokenViewController.isChia = self.wallet!.name!.contains("Chia Wallet")
+            getTokenViewController.isChiaTest = self.wallet!.name!.contains("Chia TestNet")
+            getTokenViewController.isChives = self.wallet!.name!.contains("Chives Wallet")
+            getTokenViewController.isChivesTest = self.wallet!.name!.contains("Chives TestNet")
+            getTokenViewController.isMyWallet = true
+            getTokenViewController.wallet = self.wallet
+            getTokenViewController.modalPresentationStyle = .fullScreen
+            self.tabBarController?.present(getTokenViewController, animated: true)
+        } else {
+            let storyboard = UIStoryboard(name: "Main", bundle: .main)
+            let selectSystemVC = storyboard.instantiateViewController(withIdentifier: "SelectSystemViewController") as! SelectSystemViewController
+            selectSystemVC.isNewWallet = true
+            self.tabBarController?.present(selectSystemVC, animated: true)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "newWallet"), object: nil)
+        }
     }
     
 }
@@ -290,19 +304,12 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
                     self.balanceLabel.text = "⁓\(NSString(format:"%.2f", summ)) USD"
                     self.percentLabel.text = "  \(String(ExchangeRatesManager.share.difference).prefix(5)) % "
                     ExchangeRatesManager.share.changeColorOfView(label: self.percentLabel)
-                } else {
-                    let summ: Double = (((self.wallet?.token?.map({Double($0[2])!}).reduce(0, +) ?? 0) / 1000000000000) * ExchangeRatesManager.share.newChivesRatePerDollar).rounded(toPlaces: 8)
-                    if ExchangeRatesManager.share.newChivesRatePerDollar == 0 {
-                        self.percentLabel.text = "  \(String(ExchangeRatesManager.share.differenceChives).prefix(5)) % "
-                        self.riseLabel.text = "XCC price: ~"
-                        self.balanceLabel.text = "⁓\(NSString(format:"%.2f", summ)) USD"
-                    } else {
-                        self.riseLabel.text = "XCC price: \(ExchangeRatesManager.share.newChivesRatePerDollar) $"
-                        self.balanceLabel.text = "⁓\(NSString(format:"%.2f", summ)) USD"
-                        self.percentLabel.text = "  \(String(ExchangeRatesManager.share.differenceChives).prefix(5)) % "
-                        ExchangeRatesManager.share.changeChivesColorOfView(label: self.percentLabel)
-                    }
-                    
+                } else if self.wallet?.name == "Chives Wallet" || self.wallet?.name == "Chives TestNet" {
+                    let summ: Double = (((self.wallet?.token?.map({Double($0[2]) ?? 0}).reduce(0, +) ?? 0) / 1000000000000) * ExchangeRatesManager.share.newRatePerDollar).rounded(toPlaces: 8)
+                    self.riseLabel.text = "XCH price: \(ExchangeRatesManager.share.newChivesRatePerDollar) $"
+                    self.balanceLabel.text = "⁓\(NSString(format:"%.2f", summ)) USD"
+                    self.percentLabel.text = "  \(String(ExchangeRatesManager.share.differenceChives).prefix(5)) % "
+                    ExchangeRatesManager.share.changeColorOfView(label: self.percentLabel)
                 }
                 
                 

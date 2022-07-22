@@ -10,6 +10,7 @@ import UIKit
 class SprinnerViewController: UIViewController {
     
     var isDeleting = false
+    var isNewWallet = false
     
     @IBOutlet weak var mainTitle: UILabel!
     @IBOutlet weak var mainDescription: UILabel!
@@ -28,11 +29,14 @@ class SprinnerViewController: UIViewController {
     }
     
     private func localization() {
-        if !self.isDeleting {
-            self.mainTitle.text = LocalizationManager.share.translate?.result.list.all.loading_pop_up_title
-            self.mainDescription.text = LocalizationManager.share.translate?.result.list.all.loading_pop_up_description
-        } else {
+        if self.isDeleting {
             self.mainTitle.text = LocalizationManager.share.translate?.result.list.address_book.adress_book_loading_remove_title
+            self.mainDescription.text = LocalizationManager.share.translate?.result.list.all.loading_pop_up_description
+        } else if isNewWallet {
+            self.mainTitle.text = LocalizationManager.share.translate?.result.list.all.creation_pop_up_title
+            self.mainDescription.text = LocalizationManager.share.translate?.result.list.all.loading_pop_up_description
+        } else if !self.isDeleting && !self.isNewWallet {
+            self.mainTitle.text = LocalizationManager.share.translate?.result.list.all.loading_pop_up_title
             self.mainDescription.text = LocalizationManager.share.translate?.result.list.all.loading_pop_up_description
         }
     }

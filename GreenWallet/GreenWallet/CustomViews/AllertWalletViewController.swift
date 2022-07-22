@@ -27,6 +27,7 @@ class AllertWalletViewController: UIViewController {
     var isNowallets = false
     var isNoConnection = false
     var isReloadAll = false
+    var isBlockchianError = false
     
     @IBOutlet weak var mainLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
@@ -102,7 +103,7 @@ class AllertWalletViewController: UIViewController {
             } 
             self.mainButton.setTitle(LocalizationManager.share.translate?.result.list.all.ready_btn, for: .normal)
         } else if self.restorationIdentifier == "DeleteContact" {
-            if !self.isNewWalletError && !self.isSendError && !self.isServerError && !self.iserrorCountOfWalletError && !self.isDuplicateWallet {
+            if !self.isBlockchianError && !self.isNewWalletError && !self.isSendError && !self.isServerError && !self.iserrorCountOfWalletError && !self.isDuplicateWallet && !self.isBlockchianError {
                 self.deleteTitle.text = LocalizationManager.share.translate?.result.list.address_book.address_book_pop_up_delete_title
                 self.deleteDescription.text = LocalizationManager.share.translate?.result.list.address_book.address_book_pop_up_delete_description
                 self.confirmutton.setTitle(LocalizationManager.share.translate?.result.list.all.confirm_btn, for: .normal)
@@ -134,7 +135,12 @@ class AllertWalletViewController: UIViewController {
                 self.deleteTitle.text = LocalizationManager.share.translate?.result.list.all.pop_up_failed_error_title
                 self.deleteDescription.text = "Данный кошелек уже добавлен"
                 self.confirmutton.setTitle(LocalizationManager.share.translate?.result.list.all.confirm_btn, for: .normal)
+            } else if self.isBlockchianError && !self.isDuplicateWallet && !self.iserrorCountOfWalletError && !self.isNowallets && !self.isNewWalletError && !self.isSendError && !self.isImportMnemonicError && !self.isServerError {
+                self.deleteTitle.text = LocalizationManager.share.translate?.result.list.all.pop_up_failed_error_title
+                self.deleteDescription.text = LocalizationManager.share.translate?.result.list.all.pop_up_failed_error_description_blockchain_not_available
+                self.confirmutton.setTitle(LocalizationManager.share.translate?.result.list.all.confirm_btn, for: .normal)
             }
+                        
         } else if self.restorationIdentifier == "noConnection" {
             self.noConnectionTitle.text = LocalizationManager.share.translate?.result.list.no_connection.no_connection_title
             self.noConnectionDescription.text = LocalizationManager.share.translate?.result.list.no_connection.no_connection_description
@@ -164,7 +170,7 @@ class AllertWalletViewController: UIViewController {
     }
     
     @IBAction func confirmDeleteContact(_ sender: Any) {
-        if !self.isNewWalletError && !self.isSendError && !self.isImportMnemonicError && !self.isDuplicateWallet && !self.isServerError && !self.iserrorCountOfWalletError {
+        if !self.isBlockchianError && !self.isNewWalletError && !self.isSendError && !self.isImportMnemonicError && !self.isDuplicateWallet && !self.isServerError && !self.iserrorCountOfWalletError && !self.isBlockchianError {
             CoreDataManager.share.deleteContact(self.index)
             self.dismiss(animated: true)
             NotificationCenter.default.post(name: NSNotification.Name("showSpinner"), object: nil)

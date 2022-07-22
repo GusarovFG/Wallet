@@ -13,7 +13,6 @@ class AddContactViewController: UIViewController {
     var isEditingContact = false
     var index = 0
     
-    private var adres = "qwertyuiopasdfghjkl"
     private var isError = false
     
     @IBOutlet weak var contactNameLabel: UILabel!
@@ -156,22 +155,28 @@ class AddContactViewController: UIViewController {
     
     @IBAction func addContactButtonPressed(_ sender: Any) {
         if !self.isEditingContact {
-//            if self.contactAdresTextField.text != self.adres && !self.isError {
-//                self.errorLabel.alpha = 1
-//                self.contactAdresTextField.textColor = #colorLiteral(red: 1, green: 0.2360929251, blue: 0.1714096665, alpha: 1)
-//                self.bottomCorner.backgroundColor = #colorLiteral(red: 1, green: 0.2360929251, blue: 0.1714096665, alpha: 1)
-//                self.viewHeightConstraint.constant += 20
-//                self.isError = true
-//            } else {
+            if CoreDataManager.share.fetchContacts().filter({$0.adres == self.contactAdresTextField.text}).count > 0 && self.contactNameTextField.text != "" {
+                self.errorLabel.alpha = 1
+                self.contactAdresTextField.textColor = #colorLiteral(red: 1, green: 0.2360929251, blue: 0.1714096665, alpha: 1)
+                self.bottomCorner.backgroundColor = #colorLiteral(red: 1, green: 0.2360929251, blue: 0.1714096665, alpha: 1)
+                self.viewHeightConstraint.constant += 20
+                self.isError = true
+            } else {
                 
                 CoreDataManager.share.saveContact(self.contactNameTextField.text ?? "", adres: self.contactAdresTextField.text ?? "", description: self.descriptionTextField.text ?? "")
                 AlertManager.share.seccessAddContect(self)
-                
+            }
             
         } else {
             if self.contactNameTextField.text != "" {
                 CoreDataManager.share.editContact(index: self.index, name: self.contactNameTextField.text ?? "", adres: self.contactAdresTextField.text ?? "", description: self.descriptionTextField.text ?? "")
                 AlertManager.share.seccessEditContact(self)
+            } else {
+                self.errorLabel.alpha = 1
+                self.contactAdresTextField.textColor = #colorLiteral(red: 1, green: 0.2360929251, blue: 0.1714096665, alpha: 1)
+                self.bottomCorner.backgroundColor = #colorLiteral(red: 1, green: 0.2360929251, blue: 0.1714096665, alpha: 1)
+                self.viewHeightConstraint.constant += 20
+                self.isError = true
             }
         }
     }

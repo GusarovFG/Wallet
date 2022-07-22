@@ -47,7 +47,7 @@ class mCollectionViewCell: UICollectionViewCell {
         self.footerView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
         
         
-        self.token = self.wallet?.token?.filter({$0[3] == "show"}) ?? []
+        
         localization()
         NotificationCenter.default.addObserver(self, selector: #selector(reloadTableView), name: NSNotification.Name("reload"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(updateBalances), name: NSNotification.Name("updateBalances"), object: nil)
@@ -59,8 +59,8 @@ class mCollectionViewCell: UICollectionViewCell {
     
     override func layoutSubviews(){
         super.layoutSubviews()
+        self.token = self.wallet?.token?.filter({$0.contains("show")}) ?? []
         self.tableView.reloadData()
-        self.token = self.wallet?.token?.filter({$0[3] == "show"}) ?? []
         if self.stackView.arrangedSubviews.count == 2 {
             self.heightConstraint.constant = (self.frame.size.height) - (self.footerView.frame.height + self.headerView.frame.height)
             self.collectionVieww.constant = self.heightConstraint.constant
@@ -91,7 +91,7 @@ class mCollectionViewCell: UICollectionViewCell {
     override func layoutIfNeeded() {
         super.layoutIfNeeded()
         self.tableView.reloadData()
-        self.token = self.wallet?.token?.filter({$0[3] == "show"}) ?? []    }
+    }
     
     @objc private func hideWallet(notification: Notification) {
         guard let userInfo = notification.userInfo else { return }
@@ -159,7 +159,6 @@ extension mCollectionViewCell: UITableViewDelegate, UITableViewDataSource {
             } else {
                 return 0
             }
-            
         }
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -179,10 +178,7 @@ extension mCollectionViewCell: UITableViewDelegate, UITableViewDataSource {
             return importCell
         default:
             self.height += walletCell.frame.height
-            print("asdasdasd \(self.wallet)")
-            print(self.token.count)
-            print(indexPath)
-            
+         
             
             let token = self.token[indexPath.row]
             if !CoreDataManager.share.fetchChiaWalletPrivateKey().isEmpty {

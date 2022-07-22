@@ -39,11 +39,7 @@ class ImportTokensViewController: UIViewController {
         self.spinerVC = storyoard.instantiateViewController(withIdentifier: "spinner") as! SprinnerViewController
         NotificationCenter.default.addObserver(self, selector: #selector(alertErrorGerCodingKeysPresent), name: NSNotification.Name("alertErrorGerCodingKeys"), object: nil)
         print(self.index)
-        DispatchQueue.global().async {
-            ChiaBlockchainManager.share.logIn(Int(CoreDataManager.share.fetchChiaWalletPrivateKey()[self.index].fingerprint )) { log in
-                print(log.success)
-            }
-        }
+       
         print(TailsManager.share.tails?.result.list)
     }
     

@@ -267,7 +267,7 @@ class PushTokensViewController: UIViewController {
     
     @objc func pushToken() {
         
-        if self.isAddNewContact {
+        if self.isAddNewContact && !CoreDataManager.share.fetchContacts().contains(where: {$0.name?.lowercased() == self.contactTextField.text?.lowercased() || $0.adres?.lowercased() == self.adressTextField.text?.lowercased()}){
         CoreDataManager.share.saveContact(self.contactTextField.text ?? "", adres: self.adressTextField.text ?? "", description: "")
         }
         let amount: Double = Double(self.transferTextField.text ?? "0") ?? 0
@@ -628,7 +628,7 @@ class PushTokensViewController: UIViewController {
         let digits = "1234567890"
         sender.text = text.filter { engCharacters.contains($0) || digits.contains($0) }
         
-        if sender.text != "" {
+        if sender.text != "" && !CoreDataManager.share.fetchContacts().contains(where: {$0.name?.lowercased() == self.contactTextField.text?.lowercased() || $0.adres?.lowercased() == self.adressTextField.text?.lowercased()}){
             self.walletErrorLabel.alpha = 1
             self.walletErrorLabel.textColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
             self.walletLinkError.alpha = 0
@@ -685,6 +685,14 @@ class PushTokensViewController: UIViewController {
     }
     
     @IBAction func checkBoxButtonPressed(_ sender: UIButton) {
+        
+        if CoreDataManager.share.fetchContacts().contains(where: {$0.name?.lowercased() == self.contactTextField.text?.lowercased() || $0.adres?.lowercased() == self.adressTextField.text?.lowercased()}) {
+            self.walletLinkError.text = LocalizationManager.share.translate?.result.list.send_token.send_token_address_is_already_exist
+            self.walletLinkError.textColor = #colorLiteral(red: 0.1176470588, green: 0.5764705882, blue: 1, alpha: 1)
+            self.walletLinkError.alpha = 1
+            self.continueButton.isEnabled = false
+        }
+        
         if sender.imageView?.image != UIImage(systemName: "checkmark.square.fill") {
             sender.setImage(UIImage(systemName: "checkmark.square.fill"), for: .normal)
             sender.tintColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
@@ -696,13 +704,16 @@ class PushTokensViewController: UIViewController {
             self.checkboxLabelConstraint.constant += 65
             self.checkboxButtonConstraint.constant += 65
             self.contactTextField.text = "My Binance Wallet"
+            
             self.isAddNewContact = true
             
         } else {
             sender.setImage(UIImage(systemName: "squareshape.fill"), for: .normal)
             sender.imageView?.layer.cornerRadius = 5
             sender.tintColor = .white
-            
+            if self.walletLinkError.alpha == 1 {
+                self.walletLinkError.alpha = 0
+            }
             self.contactLabel.isHidden = true
             self.contactTextField.isHidden = true
             self.walletAdressViewConstraint.constant -= 65
@@ -714,7 +725,7 @@ class PushTokensViewController: UIViewController {
     }
     @IBAction func transferSuccsessCheck(_ sender: UITextField) {
         
-        if sender.text != "" && self.adressTextField.text != "" {
+        if sender.text != "" && self.adressTextField.text != "" && self.walletLinkError.alpha != 1 {
             
             self.continueButton.isEnabled = true
             self.continueButton.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)

@@ -235,7 +235,12 @@ struct All: Codable {
     let search: String
     let select_network: String
     let share_btn: String
-
+    let pop_up_failed_error_description_blockchain_not_available: String
+    let pop_up_failed_error_description_wallet_has_already_added: String
+    let the_application_does_not_support_more_than_wallets: String
+    let select_network_new_wallet: String
+    let creation_pop_up_title: String
+    
     enum CodingKeys: String, CodingKey {
         case add_wallet_import
         case add_wallet_new
@@ -270,6 +275,11 @@ struct All: Codable {
         case search
         case select_network
         case share_btn
+        case pop_up_failed_error_description_blockchain_not_available
+        case pop_up_failed_error_description_wallet_has_already_added
+        case the_application_does_not_support_more_than_wallets
+        case select_network_new_wallet
+        case creation_pop_up_title
     }
 }
 
