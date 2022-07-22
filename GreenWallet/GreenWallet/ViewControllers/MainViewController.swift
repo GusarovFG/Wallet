@@ -70,6 +70,8 @@ class MainViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.wallets = WalletManager.share.favoritesWallets
+        WalletManager.share.vallets = CoreDataManager.share.fetchChiaWalletPrivateKey()
         self.cellectionView.reloadData()
         if self.wallet?.name == "Chia Wallet" || self.wallet?.name == "Chia Wallet" {
             
@@ -81,9 +83,6 @@ class MainViewController: UIViewController {
         }
         ExchangeRatesManager.share.changeColorOfView(label: self.percentLabel)
         WalletManager.share.isUpdate = true
-        WalletManager.share.vallets = CoreDataManager.share.fetchChiaWalletPrivateKey()
-        self.wallets = WalletManager.share.favoritesWallets
-        self.wallets = WalletManager.share.favoritesWallets
         if !CoreDataManager.share.fetchChiaWalletPrivateKey().isEmpty {
             
             self.cellectionView.scrollToItem(at: [0,0], at: .left, animated: true)
@@ -120,7 +119,6 @@ class MainViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         localization()
-        self.cellectionView.reloadData()
         LocalNotificationsManager.share.checkUpdates()
     }
     
@@ -132,6 +130,8 @@ class MainViewController: UIViewController {
     @objc func updateBalances() {
         let summ: Double = (((self.wallet?.token?.map({Double($0[2]) ?? 0}).reduce(0, +) ?? 0) / 1000000000000) * ExchangeRatesManager.share.newRatePerDollar).rounded(toPlaces: 8)
         self.balanceLabel.text = "⁓\(NSString(format:"%.2f", summ)) USD"
+        self.wallets = WalletManager.share.favoritesWallets
+        WalletManager.share.vallets = CoreDataManager.share.fetchChiaWalletPrivateKey()
         self.cellectionView.reloadData()
     }
     
@@ -253,7 +253,6 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
                 cell.numberOFWallet.text = "\(wallet.name ?? "") ****\(String(wallet.fingerprint).suffix(4))"
                 cell.controller = self.tabBarController ?? self
                 self.collectionViewHeightConstraint.constant = cell.frame.height
-                cell.tableView.reloadData()
                 print(self.collectionViewHeightConstraint.constant)
             } else {
                 cell.stackView.addArrangedSubview(cell.tableView)

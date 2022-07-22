@@ -47,7 +47,7 @@ class mCollectionViewCell: UICollectionViewCell {
         self.footerView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
         
         
-        self.token = self.wallet?.token?.filter({$0.filter({$0.contains("show")}).count == 1}) ?? []
+        self.token = self.wallet?.token?.filter({$0[3] == "show"}) ?? []
         localization()
         NotificationCenter.default.addObserver(self, selector: #selector(reloadTableView), name: NSNotification.Name("reload"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(updateBalances), name: NSNotification.Name("updateBalances"), object: nil)
@@ -60,7 +60,7 @@ class mCollectionViewCell: UICollectionViewCell {
     override func layoutSubviews(){
         super.layoutSubviews()
         self.tableView.reloadData()
-        self.token = self.wallet?.token?.filter({$0.filter({$0.contains("show")}).count == 1}) ?? []
+        self.token = self.wallet?.token?.filter({$0[3] == "show"}) ?? []
         if self.stackView.arrangedSubviews.count == 2 {
             self.heightConstraint.constant = (self.frame.size.height) - (self.footerView.frame.height + self.headerView.frame.height)
             self.collectionVieww.constant = self.heightConstraint.constant
@@ -91,8 +91,7 @@ class mCollectionViewCell: UICollectionViewCell {
     override func layoutIfNeeded() {
         super.layoutIfNeeded()
         self.tableView.reloadData()
-        self.token = self.wallet?.token?.filter({$0.filter({$0.contains("show")}).count == 1}) ?? []
-    }
+        self.token = self.wallet?.token?.filter({$0[3] == "show"}) ?? []    }
     
     @objc private func hideWallet(notification: Notification) {
         guard let userInfo = notification.userInfo else { return }
@@ -109,7 +108,6 @@ class mCollectionViewCell: UICollectionViewCell {
     
     @objc func updateBalances() {
         self.tableView.reloadData()
-        self.layoutIfNeeded()
     }
     
     @objc func reloadTableView() {
@@ -169,7 +167,7 @@ extension mCollectionViewCell: UITableViewDelegate, UITableViewDataSource {
         let importCell = tableView.dequeueReusableCell(withIdentifier: "ImportTableViewCell", for: indexPath) as! ImportTableViewCell
         
         switch indexPath {
-        case [0,self.token.count ]:
+        case [0,self.token.count]:
             self.height += importCell.frame.height
             if self.wallet?.name == "Chia Wallet" || self.wallet?.name == "Chia TestNet" {
                 importCell.titleLabel.text = "+ \(LocalizationManager.share.translate?.result.list.main_screen.main_screen_purse_import ?? "")"
@@ -181,10 +179,12 @@ extension mCollectionViewCell: UITableViewDelegate, UITableViewDataSource {
             return importCell
         default:
             self.height += walletCell.frame.height
+            print("asdasdasd \(self.wallet)")
+            print(self.token.count)
+            print(indexPath)
+            
             
             let token = self.token[indexPath.row]
-            print("token \(token)")
-            
             if !CoreDataManager.share.fetchChiaWalletPrivateKey().isEmpty {
                 if token[0] == "Chia Wallet" || token[0] == "Chia TestNet" {
                     walletCell.cellImage.image = UIImage(named: "LogoChia")!

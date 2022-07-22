@@ -342,63 +342,65 @@ class ImportMnemonicViewController: UIViewController {
                                 
                                 ChiaBlockchainManager.share.logIn(fingerpring.fingerprint) { log in
                                     if log.success {
-                                        
-                                        DispatchQueue.global().asyncAfter(deadline: .now() + 15) {
-                                            
-                                            ChiaBlockchainManager.share.getSyncStatus(1) { status in
-                                                DispatchQueue.global().asyncAfter(deadline: .now() + 15) {
-                                                    ChiaBlockchainManager.share.addCat(tailHash: "1dd54162ec6423211556155fa455d4ed1a52ad305e6b5249eba50c91c8428dfb") { newCat in
-                                                        print(newCat.success)
-                                                    }
-                                                }
-                                            }
-                                            ChiaBlockchainManager.share.getSyncStatus(1) { status in
-                                                DispatchQueue.global().asyncAfter(deadline: .now() + 15) {
-                                                    ChiaBlockchainManager.share.addCat(tailHash: "6d95dae356e32a71db5ddcb42224754a02524c615c5fc35f568c2af04774e589") { newCat in
-                                                        print(newCat.success)
-                                                    }
-                                                }
-                                            }
-                                        }
-                                        
-                                        ChiaBlockchainManager.share.getWallets { wallets in
-                                            for wallet in wallets.wallets {
-                                                
-                                                
-                                                
-                                                ChiaBlockchainManager.share.getWalletBalance(wallet.id) { balance in
-                                                    newbalance = "\(balance.wallet_balance.confirmed_wallet_balance)"
-                                                    id = "\(wallet.id)"
-                                                    name = wallet.name
-                                                    token.append(name)
-                                                    token.append(id)
-                                                    token.append("\(balance.wallet_balance.confirmed_wallet_balance)")
-                                                    token.append("show")
-                                                    tokens.append(token)
-                                                    token.removeAll()
-                                                }
-                                            }
-                                            ChiaBlockchainManager.share.getPrivateKey(fingerpring.fingerprint) { privateKeys in
-                                                privateKey = privateKeys
-                                                print(privateKey)
-                                                
-                                                
-                                                
-                                                UserDefaultsManager.shared.userDefaults.set("Exist", forKey: UserDefaultsStringKeys.walletExist.rawValue )
-                                                CoreDataManager.share.saveChiaWalletPrivateKey(name: "Chia Wallet", fingerprint: privateKey.private_key.fingerprint, pk: privateKey.private_key.pk, seed: privateKey.private_key.seed, sk: privateKey.private_key.seed, adress: adreses, tokens: tokens)
-                                                guard let newWallet = CoreDataManager.share.fetchChiaWalletPrivateKey().last else { return }
-                                                WalletManager.share.favoritesWallets.append(newWallet)
-                                                DispatchQueue.main.async {
-                                                    NotificationCenter.default.post(name: NSNotification.Name("reload"), object: nil)
-                                                    print(CoreDataManager.share.fetchChiaWalletPrivateKey())
-                                                    self.spinnerVC.dismiss(animated: true, completion: nil)
-                                                    AlertManager.share.seccessImportWallet(self)
-                                                }
-                                            }
-                                            
-                                        }
+                                        print(log.success)
                                     }
                                 }
+//                                    DispatchQueue.global().asyncAfter(deadline: .now() + 15) {
+//                                        
+//                                        ChiaBlockchainManager.share.getSyncStatus(1) { status in
+//                                            DispatchQueue.global().asyncAfter(deadline: .now() + 15) {
+//                                                ChiaBlockchainManager.share.addCat(tailHash: "1dd54162ec6423211556155fa455d4ed1a52ad305e6b5249eba50c91c8428dfb") { newCat in
+//                                                    print(newCat.success)
+//                                                }
+//                                            }
+//                                        }
+//                                        ChiaBlockchainManager.share.getSyncStatus(1) { status in
+//                                            DispatchQueue.global().asyncAfter(deadline: .now() + 15) {
+//                                                ChiaBlockchainManager.share.addCat(tailHash: "6d95dae356e32a71db5ddcb42224754a02524c615c5fc35f568c2af04774e589") { newCat in
+//                                                    print(newCat.success)
+//                                                }
+//                                            }
+//                                        }
+//                                    }
+                                    
+                                    ChiaBlockchainManager.share.getWallets { wallets in
+                                        for wallet in wallets.wallets {
+                                            
+                                            
+                                            
+                                            ChiaBlockchainManager.share.getWalletBalance(wallet.id) { balance in
+                                                newbalance = "\(balance.wallet_balance.confirmed_wallet_balance)"
+                                                id = "\(wallet.id)"
+                                                name = wallet.name
+                                                token.append(name)
+                                                token.append(id)
+                                                token.append("\(balance.wallet_balance.confirmed_wallet_balance)")
+                                                token.append("show")
+                                                tokens.append(token)
+                                                token.removeAll()
+                                            }
+                                        }
+                                        ChiaBlockchainManager.share.getPrivateKey(fingerpring.fingerprint) { privateKeys in
+                                            privateKey = privateKeys
+                                            print(privateKey)
+                                            
+                                            
+                                            
+                                            UserDefaultsManager.shared.userDefaults.set("Exist", forKey: UserDefaultsStringKeys.walletExist.rawValue )
+                                            CoreDataManager.share.saveChiaWalletPrivateKey(name: "Chia Wallet", fingerprint: privateKey.private_key.fingerprint, pk: privateKey.private_key.pk, seed: privateKey.private_key.seed, sk: privateKey.private_key.seed, adress: adreses, tokens: tokens)
+                                            guard let newWallet = CoreDataManager.share.fetchChiaWalletPrivateKey().last else { return }
+                                            WalletManager.share.favoritesWallets.append(newWallet)
+                                            DispatchQueue.main.async {
+                                                NotificationCenter.default.post(name: NSNotification.Name("reload"), object: nil)
+                                                print(CoreDataManager.share.fetchChiaWalletPrivateKey())
+                                                self.spinnerVC.dismiss(animated: true, completion: nil)
+                                                AlertManager.share.seccessImportWallet(self)
+                                            }
+                                        }
+                                        
+                                        
+                                    }
+                                
                             } else {
                                 DispatchQueue.main.async {
                                     self.spinnerVC.dismiss(animated: true)
@@ -407,7 +409,7 @@ class ImportMnemonicViewController: UIViewController {
                             }
                         }
                     }
-
+                    
                     
                 } else if self.isChives {
                     DispatchQueue.global().sync {

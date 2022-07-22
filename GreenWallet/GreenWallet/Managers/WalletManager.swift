@@ -36,7 +36,7 @@ class WalletManager {
                 
                 print(CoreDataManager.share.fetchChiaWalletPrivateKey())
                 
-                NotificationCenter.default.post(name: NSNotification.Name("updateBalances"), object: nil)
+//                NotificationCenter.default.post(name: NSNotification.Name("updateBalances"), object: nil)
             
         } else {
             self.index += 1
@@ -46,7 +46,7 @@ class WalletManager {
                 
                 print(CoreDataManager.share.fetchChiaWalletPrivateKey())
                 
-                NotificationCenter.default.post(name: NSNotification.Name("updateBalances"), object: nil)
+                
 
         }
         
@@ -82,11 +82,17 @@ class WalletManager {
                                                 print("Новье")
                                                 CoreDataManager.share.addCatBalanceChiaWalletPrivateKey(index: self.index, token: token)
                                                 token.removeAll()
-                                
+                                                DispatchQueue.main.async {
+                                                    NotificationCenter.default.post(name: NSNotification.Name("updateBalances"), object: nil)
+
+                                                }
                                                 
                                             } else {
                                                 CoreDataManager.share.updateCatBalanceChiaWalletPrivateKey(index: self.index, id: wallets.wallets[walletONe].id, balance: "\(balance.wallet_balance.confirmed_wallet_balance)")
-                                                
+                                                DispatchQueue.main.async {
+                                                    NotificationCenter.default.post(name: NSNotification.Name("updateBalances"), object: nil)
+
+                                                }
                                                 token.removeAll()
                                                 print("То же самое")
                                             }
