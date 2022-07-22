@@ -672,13 +672,13 @@ class PushTokensViewController: UIViewController {
         
         if self.wallet?.name == "Chia Wallet" || self.wallet?.name == "Chia TestNet" {
             self.comissionTextField.text = AgreesManager.share.agrees.filter({$0.blockchain_name == "Chia Network"}).first?.fee_transaction ?? ""
-            self.usdLabel.text = "~ \((Double(self.balanceButton.currentTitle ?? "0") ?? 0) * ExchangeRatesManager.share.newRatePerDollar)"
-//            self.gadLabel.text = "~ \((Double(self.balanceButton.currentTitle ?? "0") ?? 0) * ExchangeRatesManager.share.newRatePerDollar * (Double(TailsManager.share.prices.filter({$0.code == self.transferTokenLabel.text}).first?.price) ?? "0") ?? 0)"
+            self.usdLabel.text = "~ \((Double(sender.text ?? "0") ?? 0) * ExchangeRatesManager.share.newRatePerDollar)"
+//            self.gadLabel.text = "~ \((Double(sender.text ?? "0") ?? 0) * ExchangeRatesManager.share.newChivesRatePerDollar * (Double(TailsManager.share.prices.filter({$0.code == "GAD"}).first?.price) ?? "0") ?? 0)"
             
         } else if self.wallet?.name == "Chives Wallet" || self.wallet?.name == "Chives TestNet" {
             self.comissionTextField.text = AgreesManager.share.agrees.filter({$0.blockchain_name == "Chives Network"}).first?.fee_transaction ?? ""
-            self.usdLabel.text = "~ \((Double(self.balanceButton.currentTitle ?? "0") ?? 0) * ExchangeRatesManager.share.newChivesRatePerDollar)"
-//            self.gadLabel.text = "~ \((Double(self.balanceButton.currentTitle ?? "0") ?? 0) * ExchangeRatesManager.share.newRatePerDollar * (Double(TailsManager.share.prices.filter({$0.code == self.transferTokenLabel.text}).first?.price) ?? "0") ?? 0)"
+            self.usdLabel.text = "~ \((Double(sender.text ?? "0") ?? 0) * ExchangeRatesManager.share.newChivesRatePerDollar)"
+//            self.gadLabel.text = "~ \((Double(sender.text) ?? 0) * ExchangeRatesManager.share.newChivesRatePerDollar * (Double(TailsManager.share.prices.filter({$0.code == "GAD"}).first?.price) ?? "0") ?? 0)"
         }
         
         self.transferTokenLabel.text = self.balanceButton.currentTitle?.filter{!$0.isNumber && !$0.isPunctuation}
