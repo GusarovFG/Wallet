@@ -129,7 +129,7 @@ class MnemonicViewController: UIViewController {
         UIView.animate(withDuration: 1) {
             self.copyLabel.alpha = 1
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             UIView.animate(withDuration: 1) {
                 self.copyLabel.alpha = 0
             }
