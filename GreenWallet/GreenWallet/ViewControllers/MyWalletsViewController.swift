@@ -183,11 +183,11 @@ extension MyWalletsViewController: UICollectionViewDelegate, UICollectionViewDat
                 mainCell.walletImage.image = UIImage(named: "LogoChia")!
                 
                 mainCell.publicKeyLabel.text = "\(LocalizationManager.share.translate?.result.list.wallet.wallet_data_public_key ?? "") \(wallets[indexPath.row].fingerprint )"
-                if ((wallet.name?.contains("Chia")) != nil) {
+                if wallet.name == "Chia Wallet" || wallet.name == "Chia TestNet" {
                     let summChia: Double = ((wallet.token?.map({$0[2].toDouble() ?? 0}).reduce(0, +) ?? 0) / 1000000000000) * ExchangeRatesManager.share.newRatePerDollar
                     mainCell.balanceLabel.text = "\(((wallet.token?.map({$0[2].toDouble() ?? 0}).reduce(0, +) ?? 0) / 1000000000000)) XCH"
                     mainCell.usdLabel.text = "⁓ \(NSString(format:"%.2f", summChia)) USD"
-                } else {
+                } else if wallet.name == "Chives Wallet" || wallet.name == "Chives TestNet" {
                     let summChives: Double = ((wallet.token?.map({$0[2].toDouble() ?? 0}).reduce(0, +) ?? 0) / 100000000) * ExchangeRatesManager.share.newChivesRatePerDollar
                     mainCell.balanceLabel.text = "\(((wallet.token?.map({$0[2].toDouble() ?? 0}).reduce(0, +) ?? 0) / 100000000)) XCС"
                     mainCell.usdLabel.text = "⁓ \(NSString(format:"%.2f", summChives)) USD"
