@@ -462,7 +462,7 @@ class PushTokensViewController: UIViewController {
             if sender == self.systemStackView.arrangedSubviews[i] {
                 self.systemButton.setTitle("• \(self.systems[i].name)", for: .normal)
                 sender.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
-                
+                self.walletsView.alpha = 0
                 if self.systems[i].name == "Chia Network" {
                     self.wallets = CoreDataManager.share.fetchChiaWalletPrivateKey().filter({$0.name == "Chia Wallet"})
                     self.wallet = self.wallets.first
@@ -564,7 +564,7 @@ class PushTokensViewController: UIViewController {
                     if self.wallet?.token?[i][0] == "Chia Wallet" || self.wallet?.token?[i][0] == "Chia TestNet" {
                         button.setTitle("\(((self.wallet?.token?[i][2].toDouble() ?? 0) / 1000000000000.0).rounded(toPlaces: 8)) XCH", for: .normal)
                     } else if self.wallet?.token?[i][0] == "Chives Wallet" || self.wallet?.token?[i][0] == "Chives TestNet" {
-                        button.setTitle("\(((self.wallet?.token?[i][2].toDouble() ?? 0) / 1000000000000.0).rounded(toPlaces: 8)) XCC", for: .normal)
+                        button.setTitle("\(((self.wallet?.token?[i][2].toDouble() ?? 0) / 100000000.0).rounded(toPlaces: 8)) XCC", for: .normal)
                     } else {
                         button.setTitle("\(((self.wallet?.token?[i][2].toDouble() ?? 0) / 1000000000000.0).rounded(toPlaces: 8)) \(TailsManager.share.tails?.result.list.filter({$0.hash.contains(self.wallet?.token?[i][0].split(separator: " ").last?.prefix(15) ?? "") || $0.name.contains(self.wallet?.token?[i][0] ?? "")}).first?.code ?? "")", for: .normal)
                     }
@@ -592,7 +592,11 @@ class PushTokensViewController: UIViewController {
                 self.tokenImage.image = UIImage(named: "LogoChia")!
                 setupWalletButton()
                 sender.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
-                self.balanceButton.setTitle("\(((self.wallet?.token?.first?[2].toDouble() ?? 0) / 1000000000000.0).rounded(toPlaces: 8)) XCH", for: .normal)
+                if self.wallets[i].name == "Chia Wallet" || self.wallets[i].name == "Chia TestNet" {
+                    self.balanceButton.setTitle("\(((self.wallet?.token?.first?[2].toDouble() ?? 0) / 1000000000000.0).rounded(toPlaces: 8).avoidNotation) XCH", for: .normal)
+                } else {
+                    self.balanceButton.setTitle("\(((self.wallet?.token?.first?[2].toDouble() ?? 0) / 100000000.0).rounded(toPlaces: 8).avoidNotation) XCC", for: .normal)
+                }
                 self.balanceView.isHidden = true
                 self.walletsView.isHidden = true
                 self.balanceStackView.removeAllSubviews()
@@ -606,12 +610,7 @@ class PushTokensViewController: UIViewController {
         for i in 0..<self.balanceStackView.arrangedSubviews.count {
             self.balanceStackView.arrangedSubviews[i].backgroundColor = .systemBackground
             if sender == self.balanceStackView.arrangedSubviews[i] {
-                if self.wallet?.token?[i][0] == "Chia Wallet" || self.wallet?.token?[i][0] == "Chia TestNet" {
-                    self.balanceButton.setTitle("\(((self.wallet?.token?[i][2].toDouble() ?? 0) / 1000000000000.0).rounded(toPlaces: 8).avoidNotation) XCH", for: .normal)
-                } else {
-                    
-                    self.balanceButton.setTitle("\(((self.wallet?.token?[i][2].toDouble() ?? 0) / 100000000.0).rounded(toPlaces: 8).avoidNotation) \(TailsManager.share.tails?.result.list.filter({$0.hash.contains(self.wallet?.token?[i][0].split(separator: " ").last?.prefix(15) ?? "") || $0.name.contains(self.wallet?.token?[i][0] ?? "")}).first?.code ?? "")", for: .normal)
-                }
+                self.balanceButton.setTitle(sender.titleLabel?.text ?? "", for: .normal)
                 
                 sender.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
                 self.balanceView.isHidden = true
@@ -672,13 +671,13 @@ class PushTokensViewController: UIViewController {
         
         if self.wallet?.name == "Chia Wallet" || self.wallet?.name == "Chia TestNet" {
             self.comissionTextField.text = AgreesManager.share.agrees.filter({$0.blockchain_name == "Chia Network"}).first?.fee_transaction ?? ""
-            self.usdLabel.text = "~ \((Double(sender.text ?? "0") ?? 0) * ExchangeRatesManager.share.newRatePerDollar)"
-            self.gadLabel.text = "~ \((Double(sender.text ?? "0") ?? 0) * ExchangeRatesManager.share.newRatePerDollar * (Double(TailsManager.share.prices.filter({$0.code == "GAD"}).first?.price ?? "0") ?? 0)) USD"
+            self.usdLabel.text = "~ \(((Double(sender.text ?? "0") ?? 0) * ExchangeRatesManager.share.newRatePerDollar).rounded(toPlaces: 2))"
+            self.gadLabel.text = "~ \(((Double(sender.text ?? "0") ?? 0) * ExchangeRatesManager.share.newRatePerDollar / (Double(TailsManager.share.prices.filter({$0.code == "GAD"}).first?.price ?? "0") ?? 0)).rounded(toPlaces: 2))"
             
         } else if self.wallet?.name == "Chives Wallet" || self.wallet?.name == "Chives TestNet" {
             self.comissionTextField.text = AgreesManager.share.agrees.filter({$0.blockchain_name == "Chives Network"}).first?.fee_transaction ?? ""
-            self.usdLabel.text = "~ \(((Double(sender.text ?? "0") ?? 0) * ExchangeRatesManager.share.newChivesRatePerDollar).avoidNotation)"
-            self.gadLabel.text = "~ \(((Double(sender.text ?? "0") ?? 0) * ExchangeRatesManager.share.newChivesRatePerDollar * (Double(TailsManager.share.prices.filter({$0.code == "GAD"}).first?.price ?? "0") ?? 0)).avoidNotation)"
+            self.usdLabel.text = "~ \(((Double(sender.text ?? "0") ?? 0) * ExchangeRatesManager.share.newChivesRatePerDollar).rounded(toPlaces: 2))"
+            self.gadLabel.text = "~ \(((Double(sender.text ?? "0") ?? 0) * ExchangeRatesManager.share.newChivesRatePerDollar / (Double(TailsManager.share.prices.filter({$0.code == "GAD"}).first?.price ?? "0") ?? 0)).rounded(toPlaces: 2))"
         }
         
         self.transferTokenLabel.text = self.balanceButton.currentTitle?.filter{!$0.isNumber && !$0.isPunctuation}

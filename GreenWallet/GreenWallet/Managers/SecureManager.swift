@@ -5,28 +5,26 @@
 //  Created by Фаддей Гусаров on 18.07.2022.
 //
 
-import Foundation
 import CryptoSwift
 
-class SecureManager {
+
+
+
+extension String{
     
-    static let share = SecureManager()
-    
-    func encrypt(text: String) -> String?  {
-        if let aes = try? AES(key: "passwordpassword", iv: "drowssapdrowssap"),
-           let encrypted = try? aes.encrypt(Array(text.utf8)) {
-            print(encrypted.toHexString())
-            return encrypted.toHexString()
-        }
-        return nil
+    func aesEncrypt(key: String, iv: String) throws -> String {
+        let data = self.data(using: .utf8)!
+        let encrypted = try! AES(key: Array(key.utf8), blockMode: CBC.init(iv: Array(iv.utf8)), padding: .pkcs7).encrypt([UInt8](data));
+        //        let encrypted = try! AES(key: key, blockMode: .CBC, padding: .pkcs7) //AES(key: key, iv: iv, blockMode: .CBC, padding: .pkcs7).encrypt([UInt8](data))
+        let encryptedData = Data(encrypted)
+        return encryptedData.base64EncodedString()
     }
     
-    func decrypt(hexString: String) -> String? {
-        if let aes = try? AES(key: "passwordpassword", iv: "drowssapdrowssap"),
-            let decrypted = try? aes.decrypt(Array<UInt8>(hex: hexString)) {
-            print(String(data: Data(bytes: decrypted), encoding: .utf8)!)
-            return String(data: Data(bytes: decrypted), encoding: .utf8)
-        }
-        return nil
+    func aesDecrypt(key: String, iv: String) throws -> String {
+        let data = Data(base64Encoded: self)!
+        let decrypted = try! AES(key: Array(key.utf8), blockMode: CBC.init(iv: Array(iv.utf8)), padding: .pkcs7).decrypt([UInt8](data));
+        let decryptedData = Data(decrypted)
+        return String(bytes: decryptedData.bytes, encoding: .utf8) ?? "Could not decrypt"
+        
     }
 }

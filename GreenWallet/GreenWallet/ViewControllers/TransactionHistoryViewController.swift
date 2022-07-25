@@ -121,46 +121,49 @@ class TransactionHistoryViewController: UIViewController {
         super.viewWillDisappear(animated)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        self.searchBar.searchTextField.attributedPlaceholder = NSAttributedString(string: LocalizationManager.share.translate?.result.list.all.search ?? "", attributes: [:])
+
         
         let queue = DispatchQueue.global(qos: .userInteractive)
         
         if self.filterWalletsTransactions.isEmpty && !self.isHistoryWallet && !CoreDataManager.share.fetchChiaWalletPrivateKey().isEmpty {
-            self.present(spinnerVC, animated: true)
+            self.present(self.spinnerVC, animated: true)
             queue.async {
                 for i in CoreDataManager.share.fetchChiaWalletPrivateKey() {
                     if i.name == "Chia Wallet" {
-//                        ChiaBlockchainManager.share.logIn(Int(i.fingerprint)) { log in
-//
-//                            if log.success {
-//                                ChiaBlockchainManager.share.getWallets { wallet in
-//
-//                                    for iwallet in wallet.wallets {
-//
-//                                        ChiaBlockchainManager.share.getTransactions(iwallet.id) { transact in
-//
-//                                            self.walletsTransactions.append(transact.transactions)
-//
-//
-//                                            DispatchQueue.main.async {
-//
-//                                                self.filterWalletsTransactions = self.walletsTransactions.reduce([], +)
-//                                                if CoreDataManager.share.fetchTransactions().isEmpty{
-//                                                    self.filterWalletsTransactions.forEach({CoreDataManager.share.saveTransactions(newTransactions: $0)})
-//                                                    print(CoreDataManager.share.fetchTransactions())
-//                                                } else {
-//                                                    CoreDataManager.share.deleteTransactions()
-//                                                    self.filterWalletsTransactions.forEach({CoreDataManager.share.saveTransactions(newTransactions: $0)})
-//                                                }
-//                                                self.tableView.reloadData()
-//                                                self.spinnerVC.dismiss(animated: true)
-//                                            }
-//                                        }
-//                                    }
-//                                }
-//                            }
-//                        }
+                        ChiaBlockchainManager.share.logIn(Int(i.fingerprint)) { log in
+
+                            if log.success {
+                                ChiaBlockchainManager.share.getWallets { wallet in
+
+                                    for iwallet in wallet.wallets {
+
+                                        ChiaBlockchainManager.share.getTransactions(iwallet.id) { transact in
+
+                                            self.walletsTransactions.append(transact.transactions)
+
+
+                                            DispatchQueue.main.async {
+
+                                                self.filterWalletsTransactions = self.walletsTransactions.reduce([], +)
+                                                if CoreDataManager.share.fetchTransactions().isEmpty{
+                                                    self.filterWalletsTransactions.forEach({CoreDataManager.share.saveTransactions(newTransactions: $0)})
+                                                    print(CoreDataManager.share.fetchTransactions())
+                                                } else {
+                                                    CoreDataManager.share.deleteTransactions()
+                                                    self.filterWalletsTransactions.forEach({CoreDataManager.share.saveTransactions(newTransactions: $0)})
+                                                }
+                                                self.tableView.reloadData()
+                                                self.spinnerVC.dismiss(animated: true)
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
                         
                     } else if i.name == "Chives Wallet"{
                         ChivesBlockchainManager.share.logIn(Int(i.fingerprint)) { log in
@@ -345,11 +348,7 @@ class TransactionHistoryViewController: UIViewController {
         }
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        self.searchBar.searchTextField.attributedPlaceholder = NSAttributedString(string: LocalizationManager.share.translate?.result.list.all.search ?? "", attributes: [:])
-        
-    }
+
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -368,7 +367,10 @@ class TransactionHistoryViewController: UIViewController {
     
     @objc private func alertErrorGerCodingKeysPresent() {
         self.spinnerVC.dismiss(animated: false)
-        AlertManager.share.serverError(self.spinnerVC)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            
+            AlertManager.share.serverError(self)
+        }
     }
     
     
@@ -581,8 +583,8 @@ class TransactionHistoryViewController: UIViewController {
     
     
     @IBAction func allSystemButtonPresed(_ sender: UIButton) {
-        self.allSystemButton.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
-        
+        sender.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
+        self.filterSystemButton.setTitle(LocalizationManager.share.translate?.result.list.transactions.transactions_all, for: .normal)
         
         if UserDefaultsManager.shared.userDefaults.string(forKey: "Theme") == "light" {
             self.systemsStackView.arrangedSubviews.forEach({$0.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)})

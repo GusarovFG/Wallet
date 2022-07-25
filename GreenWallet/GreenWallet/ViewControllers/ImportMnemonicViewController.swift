@@ -14,8 +14,9 @@ class ImportMnemonicViewController: UIViewController {
     var isChivesTest = false
     var isMainScreen = false
     var spinnerVC = SprinnerViewController()
-    let nf = NumberFormatter()
     
+    private var isImporting = false
+    private let nf = NumberFormatter()
     private var duplicates: [String] = []
     private var mnemonicPhrase: [String] = []
     private var countOfItems = 12
@@ -92,10 +93,14 @@ class ImportMnemonicViewController: UIViewController {
     }
     
     @objc private func alertErrorGerCodingKeysPresent() {
-        self.spinnerVC.dismiss(animated: false)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-            
-            AlertManager.share.errorBlockchainConnect(self)
+        if self.isImporting {
+            self.spinnerVC.dismiss(animated: false)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                
+                AlertManager.share.errorBlockchainConnect(self)
+            }
+        } else {
+            return
         }
     }
     
@@ -320,7 +325,7 @@ class ImportMnemonicViewController: UIViewController {
             } else {
                 
                 self.present(spinnerVC, animated: true)
-                
+                self.isImporting = true
                 if self.isChia {
                     
                     

@@ -240,6 +240,7 @@ struct All: Codable {
     let the_application_does_not_support_more_than_wallets: String
     let select_network_new_wallet: String
     let creation_pop_up_title: String
+    let pop_up_failed_error_description_address_already_exists: String
     
     enum CodingKeys: String, CodingKey {
         case add_wallet_import
@@ -280,6 +281,7 @@ struct All: Codable {
         case the_application_does_not_support_more_than_wallets
         case select_network_new_wallet
         case creation_pop_up_title
+        case pop_up_failed_error_description_address_already_exists
     }
 }
 

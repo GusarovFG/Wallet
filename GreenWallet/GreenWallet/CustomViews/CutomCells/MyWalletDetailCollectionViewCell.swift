@@ -42,10 +42,10 @@ class MyWalletDetailCollectionViewCell: UICollectionViewCell {
     
     @IBAction func copyingMnemonic(_ sender: Any) {
         
-        let value = self.wallet?.seed
-        let encryptedValue = try! value?.aesDecrypt(key: KeyChainManager.share.loadPassword())
+        let value = self.wallet?.seed ?? ""
+        let descryptedSeed = try? value.aesDecrypt(key: KeyChainManager.share.loadPassword(), iv: KeyChainManager.share.iv)
         
-        UIPasteboard.general.string = encryptedValue
+        UIPasteboard.general.string = descryptedSeed
         self.complitionHandler?()
     }
 }

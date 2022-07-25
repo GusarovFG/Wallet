@@ -10,6 +10,7 @@ import UIKit
 @IBDesignable
 public class CustomSwitch: UIControl {
     
+    var isSecure = false
     // MARK: Public properties
     public var animationDelay: Double = 0
     public var animationSpriteWithDamping = CGFloat(0.7)
@@ -247,7 +248,7 @@ extension CustomSwitch {
         })
     }
     
-    private func setupViewsOnAction() {
+    func setupViewsOnAction() {
         self.thumbView.frame.origin.x = self.isOn ? (self.onPoint.x) : (self.offPoint.x)
         self.backgroundColor = self.isOn ? self.onTintColor : self.offTintColor
         if self.isOn {
@@ -258,9 +259,18 @@ extension CustomSwitch {
             }
         } else {
             if UserDefaultsManager.shared.userDefaults.string(forKey: "Theme") == "light" {
-                self.thumbView.backgroundColor = #colorLiteral(red: 0.9490196078, green: 0.9490196078, blue: 0.9490196078, alpha: 1)
+                if self.isSecure {
+                    self.thumbView.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+                } else {
+                    self.thumbView.backgroundColor = #colorLiteral(red: 0.9490196078, green: 0.9490196078, blue: 0.9490196078, alpha: 1)
+                }
             } else {
-                self.thumbView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+                
+                if self.isSecure {
+                    self.thumbView.backgroundColor = #colorLiteral(red: 0.5803921569, green: 0.5803921569, blue: 0.5803921569, alpha: 1)
+                } else {
+                    self.thumbView.backgroundColor = #colorLiteral(red: 0.5803921569, green: 0.5803921569, blue: 0.5803921569, alpha: 1)
+                }
             }
         }
         self.setOnOffImageFrame()

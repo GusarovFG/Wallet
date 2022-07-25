@@ -156,11 +156,7 @@ class AddContactViewController: UIViewController {
     @IBAction func addContactButtonPressed(_ sender: Any) {
         if !self.isEditingContact {
             if CoreDataManager.share.fetchContacts().filter({$0.adres == self.contactAdresTextField.text}).count > 0 && self.contactNameTextField.text != "" {
-                self.errorLabel.alpha = 1
-                self.contactAdresTextField.textColor = #colorLiteral(red: 1, green: 0.2360929251, blue: 0.1714096665, alpha: 1)
-                self.bottomCorner.backgroundColor = #colorLiteral(red: 1, green: 0.2360929251, blue: 0.1714096665, alpha: 1)
-                self.viewHeightConstraint.constant += 20
-                self.isError = true
+                AlertManager.share.dulpicateContactError(self)
             } else {
                 
                 CoreDataManager.share.saveContact(self.contactNameTextField.text ?? "", adres: self.contactAdresTextField.text ?? "", description: self.descriptionTextField.text ?? "")

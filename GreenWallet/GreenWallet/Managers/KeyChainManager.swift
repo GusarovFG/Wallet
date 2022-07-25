@@ -10,6 +10,8 @@ import Locksmith
 
 class KeyChainManager {
     
+    let iv = "bbC2H19lkVbQDfak"
+    
     static let share = KeyChainManager()
     
     private init(){}
@@ -41,3 +43,4 @@ class KeyChainManager {
        
     }
 }
+

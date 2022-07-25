@@ -20,11 +20,16 @@ class SecureAndPushTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         if UserDefaultsManager.shared.userDefaults.bool(forKey: UserDefaultsStringKeys.hideWalletsBalance.rawValue) {
-            cellSwitch?.isOn = true
+            self.cellSwitch?.isOn = true
         } else {
             self.cellSwitch?.isOn = false
         }
         
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        self.cellSwitch?.setupViewsOnAction()
     }
     
     @IBAction func hideWallet(_ sender: CustomSwitch) {

@@ -24,7 +24,7 @@ class SprinnerViewController: UIViewController {
         
         self.spinner.beginRefreshing()
         WalletManager.share.isUpdate = false
-            NotificationCenter.default.post(name: NSNotification.Name("showPopUp"), object: nil)
+//            NotificationCenter.default.post(name: NSNotification.Name("showPopUp"), object: nil)
 
     }
     

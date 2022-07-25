@@ -66,6 +66,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
             secureAndPushCell.detailLabel?.text = LocalizationManager.share.translate?.result.list.menu.menu_hide_wallet_balance_description
             secureAndPushCell.cellSwitch?.isOn = false
             secureAndPushCell.secure = true
+            secureAndPushCell.cellSwitch?.isSecure = true
             if UserDefaultsManager.shared.userDefaults.bool(forKey: UserDefaultsStringKeys.hideWalletsBalance.rawValue) {
                 secureAndPushCell.cellSwitch?.isOn = true
             } else {
@@ -77,6 +78,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
             secureAndPushCell.detailLabel?.text = LocalizationManager.share.translate?.result.list.menu.menu_push_notifications_description
             secureAndPushCell.mainLabel?.text = LocalizationManager.share.translate?.result.list.menu.menu_push_notifications_title
             secureAndPushCell.cellSwitch?.isOn = true
+            secureAndPushCell.cellSwitch?.isSecure = false
             return secureAndPushCell
         case [0,3]:
             supportCell.mainLabel?.text = LocalizationManager.share.translate?.result.list.menu.menu_support_title

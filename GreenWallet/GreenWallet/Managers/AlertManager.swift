@@ -96,6 +96,15 @@ class AlertManager {
         controller.present(alertVC, animated: true)
     }
     
+    func dulpicateContactError(_ controller: UIViewController) {
+        let storyBoard = UIStoryboard(name: "Alert", bundle: .main)
+        let alertVC = storyBoard.instantiateViewController(withIdentifier: "DeleteContact") as! AllertWalletViewController
+        alertVC.isDuplicateContact = true
+        alertVC.controller = controller
+        
+        
+        controller.present(alertVC, animated: true)
+    }
    
     
     func serverError(_ controller: UIViewController) {

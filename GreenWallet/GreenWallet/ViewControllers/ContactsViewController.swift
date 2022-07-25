@@ -34,7 +34,6 @@ class ContactsViewController: UIViewController {
         localization()
         NotificationCenter.default.addObserver(self, selector: #selector(localization), name: NSNotification.Name("localized"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(showPopUp), name: NSNotification.Name("showPopUp"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(showSpinner), name: NSNotification.Name("showSpinner"), object: nil)
         
     }
     
@@ -64,12 +63,7 @@ class ContactsViewController: UIViewController {
     
     
     
-    @objc private func showSpinner() {
-        AlertManager.share.showSpinner(self, true)
-        self.contacts = CoreDataManager.share.fetchContacts()
-        self.filterContacts = self.contacts
-        self.contactsTableView.reloadData()
-    }
+
     
     @objc func showPopUp() {
         
