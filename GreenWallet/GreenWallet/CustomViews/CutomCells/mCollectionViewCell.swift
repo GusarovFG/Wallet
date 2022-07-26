@@ -131,11 +131,16 @@ class mCollectionViewCell: UICollectionViewCell {
     
     
     @objc func newwalletButtomPressed(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "Main", bundle: .main)
-        let selectSystemVC = storyboard.instantiateViewController(withIdentifier: "SelectSystemViewController") as! SelectSystemViewController
-        selectSystemVC.isNewWallet = true
-        self.controller.present(selectSystemVC, animated: true)
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "newWallet"), object: nil)
+        if CoreDataManager.share.fetchChiaWalletPrivateKey().count == 10 {
+            AlertManager.share.errorCountOfWallet(self.controller)
+        } else {
+            
+            let storyboard = UIStoryboard(name: "Main", bundle: .main)
+            let selectSystemVC = storyboard.instantiateViewController(withIdentifier: "SelectSystemViewController") as! SelectSystemViewController
+            selectSystemVC.isNewWallet = true
+            self.controller.present(selectSystemVC, animated: true)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "newWallet"), object: nil)
+        }
     }
     
     @IBAction func footerButtonPressed(_ sender: UIButton) {
@@ -178,7 +183,7 @@ extension mCollectionViewCell: UITableViewDelegate, UITableViewDataSource {
             return importCell
         default:
             self.height += walletCell.frame.height
-         
+            
             
             let token = self.token[indexPath.row]
             if !CoreDataManager.share.fetchChiaWalletPrivateKey().isEmpty {
@@ -217,7 +222,7 @@ extension mCollectionViewCell: UITableViewDelegate, UITableViewDataSource {
                     walletCell.tokenLabel.text = token[0]
                     
                 } else {
-                  
+                    
                     walletCell.cellImage.downloadImage(from: TailsManager.share.tails?.result.list.filter({$0.hash.contains(token[0].dropFirst(4).dropLast(3) ) }).first?.logo_url ?? "")
                     let summ: Double = ((Double(token[2]) ?? 0) / 1000000000000) * ExchangeRatesManager.share.newRatePerDollar
                     
@@ -233,11 +238,11 @@ extension mCollectionViewCell: UITableViewDelegate, UITableViewDataSource {
                     
                     walletCell.tokenLabel.text = TailsManager.share.tails?.result.list.filter({$0.hash.contains(self.token[indexPath.row][0].split(separator: " ").last?.prefix(15) ?? "") || $0.name.contains(token[0])}).first?.name
                     
-                   
+                    
                     
                 }
                 
-                 
+                
             } else {
                 walletCell.balanceLabel.text = "0 XCH"
             }

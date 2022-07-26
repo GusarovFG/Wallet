@@ -41,7 +41,6 @@ class NotificationsViewController: UIViewController {
     @IBOutlet weak var detailHeight: UILabel!
     
     @IBOutlet weak var filterTimeButton: UIButton!
-    @IBOutlet weak var filterSystemButton: UIButton!
 
     @IBOutlet weak var searchBar: UISearchBar!
     
@@ -51,8 +50,6 @@ class NotificationsViewController: UIViewController {
     @IBOutlet weak var yesterdayDayeButton: UIButton!
     @IBOutlet weak var lastWeekDateButton: UIButton!
     @IBOutlet weak var lastMonthButton: UIButton!
-    
-
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var filterCollectionView: UICollectionView!

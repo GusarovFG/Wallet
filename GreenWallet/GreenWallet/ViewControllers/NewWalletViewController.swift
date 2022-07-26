@@ -59,12 +59,12 @@ class NewWalletViewController: UIViewController {
             self.titleLabel.text = "Chives Network"
         }
         
-        self.agreeLabel.addRangeGesture(stringRange: "условиями пользования") {
-            let url = URL(string: "https://devushka.ru/upload/posts/a1797083197722a6b1ab8e2f4beb2b08.jpg")
-            if UIApplication.shared.canOpenURL(url!) {
-                UIApplication.shared.open(url!, options: [:])
-            }
-        }
+//        self.agreeLabel.addRangeGesture(stringRange: "условиями пользования") {
+//            let url = URL(string: "https://devushka.ru/upload/posts/a1797083197722a6b1ab8e2f4beb2b08.jpg")
+//            if UIApplication.shared.canOpenURL(url!) {
+//                UIApplication.shared.open(url!, options: [:])
+//            }
+//        }
     }
     
     override func viewWillAppear(_ animated: Bool) {

@@ -119,9 +119,7 @@ class VerifyMnemonicViewController: UIViewController {
             
             
             let dispatchGroup = DispatchGroup()
-            if CoreDataManager.share.fetchChiaWalletPrivateKey().count == 10 {
-                AlertManager.share.errorCountOfWallet(self)
-            } else {
+           
                 self.present(self.spinnerVC, animated: true)
                 if isChia {
                     
@@ -143,47 +141,26 @@ class VerifyMnemonicViewController: UIViewController {
                                 }
                             }
                             dispatchGroup.enter()
-                            DispatchQueue.global().asyncAfter(deadline: .now() + 15) {
-
-                                ChiaBlockchainManager.share.getSyncStatus(1) { status in
-                                    DispatchQueue.global().asyncAfter(deadline: .now() + 10) {
-                                        if status.synced {
-                                            ChiaBlockchainManager.share.addCat(tailHash: "1dd54162ec6423211556155fa455d4ed1a52ad305e6b5249eba50c91c8428dfb") { newCat in
-                                                if newCat.success {
-                                                    ChiaBlockchainManager.share.addCat(tailHash: "6d95dae356e32a71db5ddcb42224754a02524c615c5fc35f568c2af04774e589") { newCat in
-                                                        print(newCat.success)
-                                                        dispatchGroup.leave()
-                                                    }
-                                                }
-
-                                            }
-
-                                        } else {
-                                            DispatchQueue.main.async {
-                                                self.spinnerVC.dismiss(animated: true)
-                                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-
-                                                    AlertManager.share.errorNewWallet(self)
-                                                    return
-                                                }
-                                            }
-                                        }
-
-
-                                    }
-
-                                }
-
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 15) {
                                 
+                                ChiaBlockchainManager.share.addCat(tailHash: "1dd54162ec6423211556155fa455d4ed1a52ad305e6b5249eba50c91c8428dfb") { new in
+                                    print(new.success)
+                                    dispatchGroup.leave()
+                                }
+                                dispatchGroup.enter()
+                                ChiaBlockchainManager.share.addCat(tailHash: "6d95dae356e32a71db5ddcb42224754a02524c615c5fc35f568c2af04774e589") { new in
+                                    print(new.success)
+                                    dispatchGroup.leave()
+                                }
                             }
                             
-                            dispatchGroup.enter()
                             ChiaBlockchainManager.share.getNextAddress(walletID: Int64(1)) { adres in
                                 adreses = adres.address
                                 print(adreses)
                                 dispatchGroup.leave()
                             }
-                            
+
+                            dispatchGroup.enter()
                             ChiaBlockchainManager.share.getWallets { wallets in
                                 dispatchGroup.enter()
                                 for wallet in wallets.wallets {
@@ -192,8 +169,7 @@ class VerifyMnemonicViewController: UIViewController {
                                     id = "\(wallet.id)"
                                     
                                     dispatchGroup.leave()
-                                    dispatchGroup.enter()
-                                    dispatchGroup.leave()
+           
                                     dispatchGroup.enter()
                                     ChiaBlockchainManager.share.getWalletBalance(wallet.id) { balance in
                                         newbalance = "\(balance.wallet_balance.confirmed_wallet_balance)"
@@ -206,6 +182,8 @@ class VerifyMnemonicViewController: UIViewController {
                                     dispatchGroup.leave()
                                     
                                 }
+                                
+                                
                                 dispatchGroup.enter()
                                 ChiaBlockchainManager.share.getPrivateKey(fingerpring.fingerprint) { privateKeys in
                                     privateKey = privateKeys
@@ -467,7 +445,7 @@ class VerifyMnemonicViewController: UIViewController {
                         }
                     }
                 }
-            }
+            
             
         } else {
             self.errorLabel.isHidden = false

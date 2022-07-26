@@ -24,7 +24,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wxe-Lp-QNX">
-                        <rect key="frame" x="15" y="35" width="36" height="17"/>
+                        <rect key="frame" x="15" y="35" width="285" height="17"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" red="0.58039215686274503" green="0.58039215686274503" blue="0.58039215686274503" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
@@ -34,6 +34,7 @@
                 <constraints>
                     <constraint firstItem="Bmd-TJ-yO2" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="13" id="78X-FO-Tkg"/>
                     <constraint firstAttribute="bottom" secondItem="Wxe-Lp-QNX" secondAttribute="bottom" constant="13" id="XIH-IP-iW2"/>
+                    <constraint firstAttribute="trailing" secondItem="Wxe-Lp-QNX" secondAttribute="trailing" constant="75" id="iXN-GR-GPv"/>
                     <constraint firstItem="Bmd-TJ-yO2" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="n9d-1u-iMq"/>
                     <constraint firstItem="Wxe-Lp-QNX" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="oeH-fk-9fu"/>
                 </constraints>

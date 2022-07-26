@@ -4,7 +4,7 @@
 //
 //  Created by Фаддей Гусаров on 27.04.2022.
 //
-
+import SDWebImage
 import UIKit
 
 class ImportTokensViewController: UIViewController {

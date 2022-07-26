@@ -126,7 +126,7 @@ class AllertWalletViewController: UIViewController {
                 self.confirmutton.setTitle(LocalizationManager.share.translate?.result.list.all.confirm_btn, for: .normal)
             } else if self.iserrorCountOfWalletError && !self.isNowallets && !self.isNewWalletError && !self.isSendError && !self.isImportMnemonicError && !self.isServerError {
                 self.deleteTitle.text = LocalizationManager.share.translate?.result.list.all.pop_up_failed_error_title
-                self.deleteDescription.text = "Приложение не поддерживает больше 10 кошельков"
+                self.deleteDescription.text = LocalizationManager.share.translate?.result.list.all.the_application_does_not_support_more_than_wallets
                 self.confirmutton.setTitle(LocalizationManager.share.translate?.result.list.all.confirm_btn, for: .normal)
             } else if self.iserrorCountOfWalletError && self.isNowallets && !self.isNewWalletError && !self.isSendError && !self.isImportMnemonicError && !self.isServerError {
                 self.deleteTitle.text = LocalizationManager.share.translate?.result.list.all.pop_up_failed_error_title

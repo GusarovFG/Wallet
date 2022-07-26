@@ -70,6 +70,9 @@ class TransactionHistoryViewController: UIViewController {
             self.backButton.isEnabled = false
         }
         
+        if self.isHistoryWallet {
+            
+        }
         
         self.systemsStackView.alignment = .fill
         
@@ -148,7 +151,7 @@ class TransactionHistoryViewController: UIViewController {
 
                                             DispatchQueue.main.async {
 
-                                                self.filterWalletsTransactions = self.walletsTransactions.reduce([], +)
+                                                self.filterWalletsTransactions = self.walletsTransactions.reduce([], +).reversed()
                                                 if CoreDataManager.share.fetchTransactions().isEmpty{
                                                     self.filterWalletsTransactions.forEach({CoreDataManager.share.saveTransactions(newTransactions: $0)})
                                                     print(CoreDataManager.share.fetchTransactions())
@@ -156,6 +159,7 @@ class TransactionHistoryViewController: UIViewController {
                                                     CoreDataManager.share.deleteTransactions()
                                                     self.filterWalletsTransactions.forEach({CoreDataManager.share.saveTransactions(newTransactions: $0)})
                                                 }
+                                                
                                                 self.tableView.reloadData()
                                                 self.spinnerVC.dismiss(animated: true)
                                             }
@@ -179,7 +183,7 @@ class TransactionHistoryViewController: UIViewController {
                                             
                                             DispatchQueue.main.async {
                                                 
-                                                self.filterWalletsTransactions = self.walletsTransactions.reduce([], +)
+                                                self.filterWalletsTransactions = self.walletsTransactions.reduce([], +).reversed()
                                                 self.tableView.reloadData()
                                                 self.spinnerVC.dismiss(animated: true)
                                             }
@@ -203,7 +207,7 @@ class TransactionHistoryViewController: UIViewController {
                                             
                                             DispatchQueue.main.async {
                                                 
-                                                self.filterWalletsTransactions = self.walletsTransactions.reduce([], +)
+                                                self.filterWalletsTransactions = self.walletsTransactions.reduce([], +).reversed()
                                                 self.tableView.reloadData()
                                                 self.spinnerVC.dismiss(animated: true)
                                             }
@@ -227,7 +231,7 @@ class TransactionHistoryViewController: UIViewController {
                                             
                                             DispatchQueue.main.async {
                                                 
-                                                self.filterWalletsTransactions = self.walletsTransactions.reduce([], +)
+                                                self.filterWalletsTransactions = self.walletsTransactions.reduce([], +).reversed()
                                                 self.tableView.reloadData()
                                                 self.spinnerVC.dismiss(animated: true)
                                             }
@@ -257,7 +261,7 @@ class TransactionHistoryViewController: UIViewController {
                                         
                                         DispatchQueue.main.async {
                                             
-                                            self.filterWalletsTransactions = self.walletsTransactions.reduce([], +)
+                                            self.filterWalletsTransactions = self.walletsTransactions.reduce([], +).reversed()
                                             self.tableView.reloadData()
                                             self.spinnerVC.dismiss(animated: true)
                                         }
@@ -283,7 +287,7 @@ class TransactionHistoryViewController: UIViewController {
                                         
                                         DispatchQueue.main.async {
                                             
-                                            self.filterWalletsTransactions = self.walletsTransactions.reduce([], +)
+                                            self.filterWalletsTransactions = self.walletsTransactions.reduce([], +).reversed()
                                             self.tableView.reloadData()
                                             self.spinnerVC.dismiss(animated: true)
                                         }
@@ -307,7 +311,7 @@ class TransactionHistoryViewController: UIViewController {
                                         
                                         DispatchQueue.main.async {
                                             
-                                            self.filterWalletsTransactions = self.walletsTransactions.reduce([], +)
+                                            self.filterWalletsTransactions = self.walletsTransactions.reduce([], +).reversed()
                                             self.tableView.reloadData()
                                             self.spinnerVC.dismiss(animated: true)
                                         }
@@ -331,7 +335,7 @@ class TransactionHistoryViewController: UIViewController {
                                         
                                         DispatchQueue.main.async {
                                             
-                                            self.filterWalletsTransactions = self.walletsTransactions.reduce([], +)
+                                            self.filterWalletsTransactions = self.walletsTransactions.reduce([], +).reversed()
                                             self.tableView.reloadData()
                                             self.spinnerVC.dismiss(animated: true)
                                         }
@@ -541,7 +545,7 @@ class TransactionHistoryViewController: UIViewController {
             self.systemsStackView.arrangedSubviews[i].backgroundColor = .systemBackground
             
             if sender == self.systemsStackView.arrangedSubviews[i] && sender != self.allSystemButton {
-                self.filterSystemButton.setTitle("\(sender.currentTitle?.split(separator: " ").first ?? "")", for: .normal)
+                self.filterSystemButton.setTitle("\(sender.currentTitle ?? "")", for: .normal)
                 sender.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
                 
                 
@@ -634,11 +638,11 @@ extension TransactionHistoryViewController: UITableViewDelegate, UITableViewData
         if transiction.to_address.contains("xch") {
             cell.summLabel.text = "\((Double(transiction.amount) / 1000000000000).avoidNotation) XCH"
         } else if transiction.to_address.contains("xcc") {
-            cell.summLabel.text = "\((Double(transiction.amount) / 1000000000000).avoidNotation) XCC"
+            cell.summLabel.text = "\((Double(transiction.amount) / 100000000).avoidNotation) XCC"
         } else if transiction.to_address.contains("txch") {
             cell.summLabel.text = "\((Double(transiction.amount) / 1000000000000).avoidNotation) TXCH"
         } else if transiction.to_address.contains("txcc") {
-            cell.summLabel.text = "\((Double(transiction.amount) / 1000000000000).avoidNotation) TXCC"
+            cell.summLabel.text = "\((Double(transiction.amount) / 100000000).avoidNotation) TXCC"
         }
         
         
@@ -778,7 +782,7 @@ extension TransactionHistoryViewController: UICollectionViewDelegate, UICollecti
             }
             cell.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
             cell.cellLabel.textColor = .white
-            self.filterWalletsTransactions = self.walletsTransactions.reduce([], +).filter({$0.type == 1})
+            self.filterWalletsTransactions = self.walletsTransactions.reduce([], +).filter({$0.type == 1 || $0.confirmed == true})
             self.isAllFilter = false
             self.isInFilter = false
             self.isOutFilter = true

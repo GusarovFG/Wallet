@@ -4,7 +4,7 @@
 //
 //  Created by Фаддей Гусаров on 27.04.2022.
 //
-
+import SDWebImage
 import UIKit
 
 class ImportTokensTableViewCell: UITableViewCell {
@@ -27,7 +27,15 @@ class ImportTokensTableViewCell: UITableViewCell {
     func setupCell(tail: TailsList) {
         self.nameOfSystemLabel.text = tail.name
         self.tokensLabel.text = tail.code
-        self.systemImage.load(url: URL(string: tail.logo_url)!)
+        let url = URL(string: tail.logo_url ?? "")
+        DispatchQueue.global().async {
+            
+            self.systemImage.sd_setImage(with: url) { image, error, cach, url in
+                DispatchQueue.main.async {
+                    self.systemImage.image = image
+                }
+            }
+        }
         self.systemImage.layer.cornerRadius = self.systemImage.frame.width / 2
     }
 

@@ -438,7 +438,11 @@ class PushTokensViewController: UIViewController {
                 self.systemViewHeightConstraint.constant += button.frame.height
                 
                 button.addTarget(self, action: #selector(setupSystemMenuButtons), for: .touchUpInside)
-                
+                if UserDefaultsManager.shared.userDefaults.string(forKey: "Theme") == "light" {
+                    button.setTitleColor(.black, for: .normal)
+                } else {
+                    button.setTitleColor(.white, for: .normal)
+                }
             }
         }
         
@@ -462,7 +466,8 @@ class PushTokensViewController: UIViewController {
             if sender == self.systemStackView.arrangedSubviews[i] {
                 self.systemButton.setTitle("• \(self.systems[i].name)", for: .normal)
                 sender.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
-                self.walletsView.alpha = 0
+                
+                
                 if self.systems[i].name == "Chia Network" {
                     self.wallets = CoreDataManager.share.fetchChiaWalletPrivateKey().filter({$0.name == "Chia Wallet"})
                     self.wallet = self.wallets.first
@@ -501,6 +506,8 @@ class PushTokensViewController: UIViewController {
             UIView.animate(withDuration: 0.5) {
                 self.systemView.alpha = 0
                 self.systemView.isHidden = true
+                self.walletsView.alpha = 0
+                self.walletsView.isHidden = true
             }
         }
     }
@@ -702,7 +709,7 @@ class PushTokensViewController: UIViewController {
             self.walletAdressViewConstraint.constant += 65
             self.checkboxLabelConstraint.constant += 65
             self.checkboxButtonConstraint.constant += 65
-            self.contactTextField.text = "My Binance Wallet"
+            self.contactTextField.text = "My Wallet"
             
             self.isAddNewContact = true
             
