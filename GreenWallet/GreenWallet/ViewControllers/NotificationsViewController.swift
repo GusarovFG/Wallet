@@ -59,11 +59,11 @@ class NotificationsViewController: UIViewController {
         super.viewDidLoad()
         if !CoreDataManager.share.fetchTransactions().isEmpty {
             self.notifications = CoreDataManager.share.fetchTransactions()
-            self.filterNotifications = CoreDataManager.share.fetchTransactions().reversed()
-            self.otherNotifications = CoreDataManager.share.fetchPushNotifications().reversed()
+            self.filterNotifications = CoreDataManager.share.fetchTransactions()
+            
         }
-        
-        print(filterNotifications)
+        self.otherNotifications = CoreDataManager.share.fetchPushNotifications()
+        print("otherNotifications \(otherNotifications)")
         SystemsManager.share.filterSystems()
         self.systems = Array(Set(SystemsManager.share.listOfSystems))
         self.filterDateView.isHidden = true
@@ -326,7 +326,7 @@ extension NotificationsViewController: UITableViewDelegate, UITableViewDataSourc
         if !self.isOther {
             return self.filterNotifications.map({$0.create_at_time}).removingDuplicates()[section]
         } else {
-            return self.otherNotifications.map({$0.created_at}).removingDuplicates()[section]
+            return self.otherNotifications.map({$0.created_at ?? ""}).removingDuplicates().sorted(by: {TimeManager.share.dateToUnix(string: $0) < TimeManager.share.dateToUnix(string: $1)})[section]
         }
         
     }
@@ -509,6 +509,7 @@ extension NotificationsViewController: UICollectionViewDelegate, UICollectionVie
             self.isInFilter = false
             self.isOutFilter = false
             self.isOther = true
+            
             self.notificationTableView.reloadData()
         }
     }

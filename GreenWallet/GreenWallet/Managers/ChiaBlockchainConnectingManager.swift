@@ -121,6 +121,13 @@ class ChiaBlockchainManager {
                         
                         NotificationCenter.default.post(name: NSNotification.Name("alertErrorGerCodingKeys"), object: nil)
                     }
+                } catch {
+                    if error.isConnectivityError == false {
+                        DispatchQueue.main.async {
+                            
+                            NotificationCenter.default.post(name: NSNotification.Name("alertErrorGerCodingKeys"), object: nil)
+                        }
+                    }
                 }
             }
         }.resume()
@@ -240,6 +247,13 @@ class ChiaBlockchainManager {
                     DispatchQueue.main.async {
                         
                         NotificationCenter.default.post(name: NSNotification.Name("alertErrorGerCodingKeys"), object: nil)
+                    }
+                } catch {
+                    if error.isConnectivityError == false {
+                        DispatchQueue.main.async {
+                            
+                            NotificationCenter.default.post(name: NSNotification.Name("alertErrorGerCodingKeys"), object: nil)
+                        }
                     }
                 }
             }
@@ -479,6 +493,13 @@ class ChiaBlockchainManager {
                         
                         NotificationCenter.default.post(name: NSNotification.Name("alertErrorGerCodingKeys"), object: nil)
                     }
+                } catch {
+                    if error.isConnectivityError == false {
+                        DispatchQueue.main.async {
+                            
+                            NotificationCenter.default.post(name: NSNotification.Name("alertErrorGerCodingKeys"), object: nil)
+                        }
+                    }
                 }
             }
         }.resume()
@@ -498,6 +519,7 @@ class ChiaBlockchainManager {
         session.dataTask(with: request) { data, response, error in
             if let response = response {
                 print(response)
+                
             }
             if let data = data {
                 do {
@@ -532,10 +554,8 @@ class ChiaBlockchainManager {
                         NotificationCenter.default.post(name: NSNotification.Name("alertErrorGerCodingKeys"), object: nil)
                     }
                 } catch {
-                    print("error: ", error)
-                    DispatchQueue.main.async {
-                        
-                        NotificationCenter.default.post(name: NSNotification.Name("alertErrorGerCodingKeys"), object: nil)
+                    if (error as? URLError)?.code == .timedOut {
+                        // Handle session timeout
                     }
                 }
             }
@@ -1143,7 +1163,12 @@ class ChiaTestBlockchainManager {
                     print("Type '\(type)' mismatch:", context.debugDescription)
                     print("codingPath:", context.codingPath)
                 } catch {
-                    print("error: ", error)
+                    if (error as? URLError)?.code == .timedOut {
+                        DispatchQueue.main.async {
+                            
+                            NotificationCenter.default.post(name: NSNotification.Name("alertErrorGerCodingKeys"), object: nil)
+                        }
+                    }
                 }
             }
         }.resume()

@@ -95,7 +95,6 @@ class PushTokensViewController: UIViewController {
         self.adressTextField.text = self.address
         let storyoard = UIStoryboard(name: "spinner", bundle: .main)
         self.spinnerVC = storyoard.instantiateViewController(withIdentifier: "spinner") as! SprinnerViewController
-        
         if self.isChia {
             self.wallets = CoreDataManager.share.fetchChiaWalletPrivateKey().filter({$0.name! == "Chia Wallet"})
             self.systemButton.setTitle("• Chia Network", for: .normal)
@@ -506,8 +505,8 @@ class PushTokensViewController: UIViewController {
             UIView.animate(withDuration: 0.5) {
                 self.systemView.alpha = 0
                 self.systemView.isHidden = true
-                self.walletsView.alpha = 0
-                self.walletsView.isHidden = true
+//                self.walletsView.alpha = 0
+//                self.walletsView.isHidden = true
             }
         }
     }
@@ -579,6 +578,11 @@ class PushTokensViewController: UIViewController {
                     self.balanceViewConstraint.constant += button.frame.height
                     self.balaceStackViewConstraint.constant += button.frame.height
                     button.addTarget(self, action: #selector(setupBalanceMenuButtons), for: .touchUpInside)
+                    if UserDefaultsManager.shared.userDefaults.string(forKey: "Theme") == "light" {
+                        button.setTitleColor(.black, for: .normal)
+                    } else {
+                        button.setTitleColor(.white, for: .normal) 
+                    }
                     
                 }
             }
@@ -593,8 +597,15 @@ class PushTokensViewController: UIViewController {
     
     @objc func setupWalletsMenuButtons(_ sender: UIButton) {
         for i in 0..<self.walletStackView.arrangedSubviews.count {
-            self.walletStackView.arrangedSubviews[i].backgroundColor = .systemBackground
+            
+            if UserDefaultsManager.shared.userDefaults.string(forKey: "Theme") == "light" {
+                self.walletStackView.arrangedSubviews[i].backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+            } else {
+                self.walletStackView.arrangedSubviews[i].backgroundColor = #colorLiteral(red: 0.1879999936, green: 0.1879999936, blue: 0.1879999936, alpha: 1)
+            }
             if sender == self.walletStackView.arrangedSubviews[i] {
+                  
+                
                 self.wallet = self.wallets[i]
                 self.tokenImage.image = UIImage(named: "LogoChia")!
                 setupWalletButton()
@@ -684,7 +695,7 @@ class PushTokensViewController: UIViewController {
         } else if self.wallet?.name == "Chives Wallet" || self.wallet?.name == "Chives TestNet" {
             self.comissionTextField.text = AgreesManager.share.agrees.filter({$0.blockchain_name == "Chives Network"}).first?.fee_transaction ?? ""
             self.usdLabel.text = "~ \(((Double(sender.text ?? "0") ?? 0) * ExchangeRatesManager.share.newChivesRatePerDollar).rounded(toPlaces: 2))"
-            self.gadLabel.text = "~ \(((Double(sender.text ?? "0") ?? 0) * ExchangeRatesManager.share.newChivesRatePerDollar / (Double(TailsManager.share.prices.filter({$0.code == "GAD"}).first?.price ?? "0") ?? 0)).rounded(toPlaces: 2))"
+            self.gadLabel.alpha = 0
         }
         
         self.transferTokenLabel.text = self.balanceButton.currentTitle?.filter{!$0.isNumber && !$0.isPunctuation}

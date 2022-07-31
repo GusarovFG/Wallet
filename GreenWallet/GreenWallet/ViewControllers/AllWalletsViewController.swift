@@ -22,24 +22,24 @@ class AllWalletsViewController: UIViewController {
         super.viewDidLoad()
         localization()
         self.favoriteLabel.alpha = 0
-        self.wallets = CoreDataManager.share.fetchChiaWalletPrivateKey()
+        self.wallets = WalletManager.share.vallets
         
         self.walletsTableView.register(UINib(nibName: "AddWalletTableViewCell", bundle: nil), forCellReuseIdentifier: "AddWalletTableViewCell")
         self.walletsTableView.register(UINib(nibName: "AllWalletsTableViewCell", bundle: nil), forCellReuseIdentifier: "AllWalletsTableViewCell")
-
+        
         NotificationCenter.default.addObserver(self, selector: #selector(openAlert), name: NSNotification.Name("closeAlert"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(openAlert), name: NSNotification.Name("deleteWalletAtIntex"), object: nil)
-
+        
     }
     
-
+    
     
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.wallets = CoreDataManager.share.fetchChiaWalletPrivateKey()
+        self.wallets = WalletManager.share.vallets
         self.walletsTableView.reloadData()
-
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -48,7 +48,7 @@ class AllWalletsViewController: UIViewController {
     }
     
     @objc func openAlert(notification: Notification)  {
-        self.wallets = CoreDataManager.share.fetchChiaWalletPrivateKey()
+        self.wallets = WalletManager.share.vallets
         let storyBoard = UIStoryboard(name: "Alert", bundle: .main)
         let alertVC = storyBoard.instantiateViewController(withIdentifier: "DeletingAlert") as! AllertWalletViewController
         alertVC.isInMyWallet = true
@@ -61,7 +61,7 @@ class AllWalletsViewController: UIViewController {
         self.mainLabel.text = LocalizationManager.share.translate?.result.list.my_wallets.my_wallets_title
         self.backButton.setTitle(LocalizationManager.share.translate?.result.list.all.back_btn, for: .normal)
     }
-
+    
     
     @IBAction func backButtonPressed(_ sender: Any) {
         NotificationCenter.default.post(name: NSNotification.Name("reload"), object: nil)
@@ -101,7 +101,7 @@ extension AllWalletsViewController: UITableViewDelegate, UITableViewDataSource {
                    trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let wallet = self.wallets[indexPath.row]
         let favorite = UIContextualAction(style: .normal,
-                                         title: "") {  (action, view, completionHandler) in
+                                          title: "") {  (action, view, completionHandler) in
             if WalletManager.share.favoritesWallets.filter({$0 == wallet}).count == 0 {
                 WalletManager.share.favoritesWallets.append(wallet)
                 self.favoriteLabel.backgroundColor = #colorLiteral(red: 0.2274509804, green: 0.6745098039, blue: 0.3490196078, alpha: 1)
@@ -118,6 +118,7 @@ extension AllWalletsViewController: UITableViewDelegate, UITableViewDataSource {
                 if WalletManager.share.favoritesWallets.count > 1 {
                     WalletManager.share.favoritesWallets.removeAll(where: {$0 == wallet})
                     
+                    
                     self.favoriteLabel.backgroundColor = #colorLiteral(red: 1, green: 0.2360929251, blue: 0.1714096665, alpha: 1)
                     self.favoriteLabel.text = "     \(LocalizationManager.share.translate?.result.list.my_wallets.my_wallets_label_removed ?? "")"
                     UIView.animate(withDuration: 1, delay: 0) {
@@ -132,7 +133,7 @@ extension AllWalletsViewController: UITableViewDelegate, UITableViewDataSource {
             }
             completionHandler(true)
         }
-
+        
         favorite.backgroundColor = #colorLiteral(red: 0.1189827248, green: 0.6536024213, blue: 1, alpha: 1)
         if WalletManager.share.favoritesWallets.filter({$0 == wallet}).count == 0 {
             favorite.image = UIImage(named: "favorite")!
@@ -159,13 +160,17 @@ extension AllWalletsViewController: UITableViewDelegate, UITableViewDataSource {
         configuration.performsFirstActionWithFullSwipe = false
         return configuration
     }
-
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath {
         case [0,self.wallets.count]:
-            let systemViewController = self.storyboard?.instantiateViewController(withIdentifier: "SelectSystemViewController") as! SelectSystemViewController
-            systemViewController.isNewWallet = true
-            self.present(systemViewController, animated: true, completion: nil)
+            if CoreDataManager.share.fetchChiaWalletPrivateKey().count == 10 {
+                AlertManager.share.errorCountOfWallet(self)
+            } else {
+                let systemViewController = self.storyboard?.instantiateViewController(withIdentifier: "SelectSystemViewController") as! SelectSystemViewController
+                systemViewController.isNewWallet = true
+                self.present(systemViewController, animated: true, completion: nil)
+            }
         default:
             let myWalletsVC = storyboard?.instantiateViewController(withIdentifier: "MyWalletsViewController") as! MyWalletsViewController
             myWalletsVC.wallets = self.wallets

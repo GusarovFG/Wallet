@@ -50,8 +50,8 @@ class ImportMnemonicViewController: UIViewController {
         setuptermsLabel()
         registerFromKeyBoardNotifications()
         
-        let storyoard = UIStoryboard(name: "spinner", bundle: .main)
-        self.spinnerVC = storyoard.instantiateViewController(withIdentifier: "spinner") as! SprinnerViewController
+        let spinStoryoard = UIStoryboard(name: "spinner", bundle: .main)
+        self.spinnerVC = spinStoryoard.instantiateViewController(withIdentifier: "spinner") as! SprinnerViewController
         
         self.scrollView.isScrollEnabled = false
         
@@ -65,10 +65,15 @@ class ImportMnemonicViewController: UIViewController {
             self.continueButton.backgroundColor = #colorLiteral(red: 0.2666666667, green: 0.2666666667, blue: 0.2666666667, alpha: 1)
         }
         self.termsLabel.addRangeGesture(stringRange: "условиями пользования") {
-            let url = URL(string: "https://devushka.ru/upload/posts/a1797083197722a6b1ab8e2f4beb2b08.jpg")
-            if UIApplication.shared.canOpenURL(url!) {
-                UIApplication.shared.open(url!, options: [:])
-            }
+            let termsVC = self.storyboard?.instantiateViewController(withIdentifier: "NewWalletViewController") as! NewWalletViewController
+            termsVC.isChia = self.isChia
+            termsVC.isChives = self.isChives
+            termsVC.isChiaTest = self.isChiaTest
+            termsVC.isChivesTest = self.isChivesTest
+            termsVC.isFromImport = true
+            termsVC.modalPresentationStyle = .fullScreen
+            self.present(termsVC, animated: true)
+            
         }
         if UserDefaultsManager.shared.userDefaults.string(forKey: "Theme") == "light" {
             let font = UIFont.systemFont(ofSize: 16)
@@ -502,9 +507,10 @@ class ImportMnemonicViewController: UIViewController {
                                                 }
                                                 ChiaTestBlockchainManager.share.getWalletBalance(wallet.id) { balance in
                                                     newbalance = "\(balance.wallet_balance.confirmed_wallet_balance)"
-                                                    token.insert(name, at: 0)
-                                                    token.insert(id, at: 1)
-                                                    token.insert("show", at: 3)
+                                                    token.append(name)
+                                                    token.append(id)
+                                                    token.append(newbalance)
+                                                    token.append("show")
                                                     tokens.append(token)
                                                     
                                                 }

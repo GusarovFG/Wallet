@@ -93,12 +93,12 @@ class AllertWalletViewController: UIViewController {
             if self.islisting {
                 self.wasDeletedTitle.text = LocalizationManager.share.translate?.result.list.listing_request.listing_request_title
                 self.wasDeletedDescription.text = LocalizationManager.share.translate?.result.list.listing_request.pop_up_listing_request_description
-            } else if !self.isContact {
+            } else if !self.isContact && !self.isEditingContact {
                 self.wasDeletedDescription.text = LocalizationManager.share.translate?.result.list.address_book.address_book_pop_up_added_description
             } else if self.isContact {
                 self.wasDeletedTitle.text = LocalizationManager.share.translate?.result.list.address_book.adress_book_pop_up_removed_title
                 self.wasDeletedDescription.text = LocalizationManager.share.translate?.result.list.address_book.adress_book_pop_up_removed_description
-            } else if isEditingContact {
+            } else if isEditingContact && !self.isContact {
                 self.wasDeletedTitle.text = LocalizationManager.share.translate?.result.list.address_book.adress_book_edit_contact_pop_up_changed_title
                 self.wasDeletedDescription.text = LocalizationManager.share.translate?.result.list.address_book.adress_book_edit_contact_pop_up_changed_description
             } 

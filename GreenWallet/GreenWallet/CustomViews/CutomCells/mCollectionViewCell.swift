@@ -59,14 +59,13 @@ class mCollectionViewCell: UICollectionViewCell {
     
     override func layoutSubviews(){
         super.layoutSubviews()
-        self.token = self.wallet?.token?.filter({$0.contains("show")}) ?? []
-        self.tableView.reloadData()
+        self.token = self.wallet?.token?.filter({$0.contains("show")}).sorted{(Int($0[1]) ?? 0) < (Int($1[1]) ?? 0)} ?? []
         if self.stackView.arrangedSubviews.count == 2 {
             self.heightConstraint.constant = (self.frame.size.height) - (self.footerView.frame.height + self.headerView.frame.height)
             self.collectionVieww.constant = self.heightConstraint.constant
         } else {
-            if self.tableView.visibleCells.count >= 5 {
-                self.heightConstraint.constant = (self.frame.size.height) - (self.footerView.frame.height + self.headerView.frame.height + CGFloat((76 * 5)) + 46)
+            if (self.wallet?.token?.count ?? 0) >= 5 && !CoreDataManager.share.fetchChiaWalletPrivateKey().isEmpty {
+                self.heightConstraint.constant = (self.frame.size.height) - (self.footerView.frame.height + self.headerView.frame.height + CGFloat((76 * 5)))
                 self.collectionVieww.constant = self.heightConstraint.constant
             } else {
                 if self.wallet != nil {
@@ -90,7 +89,6 @@ class mCollectionViewCell: UICollectionViewCell {
     }
     override func layoutIfNeeded() {
         super.layoutIfNeeded()
-        self.tableView.reloadData()
     }
     
     @objc private func hideWallet(notification: Notification) {
@@ -172,7 +170,7 @@ extension mCollectionViewCell: UITableViewDelegate, UITableViewDataSource {
         
         switch indexPath {
         case [0,self.token.count]:
-            self.height += importCell.frame.height
+//            self.height += importCell.frame.height
             if self.wallet?.name == "Chia Wallet" || self.wallet?.name == "Chia TestNet" {
                 importCell.titleLabel.text = "+ \(LocalizationManager.share.translate?.result.list.main_screen.main_screen_purse_import ?? "")"
             } else {
@@ -182,7 +180,7 @@ extension mCollectionViewCell: UITableViewDelegate, UITableViewDataSource {
             print(token.count)
             return importCell
         default:
-            self.height += walletCell.frame.height
+//            self.height += walletCell.frame.height
             
             
             let token = self.token[indexPath.row]
@@ -223,7 +221,7 @@ extension mCollectionViewCell: UITableViewDelegate, UITableViewDataSource {
                     
                 } else {
                     
-                    walletCell.cellImage.downloadImage(from: TailsManager.share.tails?.result.list.filter({$0.hash.contains(token[0].dropFirst(4).dropLast(3) ) }).first?.logo_url ?? "")
+                    walletCell.cellImage.downloadImage(from: TailsManager.share.tails?.result.list.filter({$0.hash.contains(token[0].dropFirst(4).dropLast(3)) || $0.name == token[0] }).first?.logo_url ?? "" )
                     let summ: Double = ((Double(token[2]) ?? 0) / 1000000000000) * ExchangeRatesManager.share.newRatePerDollar
                     
                     if !self.hideBalance {
@@ -258,7 +256,7 @@ extension mCollectionViewCell: UITableViewDelegate, UITableViewDataSource {
                 
                 let storyboard = UIStoryboard(name: "Main", bundle: .main)
                 let importVC = storyboard.instantiateViewController(withIdentifier: "ImportTokensViewController") as! ImportTokensViewController
-                importVC.index = self.index
+                importVC.index = CoreDataManager.share.fetchChiaWalletPrivateKey().firstIndex(of: self.wallet!) ?? 0
                 print(self.index)
                 importVC.modalPresentationStyle = .fullScreen
                 self.controller.present(importVC, animated: true)
@@ -267,6 +265,7 @@ extension mCollectionViewCell: UITableViewDelegate, UITableViewDataSource {
             }
         }
     }
+    
     
     
     

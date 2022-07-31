@@ -14,6 +14,7 @@ class NewWalletViewController: UIViewController {
     var isChiaTest = false
     var isChivesTest = false
     var isMainScreen = false
+    var isFromImport = false
     
     private var agrees: [CoinsInfoResultList] = []
     
@@ -59,12 +60,13 @@ class NewWalletViewController: UIViewController {
             self.titleLabel.text = "Chives Network"
         }
         
-//        self.agreeLabel.addRangeGesture(stringRange: "условиями пользования") {
-//            let url = URL(string: "https://devushka.ru/upload/posts/a1797083197722a6b1ab8e2f4beb2b08.jpg")
-//            if UIApplication.shared.canOpenURL(url!) {
-//                UIApplication.shared.open(url!, options: [:])
-//            }
-//        }
+        if self.isFromImport {
+            self.checkBoxButton.isHidden = true
+            self.agreeLabel.isHidden = true
+            self.createNewWalletButton.isHidden = true
+        }
+        
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -128,12 +130,7 @@ class NewWalletViewController: UIViewController {
         
         self.agreeLabel.attributedText = attributedString
         
-        self.agreeLabel.addRangeGesture(stringRange: second) {
-            let url = URL(string: "https://devushka.ru/upload/posts/a1797083197722a6b1ab8e2f4beb2b08.jpg")
-            if UIApplication.shared.canOpenURL(url!) {
-                UIApplication.shared.open(url!, options: [:])
-            }
-        }
+
     }
     
     @IBAction func checkBoxButtonPressed(_ sender: UIButton) {

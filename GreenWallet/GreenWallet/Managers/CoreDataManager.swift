@@ -162,7 +162,7 @@ class CoreDataManager {
         
         let indexCat = privateKey[index].token?.firstIndex(where: {$0.contains("\(id)")})
         privateKey[index].token?[indexCat ?? 0][2] = balance
-        
+        privateKey[index].token?.sort{(Int($0[1]) ?? 0) < (Int($1[1]) ?? 0)}
         saveContext()
         
     }
@@ -198,6 +198,7 @@ class CoreDataManager {
         saveContext()
     }
     
+
     func saveExchangedRates(ratePerDollar: Double) {
         let rate = ExchangeRatesCD(context: self.persistentContainer.viewContext)
         
@@ -285,6 +286,8 @@ class CoreDataManager {
         
         saveContext()
     }
+    
+
     
     func fetchTransactions() -> [TransactionsCD] {
         let fetchReqest: NSFetchRequest<TransactionsCD> = TransactionsCD.fetchRequest()

@@ -70,7 +70,9 @@ class MainViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
         if !self.wallets.isEmpty {
+            WalletManager.share.isUpdate = true
             self.cellectionView.isScrollEnabled = true
             self.wallet = self.wallets[0]
             let summ: Double = (((self.wallet?.token?.map({Double($0[2]) ?? 0}).reduce(0, +) ?? 0) / 1000000000000) * ExchangeRatesManager.share.newRatePerDollar).rounded(toPlaces: 8)
@@ -109,7 +111,7 @@ class MainViewController: UIViewController {
             self.riseLabel.text = "XCC price: \(ExchangeRatesManager.share.newChivesRatePerDollar) $"
         }
         ExchangeRatesManager.share.changeColorOfView(label: self.percentLabel)
-        WalletManager.share.isUpdate = true
+        
         if !CoreDataManager.share.fetchChiaWalletPrivateKey().isEmpty {
             
             self.cellectionView.scrollToItem(at: [0,0], at: .left, animated: true)
@@ -258,7 +260,7 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
             cell.headerButton.isHidden = true
             cell.footerButtonConstraint.constant = 0
             cell.tableView.reloadData()
-            self.collectionViewHeightConstraint.constant = cell.frame.height
+            self.collectionViewHeightConstraint = cell.collectionVieww
             if cell.wallet?.token != nil {
                 self.balanceLabel.text = "\(cell.wallet?.token?.map({Double($0[2])!}).reduce(0, +) ?? 0) USD"
                 
@@ -266,21 +268,19 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
                 self.balanceLabel.text = "0 USD"
             }
         } else {
-            print(CoreDataManager.share.fetchChiaWalletPrivateKey())
             if cell.stackView.arrangedSubviews.contains(where: {$0 == cell.tableView}) {
                 let wallet = self.wallets[indexPath.row]
                 cell.wallet = wallet
                 cell.index = self.index
                 cell.numberOFWallet.text = "\(wallet.name ?? "") ****\(String(wallet.fingerprint).suffix(4))"
                 cell.controller = self.tabBarController ?? self
-                self.collectionViewHeightConstraint.constant = cell.frame.height
-                print(self.collectionViewHeightConstraint.constant)
+                self.collectionViewHeightConstraint = cell.collectionVieww
             } else {
                 cell.stackView.addArrangedSubview(cell.tableView)
                 cell.wallet = CoreDataManager.share.fetchChiaWalletPrivateKey()[indexPath.row]
                 cell.controller = self.tabBarController ?? self
                 cell.tableView.reloadData()
-                self.collectionViewHeightConstraint.constant = cell.frame.height
+                self.collectionViewHeightConstraint = cell.collectionVieww
                 
             }
             

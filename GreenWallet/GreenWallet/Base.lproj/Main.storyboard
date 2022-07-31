@@ -325,7 +325,7 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
         <!--New Wallet View Controller-->
         <scene sceneID="Qog-2b-GV8">
             <objects>
-                <viewController storyboardIdentifier="NewWalletViewController" modalPresentationStyle="fullScreen" id="5v2-Wl-TZc" customClass="NewWalletViewController" customModule="GreenWallet" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="NewWalletViewController" modalPresentationStyle="fullScreen" useStoryboardIdentifierAsRestorationIdentifier="YES" id="5v2-Wl-TZc" customClass="NewWalletViewController" customModule="GreenWallet" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="89c-K4-XkB">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1104,14 +1104,7 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                                         <rect key="frame" x="180" y="0.0" width="194" height="40"/>
                                         <color key="tintColor" name="PasswordButtonsColor"/>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" imagePlacement="trailing" imagePadding="3">
-                                            <imageReference key="image" image="chevron.down" catalog="system" renderingMode="hierarchical-single">
-                                                <hierarchicalColors>
-                                                    <color red="0.2274509804" green="0.67450980390000004" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <color systemColor="secondaryLabelColor"/>
-                                                    <color systemColor="tertiaryLabelColor"/>
-                                                </hierarchicalColors>
-                                            </imageReference>
+                                        <buttonConfiguration key="configuration" style="plain">
                                             <attributedString key="attributedTitle">
                                                 <fragment content="8.5478614578 XCH">
                                                     <attributes>
@@ -1469,10 +1462,11 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="zUk-ei-7q2">
                                         <rect key="frame" x="0.0" y="0.0" width="168" height="40"/>
+                                        <color key="backgroundColor" name="ViewColor"/>
                                         <color key="tintColor" name="ViewColor"/>
                                     </stackView>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="backgroundColor" name="ViewColor"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="zUk-ei-7q2" secondAttribute="trailing" id="1WU-GO-3q4"/>
                                     <constraint firstItem="zUk-ei-7q2" firstAttribute="top" secondItem="1q9-NY-1X7" secondAttribute="top" id="Dgg-Qh-gey"/>
@@ -1506,12 +1500,14 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="TOO-Ci-1W7">
                                         <rect key="frame" x="0.0" y="0.0" width="168" height="40"/>
                                         <color key="backgroundColor" name="ViewColor"/>
+                                        <color key="tintColor" name="ViewColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="CnE-8c-Wqq"/>
                                         </constraints>
                                     </stackView>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="backgroundColor" name="ViewColor"/>
+                                <color key="tintColor" name="ViewColor"/>
                                 <constraints>
                                     <constraint firstItem="TOO-Ci-1W7" firstAttribute="top" secondItem="FW4-UB-cxW" secondAttribute="top" id="3vn-Kk-bMm"/>
                                     <constraint firstAttribute="trailing" secondItem="TOO-Ci-1W7" secondAttribute="trailing" id="DqT-x6-hiV"/>
@@ -1753,12 +1749,6 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                             <constraint firstItem="bmv-RL-rBj" firstAttribute="trailing" secondItem="n7w-Dy-b0g" secondAttribute="trailing" id="wpW-du-iwA"/>
                             <constraint firstItem="7AU-7a-QaI" firstAttribute="top" secondItem="r99-q5-ntG" secondAttribute="top" id="zA4-mQ-ST6"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="subviews">
-                                <exclude reference="7AU-7a-QaI"/>
-                                <exclude reference="bmv-RL-rBj"/>
-                            </mask>
-                        </variation>
                     </view>
                     <connections>
                         <outlet property="addContactLabel" destination="hVU-57-gCy" id="C5r-RW-SbD"/>
@@ -1967,10 +1957,10 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                                 </connections>
                             </button>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceHorizontal="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="osZ-w1-XVa" customClass="CustomMainCollectionView" customModule="GreenWallet" customModuleProvider="target">
-                                <rect key="frame" x="15" y="231" width="384" height="398"/>
+                                <rect key="frame" x="15" y="231" width="384" height="516"/>
                                 <color key="backgroundColor" name="mainBackGroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" priority="999" constant="398" id="Vhf-dz-tOj"/>
+                                    <constraint firstAttribute="height" constant="516" id="RfO-oa-MYD"/>
                                 </constraints>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="mlE-4t-YUA">
                                     <size key="itemSize" width="50" height="50"/>
@@ -2013,7 +2003,7 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                             <constraint firstItem="osZ-w1-XVa" firstAttribute="top" secondItem="D3F-W3-Jpm" secondAttribute="bottom" constant="8" symbolic="YES" id="i7r-TR-DPk"/>
                             <constraint firstItem="jMi-1S-2e6" firstAttribute="bottom" secondItem="ITP-eL-ev8" secondAttribute="bottom" constant="20" id="iGI-uU-dJs"/>
                             <constraint firstItem="neh-Z2-VSf" firstAttribute="leading" secondItem="D3F-W3-Jpm" secondAttribute="trailing" constant="15" id="ixB-g7-TYe"/>
-                            <constraint firstItem="jMi-1S-2e6" firstAttribute="bottom" relation="lessThanOrEqual" secondItem="osZ-w1-XVa" secondAttribute="bottom" constant="184" id="mSE-1Q-FbO"/>
+                            <constraint firstItem="ITP-eL-ev8" firstAttribute="top" relation="greaterThanOrEqual" secondItem="osZ-w1-XVa" secondAttribute="bottom" constant="20" id="lSw-3Y-hQe"/>
                             <constraint firstItem="jMi-1S-2e6" firstAttribute="trailing" secondItem="m6P-Tb-zTL" secondAttribute="trailing" constant="15" id="nBL-6d-ytf"/>
                             <constraint firstItem="jMi-1S-2e6" firstAttribute="trailing" secondItem="ITP-eL-ev8" secondAttribute="trailing" constant="50" id="o5B-xA-b7K"/>
                             <constraint firstItem="ITP-eL-ev8" firstAttribute="leading" secondItem="jMi-1S-2e6" secondAttribute="leading" constant="50" id="o6q-CK-nut"/>
@@ -2026,7 +2016,7 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                         <outlet property="balanceView" destination="D3F-W3-Jpm" id="g1M-rr-vFy"/>
                         <outlet property="balandeTitle" destination="fGo-lH-5NH" id="4Ya-3D-4Dm"/>
                         <outlet property="cellectionView" destination="osZ-w1-XVa" id="O0Z-Ck-hk7"/>
-                        <outlet property="collectionViewHeightConstraint" destination="Vhf-dz-tOj" id="Qor-p2-sWO"/>
+                        <outlet property="collectionViewHeightConstraint" destination="RfO-oa-MYD" id="m7i-mH-TP9"/>
                         <outlet property="pageControl" destination="ITP-eL-ev8" id="2BL-fa-AiR"/>
                         <outlet property="percentLabel" destination="q8X-eN-3k7" id="kuj-dn-Fon"/>
                         <outlet property="riseLabel" destination="aKl-mN-fcL" id="ByR-je-BZb"/>
@@ -2486,6 +2476,7 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                                     </collectionView>
                                     <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="3XB-58-nVn">
                                         <rect key="frame" x="50" y="254" width="314" height="26"/>
+                                        <color key="pageIndicatorTintColor" red="0.58039215690000001" green="0.58039215690000001" blue="0.58039215690000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <color key="currentPageIndicatorTintColor" red="0.2274509804" green="0.67450980390000004" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </pageControl>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="mFC-QA-eeL">

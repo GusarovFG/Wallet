@@ -11,6 +11,8 @@ class TimeManager {
     
     static let share = TimeManager()
     
+    let currentDate = Double(Date().timeIntervalSince1970)
+    
     private init(){}
     
     func getTime() -> Int {

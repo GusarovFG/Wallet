@@ -62,7 +62,6 @@ class VerifyMnemonicViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         WalletManager.share.isUpdate = false
-        WalletManager.share.updateBalances()
         
         for i in 0..<self.mnemonicPhrase.count {
             if i < 6  {
@@ -194,6 +193,8 @@ class VerifyMnemonicViewController: UIViewController {
                                     
                                     UserDefaultsManager.shared.userDefaults.set("Exist", forKey: UserDefaultsStringKeys.walletExist.rawValue )
                                     CoreDataManager.share.saveChiaWalletPrivateKey(name: "Chia Wallet", fingerprint: privateKey.private_key.fingerprint, pk: privateKey.private_key.pk, seed: privateKey.private_key.seed, sk: privateKey.private_key.seed, adress: adreses, tokens: tokens)
+                                    CoreDataManager.share.addCatBalanceChiaWalletPrivateKey(index: CoreDataManager.share.fetchChiaWalletPrivateKey().count - 1, token: ["CAT 1dd54162ec642321...", "2", "0.0", "show"])
+                                    CoreDataManager.share.addCatBalanceChiaWalletPrivateKey(index: CoreDataManager.share.fetchChiaWalletPrivateKey().count - 1, token: ["Stably USD", "3", "0.0", "show"])
                                     
                                     dispatchGroup.leave()
                                     dispatchGroup.enter()

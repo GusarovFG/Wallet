@@ -39,14 +39,13 @@ class ImportTokensViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(alertErrorGerCodingKeysPresent), name: NSNotification.Name("alertErrorGerCodingKeys"), object: nil)
         print(self.index)
        
-        print(TailsManager.share.tails?.result.list)
     }
     
     @objc private func alertErrorGerCodingKeysPresent() {
         self.spinerVC.dismiss(animated: false)
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
             
-            AlertManager.share.serverError(self)
+            AlertManager.share.errorBlockchainConnect(self)
             self.tableView.reloadData()
         }
     }
@@ -76,11 +75,15 @@ extension ImportTokensViewController: UITableViewDelegate, UITableViewDataSource
         let token = self.filteredTokens[indexPath.row]
         cell.setupCell(tail: token)
         
-        if token.name == "Green App Development" {
-            cell.choiceSwitch.isOn = true
-            cell.choiceSwitch.isEnabled = false
-            cell.choiceSwitch.onTintColor = #colorLiteral(red: 0.5098039216, green: 0.5098039216, blue: 0.5098039216, alpha: 1)
-        } else if token.name == "USD Stable" {
+        if CoreDataManager.share.fetchChiaWalletPrivateKey()[self.index].token?.filter({$0.filter({$0.contains((token.hash.dropLast(55)))}).count == 1}).isEmpty == false && CoreDataManager.share.fetchChiaWalletPrivateKey()[self.index].token?.filter({$0.filter({$0.contains((token.hash.dropLast(55)))}).count == 1}).first?[3] == "show" && token.default_tail != 1   {
+            
+             
+                cell.choiceSwitch.isOn = true
+                cell.choiceSwitch.isEnabled = true
+                cell.choiceSwitch.onTintColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
+           
+            
+        } else if token.default_tail == 1 {
             cell.choiceSwitch.isOn = true
             cell.choiceSwitch.isEnabled = false
             cell.choiceSwitch.onTintColor = #colorLiteral(red: 0.5098039216, green: 0.5098039216, blue: 0.5098039216, alpha: 1)
@@ -88,33 +91,7 @@ extension ImportTokensViewController: UITableViewDelegate, UITableViewDataSource
             cell.choiceSwitch.isOn = false
             cell.choiceSwitch.isEnabled = true
             cell.choiceSwitch.onTintColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
-        }
-        
-        if CoreDataManager.share.fetchChiaWalletPrivateKey()[self.index].token?.filter({$0.filter({$0.contains((self.filteredTokens[indexPath.row].hash.dropLast(55)))}).count == 1}).isEmpty == false && CoreDataManager.share.fetchChiaWalletPrivateKey()[self.index].token?.filter({$0.filter({$0.contains((self.filteredTokens[indexPath.row].hash.dropLast(55)))}).count == 1}).first?[3] == "show"  {
-            
-            cell.choiceSwitch.isOn = true
-            
-            if token.name == "Green App Development" {
-                cell.choiceSwitch.isOn = true
-                cell.choiceSwitch.isEnabled = false
-                cell.choiceSwitch.onTintColor = #colorLiteral(red: 0.5098039216, green: 0.5098039216, blue: 0.5098039216, alpha: 1)
-            } else if token.name == "USD Stable" {
-                cell.choiceSwitch.isOn = true
-                cell.choiceSwitch.isEnabled = false
-                cell.choiceSwitch.onTintColor = #colorLiteral(red: 0.5098039216, green: 0.5098039216, blue: 0.5098039216, alpha: 1)
-            }
-        } else {
-            cell.choiceSwitch.isOn = false
-            
-            if token.name == "Green App Development" {
-                cell.choiceSwitch.isOn = true
-                cell.choiceSwitch.isEnabled = false
-                cell.choiceSwitch.onTintColor = #colorLiteral(red: 0.5098039216, green: 0.5098039216, blue: 0.5098039216, alpha: 1)
-            } else if token.name == "USD Stable" {
-                cell.choiceSwitch.isOn = true
-                cell.choiceSwitch.isEnabled = false
-                cell.choiceSwitch.onTintColor = #colorLiteral(red: 0.5098039216, green: 0.5098039216, blue: 0.5098039216, alpha: 1)
-            }
+  
         }
         
         cell.switchPressed = { [unowned self] in
@@ -126,7 +103,7 @@ extension ImportTokensViewController: UITableViewDelegate, UITableViewDataSource
                     
                     ChiaBlockchainManager.share.getWallets { wallets in
                         let name = "CAT \(self.filteredTokens[indexPath.row].hash.dropLast(48))..."
-                        if wallets.wallets.filter({$0.name == name}).count == 1 {
+                        if wallets.wallets.filter({$0.name == name || $0.name == token.name}).count == 1 {
                             CoreDataManager.share.showCatChiaWalletPrivateKey(index: self.index, hash: self.filteredTokens[indexPath.row].hash, show: "show")
                             print("Уже есть")
                             DispatchQueue.main.async {

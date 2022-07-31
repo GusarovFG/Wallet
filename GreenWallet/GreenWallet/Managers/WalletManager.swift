@@ -43,6 +43,7 @@ class WalletManager {
                     let wallet = CoreDataManager.share.fetchChiaWalletPrivateKey()[self.index]
                     print("индекс кошелька")
                     print(self.index)
+                    print(wallet)
                     let walletTokens = CoreDataManager.share.fetchChiaWalletPrivateKey()[self.index].token ?? []
                     if wallet.name == "Chia Wallet" {
                         ChiaBlockchainManager.share.logIn(Int(wallet.fingerprint)) { log in

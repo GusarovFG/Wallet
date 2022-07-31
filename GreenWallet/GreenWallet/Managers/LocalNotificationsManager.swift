@@ -52,20 +52,22 @@ class LocalNotificationsManager: NSObject {
                         
                     }
                 } else if notifications.result.version != CoreDataManager.share.fetchPushNotificationsVersion()  {
-                    CoreDataManager.share.savePushNotifications(guid: newNotifications.last?.guid ?? "", created_at: newNotifications.last?.created_at ?? "", message: newNotifications.last?.message ?? "")
                     CoreDataManager.share.editPushNotificationsVersion(version: notifications.result.version )
-                    self.content.title = "\(newNotifications.last?.guid ?? "")"
-                    self.content.body = "\(newNotifications.last?.message ?? "")"
-                    print("no First")
-                    self.sendNotification()
-
-                } else {
-                    return
+                    for i in newNotifications {
+                        if CoreDataManager.share.fetchPushNotifications().filter({$0.guid == i.guid}).count == 0 {
+                            CoreDataManager.share.savePushNotifications(guid: i.guid , created_at: i.created_at, message: i.message)
+                            self.content.title = "\(newNotifications.first?.guid ?? "")"
+                            self.content.body = "\(newNotifications.first?.message ?? "")"
+                            print("no First")
+                            self.sendNotification()
+                        } else {
+                            continue
+                        }
+                        
+                    }
                 }
                 
-                
             }
-            
         }
     }
 }

@@ -147,19 +147,19 @@ class TransactionHistoryViewController: UIViewController {
                                         ChiaBlockchainManager.share.getTransactions(iwallet.id) { transact in
 
                                             self.walletsTransactions.append(transact.transactions)
-
+                                            if CoreDataManager.share.fetchTransactions().isEmpty{
+                                                self.filterWalletsTransactions.forEach({CoreDataManager.share.saveTransactions(newTransactions: $0)})
+                                                print(CoreDataManager.share.fetchTransactions())
+                                            } else {
+                                                CoreDataManager.share.deleteTransactions()
+                                                self.filterWalletsTransactions.forEach({CoreDataManager.share.saveTransactions(newTransactions: $0)})
+                                            }
 
                                             DispatchQueue.main.async {
 
-                                                self.filterWalletsTransactions = self.walletsTransactions.reduce([], +).reversed()
-                                                if CoreDataManager.share.fetchTransactions().isEmpty{
-                                                    self.filterWalletsTransactions.forEach({CoreDataManager.share.saveTransactions(newTransactions: $0)})
-                                                    print(CoreDataManager.share.fetchTransactions())
-                                                } else {
-                                                    CoreDataManager.share.deleteTransactions()
-                                                    self.filterWalletsTransactions.forEach({CoreDataManager.share.saveTransactions(newTransactions: $0)})
-                                                }
                                                 
+                                                
+                                                self.filterWalletsTransactions = self.walletsTransactions.reduce([], +).reversed()
                                                 self.tableView.reloadData()
                                                 self.spinnerVC.dismiss(animated: true)
                                             }
@@ -466,7 +466,7 @@ class TransactionHistoryViewController: UIViewController {
         
         
         
-        //        self.filterWalletsTransactions = self.walletsTransactions.reduce([], +).filter({Int(TimeManager.share.convertUnixTime(unix: $0.created_at_time, format: "dd.MM.yy").split(separator: ".")[0]) - Int(Date().string(format: "dd.MM.yy").split(separator: ".")[0]) == 1})
+        self.filterWalletsTransactions = self.walletsTransactions.reduce([], +).filter({(TimeManager.share.currentDate - $0.created_at_time) <= 87400 && (TimeManager.share.currentDate - $0.created_at_time) >= 85400})
         self.filterDateView.isHidden = true
         self.tableView.reloadData()
     }
@@ -480,7 +480,7 @@ class TransactionHistoryViewController: UIViewController {
         self.allDateButton.backgroundColor = .systemBackground
         self.lastMonthButton.backgroundColor = .systemBackground
         
-        //        self.filterWalletsTransactions = self.walletsTransactions.filter({$0.date == "lastWeek"})
+        self.filterWalletsTransactions = self.walletsTransactions.reduce([], +).filter({(TimeManager.share.currentDate - $0.created_at_time) <= 614800 && (TimeManager.share.currentDate - $0.created_at_time) >= 594800})
         self.filterDateView.isHidden = true
         self.tableView.reloadData()
     }
@@ -764,7 +764,7 @@ extension TransactionHistoryViewController: UICollectionViewDelegate, UICollecti
             }
             cell.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
             cell.cellLabel.textColor = .white
-            self.filterWalletsTransactions = self.walletsTransactions.reduce([], +).filter({$0.type == 0})
+            self.filterWalletsTransactions = self.walletsTransactions.reduce([], +).filter({$0.type == 0 && $0.confirmed == true})
             self.isAllFilter = false
             self.isInFilter = true
             self.isOutFilter = false
@@ -782,7 +782,7 @@ extension TransactionHistoryViewController: UICollectionViewDelegate, UICollecti
             }
             cell.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
             cell.cellLabel.textColor = .white
-            self.filterWalletsTransactions = self.walletsTransactions.reduce([], +).filter({$0.type == 1 || $0.confirmed == true})
+            self.filterWalletsTransactions = self.walletsTransactions.reduce([], +).filter({$0.type == 1 && $0.confirmed == true})
             self.isAllFilter = false
             self.isInFilter = false
             self.isOutFilter = true
