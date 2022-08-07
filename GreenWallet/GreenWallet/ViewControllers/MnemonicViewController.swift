@@ -59,6 +59,14 @@ class MnemonicViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         AlertManager.share.showSpinner(self, nil)
         guard let mnemonic = try? Mnemonic.generateMnemonic(strength: 128, language: .english) else { return }
+        do {
+            let qqewe = try Mnemonic.deterministicSeedBytes(from: mnemonic)
+            print(qqewe)
+            print("qwe")
+        } catch {
+            print("qwe")
+        }
+        
         self.mnemonicPhrase = mnemonic.components(separatedBy: " ")
         self.secureMnemonicPhrase = self.mnemonicPhrase
         self.secureMnemonic()

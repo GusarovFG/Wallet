@@ -59,23 +59,23 @@ class mCollectionViewCell: UICollectionViewCell {
     
     override func layoutSubviews(){
         super.layoutSubviews()
-        self.token = self.wallet?.token?.filter({$0.contains("show")}).sorted{(Int($0[1]) ?? 0) < (Int($1[1]) ?? 0)} ?? []
+        self.token = self.wallet?.token?.filter({$0[3] == "show"}).sorted{(Int($0[1]) ?? 0) < (Int($1[1]) ?? 0)} ?? []
         if self.stackView.arrangedSubviews.count == 2 {
             self.heightConstraint.constant = (self.frame.size.height) - (self.footerView.frame.height + self.headerView.frame.height)
             self.collectionVieww.constant = self.heightConstraint.constant
         } else {
-            if (self.wallet?.token?.count ?? 0) >= 5 && !CoreDataManager.share.fetchChiaWalletPrivateKey().isEmpty {
+            if self.token.count >= 5 && !CoreDataManager.share.fetchChiaWalletPrivateKey().isEmpty {
                 self.heightConstraint.constant = (self.frame.size.height) - (self.footerView.frame.height + self.headerView.frame.height + CGFloat((76 * 5)))
                 self.collectionVieww.constant = self.heightConstraint.constant
-            } else {
-                if self.wallet != nil {
-                    self.heightConstraint.constant = (self.frame.size.height) - (self.footerView.frame.height + self.headerView.frame.height + CGFloat(self.token.count * 76 + 46))
-                    self.collectionVieww.constant = self.heightConstraint.constant
-                    
-                } else {
-                    self.heightConstraint.constant = (self.frame.size.height) - (self.footerView.frame.height + self.headerView.frame.height)
-                    self.collectionVieww.constant = self.heightConstraint.constant
-                }
+            } else if self.token.count < 5 && !CoreDataManager.share.fetchChiaWalletPrivateKey().isEmpty {
+                
+                self.heightConstraint.constant = (self.frame.size.height) - (self.footerView.frame.height + self.headerView.frame.height + CGFloat(self.token.count * 76 + 46))
+                self.collectionVieww.constant = self.heightConstraint.constant
+                
+                
+            }  else {
+                self.heightConstraint.constant = (self.frame.size.height) - (self.footerView.frame.height + self.headerView.frame.height)
+                self.collectionVieww.constant = self.heightConstraint.constant
             }
         }
         if self.wallet?.token != nil {
@@ -85,7 +85,7 @@ class mCollectionViewCell: UICollectionViewCell {
                 self.tableView.isScrollEnabled = false
             }
         }
-        
+        self.tableView.reloadData()
     }
     override func layoutIfNeeded() {
         super.layoutIfNeeded()
@@ -170,7 +170,7 @@ extension mCollectionViewCell: UITableViewDelegate, UITableViewDataSource {
         
         switch indexPath {
         case [0,self.token.count]:
-//            self.height += importCell.frame.height
+            //            self.height += importCell.frame.height
             if self.wallet?.name == "Chia Wallet" || self.wallet?.name == "Chia TestNet" {
                 importCell.titleLabel.text = "+ \(LocalizationManager.share.translate?.result.list.main_screen.main_screen_purse_import ?? "")"
             } else {
@@ -180,7 +180,7 @@ extension mCollectionViewCell: UITableViewDelegate, UITableViewDataSource {
             print(token.count)
             return importCell
         default:
-//            self.height += walletCell.frame.height
+            //            self.height += walletCell.frame.height
             
             
             let token = self.token[indexPath.row]
@@ -245,6 +245,7 @@ extension mCollectionViewCell: UITableViewDelegate, UITableViewDataSource {
                 walletCell.balanceLabel.text = "0 XCH"
             }
             print(indexPath)
+            
             return walletCell
             
         }

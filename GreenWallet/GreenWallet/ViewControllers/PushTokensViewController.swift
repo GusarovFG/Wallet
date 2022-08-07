@@ -32,6 +32,7 @@ class PushTokensViewController: UIViewController {
 //    let storyoard = UIStoryboard(name: "spinner", bundle: .main)
     var spinnerVC = SprinnerViewController()
     
+    @IBOutlet weak var gadTokenLAbel: UILabel!
     @IBOutlet weak var tokenImage: UIImageView!
     @IBOutlet weak var tokenButton: UIButton!
     @IBOutlet weak var balanceButton: UIButton!
@@ -95,11 +96,15 @@ class PushTokensViewController: UIViewController {
         self.adressTextField.text = self.address
         let storyoard = UIStoryboard(name: "spinner", bundle: .main)
         self.spinnerVC = storyoard.instantiateViewController(withIdentifier: "spinner") as! SprinnerViewController
+        self.gadLabel.alpha = 0
+        self.gadTokenLAbel.alpha = 0
         if self.isChia {
             self.wallets = CoreDataManager.share.fetchChiaWalletPrivateKey().filter({$0.name! == "Chia Wallet"})
             self.systemButton.setTitle("• Chia Network", for: .normal)
             self.tokenImage.image = UIImage(named: "LogoChia")!
             self.balanceButton.setTitle("\(((self.wallet?.token?.first?[2].toDouble() ?? 0) / 1000000000000.0).rounded(toPlaces: 8)) XCH", for: .normal)
+            self.gadLabel.alpha = 1
+            self.gadTokenLAbel.alpha = 1
         } else if self.isChives {
             self.wallets = CoreDataManager.share.fetchChiaWalletPrivateKey().filter({$0.name! == "Chives Wallet"})
             self.systemButton.setTitle("• Chives Network", for: .normal)
@@ -115,6 +120,8 @@ class PushTokensViewController: UIViewController {
             self.systemButton.setTitle("• Chives TestNet", for: .normal)
             self.tokenImage.image = UIImage(named: "ChivesLogo")!
             self.balanceButton.setTitle("\(((self.wallet?.token?.first?[2].toDouble() ?? 0) / 100000000.0).rounded(toPlaces: 8)) XCC", for: .normal)
+            self.gadLabel.alpha = 1
+            self.gadTokenLAbel.alpha = 1
         }
         
         if !self.isInMyWallet {
@@ -505,8 +512,7 @@ class PushTokensViewController: UIViewController {
             UIView.animate(withDuration: 0.5) {
                 self.systemView.alpha = 0
                 self.systemView.isHidden = true
-//                self.walletsView.alpha = 0
-//                self.walletsView.isHidden = true
+
             }
         }
     }
@@ -563,16 +569,17 @@ class PushTokensViewController: UIViewController {
     @IBAction func balanceMenuOpen(_ sender: Any) {
         if self.balanceView.isHidden == true {
             self.balanceView.isHidden = false
-            for i in 0..<(self.wallet?.token?.count ?? 0) {
-                if self.balanceStackView.arrangedSubviews.count == self.wallet?.token?.count ?? 0 {
+            let filterTokens = self.wallet?.token?.filter({$0[3] == "show"})
+            for i in 0..<(filterTokens?.count ?? 0) {
+                if self.balanceStackView.arrangedSubviews.count == filterTokens?.count ?? 0 {
                 } else {
                     let button = UIButton(frame: CGRect(x: 0, y: 0, width: self.balanceStackView.frame.width, height: 40))
-                    if self.wallet?.token?[i][0] == "Chia Wallet" || self.wallet?.token?[i][0] == "Chia TestNet" {
-                        button.setTitle("\(((self.wallet?.token?[i][2].toDouble() ?? 0) / 1000000000000.0).rounded(toPlaces: 8)) XCH", for: .normal)
-                    } else if self.wallet?.token?[i][0] == "Chives Wallet" || self.wallet?.token?[i][0] == "Chives TestNet" {
-                        button.setTitle("\(((self.wallet?.token?[i][2].toDouble() ?? 0) / 100000000.0).rounded(toPlaces: 8)) XCC", for: .normal)
+                    if filterTokens?[i][0] == "Chia Wallet" || filterTokens?[i][0] == "Chia TestNet" {
+                        button.setTitle("\(((filterTokens?[i][2].toDouble() ?? 0) / 1000000000000.0).rounded(toPlaces: 8)) XCH", for: .normal)
+                    } else if filterTokens?[i][0] == "Chives Wallet" || filterTokens?[i][0] == "Chives TestNet" {
+                        button.setTitle("\(((filterTokens?[i][2].toDouble() ?? 0) / 100000000.0).rounded(toPlaces: 8)) XCC", for: .normal)
                     } else {
-                        button.setTitle("\(((self.wallet?.token?[i][2].toDouble() ?? 0) / 1000000000000.0).rounded(toPlaces: 8)) \(TailsManager.share.tails?.result.list.filter({$0.hash.contains(self.wallet?.token?[i][0].split(separator: " ").last?.prefix(15) ?? "") || $0.name.contains(self.wallet?.token?[i][0] ?? "")}).first?.code ?? "")", for: .normal)
+                        button.setTitle("\(((filterTokens?[i][2].toDouble() ?? 0) / 1000000000000.0).rounded(toPlaces: 8)) \(TailsManager.share.tails?.result.list.filter({$0.hash.contains(filterTokens?[i][0].split(separator: " ").last?.prefix(15) ?? "") || $0.name.contains(filterTokens?[i][0] ?? "")}).first?.code ?? "")", for: .normal)
                     }
                     self.balanceStackView.addArrangedSubview(button)
                     self.balanceViewConstraint.constant += button.frame.height
@@ -625,6 +632,7 @@ class PushTokensViewController: UIViewController {
     }
     
     @objc func setupBalanceMenuButtons(_ sender: UIButton) {
+        let filterTokens = self.wallet?.token?.filter({$0[3] == "show"})
         for i in 0..<self.balanceStackView.arrangedSubviews.count {
             self.balanceStackView.arrangedSubviews[i].backgroundColor = .systemBackground
             if sender == self.balanceStackView.arrangedSubviews[i] {
@@ -633,7 +641,7 @@ class PushTokensViewController: UIViewController {
                 sender.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
                 self.balanceView.isHidden = true
                 self.walletsView.isHidden = true
-                self.walletId = (i + 1)
+                self.walletId = Int(filterTokens?[i][1] ?? "0")!
                 print(self.walletId)
             }
         }
@@ -807,25 +815,9 @@ class PushTokensViewController: UIViewController {
             self.transferErrorLabel.textColor = #colorLiteral(red: 1, green: 0.2360929251, blue: 0.1714096665, alpha: 0.8980392157)
         }
         
-//        if self.adressTextField.text == self.link  {
-//
-//            self.walletLinkError.alpha = 0
-//            self.adressTextField.textColor = .white
-//            self.walletErrorLabel.textColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
-//
-//
-//            self.transitionTokenLabel.text = "XCH"
-//            self.transitionBlockchainLabel.text = self.wallet?.name
-//            self.transitinSumLabel.text = self.transferTextField.text
-//            self.transitionLinkLabel.text = self.adressTextField.text
-//        } else {
-//            self.walletLinkError.alpha = 1
-//            self.adressTextField.textColor = #colorLiteral(red: 1, green: 0.2360929251, blue: 0.1714096665, alpha: 0.8980392157)
-//            self.walletErrorLabel.textColor = #colorLiteral(red: 1, green: 0.2360929251, blue: 0.1714096665, alpha: 0.8980392157)
-//        }
+
         if (Double(self.transferTextField.text ?? "") ?? 0) < Double(self.balanceButton.currentTitle?.split(separator: " ").first ?? "0") ?? 0 {
-//            let storyoard = UIStoryboard(name: "spinner", bundle: .main)
-//            let spinnerVC = storyoard.instantiateViewController(withIdentifier: "spinner") as! SprinnerViewController'
+
             self.transitionTokenLabel.text = self.transferTokenLabel.text
             self.transitionBlockchainLabel.text = self.systemButton.titleLabel?.text?.filter({$0 != "•"})
             self.transitinSumLabel.text = self.transferTextField.text

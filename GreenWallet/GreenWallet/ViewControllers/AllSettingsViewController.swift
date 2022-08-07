@@ -117,6 +117,11 @@ extension AllSettingsViewController: UITableViewDelegate, UITableViewDataSource 
             supportVC.modalPresentationStyle = .fullScreen
             
             self.present(supportVC, animated: true, completion: nil)
+        case [0,4]:
+                let notificationsVC = storyboard?.instantiateViewController(withIdentifier: "NotificationsViewController") as! NotificationsViewController
+                notificationsVC.modalPresentationStyle = .fullScreen
+                
+                self.present(notificationsVC, animated: true)
         case [0,5]:
             let languageVC = storyboard?.instantiateViewController(withIdentifier: "LanguageViewController") as! LanguageViewController
             languageVC.modalPresentationStyle = .fullScreen

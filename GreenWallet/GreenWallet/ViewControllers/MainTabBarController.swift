@@ -113,7 +113,7 @@ class MainTabBarController: UITabBarController, UINavigationBarDelegate {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.addTabs()
+//        self.addTabs()
     }
     
     @objc private func changeIndex() {

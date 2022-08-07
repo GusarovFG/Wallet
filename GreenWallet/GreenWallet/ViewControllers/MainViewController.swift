@@ -112,10 +112,7 @@ class MainViewController: UIViewController {
         }
         ExchangeRatesManager.share.changeColorOfView(label: self.percentLabel)
         
-        if !CoreDataManager.share.fetchChiaWalletPrivateKey().isEmpty {
-            
-            self.cellectionView.scrollToItem(at: [0,0], at: .left, animated: true)
-        }
+      
         
         
     }
@@ -124,6 +121,7 @@ class MainViewController: UIViewController {
         super.viewDidAppear(animated)
         localization()
         LocalNotificationsManager.share.checkUpdates()
+        self.cellectionView.reloadItems(at: [[0,self.index]])
     }
     
     override func viewDidLayoutSubviews() {
@@ -172,9 +170,9 @@ class MainViewController: UIViewController {
         let nav = UINavigationController(rootViewController: settingsViewController)
         nav.navigationBar.isHidden = true
         nav.modalPresentationStyle = .pageSheet
-        if let sheet = nav.sheetPresentationController {
-            sheet.detents = [.medium(), .large()]
-        }
+      if let sheet = nav.sheetPresentationController {
+          sheet.detents = [.medium(), .large()]
+                }
         self.present(nav, animated: true, completion: nil)
     }
     
@@ -274,13 +272,13 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
                 cell.index = self.index
                 cell.numberOFWallet.text = "\(wallet.name ?? "") ****\(String(wallet.fingerprint).suffix(4))"
                 cell.controller = self.tabBarController ?? self
-                self.collectionViewHeightConstraint = cell.collectionVieww
+//                self.collectionViewHeightConstraint = cell.collectionVieww
             } else {
                 cell.stackView.addArrangedSubview(cell.tableView)
                 cell.wallet = CoreDataManager.share.fetchChiaWalletPrivateKey()[indexPath.row]
                 cell.controller = self.tabBarController ?? self
                 cell.tableView.reloadData()
-                self.collectionViewHeightConstraint = cell.collectionVieww
+//                self.collectionViewHeightConstraint = cell.collectionVieww
                 
             }
             

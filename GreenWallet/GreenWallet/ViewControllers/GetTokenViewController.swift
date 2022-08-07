@@ -192,6 +192,11 @@ class GetTokenViewController: UIViewController {
                 self.systemViewHeightConstraint.constant += button.frame.height
                 
                 button.addTarget(self, action: #selector(setupSystemMenuButtons), for: .touchUpInside)
+                if UserDefaultsManager.shared.userDefaults.string(forKey: "Theme") == "light" {
+                    button.setTitleColor(.black, for: .normal)
+                } else {
+                    button.setTitleColor(.white, for: .normal)
+                }
                 
             }
         }
@@ -218,6 +223,8 @@ class GetTokenViewController: UIViewController {
                 self.menuButton.setTitle("• \(self.systems[i].name)", for: .normal)
                 sender.backgroundColor = #colorLiteral(red: 0.2681596875, green: 0.717217505, blue: 0.4235975146, alpha: 1)
                 self.titleLabel.text = self.systems[i].name
+                
+              
                 
                 if self.systems[i].name == "Chia Network" {
                     self.wallets = CoreDataManager.share.fetchChiaWalletPrivateKey().filter({$0.name == "Chia Wallet"})

@@ -1104,7 +1104,7 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                                         <rect key="frame" x="180" y="0.0" width="194" height="40"/>
                                         <color key="tintColor" name="PasswordButtonsColor"/>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain">
+                                        <buttonConfiguration key="configuration" style="plain" image="chevron.down" catalog="system" imagePlacement="trailing">
                                             <attributedString key="attributedTitle">
                                                 <fragment content="8.5478614578 XCH">
                                                     <attributes>
@@ -1120,6 +1120,7 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                                                 </fragment>
                                             </attributedString>
                                             <directionalEdgeInsets key="contentInsets" top="0.0" leading="1" bottom="0.0" trailing="0.0"/>
+                                            <color key="baseForegroundColor" red="0.2274509804" green="0.67450980390000004" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                         </buttonConfiguration>
                                         <connections>
                                             <action selector="balanceMenuOpen:" destination="cnF-1c-1r2" eventType="touchUpInside" id="t0u-xk-ly7"/>
@@ -1774,6 +1775,7 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                         <outlet property="contactTextField" destination="5bp-F0-POt" id="xi8-gZ-m18"/>
                         <outlet property="continueButton" destination="LGy-uT-4y7" id="0dK-Th-jYB"/>
                         <outlet property="gadLabel" destination="VfE-rm-jzL" id="M3E-Iv-HnM"/>
+                        <outlet property="gadTokenLAbel" destination="zjS-7R-Vl2" id="UzC-Vm-gMH"/>
                         <outlet property="qrBackButton" destination="Iyx-0z-A85" id="YPV-UT-2hi"/>
                         <outlet property="recomendedComissionLabel" destination="i9s-S0-U7y" id="XIH-3N-BSZ"/>
                         <outlet property="secondTransferErrorLabel" destination="bE3-Hw-2NN" id="Jh1-71-3dE"/>
@@ -2035,8 +2037,9 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="pU9-kX-RmK">
-                                <rect key="frame" x="0.0" y="44" width="414" height="852"/>
+                                <rect key="frame" x="0.0" y="64" width="414" height="832"/>
                                 <color key="backgroundColor" name="mainBackGroundColor"/>
+                                <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="themeCell" id="NoH-UE-pvw">
                                         <rect key="frame" x="0.0" y="44.5" width="414" height="43.5"/>
@@ -2076,18 +2079,34 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                                     <outlet property="delegate" destination="V0M-eY-soX" id="75j-MM-nlY"/>
                                 </connections>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G44-vb-21u">
+                                <rect key="frame" x="167" y="51" width="80" height="5"/>
+                                <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="5" id="1DK-RJ-ivu"/>
+                                    <constraint firstAttribute="width" constant="80" id="eHK-iC-iPF"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <integer key="value" value="4"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="kgT-o5-oKZ"/>
-                        <color key="backgroundColor" name="mainBackGroundColor"/>
+                        <color key="backgroundColor" name="ViewColor"/>
                         <constraints>
-                            <constraint firstItem="pU9-kX-RmK" firstAttribute="top" secondItem="kgT-o5-oKZ" secondAttribute="top" id="B7V-QF-2hs"/>
+                            <constraint firstItem="pU9-kX-RmK" firstAttribute="top" secondItem="kgT-o5-oKZ" secondAttribute="top" constant="20" id="B7V-QF-2hs"/>
                             <constraint firstItem="pU9-kX-RmK" firstAttribute="leading" secondItem="kgT-o5-oKZ" secondAttribute="leading" id="EB7-5J-DUK"/>
+                            <constraint firstItem="pU9-kX-RmK" firstAttribute="top" secondItem="G44-vb-21u" secondAttribute="bottom" constant="8" symbolic="YES" id="ISm-j6-ibx"/>
                             <constraint firstItem="pU9-kX-RmK" firstAttribute="trailing" secondItem="kgT-o5-oKZ" secondAttribute="trailing" id="J9E-J1-rra"/>
+                            <constraint firstItem="G44-vb-21u" firstAttribute="centerX" secondItem="I5M-De-exO" secondAttribute="centerX" id="Xd1-zP-Z3l"/>
                             <constraint firstItem="kgT-o5-oKZ" firstAttribute="bottom" secondItem="pU9-kX-RmK" secondAttribute="bottom" constant="-34" id="Xq0-2M-AB3"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="tableView" destination="pU9-kX-RmK" id="Xaq-rU-o9L"/>
+                        <outlet property="topConstraint" destination="B7V-QF-2hs" id="Lkg-aj-qDd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="u24-TB-f1Y" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -5101,7 +5120,7 @@ uNGFINCy0LvQsNC00LXQu9GM0YbQsNC8LuKAqOKAqNCd0LXQt9Cw0LrQvtC90L3QvtC1INC60L7Qv9C4
                                 <rect key="frame" x="15" y="142" width="328" height="51"/>
                                 <color key="backgroundColor" name="ViewColor"/>
                                 <color key="barTintColor" name="ViewColor"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                                 <scopeButtonTitles>
                                     <string>Title</string>
                                     <string>Title</string>

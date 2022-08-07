@@ -355,23 +355,23 @@ class ImportMnemonicViewController: UIViewController {
                                         print(log.success)
                                     }
                                 }
-//                                    DispatchQueue.global().asyncAfter(deadline: .now() + 15) {
-//                                        
-//                                        ChiaBlockchainManager.share.getSyncStatus(1) { status in
-//                                            DispatchQueue.global().asyncAfter(deadline: .now() + 15) {
-//                                                ChiaBlockchainManager.share.addCat(tailHash: "1dd54162ec6423211556155fa455d4ed1a52ad305e6b5249eba50c91c8428dfb") { newCat in
-//                                                    print(newCat.success)
-//                                                }
-//                                            }
-//                                        }
-//                                        ChiaBlockchainManager.share.getSyncStatus(1) { status in
-//                                            DispatchQueue.global().asyncAfter(deadline: .now() + 15) {
-//                                                ChiaBlockchainManager.share.addCat(tailHash: "6d95dae356e32a71db5ddcb42224754a02524c615c5fc35f568c2af04774e589") { newCat in
-//                                                    print(newCat.success)
-//                                                }
-//                                            }
-//                                        }
-//                                    }
+                                    DispatchQueue.global().asyncAfter(deadline: .now() + 15) {
+                                        
+                                        ChiaBlockchainManager.share.getSyncStatus(1) { status in
+                                            DispatchQueue.global().asyncAfter(deadline: .now() + 15) {
+                                                ChiaBlockchainManager.share.addCat(tailHash: "1dd54162ec6423211556155fa455d4ed1a52ad305e6b5249eba50c91c8428dfb") { newCat in
+                                                    print(newCat.success)
+                                                }
+                                            }
+                                        }
+                                        ChiaBlockchainManager.share.getSyncStatus(1) { status in
+                                            DispatchQueue.global().asyncAfter(deadline: .now() + 15) {
+                                                ChiaBlockchainManager.share.addCat(tailHash: "6d95dae356e32a71db5ddcb42224754a02524c615c5fc35f568c2af04774e589") { newCat in
+                                                    print(newCat.success)
+                                                }
+                                            }
+                                        }
+                                    }
                                     
                                     ChiaBlockchainManager.share.getWallets { wallets in
                                         for wallet in wallets.wallets {
@@ -398,6 +398,13 @@ class ImportMnemonicViewController: UIViewController {
                                             
                                             UserDefaultsManager.shared.userDefaults.set("Exist", forKey: UserDefaultsStringKeys.walletExist.rawValue )
                                             CoreDataManager.share.saveChiaWalletPrivateKey(name: "Chia Wallet", fingerprint: privateKey.private_key.fingerprint, pk: privateKey.private_key.pk, seed: privateKey.private_key.seed, sk: privateKey.private_key.seed, adress: adreses, tokens: tokens)
+                                            if !tokens.contains(where: {$0[0] == "CAT 1dd54162ec642321..."}) {
+                                                CoreDataManager.share.addCatBalanceChiaWalletPrivateKey(index: CoreDataManager.share.fetchChiaWalletPrivateKey().count - 1, token: ["CAT 1dd54162ec642321...", "2", "0.0", "show"])
+                                            } else if !tokens.contains(where: {$0[0] == "CAT 1dd54162ec642321..."}) {
+                                                CoreDataManager.share.addCatBalanceChiaWalletPrivateKey(index: CoreDataManager.share.fetchChiaWalletPrivateKey().count - 1, token: ["Stably USD", "3", "0.0", "show"])
+                                            }
+                                            
+                                            
                                             guard let newWallet = CoreDataManager.share.fetchChiaWalletPrivateKey().last else { return }
                                             WalletManager.share.favoritesWallets.append(newWallet)
                                             DispatchQueue.main.async {

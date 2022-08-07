@@ -10,6 +10,7 @@ import UIKit
 class SettingsViewController: UIViewController {
     
 
+    @IBOutlet weak var topConstraint: NSLayoutConstraint!
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
@@ -27,7 +28,12 @@ class SettingsViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         print("viewWillAppear")
+        
         self.tableView.reloadData()
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
     }
     
     override func viewDidAppear(_ animated: Bool) {

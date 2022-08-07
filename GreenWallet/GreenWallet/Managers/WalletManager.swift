@@ -64,7 +64,7 @@ class WalletManager {
                                             print(tokens)
                                             print(walletTokens)
                                             print(token)
-                                            if !walletTokens.contains(where: {$0[0] == token[0]}) {
+                                            if !walletTokens.contains(where: {$0[0] == token[0]}){
                                                 print("Новье")
                                                 CoreDataManager.share.addCatBalanceChiaWalletPrivateKey(index: self.index, token: token)
                                                 token.removeAll()
@@ -74,8 +74,9 @@ class WalletManager {
                                                 }
                                                 
                                             } else {
-                                                CoreDataManager.share.updateCatBalanceChiaWalletPrivateKey(index: self.index, id: wallets.wallets[walletONe].id, balance: "\(balance.wallet_balance.confirmed_wallet_balance)")
                                                 DispatchQueue.main.async {
+                                                CoreDataManager.share.updateCatBalanceChiaWalletPrivateKey(index: self.index, id: wallets.wallets[walletONe].id, balance: "\(balance.wallet_balance.confirmed_wallet_balance)")
+                                                
                                                     NotificationCenter.default.post(name: NSNotification.Name("updateBalances"), object: nil)
 
                                                 }

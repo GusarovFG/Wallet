@@ -1133,6 +1133,7 @@ class ChiaTestBlockchainManager {
         let parameters = ["mnemonic":mnemonicPhrase] as [String : Any]
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
+        request.timeoutInterval = 120
         guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: []) else { return }
         request.httpBody = httpBody
         
