@@ -4,7 +4,6 @@
 //
 //  Created by Фаддей Гусаров on 03.05.2022.
 //
-import MaterialDesignWidgets
 import UIKit
 
 class MainTabBarController: UITabBarController, UINavigationBarDelegate {
